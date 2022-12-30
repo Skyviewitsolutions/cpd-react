@@ -1,0 +1,48 @@
+.all_selectedmembersCard h4{
+    margin-bottom: 0%;
+    font-size: 20px;
+    cursor: pointer;
+    }
+    .all_selectedmembersCard span{
+        color:rgb(133, 133, 247);
+        cursor: pointer
+    }
+    .all_selectedmembersCard{
+        margin-left: 0%;
+        padding-left: 0px;
+        cursor: pointer;
+    }
+    .all_selectedmembersCard h5{
+
+        padding-top: 10px;
+        cursor: pointer;
+        /* padding-top: 0%; */
+        margin-top: 0%;
+        font-size: 15px;
+        color:#2c6959;
+    }
+    .all_selectedmembersCard h6{
+        cursor: pointer;
+        font-size: 13px;
+    }
+    .all_selectedmembers_box{ 
+        padding-right: 0%;
+        margin-right: 0%;
+        cursor: pointer;
+        width:80px;
+        height:120px;
+        position: relative;
+    }
+    .all_selectedmembers_box img{
+
+        cursor: pointer;
+        border-radius: 8px;
+        width:80px;
+        height:120px;
+    }
+    .all_selectedmembers_box input{
+        cursor: pointer;
+     position:absolute;
+     top:5px;
+     right:5px;
+    }

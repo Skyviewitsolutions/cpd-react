@@ -1,0 +1,33 @@
+.jobHeader{
+    background: #D6F6ED;
+    margin-top:15px;
+    padding-top:10px;
+    padding-bottom: 10px;
+    text-align: center;   
+}
+.jobHeader h5{
+    font-weight: 500;
+    color:#2c6959;
+    font-size: 40px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.jobSumbit{
+    border:none;
+    margin-top: 20px;
+   padding:20px 150px 20px 150px;
+    background: #2C6959 0% 0% no-repeat padding-box;
+    color:white;
+border-radius: 54px;
+}
+.personal_details_jobheading h5{
+    margin-top:20px;
+}
+
+@media screen and (max-device-width: 480px){
+    .jobSumbit{
+        
+       padding:15px 80px 15px 80px;
+        
+    } 
+}

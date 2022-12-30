@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144" height="144" viewBox="0 0 144 144">
+  <defs>
+    <clipPath id="clip-Artboard_42">
+      <rect width="144" height="144"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_42" data-name="Artboard – 42" clip-path="url(#clip-Artboard_42)">
+    <rect width="144" height="144" fill="#fff"/>
+    <g id="Group_13" data-name="Group 13" transform="translate(21.387 21.387)">
+      <g id="Group_24225" data-name="Group 24225">
+        <g id="info" opacity="0.65">
+          <g id="Group_6480" data-name="Group 6480">
+            <g id="Group_6479" data-name="Group 6479">
+              <path id="Path_6416" data-name="Path 6416" d="M50.707,0a50.707,50.707,0,1,0,50.707,50.707A50.679,50.679,0,0,0,50.707,0Zm0,94.339A43.632,43.632,0,1,1,94.339,50.707,43.681,43.681,0,0,1,50.707,94.339Z"/>
+            </g>
+          </g>
+        </g>
+        <g id="Group_24195" data-name="Group 24195" transform="translate(45.57 42.268)">
+          <g id="Group_6481" data-name="Group 6481">
+            <path id="Path_6417" data-name="Path 6417" d="M235.2,213.4c-3,0-5.139,1.269-5.139,3.137v25.43c0,1.6,2.136,3.2,5.139,3.2,2.87,0,5.206-1.6,5.206-3.2v-25.43C240.4,214.665,238.068,213.4,235.2,213.4Z" transform="translate(-230.059 -213.397)" fill="#585858"/>
+          </g>
+        </g>
+        <g id="Group_24196" data-name="Group 24196" transform="translate(45.236 26.584)">
+          <g id="Group_6483" data-name="Group 6483">
+            <path id="Path_6418" data-name="Path 6418" d="M233.848,134.208c-3.07,0-5.473,2.2-5.473,4.739s2.4,4.806,5.473,4.806c3,0,5.407-2.269,5.407-4.806S236.851,134.208,233.848,134.208Z" transform="translate(-228.375 -134.208)" fill="#585858"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

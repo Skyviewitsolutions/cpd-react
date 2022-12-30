@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144" height="144" viewBox="0 0 144 144">
+  <defs>
+    <clipPath id="clip-Artboard_21">
+      <rect width="144" height="144"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_21" data-name="Artboard – 21" clip-path="url(#clip-Artboard_21)">
+    <rect width="144" height="144" fill="#fff"/>
+    <g id="computer" transform="translate(19.404 22.977)">
+      <path id="Path_6051" data-name="Path 6051" d="M36.151,26.606a14.06,14.06,0,1,0,14.06,14.06A14.075,14.075,0,0,0,36.151,26.606ZM30.878,50.748V30.584L46,40.666ZM92.392,2H15.06A14.075,14.075,0,0,0,1,16.06V65.271a14.075,14.075,0,0,0,14.06,14.06H92.392a14.075,14.075,0,0,0,14.06-14.06V16.06A14.075,14.075,0,0,0,92.392,2ZM36.151,61.756a21.09,21.09,0,1,1,21.09-21.09A21.114,21.114,0,0,1,36.151,61.756Zm56.241-3.515H64.271v-7.03H92.392Zm0-14.06H64.271v-7.03H92.392Zm0-14.06H64.271V23.09H92.392ZM64.271,93.392v-7.03H43.181v7.03H29.121v7.03H78.332v-7.03Z" transform="translate(-1 -2)" fill="#2c6959"/>
+    </g>
+  </g>
+</svg>

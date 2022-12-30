@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144" height="144" viewBox="0 0 144 144">
+  <defs>
+    <clipPath id="clip-Artboard_35">
+      <rect width="144" height="144"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_35" data-name="Artboard – 35" clip-path="url(#clip-Artboard_35)">
+    <rect width="144" height="144" fill="#fff"/>
+    <g id="gps_1_" data-name="gps (1)" transform="translate(16.967 16.968)">
+      <path id="Path_7254" data-name="Path 7254" d="M172.289,150.213a22.205,22.205,0,1,1-22.206-22.2A22.206,22.206,0,0,1,172.289,150.213Zm0,0" transform="translate(-94.603 -94.699)" fill="#2c6959"/>
+      <path id="Path_7255" data-name="Path 7255" d="M107.7,52.183h-7.424A44.969,44.969,0,0,0,58.812,10.716V3.331a3.331,3.331,0,0,0-6.662,0v7.385A44.971,44.971,0,0,0,10.686,52.183H3.331a3.331,3.331,0,0,0,0,6.662h7.355a44.97,44.97,0,0,0,41.464,41.468V107.7a3.33,3.33,0,1,0,6.661,0v-7.387a44.969,44.969,0,0,0,41.465-41.468H107.7a3.331,3.331,0,0,0,0-6.662ZM55.48,93.818a38.3,38.3,0,1,1,38.306-38.3A38.3,38.3,0,0,1,55.48,93.818Zm0,0" transform="translate(0 0)" fill="#2c6959"/>
+    </g>
+  </g>
+</svg>

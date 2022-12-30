@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144" height="144" viewBox="0 0 144 144">
+  <defs>
+    <clipPath id="clip-Artboard_84">
+      <rect width="144" height="144"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_84" data-name="Artboard – 84" clip-path="url(#clip-Artboard_84)">
+    <rect width="144" height="144" fill="#fff"/>
+    <g id="Group_22" data-name="Group 22" transform="translate(2426.87 -15917.567)">
+      <g id="dll" transform="translate(-2403.87 15933.567)">
+        <path id="Path_10731" data-name="Path 10731" d="M103.035,0A7.056,7.056,0,0,0,96,7.035v98.5a7.056,7.056,0,0,0,7.035,7.035H173.39a7.056,7.056,0,0,0,7.035-7.035V28.142L152.283,0Z" transform="translate(-81.929)" fill="#e2e5e7"/>
+        <path id="Path_10732" data-name="Path 10732" d="M359.035,28.142h21.106L352,0V21.106A7.056,7.056,0,0,0,359.035,28.142Z" transform="translate(-281.646)" fill="#b0b7bd"/>
+        <path id="Path_10733" data-name="Path 10733" d="M405.106,149.106,384,128h21.106Z" transform="translate(-306.61 -99.858)" fill="#cad1d8"/>
+        <path id="Path_10734" data-name="Path 10734" d="M116.425,278.695a3.528,3.528,0,0,1-3.518,3.518H35.518A3.528,3.528,0,0,1,32,278.695V243.518A3.528,3.528,0,0,1,35.518,240h77.39a3.528,3.528,0,0,1,3.518,3.518Z" transform="translate(-32 -187.234)" fill="#576d7e"/>
+        <path id="Path_10738" data-name="Path 10738" d="M162.836,419.518H96v3.518h66.836a3.528,3.528,0,0,0,3.518-3.518V416A3.528,3.528,0,0,1,162.836,419.518Z" transform="translate(-81.929 -324.54)" fill="#cad1d8"/>
+      </g>
+      <text id="DOC" transform="translate(-2361 16015.985)" fill="#fff" font-size="24" font-family="Poppins-Medium, Poppins" font-weight="500"><tspan x="-27.192" y="0">DOC</tspan></text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144" height="144" viewBox="0 0 144 144">
+  <defs>
+    <clipPath id="clip-Artboard_82">
+      <rect width="144" height="144"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_82" data-name="Artboard – 82" clip-path="url(#clip-Artboard_82)">
+    <rect width="144" height="144" fill="#fff"/>
+    <g id="Group_20" data-name="Group 20" transform="translate(2701.12 -15918)">
+      <g id="avi" transform="translate(-2669.12 15944)">
+        <path id="Path_10683" data-name="Path 10683" d="M101.731,0A5.748,5.748,0,0,0,96,5.731V85.97a5.748,5.748,0,0,0,5.731,5.731h57.314a5.748,5.748,0,0,0,5.731-5.731V22.925L141.851,0Z" transform="translate(-84.537)" fill="#e2e5e7"/>
+        <path id="Path_10684" data-name="Path 10684" d="M357.731,22.925h17.194L352,0V17.194A5.748,5.748,0,0,0,357.731,22.925Z" transform="translate(-294.686)" fill="#b0b7bd"/>
+        <path id="Path_10685" data-name="Path 10685" d="M401.194,145.194,384,128h17.194Z" transform="translate(-320.955 -105.075)" fill="#cad1d8"/>
+        <path id="Path_10686" data-name="Path 10686" d="M100.776,271.522a2.874,2.874,0,0,1-2.866,2.866H34.866A2.874,2.874,0,0,1,32,271.522V242.866A2.874,2.874,0,0,1,34.866,240H97.911a2.874,2.874,0,0,1,2.866,2.866Z" transform="translate(-32 -197.015)" fill="#f15642"/>
+        <path id="Path_10690" data-name="Path 10690" d="M150.448,418.866H96v2.866h54.448a2.874,2.874,0,0,0,2.866-2.866V416A2.874,2.874,0,0,1,150.448,418.866Z" transform="translate(-84.537 -341.492)" fill="#cad1d8"/>
+      </g>
+      <text id="Mp4" transform="translate(-2635.854 16009.977)" fill="#fff" font-size="20" font-family="Poppins-Medium, Poppins" font-weight="500"><tspan x="-22.07" y="0">Mp4</tspan></text>
+    </g>
+  </g>
+</svg>

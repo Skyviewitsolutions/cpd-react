@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144" height="144" viewBox="0 0 144 144">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#2c6959"/>
+      <stop offset="1" stop-color="#357a68"/>
+    </linearGradient>
+    <clipPath id="clip-Artboard_45">
+      <rect width="144" height="144"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_45" data-name="Artboard – 45" clip-path="url(#clip-Artboard_45)">
+    <rect width="144" height="144" fill="#fff"/>
+    <g id="computer" transform="translate(24.02 27.552)">
+      <path id="Path_6124" data-name="Path 6124" d="M32.874,24.312a12.75,12.75,0,1,0,12.75,12.75A12.763,12.763,0,0,0,32.874,24.312ZM28.093,46.2V27.919l13.714,9.142ZM83.872,2H13.75A12.763,12.763,0,0,0,1,14.75V59.373a12.763,12.763,0,0,0,12.75,12.75H83.872a12.763,12.763,0,0,0,12.75-12.75V14.75A12.763,12.763,0,0,0,83.872,2Zm-51,54.186A19.124,19.124,0,1,1,52,37.061,19.145,19.145,0,0,1,32.874,56.186Zm51-3.187h-25.5V46.624h25.5Zm0-12.75h-25.5V33.874h25.5Zm0-12.75h-25.5V21.124h25.5Zm-25.5,57.373V78.5H39.249v6.375H26.5v6.375H71.122V84.872Z" transform="translate(-1 -2)" fill="url(#linear-gradient)"/>
+    </g>
+  </g>
+</svg>

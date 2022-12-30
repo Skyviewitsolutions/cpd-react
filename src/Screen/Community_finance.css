@@ -1,0 +1,39 @@
+
+ 
+.upcoming_heading{
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.upcoming_heading h3{
+    font-size: 30px;
+    font-weight: 700;
+
+}
+.upcoming_heading button{
+    min-width:100px;
+    height:35px;
+    border-radius: 5px;
+    font-size: 13px;
+    color:#2c6959;
+    border: none;
+    background-color: transparent;
+    border:1px solid #2c6959;
+    font-weight: bold;
+
+}
+.criteria_join{
+    font-size: 12px;
+    font-weight: 700;
+}
+#eligible{
+    font-size: 12px;
+      color:#2c6959;
+}
+.latest_session{
+    display: flex;
+    justify-content: space-between;
+}
+.Sidenav_communityFinance{
+     box-shadow: 3px 3px 3px 3px gray 0.6;
+}

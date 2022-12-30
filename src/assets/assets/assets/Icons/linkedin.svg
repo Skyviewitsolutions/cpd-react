@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="80" height="80" viewBox="0 0 80 80">
+  <defs>
+    <clipPath id="clip-linkedin">
+      <rect width="80" height="80"/>
+    </clipPath>
+  </defs>
+  <g id="linkedin" clip-path="url(#clip-linkedin)">
+    <g id="Layer_2" data-name="Layer 2" transform="translate(3.324 3.493)">
+      <g id="linkedin-2" data-name="linkedin" transform="translate(0 -0.169)">
+        <rect id="background" width="74" height="74" rx="8" transform="translate(-0.324 -0.324)" fill="#0077b5"/>
+        <g id="icon" transform="translate(14.066 13.779)">
+          <path id="Path_11109" data-name="Path 11109" d="M46.034,39.317A6.317,6.317,0,1,1,39.717,33a6.317,6.317,0,0,1,6.317,6.317Z" transform="translate(-33.4 -33)" fill="#fff"/>
+          <path id="Path_11110" data-name="Path 11110" d="M46.547,70.847V98.755a1.562,1.562,0,0,1-1.562,1.571H38.327a1.562,1.562,0,0,1-1.567-1.567V70.847a1.567,1.567,0,0,1,1.567-1.567h6.658a1.567,1.567,0,0,1,1.562,1.567Z" transform="translate(-35.345 -54.002)" fill="#fff"/>
+          <path id="Path_11111" data-name="Path 11111" d="M100.863,84.739v13.51a1.436,1.436,0,0,1-1.44,1.44H92.263a1.436,1.436,0,0,1-1.44-1.44V85.156c0-1.954.573-8.557-5.108-8.557-4.4,0-5.3,4.519-5.475,6.549v15.1a1.44,1.44,0,0,1-1.419,1.44H71.906a1.436,1.436,0,0,1-1.436-1.44V70.088a1.436,1.436,0,0,1,1.436-1.44h6.915a1.44,1.44,0,0,1,1.44,1.44v2.434c1.634-2.451,4.055-4.342,9.223-4.342C100.93,68.18,100.863,78.868,100.863,84.739Z" transform="translate(-54.859 -53.365)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

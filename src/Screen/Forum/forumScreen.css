@@ -1,0 +1,178 @@
+.forum-wrapper{
+    padding:30px 50px 30px 50px;
+}
+#forumHeading{
+    font-family: Inter-Medium;
+    font-size:40px;
+    color:#232423;
+}
+.forumcardsection p{
+    text-align: left;
+    font-family:Inter-Regular;
+font-size:13px;
+letter-spacing: 0px;
+color: #232423;
+}
+.forumcardsection h5{
+    text-align: left;
+    font-family: Inter-Medium;
+    font-size:17px;
+letter-spacing: 0px;
+color: #232423;
+
+}
+.forumcardsection{
+   margin-top:20px;
+   border:1px solid rgb(204, 204, 204);
+   padding:30px 30px 30px 30px;
+   box-shadow: 0px 12px 31px #00000040;
+
+}
+
+.forumcardsection p{
+    margin-top:5px;
+}
+
+.Forumprofile{
+    overflow: hidden;
+    width:90px;
+    height:90px;
+    border-radius: 50%;
+    border:1px solid rgb(187, 186, 186);
+
+}
+.Forumprofile img{
+    border-radius:50%;
+width:100%;
+height:100%;
+
+}
+.ForumcommentImage{
+    display:flex;
+    flex-direction: column;
+}
+.forumImgaeList {
+    display: flex;
+}
+.forumImgaeList ul{
+    list-style-type: none;
+    display:flex;
+
+}
+
+.forumImgaeList li{
+    margin-left: -10px;
+    border-radius:50%;
+    width:40px;
+    height:40px;
+    border:1px solid rgb(182, 179, 179);
+    overflow:hidden;
+}
+.forumImgaeList li img{
+    width:100%;
+    height:100%;
+}
+.ForumCommentbox{
+    /* margin-left: 10px; */
+    display: flex;
+}
+.ForumCommentbox svg{
+    margin-right: 5px;
+    font-size: 30px;
+    margin-left: 20px;
+    color:#2c6959;
+}
+.ForumCommentbox h6{
+font-size:15px;
+
+}
+.forum_descriptiontext svg{
+    font-size: 15px;
+    margin-right:3px;
+}
+.forum_descriptiontext h6{
+    font-size:15px;
+}
+.forum_descriptionid h6{
+    font-size:15px;
+    color:#2c6959;
+}
+.forum_descriptiontime h6{
+    font-size:15px;
+}
+
+.forumcardsection :last-child{
+    border:none;
+}
+
+@media screen and (max-device-width: 480px){
+    .forum-wrapper{
+        padding:10px 10px 10px 10px;
+    }
+.Forumprofile {
+    margin-bottom: 10px;
+}
+.ForumCommentbox svg {
+    
+    
+    margin-left: 0px;
+    
+}
+.forumcardsection{
+    padding:10px 10px 10px 10px;
+}
+.forumImgaeList ul{
+    padding-left: 8px;
+
+}
+    }
+    @media screen and (min-device-width: 481px) and (max-device-width: 767px) {
+        .forumcardsection{
+            padding:10px 10px 10px 10px;
+        }
+        .forum-wrapper{
+            padding:10px 10px 10px 10px;
+        }
+        .forum_descriptiontext svg{
+            font-size: 12px;
+            
+        }
+        .forum_descriptiontext h6{
+            font-size:12px;
+        }
+        .forum_descriptionid h6{
+            font-size:12px;
+            
+        }
+        .forum_descriptiontime h6{
+            font-size:12px;
+        }
+       }
+
+    @media screen and (min-device-width: 768px) and (max-device-width: 961px) {
+        .forumcardsection{
+    padding:10px 10px 10px 10px;
+}
+      
+        .forum-wrapper{
+            padding:10px 10px 10px 10px;
+        }
+        .forum_descriptiontext svg{
+            font-size: 12px;
+           
+        }
+        .forum_descriptiontext h6{
+            font-size:12px;
+        }
+        .forum_descriptionid h6{
+            font-size:12px;
+            
+        }
+        .forum_descriptiontime h6{
+            font-size:12px;
+        }
+
+    }
+
+
+    

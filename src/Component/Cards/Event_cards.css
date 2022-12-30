@@ -1,0 +1,172 @@
+.Card.Body {
+  padding-bottom: 0%;
+}
+.Ecard_media_event {
+  height: 210px;
+  border-bottom: 1px solid rgb(237 231 231);
+}
+.Ecard_media_event img {
+  border-radius: 10px 10px 0px 0px;
+  height: 100%;
+  width: 100%;
+}
+.avlbltyEvent {
+  height: 40px;
+  width: 100%;
+}
+.avlbltyEvent h6 {
+  font-size: 14px !important;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+.Ecard_outline {
+  cursor: pointer;
+  margin-bottom: 20px !important;
+  border: 1px solid gainsboro !important;
+  border-radius: 1px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  /* height: 350px; */
+}
+
+.subType{
+  align-items: center;
+}
+
+.subType h6{
+  margin-bottom: 0px !important;
+  margin-right: 8px;
+}
+.subType span{
+  margin-bottom: 0px !important;
+  margin-left: 8px;
+}
+
+.cardCont{
+  border-radius: 6px !important;
+}
+.evDiscript {
+  height: 40px;
+  width: 100%;
+}
+.evDiscript p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: rgb(109, 107, 107);
+}
+
+.Ecard_title h5 {
+  margin-top: -5%;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.Ecard_title h6 {
+  font-size: 11px;
+
+  text-transform: capitalize;
+}
+.Ename_boxes {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center !important;
+}
+button.evntBtnViewDtls {
+  background: none;
+  border: 2px solid rgb(162, 160, 160);
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c6959;
+  text-transform: capitalize;
+  padding: 4px 7px;
+}
+button.evntBtnViewDtls:hover {
+  border: 2px solid #2c6959;
+}
+
+.Ename_boxes h6 {
+  color: #2c6959;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+.Ename_boxes h6 {
+  font-weight: 500;
+  color: #2c6959;
+  font-size: 14px;
+}
+.Ename_boxes img {
+  width: 14px;
+  height: 14px;
+}
+
+.Etiming_boxes {
+  align-items: center;
+  display: flex;
+  color: gray;
+  justify-content: space-between;
+  margin-top: 7px;
+  margin-bottom: 5px;
+}
+
+.Etiming_boxes h6 {
+  font-size: 16px;
+  padding-bottom: 0%;
+  margin-bottom: -5px;
+}
+.Etiming_boxes h6 {
+  padding-top: 0%;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: -5px;
+}
+.Etiming_boxes img {
+  width: 16px;
+  height: 16px;
+}
+.Ecard_media {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  object-fit: cover;
+}
+span.evntcrdDurtion {
+  position: relative;
+  top: 1px;
+  font-size: 14px;
+}
+
+.evntt-days {
+  font-size: 14px !important;
+  font-weight: bold !important;
+  color: rgb(109, 107, 107) !important;
+}
+
+.evntt-days span {
+  font-weight: 400;
+}
+
+.cardCont .card-body{
+  padding: 10px 11px !important;
+}
+
+.titleCont{
+  margin-bottom: 0px !important;
+}
+
+.shareBtn2{
+  width: 100%;
+  margin-top: 8px;
+  padding-left: 0px;
+  
+}
+
+.shareBtn2>div{
+  display: flex !important ;
+ 
+}

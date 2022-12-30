@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="80" height="80" viewBox="0 0 80 80">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.074" y1="0.926" x2="0.909" y2="0.091" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#e09b3d"/>
+      <stop offset="0.3" stop-color="#c74c4d"/>
+      <stop offset="0.6" stop-color="#c21975"/>
+      <stop offset="1" stop-color="#7024c4"/>
+    </linearGradient>
+    <clipPath id="clip-insta">
+      <rect width="80" height="80"/>
+    </clipPath>
+  </defs>
+  <g id="insta" clip-path="url(#clip-insta)">
+    <g id="instagram_6_" data-name="instagram (6)" transform="translate(-242.114 -202.146)">
+      <g id="Layer_2" data-name="Layer 2" transform="translate(243.93 203.961)">
+        <g id="_07.instagram" data-name="07.instagram" transform="translate(0 0)">
+          <path id="background" d="M62.7,75.059a231.08,231.08,0,0,1-49.029,0A13.915,13.915,0,0,1,1.3,62.7a231.081,231.081,0,0,1,0-49.029A13.915,13.915,0,0,1,13.656,1.3a231.083,231.083,0,0,1,49.029,0A13.915,13.915,0,0,1,75.059,13.656a231.08,231.08,0,0,1,0,49.029A13.915,13.915,0,0,1,62.7,75.059Z" transform="translate(0.005 0.005)" fill="url(#linear-gradient)"/>
+          <g id="icon" transform="translate(14.321 14.321)">
+            <g id="icon-2" data-name="icon">
+              <path id="Path_11115" data-name="Path 11115" d="M66.509,33H47.218A14.236,14.236,0,0,0,33,47.218V66.509A14.236,14.236,0,0,0,47.218,80.728H66.509A14.236,14.236,0,0,0,80.728,66.509V47.218A14.236,14.236,0,0,0,66.509,33Zm9.415,33.509a9.411,9.411,0,0,1-9.415,9.415H47.218A9.411,9.411,0,0,1,37.8,66.509V47.218A9.415,9.415,0,0,1,47.218,37.8H66.509a9.415,9.415,0,0,1,9.415,9.415Z" transform="translate(-33 -33)" fill="#fff"/>
+              <path id="Path_11116" data-name="Path 11116" d="M71.894,59.55A12.344,12.344,0,1,0,84.238,71.894,12.344,12.344,0,0,0,71.894,59.55Zm0,19.889a7.545,7.545,0,1,1,7.545-7.545A7.545,7.545,0,0,1,71.894,79.439Z" transform="translate(-48.03 -48.03)" fill="#fff"/>
+              <circle id="Ellipse_566" data-name="Ellipse 566" cx="3.05" cy="3.05" r="3.05" transform="translate(33.227 8.469)" fill="#fff"/>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144" height="144" viewBox="0 0 144 144">
+  <defs>
+    <clipPath id="clip-Artboard_51">
+      <rect width="144" height="144"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_51" data-name="Artboard – 51" clip-path="url(#clip-Artboard_51)">
+    <rect width="144" height="144" fill="#fff"/>
+    <g id="comment" transform="translate(20.119 24.308)">
+      <path id="Path_6081" data-name="Path 6081" d="M89.279-1.332H14.231A14.246,14.246,0,0,0,0,12.9V58.826a14.247,14.247,0,0,0,14.18,14.231V93.9L44.132,73.057H89.279A14.247,14.247,0,0,0,103.51,58.826V12.9A14.246,14.246,0,0,0,89.279-1.332Zm8.166,60.158a8.175,8.175,0,0,1-8.166,8.166H42.229l-21.984,15.3v-15.3H14.231a8.175,8.175,0,0,1-8.166-8.166V12.9a8.174,8.174,0,0,1,8.166-8.166H89.279A8.174,8.174,0,0,1,97.445,12.9Zm0,0" transform="translate(-0.001 1.332)"/>
+      <path id="Path_6082" data-name="Path 6082" d="M171.293,131.172h48.1v6.065h-48.1Zm0,0" transform="translate(-143.589 -109.742)"/>
+      <path id="Path_6083" data-name="Path 6083" d="M171.293,211.172h48.1v6.065h-48.1Zm0,0" transform="translate(-143.589 -176.803)"/>
+      <path id="Path_6084" data-name="Path 6084" d="M171.293,291.172h48.1v6.065h-48.1Zm0,0" transform="translate(-143.589 -243.865)"/>
+    </g>
+  </g>
+</svg>

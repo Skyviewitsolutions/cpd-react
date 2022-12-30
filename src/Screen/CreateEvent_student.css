@@ -1,0 +1,10 @@
+.studentEvent_outline{
+    box-shadow: 1px 1px 10px 7px rgb(205, 204, 204);
+   padding:2%;
+   border-radius: 5px;
+   align-items: center;
+   height:auto;
+   border:1px solid black;
+   margin-bottom: 20px;
+   }
+   

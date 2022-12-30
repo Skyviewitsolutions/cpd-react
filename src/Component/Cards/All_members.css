@@ -1,0 +1,170 @@
+.all_membersCard h4{
+    font-size: 18px;
+    cursor: pointer;
+    }
+    .all_membersCard span{
+        color:rgb(133, 133, 247);
+        cursor: pointer
+    }
+    .all_membersCard{
+        padding-left: 20px;
+        cursor: pointer;
+    }
+    .all_membersCard h5{
+        cursor: pointer;
+        padding-top: 0%;
+        margin-top: 0%;
+        font-size: 15px;
+        color:#2c6959;
+    }
+    .all_membersCard h6{
+        cursor: pointer;
+        font-size: 13px;
+    }
+    .all_members_box input{
+        cursor: pointer;
+     position:absolute;
+     top:5px;
+     right:5px;
+    }
+    
+    
+    .member_list .card {
+      --background-checkbox: #2c6959;
+       --background-image: #2c6959, rgba(0, 107, 175, 1); 
+      --text-color: #666;
+      --text-headline: #000;
+      --card-shadow: #2c6959;
+      --header-height: 47px;
+      --blend-mode: overlay;
+      --transition: 0.15s;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+     .member_list .card__input {
+        position: absolute;
+        display: block;
+        outline: none;
+        border: none;
+        background: none;
+        padding: 0;
+        margin: 0;
+        -webkit-appearance: none;
+      }
+    .member_list .card_input:checked ~ .card_body {
+        --shadow: 0 0 0 3px var(--card-shadow);
+      }
+    .member_list .card_input:checked ~ .cardbody .card_body-cover-checkbox {
+        --check-bg: var(--background-checkbox);
+        --check-border: #fff;
+        --check-scale: 1;
+        --check-opacity: 1;
+      }
+    .member_list .card_input:checked ~ .cardbody .card_body-cover-checkbox--svg {
+        --stroke-color: #fff;
+        --stroke-dashoffset: 0;
+      }
+    .member_list .card_input:checked ~ .cardbody .card_body-cover:after {
+        --opacity-bg: 0;
+      }
+    .member_list .card_input:checked ~ .cardbody .card_body-cover-image {
+        --filter-bg: grayscale(0);
+      }
+    .member_list .card_input:disabled ~ .card_body {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+    .member_list .card_input:disabled ~ .card_body:active {
+        --scale: 1;
+      }
+    .member_list .card__body {
+        display: grid;
+        grid-auto-rows: calc(var(--card-height) - var(--header-height)) auto;
+        background: var(--background);
+        height: var(--card-height);
+        width: var(--card-width);
+        border-radius: var(--card-radius);
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        box-shadow: var(--shadow, 0 4px 4px 0 rgba(0, 0, 0, 0.02));
+        transition: transform var(--transition), box-shadow var(--transition);
+        transform: scale(var(--scale, 1)) translateZ(0);
+      }
+    .member_list .card__body:active {
+        --scale: 0.96;
+      }
+    .member_list .card__body-cover {
+        --c-border: var(--card-radius) var(--card-radius) 0 0;
+        --c-width: 100%;
+        --c-height: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+     .member_list .card__body-cover:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: var(--c-width);
+        height: var(--c-height);
+        border-radius: var(--c-border);
+        background: linear-gradient(to bottom right, var(--background-image));
+        mix-blend-mode: var(--blend-mode);
+        opacity: var(--opacity-bg, 1);
+        transition: opacity var(--transition) linear;
+      }
+    .member_list .card__body-cover-image {
+        width: var(--c-width);
+        height: var(--c-height);
+        -o-object-fit: cover;
+           object-fit: cover;
+        border-radius: var(--c-border);
+        filter: var(--filter-bg, grayscale(1));
+        -webkit-clip-path: polygon(0% 0%, 100% 0%, var(--x-y1, 100% 90%), var(--x-y2, 67% 83%), var(--x-y3, 33% 90%), var(--x-y4, 0% 85%));
+                clip-path: polygon(0% 0%, 100% 0%, var(--x-y1, 100% 90%), var(--x-y2, 67% 83%), var(--x-y3, 33% 90%), var(--x-y4, 0% 85%));
+      }
+     .member_list .card__body-cover-checkbox {
+        background: var(--check-bg, var(--background-checkbox));
+        border: 2px solid var(--check-border, #fff);
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 1;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        opacity: var(--check-opacity, 0);
+        transition: transform var(--transition), opacity calc(var(--transition) * 1.2) linear;
+        transform: scale(var(--check-scale, 0));
+      }
+      .member_list .card__body-cover-checkbox--svg {
+        width: 13px;
+        height: 11px;
+        display: inline-block;
+        vertical-align: top;
+        fill: none;
+        margin: 7px 0 0 5px;
+        stroke: var(--stroke-color, #fff);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 16px;
+        stroke-dashoffset: var(--stroke-dashoffset, 16px);
+        transition: stroke-dashoffset 0.4s ease var(--transition);
+      }
+    .member_list .card__body-header {
+        height: var(--header-height);
+        background: var(--background);
+        padding: 0 10px 10px 10px;
+      }
+      .member_list .card__body-header-title {
+        color: var(--text-headline);
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+    .member_list .card__body-header-subtitle {
+        color: var(--text-color);
+        font-weight: 500;
+        font-size: 13px;
+      }

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144" height="144" viewBox="0 0 144 144">
+  <defs>
+    <clipPath id="clip-Artboard_34">
+      <rect width="144" height="144"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_34" data-name="Artboard – 34" clip-path="url(#clip-Artboard_34)">
+    <rect width="144" height="144" fill="#fff"/>
+    <g id="Group_11" data-name="Group 11" transform="translate(-5042.659 388.105)">
+      <rect id="Rectangle_7404" data-name="Rectangle 7404" width="114.483" height="110.79" rx="15" transform="translate(5057.111 -371.248)" fill="#ffe0e0"/>
+      <g id="delete_1_" data-name="delete (1)" transform="translate(5085.56 -348.971)">
+        <path id="Path_7310" data-name="Path 7310" d="M224.1,154.7a1.705,1.705,0,0,0-1.705,1.705v32.227a1.705,1.705,0,1,0,3.41,0V156.408A1.705,1.705,0,0,0,224.1,154.7Zm0,0" transform="translate(-184.475 -128.324)" fill="#e23d3d"/>
+        <path id="Path_7311" data-name="Path 7311" d="M106.1,154.7a1.705,1.705,0,0,0-1.705,1.705v32.227a1.705,1.705,0,1,0,3.41,0V156.408A1.705,1.705,0,0,0,106.1,154.7Zm0,0" transform="translate(-86.596 -128.324)" fill="#e23d3d"/>
+        <path id="Path_7312" data-name="Path 7312" d="M4.84,21.675V63.686a9.408,9.408,0,0,0,2.5,6.488,8.4,8.4,0,0,0,6.093,2.634H45.7a8.4,8.4,0,0,0,6.093-2.634,9.408,9.408,0,0,0,2.5-6.488V21.675A6.514,6.514,0,0,0,52.618,8.865h-8.73V6.734A6.7,6.7,0,0,0,37.135,0H21.994a6.7,6.7,0,0,0-6.753,6.735V8.865H6.511A6.514,6.514,0,0,0,4.84,21.675ZM45.7,69.4H13.433c-2.915,0-5.183-2.5-5.183-5.712V21.825H50.879V63.686c0,3.208-2.268,5.712-5.183,5.712ZM18.651,6.734a3.285,3.285,0,0,1,3.342-3.325H37.135a3.285,3.285,0,0,1,3.342,3.325V8.866H18.651ZM6.511,12.276H52.618a3.069,3.069,0,0,1,0,6.139H6.511a3.069,3.069,0,1,1,0-6.139Zm0,0" transform="translate(0.003 0.002)" fill="#e23d3d"/>
+        <path id="Path_7313" data-name="Path 7313" d="M165.1,154.7a1.705,1.705,0,0,0-1.705,1.705v32.227a1.705,1.705,0,1,0,3.41,0V156.408A1.705,1.705,0,0,0,165.1,154.7Zm0,0" transform="translate(-135.536 -128.324)" fill="#e23d3d"/>
+      </g>
+    </g>
+  </g>
+</svg>

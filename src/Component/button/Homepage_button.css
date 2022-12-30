@@ -1,0 +1,26 @@
+.view{
+    border:1px solid #2c6959;
+    font-weight: 700px;
+    min-width:90px;
+    height:30px;
+    border-radius: 20px;
+    background-color: white;
+    font-size: 13px;
+    
+}
+.view_button{
+    position:relative;
+    bottom:20%;
+}
+@media screen and (min-device-width: 741px) and (max-device-width: 1090px){
+    .view{
+    width:110px;
+    height:35px;
+    font-size: 15px;
+    
+
+
+    }
+    
+
+}

@@ -1,0 +1,47 @@
+.rsumModal{
+    width: 150%;
+    background-color: white;
+    margin-left: -25%;
+    height: 700px;
+    overflow-y: scroll;
+}
+
+.resume-wrapper{
+    padding: 25px 30px !important;
+}
+
+.cutOption{
+    color: gray;
+    position: absolute;
+    right: 29px;
+    top: 23px;
+    z-index: 100;
+    font-size: 20px;
+   text-align: center;
+    border: 1px solid grey;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+}
+
+.cutOption h6{
+    font-size: 20px;
+
+}
+
+.rsumModal{
+    position: relative !important;
+}
+
+.resume_nameBox h1 , .resume_nameBox h5{
+    text-transform: capitalize;
+}
+
+
+@media only screen and (max-width : 600px){
+    .rsumModal{
+        width: 100%;
+        margin-left: 0%;
+    }
+}

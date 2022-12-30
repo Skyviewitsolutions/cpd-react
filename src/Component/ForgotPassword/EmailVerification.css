@@ -1,0 +1,367 @@
+.loginpage_form label {
+  font-size: 17px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.login_bottom{
+
+   padding-top: 10px;
+   align-items: center;
+}
+.loginpage_form h4 {
+  font-weight: 600;
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+input.loginCheckbox {
+  height: 25px;
+  width: 30px;
+  cursor:pointer;
+}
+span.LoginCheckText {
+  margin-top: -30px!important;
+  display: flex;
+  align-items: ceneter;
+  margin-left: 0px;
+}
+a.forgotPassword {
+color: #2c6959;
+  margin-left: 32%;
+}
+.LoginSocial{
+  margin-left: 26%;
+  font-size: 16px!important;
+}
+.col.md-7.flex-center.socialIcons img {
+  height: 45px!important;
+  width: 45px!important;
+  margin-left: 10px;
+  margin-top: 4%;
+  cursor: pointer;
+}
+.col.md-7.flex-center.socialIcons {
+  float: right;
+  text-align: right;
+}
+.lg_check {
+  min-width: 275px;
+}
+.social_box{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.social_icon_box{
+  display: flex;
+  justify-content: space-between;
+}
+.social_icon_box img{
+  margin-left: 6px;
+  margin-right: 6px;
+   width:40px;
+   height:40px;
+} #or{     
+   justify-content: center;
+}
+#or h6{
+   font-size: 14px;
+   text-align: center;
+}
+#useotp{
+   background-color: transparent;
+   border: none;
+   color:#2c6959;
+   border:1px solid #2c6959;
+   box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 20px -20px;
+
+   border-radius: 5px;
+   min-width: 140px;
+   
+   text-align: center;
+   font-size: 14px;
+   font-weight: 500;
+   height:40px;
+}
+.input_outbox{
+  position:relative;
+}
+#create_account{
+  font-size: 16px;
+text-decoration: underline;      
+}
+#create_account:hover{
+
+  font-weight: 700;
+}
+#not_a_member{
+  margin-top: 10px;
+}
+input:-internal-autofill-selected{
+  background-color:white!important;
+}
+.formBasicCheckbox{
+  cursor: pointer;
+}
+div#or h6 {
+  font-size: 20px;
+}
+.loginpage_form #itext input {
+  margin-left: 15px;
+  border: none;
+  width: 90%;
+  height: 100%;
+  outline: none;
+  font-size: 15px;
+  padding-left: 35px;
+}
+.loginpage_form div#iicon {
+  padding-left: 10px;
+  font-size: 23px;
+}
+.loginpage_form #itext input {
+  margin-left: 15px;
+  border: none;
+  width: 90%;
+  height: 100%;
+  outline: none;
+  font-size: 18px;
+  padding-left: 42px;
+}
+.loginpage_form #itext input::placeholder {
+  color: #959595;
+}
+.check_and_forgot .lg_check label {
+  margin-bottom: 0px !important;
+  margin-left: 10px;
+  color: #7E7E7E;
+  font-size: 15px;
+}
+.check_and_forgot  input[type="checkbox"]:before {
+  background: #E3E3E3 !important;
+}
+.check_and_forgot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+.check_and_forgot .forgot-link {
+  text-align: right;
+}
+.lg_check label {
+  display: contents;
+}
+.lg_check span.LoginCheckText {
+  padding-left: 45px;
+}
+.loginpage_form .subbtncont {
+  margin-top: 4%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  border: none;
+  color: white;
+  background: #2C6959 0% 0% no-repeat padding-box;
+  box-shadow: 0px 8px 14px #00000029;
+  border-radius: 4px;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.about_con_login h4 {
+  font-size: 40px;
+  font-weight: 700;
+  padding-bottom: 15px;
+}
+.about_con_login p.p_login {
+  font-size: 18px;
+  color: #232423;
+  font-weight: 500;
+  line-height: 33px;
+  margin-bottom: 35px;
+}
+.about_con_login button.signUp_aboutCpd {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #2C6959;
+  border-radius: 6px;
+  min-width: 240px;
+  height: 50px;
+}
+.about_con_login img.limg_login {
+  min-width: 280px;
+}
+.loginpage_form div#ipass {
+  right: 18px;
+}
+.about_con_login p.p_login {
+  width: 100%; 
+}
+.about_con_login p.p_login {
+  max-width: 520px;
+}
+.cpd_loginPage .container {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.col.md-7.col-12.flex-center.socialIcons {
+  min-width: 200px;
+}
+.login-page-section .loginpage_form {
+  padding-left: 70px;
+}
+
+@media only screen and (max-width: 600px) {
+  .LoginSocial {
+        margin-left: 0%;
+        font-size: 18px!important;
+        text-align: center;
+        display: block;
+  }
+   .col.md-7.flex-center.socialIcons img {
+      margin-left: 17%;
+   }
+   .orLogin{
+      margin-top: 5px;
+      font-size: 14px;
+      font-weight: 600;
+   }
+   p.loginSignup {
+      text-align: center;
+  }
+  a.forgotPassword {
+      text-decoration: underline;
+   }
+   .cpd_loginPage .container {
+        padding-left: 15px;
+        padding-right: 15px;
+  }
+  .about_con_login img.limg_login {
+     min-width: 280px;
+     margin: 0px;
+     padding-bottom: 25px;
+  }
+ .about_con_login h4 {
+     font-size: 28px;
+     font-weight: 700;
+     padding-bottom: 10px;
+  }
+  .about_con_login p.p_login {
+        width: 100% !important;
+        text-align: center;
+        margin-bottom: 0px !important;
+  }
+  .about_con_login {
+     text-align: center;
+  }
+  .about_con_login button.signUp_aboutCpd {
+     margin: 0px auto !important;
+     position: relative;
+     text-align: center;
+  }
+  .check_and_forgot {
+     display: block;
+     align-items: center;
+  }
+  p.loginSignup {
+        padding: 20px 5px !important;
+  }
+  .col.md-7.flex-center.socialIcons img {
+     margin: 0px 13px;
+     text-align: center;
+ }
+ .col.md-7.flex-center.socialIcons {
+     float: inherit;
+     text-align: right;
+  }
+  .login_bottom button#useotp {
+        margin: 0px auto;
+        text-align: center;
+        display: block;
+  }
+  .col.md-7.flex-center.socialIcons {
+     float: inherit;
+     text-align: center;
+     padding-top: 15px;
+ }
+ .p_login {
+     padding: 5% 5px;
+     width: 100%;
+     text-align: justify;
+     margin-top: -10px;
+     font-size: 16px !important;
+  }
+  .loginpage_form h4 {
+        font-weight: 700;
+        font-size: 31px;
+        margin-bottom: 20px;
+  }
+  .login-page-section .loginpage_form {
+     padding-left: 0px;
+     margin-top: 25px;
+ }
+
+}
+
+
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px){
+  .about_con_login img.limg_login {
+     min-width: 280px;
+     margin: 0px;
+     padding-bottom: 25px;
+  }
+ .about_con_login h4 {
+     font-size: 28px;
+     font-weight: 700;
+     padding-bottom: 10px;
+  }
+  .about_con_login p.p_login {
+        width: 100% !important;
+        text-align: center;
+        margin-bottom: 0px !important;
+  }
+  .about_con_login {
+     text-align: center;
+  }
+  .about_con_login button.signUp_aboutCpd {
+     margin: 0px auto !important;
+     position: relative;
+     text-align: center;
+  }
+  .col.md-7.flex-center.socialIcons img {
+     margin: 0px 13px;
+     text-align: center;
+ }
+ .col.md-7.flex-center.socialIcons {
+     float: inherit;
+     text-align: right;
+  }
+  .col.md-7.flex-center.socialIcons {
+     float: inherit;
+     text-align: center;
+     padding-top: 15px;
+ }
+ .p_login {
+     padding: 5% 5px;
+     width: 100%;
+     text-align: justify;
+     margin-top: -10px;
+     font-size: 16px !important;
+  }
+  .loginpage_form h4 {
+        font-weight: 700;
+        font-size: 31px;
+        margin-bottom: 20px;
+  }
+  .about_con_login p.p_login {
+        max-width: 100%;
+  }
+  .loginpage_form h4 {
+     margin-top: 30px;
+ }
+ .login-page-section .loginpage_form {
+     padding-left: 0px;
+  }
+}

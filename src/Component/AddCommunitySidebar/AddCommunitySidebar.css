@@ -1,0 +1,244 @@
+/* * {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+} */
+
+
+
+.btn {
+  position: relative;
+  top: 15px;
+  left: 45px;
+  height: 45px;
+  text-align: center;
+  background: #2c6959;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: left 0.4s ease;
+  color: white;
+}
+.btn:hover {
+  background-color: #2c6959;
+}
+
+.sideBarBtn {
+  left: 260px;
+  visibility: hidden;
+}
+.btn span {
+  color: white;
+  font-size: 28px;
+  line-height: 45px;
+}
+.btn.click span:before {
+  content: "\f1d";
+  font-size: 80px;
+  position: relative;
+  font-weight: 800;
+  bottom: 30px;
+}
+.faBars {
+  margin-bottom: 20px;
+
+  margin-left: -2px;
+}
+.sidebar {
+  position: absolute;
+  width: 250px;
+  height: auto;
+  left: -250px;
+  background: white;
+  color: black;
+  margin-top: -42px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: left 0.4s ease;
+  border-radius: 8px;
+}
+.sidebar.show {
+  left: 17px;
+  height: auto;
+  border-radius: 8px;
+}
+.sidebar .text {
+  color: black;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 65px;
+  margin-left: 15%;
+  background: white;
+  letter-spacing: 1px;
+}
+input.checkBoxAdCmnty {
+  height: 20px;
+  width: 20px;
+}
+nav ul {
+  background: white;
+  color: black;
+  height: 100%;
+  width: 100%;
+  list-style: none;
+}
+nav ul li {
+  line-height: 35px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+nav ul li:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+nav ul li a {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  padding-left: 5px;
+  font-weight: 500;
+  display: block;
+  width: 100%;
+  border-left: 3px solid transparent;
+}
+nav ul li.active a {
+  color: black;
+  background: white;
+}
+nav ul li a:hover {
+  background: white;
+  color: black;
+}
+nav ul ul {
+  position: static;
+  display: none;
+}
+nav ul .feat-show.show {
+  display: block;
+}
+nav ul .serv-show.show1 {
+  display: block;
+}
+nav ul ul li {
+  line-height: 42px;
+  border-top: none;
+}
+nav ul ul li a {
+  font-size: 17px;
+  color: #e6e6e6;
+  padding-left: 80px;
+}
+nav ul li.active ul li a {
+  color: #e6e6e6;
+  background: white;
+  border-left-color: transparent;
+}
+nav ul ul li a:hover {
+  color: black !important;
+  background: white !important;
+}
+nav ul li a span {
+  position: absolute;
+  color: black;
+  top: 42%;
+  margin-left: 10px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  transition: transform 0.4s;
+}
+h6.AddCmntyMenuText {
+  margin-left: 8px;
+  color: #aaa;
+}
+nav ul li a span.rotate {
+  transform: translateY(-50%) rotate(-180deg);
+}
+button.BtnMore {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #2c6959;
+}
+.btn.click span:before {
+  content: "\f1d";
+  font-size: 80px;
+  position: relative;
+  font-weight: 800;
+  bottom: 30px;
+}
+input[type="checkbox"] {
+  accent-color: #2c6959;
+}
+.texthideShow {
+  visibility: hidden;
+}
+button.ClearAllAddCmntybtn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color:  #2c6959;
+}
+@media screen and (max-width: 600px) {
+  .btn.click {
+    visibility: visible;
+    z-index: 15;
+  }
+  .btn {
+    top: 0px;
+    margin-bottom: 20px;
+    margin-left: -36px;
+  }
+  .sidebar.show {
+    z-index: 2;
+  }
+  .btn.click svg.faBars {
+    opacity: 0;
+  }
+  nav.sidebar.show {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 0px;
+  }
+  .texthideShow {
+    visibility: visible;
+    position: absolute;
+    bottom: 14px;
+    font-size: 20px;
+    font-weight: 700;
+    left: 60px;
+    color: black;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 820px) {
+  .btn {
+    position: relative;
+    top: 0px;
+    margin-bottom: 15px;
+    left:0px;
+}
+.texthideShow {
+  visibility: visible;
+  position: absolute;
+  bottom: 7px;
+  font-size: 20px;
+  font-weight: 700;
+  left: 60px;
+  color: black;
+}
+.btn.click {
+  visibility: visible;
+  z-index: 15;
+}
+.sidebar.show {
+  z-index: 2;
+}
+.btn.click svg.faBars {
+  opacity: 0;
+}
+nav.sidebar.show {
+  max-height: 500px;
+  overflow-y: auto;
+  margin-top: 0px;
+}
+}
+

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144" height="144" viewBox="0 0 144 144">
+  <defs>
+    <clipPath id="clip-Artboard_79">
+      <rect width="144" height="144"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_79" data-name="Artboard – 79" clip-path="url(#clip-Artboard_79)">
+    <rect width="144" height="144" fill="#fff"/>
+    <g id="list" transform="translate(10 25)">
+      <path id="Path_6532" data-name="Path 6532" d="M103.385,58.318H20.132a6.212,6.212,0,0,1,0-12.425h83.251a6.212,6.212,0,0,1,0,12.425Z" transform="translate(14.905 33.749)" fill="#777978"/>
+      <path id="Path_6533" data-name="Path 6533" d="M103.385,39.487H20.132a6.212,6.212,0,0,1,0-12.425h83.251a6.212,6.212,0,0,1,0,12.425Z" transform="translate(14.905 13.584)" fill="#777978"/>
+      <path id="Path_6534" data-name="Path 6534" d="M103.385,20.656H20.132a6.212,6.212,0,0,1,0-12.425h83.251a6.212,6.212,0,0,1,0,12.425Z" transform="translate(14.905 -6.581)" fill="#777978"/>
+      <ellipse id="Ellipse_372" data-name="Ellipse 372" cx="8.343" cy="8.343" rx="8.343" ry="8.343" fill="#777978"/>
+      <ellipse id="Ellipse_373" data-name="Ellipse 373" cx="8.343" cy="8.343" rx="8.343" ry="8.343" transform="translate(0 38.515)" fill="#777978"/>
+      <ellipse id="Ellipse_374" data-name="Ellipse 374" cx="8.343" cy="8.343" rx="8.343" ry="8.343" transform="translate(0 77.03)" fill="#777978"/>
+    </g>
+  </g>
+</svg>

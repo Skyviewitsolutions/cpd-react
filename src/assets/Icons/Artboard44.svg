@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144" height="144" viewBox="0 0 144 144">
+  <defs>
+    <clipPath id="clip-Artboard_44">
+      <rect width="144" height="144"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_44" data-name="Artboard – 44" clip-path="url(#clip-Artboard_44)">
+    <rect width="144" height="144" fill="#fff"/>
+    <g id="negotiation" transform="translate(26.371 32.111)">
+      <path id="Path_6125" data-name="Path 6125" d="M187.776,158.018v-5.346A2.672,2.672,0,0,0,185.1,150h-32.43A2.672,2.672,0,0,0,150,152.673v5.346a2.672,2.672,0,0,0,2.673,2.673H185.1A2.672,2.672,0,0,0,187.776,158.018Zm0,0" transform="translate(-123.272 -123.272)" fill="#2c6959"/>
+      <path id="Path_6126" data-name="Path 6126" d="M5.346,162.765H21.382v13.364a2.673,2.673,0,0,0,2.673,2.673h8.018V157.42a5.345,5.345,0,0,0-5.346-5.346H16.037V128.018a8.018,8.018,0,1,0-16.037,0v29.4A5.346,5.346,0,0,0,5.346,162.765Zm0,0" transform="translate(0 -98.617)" fill="#2c6959"/>
+      <path id="Path_6127" data-name="Path 6127" d="M16.037,8.018A8.018,8.018,0,1,1,8.018,0,8.019,8.019,0,0,1,16.037,8.018Zm0,0" fill="#2c6959"/>
+      <path id="Path_6128" data-name="Path 6128" d="M356.055,120a8.028,8.028,0,0,0-8.018,8.018v24.055H337.346A5.345,5.345,0,0,0,332,157.42V178.8h8.019a2.673,2.673,0,0,0,2.673-2.673V162.765h16.037a5.346,5.346,0,0,0,5.346-5.346v-29.4A8.028,8.028,0,0,0,356.055,120Zm0,0" transform="translate(-272.842 -98.617)" fill="#2c6959"/>
+      <path id="Path_6129" data-name="Path 6129" d="M438.037,8.018A8.018,8.018,0,1,1,430.018,0,8.019,8.019,0,0,1,438.037,8.018Zm0,0" transform="translate(-346.805)" fill="#2c6959"/>
+      <path id="Path_6130" data-name="Path 6130" d="M210,240h16.393v37.419H210Zm0,0" transform="translate(-172.581 -197.235)" fill="#2c6959"/>
+    </g>
+  </g>
+</svg>

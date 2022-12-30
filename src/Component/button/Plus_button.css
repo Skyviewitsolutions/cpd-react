@@ -1,0 +1,43 @@
+.plus_button_icon {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    border: none;
+    border:none;
+  
+  
+    color:#2c6959;
+  }
+  .plus_button{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border:none;
+  background-color:transparent;
+  }
+  .plus_button_span{
+    
+    
+    font-size: 13px;
+    font-weight: 900;
+  margin-left: -20px;
+      
+  }
+  @media screen and (max-device-width: 480px) {
+    .plus_button_icon {
+     margin-top: 10px;
+    }
+  }
+  @media screen and (min-device-width: 481px) and (max-device-width: 767px) {
+   
+    
+  }
+  @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    
+   
+  }

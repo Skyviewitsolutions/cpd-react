@@ -1,0 +1,43 @@
+.explore{
+    padding:10px;
+   background-color:  #D6F6ED;
+   margin-top:10px;
+    text-align: center;   
+}
+.explore a{
+    color:#2c6959;
+    text-decoration: none;
+}
+.explore a:hover{
+    text-decoration: underline;
+    font-weight: 700;
+}
+.explore h5{
+    font-weight: 500;
+    color:#2c6959;
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.explore h6{
+    font-family: Inter-Regular;
+    font-size: 14px;
+    color: #232423;
+}
+.networking_searchbox{
+    border-radius: none;
+    border:none;
+    border:1px solid #2c6959;
+}
+@media screen and (max-width:600px) {
+    .explore h5 {
+        
+       
+         font-size: 20px;
+
+     
+    }
+    .explore h6{
+        font-size:12px;
+    }
+    
+}

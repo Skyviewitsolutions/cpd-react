@@ -1,0 +1,19 @@
+.side_nav h5{
+    font-size: 18px;
+    font-weight: bold;
+
+}
+.side_nav h6{
+    color:gray;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+.more{
+    background-color: transparent;
+    border: none;
+    color:#2c6959;
+    font-size: 16px;
+    font-weight: 500;
+
+}

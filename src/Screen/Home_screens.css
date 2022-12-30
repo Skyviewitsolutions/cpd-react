@@ -1,0 +1,160 @@
+/* .userprofile_try {
+  margin: 0%;
+  margin-top: 30px;
+  padding: 0%;
+  box-sizing: border-box;
+  height: auto;
+  padding-bottom: 10%;
+  position: relative;
+}
+.userprofile_div {
+  display: flex;
+  flex-direction: column;
+}
+#comment_red {
+  position: relative;
+  
+  top:20px;
+  height: 70px;
+  width: 70px;
+}
+
+.home_cards {
+    display: flex;
+    flex-direction: column;
+  }
+  .all_notification {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;  
+  }
+  .all_notification h6 {
+    font-weight: 700;
+    font-size: 18px;
+    color: black;
+  }
+  .filter img {
+    width: 20px;
+    height: 20px;
+  }
+  .filter span {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .chat_side{
+    display:flex;
+    flex-direction: column;
+  } */
+.userprofile_try {
+    margin: 0%;
+    margin-top: 30px;
+    padding: 0%;
+    box-sizing: border-box;
+    height: auto;
+    padding-bottom: 10%;
+    position: relative;
+  }
+  .userprofile_div {
+    display: flex;
+    flex-direction: column;
+  }
+  #comment_red {
+    position: relative;
+    
+    top:20px;
+    height: 70px;
+    width: 70px;
+  }
+  
+  .home_cards {
+    margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+    }
+    .all_notification {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;  
+    }
+    .all_notification h6 {
+      font-weight: 700;
+      font-size: 18px;
+      color: black;
+    }
+    .filter img {
+      width: 20px;
+      height: 20px;
+    }
+    .filter span {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .chats_side{
+      margin-top: 50px;
+      display:flex;
+      flex-direction: column;
+    }
+    .home_cards {
+      margin-top: 50px;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 25px;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  .homeSreenPage{
+    width: 100%;
+    padding:0px;
+    margin:0px;
+  }
+    @media screen and (max-device-width: 480px) {
+  .home_cards{
+    margin-top: -20px;
+  }    
+  .all_notification h6 {
+    
+    margin-top: 45px;
+}
+.all_notification span {
+  margin-top: 27px;
+}
+      .chats_side{
+        margin-top: 20px;
+      }
+   
+   }
+   @media screen and (min-device-width: 481px) and (max-device-width: 767px) {
+ .home_cards{
+      margin-top: 20px;
+    }    
+    
+    .chats_side{
+      margin-top: 20px;
+    
+      
+   }
+   .all_notification h6 {
+    
+    margin-top: 45px;
+}
+.all_notification span {
+  margin-top: 27px;
+}
+  }
+   @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .home_cards{
+      margin-top: 20px;
+    }    
+    
+      
+    .chats_side{
+      margin-top: 20px;
+    }
+   }
+
+   .hmgCrdCont{
+    height: 1500px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+   }

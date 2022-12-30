@@ -1,0 +1,29 @@
+
+.lheader {
+  
+  padding-bottom: 10px;
+  border-bottom: 5px solid #2c6959;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.logo {
+  
+  width: 150px;
+  height: 50px;
+}
+.user_profile {
+  margin: 10px;
+  padding: 3px;
+  
+  width: 50px;
+  height: 50px;
+  border-left: 1px solid grey;
+}
+.headerScreen{
+  width:100%;
+  margin: 0px;
+  padding:0px;
+  overflow: hidden;
+}

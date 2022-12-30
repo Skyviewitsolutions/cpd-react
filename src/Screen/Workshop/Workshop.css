@@ -1,0 +1,394 @@
+.wiper{
+    margin-top: 10px;
+ background-color:#F1F9FF;
+}
+.Workshop_section1{
+    padding-left:20px;
+    padding-right: 20px;
+    background-color:#F1F9FF ;
+    padding-bottom: 10px;
+}
+.workshop_headingblock{
+    padding-left: 70px;
+    padding-top:60px;
+    padding-bottom: 20px;
+    
+}
+.workshop_headingblock h1{
+font-family: Inter-Bold;
+font-size:40px;
+color: #232423;
+text-align: left;
+
+
+}
+.workshop_headingblock h5 {
+    color: #2c6959;
+    font-family: Inter-Regular;
+    font-size: 20px;
+    font-weight: 600;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+.workshop_headingblock h6{
+    color: #232423;
+    font-size: 17px;
+    font-family:Inter-Regular;
+}
+.workshop_imageblock{
+    padding-right: 70px;
+    padding-top: 0px;
+    /* padding-bottom: 50px; */
+    width: 400px;
+    height: 290px;
+    
+}
+.workshop_imageblock img{
+    width:90%;
+    height:90%;
+}
+
+.workshop_searchBar{
+   
+   
+    position: relative;
+  }
+  .workshop_searchBar input{
+    
+    border-radius: 26px;
+    padding:10px;
+    padding-left: 40px;
+    color:#2c6959;
+  }
+   #workshop_search { 
+    color: #2c6959;
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    }
+    .workshop_searchBox{
+        padding-left: 30px;
+        padding-right: 50px;
+    display: flex;
+    align-items: center;
+    }
+    .workshop_searchBox h5 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #232423;
+        /* margin-bottom: 0%; */
+        font-family: Inter-Bold;
+        /* padding-top: 20px; */
+    }
+
+    .Workshop_section2{
+       
+        padding-left:20px;
+        padding-right: 20px;
+      background-color: white;
+      padding-top: 20px;
+    }
+.workshop-card .card{
+    box-shadow: 3px 11px 20px #00000029;
+    border: 0.5px solid #d1cfcf;
+border-radius: 7px;
+background: #FFFFFF;
+margin-bottom:20px;
+}
+.workshopcard_media{
+width:100%;
+height: 100%;
+object-fit: cover;
+
+}
+.workshopcard_media img{
+    width:100%;
+    height: 100%;
+    /* object-fit: cover; */
+    position: relative;
+    }
+    .workshopcard_media .tags_onImage {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #ED1066;
+    }
+    .workshopcard_media .tags_onImage h6 {
+        font-size: 12px;
+        color: white;
+        text-align: center;
+        padding: 5px;
+        font-family: Inter-Bold;
+        margin-bottom: 0%;
+    }
+    .workshopcard_descriptionBox {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    .workshopcard_descriptionBox h4 {
+        color: black;
+        font-size: 15px;
+        font-family: Inter-Bold;
+        margin-bottom: 0px;
+    }
+    .workshopcard_descriptionBox h5{
+        color:rgb(153, 152, 152);
+        font-size: 13px;
+        font-family: Inter-Bold;
+
+    }
+    .workshopcard_descriptionBox h6{
+        font-size: 12px;
+        font-family: Inter-Bold;
+        color:#232423;
+        padding-right: 35px;
+
+    }
+    .workshop_FreeBox{
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+    .workshop_FreeBox h6{
+        margin-bottom: 0%;
+    }
+    .workshopcard_descriptionBox .domainBox{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 10px;
+
+    }
+    .workshopcard_descriptionBox  .colorText {
+        color:#2c6959;
+    }
+    .workshopcard_descriptionBox #enrolled {
+        color: #ED1066;
+        font-size: 12px;
+        padding-top: 10px;
+    }
+    .viewDetailsBox img{
+        width:18px;
+        height:18px;
+        margin-right: 3px;
+    }
+    .viewDetailsBox span{
+        /* padding-left: 10px; */
+        font-size: 12px;
+        font-family: Inter-Bold;
+    }
+    .viewDetailsBox #heart-icon{
+       
+        color:#232423;
+        font-size: 20px !important;
+       
+    }
+    #enrolled span{
+        color:#232423 !important;
+    }
+
+
+
+
+
+
+    @media screen and (max-device-width: 480px) {
+   
+        .workshop_headingblock {
+           padding-left:10px;
+            padding-top: 20px;
+           padding-bottom: 0px;
+        }
+        .workshop_headingblock h1 {
+            
+            font-size: 30px;
+            
+        }
+        .workshop_headingblock h5 {
+           
+            font-size: 15px;
+            
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+        .workshop_headingblock h6 {
+           
+            font-size: 10px;
+            
+        }
+        .workshop_imageblock {
+            padding-right: 0px;
+           
+           
+            width: 100%;
+            height: 280px;
+        }
+        .workshop_searchBox {
+            padding-left: 0px;
+            padding-right: 0px;
+            
+        }
+        .workshop_searchBox h5 {
+            font-size: 14px;
+            
+        }
+        .workshop_searchBar input {
+            
+            padding: 5px;
+            padding-left: 20px;
+            
+        }
+        #workshop_search { 
+            color: #2c6959;
+            position: absolute;
+            top: 10px;
+            right: 30px;
+            }
+            .workshopcard_descriptionBox h4 {
+                color: black;
+                font-size: 13px;
+                font-family: Inter-Bold;
+                margin-bottom: 0px;
+            }
+            .workshopcard_descriptionBox h6 {
+                
+                padding-right: 0px;
+            }
+
+      }
+      @media screen and (min-device-width: 481px) and (max-device-width: 767px) {
+        .workshop_headingblock {
+            padding-left:10px;
+             padding-top: 20px;
+            padding-bottom: 0px;
+         }
+         .workshop_headingblock h1 {
+             
+             font-size: 30px;
+             
+         }
+         .workshop_headingblock h5 {
+            
+             font-size: 15px;
+             
+             padding-top: 0px;
+             padding-bottom: 0px;
+         }
+         .workshop_headingblock h6 {
+            
+             font-size: 10px;
+             
+         }
+         .workshop_imageblock {
+             padding-right: 0px;
+            
+            
+             width: 100%;
+             height: 280px;
+         }
+         .workshop_searchBox {
+             padding-left: 0px;
+             padding-right: 0px;
+             
+         }
+         .workshop_searchBox h5 {
+             font-size: 14px;
+             
+         }
+         .workshop_searchBar input {
+             
+             padding: 5px;
+             padding-left: 20px;
+             
+         }
+         #workshop_search { 
+             color: #2c6959;
+             position: absolute;
+             top: 10px;
+             right: 30px;
+             }
+             .workshopcard_descriptionBox h4 {
+                 color: black;
+                 font-size: 13px;
+                 font-family: Inter-Bold;
+                 margin-bottom: 0px;
+             }
+             .workshopcard_descriptionBox h6 {
+                 
+                 padding-right: 0px;
+             }
+    
+        
+      }
+      @media screen and (min-device-width: 768px) and (max-device-width: 961px) {
+        .workshop_headingblock {
+            padding-left:10px;
+             padding-top: 20px;
+            padding-bottom: 0px;
+         }
+         .workshop_headingblock h1 {
+             
+             font-size: 30px;
+             
+         }
+         .workshop_headingblock h5 {
+            
+             font-size: 15px;
+             
+             padding-top: 0px;
+             padding-bottom: 0px;
+         }
+         .workshop_headingblock h6 {
+            
+             font-size: 10px;
+             
+         }
+         .workshop_imageblock {
+             padding-right: 0px;
+            
+            
+             width: 100%;
+             height: 280px;
+         }
+         .workshop_searchBox {
+             padding-left: 0px;
+             padding-right: 0px;
+             
+         }
+         .workshop_searchBox h5 {
+             font-size: 14px;
+             
+         }
+         .workshop_searchBar input {
+             
+             padding: 5px;
+             padding-left: 20px;
+             
+         }
+         #workshop_search { 
+             color: #2c6959;
+             position: absolute;
+             top: 10px;
+             right: 30px;
+             }
+             .workshopcard_descriptionBox h4 {
+                 color: black;
+                 font-size: 13px;
+                 font-family: Inter-Bold;
+                 margin-bottom: 0px;
+             }
+             .workshopcard_descriptionBox h6 {
+                 
+                 padding-right: 0px;
+             }
+        
+      }
+      @media screen and (min-device-width: 961px) and (max-device-width: 1024px) {
+        .workshop-card{
+            width:100%;
+        }
+      
+      }

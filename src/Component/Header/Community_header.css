@@ -1,0 +1,101 @@
+.Communityheader {
+    padding: 10px;
+    width: 100%!important;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  .community_details {
+    height: 120px;
+  }
+  .community_details h4 {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .community_details p {
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .community_details h6 {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .UserDetails {
+    height: 120px;
+  }
+  .UserDetails img {
+    height: 80px;
+    width: 80px;
+    margin-left: 20px;
+  }
+  .UserDetails h6 {
+    margin-left: 20px;
+    font-size: 14px;
+  }
+  .UserDetails .userDetailsBtn {
+    margin-top: 50px;
+  }
+  .UserDetails button.view_communities {
+    margin-top: 30px;
+    height: 45px;
+  }
+  .community_left {
+    border-right: 1px solid grey;
+  }
+  
+  .UserDetails button.plus_button {
+    margin-left: 35px;
+    margin-top: 29px;
+  }
+  .UserDetails h5 {
+    margin: 0px;
+    margin-top: -23px;
+    font-size: 16px;
+  
+    margin-left: 12px;
+  }
+  @media screen and (max-width: 600px) {
+    button.view_communities {
+        position: absolute;
+        /* bottom: -105px;
+        left: 156px; */
+    }
+    .UserDetails {
+      margin-top: 20px;
+    }
+    .community_details p {
+      margin: 0px;
+      padding: 5px;
+    }
+  
+    .UserDetails button.plus_button {
+        position: relative!important;
+        top: -84px!important;
+        left: 28%!important;
+    }
+   
+        .UserDetails h5 {
+            margin-top: -145px!important;
+            margin-left: 170px!important;
+            font-size: 16px!important;
+        }
+    
+    .UserDetails img {
+      position: relative;
+      top: -15px;
+    }
+    .UserDetails h6 {
+       position: relative;
+      top: -20px;
+  }
+  }
+  @media (min-width: 601px) and (max-width:820px) {
+      .community_details p {
+         
+          padding: 0px;
+      }
+      .community_left {
+        border-right: none!important;
+    }
+  }

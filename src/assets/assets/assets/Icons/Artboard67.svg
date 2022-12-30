@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144" height="144" viewBox="0 0 144 144">
+  <defs>
+    <clipPath id="clip-Artboard_67">
+      <rect width="144" height="144"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_67" data-name="Artboard – 67" clip-path="url(#clip-Artboard_67)">
+    <rect width="144" height="144" fill="#fff"/>
+    <g id="Group_15" data-name="Group 15" transform="translate(-1755.987 -1312.143)">
+      <g id="telephone" transform="translate(1771.844 1328)">
+        <circle id="Ellipse_371" data-name="Ellipse 371" cx="56.61" cy="56.61" r="56.61" transform="translate(0 0)" fill="#2196f3"/>
+        <path id="Path_6527" data-name="Path 6527" d="M171.412,155.014a38.586,38.586,0,0,1-17.09-3.907,3.5,3.5,0,0,0-4.683,1.622l-2.516,5.207a49.214,49.214,0,0,1-18.152-18.152l5.214-2.516a3.5,3.5,0,0,0,1.622-4.683,38.454,38.454,0,0,1-3.914-17.09A3.5,3.5,0,0,0,128.4,112h-12.9A3.5,3.5,0,0,0,112,115.495a59.479,59.479,0,0,0,59.412,59.412,3.5,3.5,0,0,0,3.495-3.495v-12.9A3.5,3.5,0,0,0,171.412,155.014Z" transform="translate(-85.367 -86.394)" fill="#fafafa"/>
+      </g>
+    </g>
+  </g>
+</svg>

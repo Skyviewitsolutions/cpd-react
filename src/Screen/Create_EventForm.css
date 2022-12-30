@@ -1,0 +1,227 @@
+.eventform_outline {
+  box-shadow: 1px 1px 10px 7px rgb(205, 204, 204);
+  padding: 2%;
+  border-radius: 5px;
+  align-items: center;
+  height: auto;
+  border: 1px solid black;
+  margin-bottom: 20px;
+}
+.online_offline_box {
+  display: flex;
+  width: 100%;
+}
+#input_Form h5 {
+  font-size: 23px;
+  font-weight: 700;
+}
+#input_Form span {
+  color: rgb(175, 171, 171);
+  font-size: 40px;
+}
+.Create_Event_label h6 {
+  font-size: 14px;
+  font-weight: 700;
+}
+/* .Event_formInput {
+  height: 40px;
+  font-size: 14px;
+  width: 87%;
+  margin: auto;
+  margin-right: 4%;
+} */
+.cef_mainHeading h5 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #2c6959;
+}
+#created_name {
+  color: #2c6959;
+}
+.cef_tags_button {
+  font-size: 15px;
+  min-width: 160px;
+  font-weight: 500;
+  border: none;
+  color: #2c6959;
+  border-radius: 20px;
+  height: 35px;
+  background-color: rgb(221, 219, 219);
+}
+.zoom_link {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(201, 201, 223);
+  height: 40px;
+}
+.zoom_link_img {
+  padding: 2px;
+  border-right: 1px solid gray;
+  height: 100%;
+  min-width: 70px;
+}
+
+.zoom_link button {
+  min-width: 100px;
+  height: 100%;
+  color: white;
+  background-color: #2c6959;
+  border-radius: 40px;
+  border: none;
+}
+.upload_EventSession input {
+  display: flex;
+
+  flex-direction: column;
+  height: 170px;
+  width: 100%;
+  border: 2px dashed #2c6959;
+  background-color: #ddf8f1;
+}
+#EventForm_subscriptionStatus {
+  color: #2c6959;
+  font-size: 20px;
+}
+.meeting_logoBox {
+  width: 100%;
+  height: 60px;
+  /* border:1px solid red; */
+}
+#zoom_linkInput {
+  border: none;
+  outline: none;
+}
+.session_uploadedEventForm {
+  display: flex;
+  justify-content: space-between;
+}
+.session_uploadedEventForm h6 {
+  font-size: 13px;
+  color: gray;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+.uploadButton_text {
+  padding-left: 5px;
+  position: absolute;
+  display: flex;
+  /* border:1px solid red; */
+  top: 20px;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+.uploadButton_text h5 {
+  text-align: center;
+  font-size: 12px;
+}
+.uploadButton_text h6 {
+  text-align: center;
+  font-size: 10px;
+  color: gray;
+}
+.uploadFile_input {
+  position: relative;
+}
+.EventForm_nav {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  /* border: 1px solid red; */
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  box-shadow: 3px 2px 3px 3px ghostwhite;
+}
+.Domain_EventForm {
+  display: flex;
+}
+.addMember_create_EventForm h5 {
+  height: 50px;
+  background-color: #cce0da;
+  color: #2c6959;
+  font-size: 18px;
+  font-weight: 700;
+  padding-left: 10px;
+  border-radius: 8px 8px 0px 0px;
+  line-height: 50px;
+  width: 96%;
+}
+.zoomInputbox {
+  outline: none !important;
+  border: none !important;
+}
+h5.DomainEventH {
+  margin: auto;
+  font-size: 20px;
+  font-weight: 600;
+  margin-right: 4%;
+  
+}
+.form {
+  position: relative;
+}
+
+.form .srch {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  color: #9ca3af;
+  padding-right: 10px;
+}
+
+.form-input {
+  height: 45px;
+  text-indent: 33px;
+  border-radius: 10px;
+}
+.addinvitecumntyContainer {
+  width: 95%;
+
+}
+.form-input:focus {
+  box-shadow: none;
+}
+
+.form span {
+  position: absolute;
+  right: 17px;
+  top: 13px;
+  padding: 2px;
+  border-left: 1px solid #d1d5db;
+}
+.searchCmnty {
+  position: relative;
+  color: #aaa;
+  font-size: 16px;
+  width: 90%;
+}
+
+.searchCmnty {display: inline-block;}
+
+.searchCmnty input {
+  width: 95%;
+  height: 45px;
+
+  
+  border: 1px solid #aaa;
+  border-radius: 5px;
+ 
+}
+
+.searchCmnty input { text-indent: 32px;}
+.searchCmnty .fasearch { 
+  position: absolute;
+  top: 10px;
+  right: 8%;
+  left: auto;
+}
+input:focus-visible {
+ 
+  outline: none;
+}
+
+
+@media screen and (min-width: 601px) and (max-width: 820px) {
+  .addinvitecumntyContainer {
+    width: 98%;
+  }
+}

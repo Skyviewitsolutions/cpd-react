@@ -1,0 +1,101 @@
+.design_outbox{
+   padding-left:10px;
+   padding-right: 10px;
+
+}
+
+#certification{
+    border-bottom: 1px solid #2c6959;
+    color:#2c6959;
+    font-size: 16px;
+    font-weight: 500;
+    padding-bottom: 10px;
+    padding:10px;
+}
+
+.certification_index{
+   border:1px solid rgb(209, 208, 208);
+   border-radius: 10px;
+   padding:5px;
+}
+.designprogram_box{
+   
+   align-items: center;
+   justify-content: space-between;
+   display: flex;
+   align-items: center;
+} 
+
+.career_foundry{
+   padding-top: 5px;
+   display: flex;
+   flex-direction: column;
+}
+.career_foundry h6{
+   font-weight: 700;
+   color:black;
+   font-size: 15px;
+   
+}
+.career_foundry h5{
+   font-size: 18px;
+   font-weight: 700;
+   margin-top: 1%;
+   padding-top: 0%;
+}
+
+.days_box{
+
+   margin-bottom: 5px;
+   display: flex;
+   justify-content: flex-start;
+   }
+   .days_box img{
+      
+margin-right: 5px;
+       width:15px;
+       height:15px;
+   }
+   .days_box h6{
+       font-size: 10px;
+       margin-right: 5px;
+          }
+.design_details{
+   padding-right: 30px;
+   border-bottom:1px solid gainsboro;
+   min-height:80px;
+   margin-bottom: 5px;
+   
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+.design_profile{
+   display: flex;
+   width:auto;
+   align-items: center;
+}
+.design_profilepic img{
+   width:50px;
+   height:50px;
+}
+.design_name{
+  margin-top: 10px;
+   display: flex;
+   flex-direction: column;
+   flex-wrap: wrap;
+   margin-left: 15px; 
+
+}
+.design_name h6{
+   font-size: 12px;
+}
+
+.design_name h4{
+   font-weight: 600;
+margin-bottom: 0px;
+  
+   padding-left: 0%;
+  
+   font-size: 15px;
+}

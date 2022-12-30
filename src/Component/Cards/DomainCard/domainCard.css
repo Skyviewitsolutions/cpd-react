@@ -1,0 +1,242 @@
+.domainCard_outline {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  border-radius: 8px;
+  margin-bottom: 20px !important;
+}
+.Card {
+  cursor: pointer;
+  margin-bottom: 5px;
+  border: 1px solid gainsboro !important;
+  border-radius: 5px;
+}
+.domainCard_media {
+  position: relative;
+}
+.domainCard_media img {
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+  object-fit: cover;
+}
+.st-inline-share-buttons{
+  z-index: -1 !important;
+}
+
+img.shareBtn {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+
+}
+.SocialShare button#dropdown-basic {
+  background: none;
+  border: none;
+}
+.domainCard_title {
+  cursor: pointer;
+  width: 100%;
+  position: absolute;
+  bottom: 0%;
+  text-align: center;
+  color: white;
+  background-color: #2c695991;
+}
+.domainCard_title h6 {
+  cursor: pointer;
+  padding: 8px;
+  text-align: center;
+  color: white;
+  font-size: 15px;
+}
+.domainCard_description {
+  padding: 10px;
+}
+.domainCard_definition h6 {
+  cursor: pointer;
+  margin-top: 2%;
+  font-weight: 600;
+  font-size: 14px;
+  height: 36px;
+  margin-bottom: 0%;
+}
+div#popup-2 {
+  position: absolute;
+  z-index: 999;
+  width: 10rem;
+  height: 11rem;
+
+  pointer-events: auto;
+  top: 777.488px;
+  left: 799.525px;
+}
+
+.domainCardName_box {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.domainCardName_box h6 {
+  cursor: pointer;
+  font-weight: 500;
+  color: #2c6959;
+  font-size: 13px;
+  border: 2px solid rgb(182, 178, 178);
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+.domainCardName_box h6:hover {
+  border: 2px solid green;
+ 
+}
+
+.domainCardName_box img {
+  width: 16px;
+  height: 16px;
+}
+.criteria_join {
+  width: 100%;
+  display: flex;
+  color: rgb(26, 25, 25);
+}
+.criteria_join h6 {
+  cursor: pointer;
+  font-weight: 500;
+  color: black;
+  font-size: 14px;
+}
+#join {
+  font-size: 14;
+  font-weight: bolder;
+  color: black;
+}
+.member {
+  /* border:1px solid red; */
+
+  display: flex;
+  align-items: center;
+}
+.domain_cards_members {
+  display: flex;
+  flex-direction: row;
+}
+.domain_cards_members h5 {
+  cursor: pointer;
+  color: black;
+
+  font-size: 13px;
+}
+.domainCard_media img {
+  height: 100% !important;
+  width: 100% !important;
+}
+.domain_cards_members h6 {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #2c6959;
+  margin-top: 8px !important;
+}
+
+.domain_cards_user_icon {
+  color: #2c6959;
+  margin-left: 15px;
+  margin-top: 8px !important;
+  font-size: 20px;
+}
+.SocialShareIcons img {
+  height: 34px;
+  width: 39px;
+  padding: 5px;
+}
+.domaintooltip {
+  position: relative;
+  display: inline-block;
+  
+}
+
+.domaintooltip .tooltiptextabc {
+  visibility: hidden;
+  height:150px;
+  width: 250px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  background-color: #fff;
+  color:black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -190px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  padding-bottom: 10px !important;
+  padding-left: 7px;
+}
+.domaintooltip .tooltiptextabc h5{
+  color:#2c6959;
+  font-family: Inter-Bold;
+}
+.domaintooltip .tooltiptextabc p{ 
+  height:80px;
+  overflow-y: scroll;
+  font-size: 12px;
+  font-family: Inter-Regular;
+}
+
+
+.domaintooltip .tooltiptextabc::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 60%;
+  margin-left: -5px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: rgb(219, 214, 214) transparent transparent transparent;
+}
+
+.domaintooltip:hover .tooltiptextabc {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltiptextabc h5{
+  text-transform: capitalize;
+}
+.subType {
+  display: flex;
+  margin-bottom: 0px;
+}
+
+.subType h6{
+  border: none !important ;
+}
+
+.subType span{
+  font-size: 14px;
+}
+
+.domainCardName_box h6:hover {
+  border: 2px solid #2c6959;
+}
+
+@media screen and (max-device-width: 480px) {
+  .domainCard_description {
+    margin-bottom: 15px;
+  }
+}
+@media screen and (min-device-width: 481px) and (max-device-width: 767px) {
+  .domainCard_description {
+    margin-bottom: 15px;
+  }
+}
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .domainCard_description {
+    margin-bottom: 15px;
+  }
+}
+

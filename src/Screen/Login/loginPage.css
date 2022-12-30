@@ -1,0 +1,144 @@
+.cpd_loginPage {
+  margin: 0%;
+  padding: 0%;
+}
+.login_side {
+  margin-left: 50px !important;
+  padding-left: 50px !important;
+}
+
+.context-menu {
+  cursor: context-menu;
+}
+
+.about_con_login {
+  cursor: pointer;
+  border-right: 1px solid gray;
+}
+.about_con_login h4 {
+  font-size: 28px;
+  font-weight: 700;
+}
+.p_login {
+ 
+  font-size: 15px;
+  width: 80%;
+  font-family: Georgia;
+  text-align: justify;
+}
+
+.limg_login {
+  align-items: center;
+
+  width: 200px !important;
+  margin-bottom: 35px;
+}
+
+.signUp_aboutCpd {
+  padding-left: 0%;
+  min-width: 150px;
+  min-height: 35px;
+  color: #2c6959!important;
+  text-align: center;
+  border-radius: 5px;
+ border: 1px solid #2c6959;
+  background-color: transparent;
+  font-size: 15px;
+  font-weight: 600;
+}
+.signUp_aboutCpd:hover {
+  font-weight: 700;
+  color: #2c6959!important;
+}
+
+button.signUp_aboutCpd a {
+  text-decoration: none;
+  color: #2c6959!important;
+  padding: 10px;
+}
+@media screen and (max-width: 600px) {
+  .col-lg-6.col-md-12.col-12.about_con_login {
+    border-right: none;
+  }
+  .limg_login {
+    margin-bottom: 20px;
+    margin-top: -30px;
+    margin-left: 20%;
+  }
+ 
+  .p_login {
+    padding: 5%;
+    width: 100%;
+    text-align: justify;
+    margin-top: -10px;
+  }
+  .about_con_login h4 {
+    text-align: center;
+    font-size: 25px;
+  }
+  button.signUp_aboutCpd {
+    margin-left: 14px;
+   position: absolute;
+   margin-top: -25px;
+}
+.loginpage_form h4 {
+  font-weight: 700;
+  text-align: center;
+  margin-top: 25px;
+  font-size: 28px;
+}
+
+
+label {
+    font-size: 18px;
+}
+}
+ 
+@media (min-width: 601px) and (max-width: 820px) {
+    .col-lg-6.col-md-12.col-12.about_con_login {
+        border-right: none;
+      }
+    .limg_login {
+       
+        margin-top: -30px;
+        margin-left: 35%;
+      }
+      .about_con_login h4 {
+        text-align: center;
+        font-size: 25px;
+      }
+      .p_login {
+       
+        font-size: 18px;
+        width: 100%;
+        font-family: Georgia;
+        text-align: justify;
+    }
+    button.signUp_aboutCpd {
+        position: absolute;
+        margin-top: -43px;
+        margin-left: 35px;
+        font-size: 18px;
+    }
+    .loginpage_form h4 {
+        font-weight: 700;
+        font-size: 28px;
+    }
+    p.loginSignup {
+        margin-left: -30px!important;
+       
+        font-size: 18px;
+        margin-top: -18px;
+    }
+    
+
+.loginpage_form h4 {
+   font-size: 28px;
+    text-align: center;
+}
+
+label {
+    font-size: 18px;
+  
+}
+}   

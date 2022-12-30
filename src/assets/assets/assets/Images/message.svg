@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="43" height="47" viewBox="0 0 43 47">
+  <g id="Group_24251" data-name="Group 24251" transform="translate(10007 6158)">
+    <g id="Group_5988" data-name="Group 5988" transform="translate(-11625 -6190)">
+      <path id="comm-17_chat" d="M8.882.529A8.344,8.344,0,0,0,.548,8.881L.529,20.423a8.308,8.308,0,0,0,7.733,8.293v7.211a.6.6,0,0,0,1.025.424l7.557-7.576H28.2a8.337,8.337,0,0,0,8.333-8.352V8.882A8.323,8.323,0,0,0,28.214.529ZM12.53,12.854a1.8,1.8,0,1,1-1.8,1.8A1.808,1.808,0,0,1,12.53,12.854Zm6,0a1.8,1.8,0,1,1-1.8,1.8A1.809,1.809,0,0,1,18.529,12.854Zm6,0a1.8,1.8,0,1,1-1.8,1.8A1.809,1.809,0,0,1,24.53,12.854Z" transform="translate(1617.471 42.471)" fill="#2c6959"/>
+    </g>
+    <g id="Group_6119" data-name="Group 6119" transform="translate(-11250 -6189)">
+      <g id="Group_6115" data-name="Group 6115" transform="translate(1264 31)">
+        <ellipse id="Ellipse_331" data-name="Ellipse 331" cx="11" cy="10.5" rx="11" ry="10.5" fill="#d63c3c"/>
+      </g>
+      <text id="_30_" data-name="30+" transform="translate(1267 45)" fill="#fff" font-size="10" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">30+</tspan></text>
+    </g>
+  </g>
+</svg>

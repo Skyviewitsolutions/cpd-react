@@ -1,0 +1,51 @@
+.Ecard_outline{
+    margin-bottom: 5px;
+     border:1px solid gainsboro !important;
+     border-radius: 5px;
+     box-shadow: 2px 2px 2px 1px rgb(179, 177, 177);
+}
+.Ecard_title h5{
+   margin-top: -3%;
+    font-size: 15px;
+}
+.Ecard_title h6{
+    font-size: 11px;
+    color:gray;
+}
+.Ename_box{
+    display: flex;
+    justify-content: space-between;
+}
+.Ename_box h5{
+    color: #2c6959;
+    font-size: 15px;
+    font-weight: 700;
+}
+.Ename_box h6{
+    font-weight: 500;
+    color: #2c6959;
+    font-size: 14px;
+
+}
+.Ename_box img{
+    width:16px;
+    height:16px;
+
+}
+.Etiming_box{
+    align-items: center;
+    display: flex;
+    color:gray;
+    justify-content: space-between;
+}
+.Etiming_box h6{
+    
+    font-size: 12px;
+}
+.Etiming_box h5{
+    font-size: 15px;
+}
+.Etiming_box img{
+    width:14px;
+    height:14px;
+}

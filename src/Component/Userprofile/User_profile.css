@@ -1,0 +1,221 @@
+.profile_box {
+    border-radius: 5px;
+      border: 1px solid rgb(237, 233, 233);
+        box-shadow: 2px 2px 3px 2px rgb(203, 199, 199);
+  }
+  
+  .profile {
+    padding-bottom: 50px;
+    display: flex;
+    flex-wrap: wrap;
+     padding-left: 4%;
+    padding-right: 2%; 
+    box-sizing: border-box;
+  }
+  .profile_header {
+    background-color: #2c6959;
+    width: 100%;
+    position: relative;
+    height: 60px;
+  }
+  .profile_photo_box {
+    background-color: aliceblue;
+    width: 70px;
+    height: 70px;
+  
+    border-radius: 50%;
+    position: absolute;
+    top: 35%;
+    left: 3%;
+    border: 1px solid white;
+  }
+  .user_name {
+    margin-top: 15%;
+    padding-top: 1%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .user_name h2 {
+    font-size: 17px;
+  
+    font-weight: 700;
+    
+  }
+  .qualification {
+    margin-top: 15px;
+    font-size: 13px;
+    color:rgb(188, 188, 188);
+    width: 100%;
+    padding-bottom: 5%;
+  }
+  .heading_box{
+    height:auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .heading {
+  
+    font-size: 14px;
+    padding-bottom: 4%;
+    color:#111111;
+  }
+  .heading span{
+      font-weight: bolder;
+  }
+  .hightlight {
+      font-weight: bold;
+    }
+  .heading_margin {
+    margin-top: 25px;
+  }
+  /* h5 {
+    font-weight: bolder;
+    padding-top: 10px;
+  }
+   */
+  .tagsbtn_outline {
+  height: auto;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  #tags_clickmore {
+    font-size: 16px;
+    color: #2c6959;
+  }
+  .view_button {
+    position: relative;
+    top: 40%;
+    left: 20%;
+  }
+  .percentage_box{
+    float: right;
+    display: flex;
+    flex-direction: column;
+  }
+  .percentage_box h5{
+    color:rgb(2, 172, 2)
+  }
+  .percentage_box h4{
+    color:black;
+  }
+  .tags_line {
+     
+    
+      width: 100%;
+  }
+  .goal_box{
+      display: flex;
+      justify-content: space-between;
+  }
+  .yourstatus_box {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+  
+    padding-top: 2px;
+    align-items: left;
+  }
+  .yourstatus_innerbox {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /* padding-top: 2%; */
+    display: flex;
+  }
+  .yourstatus_innerbox h6 {
+    padding-left: 10px;
+    font-size: 15px;
+    font-size: 400;
+  }
+  .yourstatus_innerbox img{
+    width: 18px;
+    height: 18px;
+  }
+  .heading2 {
+    font-size: 17px;
+    padding-bottom: 0px;
+    padding-top: 10px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+  }
+#see_all{
+  margin-top: 10px;
+}
+
+  @media screen and (min-device-width: 741px) and (max-device-width: 1090px){
+    .user_name{
+      margin-top: 5%;
+    }
+  .user_name h2{
+    font-size: 25px;
+  
+  }
+    .qualification{
+      
+    height:20px;
+   padding-bottom: 0%;
+      margin-top: 5px;
+       }
+       .qualification h6{
+        margin-bottom: 0%;
+        padding-bottom: 0%;
+        font-size: 18px;
+       }
+    .heading_box{
+      margin-top: 5%;
+      width:100%;
+    }
+    .tagsbtn_outline{
+      display: flex;
+      justify-content: space-between;
+      padding-right: 0%;
+      padding-left: 0%;
+    }
+    
+    .heading{
+      font-size: 18px;
+      padding-bottom: 2%;
+    }
+    .heading2{
+      font-size: 20px;
+    }
+    .heading_margin {
+      margin-top: 5%;
+    }
+    .tagsbtn_outline{
+      width:100%;
+    }
+    #tags_clickmore{
+      font-size: 16px;
+    }
+    .yourstatus_box{
+      height:40px;
+    }
+    .yourstatus_innerbox h6 {
+      padding-left: 10px;
+      font-size: 20px;
+      font-weight: 400;
+    }
+    .yourstatus_innerbox img{
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .profile_photo_box{
+    display: flex;
+    justify-content: center ;
+    align-items:  center;
+  }
+
+  .userImgIcon{
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    
+  }

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="46" height="39.887" viewBox="0 0 46 39.887">
+  <g id="Group_24250" data-name="Group 24250" transform="translate(10134 6154)">
+    <g id="Group_5989" data-name="Group 5989" transform="translate(-11616 -6191)">
+      <g id="suitcase" transform="translate(1482 45)">
+        <path id="Path_6044" data-name="Path 6044" d="M18.46,8.725A1.5,1.5,0,0,1,16.966,7.23V4.989H10.989V7.23A1.494,1.494,0,0,1,8,7.23V4.989A2.992,2.992,0,0,1,10.989,2h5.977a2.992,2.992,0,0,1,2.989,2.989V7.23A1.5,1.5,0,0,1,18.46,8.725Z" transform="translate(3.955 0)" fill="#2c6959"/>
+        <path id="Path_6045" data-name="Path 6045" d="M18.993,17.239a3.078,3.078,0,0,1-1.061.179,3.274,3.274,0,0,1-1.151-.209L0,11.62v11.4a4.107,4.107,0,0,0,4.109,4.109H31.755a4.107,4.107,0,0,0,4.109-4.109V11.62Z" transform="translate(0 4.756)" fill="#2c6959"/>
+        <path id="Path_6046" data-name="Path 6046" d="M35.864,9.109v3.422L18.291,18.389a1.106,1.106,0,0,1-.717,0L0,12.531V9.109A4.107,4.107,0,0,1,4.109,5H31.755A4.107,4.107,0,0,1,35.864,9.109Z" transform="translate(0 1.483)" fill="#2c6959"/>
+      </g>
+    </g>
+    <g id="Group_6118" data-name="Group 6118" transform="translate(-11373.835 -6184.918)">
+      <g id="Group_6115" data-name="Group 6115" transform="translate(1264 31)">
+        <ellipse id="Ellipse_331" data-name="Ellipse 331" cx="11" cy="10.5" rx="11" ry="10.5" transform="translate(-0.165 -0.082)" fill="#d63c3c"/>
+      </g>
+      <text id="_5" data-name="5" transform="translate(1271.835 44.918)" fill="#fff" font-size="11" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">5</tspan></text>
+    </g>
+  </g>
+</svg>

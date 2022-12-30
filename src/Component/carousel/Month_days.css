@@ -1,0 +1,63 @@
+/* .eventForm_monthDays{
+  
+    border:1px solid red;
+ }
+ .eventForm_monthDays_carousel{
+    position:relative;
+ }
+ 
+ .eventForm_monthDays_carousel button.owl-prev span {
+  
+    position: absolute;
+     top:15px;
+    font-size: 70px !important;
+    line-height: 20px;
+ 
+    color:#2c6959;
+    font-weight: bolder;
+    left:-15px;
+ }
+ .eventForm_monthDays_carousel button.owl-next span{
+    position: absolute;
+    top:15px;
+   font-size: 70px !important;
+   line-height: 20px;
+   color:#2c6959;
+   font-weight: bolder;
+   right:-15px;
+ }
+ 
+
+.eventForm_monthDays_nopad {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+.monthdays{
+   display:flex;
+}
+
+.month_image-checkbox {
+   padding-top: 20px;
+   text-align: center;
+   margin:5px;
+width:50px;
+height:60px;
+   border:2px solid #2c6959; 
+   border-radius: 10px;
+	cursor: pointer;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+
+	margin-bottom: 0;
+	outline: 0;
+}
+.month_image-checkbox input[type="checkbox"] {
+	display: none;
+}
+
+.month_image-checkbox-checked {
+	background-color: #2c6959;
+   color:white;
+   font-weight: 700;
+} */

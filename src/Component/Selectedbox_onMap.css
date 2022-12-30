@@ -1,0 +1,30 @@
+.Selectedbox_onMap{
+    border:1px solid red;
+    background-color: white;
+    width:280px;
+    height:120px;
+
+}
+.Selectedbox_onMap h5{
+    text-align: center;
+padding-top: 10px;
+font-weight: 500;
+/* padding-left: 10px; */
+    
+}
+.bottom_selectedbox_onMap{
+    display: flex;
+width:80%;
+height:30%;
+
+}
+.bottom_selectedbox_onMap img{
+    width:20px;
+    height:20px;
+}
+/* .selectedRetail_blueIcon{
+    margin-top: 5px;
+    width: 30px;
+    height:30px;
+} */
+    

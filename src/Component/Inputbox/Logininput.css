@@ -1,0 +1,48 @@
+.inputf{
+    align-items: center;
+    display:flex;
+    border: 1px solid rgb(201, 197, 197);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+    height:50px;
+    border-radius: 5px;
+    margin:auto;
+    position:relative
+}
+#iicon{ 
+    font-size: 20px; 
+ display: flex;
+ align-items: center;
+    height:100%;
+    position:absolute;
+     margin-left: 6px;
+    min-width:40px;
+    /* max-width:10%;    */
+    color:#2c6959;
+}
+#itext{
+
+width:100%;
+height:100%;
+}
+#itext input{
+
+margin-left: 15px;
+    border:none;
+    width:80%;
+    height:100%;
+    outline: none;
+    font-size: 15px;
+    padding-left: 25px;
+}
+#ipass{
+    font-size: 20px;
+    display: flex;
+ align-items: center;
+   align-items: center;
+    height:100%;
+    position:absolute;
+    right:10px;
+    min-width:20px;
+    max-width:10%;   
+   color: #259405;
+}

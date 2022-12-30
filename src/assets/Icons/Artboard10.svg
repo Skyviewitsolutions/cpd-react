@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144" height="144" viewBox="0 0 144 144">
+  <defs>
+    <filter id="Ellipse_573" x="9.5" y="14.501" width="125" height="125" filterUnits="userSpaceOnUse">
+      <feOffset dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-Artboard_10">
+      <rect width="144" height="144"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_10" data-name="Artboard – 10" clip-path="url(#clip-Artboard_10)">
+    <rect width="144" height="144" fill="#fff"/>
+    <g id="Group_12" data-name="Group 12" transform="translate(-2362.14 -10314.14)">
+      <g id="Group_24011" data-name="Group 24011" transform="translate(2385 10337)">
+        <g transform="matrix(1, 0, 0, 1, -22.86, -22.86)" filter="url(#Ellipse_573)">
+          <circle id="Ellipse_573-2" data-name="Ellipse 573" cx="49" cy="49" r="49" transform="translate(23 23)" fill="#3d9981"/>
+        </g>
+        <g id="chat_4_" data-name="chat (4)" transform="translate(18.203 20.137)">
+          <g id="Group_23973" data-name="Group 23973" transform="translate(0 0)">
+            <path id="Path_10828" data-name="Path 10828" d="M30.816,16C13.824,16,0,28.2,0,43.191A25.338,25.338,0,0,0,7.068,60.527,11.023,11.023,0,0,1,4.156,70.912a1.814,1.814,0,0,0,1.282,3.094,19.987,19.987,0,0,0,13.845-5.592,34.183,34.183,0,0,0,11.533,1.967c16.992,0,31.058-12.2,31.058-27.191S47.808,16,30.816,16ZM16.556,48.629a5.438,5.438,0,1,1,5.438-5.438A5.444,5.444,0,0,1,16.556,48.629Zm14.5,0A5.438,5.438,0,1,1,36.5,43.191,5.444,5.444,0,0,1,31.058,48.629Zm14.5,0A5.438,5.438,0,1,1,51,43.191,5.444,5.444,0,0,1,45.56,48.629Z" transform="translate(0 -16)" fill="#fff"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

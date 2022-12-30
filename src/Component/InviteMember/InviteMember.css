@@ -1,0 +1,135 @@
+.InviteMember {
+  width: 96%;
+  margin: auto;
+}
+.inviteSidebar {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.inviteSidebar h4 {
+  margin-left: 25px;
+  color: black;
+  font-size: 22px;
+  font-weight: 600;
+  padding-top: 10px;
+}
+.allMembers {
+  height: 40px;
+  background-color: rgb(133, 184, 167);
+}
+.allMembers h5 {
+  font-size: 16px;
+  margin: 25px;
+  font-weight: 400;
+}
+.inviteSidebar li {
+  list-style-type: none;
+  margin-top: 10px;
+}
+.inviteSidebar li input {
+  width: 15px;
+  height: 15px;
+  margin-top: 5px;
+  margin-left: 25px;
+  cursor: pointer;
+}
+.inviteSidebar li a {
+  text-decoration: none;
+  margin-left: 10px;
+  position: absolute;
+  font-size: 16px;
+  cursor: pointer;
+}
+.inviteSidebar span {
+  margin-left: 25px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+input.allMemberLocationSerch {
+  outline: none;
+  border-radius: 5px;
+  margin-left: 25px;
+  margin-top: 5px;
+}
+.inviteSidebar h6 {
+  font-size: 12px;
+  margin-left: 25px;
+  margin-top: 10px;
+}
+.AddMember {
+  height: 50px;
+  background-color: #cce0da;
+  margin-left: 30px;
+  border-radius: 8px 8px 0px 0px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.AddMember h4 {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 10px;
+  margin-left: 20px;
+}
+.AddMemberBtn {
+  height: 50px;
+  padding: 10px;
+  font-size: 18px;
+  width: 200px;
+  margin-left: 20px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.InviteMemberDiv {
+  /* background-color: aqua; */
+  height: 250px;
+}
+.memberCardDetails {
+  margin: auto;
+  height: 500px;
+  width: 100%;
+  /* background-color: aqua; */
+  margin-bottom: 50px;
+}
+.InviteMemberCard_box {
+  height: 500px;
+  width: 96%;
+  border: 1px solid #aaa;
+  padding-top: 5px;
+  margin-left: 25px;
+  margin-bottom: 50px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+overflow-y: scroll;
+overflow-x: hidden;
+ }
+@media screen and (max-width: 600px) {
+  .AddMember {
+    margin-left: 0px;
+
+    margin-top: 10px;
+  }
+  .AddMemberBtn {
+    margin-top: 10px;
+  }
+  button.AddMemberBtn {
+    margin-left: 0px;
+  }
+  .col-sm-12.inviteUser {
+    position: relative;
+    top: -20px;
+    left: -43px;
+  }
+  .col-sm-12.inviteUser h6 {
+    position: relative;
+    left: 26%;
+    top: -65%;
+  }
+  .InviteMemberCard_box {
+   
+    width: 100%;
+    margin:auto;
+    /* margin-left:5px; */
+    margin-bottom: 40px;
+    /* padding-right: 40px;*/
+} 
+}

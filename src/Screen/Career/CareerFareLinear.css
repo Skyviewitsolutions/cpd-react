@@ -1,0 +1,183 @@
+.careerLinearwrapper{
+    padding:10px 30px 20px 30px;
+    /* border:1px solid red; */
+}
+
+#careerLinearHeading {
+    margin-top: 35px;
+    font-family: Inter-Bold;
+    font-size: 24px;
+    color: #232423;
+    padding-left: 0px;
+}
+.careerLinearviewList{
+    display:flex;
+    align-items:center;
+}
+.careerLinearviewList ul{
+    padding:0px;
+    display: flex;
+    list-style-type: none;
+    margin-top: 30px;
+
+}
+.careerLinearviewList h6 {
+    margin-right:10px;
+    font-size: 18px;
+    color: #232423;
+   margin-top: 5px;
+    font-family: Inter-Medium;
+}
+.careerLinearviewList svg{
+    margin-right: 10px;
+    font-size: 30px;
+    
+}
+.careerLinearviewList svg:Focus{
+    color:#2c6959;
+}
+#careerLinearNewest{
+    padding-right: 10px;
+    font-size: 20px;
+    color: #232423;
+    margin-top:35px;
+    font-family:Inter-Medium
+}
+.careerLinearCardBox{
+
+background: #FFFFFF;
+box-shadow: 0px 7px 25px #00000029;
+border: 0.20000000298023224px solid #d3cccc;
+border-radius: 13px;
+padding:10px 20px 10px 20px;
+}
+.careerLinearCard{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+border: 0.5px solid #d3cccc;
+border-radius: 13px;
+padding:20px 20px 20px 20px;
+}
+.careerLinearimgbox{
+    margin-right:10px;
+    overflow: hiddden;
+    width:180px;
+    height: 190px;
+    border-radius:13px;
+    border:0.5px solid #ebe4e4;
+}
+.careerLinearimgbox img{
+    border-radius:13px;
+    width:100%;
+    height:100%;
+    object-fit: cover;
+}
+.careerLinearCardDescription h3{
+    font-family: Inter-Bold;
+    font-size:18px;
+    color:#2c6959;
+
+}
+.careerLinearCardDescription h4{
+    color: #D51E1E;
+    text-transform: capitalize;
+font-family: Inter-Regular;
+font-size: 18px;
+}
+.careerLinearCardDescription h5{
+    
+font-size: 16px;
+}
+.careerLinearCardDescription p{
+    font-size:14px;
+    color:#232423;
+    font-family: Poppins-Regular;
+
+}
+.careerLinearCardRight{
+    align-items: flex-end;
+    display:flex;
+    flex-direction: column;
+}
+.careerLinearCardRight svg{
+   font-size:30px;
+   
+   text-align: Right;
+}
+.careerLinearCardsubmit {
+    top: 40px;
+    position: relative;
+    padding: 15px 20px 15px 20px;
+    color: #2c6959;
+    border: 1px solid #2c6959;
+    background-color: #FFFFFF;
+    font-size: 13px;
+    text-align: center;
+    border-radius: 26px;
+}
+
+.careerLinear_searchBar{
+    margin-top: 20px;
+    
+    position: relative;
+  }
+  .careerLinear_searchBar input{
+    border:1px solid #2c6959;
+    border-radius: 26px;
+    padding:12px;
+    padding-left: 40px;
+    color:#2c6959;
+  }
+   #careerLinear_search { 
+    color: #2c6959;
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    }
+    @media screen and (max-device-width: 480px) {
+ 
+      
+      }
+      @media screen and (min-device-width: 481px) and (max-device-width: 767px) {
+      
+        
+      }
+      @media screen and (min-device-width: 768px) and (max-device-width: 961px) {
+        .careerLinearimgbox {
+           /* margin-right:10px; */
+            width: 160px;
+            height: 160px;
+           
+        }
+        .careerLinearCardRight{
+            flex-direction: row;
+            margin-left:180px;
+        }
+        .careerLinearCardsubmit{
+            top:0px;
+            margin-left:10px;
+            padding: 10px 20px 10px 20px;
+        }
+        .careerLinearCardRight svg{
+          position:relative;
+          bottom:5px;
+        }
+        
+        .careerLinearCardDescription h3{
+           
+            font-size:20px;
+            
+        
+        }
+        .careerLinearCardDescription h4{
+            
+        font-size: 18px;
+        }
+        
+
+
+
+
+
+      }

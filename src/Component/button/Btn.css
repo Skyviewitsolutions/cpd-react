@@ -1,0 +1,20 @@
+.subbtncont{
+    margin-top:4%;
+    border-radius: 10px;
+    width:100%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 45px;
+    background-color: #2c6959;
+    border: none;
+    color:white;
+  }
+  .subbtncont:hover{
+    font-weight: 700;
+  }
+  .subbtn{
+    background: transparent;
+    border: none;
+    color: white;
+  }

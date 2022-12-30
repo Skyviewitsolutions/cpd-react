@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144" height="144" viewBox="0 0 144 144">
+  <defs>
+    <clipPath id="clip-Artboard_8">
+      <rect width="144" height="144"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_8" data-name="Artboard – 8" clip-path="url(#clip-Artboard_8)">
+    <rect width="144" height="144" fill="#fff"/>
+    <g id="envelope_1_" data-name="envelope (1)" transform="translate(18.533 31.9)">
+      <g id="Group_930" data-name="Group 930" transform="translate(0 0)">
+        <g id="Group_929" data-name="Group 929">
+          <path id="Path_3710" data-name="Path 3710" d="M7.707,70.548c14.769,12.507,40.683,34.512,48.3,41.373a4.5,4.5,0,0,0,6.509.009c7.623-6.868,33.537-28.874,48.306-41.382a2.24,2.24,0,0,0,.315-3.094A8.9,8.9,0,0,0,104.1,64H14.428a8.9,8.9,0,0,0-7.036,3.455A2.24,2.24,0,0,0,7.707,70.548Z" transform="translate(-5.461 -64)" fill="#2c6959"/>
+          <path id="Path_3711" data-name="Path 3711" d="M106.307,126.621a2.232,2.232,0,0,0-2.391.324c-16.378,13.884-37.281,31.681-43.858,37.607a9.078,9.078,0,0,1-12.514,0c-7.01-6.316-30.483-26.271-43.853-37.6A2.242,2.242,0,0,0,0,128.654v56.378A8.976,8.976,0,0,0,8.967,194H98.64a8.976,8.976,0,0,0,8.967-8.967V128.654A2.241,2.241,0,0,0,106.307,126.621Z" transform="translate(0 -113.295)" fill="#2c6959"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

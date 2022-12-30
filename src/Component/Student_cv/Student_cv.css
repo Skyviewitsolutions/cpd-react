@@ -1,0 +1,448 @@
+.form-control:focus{
+    border-color: #2c6959;
+    box-shadow: none;
+}
+
+.studentCvBtn{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.studentCvCntrl{
+    height: 90vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.studentCvCntrl::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  .studentCvCntrl::-webkit-scrollbar-thumb {
+    background: #2c6959; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  .studentCvCntrl::-webkit-scrollbar-thumb:hover {
+    background: #2c6959; 
+  }
+  .studentCvCntrl::-webkit-scrollbar {
+    width: 6px;
+  }
+
+.formoutline_studentcv label{
+    padding-top: 20px;
+} 
+
+    .formoutline_studentcv input {
+        height:50px;
+        background-color: #fcfcfc;
+        box-shadow: 0px 8px 6px #0000000F
+    }
+
+    .hobbies_tags{
+        height:50px;
+        background-color: #fcfcfc;
+        box-shadow: 0px 8px 6px #0000000F
+    }
+
+    .formoutline_studentcv .rti--container:focus-within {
+        border-color: #2c6959;
+        box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px!important;
+    }
+
+    .formoutline_studentcv.rti--container{
+        box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px!important;
+        border-color: #2c6959;
+    }
+
+    .formoutline_studentcv .rti--input {width:100%}
+     .formoutline_studentcv select{
+        height:50px;
+        background-color: #fcfcfc;
+        box-shadow: 0px 8px 6px #0000000F
+    } 
+    
+    .formoutline_studentcv textarea{
+        background-color: #fcfcfc;
+    } 
+
+    .studentcv_hr{
+        margin-top: 20px;
+    }
+
+    .studentcv_experiencelogoBox{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 21px;
+    }
+
+    .studentCV_logobox img{
+        width:120px;
+        height:60px;
+    }
+
+    .studentCV_logobox {
+        display: flex;
+    }
+
+    .studentCV_universityDetail{
+        padding-left: 10px;
+    }
+
+    .studentCV_universityDetail h5{
+        font-family: Inter-Bold;
+        font-size: 15px;
+        margin-bottom: 0px;
+    }
+
+    .studentCV_universityDetail h6{
+        color:#707070;
+        font-size: 12px;
+        font-family: Inter-Regular;
+        margin-bottom: 0px;
+    }
+
+    .studentCV_universityDetail h6{
+        font-size: 12px;
+    }
+
+    #create_resume{
+        font-family:Inter-SemiBold;
+        letter-spacing: 0px;
+        color: #232423;
+        opacity: 1;
+        font-size: 20px;
+     margin-top: 40px;
+     margin-bottom: 10px;
+    }
+   
+    .heading_second{
+        background-color: #e0e9e6;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 15px;
+        font-weight: 600;
+        width:100%;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .details_select{
+       border:none;
+       outline:none;
+    }
+
+    .studentCV_ExperienceCheckbox{
+        margin-top: 55px;
+    }
+
+     .studentCV_ExperienceCheckbox input{
+        margin-top: 0px;
+        border-radius: 7px;
+        height: 30px;
+        width: 30px;
+        box-shadow: 0px 8px 6px #0000000F;
+        border: 0.5px solid #707070
+        
+    }
+    .studentCV_checkLabel{
+        padding-top: 0px !important;
+        text-align: center;
+       padding-left: 10px;
+       font-size: 15px;    
+    } 
+    .submit_resumeCreationButton {
+        border:none;
+        min-height: 50px;
+        border-radius: 5px;
+        background-color: #2c6959;
+        font-family: Inter-Bold;
+        color: white;
+        margin-top: 20px;
+        min-width: 250px;
+        margin-bottom: 30px;
+    }
+    .submit_resumeCreationButton:hover{
+      background-color: #3b8b75;
+      font-family: Inter-Bold;
+        border:2px solid #2c6959;
+        color:#2c6959 !important;
+    }
+    .student_cv_search {  
+        position: relative; 
+      }
+      .student_cv_search input {
+        display: flex;
+       align-items: center;
+        background: #fcfcfc;
+        border: 1px solid #d5d8d7;
+        border-radius: 5px;       
+      } 
+      .student_cv_search .search_icon { 
+        position: absolute;
+        bottom:20px;
+        right:15px;
+      }
+      .student_cv_search .location_icon{
+        position: absolute;
+         color:#2c6959;
+         font-size: 25px;
+        bottom:10px;
+        right:15px;
+      }
+      .formoutline_studentcv {
+        padding: 30px 30px;
+        align-items: center;
+        height: auto;
+        border: none !important;
+        margin-bottom: 10px;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        box-shadow: 0px -6px 41px #00000029;
+        border: 0.5px solid #d5d8d7 !important; 
+        border-radius: 4px;
+        opacity: 1;
+    }
+    
+       
+        .personal_details_heading{
+            display: flex;
+            align-items: center;
+          
+           border-bottom: 1px solid #707070;
+            color: #0f0f0f;
+           font-family: Inter-Regular;
+            font-size: 18px;
+          
+    height:45px;
+            
+           
+        }
+    .addExperiencebutton {
+
+       margin-top:53px;
+        min-height: 40px;
+        min-width: 220px;
+        border-radius: 5px;   
+        border: 1px solid #2c6959;
+        background-color: transparent;
+        color: #2c6959;
+    }
+    /* .studentCVdomain_heading {
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #e0e9e6;
+        padding: 20px 5px 5px 15px;
+        margin: 20px 0px 0px 0px;
+        border-radius: 8px;
+    }
+    .studentCVdomain_heading h5{
+        font-size: 16px;
+        color:#232423;
+        font-family: Inter-Regular;
+    }
+    .studentCVdomain_heading h5 span{
+        font-size: 16px;
+        font-family: Inter-Bold;
+    }
+    .studentCVdomain_heading p{
+        padding-left: 0px;
+        margin-top: 0px;
+        font-size: 15px;
+        font-family: Inter-Regular;
+    } */
+   .studentCV_rightIcon {   
+        align-items: center;
+        display: flex;
+        font-size: 35px;
+        color: #2c6959;  
+    }
+    .studentCV_rightIcon svg{
+        margin-right:10px;
+        margin-left: 10px;
+    }
+    .domain_textarea textarea{
+       min-height: 143px;
+    }
+        #cvForm_description_text{
+            margin-top: 20px
+               }
+
+.student_records{
+ 
+    width: 100%;
+} 
+    
+a.extra-fields-customer {
+    float: right;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 25px;
+}
+a.extra-fields-customer:hover{
+color: #2c6959;
+}
+
+.StudentCv_attachFile {
+   
+    margin-top: 20px;
+    
+  }
+  .StudentCv_attachFile .upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .StudentCv_attachFile button {
+    min-width: 330px;
+    min-height: 60px;
+    border-radius: 5px;
+    border: 1px solid #d5d8d7;
+    background-color: transparent;
+   
+  }
+  
+  .StudentCv_attachFile .upload-btn-wrapper input[type="file"] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+  .react-tel-input .form-control {
+    position: relative;
+    font-size: 14px;
+    letter-spacing: .01rem;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-left: 48px;
+    margin-left: 0;
+    background: #FFFFFF;
+    border: 1px solid #CACACA;
+    border-radius: 5px;
+    line-height: 25px;
+    height: 50px!important;
+   width: 100%!important;
+    outline: none;
+}
+  @media only screen and (max-width: 600px) {
+            .formoutline_studentcv{
+                padding: 20px 10px !important;
+               
+            }
+
+            .studentCvBtn{
+                flex-direction: column !important;
+            }
+            .studentCV_logobox {
+    display: flex;
+    flex-direction: column;
+}
+            .studentCV_rightIcon {
+                margin-top: -60px !important;
+   
+                font-size: 30px;
+                
+            }
+            .studentCV_rightIcon svg {
+               margin-left: 5px;
+                margin-right: 5px;
+                
+            }
+
+            .studentCV_universityDetail {
+                padding-left: 0px;
+            }
+            .addExperiencebutton {
+                margin-top: 30px;
+                width:100%;
+            }
+            .studentCV_ExperienceCheckbox {
+                margin-top: 20px;
+            }
+
+            .formoutline_studentcv label{
+                padding-top: 10px;
+            } 
+                .formoutline_studentcv input {
+                    height:50px;
+                  
+                }
+                 .formoutline_studentcv select{
+                    height:50px;
+                   
+                } 
+                .StudentCv_attachFile {
+                    margin-top: 10px;
+                }
+
+
+                .studentcv_hr{
+                    margin-top: 20px;
+                    margin-bottom: 0px;
+                    
+                }
+
+                .studentCV_ExperienceCheckbox input {
+                    height: 30px!important;
+                }
+                .studentCV_ExperienceCheckbox label {
+                   margin-top: 5px;
+                }
+                
+                .student_cv_search .search_icon {
+                   
+                    bottom: 15px;
+                  
+                }
+                .submit_resumeCreationButton {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    width:100% !important;
+                }
+                
+          }
+
+
+         @media screen and (min-device-width: 601px) and (max-device-width: 767px) {
+            #create_resume{
+                font-size: 20px;
+            }
+            .personal_details_heading{
+                padding-left: 10px;
+            }
+            .heading_second{
+                padding-left: 10px;
+            }  
+            /* .studentCVdomain_heading p{
+                padding-top: 10px;
+            } */
+        
+         }
+         @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+            
+            .addExperiencebutton {
+                margin-top: 50px !important;
+            min-height:50px;}
+            .StudentCv_attachFile {
+                margin-top: 0px;
+                width:100% !important;
+            }
+            .StudentCv_attachFile .upload-btn-wrapper {
+               width: 100% !important;
+              }
+            .StudentCv_attachFile button {
+                margin-top: 20px;
+                width: 100% !important;
+            }
+                 /* .studentCVdomain_heading p{
+                    padding-left: 0px;
+                    margin-top: 0px;
+                   
+                } */
+               
+            }

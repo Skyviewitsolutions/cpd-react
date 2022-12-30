@@ -1,0 +1,124 @@
+.Card.Body{
+    padding-bottom: 0%;
+   
+}
+.Ecard_outline {
+    cursor: pointer;
+    margin-bottom: 20px!important;
+    border: 1px solid gainsboro !important;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 15px;
+}
+.Ecard_media img{
+    width: 100%!important;
+    height: 100%!important;
+}  
+.Ecard_outline.card .Ecard_title h5 {
+    padding-top: 0px;
+    margin-top: 0;
+    font-size: 17px;
+    font-weight: 600;
+    text-transform: capitalize;
+
+}
+.events-list .latest {
+    border-top: 1px solid;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.Ecard_outline.card .card-body {
+    padding-bottom: 20px;
+}
+.Ecard_title h6 {
+    font-size: 13px;
+    color: #232423;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+.Ename_box{
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.Ename_box h5 {
+    color: #2C6959;
+    font-size: 15px;
+    font-weight: 700;
+}
+.Ename_box h6 {
+    font-weight: 500;
+    color: #2c6959;
+    font-size: 15px;
+    text-transform: capitalize;
+}
+.Ename_box img{
+    width:14px;
+    height:14px;
+}
+.Etiming_box{
+    align-items: center;
+    display: flex;
+    color:gray;
+    justify-content: space-between;
+}
+.Etiming_box h6{
+      
+font-size: 14px;
+padding-bottom: 0%;
+margin-bottom: -5px;
+}
+.Etiming_box h5{
+    padding-top: 0%;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: -5px;
+    
+}
+.Etiming_box img{
+    
+    width:14px;
+    height:14px;
+}
+.Ecard_media img {
+    width: 100%;
+    min-height: 175px;
+    object-fit: cover;
+    max-height: 175px;
+    border-radius: 15px 15px 0px 0px;
+}
+.comntyDetails{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.Ecard_media {
+    width: 100%;
+    height: auto !important;
+    overflow: hidden;
+    object-fit: cover;
+}
+inputbox.form-control.networking_searchbox {
+    height: 50px;
+    padding: 10px 15px;
+}
+.events-list .view_communities {
+    text-align: center;
+    min-width: 180px;
+    max-width: 100%;
+    height: 50px;
+    color: white;
+    font-size: 17px;
+    padding: 10px 30px;
+    background: #2C6959 0% 0% no-repeat padding-box;
+    border: 1px solid #2C6959;
+    border-radius: 36px;
+}
+
+@media only screen and (max-width: 600px) {
+    .side_nav {
+        margin-left: 0px;
+        width: 100%;
+        border-right: none;
+        padding-bottom: 10px;
+    }
+  }

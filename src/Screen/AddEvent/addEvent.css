@@ -1,0 +1,488 @@
+.selected-border{
+   border: 2px solid green;
+  
+}
+.eventForm_paid.freepaid {
+   margin-left: 30px;
+}
+label.form-check-label.textsession {
+   margin-top: 3px;
+}
+label.btnfree {
+   background: #f8f9fa;
+   padding-top: 5px;
+   border: 1px solid grey;
+   border-radius: 5px;
+}
+.Event_Speaker_form{
+    padding-top: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+ }
+ #eventForm_speaker{
+    font-size: 20px;
+    color:gray;
+ }
+ .eventForm_sessionTags{
+   display:flex;
+   flex-wrap: wrap;
+ }
+ .eventForm_timingInput{
+   width: 100px;
+   height:40px;
+   font-size: 14px;
+
+}
+.eventForm_daysDate{
+   margin-right: 5px;
+  
+}
+
+ .has-search .form-control {
+    padding-left: 2.375rem;
+ }
+ .eventForm_speakerLabel{
+    font-size: 14px;
+    font-weight: 700;
+ }
+
+ .eventForm_paid {
+   float: left;
+   margin: 0 5px 0 0;
+   width: 100px;
+   height: 40px;
+   position: relative;
+ }
+ 
+ .eventForm_paid label,
+ .eventForm_paid input {
+   text-align: center;
+   align-items: center;
+   display: block;
+   position: absolute;
+   font-size: 15px;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+ }
+ .eventDocumentName{
+   text-align: center;
+ }
+ .eventForm_paid input[type="radio"] {
+   opacity: 0.011;
+   z-index: 100;
+    }
+ 
+ .eventForm_paid input[type="radio"]:checked + label {
+   border:2px solid #2c6959;
+   border-radius: 4px;
+ }
+ 
+ .eventForm_paid label {
+   width: 100px;
+   cursor: pointer;
+   z-index: 90;
+   line-height: 1.8em;
+ }
+ #calender_icon{
+   font-size: 20px;
+   margin-left: 5px;
+   color:#2c6959;
+   margin-bottom: 6px;
+ }
+.week_outbox{
+   display:flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.eventForm_weekBox {
+   display: flex;
+   align-items: center;
+   margin:auto;
+   }
+   input.form-control.addEvent_formInput {
+      height: 42px;
+      box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+      border-color: #2c6959;
+  }
+  input.form-control.addEvent_formInput:focus {
+   border-color: #2c6959;
+   box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+}
+   span.ImageUploadIcons {
+      position: relative;
+      bottom: 15px;
+      text-align: center;
+      font-size: 30px;
+      left: 0px;
+  }
+  textarea.form-control {
+   border-color: #2c6959;
+   box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+}
+textarea.form-control:focus {
+   border-color: #2c6959;
+   box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+}
+.eventform_outline.col-12.col-md-12.col-lg-12 {
+   margin-top: 12px;
+}
+.form-group.CommunityId {
+   width: 80%;
+   margin: auto;
+}
+
+.has-search .form-control-feedback {
+   position: absolute;
+   z-index: 2;
+   left:20px;
+   display: block;
+   /* width: 2.375rem; */
+   margin:auto;
+   height: 2.375rem;
+   line-height: 2.375rem;
+   text-align: center;
+   pointer-events: none;
+   font-size: 20px;
+   color: rgb(92, 90, 90)
+}
+.tags_span{
+   margin-left: 5px;
+   font-size: 15px;
+   color:rgb(126, 3, 3);
+}
+ 
+
+ .speaker_label{
+    font-weight: 700;
+ }
+ .Event_Speaker_tags{
+    border:none;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    height:30px;
+    width:fit-content;
+    margin: 5px;
+    border-radius: 30px;
+ padding-left: 10px;
+ padding-right: 10px;
+ background-color: #c9f8f0;
+    color:#2c6959;
+ }
+ .speaker_tags{
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+ }
+
+
+.upload-btn-wrapper {
+   position: relative;
+   overflow: hidden;
+   display: inline-block;
+    width: 90%;
+    margin-left: 53px;
+
+ }
+ 
+ .eventForm_attachFile button {
+   width:100%;
+   border: 2px solid gray;
+   color: gray;
+   background-color: white;
+
+   /* padding: 8px 20px; */
+   border-radius: 7px;
+   font-size: 16px;
+   font-weight: 600;
+ }
+ 
+ .upload-btn-wrapper input[type=file] {
+   font-size: 100px;
+   position: absolute;
+   left: 0;
+   top: 0;
+   opacity: 0;
+ }
+ img.filesIcons {
+   height: 32px;
+   width: 35px;
+}
+ .eventForm_delete_icon{
+    color:rgb(196, 90, 107);
+    font-size: 20px;
+    padding-bottom: 5px;
+ }
+
+.session_uploadedEventForm{
+   
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+}
+img.vedioIcons {
+   height: 20px;
+   width: 20px;
+  
+   margin-left: 70px;
+}
+
+.ImgUploadView {
+   position: relative;
+   bottom: 80px;
+   left: 70px;
+}
+
+.videoUploadView {
+   position: relative;
+   bottom: 80px;
+}
+ 
+
+ #attachedFile_Event label{
+    padding: 10px;
+    display: table;
+    color: #fff;
+     }
+     #attachedFile_Event input[type="file"] {
+    display: none;
+}
+
+#seach_eventForm{
+    margin:5px;
+    margin-right: 10px;
+}
+.EventForm_Checkbox{
+    display: flex;
+
+align-items: center;
+    
+}
+
+.eventFormSessionType_label{
+    font-size: 15px;
+    margin-right: 15px;
+    padding:5px;
+}
+.eventFormSessionType_checkbox{
+   width:20px;
+   height:20px;
+}
+.eventForm_studentNumber{
+   align-items: center;
+    display: flex;
+}
+#eventFormMaxNumber{
+   margin-right:10px;
+   width: 80px;
+   height:40px;
+}
+.eventForm_availableDays{
+    margin: auto;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+   
+}
+.eventForm_price{
+    display:flex;
+    align-items: center;
+    
+}
+.quantity-field {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-left: 50px;
+   height: 40px;
+      
+ }
+ 
+ .quantity-field .value-button{ 
+    border: 1px solid #ddd; 
+   margin: 0px;
+   width: 40px;
+   height: 100%;   
+   padding: 0;
+   background:white; 
+   outline: none;
+   cursor: pointer;
+ }
+ 
+ .quantity-field .value-button:hover {
+   background: rgb(230, 230, 230);
+ }
+ 
+ .quantity-field .value-button:active{
+   background: rgb(210, 210, 210);
+ }
+ 
+ .quantity-field .decrease-button {
+   margin-right: -4px;
+   
+ }
+ 
+ .quantity-field .increase-button {
+   margin-left: -4px;
+   
+ }
+  
+ .quantity-field .number{
+   display: inline-block;
+   text-align: center;
+   border: none;
+   border-top: 1px solid #ddd;
+   border-bottom: 1px solid #ddd;
+   margin: 0px;
+   width: 40px;
+   height: 100%;
+   line-height: 40px;
+   font-size: 11pt;
+   box-sizing: border-box; 
+   background: white;
+   font-family: calibri;
+ }
+ 
+ .quantity-field .number::selection{
+   background: none;
+ }
+.eventForm_dropzone {
+   max-width: 200px;
+   height: 200px;
+   margin-left: 50px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   font-family: "Quicksand", sans-serif;
+   font-weight: 500;
+   font-size: 16px;
+   cursor: pointer;
+   background-color: #d7faf1;
+color:#2c6959;
+   border: 2px dashed #2c6959;
+   border-radius: 10px;
+ }
+ .eventForm_dropzone__prompt {
+   margin-right: 16px;
+}
+ .eventForm_dropzone--over {
+   border-style: solid;
+ }
+ 
+ .eventForm_dropzone__input {
+   display: none;
+ }
+ 
+ .eventForm_dropzone__thumb {
+   width: 100%;
+   height: 100%;
+   border-radius: 10px;
+   overflow: hidden;
+   background-color: #cccccc;
+   background-size: cover;
+   position: relative;
+ }
+ 
+ .eventForm_dropzone__thumb::after {
+   content: attr(data-label);
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   width: 100%;
+   padding: 5px 0;
+   color: #ffffff;
+   background: rgba(0, 0, 0, 0.75);
+   font-size: 14px;
+   text-align: center;
+ }
+ h5.SpekerHedingEvent {
+   font-size: 24px;
+   padding: 10px;
+}
+svg.upload_icon_Image {
+   margin-bottom: 3px;
+}
+ .submit_eventFormButton{
+   text-align: center;
+   min-width: 240px;
+   height:50px;
+   padding-top: 12px;
+   border:none;
+   font-size: 15px;
+   background-color: #2c6959;
+   color:white;
+  }
+  
+  .submit_eventFormButton:hover{
+   background-color: #2c6959;
+      border:2px solid #2c6959;
+      color:white;
+  }
+
+  span.session_photo {
+   cursor: pointer;
+}
+  .priceInput {
+   width: 90px;
+   border: 1px solid grey;
+   outline: none;
+   height: 40px;
+   align-items: center;
+   display: flex;
+   justify-content: center;
+   height: 40px;
+   text-align: center;
+  }
+  .incBtn{
+   width: 40px;
+   border: 1px solid grey;
+   outline: none;
+   display: flex;
+   justify-content: center;
+   cursor: pointer;
+   height: 40px;
+   align-items: center;
+  }
+  .col-12.col-md-12.col-lg-12.eventForm_attachFile {
+   margin-top: 20px;
+   width: 94%;
+}
+
+
+  @media only screen and (max-width: 600px) {
+   
+
+.eventForm_dropzone {
+   margin-top:20px;
+   max-width: 290px;
+   height: 206px;
+   margin-left: 30px;
+   padding-left:0px;
+   align-items: center;
+  }
+  .eventForm_attachFile {
+  
+   padding-left: 0px;
+   margin-left: 0px;
+}
+.upload-btn-wrapper {
+ 
+   width: 80%;
+   margin-left: 45px;
+}
+}
+
+.btn-primary{
+   background: green !important;
+   color: white !important;
+}
+
+.btn-default {
+   background: white;
+   color: black;
+
+}

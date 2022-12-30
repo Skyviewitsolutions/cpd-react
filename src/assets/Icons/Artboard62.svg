@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144" height="144" viewBox="0 0 144 144">
+  <defs>
+    <clipPath id="clip-Artboard_62">
+      <rect width="144" height="144"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_62" data-name="Artboard – 62" clip-path="url(#clip-Artboard_62)">
+    <rect width="144" height="144" fill="#fff"/>
+    <g id="_36_Multicolor_Flag_mc_36_flag_hong_kong" data-name="36 Multicolor / Flag / mc_36_flag_hong_kong" transform="translate(13.298 13.298)">
+      <g id="mc_36_flag_hong_kong">
+        <path id="Oval" d="M58.659,117.319A58.66,58.66,0,1,0,0,58.66,58.659,58.659,0,0,0,58.659,117.319Z" fill="#d80027"/>
+        <g id="Group" transform="translate(30.686 28.546)">
+          <path id="Path" d="M30,24.59c-1.333,5.545-3.7,4.487-4.864,9.323A12.752,12.752,0,0,1,31.1,9.116c-2.325,9.671.1,10.515-1.1,15.475Z" transform="translate(4.024 -8.76)" fill="#f0f0f0"/>
+          <path id="Path_2" d="M25.677,18.916c4.862,2.981,3.124,4.907,7.363,7.507A12.752,12.752,0,0,1,11.3,13.091C19.779,18.29,21.329,16.249,25.677,18.916Z" transform="translate(-9.416 1.024)" fill="#f0f0f0"/>
+          <path id="Path_3" d="M20.84,23.7c4.338-3.7,5.632-1.454,9.415-4.683a12.752,12.752,0,1,1-19.4,16.558C18.422,29.116,16.96,27.011,20.84,23.7Z" transform="translate(-6.161 14.409)" fill="#f0f0f0"/>
+          <path id="Path_4" d="M20.143,30.522c-2.181-5.269.357-5.807-1.545-10.4a12.752,12.752,0,1,1,9.753,23.565C24.548,34.5,22.094,35.235,20.143,30.522Z" transform="translate(11.325 14.707)" fill="#f0f0f0"/>
+          <path id="Path_5" d="M29.958,29.154c-5.686.446-5.413-2.134-10.37-1.745a12.752,12.752,0,1,1,25.426-1.993C35.1,26.193,35.043,28.755,29.958,29.154Z" transform="translate(13.47 2.307)" fill="#f0f0f0"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
