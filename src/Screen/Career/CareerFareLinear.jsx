@@ -21,10 +21,10 @@ const CareerFareLinear = () => {
             <div className="col-lg-9 col-md-12 col-12">
             <section>
                 <div className='row'>
-                    <div className="col-lg-2 col-md-2 ">
+                    <div className="col-lg-2 col-md-3 ">
                     <h3 id="careerLinearHeading">Career Fare</h3>
                     </div>
-                    <div className="col-lg-5 col-md-5 col-12">
+                    <div className="col-lg-5 col-md-9 col-12">
                     <div className="careerLinear_searchBar">
                 <div className="form-group ">
                   <HiSearch id="careerLinear_search" />
@@ -36,17 +36,17 @@ const CareerFareLinear = () => {
                 </div>
               </div>
                     </div>
-                    <div className="col-lg-3 col-md-3 col-12">
+                    <div className="col-lg-3 col-md-4 col-12">
                         <div className='careerLinearviewList'>
         <ul>
-            <li><h6>View By</h6></li>
+            <li><h6>View By :</h6></li>
             <li><FiGrid/></li>
             <li><TfiMenuAlt/></li>
         </ul>
                         
                         </div>
                     </div>
-                    <div className='col-lg-2 col-md-2 col-12'>
+                    <div className='col-lg-2 col-md-8 col-12'>
                         <h6 id="careerLinearNewest">Newest</h6>
                     </div>
                 </div>

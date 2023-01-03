@@ -260,9 +260,16 @@ object-fit: cover;
 
       }
       @media screen and (min-device-width: 481px) and (max-device-width: 767px) {
+        
+        .workshop_imageblock{
+           
+            width: 300px;
+           
+            
+        }
         .workshop_headingblock {
             padding-left:10px;
-             padding-top: 20px;
+             padding-top: 40px;
             padding-bottom: 0px;
          }
          .workshop_headingblock h1 {
@@ -279,7 +286,7 @@ object-fit: cover;
          }
          .workshop_headingblock h6 {
             
-             font-size: 10px;
+             font-size: 13px;
              
          }
          .workshop_imageblock {
@@ -325,8 +332,8 @@ object-fit: cover;
       }
       @media screen and (min-device-width: 768px) and (max-device-width: 961px) {
         .workshop_headingblock {
-            padding-left:10px;
-             padding-top: 20px;
+            padding-left:20px;
+             padding-top: 50px;
             padding-bottom: 0px;
          }
          .workshop_headingblock h1 {
@@ -343,16 +350,16 @@ object-fit: cover;
          }
          .workshop_headingblock h6 {
             
-             font-size: 10px;
+             font-size: 13px;
              
          }
-         .workshop_imageblock {
+         /* .workshop_imageblock {
              padding-right: 0px;
             
             
              width: 100%;
              height: 280px;
-         }
+         } */
          .workshop_searchBox {
              padding-left: 0px;
              padding-right: 0px;

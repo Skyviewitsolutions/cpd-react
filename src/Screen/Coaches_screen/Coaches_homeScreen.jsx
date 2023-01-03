@@ -6,7 +6,7 @@ import "../../fonts/Inter-Bold.ttf";
 import "../../fonts/Inter-Regular.ttf";
 import Homepage_header from "../../Component/Header/Homepage_header";
 import Footer from "../../Component/Footer/Footer";
-import { CiSearch } from "react-icons/ci";
+import { HiSearch } from "react-icons/hi";
 import Sidenavbar from "../../Component/navbar/Sidenavbar";
 import { GrPowerForceShutdown } from "react-icons/gr";
 const Coaches_homeScreen = () => {
@@ -24,7 +24,7 @@ const Coaches_homeScreen = () => {
             <div className="col-lg-10 col-md-12 col-12 coachScreen_right">
               <div className="coach_searchBar">
                 <div className="form-group ">
-                  <CiSearch id="coach_search" />
+                  <HiSearch id="coach_search" />
                   <input
                     type="text"
                     class="form-control"

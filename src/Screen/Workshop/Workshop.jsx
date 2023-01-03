@@ -4,7 +4,7 @@ import Homepage_header from "../../Component/Header/Homepage_header";
 import Footer from "../../Component/Footer/Footer";
 import "../../fonts/Inter-Bold.ttf";
 import "../../fonts/Inter-Regular.ttf";
-import { CiSearch } from "react-icons/ci";
+import { HiSearch } from "react-icons/hi";
 import eye from "../../assets/Images/eye.svg";
 import { CgHeart } from "react-icons/cg";
 import workshop_bannerImage from "../../assets/Images/workshop_bannerImage.png";
@@ -16,13 +16,15 @@ const Workshop = () => {
       <div className="wiper">
         <section className="Workshop_section1">
           <div className="row ">
-            <div className="col-lg-8 col-md-12 col-12 workshop_headingblock ">
+            <div className="col-lg-8 col-md-7 col-12 workshop_headingblock ">
               <h1>Enroll Workshop</h1>
               <h5>Identify The Skills Yor Need To Advance Your Career</h5>
               <h6>Search For The Most Popular Workshops Skills Here</h6>
             </div>
-            <div className="col-lg-4 col-md-12 col-12 workshop_imageblock">
-              <img src={workshop_bannerImage}></img>
+            <div className="col-lg-4 col-md-5 col-12 ">
+              <div className="workshop_imageblock">
+              <img src={workshop_bannerImage} />
+              </div>
             </div>
           </div>
           <div className="row workshop_searchBox">
@@ -32,7 +34,7 @@ const Workshop = () => {
             <div className="col-12 col-md-12 col-lg-8">
               <div className="workshop_searchBar">
                 <div className="form-group ">
-                  <CiSearch id="workshop_search" />
+                  <HiSearch id="workshop_search" />
                   <input
                     type="text"
                     class="form-control"

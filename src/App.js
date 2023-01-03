@@ -34,9 +34,10 @@ import CreateCommunity from "./Component/CreateCommunity/CreateCommunity";
 import AddCommunitySidebar from "./Component/AddCommunitySidebar/AddCommunitySidebar";
 import Communities from "./Screen/Communities/Communities";
 import JobScreen from "./Screen/Job/JobScreen"
-import CareerScreen from "./Screen/Career/CareerScreen"
+// import CareerScreen from "./Screen/Career/CareerScreen";
 import CareerFareLinear from "./Screen/Career/CareerFareLinear";
 import ForumScreen from "./Screen/Forum/ForumScreen"
+import AvailableResource from "./Screen/AvailableResource/AvailableResource";
 
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
         <Route exact path="/job" element={<JobScreen /> } />
         <Route exact path="/career" element={<CareerFareLinear /> } />
         <Route exact path="/forum" element={<ForumScreen /> } />
+        <Route exact path="/availableResource" element={<AvailableResource /> } />
         <Route
           exact
           path="/sidebar_community"
