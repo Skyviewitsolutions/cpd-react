@@ -11,6 +11,9 @@ import { endpoints } from "../../Component/services/endpoints";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import AddEvent_Modal from "../../Component/Modal/AddEvent_Modal";
+import {BsFillCalendarDateFill} from "react-icons/bs";
+import CustomCalendar from "../../Component/Calendar/CustomCalendar";
+
 
 const EventDetails = (props) => {
   
@@ -20,6 +23,7 @@ const EventDetails = (props) => {
   const [imagePath, setImagePath] = useState("");
   const [showCommunityForm, setShowCommunityForm] = useState(false);
   const [communityId, setCommunityId] = useState("");
+  const [showCalendar , setShowCalendar] = useState(false);
   const [myCommunity, setMyCommunity] = useState([]);
 
   // adding form data here ;
@@ -195,7 +199,9 @@ const EventDetails = (props) => {
       <Networking_headers />
       <div className="container">
         <Event_header eventDetails={location.state.eventDetails} />
-
+        <div className="calendarIcon" onClick={() => setShowCalendar(true)}>
+        <BsFillCalendarDateFill color="#2c6959" size={32}/>
+        </div>
         <div className="row">
           <div className="col-lg-3 d-lg-block d-none mt-5 ps-5 pe-5 mb-5 d-lg-block d-none">
             <Sidenav_communityFinance />
@@ -231,18 +237,6 @@ const EventDetails = (props) => {
                           getAllCommunity={getAllCommunity}
                         />
                       </div>
-
-                    
-                      {/* <div className="col-sm-12 col-md-6 col-lg-4 ">
-                        <Add_committee
-                          data={itm}
-                          key={index}
-                          imagePath={imagePath}
-                          // isSubscribed={isSubscribed}
-                          // getMyCommunity={getMyCommunity}
-                          // getAllCommunity={getAllCommunity}
-                        />
-                      </div> */}
                     </>
                   );
                 })}
@@ -250,7 +244,7 @@ const EventDetails = (props) => {
           </div>
         </div>
       </div>
-
+      <CustomCalendar showCalendar={showCalendar} setShowCalendar={setShowCalendar}/>
       <Footer />
     </>
   );

@@ -102,6 +102,7 @@ function App() {
         <Route exact path="/workshop_screen" element={<Workshop />} />
         {/* <Route exact path="/speaker_cv" element={<CoachesForm2/>} /> */}
         <Route exact path="/finalresume" element={<FinalResume />} />
+        <Route exact path="/tnc" element={<TermsConditions/>} />
       </Routes>
       
     </Router>
