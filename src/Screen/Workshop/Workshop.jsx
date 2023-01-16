@@ -1,4 +1,5 @@
-import React from "react";
+import React  from "react";
+import { useNavigate } from "react-router-dom";
 import "./Workshop.css";
 import Homepage_header from "../../Component/Header/Homepage_header";
 import Footer from "../../Component/Footer/Footer";
@@ -9,11 +10,17 @@ import eye from "../../assets/Images/eye.svg";
 import { CgHeart } from "react-icons/cg";
 import workshop_bannerImage from "../../assets/Images/workshop_bannerImage.png";
 import dommy_workshopImage from "../../assets/Images/dommy_workshopImage.png";
+import WorkshsopSidenav from "./WorkshsopSidenav";
+import WorkshopEnroll from "../../Component/Modal/WorkshopEnroll/WorkshopEnroll";
+// import ViewDetail from "./ViewDetail";
 const Workshop = () => {
+  const navigate = useNavigate("");
+
+  const [modalShow, setModalShow] = React.useState(false);
   return (
     <>
       <Homepage_header />
-      <div className="wiper">
+      <div className="workshopwiper">
         <section className="Workshop_section1">
           <div className="row ">
             <div className="col-lg-8 col-md-7 col-12 workshop_headingblock ">
@@ -47,10 +54,46 @@ const Workshop = () => {
         </section>
         <section className="Workshop_section2">
           <div className="row">
-            <div className="col-lg-3 col-md-12 col-12 d-lg-block d-block"></div>
+            <div className="col-lg-3 col-md-12 col-12 "> 
+            <WorkshsopSidenav/>
+            </div>
             <div className="col-lg-9 col-md-12 col-12 ">
               <div className="row">
                 <div className="col-lg-4 col-md-12 col-12 workshop-card">
+                  <div className="card" style={{ transition: "transform ease-in-out"}}>
+                    <div className="workshopcard_media">
+                      <img src={dommy_workshopImage} alt="" />
+                      <div className="tags_onImage">
+                        <h6>Workshop</h6>
+                      </div>
+                    </div>
+                    <div className="workshopcard_descriptionBox">
+                      <h4>
+                        DIY Organic Bath and Body Products | Start your Business
+                        at Home!
+                      </h4>
+                      <h5>September 3 | 3PM-September 13 | 4PM</h5>
+                      <h6 class="colorText">Upcoming</h6>
+                      <div className="workshop_FreeBox">
+                        <h6>Free</h6>
+                        <div className="viewDetailsBox"
+                        >
+                          <span className="colorText" onClick={()=>navigate('/workshopviewdetails')}>
+                            {" "}
+                            <img src={eye} alt="" /> View Details{" "}
+                          </span>
+                          <CgHeart id="heart-icon"  />
+                        </div>
+                      </div>
+                      <div className="domainBox">
+                      <h6>Domain : Retail</h6>
+                        <h6>Industries : All</h6>
+                      </div>
+                      <h6 id="enrolled" onClick={() => setModalShow(true)}>Currently Enrolled (5/10)</h6>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-4 col-md-12 col-12 workshop-card">
                   <div className="card">
                     <div className="workshopcard_media">
                       <img src={dommy_workshopImage} alt="" />
@@ -67,7 +110,7 @@ const Workshop = () => {
                       <h6 class="colorText">Upcoming</h6>
                       <div className="workshop_FreeBox">
                         <h6>Free</h6>
-                        <div className="viewDetailsBox">
+                        <div className="viewDetailsBox" >
                           <span className="colorText">
                             {" "}
                             <img src={eye} alt="" /> View Details{" "}
@@ -112,40 +155,7 @@ const Workshop = () => {
                       <h6>Domain : Retail</h6>
                         <h6>Industries : All</h6>
                       </div>
-                      <h6 id="enrolled">Currently Enrolled (5/10)</h6>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4 col-md-12 col-12 workshop-card">
-                  <div className="card">
-                    <div className="workshopcard_media">
-                      <img src={dommy_workshopImage} alt="" />
-                      <div className="tags_onImage">
-                        <h6>Workshop</h6>
-                      </div>
-                    </div>
-                    <div className="workshopcard_descriptionBox">
-                      <h4>
-                        DIY Organic Bath and Body Products | Start your Business
-                        at Home!
-                      </h4>
-                      <h5>September 3 | 3PM-September 13 | 4PM</h5>
-                      <h6 class="colorText">Upcoming</h6>
-                      <div className="workshop_FreeBox">
-                        <h6>Free</h6>
-                        <div className="viewDetailsBox">
-                          <span className="colorText">
-                            {" "}
-                            <img src={eye} alt="" /> View Details{" "}
-                          </span>
-                          <CgHeart id="heart-icon" />
-                        </div>
-                      </div>
-                      <div className="domainBox">
-                      <h6>Domain : Retail</h6>
-                        <h6>Industries : All</h6>
-                      </div>
-                      <h6 id="enrolled">Currently Enrolled (5/10)</h6>
+                      <h6 id="enrolled" onClick={() => setModalShow(true)} >Currently Enrolled (5/10)</h6>
                     </div>
                   </div>
                 </div>
@@ -252,6 +262,9 @@ const Workshop = () => {
               </div>
             </div>
           </div>
+          <WorkshopEnroll show={modalShow}
+            onHide={()=>setModalShow(false)}
+          />
         </section>
       </div>
       <Footer />

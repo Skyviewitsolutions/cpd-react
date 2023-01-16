@@ -11,19 +11,19 @@ import { endpoints } from "../../Component/services/endpoints";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import AddEvent_Modal from "../../Component/Modal/AddEvent_Modal";
-import {BsFillCalendarDateFill} from "react-icons/bs";
+import { BsChatDots } from "react-icons/bs";
+import { BsFillCalendarDateFill } from "react-icons/bs";
+// import Chat from "../../Component/Chat/Chat";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 
-
 const EventDetails = (props) => {
-  
   const location = useLocation();
 
   const [allCommunity, setAllCommunity] = useState([]);
   const [imagePath, setImagePath] = useState("");
   const [showCommunityForm, setShowCommunityForm] = useState(false);
   const [communityId, setCommunityId] = useState("");
-  const [showCalendar , setShowCalendar] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
   const [myCommunity, setMyCommunity] = useState([]);
 
   // adding form data here ;
@@ -193,6 +193,8 @@ const EventDetails = (props) => {
       });
   }, []);
 
+  const [showChat, setShowChat] = useState(false);
+
   return (
     <>
       <Homepage_header />
@@ -200,13 +202,17 @@ const EventDetails = (props) => {
       <div className="container">
         <Event_header eventDetails={location.state.eventDetails} />
         <div className="calendarIcon" onClick={() => setShowCalendar(true)}>
-        <BsFillCalendarDateFill color="#2c6959" size={32}/>
-        </div>
+          <BsFillCalendarDateFill color="#2c6959" size={32} />
+        </div>{" "}
+        {/* <div className="eventDetailsChat" onClick={() => setShowChat(true)}>
+          <BsChatDots />
+        </div> */}
         <div className="row">
           <div className="col-lg-3 d-lg-block d-none mt-5 ps-5 pe-5 mb-5 d-lg-block d-none">
             <Sidenav_communityFinance />
           </div>
           <div className="col-lg-9 col-md-12 col-12">
+            <></>
             <div className="row">
               <div className="col-12 col-md-12 col-lg-12 mt-5 evntBtn">
                 <h5>Domain Based</h5>
@@ -237,6 +243,17 @@ const EventDetails = (props) => {
                           getAllCommunity={getAllCommunity}
                         />
                       </div>
+
+                      {/* <div className="col-sm-12 col-md-6 col-lg-4 ">
+                        <Add_committee
+                          data={itm}
+                          key={index}
+                          imagePath={imagePath}
+                          // isSubscribed={isSubscribed}
+                          // getMyCommunity={getMyCommunity}
+                          // getAllCommunity={getAllCommunity}
+                        />
+                      </div> */}
                     </>
                   );
                 })}
@@ -244,8 +261,13 @@ const EventDetails = (props) => {
           </div>
         </div>
       </div>
-      <CustomCalendar showCalendar={showCalendar} setShowCalendar={setShowCalendar}/>
+
+      <CustomCalendar
+        showCalendar={showCalendar}
+        setShowCalendar={setShowCalendar}
+      />
       <Footer />
+      {/* <Chat showChat={showChat} setShowChat={setShowChat} />   */}
     </>
   );
 };

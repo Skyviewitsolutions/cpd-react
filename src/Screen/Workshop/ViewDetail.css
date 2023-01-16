@@ -1,0 +1,15 @@
+.viewDetailWrapper{
+    padding:20px 60px 20px 60px;
+    border:1px solid red;
+}
+.workshopDetailImage{
+    height:400px;
+     border-radius:8px
+}
+.workshopDetailImage img{
+    height:100%;
+    width:100%;
+    border-radius:8px;
+    object-fit:cover;
+
+}

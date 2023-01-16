@@ -452,7 +452,7 @@ const AddEvent = () => {
       <Homepage_header />
       <div className="container">
         <h5 className="SpekerHedingEvent">
-          Organised Event <span>Speaker</span>
+          Add Event <span></span>
         </h5>
         <Form className="eventform_outline">
           <div className="row p-1">

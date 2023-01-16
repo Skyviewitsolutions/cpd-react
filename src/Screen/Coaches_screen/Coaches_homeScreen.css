@@ -78,6 +78,7 @@
 }
 
 .coaches_tooltip .tooltiptext {
+  cursor:pointer;
   /* overflow:auto; */
   /* height:150px; */
   visibility: hidden;
@@ -131,6 +132,7 @@
     color: inherit;
   }
   .CoachScreen_coachesList .card{
+    cursor:pointer;
    
 background: #FFFFFF;
 box-shadow: 0px 6px 18px #00000029;
@@ -153,6 +155,11 @@ padding:5px;
     background: #2C6959;
     border-radius: 26px;
     opacity: 1;
+}
+.coach_List_bookButton:hover{
+  background-color:#D2D2D2;
+    color:#2c6959;
+   
 }
 .CoachScreen_coachesList h5 {
   color: #232423;

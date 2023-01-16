@@ -8,6 +8,7 @@ import forumimg2 from "../../assets/Images/forumimg2.png";
 import { FiCornerUpLeft } from "react-icons/fi";
 import dommyuserperson from "../../assets/Images/dommyuserperson.jfif";
 import { HiSearch } from "react-icons/hi";
+import WorkshsopSidenav from "../Workshop/WorkshsopSidenav";
 
 
 const ForumScreen = () => {
@@ -16,7 +17,9 @@ const ForumScreen = () => {
       <Homepage_header />
       <div className="forum-wrapper">
         <div className="row">
-          <div className="col-lg-3"></div>
+          <div className="col-lg-3">
+            {/* <WorkshsopSidenav/> */}
+          </div>
           <div className="col-lg-9 col-md-12 col-12">
             <section>
               <div className="row">

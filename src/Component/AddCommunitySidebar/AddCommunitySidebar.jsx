@@ -44,6 +44,7 @@ const AddCommunitySidebar = () => {
 
   return (
     <>
+    <div className="addCommunitysidebar">
       <div className="sibar-community-toggle">
         <div class="btn sideBarBtn">
           <span class="ffa-bars">
@@ -166,6 +167,7 @@ const AddCommunitySidebar = () => {
             </li>
           </ul>
         </nav>
+      </div>
       </div>
     </>
   );

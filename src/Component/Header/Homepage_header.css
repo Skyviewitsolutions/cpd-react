@@ -201,7 +201,7 @@ a.click_forem_box.working.nav-link:hover {
 
 .headerslider .owl-nav button {
   position: absolute;
-  top: 50%;
+  /* top: 50%; */
   background-color: #000;
   color: #fff;
   margin: 0;
@@ -209,23 +209,27 @@ a.click_forem_box.working.nav-link:hover {
 }
 .headerslider .owl-nav button.owl-prev {
   left: 0;
+  position: absolute;
+  
 }
 .headerslider .owl-nav button.owl-next {
   right: 0;
+  position: absolute;
+
 }
 
 
 .headerslider .owl-nav button {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    /* top: 50%; */
+    /* transform: translateY(50%); */
     background: rgba(255, 255, 255, 0.38) !important;
 }
 .headerslider span {
   color:#2c6959;
     font-size: 70px;    
     position: relative;
-   bottom:50px;
+   /* bottom:50px; */
 }
  .headerslider .owl-nav button:focus {
     outline: none;
@@ -273,8 +277,18 @@ color:white;
     flex-direction: column;
     justify-content: center;
 }
+@media (max-width: 390px)  {
+  .headerslider .owl-nav button.owl-prev {
+    
+    bottom:20%;
+  }
+  .headerslider .owl-nav button.owl-next {
+    
+  bottom:20%;
+  }
+}
 
-@media (max-width: 480px) {
+@media  (min-width: 391px) and (max-width: 480px) {
   .header1_afterlogin {
     padding-right: 10px;
     border-bottom: none;
@@ -326,14 +340,27 @@ color:white;
     font-size: 12px;
     width: 100px;
   }
-  .headerslider span {
+  /* .headerslider span {
     font-size: 60px;
     position: relative;
     bottom: 20px;
+} */
+.headerslider .owl-nav button.owl-prev {
+  /* left: 0;
+  position: absolute; */
+  bottom:20%;
+}
+.headerslider .owl-nav button.owl-next {
+  /* right: 0;
+  position: absolute; */
+bottom:20%;
 }
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
+  .sliderInner{
+    margin:15px;
+  }
   .header1_afterlogin {
     padding-right: 10px;
     border-bottom: none;
@@ -393,10 +420,10 @@ color:white;
     font-size: 12px;
   }
   .click_forem_box h5 {
-    font-size: 12px;
+    font-size: 13px;
     
   }
-  .headerslider span {bottom:20px;}
+  /* .headerslider span {bottom:20px;} */
   .sliderInnerForum {
     
     padding: 35px 5px 35px 5px;
@@ -449,25 +476,20 @@ color:white;
   .border-bottom {
     border-bottom: 5px solid #2c6959;
   }
-
-
-  /************************* SECOND NAVBAR IN TABLET **************************************/
-  /* .header2_afterlogin {
-    visibility: hidden;
+  .headerslider .owl-nav {
+      position: absolute;
+      /* top: 38%; */
   }
-
-  .clickforem_div {
-    padding-left: 20px;
-    padding-right: 20px;
-    display: flex;
-    border: 1px solid red;
-    justify-content: space-between;
+  .headerslider .owl-nav button.owl-prev {
+    /* left: 0;
+    position: absolute; */
+    bottom:20%;
   }
-  .clickforem_div h6 {
-    font-weight: 700px;
-    font-size: 27px;
-    color: #2c6959;
-  } */
+  .headerslider .owl-nav button.owl-next {
+    /* right: 0;
+    position: absolute; */
+  bottom:20%;
+  }
 }
 
 

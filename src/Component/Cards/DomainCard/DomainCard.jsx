@@ -7,7 +7,7 @@ import Share from "../../../assets/Icons/Artboard52.svg";
 import WhatsApp from "../../../assets/Icons/whtsapp.svg";
 import Fb from "../../../assets/Icons/facebook.svg";
 import Insta from "../../../assets/Icons/insta.svg";
-import Linkdin from "../../../assets/Icons/linkedin.svg";
+import Linkdin from "../../../assets/Icons/linkdin.svg";
 import time from "../../../assets/Images/time.svg";
 import eye from "../../../assets/Images/eye.svg";
 import { CiUser } from "react-icons/ci";

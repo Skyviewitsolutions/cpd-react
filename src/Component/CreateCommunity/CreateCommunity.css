@@ -101,12 +101,12 @@ button.btn.btn-lg .communitySubmitButton{
 
 
 .rti--container:focus-within {
-    border-color: #2c6959;
+ border-color: #2c6959;
     box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px!important;
 }
 .rti--container{
     box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px!important;
-    border-color: #2c6959;
+    /* border-color: #2c6959; */
     
 
 }

@@ -1,0 +1,167 @@
+.FareDetailsWrapper {
+  /* border: 1px solid red; */
+  padding: 30px 80px 30px 80px;
+}
+.fareDetailsimg {
+  height: 450px;
+  width: 100%;
+}
+.fareDetailsimg img {
+  height: 100%;
+  width: 100%;
+}
+.FareDetailsFirstSec {
+  padding-top: 40px;
+}
+.faredetailsinformation h4 {
+  text-align: left;
+
+  font-family: Inter-SemiBold;
+  color: #2c6959;
+  font-size: 27px;
+  text-transform: uppercase;
+}
+.faredetailsinformation h3 {
+  font-size: 35px;
+  text-align: left;
+  margin-bottom: 20px;
+  color: #2c6959;
+  font-family: Inter-Bold;
+  text-transform: uppercase;
+}
+.faredetailsinformation h6 {
+  font-size: 15px;
+  margin-bottom: 20px;
+  color: #232423;
+  text-align: left;
+  font-family: Inter-Medium;
+  text-transform: uppercase;
+}
+.faredetailsinformation h5 {
+  text-align: left;
+  font-size: 18px;
+  color: #232423;
+  font-family: Inter-Medium;
+  text-transform: uppercase;
+}
+.faredetailsinformationright {
+  text-align: right;
+}
+.faredetailsinformationright h6 {
+  padding-left: 80px;
+
+  text-align: center;
+  font-family: Inter-Medium;
+  font-size: 15px;
+  text-transform: capitalize;
+  color: #2c6959;
+}
+.faredetailsinformationright button {
+  border-radius: 9px;
+  color: #fff;
+  padding: 15px 30px 15px 30px;
+  background-color: #2c6959;
+  font-size: 12px;
+  border: none;
+}
+.faredetailswhenwhere {
+  text-align: left;
+  font-family: Inter-Bold;
+  font-size: 30px;
+  margin-top: 30px;
+  letter-spacing: 0px;
+  color: #232423;
+  text-transform: capitalize;
+  opacity: 1;
+}
+.faredetailstimeOuter,
+.faredetailslocationOuter {
+  display: flex;
+  margin-top: 30px;
+}
+.faredetailstimeOuter img,
+.faredetailslocationOuter img {
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+}
+.faredetailstimeInner,
+.faredetailslocationInner {
+  display: flex;
+  flex-direction: column;
+}
+.faredetailstimeInner h5,
+.faredetailslocationInner h5 {
+  font-size: 20px;
+  font-family: Inter-Regular;
+  font-weight: 600;
+}
+.faredetailstimeInner h6,
+.faredetailslocationInner h6 {
+  font-size: 15px;
+  font-family: Inter-Medium;
+}
+.faredetailsshare {
+  margin-top: 70px;
+}
+.faredetailsshare h5 {
+  color: #232423;
+  font-family: Inter-Bold;
+  font-size: 25px;
+}
+.faredetailsshare ul {
+  margin-top: 20px;
+  padding-left: 0px;
+  list-style-type: none;
+  display: flex;
+}
+
+.faredetailsshare li img {
+  margin-right: 20px;
+  width: 25px;
+  height: 25px;
+}
+.FareDetailsFirstSec hr {
+  margin-top: 40px;
+
+  color: #3e3f3e;
+}
+.FareDetailsSecondSec h5 {
+  text-align: left;
+  font-family: Inter-SemiBold;
+  font-size: 25px;
+  letter-spacing: 0px;
+  color: #232423;
+  text-transform: capitalize;
+}
+.FareDetailsSecondSec h6 {
+  text-align: left;
+  font-family: Inter-SemiBold;
+  font-size: 20px;
+  letter-spacing: 0px;
+  color: #232423;
+  text-transform: capitalize;
+}
+.FareDetailsSecondSec p {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+  font-family: Inter-Regular;
+  font-size: 15px;
+  letter-spacing: 0px;
+  color: #232423;
+}
+.faredetailstagsbox {
+  display: flex;
+  flex-wrap: wrap;
+}
+.faredetailstagsbox button {
+  border: none;
+  padding: 5px 20px 5px 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 26px;
+  font-size: 13px;
+}

@@ -1,0 +1,126 @@
+/* .bookSlot .slot-booking-data table {
+  width: 100%;
+}
+.bookSlot .modal-title {
+  color: #2c6959;
+  margin-top: 15px;
+  margin-left: 15px;
+  font-size: x-large;
+}
+.bookSlot .modal-header {
+  text-decoration: none !important;
+}
+.bookSlot .modal-body {
+  position: relative;
+  flex: 1 1 auto;
+}
+.bookSlot button {
+  border: none;
+  background-color: #abb521;
+  color: white;
+  border-radius: 10px;
+  margin-left: 27px;
+  margin-top: 10px;
+}
+.bookSlot .slot-booking-data .col-lg-6.border-right {
+  border-right: 1px solid #cccc;
+}
+.bookSlot .date {
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+.bookSlot .date2 {
+  margin-left: 10px;
+  font-weight: 600;
+  width: 80px;
+  font-size: x-large;
+  margin-top: 20px;
+}
+.bookSlot .date1 {
+  margin-bottom: 17px;
+  font: bold;
+  font-weight: bolder;
+  text-decoration: solid;
+  margin-left: 10px;
+}
+.bookSlot .modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 110%;
+  color: var(--bs-modal-color);
+  pointer-events: auto;
+  background-color: var(--bs-modal-bg);
+  background-clip: padding-box;
+  outline: 0;
+  height: 380px;
+  text-decoration: none !important;
+  border: none !important;
+  outline: none !important;
+}
+.bookSlot .part1 {
+  border: 1px solid red;
+  width: 60%;
+  height: 30px;
+}
+.bookSlot .hight {
+  margin-bottom: 10px;
+}
+.bookSlot .btn-1 {
+  color: white;
+  width: 60%;
+  margin-left: 27px;
+}
+.bookSlot .btn_11 {
+  width: 60%;
+  margin-left: 27px;
+}
+.bookSlot .button {
+  width: 70px;
+  margin-left: 110px;
+  margin-top: 10px;
+} */
+.bookSlotModalHeading{
+  padding-left:30px;
+  padding-right:30px;
+}
+.bookSlotModalHeading h5{
+  color: #2c6959;
+  font-family: Inter-Bold;
+}
+.bookSlotModalWrapper button {
+  width: 200px;
+  height: 40px;
+  border-radius: 20px;
+}
+.bookslotmodalbody{
+  padding-left:40px;
+  padding-right:40px;
+}
+.startCol{
+  font-family: Inter-Bold;
+}
+.bookslotbutton{
+  padding:5px 20px 5px 20px;
+  padding-left:20px;
+  padding-right:20px;
+  border:none;
+  border-radius:26px;
+  color:#ffff;
+  background-color: #abb521;
+}
+/* .bookslotmodalbody .Table .tr{
+ 
+} */
+/* .bookslottablerow tr{
+  
+} */
+.bookslottablerow td{
+  padding-top:20px;
+  padding-left:10px;
+  padding-right:20px;
+}
+
+/* .bookslottablerow td{
+  padding-top:20px;
+} */

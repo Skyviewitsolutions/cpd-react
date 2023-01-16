@@ -1,0 +1,151 @@
+#coachFormstimebutton{
+    margin-left: 10px;
+border:none;
+color: #2c6959;
+font-size:15px;
+background-color: transparent;
+}
+
+.coachshowCurrent{
+    margin-left: 10px;
+    font-size:15px;
+    color:#2c6959;
+}
+.coacheshowtime{
+    font-size:20px;
+}
+.css-1igvx5z-timeSelected-time-TopBar { 
+         
+    font-size: 30px !important;   
+    color: var(--top-selected-color, #2c6959) !important;
+}
+.css-rt16tf-timeSelected-time {
+    font-size: 30px !important;   
+    color: var(--top-selected-color, #2c6959) !important;
+}.css-1lnifv0-colon {
+    font-size: 30px !important;   
+}
+.css-nntsr1-time {
+    font-size: 30px !important;   
+}
+
+.css-1wtkbk-time-TopBar{
+     font-size: 30px !important;
+    color: var(--top-meridiem-color, #2c6959) !important;
+}
+.css-1outj7w-meridiem{
+    font-weight: 900;
+    font-size:20px !important;
+    color: var(--top-meridiem-color, #2c6959) !important;
+}
+.css-200z2t-outerCircle {
+  
+    fill: var(--hand-circle-outer, #2c6959) !important;
+}
+.css-yxfhll-line {
+    stroke: var(--hand-line-color, #2c6959) !important;
+}
+.css-uby47j-centerCircle {
+    fill: var(--hand-circle-center, #2c6959);
+}
+.css-1ctvv7l-numbersStyle {
+    text-shadow: 1px 1px #ffffff; 
+}
+.css-hcsisw-wrapper {
+    padding:0px 16px !important;
+}
+.css-1157z6n-style {    
+    padding: 10px 0 10px}
+    .css-dlroum-meridiem {
+        background: var(--meridiem-selected-bg-color, #2c6959) !important;
+    color: var(--meridiem-selected-text-color, #ffffff) !important;
+    }
+    .css-1n3f8ki-meridiem {  background: var(--meridiem-selected-bg-color, #2c6959) !important;
+        color: var(--meridiem-selected-text-color, #ffffff) !important; }
+        .css-yo7vjg-doneButton {    
+           font-weight: 900 !important;
+           padding: 10px,  0px;
+            color: var(--done-text-color, #2c6959) !important;
+         }
+         .css-14lwqju-intermediateMinuteCircle {
+            fill: var(--hand-minute-circle, #2c6959) !important;
+        }
+        .css-uby47j-centerCircle {
+            fill: var(--hand-circle-center, #2c6959) !important;
+        }
+        .CoachesFormDays{
+            padding-top:0% !important;
+        }
+        .coachesFormQuantityField{
+            display:flex;
+            align-items: center;
+        }
+        .coachesFormQuantityField{
+            display:flex;
+        }
+        .coachesFormQuantityField .incBtn{
+           height:40px !important;
+
+        }
+        /* .coachesFormQuantityField .input{
+            height:40px !important;
+            
+         } */
+         .quatityButton{
+            height:40px !important;
+            border: 1px solid gray !important;
+            
+         }
+         .coachesFormPaid {
+            padding-top:0% !important;
+         }
+         .coachesFormSubmit{
+            margin-bottom:20px;
+
+            border:none;
+            background-color: #2c6959;
+            padding:10px 60px 10px 60px;
+            font-family:Inter-Bold;
+            color:#ffffff;
+
+         }
+         .coachForm_weekdays{
+            display: flex;
+    align-items: center;
+    margin:none !important;
+    
+         }
+         .coachesFormpriceBox {
+            border:1px solid gray;
+            float: left;
+            margin: 0 5px 0 0;
+            width: 100px;
+            height: 40px;
+            position: relative;
+        }
+        .coachesFormpriceBox input[type="radio"] {
+            opacity: 0.011;
+            z-index: 100;}
+
+            /* .coachesFormpriceBox label {
+                width: 100px;
+                cursor: pointer;
+                z-index: 90;
+                line-height: 1.8em;
+            } */
+
+            .coachesFormpriceBox label, .coachesFormpriceBox input {
+                height:40px;
+                text-align: center;
+                align-items: center;
+                display: block;
+                position: absolute;
+                font-size: 15px;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
+            .coachesFormpriceBox input :active{
+border:1px solid #2c6959;
+            }

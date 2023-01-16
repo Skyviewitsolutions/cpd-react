@@ -117,7 +117,7 @@ label.btnfree {
       left: 0px;
   }
   textarea.form-control {
-   border-color: #2c6959;
+   /* border-color: #2c6959; */
    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
 }
 textarea.form-control:focus {
@@ -476,12 +476,12 @@ svg.upload_icon_Image {
 }
 }
 
-.btn-primary{
+.eventForm_paid .btn-primary{
    background: green !important;
    color: white !important;
 }
 
-.btn-default {
+.eventForm_paid .btn-default {
    background: white;
    color: black;
 

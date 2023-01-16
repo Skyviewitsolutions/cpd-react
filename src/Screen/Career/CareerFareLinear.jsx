@@ -7,6 +7,7 @@ import Homepage_header from "../../Component/Header/Homepage_header";
 import Footer from "../../Component/Footer/Footer";
 import USNV from "../../assets/Images/USNV.png";
 import { BsHeart } from "react-icons/bs";
+import CareerSidenav from '../Career/CareerSidenav';
 import "../../fonts/Inter-Bold.ttf";
 import "../../fonts/Inter-Medium.ttf";
 import "../../fonts/Inter-Regular.ttf";
@@ -17,11 +18,13 @@ const CareerFareLinear = () => {
       <Homepage_header />
       <div className="careerLinearwrapper">
         <div className="row">
-          <div className="col-lg-3"></div>
+          <div className="col-lg-3 mt-3">
+            <CareerSidenav/>
+          </div>
           <div className="col-lg-9 col-md-12 col-12">
             <section>
               <div className="row">
-                <div className="col-lg-2 col-md-3 ">
+                <div className="col-lg-2 col-md-3  ">
                   <h3 id="careerLinearHeading">Career Fare</h3>
                 </div>
                 <div className="col-lg-5 col-md-9 col-12">

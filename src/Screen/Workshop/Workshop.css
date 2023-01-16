@@ -1,4 +1,4 @@
-.wiper{
+.workshopwiper{
     margin-top: 10px;
  background-color:#F1F9FF;
 }
@@ -89,11 +89,16 @@ text-align: left;
       padding-top: 20px;
     }
 .workshop-card .card{
+    cursor:pointer;
     box-shadow: 3px 11px 20px #00000029;
     border: 0.5px solid #d1cfcf;
 border-radius: 7px;
 background: #FFFFFF;
 margin-bottom:20px;
+transition:0.6s;
+}
+.workshop-card .card:hover{
+   transform:scale(1.1);
 }
 .workshopcard_media{
 width:100%;
@@ -186,12 +191,22 @@ object-fit: cover;
         font-size: 20px !important;
        
     }
+    .viewDetailsBox #heart-icon:hover{
+       
+color: #ED1066;
+font-size: 21px !important;
+       
+    }
     #enrolled span{
         color:#232423 !important;
     }
 
 
-
+ .workshop-card .card:hover{
+   transition: transform 400ms ease-in-out;
+   transform: translate(1.2);
+   
+} 
 
 
 

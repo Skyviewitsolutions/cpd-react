@@ -1,0 +1,237 @@
+
+.workshopsidebar .btn {
+    position: relative;
+    top: 15px;
+    left: 45px;
+    height: 45px;
+    text-align: center;
+    background: #2c6959;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: left 0.4s ease;
+    color: white;
+  }
+  .workshopsidebar .btn:hover {
+    background-color: #2c6959;
+  }
+  
+  .workshopsidebar .sideBarBtn {
+    left: 260px;
+    visibility: hidden;
+  }
+  .workshopsidebar .btn span {
+    color: white;
+    font-size: 28px;
+    line-height: 45px;
+  }
+  .workshopsidebar .btn.click span:before {
+    content: "\f1d";
+    font-size: 80px;
+    position: relative;
+    font-weight: 800;
+    bottom: 30px;
+  }
+  .workshopsidebar .faBars {
+    margin-bottom: 20px;
+  
+    margin-left: -2px;
+  }
+  .workshopsidebar .sidebar {
+    position: absolute;
+    width: 250px;
+    height: auto;
+    left: -250px;
+    background: white;
+    color: black;
+    margin-top: -42px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: left 0.4s ease;
+    border-radius: 8px;
+  }
+  .workshopsidebar .sidebar.show {
+    left: 17px;
+    height: auto;
+    border-radius: 8px;
+  }
+  .workshopsidebar .sidebar .text {
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 65px;
+    margin-left: 15%;
+    background: white;
+    letter-spacing: 1px;
+  }
+  .workshopsidebar input.checkBoxAdCmnty {
+    height: 20px;
+    width: 20px;
+  }
+  .workshopsidebar nav ul {
+    background: white;
+    color: black;
+    height: 100%;
+    width: 100%;
+    list-style: none;
+  }
+  .workshopsidebar nav ul li {
+    line-height: 35px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .workshopsidebar nav ul li:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .workshopsidebar nav ul li a {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding-left: 5px;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    border-left: 3px solid transparent;
+  }
+  .workshopsidebar nav ul li.active a {
+    color: black;
+    background: white;
+  }
+  .workshopsidebar nav ul li a:hover {
+    background: white;
+    color: black;
+  }
+  .workshopsidebar nav ul ul {
+    position: static;
+    display: none;
+  }
+  .workshopsidebar nav ul .feat-show.show {
+    display: block;
+  }
+  .workshopsidebar nav ul .serv-show.show1 {
+    display: block;
+  }
+  .workshopsidebar nav ul ul li {
+    line-height: 42px;
+    border-top: none;
+  }
+  .workshopsidebar nav ul ul li a {
+    font-size: 17px;
+    color: #e6e6e6;
+    padding-left: 80px;
+  }
+  .workshopsidebar nav ul li.active ul li a {
+    color: #e6e6e6;
+    background: white;
+    border-left-color: transparent;
+  }
+  .workshopsidebar nav ul ul li a:hover {
+    color: black !important;
+    background: white !important;
+  }
+  .workshopsidebar nav ul li a span {
+    position: absolute;
+    color: black;
+    top: 42%;
+    margin-left: 10px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    transition: transform 0.4s;
+  }
+  .workshopsidebar h6.AddCmntyMenuText {
+    margin-left: 8px;
+    color: #aaa;
+  }
+  .workshopsidebar nav ul li a span.rotate {
+    transform: translateY(-50%) rotate(-180deg);
+  }
+  .workshopsidebar button.BtnMore {
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #2c6959;
+  }
+  .workshopsidebar .btn.click span:before {
+    content: "\f1d";
+    font-size: 80px;
+    position: relative;
+    font-weight: 800;
+    bottom: 30px;
+  }
+  .workshopsidebar input[type="checkbox"] {
+    accent-color: #2c6959;
+  }
+  .workshopsidebar .texthideShow {
+    visibility: hidden;
+  }
+  .workshopsidebar button.ClearAllAddCmntybtn {
+    background: none;
+    border: none;
+    font-size: 14px;
+    color:  #2c6959;
+  }
+  @media screen and (max-width: 600px) {
+    .workshopsidebar.btn.click {
+      visibility: visible;
+      z-index: 15;
+    }
+    .workshopsidebar .btn {
+      top: 0px;
+      margin-bottom: 20px;
+      margin-left: -36px;
+    }
+    .workshopsidebar .sidebar.show {
+      z-index: 2;
+    }
+    .workshopsidebar .btn.click svg.faBars {
+      opacity: 0;
+    }
+    .workshopsidebar nav.sidebar.show {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-top: 0px;
+    }
+    .workshopsidebar .texthideShow {
+        visibility: visible;
+        position: absolute;
+        bottom: 0px;
+        font-size: 20px;
+        font-weight: 700;
+        left: -210px;
+        /* right: 101px; */
+        color: black;
+    }
+  }
+  
+  @media screen and (min-width: 601px) and (max-width: 820px) {
+    .workshopsidebar .btn {
+      position: relative;
+      top: 0px;
+      margin-bottom: 15px;
+      left:0px;
+  }
+  .workshopsidebar .texthideShow {
+    visibility: visible;
+    position: absolute;
+    bottom: 7px;
+    font-size: 20px;
+    font-weight: 700;
+    left: 60px;
+    color: black;
+  }
+  .workshopsidebar .btn.click {
+    visibility: visible;
+    z-index: 15;
+  }
+  .workshopsidebar .sidebar.show {
+    z-index: 2;
+  }
+  .workshopsidebar .btn.click svg.faBars {
+    opacity: 0;
+  }
+  .workshopsidebar nav.sidebar.show {
+    max-height: 500px;
+    overflow-y: auto;
+    margin-top: 0px;
+  }
+  }
+  
+  
