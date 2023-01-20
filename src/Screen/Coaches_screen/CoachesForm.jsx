@@ -1,7 +1,5 @@
 import React from "react";
 import "./CoachesForm.css";
-// import Header from "../Header/Homepage_header";
-// import Footer from "../Footer/Footer";
 import Form from "react-bootstrap/Form";
 import {
   json,
@@ -14,9 +12,7 @@ import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import { useEffect } from "react";
 import { FaCalendarAlt } from "react-icons/fa";
-// import { endpoints } from "../services/endpoints";
 import Spinner from "react-bootstrap/Spinner";
-// import Homepage_header from "../Header/Homepage_header";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -26,7 +22,6 @@ import { AiFillMinusCircle } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import "../../../src/fonts/Inter-Bold.ttf";
 import "../../../src/fonts/Inter-Regular.ttf";
-// import { TagsInput } from "react-tag-input-component";
 import { CgAttachment } from "react-icons/cg";
 import { BiCurrentLocation } from "react-icons/bi";
 import educationLogo from "../../assets/Images/educationLogo.png";
@@ -36,65 +31,258 @@ import TimeKeeper from "react-timekeeper";
 import { BsPlusCircleFill } from "react-icons/bs";
 import Week_days from "../../Component/DaySelection/Week_days";
 import Month_days from "../../Component/DaySelection/Month_days";
-import $, { fn, uniqueSort } from "jquery";
+import $, { fn, timers, uniqueSort } from "jquery";
 import Homepage_header from "../../Component/Header/Homepage_header";
 import Footer from "../../Component/Footer/Footer";
 import CoachesPreview from "../../Component/Modal/CoachesPreview/CoachesPreview";
-// import PreviewResumeModal from "../Modal/PreviewResumeModal/PreviewResumeModal";
+import { useTab } from "@mui/base";
+import { sizeHeight } from "@mui/system";
+import { BsFillCalendarDateFill } from "react-icons/bs";
+import CustomCalendar from "../../Component/Calendar/CustomCalendar";
+import { NavItem } from "react-bootstrap";
+import moment from "moment";
+
 const CoachesForm = () => {
   const [coachesPreview, setCoachesPreview] = useState(false);
   const [opencoachesPreview, setOpenCoachesPreview] = useState(false);
 
-  const [startTime, setStartTime] = useState("12:34pm");
-  const [showStartTime, setShowStartTime] = useState(false);
-  const [endTime, setEndTime] = useState("12:34pm");
-  const [showEndTime, setShowEndTime] = useState(false);
-  const [currentTime, setCurrentTime] = useState("");
-  const [currentTimeM, setCurrentTimeM] = useState("");
-  useEffect(() => {
-    // const myInterval = setInterval(() => {
-    //   setCurrentTime(new Date().toLocaleTimeString());
-    // }, 1000);
-    // return () => {
-    //   clearInterval(myInterval);
-    // }
-    // const slotTime= Date().getHours();
-    const h = new Date();
+  const [daysFormat, setDaysFormat] = useState("weekly");
+  const [isRepeated, setIsRepeated] = useState(false);
 
-    setCurrentTime(h.getHours());
-    const i = new Date();
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [isConfirm, setIsConfirm] = useState(false);
+  const [price, setPrice] = useState(0);
+  const [paid, setPaid] = useState(false);
+  const [category, setCategory] = useState("");
+  const [sessionType, setSessionType] = useState("");
 
-    // setCurrentTime(h.getHours());
-    setCurrentTimeM(i.getMinutes());
-    // setCurrentTime(new Date().getHours());
-  });
-  const [dayType, setDayType] = useState("days");
-  const [days, setDays] = useState([]);
-  const [timeSlots, setTimeSlots] = useState([]);
-  const [updateWeekDays, setUpdateWeekDays] = useState(false);
+  const [eventsToBeShown, setEventsToBeShown] = useState([]);
 
-  const addTimeSlot = (val) => {
-    let check = timeSlots.includes(val);
-    if (check) {
-      var checkIndex = timeSlots.indexOf(val);
-      timeSlots.splice(checkIndex, 1);
-      setTimeSlots(timeSlots);
+  const time = [
+    "01:00:00",
+    "02:00:00",
+    "03:00:00",
+    "04:00:00",
+    "05:00:00",
+    "06:00:00",
+    "07:00:00",
+    "08:00:00",
+    "09:00:00",
+    "10:00:00",
+    "11:00:00",
+    "12:00:00",
+    "13:00:00",
+    "14:00:00",
+    "15:00:00",
+    "16:00:00",
+    "17:00:00",
+    "18:00:00",
+    "19:00:00",
+    "20:00:00",
+    "21:00:00",
+    "22:00:00",
+    "23:00:00",
+    "24:00:00",
+  ];
+
+  // var allDays = [ "sun",
+  // "mon",
+  // "tue",
+  // "wed",
+  // "thr",
+  // "fri",
+  // "sat",]
+
+  var allDays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  const [selectedDays, setSelectedDays] = useState([]);
+
+  const handleSelectdDays = (day) => {
+    if (selectedDays.indexOf(day) == -1) {
+      setSelectedDays((itm) => {
+        return [...itm, day];
+      });
     } else {
-      timeSlots.push(val);
-      setTimeSlots(timeSlots);
+      var filterDays = selectedDays.filter((itm, ind) => {
+        return itm != day;
+      });
+      setSelectedDays(filterDays);
     }
-    setUpdateWeekDays(!updateWeekDays);
   };
 
-  const addDaySlot = (val) => {
-    let check = days.includes(val);
-    if (check) {
-      var checkIndex = days.indexOf(val);
-      days.splice(checkIndex, 1);
-      setDays(days);
+  var getDates = function (start, end) {
+    for (
+      var arr = [], dt = new Date(start);
+      dt <= new Date(end);
+      dt.setDate(dt.getDate() + 1)
+    ) {
+      arr.push(new Date(dt));
+    }
+    return arr;
+  };
+
+  // get all days of the month ;
+
+  const getDaysOfMonth = async (day) => {
+    var d = new Date();
+    var getTot = daysInMonth(d.getMonth(), d.getFullYear()); //Get total
+    var date = [];
+    for (var i = 1; i <= getTot; i++) {
+      //looping through days in month
+      var newDate = new Date(d.getFullYear(), d.getMonth(), i);
+      if (newDate.getDay() == day) {
+        date.push(newDate);
+      }
+    }
+
+    function daysInMonth(month, year) {
+      return new Date(year, month, 0).getDate();
+    }
+    return date;
+  };
+
+  // get selected dates of thee year ;
+
+  const buildDates = async (startDate, months) => {
+    return Array.from(
+      {
+        length: months,
+      },
+      function (_, i) {
+        var date = new Date(startDate.getTime());
+        var mnth = date.getMonth();
+        date.setMonth(mnth + i);
+        if (date.getMonth() !== (mnth + i) % 12) {
+          date.setDate(0);
+        }
+        return date;
+      }
+    );
+  };
+
+  const handleConfirmSlots = async () => {
+    
+    if (allDays.length != 0 && daysFormat === "weekly") {
+      toast("Please select start day", { type: "warning" });
+    } else if (startDate == "" && daysFormat === "monthly") {
+      toast("Please select start date", { type: "warning" });
+    } else if (endDate == "" && daysFormat === "monthly") {
+      toast("Please select end date", { type: "warning" });
+    } else if (startTime == "") {
+      toast("please select start time", { type: "warning" });
+    } else if (endTime == "") {
+      toast("Please select end time", { type: "warning" });
     } else {
-      days.push(val);
-      setDays(days);
+      setIsConfirm(true);
+      var events = [];
+
+      if (daysFormat === "weekly") {
+        var dateArray = [];
+        if (isRepeated) {
+          for (var i = 0; i < selectedDays.length; i++) {
+            var daysNum = allDays.indexOf(selectedDays[i]);
+            var dates = await getDaysOfMonth(daysNum);
+            dateArray.push(...dates);
+          }
+        } else {
+          for (var i = 0; i < selectedDays.length; i++) {
+            var daysNum = allDays.indexOf(selectedDays[i]);
+            var dates = await getDaysOfMonth(daysNum);
+            dates = dates[0];
+            dateArray.push(dates);
+          }
+        }
+
+        dateArray.map((itm) => {
+          var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
+          var month =
+            itm.getMonth() + 1 < 10
+              ? `0${itm.getMonth() + 1}`
+              : itm.getDate() + 1;
+          var year = itm.getFullYear();
+
+          var startDte = `${year}-${month}-${date}T${startTime}`;
+          var endDte = `${year}-${month}-${date}T${endTime}`;
+
+          var evnt = {
+            start: new Date(startDte),
+            end: new Date(endDte),
+            title: "Event 1",
+          };
+
+          events.push(evnt);
+        });
+        setEventsToBeShown(events);
+      } else if (daysFormat === "monthly") {
+        var dateArray = [];
+
+        if (isRepeated) {
+          var allDates = [];
+          var startMonth = new Date(startDate).getMonth();
+
+          var dates = await getDates(startDate, endDate);
+
+          for (var j = 0; j < dates.length; j++) {
+            var count = 11 - startMonth;
+            var date = await buildDates(dates[j], count);
+            allDates.push(...date);
+          }
+
+          allDates.map((itm) => {
+            var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
+            var month =
+              itm.getMonth() + 1 < 10
+                ? `0${itm.getMonth() + 1}`
+                : itm.getDate() + 1;
+            var year = itm.getFullYear();
+            var startDte = `${year}-${month}-${date}T${startTime}`;
+            var endDte = `${year}-${month}-${date}T${endTime}`;
+
+            var evnt = {
+              start: new Date(startDte),
+              end: new Date(endDte),
+              title: "Event 1",
+            };
+
+            events.push(evnt);
+          });
+          setEventsToBeShown(events);
+        } else {
+          var allDates = await getDates(startDate, endDate);
+
+          allDates.map((itm) => {
+            var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
+            var month =
+              itm.getMonth() + 1 < 10
+                ? `0${itm.getMonth() + 1}`
+                : itm.getDate() + 1;
+            var year = itm.getFullYear();
+            var startDte = `${year}-${month}-${date}T${startTime}`;
+            var endDte = `${year}-${month}-${date}T${endTime}`;
+
+            var evnt = {
+              start: new Date(startDte),
+              end: new Date(endDte),
+              title: "Event 1",
+            };
+
+            events.push(evnt);
+          });
+          setEventsToBeShown(events);
+        }
+      }
     }
   };
 
@@ -173,7 +361,7 @@ const CoachesForm = () => {
             <div className="col-12 col-md-6 col-lg-4 ">
               <div class="form-group">
                 <label htmlFor="takePhoto">Upload Img</label>
-                {/* <h5  class="form-control" htmlFor="takePhone">{uploadImg.name}</h5> */}
+
                 <input
                   type="file"
                   class="form-control"
@@ -306,42 +494,7 @@ const CoachesForm = () => {
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-lg-12 col-md-12 col-12">
-              <h5 className="heading_second">Extra Experience</h5>
-            </div>
-          </div>
-          <div className="row ">
-            <div className="col-12 col-md-12 col-lg-5 ">
-              <div class="form-group">
-                <label for="exampleInputPassword1">Role</label>
-                <input
-                  type="text"
-                  class="form-control "
-                  id="exampleInputPassword1"
-                  placeholder="Enter "
-                />
-              </div>
-              <div class="form-group ">
-                <label for="exampleInputPassword1">Type</label>
-                <input
-                  type="text"
-                  class="form-control "
-                  placeholder="choose Domain"
-                />
-              </div>
-            </div>
-            <div className="col-12 col-md-12 col-lg-7  ">
-              <label for="exampleInputPassword1">Description</label>
-              <div class="form-group domain_textarea">
-                <textarea
-                  type="text"
-                  class="form-control "
-                  placeholder="Enter some information related Domain and Industry"
-                />
-              </div>
-            </div>
-          </div>
+
           <hr className="studentcv_hr" />
           <div className="row">
             <div classname="col-12 col-md-6 col-lg-12  ">
@@ -357,7 +510,7 @@ const CoachesForm = () => {
           </div>
           <hr className="studentcv_hr" />
           <div className="row">
-            <div className="col-lg-4 col-md-6 col-12  ">
+            {/* <div className="col-lg-4 col-md-6 col-12  ">
               <div class="form-group">
                 <label for="exampleInputPassword1">Recommendation</label>
                 <input
@@ -366,230 +519,317 @@ const CoachesForm = () => {
                   placeholder="Enter here"
                 />
               </div>
+            </div> */}
+            <div className="col-12 col-md-6 col-lg-4 ">
+              <div class="form-group">
+                <label for="exampleInputPassword1">Category</label>
+                <select
+                  class="form-select end-year "
+                  aria-label="Default select example"
+                  onChange={(e) => setCategory(e.target.value)}
+                >
+                  <option value="">Choose</option>
+                  <option value="IT">IT</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Civil">Civil</option>
+                </select>
+              </div>
             </div>
 
-            <div className="col-lg-4 col-md-6 col-12  ">
-              <div class="form-group">
-                <label for="exampleInputPassword1">Recommendation Email</label>
+            {category != "" && (
+              <div className="col-12 col-md-6 col-lg-4 ">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">SubCategory</label>
+                  <select
+                    class="form-select end-year "
+                    aria-label="Default select example"
+                  >
+                    <option>Choose</option>
+                    <option value="software">software</option>
+                    <option value="hardware">hardware</option>
+                    <option value="cloud">cloud</option>
+                  </select>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="formoutline_studentcv coachFormSt">
+          <div className="col-lg-12 col-md-12 col-12">
+            <h5 className="heading_second">Slot Availability</h5>
+          </div>
+
+          <div className="row">
+            <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center">
+              <input
+                type="radio"
+                id="weekly"
+                checked={daysFormat == "weekly"}
+                onChange={() => setDaysFormat("weekly")}
+              />
+              <label htmlFor="weekly">Weekly</label>
+            </div>
+            <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center">
+              <input
+                type="radio"
+                id="monthly"
+                checked={daysFormat == "monthly"}
+                onChange={() => setDaysFormat("monthly")}
+              />
+              <label htmlFor="monthly">Monthly</label>
+            </div>
+            <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center repeadtd">
+              <input
+                type="checkbox"
+                name=""
+                id="repeat"
+                onChange={() => setIsRepeated(!isRepeated)}
+                checked={isRepeated}
+              />
+              <label htmlFor="repead">Repeated</label>
+            </div>
+          </div>
+
+          {daysFormat === "weekly" && (
+            <div className="row week_days">
+              <h5
+                onClick={() => handleSelectdDays("Sunday")}
+                style={{
+                  background:
+                    selectedDays.indexOf("Sunday") != -1 ? "#2c6959" : "white",
+                  color:
+                    selectedDays.indexOf("Sunday") != -1 ? "white" : "grey",
+                }}
+              >
+                S
+              </h5>
+              <h5
+                onClick={() => handleSelectdDays("Monday")}
+                style={{
+                  background:
+                    selectedDays.indexOf("Monday") != -1 ? "#2c6959" : "white",
+                  color:
+                    selectedDays.indexOf("Monday") != -1 ? "white" : "grey",
+                }}
+              >
+                M
+              </h5>
+              <h5
+                onClick={() => handleSelectdDays("Tuesday")}
+                style={{
+                  background:
+                    selectedDays.indexOf("Tuesday") != -1 ? "#2c6959" : "white",
+                  color:
+                    selectedDays.indexOf("Tuesday") != -1 ? "white" : "grey",
+                }}
+              >
+                T
+              </h5>
+              <h5
+                onClick={() => handleSelectdDays("Wednesday")}
+                style={{
+                  background:
+                    selectedDays.indexOf("Wednesday") != -1
+                      ? "#2c6959"
+                      : "white",
+                  color:
+                    selectedDays.indexOf("Wednesday") != -1 ? "white" : "grey",
+                }}
+              >
+                W
+              </h5>
+              <h5
+                onClick={() => handleSelectdDays("Thursday")}
+                style={{
+                  background:
+                    selectedDays.indexOf("Thursday") != -1
+                      ? "#2c6959"
+                      : "white",
+                  color:
+                    selectedDays.indexOf("Thursday") != -1 ? "white" : "grey",
+                }}
+              >
+                T
+              </h5>
+              <h5
+                onClick={() => handleSelectdDays("Friday")}
+                style={{
+                  background:
+                    selectedDays.indexOf("Friday") != -1 ? "#2c6959" : "white",
+                  color:
+                    selectedDays.indexOf("Friday") != -1 ? "white" : "grey",
+                }}
+              >
+                F
+              </h5>
+              <h5
+                onClick={() => handleSelectdDays("Saturday")}
+                style={{
+                  background:
+                    selectedDays.indexOf("Saturday") != -1
+                      ? "#2c6959"
+                      : "white",
+                  color:
+                    selectedDays.indexOf("Saturday") != -1 ? "white" : "grey",
+                }}
+              >
+                S
+              </h5>
+            </div>
+          )}
+
+          {daysFormat === "monthly" && (
+            <div className="month_calendar d-flex ">
+              <div className="col-lg-2 col-md-3 col-6 ">
+                <h6>Start Date</h6>
                 <input
-                  type="email"
-                  class="form-control "
-                  placeholder="Enter here"
+                  type="date"
+                  onChange={(e) => setStartDate(e.target.value)}
+                  value={startDate}
+                />
+              </div>
+              <div className="col-lg-2 col-md-3 col-6 ">
+                <h6>End Date</h6>
+                <input
+                  type="date"
+                  onChange={(e) => setEndDate(e.target.value)}
+                  value={endDate}
                 />
               </div>
             </div>
-          </div>
-        </div>
-        <div className="formoutline_studentcv">
-          <div className="row">
-            <div className="col-lg-12 col-md-12 col-12">
-              <h5 className="heading_second">Slot Availability</h5>
+          )}
+          <div className="time_slots d-flex ">
+            <div className="col-lg-2 col-md-3 col-6 ">
+              <h6>Start Time</h6>
+              <select
+                name=""
+                id=""
+                onChange={(e) => setStartTime(e.target.value)}
+              >
+                {time.map((itm, ind) => {
+                  return (
+                    <>
+                      <option value={itm}>{itm}</option>
+                    </>
+                  );
+                })}
+              </select>
+            </div>
+            <div className="col-lg-2 col-md-3 col-6 ">
+              <h6>End Time</h6>
+              <select
+                name=""
+                id=""
+                onChange={(e) => setEndTime(e.target.value)}
+              >
+                {time.map((itm, ind) => {
+                  return (
+                    <>
+                      <option value={itm}>{itm}</option>
+                    </>
+                  );
+                })}
+              </select>
             </div>
           </div>
-          <div className="row">
-            <div className="col-lg-6 col-md-6 col-12">
-              <div className="row">
-                <div className="col-lg-6 col-md-6 col-12">
-                  <span className="d-flex coachesFormStart">
-                    <h6 className=""> Start Time</h6>
+          <div className="caledarIcons" onClick={() => setShowCalendar(true)}>
+            <BsFillCalendarDateFill color="#2c6959" size={32} />
+          </div>
 
-                    <h6 className="coachshowCurrent">{startTime}</h6>
-                    {!showStartTime && (
-                      <BsPlusCircleFill
-                        id="coachFormstimebutton"
-                        onClick={() => setShowStartTime(true)}
-                      />
-                    )}
-                  </span>
-                  {showStartTime && (
-                    <TimeKeeper
-                      time={startTime}
-                      onChange={(newTime) => setStartTime(newTime.formatted12)}
-                      onDoneClick={() => setShowStartTime(false)}
-                      switchToMinuteOnHourSelect
-                    />
-                  )}
-                </div>
+          <div className="confirmBtn">
+            <button
+              className={isConfirm ? "activeCnfBtn" : "inActiveCnfBtn"}
+              onClick={handleConfirmSlots}
+            >
+              Confirm
+            </button>
+          </div>
 
-                <div className="col-lg-6 col-md-12 col-12">
-                  <span className="d-flex align-item:center coachesFormStart">
-                    <h6 className=""> End Time</h6>
-                    <h6 className="coachshowCurrent">{endTime}</h6>
-                    {!showEndTime && (
-                      <BsPlusCircleFill
-                        id="coachFormstimebutton"
-                        onClick={() => setShowEndTime(true)}
-                      />
-                    )}
-                  </span>
-                  {showEndTime && (
-                    <TimeKeeper
-                      time={endTime}
-                      onChange={(newTime) => setEndTime(newTime.formatted12)}
-                      onDoneClick={() => setShowEndTime(false)}
-                      switchToMinuteOnHourSelect
-                    />
-                  )}
-                </div>
+          {/* here adding the fees structure */}
+
+          <div className="eventForm_price">
+            <div>
+              <div class="eventForm_paid">
+                <input
+                  type="radio"
+                  id="a25"
+                  name="check-substitution-2"
+                  onClick={() => setPaid(false)}
+                />
+                <label
+                  for="a25"
+                  className={`btnfree ${
+                    !paid ? "btn-primary" : "btn-default"
+                  } `}
+                >
+                  Free
+                </label>
               </div>
-              <div className="row">
-                {/* <div className="col-lg-12 col-md-12 col-12">
-                  <h5>Price of Workshop</h5>
-                  </div> */}
-                  <div classname="col-lg-6 col-md-6 col-12">
-                    <div className="eventForm_price">
-                      <div class="coachesFormpriceBox ">
-                        <input type="radio" name="check-substitution-2" />
-                        <label className="coachesFormPaid">Free</label>
-                      </div>
-                      <div className="coachesFormpriceBox  freepaid">
-                        <input type="radio" name="check-substitution-2" />
-                        <label className="coachesFormPaid">Paid</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div classname="col-lg-6 col-md-6 col-12 d-flex">
-                  
-              <div class="form-check">
+              <div className="eventForm_paid freepaid">
+                <input
+                  type="radio"
+                  id="a50"
+                  name="check-substitution-2"
+                  onClick={() => setPaid(true)}
+                />
+                <label
+                  for="a50"
+                  className={`btnfree ${paid ? "btn-primary" : "btn-default"} `}
+                >
+                  Paid
+                </label>
+              </div>
+            </div>
+            <div className="d-flex">
+              <div class="form-check" style={{ marginLeft: "25px" }}>
                 <input
                   class="form-check-input"
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault2"
+                  checked={sessionType == "hourly"}
+                  onChange={() => setSessionType("hourly")}
                 />
                 <label
-                  className="form-check-label textsession CoachesFormDays"
+                  class="form-check-label  textsession"
                   for="flexRadioDefault2"
                 >
                   By Hours
                 </label>
               </div>
 
-              <div class="form-check">
+              <div class="form-check" style={{ marginLeft: "25px" }}>
                 <input
                   class="form-check-input"
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault3"
+                  checked={sessionType == "sessional"}
+                  onChange={() => setSessionType("sessional")}
                 />
                 <label
-                  class="form-check-label textsession CoachesFormDays"
+                  class="form-check-label textsession"
                   for="flexRadioDefault3"
                 >
                   By Session
                 </label>
               </div>
-                     </div>
-
-                     <div className="col-lg-12 col-md-6 col-12">
-              <div class="coachesFormQuantityField">
-                <div
-                  // onClick={() => setPrice(parseInt(price) - 1)}
-                  title="Azalt"
-                  className="incBtn quatityButton"
-                >
-                  -
-                </div>
-                {/* <div class="number">0</div> */}
-                <input
-                  class="form-text-input "
-                  type="number"
-                  name="flexRadioDefault"
-                  id="flexRadioDefault1"
-                  className=" quatityButton"
-                />
-                <div title="Arrtır" className="incBtn">
-                  +
-                </div>
-              
-            </div>
-                  
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6 col-md-6 col-12">
-              <div className=" col-12 col-md-12 col-lg-10 coachesmodal_availableDays">
-                <h5 style={{ paddingRight: "10px" }}> Available Days</h5>
-                <div class="form-check ">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault4"
-                    id="flexRadioDefault4"
-                    checked={dayType === "days" ? true : false}
-                    onChange={(e) => {
-                      setDayType("days");
-                      setTimeSlots([]);
-                      setDays([]);
-                    }}
-                  />
-                  <label
-                    class="form-check-label"
-                    for="flexRadioDefault4"
-                    className="CoachesFormDays"
-                  >
-                    Days
-                  </label>
-                </div>
-                <div class="form-check ">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault4"
-                    id="flexRadioDefault5"
-                    checked={dayType === "date" ? true : false}
-                    onChange={(e) => {
-                      setDayType("date");
-                      setTimeSlots([]);
-                      setDays([]);
-                    }}
-                  />
-                  <label
-                    class="form-check-label"
-                    for="flexRadioDefault5"
-                    className="CoachesFormDays"
-                  >
-                    Date
-                  </label>
-                </div>
-              </div>
-              <div className="col-8 col-md-8 col-lg-6 week_outbox">
-                <div className="coachForm_weekdays">
-                  <h5>Week</h5> <FaCalendarAlt id="calender_icon" />
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    name="flexRadiDefault7"
-                    id="flexRadioDefault7"
-                  />
-                  <label
-                    class="form-check-label"
-                    for="flexRadioDefault7"
-                    className="CoachesFormDays"
-                  >
-                    Repeated
-                  </label>
-                </div>
-              </div>
-
-              <div className="eventForm_weekDays col-lg-10 col-md-12 col-12">
-                {dayType === "days" ? (
-                  updateWeekDays ? (
-                    <Week_days timeSlots={days} addTimeSlot={addDaySlot} />
-                  ) : (
-                    <Week_days timeSlots={days} addTimeSlot={addDaySlot} />
-                  )
-                ) : (
-                  <Month_days timeSlots={timeSlots} addTimeSlot={addTimeSlot} />
-                )}
-              </div>
             </div>
           </div>
+          {/* here we aare adding payment div */}
 
-         
+          <div className="col-lg-4 col-md-6 col-12 my-3 ">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Price in ($)</label>
+              <input
+                type="number"
+                class="form-control py-4"
+                placeholder="Enter here"
+              />
+            </div>
+          </div>
         </div>
+
         <div className="row">
           <div className="col-lg-6"></div>
           <div className="col-lg-3 col-md-3 col-12">
@@ -603,17 +843,17 @@ const CoachesForm = () => {
               Preview
             </button>
           </div>
-
-          {/* <div className="row">
-          <h1>{currentTime}</h1>
-          <h1>{currentTimeM}</h1>
-        </div> */}
         </div>
       </div>
       <CoachesPreview
         show={coachesPreview}
-        onHide={() => setCoachesPreview(false)}/>
-      
+        onHide={() => setCoachesPreview(false)}
+      />
+      <CustomCalendar
+        showCalendar={showCalendar}
+        setShowCalendar={setShowCalendar}
+        eventsToBeShown={eventsToBeShown}
+      />
       <Footer />
     </>
   );

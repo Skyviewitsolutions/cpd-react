@@ -99,7 +99,7 @@ const Signupform = (props) => {
         <div className="col-lg-4 col-md-6 col-12 signUpChoice">
           <select class="form-select" onChange={(e)=>setUserType(e.target.value)}>
             <option value="1">Student</option>
-            <option value="2">Speaker</option>
+            <option value="2">Speaker / Coach</option>
             <option value="3">Recruiter</option>
             <option value="4">University</option>
           </select>

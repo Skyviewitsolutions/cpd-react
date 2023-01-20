@@ -157,23 +157,23 @@ const Student_cv = () => {
       formData.append("nationality", nationality);
       formData.append("dob", dob);
       formData.append("gender", gender);
-      formData.append("university_name", JSON.stringify(school));
-      formData.append("start_year_educational", JSON.stringify(startYear));
-      formData.append("end_year_educational", JSON.stringify(endYear));
-      formData.append("program", JSON.stringify(program));
-      formData.append("field_of_study", JSON.stringify(fieldStudy));
-      formData.append("job_title", JSON.stringify(jobTitle));
-      formData.append("employment_type", JSON.stringify(employmentType));
-      formData.append("company", JSON.stringify(company));
-      formData.append("start_year_employment", JSON.stringify(jobStartYear));
-      formData.append("end_year_employment", JSON.stringify(jobEndYear));
-      formData.append("domain", JSON.stringify(jobDomain));
-      formData.append("industry", JSON.stringify(jobIndustry));
-      formData.append("isCurrent", JSON.stringify(currentJob));
-      formData.append("skills", JSON.stringify(skills));
+      formData.append("university_name", school);
+      formData.append("start_year_educational", startYear);
+      formData.append("end_year_educational", endYear);
+      formData.append("program", program);
+      formData.append("field_of_study", fieldStudy);
+      formData.append("job_title", jobTitle);
+      formData.append("employment_type", employmentType);
+      formData.append("company", company);
+      formData.append("start_year_employment", jobStartYear);
+      formData.append("end_year_employment", jobEndYear);
+      formData.append("domain", jobDomain);
+      formData.append("industry", jobIndustry);
+      formData.append("isCurrent", currentJob);
+      formData.append("skills", skills);
       formData.append("role", xtraRole);
       formData.append("type", xtraDomain);
-      formData.append("hobbies", JSON.stringify(hobbies));
+      formData.append("hobbies", hobbies);
       formData.append("description", description);
       formData.append("recommendation", recommendation);
       formData.append("mentor", mentorName);
@@ -186,7 +186,6 @@ const Student_cv = () => {
       formData.append("years_achieve", targetYear);
       formData.append("avtar_file", uploadImg);
 
-      console.log(uploadImg , "uploadImg");
       const headers = {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
@@ -218,7 +217,7 @@ const Student_cv = () => {
   };
 
   const handleImage = (e) => {
-   
+
     var imgFiles = e.target.files[0];
     console.log(imgFiles , "this is the event here");
     setUploadImg(imgFiles);
@@ -332,22 +331,22 @@ const Student_cv = () => {
               setDob(dobs);
               setGender(usersData.gender);
           
-              setSchool(JSON.parse(usersData.university_name));
-              setProgram(JSON.parse(usersData.program));
-              setStartYear(JSON.parse(usersData.start_year_educational));
-              setEndYear(JSON.parse(usersData.end_year_educational));
-              setFieldStudy(JSON.parse(usersData.field_of_study));
-              setJobIndustry(JSON.parse(usersData.industry));
-              setCompany(JSON.parse(usersData.company));
-              setJobTitle(JSON.parse(usersData.job_title));
-              setEmploymentType(JSON.parse(usersData.employment_type));
-              setJobStartYear(JSON.parse(usersData.start_year_employment));
-              setJobEndYear(JSON.parse(usersData.end_year_employment));
-              setJobDomain(JSON.parse(usersData.domain));
-              setSkills(JSON.parse(usersData.skills));
+              setSchool(usersData.university_name);
+              setProgram(usersData.program);
+              setStartYear(usersData.start_year_educational);
+              setEndYear(usersData.end_year_educational);
+              setFieldStudy(usersData.field_of_study);
+              setJobIndustry(usersData.industry);
+              setCompany(usersData.company);
+              setJobTitle(usersData.job_title);
+              setEmploymentType(usersData.employment_type);
+              setJobStartYear(usersData.start_year_employment);
+              setJobEndYear(usersData.end_year_employment);
+              setJobDomain(usersData.domain);
+              setSkills(usersData.skills);
               setXtraRole(usersData.role);
               setXtraDomain(usersData.type);
-              setHobbies(JSON.parse(usersData.hobbies));
+              setHobbies(usersData.hobbies);
               setRecommendation(usersData.recommendation);
               setRecommEmail(usersData.recommendation_email);
               setMentorName(usersData.mentor);
@@ -359,13 +358,11 @@ const Student_cv = () => {
               setTargetLocation(usersData.location);
               setTargetYear(usersData.years_achieve);
 
-             
-
-              const collegeName = JSON.parse(usersData.university_name);
-              const allProgram = JSON.parse(usersData.program);
-              const startYearr = JSON.parse(usersData.start_year_educational);
-              const endYearr = JSON.parse(usersData.end_year_educational);
-              const fieldStudy = JSON.parse(usersData.field_of_study);
+              const collegeName = usersData.university_name;
+              const allProgram = usersData.program;
+              const startYearr = usersData.start_year_educational;
+              const endYearr = usersData.end_year_educational;
+              const fieldStudy = usersData.field_of_study;
 
               // writing code for all college ;
 
@@ -381,21 +378,26 @@ const Student_cv = () => {
 
                 setAllCollege((itm) => {
                   return [...itm, collegeDta];
-                });
+                })
               }
-
               // writing code for all eductional part ;
 
-              const jbTitle = JSON.parse(usersData.job_title);
-              const employmentTpe = JSON.parse(usersData.employment_type);
-              const compny = JSON.parse(usersData.company);
-              const JbStrtYear = JSON.parse(usersData.start_year_employment);
-              const jbEndYear = JSON.parse(usersData.end_year_employment);
-              const jbDomain = JSON.parse(usersData.domain);
-              const jbIndustry = JSON.parse(usersData.industry);
-              const crntRole = JSON.parse(usersData.isCurrent);
+              const jbTitle = usersData.job_title;
+              const employmentTpe = usersData.employment_type;
+              const compny = usersData.company;
+              const JbStrtYear = usersData.start_year_employment;
+              const jbEndYear = usersData.end_year_employment;
+              const jbDomain = usersData.domain;
+              const jbIndustry = usersData.industry;
+              const crntRole = usersData.isCurrent;
+
+            
 
               for (var i = 0; i < jbTitle.length; i++) {
+
+                var endYear = jbEndYear[i];
+                var currentRole = endYear == new Date().getFullYear() ? "true" : "false"
+              
                 const jobDta = {
                   id: i,
                   jobTitle: jbTitle[i],
@@ -405,19 +407,18 @@ const Student_cv = () => {
                   domain: jbDomain[i],
                   industry: jbIndustry[i],
                   company: compny[i],
-                  crntRole: crntRole[i],
+                  crntRole: currentRole,
                 };
 
                 setAllExperience((itm) => {
                   return [...itm, jobDta];
                 });
+
               }
 
               var imgUrl = res.data.avtarPath + usersData.avtar
               ;
               setProfileImg(imgUrl)
-
-              console.log(imgUrl , "image url here")
 
               const fileName = "myFile.jpg";
 
@@ -429,6 +430,7 @@ const Student_cv = () => {
               });
             }
           }
+          
         }
       })
       .catch((err) => {
@@ -444,7 +446,7 @@ const Student_cv = () => {
       getUserCvData();
     }
    
-  }, []);
+  },[]);
 
   useEffect(() => {
     $(document).on("click", ".remove-field", function (e) {
@@ -484,23 +486,23 @@ const Student_cv = () => {
       formData.append("nationality", nationality);
       formData.append("dob", dob);
       formData.append("gender", gender);
-      formData.append("university_name", JSON.stringify(school));
-      formData.append("start_year_educational", JSON.stringify(startYear));
-      formData.append("end_year_educational", JSON.stringify(endYear));
-      formData.append("program", JSON.stringify(program));
-      formData.append("field_of_study", JSON.stringify(fieldStudy));
-      formData.append("job_title", JSON.stringify(jobTitle));
-      formData.append("employment_type", JSON.stringify(employmentType));
-      formData.append("company", JSON.stringify(company));
-      formData.append("start_year_employment", JSON.stringify(jobStartYear));
-      formData.append("end_year_employment", JSON.stringify(jobEndYear));
-      formData.append("domain", JSON.stringify(jobDomain));
-      formData.append("industry", JSON.stringify(jobIndustry));
-      formData.append("isCurrent", JSON.stringify(currentJob));
-      formData.append("skills", JSON.stringify(skills));
+      formData.append("university_name", school);
+      formData.append("start_year_educational", startYear);
+      formData.append("end_year_educational", endYear);
+      formData.append("program", program);
+      formData.append("field_of_study", fieldStudy);
+      formData.append("job_title", jobTitle);
+      formData.append("employment_type", employmentType);
+      formData.append("company", company);
+      formData.append("start_year_employment", jobStartYear);
+      formData.append("end_year_employment", jobEndYear);
+      formData.append("domain", jobDomain);
+      formData.append("industry", jobIndustry);
+      formData.append("isCurrent", currentJob);
+      formData.append("skills", skills);
       formData.append("role", xtraRole);
       formData.append("type", xtraDomain);
-      formData.append("hobbies", JSON.stringify(hobbies));
+      formData.append("hobbies", hobbies);
       formData.append("description", description);
       formData.append("recommendation", recommendation);
       formData.append("mentor", mentorName);

@@ -17,6 +17,7 @@ import { BsFillCalendarDateFill } from "react-icons/bs";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 
 const EventDetails = (props) => {
+  
   const location = useLocation();
 
   const [allCommunity, setAllCommunity] = useState([]);

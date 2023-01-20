@@ -62,7 +62,6 @@ function App() {
         <Route exact path="/myprofile_cv" element={<ProfileCv />} />
         <Route exact path="/create_Event_form" element={<Create_EventForm />} />
         <Route exact path="/create_community" element={<CreateCommunity />} />
-        
         <Route exact path="/availableResource" element={<AvailableResource /> } />
         <Route exact path="/coachesForm" element={<CoachesForm /> } />
         {/* <Route exact path="/chat" element={<Chat />} /> */}
@@ -102,12 +101,9 @@ function App() {
         <Route exact path="/myCommunity" element={<MyCommunity />} />
         <Route exact path="/event_details" element={<EventDetails />} />
         {/* Coaches section */}
-        
-        {/* <Route exact Path="/coaches_form" element={<CoachesForm/>} /> */}
-       
+        <Route exact Path="/coaches_form" element={<CoachesForm/>} />
         {/* <Route exact path="/speaker_cv" element={<CoachesForm2/>} /> */}
         <Route exact path="/finalresume" element={<FinalResume />} />
-       
         {/* <Route exact path="/chathome" element={<ChatHome />} /> */}
         <Route exact path="/workshop_screen" element={<Workshop />} />
         <Route exact path="/coaches_screen" element={<Coaches_homeScreen />} />

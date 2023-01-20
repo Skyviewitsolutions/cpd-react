@@ -118,7 +118,12 @@ const Homepage_header = () => {
   };
 
   const handleResume = () => {
-    navigate("/resume");
+    if(userDetails.user_type == 1){
+      navigate("/resume");
+    }
+    else if(userDetails.user_type == 2){
+      navigate("/coachesForm")
+    }
   };
 
   return (
@@ -144,7 +149,7 @@ const Homepage_header = () => {
                 <img src={home} alt="" className="nav-icons" />
                 <h6>Home</h6>
               </Nav.Link>
-              <Nav.Link className="nav_img working" onClick={() => navigate("/resume")}>
+              <Nav.Link className="nav_img working" onClick={() => handleResume()}>
                 <BsFillFileEarmarkPostFill className="nav-icons" size={22} style={{marginBottom : "5px"  , marginTop : "4px"}} color="#2c6959"/>
                 <h6>My Resume</h6>
               </Nav.Link>

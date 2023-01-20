@@ -12,18 +12,15 @@ import { InlineShareButtons } from "sharethis-reactjs";
 
 const Event_cards = (props) => {
 
-  const { data, key, picPath } = props;
+  const { data, key, picPath } = props ;
   const image = picPath + data.event_photo;
   const navigate = useNavigate();
 
-  var days = data?.days;
-  days = days.replaceAll('"', "");
-  days = days.split(",");
+  var days = data?.availability_days;
+  // days = days.replaceAll('"', "");
+  // days = days.split(",");
 
   var timeslots = data?.timeslots;
-
-  console.log(data ,"data here");
-
 
   return (
     <>

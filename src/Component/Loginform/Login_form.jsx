@@ -33,7 +33,6 @@ const Login_form = (props) => {
   const loginUrl = "https://admin.cpdedu.com/api/v1/login";
 
   const submit = () => {
-
     if (email === "") {
       setErrorMsg({ email: "Please enter valid email" });
     } else if (!validator.isEmail(email)) {
@@ -44,13 +43,7 @@ const Login_form = (props) => {
       setErrorMsg({ password: "Password must be greater then 3 digit " });
     } else {
       setErrorMsg("");
-      // setPasswordError("");
-
-      // const data = {
-      //   email: email,
-      //   password: password,
-      // };
-
+      
       const formData = new FormData();
 
       formData.append("email", email);
@@ -64,6 +57,7 @@ const Login_form = (props) => {
           setLoading(false);
           if (res.data.result === true) {
             const user_data = res.data.user;
+            console.log(user_data, "user_data here");
             const token = res.data.access_token;
             localStorage.setItem("token", token);
             localStorage.setItem("users", JSON.stringify(user_data));
@@ -71,11 +65,16 @@ const Login_form = (props) => {
             toast("Login successfully", { type: "success" });
             setLoading(false);
             const isCvUploaded = res.data.user?.isCvAvailable;
-            localStorage.setItem("isCvUploaded" , isCvUploaded)
+            localStorage.setItem("isCvUploaded", isCvUploaded);
             if (isCvUploaded) {
               navigate("/");
             } else if (!isCvUploaded) {
-              navigate("/resume");
+              const userType = user_data.user_type;
+              if (userType == 2) {
+                navigate("/coachesForm");
+              } else if (userType == 1) {
+                navigate("/resume");
+              }
             }
           } else if (res.data.result) {
             toast(res.data.message, { type: "error" });

@@ -173,6 +173,7 @@ import '../fonts/Inter-SemiBold.ttf';
 import { HiSearch } from "react-icons/hi";
 import { FaPlusCircle } from "react-icons/fa";
 
+
 const Networking = () => {
 
   const navigate = useNavigate("");
@@ -212,6 +213,7 @@ const Networking = () => {
   useEffect(() => {
     getAllEvents(getAllEvents);
   }, []);
+  
   return (
     <>
       <Homepage_header />
@@ -265,6 +267,7 @@ const Networking = () => {
               {showAllEvents
                 ? allEvent.length != 0 &&
                   allEvent.map((itm, index) => {
+                    console.log(itm , "itm here");
                     return (
                       <>
                         <div className="col-sm-12 col-md-6 col-lg-4 ">

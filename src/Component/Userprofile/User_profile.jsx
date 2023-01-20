@@ -47,19 +47,19 @@ const User_profile = () => {
           const val = res.data.data;
           console.log(val, "value here");
 
-          var universityName = JSON.parse(val.university_name);
+          var universityName = val.university_name;
           var universityName = universityName[0];
           setUniversity_name(universityName);
 
-          var industryName = JSON.parse(val.industry);
+          var industryName = val.industry;
           var industryName = industryName[0];
           setIndustry(industryName);
 
-          var domainn = JSON.parse(val.domain);
+          var domainn = val.domain;
           var domainn = domainn[0];
           setDomain(domainn);
 
-          var skills = JSON.parse(val.skills);
+          var skills = val.skills;
           setAllSkills(skills);
 
           setUsersData(val);
@@ -69,8 +69,8 @@ const User_profile = () => {
 
           setUserImg(userImg);
 
-          var startYearEmployment = JSON.parse(val.start_year_educational);
-          var endYearEmployment = JSON.parse(val.end_year_employment);
+          var startYearEmployment = val.start_year_educational;
+          var endYearEmployment = val.end_year_employment;
 
           if (startYearEmployment.length != 0) {
             var startYearEmployment = startYearEmployment[0];

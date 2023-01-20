@@ -62,7 +62,7 @@ const CreateCommunity = () => {
     setCriteriaToJoin(selectedCommunityData.criteria);
     setDiscription(selectedCommunityData.description);
     setSubType(selectedCommunityData.sub_type);
-    // setTags(JSON.parse(selectedCommunityData.tag));
+    setTags(selectedCommunityData.tag);
     setVisibility(selectedCommunityData.visibility);
     setSelectedCommunityId(selectedCommunityData._id)
 
@@ -136,7 +136,7 @@ const CreateCommunity = () => {
       formData.append("visibility", visibility);
       formData.append("community_type", communityType);
       formData.append("sub_type", subType);
-      formData.append("tag", JSON.stringify(tags));
+      formData.append("tag", tags);
       const headers = {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
@@ -198,7 +198,7 @@ const CreateCommunity = () => {
       formData.append("visibility", visibility);
       formData.append("community_type", communityType);
       formData.append("sub_type", subType);
-      formData.append("tag", JSON.stringify(tags));
+      formData.append("tag", tags);
       const headers = {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
