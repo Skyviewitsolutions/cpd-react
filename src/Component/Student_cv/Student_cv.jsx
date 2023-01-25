@@ -34,9 +34,7 @@ import { TagsInput } from "react-tag-input-component";
 import $, { fn, uniqueSort } from "jquery";
 import PreviewResumeModal from "../Modal/PreviewResumeModal/PreviewResumeModal";
 
-
 const Student_cv = () => {
-
   const navigate = useNavigate("");
   const location = useLocation("");
 
@@ -96,7 +94,7 @@ const Student_cv = () => {
   const [sltdExperienceIndex, setStldExperienceIndex] = useState(0);
   const [sltdIsCurrentJob, setSltdIsCurrentJob] = useState(false);
   const [currentJob, setCurrentJob] = useState([]);
-  const [profileImg , setProfileImg] = useState("")
+  const [profileImg, setProfileImg] = useState("");
 
   // creating extra experience useState ;
 
@@ -140,15 +138,15 @@ const Student_cv = () => {
     } else if (contact === "") {
       toast("Please enter contact", { type: "warning" });
       contRef.current.focus();
-    // } else if (nationality === "") {
-    //   toast("Please enter nationality", { type: "error" });
-    //   nationalRef.current.focus();
-    // } else if (dob === "") {
-    //   toast("Please enter DOB", { type: "warning" });
-    //   dob.current.focus();
-    // } else if (gender === "") {
-    //   toast("Please enter gender", { type: "warning" });
-    //   genderRef.current.focus();
+      // } else if (nationality === "") {
+      //   toast("Please enter nationality", { type: "error" });
+      //   nationalRef.current.focus();
+      // } else if (dob === "") {
+      //   toast("Please enter DOB", { type: "warning" });
+      //   dob.current.focus();
+      // } else if (gender === "") {
+      //   toast("Please enter gender", { type: "warning" });
+      //   genderRef.current.focus();
     } else {
       const formData = new FormData();
       formData.append("first_name", name);
@@ -199,9 +197,9 @@ const Student_cv = () => {
           setLoading(false);
           if (res.data.result === true) {
             toast("Profile created successfully", { type: "success" });
-            setOpenPreviewModal(false)
-            localStorage.setItem("isCvUploaded" , true)
-            getUserCvData()
+            setOpenPreviewModal(false);
+            localStorage.setItem("isCvUploaded", true);
+            getUserCvData();
           }
         })
         .catch((err) => {
@@ -217,11 +215,10 @@ const Student_cv = () => {
   };
 
   const handleImage = (e) => {
-
     var imgFiles = e.target.files[0];
-    console.log(imgFiles , "this is the event here");
+    console.log(imgFiles, "this is the event here");
     setUploadImg(imgFiles);
-    setProfileImg(URL.createObjectURL(imgFiles))
+    setProfileImg(URL.createObjectURL(imgFiles));
   };
 
   const domainUrl = "https://admin.cpdedu.com/api/v1/list-domain";
@@ -268,7 +265,6 @@ const Student_cv = () => {
   };
 
   const getNationality = () => {
-    
     const headers = {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
@@ -299,7 +295,6 @@ const Student_cv = () => {
   // here we are writing code for getting the userscv details if it has some data ;
 
   const getUserCvData = () => {
-
     const url = endpoints.authentication.userProfile;
 
     const headers = {
@@ -310,18 +305,16 @@ const Student_cv = () => {
     axios
       .get(url, { headers: headers })
       .then((res) => {
-        console.log(res , "response")
+        console.log(res, "response");
         if (res.data.result === true) {
           const usersData = res.data.data;
-        
+
           if (usersData) {
-          
             setAllCollege([]);
             setAllExperience([]);
 
             if (Object.keys(usersData).length) {
-
-              console.log(usersData ,"usersdata here");
+              console.log(usersData, "usersdata here");
               setUpdate(true);
               setName(usersData.first_name);
               setLname(usersData.last_name);
@@ -330,7 +323,7 @@ const Student_cv = () => {
               var dobs = usersData.dob.replaceAll("/", "-");
               setDob(dobs);
               setGender(usersData.gender);
-          
+
               setSchool(usersData.university_name);
               setProgram(usersData.program);
               setStartYear(usersData.start_year_educational);
@@ -378,7 +371,7 @@ const Student_cv = () => {
 
                 setAllCollege((itm) => {
                   return [...itm, collegeDta];
-                })
+                });
               }
               // writing code for all eductional part ;
 
@@ -391,13 +384,11 @@ const Student_cv = () => {
               const jbIndustry = usersData.industry;
               const crntRole = usersData.isCurrent;
 
-            
-
               for (var i = 0; i < jbTitle.length; i++) {
-
                 var endYear = jbEndYear[i];
-                var currentRole = endYear == new Date().getFullYear() ? "true" : "false"
-              
+                var currentRole =
+                  endYear == new Date().getFullYear() ? "true" : "false";
+
                 const jobDta = {
                   id: i,
                   jobTitle: jbTitle[i],
@@ -413,12 +404,10 @@ const Student_cv = () => {
                 setAllExperience((itm) => {
                   return [...itm, jobDta];
                 });
-
               }
 
-              var imgUrl = res.data.avtarPath + usersData.avtar
-              ;
-              setProfileImg(imgUrl)
+              var imgUrl = res.data.avtarPath + usersData.avtar;
+              setProfileImg(imgUrl);
 
               const fileName = "myFile.jpg";
 
@@ -430,7 +419,6 @@ const Student_cv = () => {
               });
             }
           }
-          
         }
       })
       .catch((err) => {
@@ -440,13 +428,12 @@ const Student_cv = () => {
 
   useEffect(() => {
     const usersDetails = JSON.parse(localStorage.getItem("users"));
-    const isCvAvailable = localStorage.getItem("isCvUploaded")
-    
+    const isCvAvailable = localStorage.getItem("isCvUploaded");
+
     if (isCvAvailable == "true") {
       getUserCvData();
     }
-   
-  },[]);
+  }, []);
 
   useEffect(() => {
     $(document).on("click", ".remove-field", function (e) {
@@ -456,7 +443,6 @@ const Student_cv = () => {
   }, []);
 
   const updateProfile = () => {
-
     const url = endpoints.authentication.updateProfile;
 
     if (name === "") {
@@ -468,16 +454,6 @@ const Student_cv = () => {
     } else if (contact === "") {
       toast("Please enter contact", { type: "warning" });
       contRef.current.focus();
-    // } else if (nationality === "") {
-    //   toast("Please enter nationality", { type: "error" });
-    //   nationalRef.current.focus();
-    // } else if (dob === "") {
-    //   toast("Please enter DOB", { type: "warning" });
-    //   dob.current.focus();
-    // } else if (gender === "") {
-    //   toast("Please enter gender", { type: "warning" });
-    //   genderRef.current.focus();
-     
     } else {
       const formData = new FormData();
       formData.append("first_name", name);
@@ -514,9 +490,6 @@ const Student_cv = () => {
       formData.append("location", targetLocation);
       formData.append("years_achieve", targetYear);
       formData.append("avtar_file", uploadImg);
-     
-
-    
 
       const headers = {
         Authorization: `Bearer ${token}`,
@@ -936,15 +909,15 @@ const Student_cv = () => {
     } else if (contact === "") {
       toast("Please enter contact", { type: "warning" });
       contRef.current.focus();
-    // } else if (nationality === "") {
-    //   toast("Please enter nationality", { type: "error" });
-    //   nationalRef.current.focus();
-    // } else if (dob === "") {
-    //   toast("Please enter DOB", { type: "warning" });
-    //   dob.current.focus();
-    // } else if (gender === "") {
-    //   toast("Please enter gender", { type: "warning" });
-    //   genderRef.current.focus();
+      // } else if (nationality === "") {
+      //   toast("Please enter nationality", { type: "error" });
+      //   nationalRef.current.focus();
+      // } else if (dob === "") {
+      //   toast("Please enter DOB", { type: "warning" });
+      //   dob.current.focus();
+      // } else if (gender === "") {
+      //   toast("Please enter gender", { type: "warning" });
+      //   genderRef.current.focus();
     } else {
       var data = {
         firstName: name,
@@ -996,31 +969,29 @@ const Student_cv = () => {
     } else if (contact === "") {
       toast("Please enter contact", { type: "warning" });
       contRef.current.focus();
-    // } else if (nationality === "") {
-    //   toast("Please enter nationality", { type: "error" });
-    //   nationalRef.current.focus();
-    // } else if (dob === "") {
-    //   toast("Please enter DOB", { type: "warning" });
-    //   dob.current.focus();
-    // } else if (gender === "") {
-    //   toast("Please enter gender", { type: "warning" });
-    //   genderRef.current.focus();
+      // } else if (nationality === "") {
+      //   toast("Please enter nationality", { type: "error" });
+      //   nationalRef.current.focus();
+      // } else if (dob === "") {
+      //   toast("Please enter DOB", { type: "warning" });
+      //   dob.current.focus();
+      // } else if (gender === "") {
+      //   toast("Please enter gender", { type: "warning" });
+      //   genderRef.current.focus();
     } else {
       setOpenPreviewModal(true);
     }
   };
 
-  const handleSelectRole = () =>{
-    setSltdIsCurrentJob(!sltdIsCurrentJob)
-    if(sltdIsCurrentJob === false){
-      const day = new Date() 
+  const handleSelectRole = () => {
+    setSltdIsCurrentJob(!sltdIsCurrentJob);
+    if (sltdIsCurrentJob === false) {
+      const day = new Date();
       const year = day.getFullYear();
-      console.log(year , "yearss here");
-      setSltdJobEndYear(year)
+      console.log(year, "yearss here");
+      setSltdJobEndYear(year);
     }
-  }
-
-
+  };
 
   return (
     <>
@@ -1070,7 +1041,7 @@ const Student_cv = () => {
                 <div class="form-group">
                   <label for="mobile_code">Contact*</label>
                   <PhoneInput
-                      country='hk'
+                    country="hk"
                     value={contact}
                     ref={contRef}
                     onChange={(phone) => setContact(phone)}
@@ -1137,32 +1108,33 @@ const Student_cv = () => {
 
               <div className="col-12 col-md-6 col-lg-4 ">
                 <div class="form-group">
-                 
-                  {uploadImg ? (<>
-                    
-                    <label  htmlFor="takePhoto">Upload Img</label>
-                    <h5  class="form-control" htmlFor="takePhone">{uploadImg.name}</h5>
-                    <input
-                      type="file"
-                      class="form-control"
-                      placeholder="Enter here"
-                      accept="image/png, image/gif, image/jpeg"
-                      onChange={(e) => handleImage(e)}
-                      id="takePhoto"
-                      style={{display : "none"}}
-                    />
+                  {uploadImg ? (
+                    <>
+                      <label htmlFor="takePhoto">Upload Img</label>
+                      <h5 class="form-control" htmlFor="takePhone">
+                        {uploadImg.name}
+                      </h5>
+                      <input
+                        type="file"
+                        class="form-control"
+                        placeholder="Enter here"
+                        accept="image/png, image/gif, image/jpeg"
+                        onChange={(e) => handleImage(e)}
+                        id="takePhoto"
+                        style={{ display: "none" }}
+                      />
                     </>
                   ) : (
                     <>
-                    <label htmlFor="takePhoto">Upload Img</label>
-                    <input
-                      type="file"
-                      class="form-control"
-                      placeholder="Enter here"
-                      accept="image/png, image/gif, image/jpeg"
-                      onChange={(e) => handleImage(e)}
-                      id="takePhoto"
-                    />
+                      <label htmlFor="takePhoto">Upload Img</label>
+                      <input
+                        type="file"
+                        class="form-control"
+                        placeholder="Enter here"
+                        accept="image/png, image/gif, image/jpeg"
+                        onChange={(e) => handleImage(e)}
+                        id="takePhoto"
+                      />
                     </>
                   )}
                 </div>
@@ -1437,7 +1409,7 @@ const Student_cv = () => {
                     value={sltdJobStartYear}
                     onChange={(e) => {
                       var val = e.target.value;
-                      
+
                       if (sltdJobEndYear !== "" && val > sltdJobEndYear) {
                         toast("start year cannot be greater then end year", {
                           type: "warning",
@@ -1509,14 +1481,13 @@ const Student_cv = () => {
                     value={sltdDomain}
                     onChange={(e) => setSltdDomain(e.target.value)}
                   />
-                 
                 </div>
               </div>
 
               <div className="col-lg-4 col-md-6 col-12 ">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Industry</label>
-                  
+
                   <input
                     type="text"
                     class="form-control field"
@@ -1561,7 +1532,7 @@ const Student_cv = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="row">
               <div className="col-lg-12 col-md-12 col-12">
                 <h5 className="heading_second">Extra Experience</h5>
@@ -1678,7 +1649,6 @@ const Student_cv = () => {
                 </div>
               </div>
             </div>
-           
           </div>
 
           <div className="formoutline_studentcv">
@@ -1693,7 +1663,6 @@ const Student_cv = () => {
               <div className="col-lg-4 col-md-6 col-12 ">
                 <div class="form-group student_cv_search ">
                   <label for="exampleInputPassword1">I want</label>
-                  
 
                   <input
                     type="text"
@@ -1707,7 +1676,6 @@ const Student_cv = () => {
               <div className="col-lg-4 col-md-6 col-12">
                 <div class="form-group student_cv_search">
                   <label for="exampleInputPassword1">Domain</label>
-                 
 
                   <input
                     type="text"
@@ -1736,7 +1704,7 @@ const Student_cv = () => {
               <div className="col-lg-4 col-md-6 col-12">
                 <div class="form-group student_cv_search">
                   <label for="exampleInputPassword1">Location</label>
-                 
+
                   <input
                     type="text"
                     class="form-control "
@@ -1768,9 +1736,7 @@ const Student_cv = () => {
 
           <div className="row">
             <div className="col-12 col-md-12 col-lg-6 ">
-              <div className="StudentCv_attachFile flex-row">
-               
-              </div>
+              <div className="StudentCv_attachFile flex-row"></div>
             </div>
           </div>
         </div>

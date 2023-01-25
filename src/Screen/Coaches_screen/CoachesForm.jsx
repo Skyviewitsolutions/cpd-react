@@ -41,14 +41,18 @@ import { BsFillCalendarDateFill } from "react-icons/bs";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 import { NavItem } from "react-bootstrap";
 import moment from "moment";
+import { endpoints } from "../../Component/services/endpoints";
+import { getAcedemicYears } from "../../utils/getAcademicYear";
+import { allCountry } from "../../utils/allCountry";
+import SlotAsWorkShop from "../../Component/SlotAsWorkShop/SlotAsWorkShop";
+import SlotAsCoach from "../../Component/SlotAsCoach/SlotAsCoach"
 
-const CoachesForm = () => {
-  const [coachesPreview, setCoachesPreview] = useState(false);
+
+const CoachesForm =  () => {
+  
   const [opencoachesPreview, setOpenCoachesPreview] = useState(false);
-
   const [daysFormat, setDaysFormat] = useState("weekly");
   const [isRepeated, setIsRepeated] = useState(false);
-
   const [showCalendar, setShowCalendar] = useState(false);
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -57,10 +61,82 @@ const CoachesForm = () => {
   const [isConfirm, setIsConfirm] = useState(false);
   const [price, setPrice] = useState(0);
   const [paid, setPaid] = useState(false);
-  const [category, setCategory] = useState("");
   const [sessionType, setSessionType] = useState("");
-
+  const token = localStorage.getItem("token");
   const [eventsToBeShown, setEventsToBeShown] = useState([]);
+  const [allCategory, setAllCategory] = useState([]);
+  const [allSubCategory, setAllSubCategory] = useState([]);
+  const [coachesPreview, setCoachesPreview] = useState(false);
+  const [coachesTitle , setCoachesTitle] = useState("")
+  const [workShopTitle , setWorkShopTitle] = useState("");
+
+  var allDays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  const [selectedDays, setSelectedDays] = useState([]);
+
+  // creating useState for holding the form date ;
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+  const [nationality, setNationality] = useState("");
+  const [dob, setDob] = useState("");
+  const [gender, setGender] = useState("");
+  const [coachImg, setCoachImg] = useState(null);
+  const [experience, setExperience] = useState("");
+  const [startYear, setStartYear] = useState("");
+  const [endYear, setEndYear] = useState("");
+  const [currentRole, setCurrentRole] = useState("");
+  const [domain, setDomain] = useState("");
+  const [industry, setIndustry] = useState("");
+  const [skills, setSkills] = useState([]);
+  const [allNational, setAllNational] = useState([]);
+  const [category, setCategory] = useState("");
+  const [subCategory, setSubCategory] = useState("");
+
+  // creating state for the experience part ;
+
+  const [jobTitle, setJobTitle] = useState([]);
+  const [sltdJobTitle, setStldJobTitle] = useState("");
+  const [employmentType, setEmploymentType] = useState([]);
+  const [sltdEmploymentType, setSltdEmploymentType] = useState("");
+  const [company, setCompany] = useState([]);
+  const [sltdCompany, setSltdCompany] = useState("");
+  const [jobStartYear, setJobStartYear] = useState([]);
+  const [sltdJobStartYear, setSltdJobStartYear] = useState("");
+  const [jobEndYear, setJobEndYear] = useState([]);
+  const [sltdJobEndYear, setSltdJobEndYear] = useState("");
+  const [jobDomain, setJobDomain] = useState([]);
+  const [jobIndustry, setJobIndustry] = useState([]);
+  const [sltdDomain, setSltdDomain] = useState("");
+  const [sltdIndustry, setSltdIndustry] = useState("");
+  const [allExperience, setAllExperience] = useState([]);
+  const [updateExperience, setUpdateExperience] = useState(false);
+  const [crntJobRole, setCrntJobRole] = useState(false);
+  const [sltdExperienceIndex, setStldExperienceIndex] = useState(0);
+  const [sltdIsCurrentJob, setSltdIsCurrentJob] = useState(false);
+  const [currentJob, setCurrentJob] = useState([]);
+  const [profileImg, setProfileImg] = useState("");
+
+  // creating extra experience useState ;
+
+  const [xtraRole, setXtraRole] = useState("");
+  const [xtraDomain, setXtraDomain] = useState("");
+  const [hobbies, setHobbies] = useState([]);
+
+  // creating recomendation useState here ;
+
+  const [recommendation, setRecommendation] = useState("");
+  const [mentorName, setMentorName] = useState("");
+  const [coachName, setCoachName] = useState("");
+  const [recommEmail, setRecommEmail] = useState("");
 
   const time = [
     "01:00:00",
@@ -88,26 +164,6 @@ const CoachesForm = () => {
     "23:00:00",
     "24:00:00",
   ];
-
-  // var allDays = [ "sun",
-  // "mon",
-  // "tue",
-  // "wed",
-  // "thr",
-  // "fri",
-  // "sat",]
-
-  var allDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-  const [selectedDays, setSelectedDays] = useState([]);
 
   const handleSelectdDays = (day) => {
     if (selectedDays.indexOf(day) == -1) {
@@ -173,18 +229,18 @@ const CoachesForm = () => {
   };
 
   const handleConfirmSlots = async () => {
-    
-    if (allDays.length != 0 && daysFormat === "weekly") {
-      toast("Please select start day", { type: "warning" });
-    } else if (startDate == "" && daysFormat === "monthly") {
-      toast("Please select start date", { type: "warning" });
-    } else if (endDate == "" && daysFormat === "monthly") {
-      toast("Please select end date", { type: "warning" });
-    } else if (startTime == "") {
-      toast("please select start time", { type: "warning" });
-    } else if (endTime == "") {
-      toast("Please select end time", { type: "warning" });
-    } else {
+
+    // if (allDays.length != 0 && daysFormat === "weekly") {
+    //   toast("Please select start day", { type: "warning" });
+    // } else if (startDate == "" && daysFormat === "monthly") {
+    //   toast("Please select start date", { type: "warning" });
+    // } else if (endDate == "" && daysFormat === "monthly") {
+    //   toast("Please select end date", { type: "warning" });
+    // } else if (startTime == "") {
+    //   toast("please select start time", { type: "warning" });
+    // } else if (endTime == "") {
+    //   toast("Please select end time", { type: "warning" });
+    // } else {
       setIsConfirm(true);
       var events = [];
 
@@ -283,8 +339,359 @@ const CoachesForm = () => {
           setEventsToBeShown(events);
         }
       }
+    // }
+  };
+
+  const getAllSubCategory = (categoryId) =>{
+    const url = `${endpoints.coaches.getCoachSubCategory}?category_id=${categoryId}`;
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    console.log(url , "urr")
+
+    axios.get(url , {headers : headers})
+    .then((res) =>{
+      if(res.data.result){
+        const val = res.data.data;
+        setAllSubCategory(val)
+      }
+    })
+    .catch((err) => {
+      console.log(err , "this is the error here")
+    })
+  }
+
+  const handleCategorySelection = (categoryName) =>{
+  
+    var categoryId = allCategory.filter((category,ind) =>{
+      return category.title == categoryName
+    });
+    categoryId = categoryId[0]._id;
+    getAllSubCategory(categoryId)
+  }
+  
+
+  // writing code for form submission ;
+
+  const submitForm = () => {};
+
+  const addExperience = () => {
+    if (
+      sltdJobTitle == "" ||
+      sltdEmploymentType == "" ||
+      sltdJobStartYear == "" ||
+      sltdJobEndYear == "" ||
+      sltdDomain == "" ||
+      sltdIndustry == "" ||
+      sltdCompany == ""
+    ) {
+      toast("Please fill the experience details", { type: "warning" });
+    } else {
+      const jobDta = {
+        id: allExperience.length + 1,
+        jobTitle: sltdJobTitle,
+        employmentType: sltdEmploymentType,
+        startYear: sltdJobStartYear,
+        endYear: sltdJobEndYear,
+        domain: sltdDomain,
+        industry: sltdIndustry,
+        company: sltdCompany,
+        crntRole: crntJobRole,
+      };
+
+      setAllExperience((itm) => {
+        return [...itm, jobDta];
+      });
+
+      setJobIndustry((itm) => {
+        return [...itm, sltdIndustry];
+      });
+      setCompany((itm) => {
+        return [...itm, sltdCompany];
+      });
+      setJobTitle((itm) => {
+        return [...itm, sltdJobTitle];
+      });
+      setEmploymentType((itm) => {
+        return [...itm, sltdEmploymentType];
+      });
+      setJobStartYear((itm) => {
+        return [...itm, sltdJobStartYear];
+      });
+      setJobEndYear((itm) => {
+        return [...itm, sltdJobEndYear];
+      });
+      setJobDomain((itm) => {
+        return [...itm, sltdDomain];
+      });
+      setCurrentJob((itm) => {
+        return [...itm, sltdIsCurrentJob];
+      });
+
+      setSltdCompany("");
+      setSltdDomain("");
+      setSltdIndustry("");
+      setStldJobTitle("");
+      setSltdJobStartYear("");
+      setSltdJobEndYear("");
+      setSltdEmploymentType("");
+      setSltdIsCurrentJob(false);
+      setCrntJobRole(false);
     }
   };
+
+  const handleExperienceEdit = (data, ind) => {
+    setSltdCompany(company[ind]);
+    setSltdDomain(jobDomain[ind]);
+    setSltdIndustry(jobIndustry[ind]);
+    setStldJobTitle(jobTitle[ind]);
+    setSltdJobStartYear(jobStartYear[ind]);
+    setSltdJobEndYear(jobEndYear[ind]);
+    setSltdEmploymentType(employmentType[ind]);
+    setCrntJobRole(crntJobRole[ind]);
+    setUpdateExperience(true);
+    setStldExperienceIndex(ind);
+  };
+
+  const updateSelectedExperience = () => {
+    if (sltdJobTitle == "") {
+      toast("Job title is required", { type: "warning" });
+    } else if (sltdEmploymentType == "") {
+      toast("Employee Type is required", { type: "warning" });
+    } else if (sltdJobStartYear == "") {
+      toast("Start year is required", { type: "warning" });
+    } else if (sltdDomain == "") {
+      toast("Domain is required", { type: "warning" });
+    } else if (sltdIndustry == "") {
+      toast("Industry is required", { type: "warning" });
+    } else if (sltdCompany == "") {
+      toast("company is required", { type: "warning" });
+    } else {
+      var cmpny = company;
+      var dmain = jobDomain;
+      var indstry = jobIndustry;
+      var jobTitl = jobTitle;
+      var jobStrtYr = jobStartYear;
+      var jobEndYr = jobEndYear;
+      var employmntTyp = employmentType;
+      var isCrntJob = currentJob;
+
+      cmpny[sltdExperienceIndex] = sltdCompany;
+      dmain[sltdExperienceIndex] = sltdDomain;
+      indstry[sltdExperienceIndex] = sltdIndustry;
+      jobTitl[sltdExperienceIndex] = sltdJobTitle;
+      jobStrtYr[sltdExperienceIndex] = sltdJobStartYear;
+      jobEndYr[sltdExperienceIndex] = sltdJobEndYear;
+      employmntTyp[sltdExperienceIndex] = sltdEmploymentType;
+      isCrntJob[sltdExperienceIndex] = sltdIsCurrentJob;
+
+      setJobDomain(dmain);
+      setJobIndustry(indstry);
+      setCompany(cmpny);
+      setJobTitle(jobTitl);
+      setEmploymentType(employmntTyp);
+      setJobStartYear(jobStrtYr);
+      setJobEndYear(jobEndYr);
+      setJobDomain(dmain);
+      setCurrentJob(isCrntJob);
+
+      setSltdCompany("");
+      setSltdDomain("");
+      setSltdIndustry("");
+      setStldJobTitle("");
+      setSltdJobStartYear("");
+      setSltdJobEndYear("");
+      setSltdEmploymentType("");
+      setCrntJobRole(false);
+      setSltdIsCurrentJob(false);
+
+      const jobDta = {
+        id: sltdExperienceIndex,
+        jobTitle: sltdJobTitle,
+        employmentType: sltdEmploymentType,
+        startYear: sltdJobStartYear,
+        endYear: sltdJobEndYear,
+        domain: sltdDomain,
+        industry: sltdIndustry,
+        company: sltdCompany,
+        crntRole: sltdIsCurrentJob,
+      };
+
+      var experienceDta = allExperience;
+      experienceDta[sltdExperienceIndex] = jobDta;
+
+      setUpdateExperience(false);
+    }
+  };
+
+  // writing function for removing job experience ;
+
+  const removeJobExperience = (index) => {
+    var filteredAllExperience = allExperience.filter((itm, ind) => {
+      return ind != index;
+    });
+
+    setAllExperience(filteredAllExperience);
+
+    var filteredDomain = jobDomain.filter((itm, ind) => {
+      return ind != index;
+    });
+
+    setJobDomain(filteredDomain);
+
+    var filteredJobIndustry = jobIndustry.filter((itm, ind) => {
+      return ind != index;
+    });
+
+    setJobIndustry(filteredJobIndustry);
+
+    var filteredCompany = company.filter((itm, ind) => {
+      return ind != index;
+    });
+
+    setCompany(filteredCompany);
+
+    var fitleredJobTitle = company.filter((itm, ind) => {
+      return ind != index;
+    });
+
+    setJobTitle(fitleredJobTitle);
+
+    var filteredEmploymentType = employmentType.filter((itm, ind) => {
+      return ind != index;
+    });
+
+    setEmploymentType(filteredEmploymentType);
+
+    var filteredJobStartYear = jobStartYear.filter((itm, ind) => {
+      return ind != index;
+    });
+
+    setJobStartYear(filteredJobStartYear);
+
+    var filteredJobEndYear = jobEndYear.filter((itm, ind) => {
+      return ind != index;
+    });
+
+    setJobEndYear(filteredJobEndYear);
+
+    var filteredCurentJob = currentJob.filter((itm, ind) => {
+      return ind != index;
+    });
+
+    setCurrentJob(filteredCurentJob);
+  };
+
+  const handleSelectRole = () => {
+    setSltdIsCurrentJob(!sltdIsCurrentJob);
+    if (sltdIsCurrentJob === false) {
+      const day = new Date();
+      const year = day.getFullYear();
+      setSltdJobEndYear(year);
+    }
+  };
+
+  const getNationality = () => {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    const url = endpoints.events.getNationalityUrl;
+
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if (res.status === 200) {
+          const val = res.data;
+          setAllNational(val);
+        }
+      })
+      .catch((err) => {
+        console.log(err, "nationality erro");
+      });
+  };
+
+  const getCoachCategoies = () => {
+    const url = endpoints.coaches.getCoachCategory;
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      
+    };
+
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if(res.data.result){
+          const val = res.data.data;
+          setAllCategory(val)
+        }
+      })
+      .catch((err) => {
+        console.log(err, "this is the error");
+      });
+  };
+
+  
+
+  useEffect(() => {
+    getNationality();
+    getCoachCategoies();
+  }, []);
+
+
+  // writing function for submitting the form ;
+
+  const submit = () =>{
+    if(firstName == ""){
+      toast("First name is required" , {type : "warning"})
+    }
+    else if(lastName == ""){
+      toast("Last name is required" ,{type : "warning"})
+    }
+    else if(contactNumber == ""){
+      toast("Please enter phone no." , {type : 'warning'})
+    }
+    else if(nationality == ""){
+      toast("Please select nationality" , {type : "warning"})
+    }
+    else if(dob == ""){
+      toast("Please select date of birth" , {type : "warning"})
+    }
+    else {
+
+      // here hitting the api for saving the coaches data;
+
+      const formData = new FormData();
+
+      formData.append("first_name", firstName);
+      formData.append("last_name", lastName);
+      formData.append("contact_number", contactNumber);
+      formData.append("nationality", nationality);
+      formData.append("dob", dob);
+      formData.append("gender", gender);
+      formData.append("job_title", jobTitle);
+      formData.append("employment_type", employmentType);
+      formData.append("company", company);
+      formData.append("start_year_employment", jobStartYear);
+      formData.append("end_year_employment", jobEndYear);
+      formData.append("domain", jobDomain);
+      formData.append("industry", jobIndustry);
+      formData.append("isCurrent", currentJob);
+      formData.append("skills", skills);
+      formData.append("hobbies", hobbies);
+      formData.append("avtar_file", coachImg);
+      formData.append("is_repeated" , isRepeated)
+      formData.append("is_paid" , paid)
+      formData.append("price" , price )
+      formData.append("")
+    }
+  }
 
   return (
     <>
@@ -306,6 +713,8 @@ const CoachesForm = () => {
                   class="form-control "
                   id="exampleInputPassword1"
                   placeholder="Enter First Name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
             </div>
@@ -318,20 +727,40 @@ const CoachesForm = () => {
                   class="form-control "
                   id="exampleInputPassword1"
                   placeholder="Enter Last Name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
               <div class="form-group">
                 <label for="mobile_code">Contact*</label>
-                <PhoneInput country="hk" />
+                <PhoneInput
+                  country="hk"
+                  value={contactNumber}
+                  onChange={(phone) => setContactNumber(phone)}
+                />
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4 ">
               <div class="form-group">
                 <label for="">Nationality*</label>
-                <select class="form-select  " aria-label="select example">
-                  <option>Choose Nationality</option>
+                <select
+                  class="form-select  "
+                  aria-label="select example"
+                  value={nationality}
+                  onChange={(e) => setNationality(e.target.value)}
+                >
+                  <option value="">Choose Nationality</option>
+                  {allNational.map((country, index) => {
+                    return (
+                      <>
+                        <option value={country.en_short_name}>
+                          {country.en_short_name}
+                        </option>
+                      </>
+                    );
+                  })}
                 </select>
               </div>
             </div>
@@ -342,6 +771,8 @@ const CoachesForm = () => {
                   type="date"
                   class="form-control "
                   placeholder="Due date"
+                  value={dob}
+                  onchange={(e) => setDob(e.target.value)}
                 />
               </div>
             </div>
@@ -351,6 +782,8 @@ const CoachesForm = () => {
                 <select
                   className="form-select "
                   aria-label="Default select example"
+                  value={gender}
+                  onchange={(e) => setGender(e.target.value)}
                 >
                   <option>Choose Gender</option>
                   <option value="Male">Male</option>
@@ -361,11 +794,11 @@ const CoachesForm = () => {
             <div className="col-12 col-md-6 col-lg-4 ">
               <div class="form-group">
                 <label htmlFor="takePhoto">Upload Img</label>
-
                 <input
                   type="file"
                   class="form-control"
                   placeholder="Enter here"
+                  onchange={(e) => setCoachImg(e.target.files[0])}
                 />
               </div>
             </div>
@@ -376,6 +809,33 @@ const CoachesForm = () => {
               <h5 className="heading_second">Add Experience</h5>
             </div>
           </div>
+          {allExperience.map((itm, index) => {
+            return (
+              <>
+                <div className="studentcv_experiencelogoBox" key={index}>
+                  <div className="studentCV_logobox">
+                    <img src={company_logo} alt="" />
+                    <div className="studentCV_universityDetail">
+                      <h5>{itm.jobTitle}</h5>
+                      <h6>{itm.company}</h6>
+                      <h6>
+                        {itm.startYear}-{itm.endYear}
+                      </h6>
+                    </div>
+                  </div>
+                  <div className="studentCV_rightIcon">
+                    <FiEdit
+                      style={{ color: "gray" }}
+                      onClick={() => handleExperienceEdit(itm, index)}
+                    />
+                    <AiFillMinusCircle
+                      onClick={() => removeJobExperience(index)}
+                    />
+                  </div>
+                </div>
+              </>
+            );
+          })}
           <div className="row">
             <div className="col-12 col-md-6 col-lg-4 ">
               <div class="form-group">
@@ -385,15 +845,21 @@ const CoachesForm = () => {
                   class="form-control field"
                   id=""
                   placeholder="Enter here"
+                  // error="Please enter text"
+                  value={sltdJobTitle}
+                  onChange={(e) => setStldJobTitle(e.target.value)}
                 />
               </div>
             </div>
+
             <div className="col-12 col-md-6 col-lg-4 ">
               <div class="form-group">
                 <label for="exampleInputPassword1">Employment Type</label>
                 <select
                   class="form-select end-year "
                   aria-label="Default select example"
+                  value={sltdEmploymentType}
+                  onChange={(e) => setSltdEmploymentType(e.target.value)}
                 >
                   <option>Choose</option>
                   <option value="Full Time">Full Time</option>
@@ -415,33 +881,63 @@ const CoachesForm = () => {
                   class="form-control field"
                   id=""
                   placeholder="Enter here"
+                  // error="Please enter text"
+                  value={sltdCompany}
+                  onChange={(e) => setSltdCompany(e.target.value)}
                 />
               </div>
             </div>
+
             <div className="col-lg-3 col-md-6 col-12 ">
               <div class="form-group">
                 <label for="exampleInputPassword1">Start Year</label>
                 <select
                   class="form-select end-year "
                   aria-label="Default select example"
+                  value={sltdJobStartYear}
+                  onChange={(e) => {
+                    var val = e.target.value;
+
+                    if (sltdJobEndYear !== "" && val > sltdJobEndYear) {
+                      toast("start year cannot be greater then end year", {
+                        type: "warning",
+                      });
+                    } else {
+                      setSltdJobStartYear(e.target.value);
+                    }
+                  }}
                 >
                   <option>select</option>
-                  <option>select years</option>
+                  {getAcedemicYears()}
                 </select>
               </div>
             </div>
+
             <div className="col-lg-3 col-md-6 col-12 ">
               <div class="form-group">
                 <label for="exampleInputPassword1">End Year</label>
                 <select
                   class="form-select end-year "
                   aria-label="Default select example"
+                  value={sltdJobEndYear}
+                  onChange={(e) => {
+                    var val = e.target.value;
+                    setSltdIsCurrentJob(false);
+                    if (val < sltdJobStartYear) {
+                      toast("end year cannot be less than start year", {
+                        type: "warning",
+                      });
+                    } else {
+                      setSltdJobEndYear(e.target.value);
+                    }
+                  }}
                 >
                   <option>select</option>
-                  <option>2002</option>
+                  {getAcedemicYears()}
                 </select>
               </div>
             </div>
+
             <div className="col-lg-6 col-md-6 col-12 ">
               <div class="form-group studentCV_ExperienceCheckbox">
                 <input
@@ -449,6 +945,8 @@ const CoachesForm = () => {
                   type="checkbox"
                   value=""
                   id="flexCheckDefault"
+                  checked={sltdIsCurrentJob}
+                  onChange={handleSelectRole}
                 />
                 <label
                   class="form-check-label studentCV_checkLabel"
@@ -458,6 +956,7 @@ const CoachesForm = () => {
                 </label>
               </div>
             </div>
+
             <div className="col-lg-4 col-md-6 col-12 ">
               <div class="form-group">
                 <label for="exampleInputPassword1">Domain</label>
@@ -467,19 +966,41 @@ const CoachesForm = () => {
                   id=""
                   placeholder="Enter here"
                   // error="Please enter text"
+                  value={sltdDomain}
+                  onChange={(e) => setSltdDomain(e.target.value)}
                 />
               </div>
             </div>
+
             <div className="col-lg-4 col-md-6 col-12 ">
               <div class="form-group">
                 <label for="exampleInputPassword1">Industry</label>
+
                 <input
                   type="text"
                   class="form-control field"
                   id=""
                   placeholder="Enter here"
+                  // error="Please enter text"
+                  value={sltdIndustry}
+                  onChange={(e) => setSltdIndustry(e.target.value)}
                 />
               </div>
+            </div>
+            <div className="col-lg-4 col-md-6 col-12 ">
+              {updateExperience === true ? (
+                <button
+                  className="addExperiencebutton"
+                  onClick={updateSelectedExperience}
+                >
+                  Update Experience
+                </button>
+              ) : (
+                <button className="addExperiencebutton" onClick={addExperience}>
+                  {" "}
+                  Add Experience
+                </button>
+              )}
             </div>
           </div>
           <div className="row">
@@ -504,34 +1025,28 @@ const CoachesForm = () => {
                   type="text"
                   class="form-control hobbies_tags "
                   placeHolder="Enter here"
+                  onchange={setHobbies}
                 />
               </div>
             </div>
           </div>
           <hr className="studentcv_hr" />
           <div className="row">
-            {/* <div className="col-lg-4 col-md-6 col-12  ">
-              <div class="form-group">
-                <label for="exampleInputPassword1">Recommendation</label>
-                <input
-                  type="text"
-                  class="form-control "
-                  placeholder="Enter here"
-                />
-              </div>
-            </div> */}
+           
             <div className="col-12 col-md-6 col-lg-4 ">
               <div class="form-group">
                 <label for="exampleInputPassword1">Category</label>
                 <select
                   class="form-select end-year "
                   aria-label="Default select example"
-                  onChange={(e) => setCategory(e.target.value)}
+                  onChange={(e) => handleCategorySelection(e.target.value)}
                 >
                   <option value="">Choose</option>
-                  <option value="IT">IT</option>
-                  <option value="Finance">Finance</option>
-                  <option value="Civil">Civil</option>
+                  {allCategory.map((category,ind) =>{
+                    return(<>
+                      <option value={category.title} key={ind}>{category.title}</option>
+                    </>)
+                  })}
                 </select>
               </div>
             </div>
@@ -543,6 +1058,8 @@ const CoachesForm = () => {
                   <select
                     class="form-select end-year "
                     aria-label="Default select example"
+                    value={subCategory}
+                    onchange={(e) => setSubCategory(e.target.value)}
                   >
                     <option>Choose</option>
                     <option value="software">software</option>
@@ -555,195 +1072,8 @@ const CoachesForm = () => {
           </div>
         </div>
         <div className="formoutline_studentcv coachFormSt">
-          <div className="col-lg-12 col-md-12 col-12">
-            <h5 className="heading_second">Slot Availability</h5>
-          </div>
-
-          <div className="row">
-            <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center">
-              <input
-                type="radio"
-                id="weekly"
-                checked={daysFormat == "weekly"}
-                onChange={() => setDaysFormat("weekly")}
-              />
-              <label htmlFor="weekly">Weekly</label>
-            </div>
-            <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center">
-              <input
-                type="radio"
-                id="monthly"
-                checked={daysFormat == "monthly"}
-                onChange={() => setDaysFormat("monthly")}
-              />
-              <label htmlFor="monthly">Monthly</label>
-            </div>
-            <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center repeadtd">
-              <input
-                type="checkbox"
-                name=""
-                id="repeat"
-                onChange={() => setIsRepeated(!isRepeated)}
-                checked={isRepeated}
-              />
-              <label htmlFor="repead">Repeated</label>
-            </div>
-          </div>
-
-          {daysFormat === "weekly" && (
-            <div className="row week_days">
-              <h5
-                onClick={() => handleSelectdDays("Sunday")}
-                style={{
-                  background:
-                    selectedDays.indexOf("Sunday") != -1 ? "#2c6959" : "white",
-                  color:
-                    selectedDays.indexOf("Sunday") != -1 ? "white" : "grey",
-                }}
-              >
-                S
-              </h5>
-              <h5
-                onClick={() => handleSelectdDays("Monday")}
-                style={{
-                  background:
-                    selectedDays.indexOf("Monday") != -1 ? "#2c6959" : "white",
-                  color:
-                    selectedDays.indexOf("Monday") != -1 ? "white" : "grey",
-                }}
-              >
-                M
-              </h5>
-              <h5
-                onClick={() => handleSelectdDays("Tuesday")}
-                style={{
-                  background:
-                    selectedDays.indexOf("Tuesday") != -1 ? "#2c6959" : "white",
-                  color:
-                    selectedDays.indexOf("Tuesday") != -1 ? "white" : "grey",
-                }}
-              >
-                T
-              </h5>
-              <h5
-                onClick={() => handleSelectdDays("Wednesday")}
-                style={{
-                  background:
-                    selectedDays.indexOf("Wednesday") != -1
-                      ? "#2c6959"
-                      : "white",
-                  color:
-                    selectedDays.indexOf("Wednesday") != -1 ? "white" : "grey",
-                }}
-              >
-                W
-              </h5>
-              <h5
-                onClick={() => handleSelectdDays("Thursday")}
-                style={{
-                  background:
-                    selectedDays.indexOf("Thursday") != -1
-                      ? "#2c6959"
-                      : "white",
-                  color:
-                    selectedDays.indexOf("Thursday") != -1 ? "white" : "grey",
-                }}
-              >
-                T
-              </h5>
-              <h5
-                onClick={() => handleSelectdDays("Friday")}
-                style={{
-                  background:
-                    selectedDays.indexOf("Friday") != -1 ? "#2c6959" : "white",
-                  color:
-                    selectedDays.indexOf("Friday") != -1 ? "white" : "grey",
-                }}
-              >
-                F
-              </h5>
-              <h5
-                onClick={() => handleSelectdDays("Saturday")}
-                style={{
-                  background:
-                    selectedDays.indexOf("Saturday") != -1
-                      ? "#2c6959"
-                      : "white",
-                  color:
-                    selectedDays.indexOf("Saturday") != -1 ? "white" : "grey",
-                }}
-              >
-                S
-              </h5>
-            </div>
-          )}
-
-          {daysFormat === "monthly" && (
-            <div className="month_calendar d-flex ">
-              <div className="col-lg-2 col-md-3 col-6 ">
-                <h6>Start Date</h6>
-                <input
-                  type="date"
-                  onChange={(e) => setStartDate(e.target.value)}
-                  value={startDate}
-                />
-              </div>
-              <div className="col-lg-2 col-md-3 col-6 ">
-                <h6>End Date</h6>
-                <input
-                  type="date"
-                  onChange={(e) => setEndDate(e.target.value)}
-                  value={endDate}
-                />
-              </div>
-            </div>
-          )}
-          <div className="time_slots d-flex ">
-            <div className="col-lg-2 col-md-3 col-6 ">
-              <h6>Start Time</h6>
-              <select
-                name=""
-                id=""
-                onChange={(e) => setStartTime(e.target.value)}
-              >
-                {time.map((itm, ind) => {
-                  return (
-                    <>
-                      <option value={itm}>{itm}</option>
-                    </>
-                  );
-                })}
-              </select>
-            </div>
-            <div className="col-lg-2 col-md-3 col-6 ">
-              <h6>End Time</h6>
-              <select
-                name=""
-                id=""
-                onChange={(e) => setEndTime(e.target.value)}
-              >
-                {time.map((itm, ind) => {
-                  return (
-                    <>
-                      <option value={itm}>{itm}</option>
-                    </>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
-          <div className="caledarIcons" onClick={() => setShowCalendar(true)}>
-            <BsFillCalendarDateFill color="#2c6959" size={32} />
-          </div>
-
-          <div className="confirmBtn">
-            <button
-              className={isConfirm ? "activeCnfBtn" : "inActiveCnfBtn"}
-              onClick={handleConfirmSlots}
-            >
-              Confirm
-            </button>
-          </div>
+           <SlotAsCoach showCalendar={showCalendar} setShowCalendar={setShowCalendar} eventsToBeShown={eventsToBeShown} setEventsToBeShown={setEventsToBeShown} coachesTitle={coachesTitle} setCoachesTitle={setCoachesTitle} />
+           <SlotAsWorkShop showCalendar={showCalendar} setShowCalendar={setShowCalendar} eventsToBeShown={eventsToBeShown} setEventsToBeShow={setEventsToBeShown} workShopTitle={workShopTitle} setWorkShopTitle={setWorkShopTitle}/>
 
           {/* here adding the fees structure */}
 
@@ -833,7 +1163,9 @@ const CoachesForm = () => {
         <div className="row">
           <div className="col-lg-6"></div>
           <div className="col-lg-3 col-md-3 col-12">
-            <button className="coachesFormSubmit">Submit</button>
+            <button className="coachesFormSubmit" onClick={submitForm}>
+              Submit
+            </button>
           </div>
           <div className="col-lg-3 col-md-3 col-12">
             <button

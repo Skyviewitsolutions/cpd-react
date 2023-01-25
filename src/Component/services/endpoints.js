@@ -27,5 +27,9 @@ export const endpoints = {
     updateEvent : BASE_URL + "/events/update/",
     delete : BASE_URL + "/events/disable/"
   },
+  coaches : {
+    getCoachCategory : BASE_URL + "/coaches/categories",
+    getCoachSubCategory : BASE_URL + '/coaches/subcategories'
+  }
  
 };
