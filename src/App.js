@@ -41,6 +41,7 @@ import AvailableResource from "./Screen/AvailableResource/AvailableResource";
 import CareerFareDetails from './Screen/Career/CareerFareDetails';
 import CoachesForm from "./Screen/Coaches_screen/CoachesForm";
 import ViewDetail from "./Screen/Workshop/ViewDetail";
+import CoachesDetails from "./Screen/Coaches_screen/CoachesDetails";
 // import Chat from '../src/Component/Modal/chat/Chat';
 // import ChatHome from "./Component/Modal/chat/ChatHome";
 
@@ -112,6 +113,7 @@ function App() {
         <Route exact path="/careerDetails" element={<CareerFareDetails /> } />
         <Route exact path="/forum" element={<ForumScreen /> } />
         <Route exact path="/workshopviewdetails" element={<ViewDetail /> } />
+        <Route exact path="/coachesDetails" element={<CoachesDetails /> } />
       </Routes>
       
     </Router>
