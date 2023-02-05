@@ -138,15 +138,6 @@ const Student_cv = () => {
     } else if (contact === "") {
       toast("Please enter contact", { type: "warning" });
       contRef.current.focus();
-      // } else if (nationality === "") {
-      //   toast("Please enter nationality", { type: "error" });
-      //   nationalRef.current.focus();
-      // } else if (dob === "") {
-      //   toast("Please enter DOB", { type: "warning" });
-      //   dob.current.focus();
-      // } else if (gender === "") {
-      //   toast("Please enter gender", { type: "warning" });
-      //   genderRef.current.focus();
     } else {
       const formData = new FormData();
       formData.append("first_name", name);
@@ -295,6 +286,7 @@ const Student_cv = () => {
   // here we are writing code for getting the userscv details if it has some data ;
 
   const getUserCvData = () => {
+
     const url = endpoints.authentication.userProfile;
 
     const headers = {
@@ -323,7 +315,6 @@ const Student_cv = () => {
               var dobs = usersData.dob.replaceAll("/", "-");
               setDob(dobs);
               setGender(usersData.gender);
-
               setSchool(usersData.university_name);
               setProgram(usersData.program);
               setStartYear(usersData.start_year_educational);
@@ -373,6 +364,7 @@ const Student_cv = () => {
                   return [...itm, collegeDta];
                 });
               }
+
               // writing code for all eductional part ;
 
               const jbTitle = usersData.job_title;
@@ -429,7 +421,6 @@ const Student_cv = () => {
   useEffect(() => {
     const usersDetails = JSON.parse(localStorage.getItem("users"));
     const isCvAvailable = localStorage.getItem("isCvUploaded");
-
     if (isCvAvailable == "true") {
       getUserCvData();
     }
@@ -505,7 +496,7 @@ const Student_cv = () => {
           if (res.data.result === true) {
             toast("Profile updated successfully", { type: "success" });
             setOpenPreviewModal(false);
-            // getUserCvData()
+            getUserCvData()
           }
         })
         .catch((err) => {
@@ -720,6 +711,7 @@ const Student_cv = () => {
   };
 
   const updateSelectedExperience = () => {
+    
     if (sltdJobTitle == "") {
       toast("Job title is required", { type: "warning" });
     } else if (sltdEmploymentType == "") {

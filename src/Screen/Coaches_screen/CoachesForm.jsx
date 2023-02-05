@@ -8,7 +8,6 @@ import {
   useRouteLoaderData,
 } from "react-router-dom";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import { useEffect } from "react";
 import { FaCalendarAlt } from "react-icons/fa";
@@ -44,22 +43,18 @@ import moment from "moment";
 import { endpoints } from "../../Component/services/endpoints";
 import { getAcedemicYears } from "../../utils/getAcademicYear";
 import { allCountry } from "../../utils/allCountry";
-import SlotAsWorkShop from "../../Component/SlotAsWorkShop/SlotAsWorkShop";
-import SlotAsCoach from "../../Component/SlotAsCoach/SlotAsCoach"
+import SlotAsCoach from "../../Component/Coaches/SlotAsCoach/SlotAsCoach";
+import SlotAsWorkShop from "../../Component/Coaches/SlotAsWorkShop/SlotAsWorkShop";
+import { toast, ToastContainer } from "react-toastify";
 
 
-const CoachesForm =  () => {
-  
+const CoachesForm = () => {
+
   const [opencoachesPreview, setOpenCoachesPreview] = useState(false);
   const [daysFormat, setDaysFormat] = useState("weekly");
   const [isRepeated, setIsRepeated] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [isConfirm, setIsConfirm] = useState(false);
-  const [price, setPrice] = useState(0);
+
   const [paid, setPaid] = useState(false);
   const [sessionType, setSessionType] = useState("");
   const token = localStorage.getItem("token");
@@ -67,8 +62,8 @@ const CoachesForm =  () => {
   const [allCategory, setAllCategory] = useState([]);
   const [allSubCategory, setAllSubCategory] = useState([]);
   const [coachesPreview, setCoachesPreview] = useState(false);
-  const [coachesTitle , setCoachesTitle] = useState("")
-  const [workShopTitle , setWorkShopTitle] = useState("");
+  const [coachesTitle, setCoachesTitle] = useState("");
+  const [workShopTitle, setWorkShopTitle] = useState("");
 
   var allDays = [
     "Sunday",
@@ -81,6 +76,7 @@ const CoachesForm =  () => {
   ];
 
   const [selectedDays, setSelectedDays] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // creating useState for holding the form date ;
   const [firstName, setFirstName] = useState("");
@@ -90,16 +86,11 @@ const CoachesForm =  () => {
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
   const [coachImg, setCoachImg] = useState(null);
-  const [experience, setExperience] = useState("");
-  const [startYear, setStartYear] = useState("");
-  const [endYear, setEndYear] = useState("");
-  const [currentRole, setCurrentRole] = useState("");
-  const [domain, setDomain] = useState("");
-  const [industry, setIndustry] = useState("");
   const [skills, setSkills] = useState([]);
   const [allNational, setAllNational] = useState([]);
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
+  const [description, setDescription] = useState("");
 
   // creating state for the experience part ;
 
@@ -123,262 +114,64 @@ const CoachesForm =  () => {
   const [sltdExperienceIndex, setStldExperienceIndex] = useState(0);
   const [sltdIsCurrentJob, setSltdIsCurrentJob] = useState(false);
   const [currentJob, setCurrentJob] = useState([]);
-  const [profileImg, setProfileImg] = useState("");
+  const [update, setUpdate] = useState(false);
 
   // creating extra experience useState ;
 
-  const [xtraRole, setXtraRole] = useState("");
-  const [xtraDomain, setXtraDomain] = useState("");
   const [hobbies, setHobbies] = useState([]);
 
   // creating recomendation useState here ;
 
-  const [recommendation, setRecommendation] = useState("");
-  const [mentorName, setMentorName] = useState("");
-  const [coachName, setCoachName] = useState("");
-  const [recommEmail, setRecommEmail] = useState("");
+  // useState as coach form ;
+  const [coachPaid, setCoachPaid] = useState(false);
+  const [coachSessionType, setCoachSessionType] = useState("");
 
-  const time = [
-    "01:00:00",
-    "02:00:00",
-    "03:00:00",
-    "04:00:00",
-    "05:00:00",
-    "06:00:00",
-    "07:00:00",
-    "08:00:00",
-    "09:00:00",
-    "10:00:00",
-    "11:00:00",
-    "12:00:00",
-    "13:00:00",
-    "14:00:00",
-    "15:00:00",
-    "16:00:00",
-    "17:00:00",
-    "18:00:00",
-    "19:00:00",
-    "20:00:00",
-    "21:00:00",
-    "22:00:00",
-    "23:00:00",
-    "24:00:00",
-  ];
 
-  const handleSelectdDays = (day) => {
-    if (selectedDays.indexOf(day) == -1) {
-      setSelectedDays((itm) => {
-        return [...itm, day];
-      });
-    } else {
-      var filterDays = selectedDays.filter((itm, ind) => {
-        return itm != day;
-      });
-      setSelectedDays(filterDays);
-    }
-  };
+  // useState as Workshop form;
 
-  var getDates = function (start, end) {
-    for (
-      var arr = [], dt = new Date(start);
-      dt <= new Date(end);
-      dt.setDate(dt.getDate() + 1)
-    ) {
-      arr.push(new Date(dt));
-    }
-    return arr;
-  };
+  const [workshopPaid, setWorkshopPaid] = useState(false);
+  const [workshopSessionType, setWorkshopSessionType] = useState("");
 
-  // get all days of the month ;
-
-  const getDaysOfMonth = async (day) => {
-    var d = new Date();
-    var getTot = daysInMonth(d.getMonth(), d.getFullYear()); //Get total
-    var date = [];
-    for (var i = 1; i <= getTot; i++) {
-      //looping through days in month
-      var newDate = new Date(d.getFullYear(), d.getMonth(), i);
-      if (newDate.getDay() == day) {
-        date.push(newDate);
-      }
-    }
-
-    function daysInMonth(month, year) {
-      return new Date(year, month, 0).getDate();
-    }
-    return date;
-  };
-
-  // get selected dates of thee year ;
-
-  const buildDates = async (startDate, months) => {
-    return Array.from(
-      {
-        length: months,
-      },
-      function (_, i) {
-        var date = new Date(startDate.getTime());
-        var mnth = date.getMonth();
-        date.setMonth(mnth + i);
-        if (date.getMonth() !== (mnth + i) % 12) {
-          date.setDate(0);
-        }
-        return date;
-      }
-    );
-  };
-
-  const handleConfirmSlots = async () => {
-
-    // if (allDays.length != 0 && daysFormat === "weekly") {
-    //   toast("Please select start day", { type: "warning" });
-    // } else if (startDate == "" && daysFormat === "monthly") {
-    //   toast("Please select start date", { type: "warning" });
-    // } else if (endDate == "" && daysFormat === "monthly") {
-    //   toast("Please select end date", { type: "warning" });
-    // } else if (startTime == "") {
-    //   toast("please select start time", { type: "warning" });
-    // } else if (endTime == "") {
-    //   toast("Please select end time", { type: "warning" });
-    // } else {
-      setIsConfirm(true);
-      var events = [];
-
-      if (daysFormat === "weekly") {
-        var dateArray = [];
-        if (isRepeated) {
-          for (var i = 0; i < selectedDays.length; i++) {
-            var daysNum = allDays.indexOf(selectedDays[i]);
-            var dates = await getDaysOfMonth(daysNum);
-            dateArray.push(...dates);
-          }
-        } else {
-          for (var i = 0; i < selectedDays.length; i++) {
-            var daysNum = allDays.indexOf(selectedDays[i]);
-            var dates = await getDaysOfMonth(daysNum);
-            dates = dates[0];
-            dateArray.push(dates);
-          }
-        }
-
-        dateArray.map((itm) => {
-          var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-          var month =
-            itm.getMonth() + 1 < 10
-              ? `0${itm.getMonth() + 1}`
-              : itm.getDate() + 1;
-          var year = itm.getFullYear();
-
-          var startDte = `${year}-${month}-${date}T${startTime}`;
-          var endDte = `${year}-${month}-${date}T${endTime}`;
-
-          var evnt = {
-            start: new Date(startDte),
-            end: new Date(endDte),
-            title: "Event 1",
-          };
-
-          events.push(evnt);
-        });
-        setEventsToBeShown(events);
-      } else if (daysFormat === "monthly") {
-        var dateArray = [];
-
-        if (isRepeated) {
-          var allDates = [];
-          var startMonth = new Date(startDate).getMonth();
-
-          var dates = await getDates(startDate, endDate);
-
-          for (var j = 0; j < dates.length; j++) {
-            var count = 11 - startMonth;
-            var date = await buildDates(dates[j], count);
-            allDates.push(...date);
-          }
-
-          allDates.map((itm) => {
-            var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-            var month =
-              itm.getMonth() + 1 < 10
-                ? `0${itm.getMonth() + 1}`
-                : itm.getDate() + 1;
-            var year = itm.getFullYear();
-            var startDte = `${year}-${month}-${date}T${startTime}`;
-            var endDte = `${year}-${month}-${date}T${endTime}`;
-
-            var evnt = {
-              start: new Date(startDte),
-              end: new Date(endDte),
-              title: "Event 1",
-            };
-
-            events.push(evnt);
-          });
-          setEventsToBeShown(events);
-        } else {
-          var allDates = await getDates(startDate, endDate);
-
-          allDates.map((itm) => {
-            var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-            var month =
-              itm.getMonth() + 1 < 10
-                ? `0${itm.getMonth() + 1}`
-                : itm.getDate() + 1;
-            var year = itm.getFullYear();
-            var startDte = `${year}-${month}-${date}T${startTime}`;
-            var endDte = `${year}-${month}-${date}T${endTime}`;
-
-            var evnt = {
-              start: new Date(startDte),
-              end: new Date(endDte),
-              title: "Event 1",
-            };
-
-            events.push(evnt);
-          });
-          setEventsToBeShown(events);
-        }
-      }
-    // }
-  };
-
-  const getAllSubCategory = (categoryId) =>{
+  const getAllSubCategory = (categoryId) => {
     const url = `${endpoints.coaches.getCoachSubCategory}?category_id=${categoryId}`;
 
     const headers = {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     };
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        console.log(res, "response here");
+        if (res.data.result) {
+          const val = res.data.data;
+          setAllSubCategory(val);
+        }
+      })
+      .catch((err) => {
+        console.log(err, "this is the error here");
+      });
+  };
 
-    console.log(url , "urr")
-
-    axios.get(url , {headers : headers})
-    .then((res) =>{
-      if(res.data.result){
-        const val = res.data.data;
-        setAllSubCategory(val)
-      }
-    })
-    .catch((err) => {
-      console.log(err , "this is the error here")
-    })
-  }
-
-  const handleCategorySelection = (categoryName) =>{
-  
-    var categoryId = allCategory.filter((category,ind) =>{
-      return category.title == categoryName
+  const handleCategorySelection = (categoryName) => {
+    var categoryId = allCategory.filter((category, ind) => {
+      return category.title == categoryName;
     });
-    categoryId = categoryId[0]._id;
-    getAllSubCategory(categoryId)
-  }
-  
+    categoryId = categoryId[0]?._id;
+    setCategory(categoryName);
+    getAllSubCategory(categoryId);
+  };
+
+  useEffect(() => {
+    if (category) {
+      handleCategorySelection(category);
+    }
+  }, [category]);
 
   // writing code for form submission ;
 
-  const submitForm = () => {};
-
-  const addExperience = () => {
+  const addExperience = (e) => {
+    e.preventDefault();
     if (
       sltdJobTitle == "" ||
       sltdEmploymentType == "" ||
@@ -454,6 +247,7 @@ const CoachesForm =  () => {
     setCrntJobRole(crntJobRole[ind]);
     setUpdateExperience(true);
     setStldExperienceIndex(ind);
+    console.log("hee");
   };
 
   const updateSelectedExperience = () => {
@@ -486,7 +280,7 @@ const CoachesForm =  () => {
       jobStrtYr[sltdExperienceIndex] = sltdJobStartYear;
       jobEndYr[sltdExperienceIndex] = sltdJobEndYear;
       employmntTyp[sltdExperienceIndex] = sltdEmploymentType;
-      isCrntJob[sltdExperienceIndex] = sltdIsCurrentJob;
+      // isCrntJob[sltdExperienceIndex] = sltdIsCurrentJob;
 
       setJobDomain(dmain);
       setJobIndustry(indstry);
@@ -611,7 +405,7 @@ const CoachesForm =  () => {
         }
       })
       .catch((err) => {
-        console.log(err, "nationality erro");
+        console.log(err, "nationality error");
       });
   };
 
@@ -621,15 +415,14 @@ const CoachesForm =  () => {
     const headers = {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
-      
     };
 
     axios
       .get(url, { headers: headers })
       .then((res) => {
-        if(res.data.result){
+        if (res.data.result) {
           const val = res.data.data;
-          setAllCategory(val)
+          setAllCategory(val);
         }
       })
       .catch((err) => {
@@ -637,38 +430,30 @@ const CoachesForm =  () => {
       });
   };
 
-  
-
   useEffect(() => {
     getNationality();
     getCoachCategoies();
   }, []);
 
-
   // writing function for submitting the form ;
 
-  const submit = () =>{
-    if(firstName == ""){
-      toast("First name is required" , {type : "warning"})
+  const submit = (e) => {
+    if (e) {
+      e.preventDefault();
     }
-    else if(lastName == ""){
-      toast("Last name is required" ,{type : "warning"})
-    }
-    else if(contactNumber == ""){
-      toast("Please enter phone no." , {type : 'warning'})
-    }
-    else if(nationality == ""){
-      toast("Please select nationality" , {type : "warning"})
-    }
-    else if(dob == ""){
-      toast("Please select date of birth" , {type : "warning"})
-    }
-    else {
-
+    if (firstName == "") {
+      toast("First name is required", { type: "warning" });
+    } else if (lastName == "") {
+      toast("Last name is required", { type: "warning" });
+    } else if (contactNumber == "") {
+      toast("Please enter phone no.", { type: "warning" });
+    } else if (nationality == "") {
+      toast("Please select nationality", { type: "warning" });
+    } else if (dob == "") {
+      toast("Please select date of birth", { type: "warning" });
+    } else {
       // here hitting the api for saving the coaches data;
-
       const formData = new FormData();
-
       formData.append("first_name", firstName);
       formData.append("last_name", lastName);
       formData.append("contact_number", contactNumber);
@@ -686,10 +471,203 @@ const CoachesForm =  () => {
       formData.append("skills", skills);
       formData.append("hobbies", hobbies);
       formData.append("avtar_file", coachImg);
-      formData.append("is_repeated" , isRepeated)
-      formData.append("is_paid" , paid)
-      formData.append("price" , price )
-      formData.append("")
+      formData.append("category", category);
+      formData.append("subCategory", subCategory);
+      formData.append("description", description);
+
+      const url = endpoints.coaches.createCoachProfile;
+      setLoading(true);
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      };
+
+      axios
+        .post(url, formData, { headers: headers })
+        .then((res) => {
+          setLoading(false);
+          if (res.data.result) {
+            getUserCvData();
+            toast("Profile created successfully", { type: "success" });
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err, "this is the error");
+        });
+    }
+  };
+
+  const handleUploadImg = (e) => {
+    const files = e.target.files[0];
+    setCoachImg(files);
+  };
+
+  const getUserCvData = () => {
+    const url = endpoints.authentication.userProfile;
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      // "Content-Type": "application/json",
+    };
+
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if (res.data.result === true) {
+          const usersData = res.data.data;
+
+          if (usersData) {
+            setAllExperience([]);
+            if (Object.keys(usersData).length) {
+              setUpdate(true);
+              setFirstName(usersData.first_name);
+              setLastName(usersData.last_name);
+              setContactNumber(usersData.contact_number);
+              setNationality(usersData.nationality);
+              var dobs = usersData.dob.replaceAll("/", "-");
+              setDob(dobs);
+              setGender(usersData.gender);
+              setCategory(usersData.category);
+              setSubCategory(usersData?.subCategory);
+              setSkills(usersData?.skills);
+              setHobbies(usersData?.hobbies);
+              setDescription(usersData?.description);
+
+              // writing code for all eductional part ;
+
+              const jbTitle = usersData.job_title;
+              const employmentTpe = usersData.employment_type;
+              const compny = usersData.company;
+              const JbStrtYear = usersData.start_year_employment;
+              const jbEndYear = usersData.end_year_employment;
+              const jbDomain = usersData.domain;
+              const jbIndustry = usersData.industry;
+              const crntRole = usersData.isCurrent;
+
+              for (var i = 0; i < jbTitle.length; i++) {
+                var endYear = jbEndYear[i];
+                var currentRole =
+                  endYear == new Date().getFullYear() ? "true" : "false";
+
+                const jobDta = {
+                  id: i,
+                  jobTitle: jbTitle[i],
+                  employmentType: employmentTpe[i],
+                  startYear: JbStrtYear[i],
+                  endYear: jbEndYear[i],
+                  domain: jbDomain[i],
+                  industry: jbIndustry[i],
+                  company: compny[i],
+                  crntRole: currentRole,
+                };
+
+                setAllExperience((itm) => {
+                  return [...itm, jobDta];
+                });
+              }
+
+              setJobTitle(jbTitle);
+              setEmploymentType(employmentTpe);
+              setJobStartYear(JbStrtYear);
+              setJobEndYear(jbEndYear);
+              setJobIndustry(jbIndustry);
+              setCurrentJob(crntRole);
+              setCompany(compny);
+              setJobDomain(jbDomain);
+
+              var imgUrl = res.data.avtarPath + usersData.avtar;
+
+              const fileName = "myFile.jpg";
+
+              fetch(imgUrl).then(async (response) => {
+                const contentType = response.headers.get("content-type");
+                const blob = await response.blob();
+                const file = new File([blob], fileName, { contentType });
+                
+                setCoachImg(file);
+              });
+            }
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err, "user data error");
+      });
+  };
+
+
+  useEffect(() => {
+    const usersDetails = JSON.parse(localStorage.getItem("users"));
+    const isCvAvailable = localStorage.getItem("isCvUploaded");
+    if (isCvAvailable == "true") {
+      getUserCvData();
+    }
+  }, []);
+
+  // here we are writing code for updating the profile ;
+
+  const updateProfile = (e) => {
+    if (e) {
+      e.preventDefault();
+    }
+
+    if (firstName == "") {
+      toast("First name is required", { type: "warning" });
+    } else if (lastName == "") {
+      toast("Last name is required", { type: "warning" });
+    } else if (contactNumber == "") {
+      toast("Please enter phone no.", { type: "warning" });
+    } else if (nationality == "") {
+      toast("Please select nationality", { type: "warning" });
+    } else if (dob == "") {
+      toast("Please select date of birth", { type: "warning" });
+    } else {
+      // here hitting the api for saving the coaches data;
+      const formData = new FormData();
+      formData.append("first_name", firstName);
+      formData.append("last_name", lastName);
+      formData.append("contact_number", contactNumber);
+      formData.append("nationality", nationality);
+      formData.append("dob", dob);
+      formData.append("gender", gender);
+      formData.append("job_title", jobTitle);
+      formData.append("employment_type", employmentType);
+      formData.append("company", company);
+      formData.append("start_year_employment", jobStartYear);
+      formData.append("end_year_employment", jobEndYear);
+      formData.append("domain", jobDomain);
+      formData.append("industry", jobIndustry);
+      formData.append("isCurrent", currentJob);
+      formData.append("skills", skills);
+      formData.append("hobbies", hobbies);
+      formData.append("avtar_file", coachImg);
+      formData.append("category", category);
+      formData.append("subCategory", subCategory);
+      formData.append("description", description);
+
+      const url = endpoints.coaches.updateCoachProfile;
+      setLoading(true);
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        // "Content-Type": "application/json",
+      };
+
+      axios
+        .post(url, formData, { headers: headers })
+        .then((res) => {
+          setLoading(false);
+          if (res.data.result) {
+            toast("Profile updated successfully", { type: "success" });
+            getUserCvData();
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err, "this is the error");
+        });
     }
   }
 
@@ -698,7 +676,7 @@ const CoachesForm =  () => {
       <Homepage_header />
       <div className="container ">
         <h3 id="create_resume">Coaches Form</h3>
-        <div className="formoutline_studentcv ">
+        <div className="formoutline_studentcv">
           <div className="row">
             <div className="col-lg-12 col-md-12 col-12">
               <h5 className="personal_details_heading">Personal Details</h5>
@@ -714,6 +692,7 @@ const CoachesForm =  () => {
                   id="exampleInputPassword1"
                   placeholder="Enter First Name"
                   value={firstName}
+                  required
                   onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
@@ -722,13 +701,13 @@ const CoachesForm =  () => {
               <div class="form-group">
                 <label for="exampleInputPassword1">Last Name*</label>
                 <input
-                  pattern="[0-9]{10}"
                   type="text"
                   class="form-control "
                   id="exampleInputPassword1"
                   placeholder="Enter Last Name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
+                  required
                 />
               </div>
             </div>
@@ -749,6 +728,7 @@ const CoachesForm =  () => {
                   class="form-select  "
                   aria-label="select example"
                   value={nationality}
+                  required
                   onChange={(e) => setNationality(e.target.value)}
                 >
                   <option value="">Choose Nationality</option>
@@ -772,7 +752,8 @@ const CoachesForm =  () => {
                   class="form-control "
                   placeholder="Due date"
                   value={dob}
-                  onchange={(e) => setDob(e.target.value)}
+                  required
+                  onChange={(e) => setDob(e.target.value)}
                 />
               </div>
             </div>
@@ -783,7 +764,8 @@ const CoachesForm =  () => {
                   className="form-select "
                   aria-label="Default select example"
                   value={gender}
-                  onchange={(e) => setGender(e.target.value)}
+                  required
+                  onChange={(e) => setGender(e.target.value)}
                 >
                   <option>Choose Gender</option>
                   <option value="Male">Male</option>
@@ -792,17 +774,52 @@ const CoachesForm =  () => {
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
-                <label htmlFor="takePhoto">Upload Img</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  placeholder="Enter here"
-                  onchange={(e) => setCoachImg(e.target.files[0])}
-                />
-              </div>
+            <div class="form-group">
+                  {coachImg ? (
+                    <>
+                      <label htmlFor="takePhoto">Upload Img</label>
+                      <h5 class="form-control" htmlFor="takePhone">
+                        {coachImg.name}
+                      </h5>
+                      <input
+                        type="file"
+                        class="form-control"
+                        placeholder="Enter here"
+                        accept="image/png, image/gif, image/jpeg"
+                        onChange={(e) => handleUploadImg(e)}
+                        id="takePhoto"
+                        style={{ display: "none" }}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <label htmlFor="takePhoto">Upload Img</label>
+                      <input
+                        type="file"
+                        class="form-control"
+                        placeholder="Enter here"
+                        accept="image/png, image/gif, image/jpeg"
+                        onChange={(e) => handleUploadImg(e)}
+                        id="takePhoto"
+                      />
+                    </>
+                  )}
+                </div>
+            </div>
+            <div className="col-12 col-md-12 col-lg-7  ">
+            <label for="exampleInputPassword1">Description</label>
+            <div class="form-group domain_textarea">
+              <textarea
+                type="text"
+                class="form-control "
+                placeholder="Enter some information related Domain and Industry"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
             </div>
           </div>
+          </div>
+          
           <div class="customer_records_dynamic"></div>
           <div className="row">
             <div className="col-lg-12 col-md-12 col-12">
@@ -997,7 +1014,6 @@ const CoachesForm =  () => {
                 </button>
               ) : (
                 <button className="addExperiencebutton" onClick={addExperience}>
-                  {" "}
                   Add Experience
                 </button>
               )}
@@ -1011,6 +1027,8 @@ const CoachesForm =  () => {
                   type="text"
                   class="form-control hobbies_tags"
                   placeHolder="Enter here"
+                  value={skills}
+                  onChange={setSkills}
                 />
               </div>
             </div>
@@ -1025,27 +1043,34 @@ const CoachesForm =  () => {
                   type="text"
                   class="form-control hobbies_tags "
                   placeHolder="Enter here"
-                  onchange={setHobbies}
+                  value={hobbies}
+                  onChange={setHobbies}
                 />
               </div>
             </div>
           </div>
+          
           <hr className="studentcv_hr" />
           <div className="row">
-           
             <div className="col-12 col-md-6 col-lg-4 ">
               <div class="form-group">
                 <label for="exampleInputPassword1">Category</label>
                 <select
                   class="form-select end-year "
                   aria-label="Default select example"
+                  value={category}
+                  required
                   onChange={(e) => handleCategorySelection(e.target.value)}
                 >
                   <option value="">Choose</option>
-                  {allCategory.map((category,ind) =>{
-                    return(<>
-                      <option value={category.title} key={ind}>{category.title}</option>
-                    </>)
+                  {allCategory.map((category, ind) => {
+                    return (
+                      <>
+                        <option value={category.title} key={ind}>
+                          {category.title}
+                        </option>
+                      </>
+                    );
                   })}
                 </select>
               </div>
@@ -1059,127 +1084,102 @@ const CoachesForm =  () => {
                     class="form-select end-year "
                     aria-label="Default select example"
                     value={subCategory}
-                    onchange={(e) => setSubCategory(e.target.value)}
+                    required
+                    onChange={(e) => setSubCategory(e.target.value)}
                   >
                     <option>Choose</option>
-                    <option value="software">software</option>
-                    <option value="hardware">hardware</option>
-                    <option value="cloud">cloud</option>
+                    {allSubCategory.map((itm, index) => {
+                      return (
+                        <>
+                          <option value={itm.title}>{itm.title}</option>
+                        </>
+                      );
+                    })}
                   </select>
                 </div>
               </div>
             )}
+
+            <div className="row mt-4">
+              <div className="col-lg-6"></div>
+              <div className="col-lg-3 col-md-3 col-12">
+                <button
+                  className="coachesFormSubmit"
+                  onClick={update === true ? updateProfile : submit}
+                >
+                  {loading ? (
+                    <Spinner
+                      animation="border"
+                      variant="light"
+                      style={{ width: "20px", height: "20px" }}
+                    />
+                  ) : update ? (
+                    "Update"
+                  ) : (
+                    "Submit"
+                  )}
+                </button>
+              </div>
+              <div className="col-lg-3 col-md-3 col-12">
+                <button
+                  className="coachesFormSubmit"
+                  onClick={() => setCoachesPreview(true)}
+                >
+                  Preview profile
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         <div className="formoutline_studentcv coachFormSt">
-           <SlotAsCoach showCalendar={showCalendar} setShowCalendar={setShowCalendar} eventsToBeShown={eventsToBeShown} setEventsToBeShown={setEventsToBeShown} coachesTitle={coachesTitle} setCoachesTitle={setCoachesTitle} />
-           <SlotAsWorkShop showCalendar={showCalendar} setShowCalendar={setShowCalendar} eventsToBeShown={eventsToBeShown} setEventsToBeShow={setEventsToBeShown} workShopTitle={workShopTitle} setWorkShopTitle={setWorkShopTitle}/>
+          <SlotAsCoach
+            showCalendar={showCalendar}
+            setShowCalendar={setShowCalendar}
+            eventsToBeShown={eventsToBeShown}
+            setEventsToBeShown={setEventsToBeShown}
+            coachesTitle={coachesTitle}
+            setCoachesTitle={setCoachesTitle}
+            coachPaid={coachPaid}
+            setCoachPaid={setCoachPaid}
+            coachSessionType={coachSessionType}
+            setCoachSessionType={setCoachSessionType}
+          />
 
-          {/* here adding the fees structure */}
-
-          <div className="eventForm_price">
-            <div>
-              <div class="eventForm_paid">
-                <input
-                  type="radio"
-                  id="a25"
-                  name="check-substitution-2"
-                  onClick={() => setPaid(false)}
-                />
-                <label
-                  for="a25"
-                  className={`btnfree ${
-                    !paid ? "btn-primary" : "btn-default"
-                  } `}
-                >
-                  Free
-                </label>
-              </div>
-              <div className="eventForm_paid freepaid">
-                <input
-                  type="radio"
-                  id="a50"
-                  name="check-substitution-2"
-                  onClick={() => setPaid(true)}
-                />
-                <label
-                  for="a50"
-                  className={`btnfree ${paid ? "btn-primary" : "btn-default"} `}
-                >
-                  Paid
-                </label>
-              </div>
-            </div>
-            <div className="d-flex">
-              <div class="form-check" style={{ marginLeft: "25px" }}>
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="flexRadioDefault"
-                  id="flexRadioDefault2"
-                  checked={sessionType == "hourly"}
-                  onChange={() => setSessionType("hourly")}
-                />
-                <label
-                  class="form-check-label  textsession"
-                  for="flexRadioDefault2"
-                >
-                  By Hours
-                </label>
-              </div>
-
-              <div class="form-check" style={{ marginLeft: "25px" }}>
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="flexRadioDefault"
-                  id="flexRadioDefault3"
-                  checked={sessionType == "sessional"}
-                  onChange={() => setSessionType("sessional")}
-                />
-                <label
-                  class="form-check-label textsession"
-                  for="flexRadioDefault3"
-                >
-                  By Session
-                </label>
-              </div>
-            </div>
-          </div>
-          {/* here we aare adding payment div */}
-
-          <div className="col-lg-4 col-md-6 col-12 my-3 ">
-            <div class="form-group">
-              <label for="exampleInputPassword1">Price in ($)</label>
-              <input
-                type="number"
-                class="form-control py-4"
-                placeholder="Enter here"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-lg-6"></div>
-          <div className="col-lg-3 col-md-3 col-12">
-            <button className="coachesFormSubmit" onClick={submitForm}>
-              Submit
-            </button>
-          </div>
-          <div className="col-lg-3 col-md-3 col-12">
-            <button
-              className="coachesFormSubmit"
-              onClick={() => setCoachesPreview(true)}
-            >
-              Preview
-            </button>
-          </div>
+          <SlotAsWorkShop
+            showCalendar={showCalendar}
+            setShowCalendar={setShowCalendar}
+            eventsToBeShown={eventsToBeShown}
+            setEventsToBeShown={setEventsToBeShown}
+            workShopTitle={workShopTitle}
+            setWorkShopTitle={setWorkShopTitle}
+            workshopSessionType={workshopSessionType}
+            setWorkshopSessionType={setWorkshopSessionType}
+            workshopPaid={workshopPaid}
+            setWorkshopPaid={setWorkshopPaid}
+          />
         </div>
       </div>
+
+      <ToastContainer />
       <CoachesPreview
-        show={coachesPreview}
-        onHide={() => setCoachesPreview(false)}
+        coachesPreview={coachesPreview}
+        setCoachesPreview={setCoachesPreview}
+        submit={submit}
+        firstName={firstName}
+        lastName={lastName}
+        contactNumber={contactNumber}
+        coachImg={coachImg}
+        gender={gender}
+        nationality={nationality}
+        description={description}
+        hobbies={hobbies}
+        category={category}
+        subCategory={subCategory}
+        allExperience={allExperience}
+        skills={skills}
+        update={update}
+        updateProfile={updateProfile}
+        loading={loading}
       />
       <CustomCalendar
         showCalendar={showCalendar}

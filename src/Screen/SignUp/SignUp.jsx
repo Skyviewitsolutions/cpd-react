@@ -7,9 +7,8 @@ import Signupform from "../../Component/Signupform/Signupform";
 import cpd_logo from "../../assets/Images/cpd_logo.png";
 import { useNavigate } from "react-router-dom";
 
-
 const SignUp = () => {
-
+  
   const navigate = useNavigate("");
 
   return (
@@ -34,7 +33,10 @@ const SignUp = () => {
                 the benefits that professional development can bring you in the
                 real world.{" "}
               </p>
-              <button className="login_aboutCpd" onClick={() => navigate("/loginpage")}>
+              <button
+                className="login_aboutCpd"
+                onClick={() => navigate("/loginpage")}
+              >
                 Login to know more
               </button>
             </div>

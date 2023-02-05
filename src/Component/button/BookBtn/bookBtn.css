@@ -1,0 +1,14 @@
+.bookBtn {
+    bottom: 0px;
+    margin-right: 10px;
+    height: 40px;
+    width: 95%;
+    border: none;
+    font-family: Inter-Bold;
+    background-color: #2c6959;
+    color: #FFFFFF;
+    background: #2C6959;
+    border-radius: 26px;
+    opacity: 1;
+    padding: 6px 20px;
+}
