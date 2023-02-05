@@ -115,6 +115,11 @@ const Homepage_header = () => {
       localStorage.setItem("activeNavbar", selected);
       setActiveNavbar(selected);
     }
+    else if (selected === "mycourse") {
+      localStorage.setItem("activeNavbar", selected);
+      setActiveNavbar(selected);
+      navigate("/mycourse");
+    } 
   };
 
   const handleResume = () => {
@@ -160,7 +165,9 @@ const Homepage_header = () => {
                 <img src={my_Community} alt="" className="nav-icons" />
                 <h6>My Community</h6>
               </Nav.Link>
-              <Nav.Link className="nav_img working">
+              <Nav.Link className="nav_img working"
+              onClick={() => navigate("/mycourse")}
+              >
                 <img src={my_course} alt="" className="nav-icons" />
                 <h6>My Course</h6>
               </Nav.Link>
