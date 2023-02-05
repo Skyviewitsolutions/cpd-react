@@ -185,12 +185,15 @@ const Homepage_header = () => {
              
               <Nav.Link className="nav_img working">
                 <img src={message} alt="" className="nav-icons" />
-
                 <h6>Notification</h6>
               </Nav.Link>
               <Nav.Link className="nav_img working">
                 <img src={learning} alt="" className="nav-icons" />
                 <h6>Learning</h6>
+              </Nav.Link>
+              <Nav.Link className="nav_img working">
+                <img src={learning} alt="" className="nav-icons" />
+                <h6>My Calendar</h6>
               </Nav.Link>
 
               {token ? (

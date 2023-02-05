@@ -137,37 +137,12 @@ const CustomCalendar = (props) => {
     weekdayFormat: (date, culture, localizer) => localizer.format(date, 'dddd', culture),
   }
 
-  console.log(eventsToBeShown  ,"events To be Shown here");
 
   return (
     <Modal show={showCalendar} size="lg">
       <h1 className="calendarTitle">Calendar</h1>
       <div className="calendarCont">
-        {/* <div className="calendarTop">
-          <input
-            type="text"
-            placeholder="Add Title"
-            style={{ marginRight: "10px" }}
-            value={newEvent.title}
-            onChange={(e) =>
-              setNewEvent({ ...newEvent, title: e.target.value })
-            }
-          />
-          <DatePicker
-            placeholderText="Start Date"
-            style={{ marginRight: "10px" }}
-            selected={newEvent.start}
-            onChange={(start) => setNewEvent({ ...newEvent, start })}
-          />
-          <DatePicker
-            placeholderText="End Date"
-            selected={newEvent.end}
-            onChange={(end) => setNewEvent({ ...newEvent, end })}
-          />
-          <div className="cldrBtn" onClick={handleAddEvent}>
-            Add Event
-          </div>
-        </div> */}
+       
         <Calendar
           localizer={localizer}
           events={eventsToBeShown}

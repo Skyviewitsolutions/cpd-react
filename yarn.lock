@@ -9207,7 +9207,7 @@ react-overlays@^5.2.0:
 
 react-owl-carousel@^2.3.3:
   version "2.3.3"
-  resolved "https://registry.npmjs.org/react-owl-carousel/-/react-owl-carousel-2.3.3.tgz"
+  resolved "https://registry.yarnpkg.com/react-owl-carousel/-/react-owl-carousel-2.3.3.tgz#bb8e40bfd740f6cda8f712863c3437484737d6c4"
   integrity sha512-B4TI2EDDtp7IDM8CWzl5Rh/17p1NfMW/QBIbkC18CkiMGCbO9ztY+vAPTN60tp+63V9v/oLqArLjkiQtDGqj/A==
   dependencies:
     owl.carousel "~2.3.4"

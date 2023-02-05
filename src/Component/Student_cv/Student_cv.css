@@ -122,13 +122,19 @@
    
     .heading_second{
         background-color: #e0e9e6;
-        padding: 15px;
+        padding: 5px  15px;
         border-radius: 5px;
         font-size: 15px;
         font-weight: 600;
         width:100%;
         margin-top: 15px;
         margin-bottom: 15px;
+        cursor: pointer;
+        align-items: center;
+    }
+
+    .heading_second h2{
+        font-size: 36px;
     }
 
     .details_select{

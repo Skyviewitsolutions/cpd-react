@@ -15,17 +15,21 @@ import tech from "../../assets/Images/tech.svg";
 import retail from "../../assets/Images/retail.svg";
 import negotiation_skills from "../../assets/Images/negotiation_skills.svg";
 import { endpoints } from "../services/endpoints";
+import { AiTwotoneBell } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import CoachNotification from "../CoachNotification/CoachNotification";
 
 const User_profile = () => {
-
+  
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [usersData, setUsersData] = useState({});
   const [userImg, setUserImg] = useState("");
   const [totalExperience, setTotalExperience] = useState(0);
+  const [showNotification, setShowNotification] = useState(false);
+  var userDetails = localStorage.getItem("users");
 
   const [university_name, setUniversity_name] = useState("");
   const [industry, setIndustry] = useState("");
@@ -45,7 +49,6 @@ const User_profile = () => {
       .then((res) => {
         if (res.data.result) {
           const val = res.data.data;
-          console.log(val, "value here");
 
           var universityName = val.university_name;
           var universityName = universityName[0];
@@ -92,33 +95,33 @@ const User_profile = () => {
     getUserDetails();
   }, []);
 
-  const updateProfile = () => {
-    const val = {
-      imageUrl: userImg,
-      usersData: usersData,
-    };
-    console.log(val, "useProfile data..");
-    navigate("/resume", { state: val });
-  };
+  var userType = JSON.parse(userDetails);
+  userType = userType.user_type;
 
-  const isJson = (str) => {
-    try {
-      let value = JSON.parse(str);
-      value = value.join(", ");
-      return value;
-    } catch (e) {
-      return str;
+  const viewProfile = () => {
+    if (userType == 1) {
+      navigate("/resume");
+    } else if (userType == 2) {
+      navigate("/coachesForm");
     }
   };
 
   return (
     <>
       <div className="profile_box">
-        <div className="profile_header">
+        <div className="profile_header d-flex justify-content-between">
           <div className="profile_photo_box">
-            {userImg && <img src={userImg} alt="" className="userImgIcon" />}
-            {/* <img src={User} height="50px" width="50px" style={{borderRadius:"50%"}}/> */}
+            {userImg && <img src={userImg} className="userImgIcon" />}
           </div>
+          {userType == 2 && (
+            <div
+              className="coachNotification"
+              onClick={() => setShowNotification(true)}
+            >
+              <AiTwotoneBell color="white" size={26} className="bellIcon" />
+              <h6 className="badge">4</h6>
+            </div>
+          )}
         </div>
         <div className="profile">
           <div className="profie_photo_box"></div>
@@ -128,15 +131,14 @@ const User_profile = () => {
               text="View profile"
               brColor="#2c6959"
               fontColor="#2c6959"
-              onClick={updateProfile}
+              onClick={viewProfile}
             />
           </div>
-          <div className="qualification">
-            <h6>
-              University : {university_name}
-              {/* {JSON.parse(usersData.university_name).join(', ')} */}
-            </h6>
-          </div>
+          {userType == 1 && (
+            <div className="qualification">
+              <h6>University : {university_name}</h6>
+            </div>
+          )}
           <div className="heading_box">
             <h6 className="heading">
               <span> Total Experience: </span>
@@ -176,10 +178,6 @@ const User_profile = () => {
                 className="status_img"
               />
               <h6>Resume Update</h6>
-              {/* <div className="percentage_box">
-                <h5>75%</h5>
-                <h4>complete</h4>
-              </div> */}
             </div>
           </div>
           <hr className="tags_line" />
@@ -270,6 +268,10 @@ const User_profile = () => {
             <Index_button text="See All" brline="gray" />
           </div>
         </div>
+        <CoachNotification
+          showNotification={showNotification}
+          setShowNotification={setShowNotification}
+        />
       </div>
     </>
   );
