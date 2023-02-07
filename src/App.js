@@ -40,6 +40,7 @@ import CoachesForm from "./Screen/Coaches_screen/CoachesForm";
 import ViewDetail from "./Screen/Workshop/ViewDetail";
 import CoachesDetails from "./Screen/CoachDetails/CoachDetails";
 import MyCourses from "./Component/MyCourses/MyCourses";
+import Header2 from "./Component/Header/Header2";
 
 
 function App() {
@@ -110,6 +111,7 @@ function App() {
         <Route exact path="/forum" element={<ForumScreen /> } />
         <Route exact path="/workshopviewdetails" element={<ViewDetail /> } />
         <Route exact path="/myCourses" element={<MyCourses />} />
+        <Route exact path="/Header2" element={<Header2 />} />
       </Routes>
       
     </Router>
