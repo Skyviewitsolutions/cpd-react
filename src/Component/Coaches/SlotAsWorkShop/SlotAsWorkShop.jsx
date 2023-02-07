@@ -2,11 +2,13 @@ import axios from "axios";
 import { duration } from "moment";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { setDefaultLocale } from "react-datepicker";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 import { RiNurseFill } from "react-icons/ri";
 import { toast } from "react-toastify";
 import "../../../Screen/Coaches_screen/CoachesForm.css";
 import { endpoints } from "../../services/endpoints";
+import Button from "../../button/Button/Button";
 
 const SlotAsWorkShop = (props) => {
   const { showCalendar, setShowCalendar, eventsToBeShown, setEventsToBeShown } =
@@ -36,10 +38,11 @@ const SlotAsWorkShop = (props) => {
   const [price, setPrice] = useState(0);
   const [sessionType, setSessionType] = useState("");
   const [showForm, setShowForm] = useState(false);
-  const [industry , setIndustry] = useState("");
-  const [domain , setDomain] = useState("");
-  const [allDomain , setAllDomain] = useState([]);
-  const [allIndustry , setAllIndustry] = useState([]);
+  const [industry, setIndustry] = useState("");
+  const [domain, setDomain] = useState("");
+  const [allDomain, setAllDomain] = useState([]);
+  const [allIndustry, setAllIndustry] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   var token = localStorage.getItem("token");
 
@@ -165,7 +168,7 @@ const SlotAsWorkShop = (props) => {
     );
   };
 
-  const handleConfirmSlots = async () => {
+  const updateDataToCalendar = async () => {
     var duration = workShopDuration;
 
     setIsConfirm(true);
@@ -255,56 +258,78 @@ const SlotAsWorkShop = (props) => {
       });
       setEventsToBeShown(events);
     }
+  };
 
-    // writing code for send the data to the database of the workshop;
+  const handleConfirmSlots = async () => {
+    updateDataToCalendar();
 
-    const url = endpoints.workshop.createWorkshop;
+    if (!title) {
+      toast("please fill the workshop title", { type: "warning" });
+    } else if (!workShopDuration) {
+      toast("workshop duration is required", { type: "warning" });
+    } else if (!workshopImg) {
+      toast("workshop image is required", { type: "warning" });
+    } else if (!domain) {
+      toast("please select workshop domain", { type: "warning" });
+    } else if (!industry) {
+      toast("please select workshop industry", { type: "warning" });
+    } else if (!maxNumber) {
+      toast("Max number of student is required", { type: "warning" });
+    } else if (!sessionType) {
+      toast("please select session type", { type: "warning" });
+    } else {
+      const url = endpoints.workshop.createWorkshop;
 
-    var availability_type = daysFormat == "weekly" ? 1 : 2;
-    var payment_type = sessionType == "hourly" ? 1 : 2;
-    var is_paid = paid == true ? 1 : 0;
-    var availability_timing = [startTime, endTime];
+      var availability_type = daysFormat == "weekly" ? 1 : 2;
+      var payment_type = sessionType == "hourly" ? 1 : 2;
+      var is_paid = paid == true ? 1 : 0;
+      var availability_timing = [startTime, endTime];
 
-    var slots = {
-      days: selectedDays,
-      dates: selectedDates,
-      startDate: startDate,
-      endDate: endDate,
-      startTime,
-      startTime,
-      endTime: startTime,
-      duration: duration,
-    };
+      var slots = {
+        days: selectedDays,
+        dates: selectedDates,
+        startDate: startDate,
+        endDate: endDate,
+        startTime,
+        startTime,
+        endTime: startTime,
+        duration: duration,
+      };
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("availability_type", availability_type);
-    formData.append("payment_type", payment_type);
-    formData.append("price", price);
-    formData.append("is_paid", is_paid);
-    formData.append("availability_slot", JSON.stringify(slots));
-    formData.append("availability_timing", availability_timing);
-    formData.append("is_repeated", 1);
-    formData.append("max_members", maxNumber);
-    formData.append("image", workshopImg);
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("availability_type", availability_type);
+      formData.append("payment_type", payment_type);
+      formData.append("price", price);
+      formData.append("is_paid", is_paid);
+      formData.append("availability_slot", JSON.stringify(slots));
+      formData.append("availability_timing", availability_timing);
+      formData.append("is_repeated", 1);
+      formData.append("max_members", maxNumber);
+      formData.append("image", workshopImg);
+      formData.append("domain", domain);
+      formData.append("industry", industry);
 
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
 
-    axios
-      .post(url, formData, { headers: headers })
-      .then((res) => {
-        console.log(res, "this is the response");
-        if (res.data.result) {
-          toast("workshop created successfully", { type: "success" });
-        } else if (res.data.result == false) {
-          toast(res.data.message, { type: "warning" });
-        }
-      })
-      .catch((err) => {
-        console.log(err, "this is the error here");
-      });
+      setLoading(true);
+      axios
+        .post(url, formData, { headers: headers })
+        .then((res) => {
+          setLoading(false);
+          if (res.data.result) {
+            toast("workshop created successfully", { type: "success" });
+          } else if (res.data.result == false) {
+            toast(res.data.message, { type: "warning" });
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err, "this is the error here");
+        });
+    }
   };
 
   const handleworkshopImg = (e) => {
@@ -327,7 +352,7 @@ const SlotAsWorkShop = (props) => {
       });
   };
 
-  const getAllDomain = () =>{
+  const getAllDomain = () => {
     const url = endpoints.master.allDomain;
     axios
       .get(url, { headers: headers })
@@ -340,13 +365,12 @@ const SlotAsWorkShop = (props) => {
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
- 
-  useEffect(() =>{
-    getAllIndustry()
-    getAllDomain()
-  },[])
+  useEffect(() => {
+    getAllIndustry();
+    getAllDomain();
+  }, []);
 
   return (
     <div className="formoutline_studentcv coachFormSt">
@@ -430,7 +454,7 @@ const SlotAsWorkShop = (props) => {
                   {allDomain.map((domain, ind) => {
                     return (
                       <>
-                        <option value={domain.title} key={ind}>
+                        <option value={domain._id} key={ind}>
                           {domain.title}
                         </option>
                       </>
@@ -454,7 +478,9 @@ const SlotAsWorkShop = (props) => {
                   {allIndustry.map((industry, index) => {
                     return (
                       <>
-                        <option value={industry.title} key={index}>{industry.title}</option>
+                        <option value={industry._id} key={index}>
+                          {industry.title}
+                        </option>
                       </>
                     );
                   })}
@@ -635,13 +661,13 @@ const SlotAsWorkShop = (props) => {
                   class="form-check-input"
                   type="radio"
                   name="flexRadioDefault"
-                  id="flexRadioDefault2"
+                  id="flexRadioDefault5"
                   checked={sessionType == "hourly"}
                   onChange={() => setSessionType("hourly")}
                 />
                 <label
                   class="form-check-label  textsession"
-                  for="flexRadioDefault2"
+                  for="flexRadioDefault5"
                 >
                   By Hours
                 </label>
@@ -652,13 +678,13 @@ const SlotAsWorkShop = (props) => {
                   class="form-check-input"
                   type="radio"
                   name="flexRadioDefault"
-                  id="flexRadioDefault3"
+                  id="flexRadioDefault6"
                   checked={sessionType == "sessional"}
                   onChange={() => setSessionType("sessional")}
                 />
                 <label
                   class="form-check-label textsession"
-                  for="flexRadioDefault3"
+                  for="flexRadioDefault6"
                 >
                   By Session
                 </label>
@@ -679,13 +705,12 @@ const SlotAsWorkShop = (props) => {
             </div>
           </div>
           <div className="confirmBtn">
-            <button
-              className={isConfirm ? "activeCnfBtn" : "inActiveCnfBtn"}
+            <Button
+              title="Create Workshop"
               onClick={handleConfirmSlots}
-            >
-              Confirm
-            </button>
-          </div>{" "}
+              loading={loading}
+            />
+          </div>
         </>
       )}
     </div>

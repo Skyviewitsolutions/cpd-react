@@ -54,7 +54,6 @@ const CoachesForm = () => {
   const [daysFormat, setDaysFormat] = useState("weekly");
   const [isRepeated, setIsRepeated] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
-
   const [paid, setPaid] = useState(false);
   const [sessionType, setSessionType] = useState("");
   const token = localStorage.getItem("token");
@@ -64,6 +63,7 @@ const CoachesForm = () => {
   const [coachesPreview, setCoachesPreview] = useState(false);
   const [coachesTitle, setCoachesTitle] = useState("");
   const [workShopTitle, setWorkShopTitle] = useState("");
+  
 
   var allDays = [
     "Sunday",

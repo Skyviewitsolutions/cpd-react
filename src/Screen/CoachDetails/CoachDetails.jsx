@@ -10,15 +10,23 @@ import { useParams } from "react-router-dom";
 import UserImg from "../../assets/Images/user.jpeg";
 import axios from "axios";
 import { getMyCoachings } from "../../utils/coaches";
+import { toast, ToastContainer } from "react-toastify";
+import BookBtn from "../../Component/button/BookBtn/BookBtn";
 
 const CoachingCard = (props) => {
-  const { coaching, key , } = props;
+  const { coaching, key, imgPath, bookingStatus, bookCoaches } = props;
+
+  const coachingImg = imgPath + "/" + coaching.image;
+
   return (
     <>
       <div className="col-lg-3 col-md-6 col-12 workshop-card" key={key}>
         <div className="card">
           <div className="workshopcard_media">
-            <img src={coachesDetailscardimages} alt="" />
+            <img
+              src={coaching.image ? coachingImg : coachesDetailscardimages}
+              alt=""
+            />
           </div>
           <div className="coachesDetailslistcard_descriptionBox">
             <div className="coachesDetailslistcardtitle">
@@ -30,16 +38,23 @@ const CoachingCard = (props) => {
 
             <div className="workshop_FreeBox">
               <h6>{coaching.is_paid == 1 ? `$ ${coaching.price}` : "Free"}</h6>
-              <h6>Domain : Retail</h6>
+              <h6>Domain : {coaching.domain}</h6>
             </div>
             <div className="domainBox">
               <div className="row">
                 <div className="col-lg-7 col-md-8 col-12">
-                  <h6 id="enrolled">Currently Enrolled (5/10)</h6>
+                  <h6 id="enrolled"></h6>
                 </div>
                 <div className="col-lg-5 col-md-4 col-12">
                   <div className=" coachesDetailsbuttonpending">
-                    <button className="">Pending</button>
+                    <BookBtn
+                      status={bookingStatus}
+                      onClick={() => bookCoaches(coaching)}
+                      styles={{
+                        height: "30px",
+                        paddingTop: "2px",
+                      }}
+                    />
                   </div>
                 </div>
               </div>
@@ -52,38 +67,55 @@ const CoachingCard = (props) => {
 };
 
 const WorkshopCard = (props) => {
-  const { workshop, key } = props;
+  
+  const { workshop, key, imgPath, enrollWorkshop, enrollStatus, showBookBtn } =
+    props;
+
+  const image = imgPath + "/" + workshop.image;
+
   return (
     <>
       <div className="col-lg-3 col-md-6 col-12 workshop-card">
         <div className="card">
           <div className="workshopcard_media">
-            <img src={coachesDetailscardimages} alt="" />
+            <img src={workshop.image && image} alt="" />
           </div>
           <div className="coachesDetailslistcard_descriptionBox">
             <div className="coachesDetailslistcardtitle">
-              <h4>DIY Organic Bath and Body Products</h4>
+              <h4>{workshop.title}</h4>
               <BsCalendarDateFill
                 style={{ color: "#2c6959", fontSize: "20px" }}
               />
             </div>
 
             <div className="workshop_FreeBox">
-              <h6>Free</h6>
-              <h6>Domain : Retail</h6>
+              <h6>{workshop.is_paid == 1 ? `${workshop.price} $` : "Free"}</h6>
+              <h6>Domain : {workshop.domain}</h6>
             </div>
             <div className="domainBox">
-              <div className="row">
-                <div className="col-lg-7 col-md-8 col-12">
-                  <h6 id="enrolled">Currently Enrolled (5/10)</h6>
+              <div className="row d-flex">
+                <div className="col-lg-7 col-md-8 col-12 d-flex justify-content-between">
+                  <h6 id="enrolled">
+                    Currently Enrolled ({workshop.workshop_members_count}/
+                    {workshop.max_members})
+                  </h6>
                 </div>
+
                 <div className="col-lg-5 col-md-4 col-12">
-                  <div className=" coachesDetailsbuttonpending">
-                    <button className="">Pending</button>
+                  <div className="">
+                    {showBookBtn && (
+                      <BookBtn
+                        status={enrollStatus}
+                        onClick={() => enrollWorkshop(workshop)}
+                        styles={{
+                          height: "30px",
+                          paddingTop: "2px",
+                        }}
+                      />
+                    )}
                   </div>
                 </div>
               </div>
-              <h6 id="enrolled">Currently Enrolled (5/10)</h6>
             </div>
           </div>
         </div>
@@ -92,16 +124,14 @@ const WorkshopCard = (props) => {
   );
 };
 
-const mycoachings = getMyCoachings();
-
 const CoachesDetails = () => {
-
   const [allCoachings, setAllCoachings] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
   const [coachingImgPath, setCoachingImgPath] = useState("");
   const [workshopImgPath, setWorkshopImgPath] = useState("");
   const [coachImgPath, setCoachImgPath] = useState("");
-  const [myEnrolledCoachings , setMyEnrolledCoachings] = useState([])
+  const [myEnrolledCoachings, setMyEnrolledCoachings] = useState([]);
+  const [myEnrolledWorkshops, setMyEnrolledWorkshops] = useState([]);
   const [coachDetails, setCoachDetails] = useState({
     first_name: "",
     last_name: "",
@@ -109,6 +139,7 @@ const CoachesDetails = () => {
     category: "",
     avatar: "",
   });
+  const [loading, setLoading] = useState([]);
 
   const token = localStorage.getItem("token");
   const headers = {
@@ -139,8 +170,11 @@ const getCoachings = () => {
       .get(url, { headers: headers })
       .then((res) => {
         if (res.data.result) {
-          var data = res.data.data[0];
+          console.log(res, "workshops here");
+          var data = res.data.data;
           var path = res.data.workshop_image_path;
+          setWorkshopImgPath(path);
+          setAllWorkshops(data);
         }
       })
       .catch((err) => {
@@ -167,15 +201,107 @@ const getCoachings = () => {
       });
   };
 
+  const getAllEnrollWorkshops = () => {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    const url = endpoints.workshop.myEnrolledWorkshop;
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if (res.data.result) {
+          var val = res.data.data;
+          setMyEnrolledWorkshops(val);
+        }
+      })
+      .catch((err) => {
+        console.log(err, "this is the error");
+      });
+  };
+
+  const getAllEnrolledCoachings = () => {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    const url = endpoints.coaches.enrolledCoaching;
+
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if (res.data.result) {
+          var val = res.data.data;
+          setMyEnrolledCoachings(val);
+        }
+      })
+      .catch((err) => {
+        console.log(err, "this is the error");
+      });
+  };
+
   useEffect(() => {
     if (coachId) {
       getCoachings();
       getWorkshops();
       getCoachDetails();
+      getAllEnrollWorkshops();
+      getAllEnrolledCoachings();
     }
   }, []);
 
- 
+  const enrollWorkshop = (workShopData) => {
+    var id = workShopData._id;
+    const url = `${endpoints.workshop.enrollWorkshop}${id}`;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        console.log(res, "this is the response");
+        if (res.data.result) {
+          toast("workshop enrolled successfully", { type: "success" });
+          getAllEnrollWorkshops();
+        } else if (res.data.result == false) {
+          toast(res.data.message, { type: "warning" });
+        }
+      })
+      .catch((err) => {
+        console.log(err, "error here");
+      });
+  };
+
+  const bookCoaches = (coachData) => {
+    var id = coachData._id;
+    var url = `${endpoints.coaches.enrollCoaching}${id}`;
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    setLoading(true);
+
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        setLoading(false);
+        if (res.data.result) {
+          toast("Coaching booked successfully", { type: "success" });
+        } else if (res.data.result == false) {
+          toast(res.data.message, { type: "warning" });
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err, "this is the error here");
+      });
+  };
+
   return (
     <>
       <Homepage_header />
@@ -183,7 +309,7 @@ const getCoachings = () => {
         <div className="row ">
           <div className="col-lg-12 col-md-12 col-12 explore">
             <h5>Explore Coaching and Workshop</h5>
-            {/* <h6>Please Click <a href=''>update your resume</a> for view more community and their events</h6> */}
+           
           </div>
         </div>
       </div>
@@ -220,18 +346,34 @@ const getCoachings = () => {
               <div className="row">
                 {allCoachings.length != 0 &&
                   allCoachings.map((coaching, index) => {
+                    var id = coaching._id;
+                    var enrolled = myEnrolledCoachings.filter((itm, ind) => {
+                      return itm.coaching_id == id;
+                    });
+
+                    var bookingStatus = 3;
+
+                    if (enrolled.length != 0) {
+                      var datas = enrolled[0];
+                      var status = datas.status;
+                      bookingStatus = status;
+                    }
                     return (
                       <>
                         <CoachingCard
                           coaching={coaching}
                           key={index}
                           imgPath={coachingImgPath}
+                          bookCoaches={bookCoaches}
+                          showBookBtn={true}
+                          bookingStatus={bookingStatus}
                         />
                       </>
                     );
                   })}
 
                 {allCoachings.length == 0 && <h6>No coachings found !</h6>}
+                <div className="viewDetailsBox"></div>
               </div>
             </div>
           </div>
@@ -244,12 +386,29 @@ const getCoachings = () => {
               <div className="row">
                 {allWorkshops.length != 0 &&
                   allWorkshops.map((workshop, index) => {
+                    var id = workshop._id;
+
+                    var enrollStatus = 3;
+
+                    var enrolled = myEnrolledWorkshops.filter((itm, ind) => {
+                      return itm.coaching_id == id;
+                    });
+
+                    if (enrolled.length != 0) {
+                      var datas = enrolled[0];
+                      var status = datas.status;
+                      enrollStatus = status;
+                    }
+
                     return (
                       <>
                         <WorkshopCard
                           workshop={workshop}
                           key={index}
                           imgPath={workshopImgPath}
+                          enrollWorkshop={enrollWorkshop}
+                          enrollStatus={enrollStatus}
+                          showBookBtn={true}
                         />
                       </>
                     );

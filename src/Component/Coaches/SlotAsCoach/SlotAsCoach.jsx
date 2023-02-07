@@ -4,8 +4,10 @@ import { BsFillCalendarDateFill } from "react-icons/bs";
 import { toast, ToastContainer } from "react-toastify";
 import { endpoints } from "../../services/endpoints";
 import MyCoachingList from "../MyCoachingList/MyCoachingList";
+import Button from "../../button/Button/Button";
 
 const SlotAsCoach = (props) => {
+
   const { setShowCalendar, setEventsToBeShown } = props;
   const token = localStorage.getItem("token");
   const [coachTitle, setCoachTitle] = useState("");
@@ -27,6 +29,7 @@ const SlotAsCoach = (props) => {
   const [domain, setDomain] = useState("");
   const [allDomain, setAllDomain] = useState([]);
   const [allIndustry, setAllIndustry] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const [startDate, setStartDate] = useState(
     new Date()
@@ -162,7 +165,8 @@ const SlotAsCoach = (props) => {
     );
   };
 
-  const handleConfirmSlots = async () => {
+  const updateDataToCalendar = async () => {
+
     setIsConfirm(true);
     var events = [];
 
@@ -283,34 +287,48 @@ const SlotAsCoach = (props) => {
             end: new Date(endDte),
             title: coachTitle,
           };
-
           events.push(evnt);
         });
         setEventsToBeShown(events);
       }
     }
+  };
 
-    // here we are writing the code for updating the data from here ;
+  const handleConfirmSlots = async () => {
+    if (coachTitle == "") {
+      toast("Please fill the coaching title", { type: "warning" });
+    } else if (!coachingImg) {
+      toast("coaching image is required", { type: "warning" });
+    } else if (!domain) {
+      toast("please select coaching domain", { type: "warning" });
+    } else if (!industry) {
+      toast("please select coaching industry", { type: "warning" });
+    } else if (!sessionType) {
+      toast("please select session type", { type: "warning" });
+    } else {
+      updateDataToCalendar();
+      // here we are writing the code for updating the data from here ;
 
-    const url = endpoints.coaches.createCoaching;
+      const url = endpoints.coaches.createCoaching;
 
-    var availability_type = daysFormat == "weekly" ? 1 : 2;
-    var payment_type = sessionType == "hourly" ? 1 : 2;
-    var is_paid = paid == true ? 1 : 0;
-    var availability_timing = [startTime, endTime];
-    var availability_slot = [startDate, endDate];
-    var is_repeated = isRepeated ? 1 : 0;
+      var availability_type = daysFormat == "weekly" ? 1 : 2;
+      var payment_type = sessionType == "hourly" ? 1 : 2;
+      var is_paid = paid == true ? 1 : 0;
+      var availability_timing = [startTime, endTime];
+      var availability_slot = [startDate, endDate];
+      var is_repeated = isRepeated ? 1 : 0;
 
-    var slots = {
-      days: selectedDays,
-      dates: selectedDates,
-      startDate: startDate,
-      endDate: endDate,
-      startTime,
-      startTime,
-      endTime: startTime,
-    };
+      var slots = {
+        days: selectedDays,
+        dates: selectedDates,
+        startDate: startDate,
+        endDate: endDate,
+        startTime,
+        startTime,
+        endTime: startTime,
+      };
 
+<<<<<<< HEAD
     const formData = new FormData();
     formData.append("title", coachTitle);
     formData.append("availability_type", availability_type);
@@ -323,24 +341,43 @@ const SlotAsCoach = (props) => {
     formData.append("image", coachingImg);
     formData.append('domain' ,  domain);
     formData.append("industry" , industry);
+=======
+      const formData = new FormData();
+      formData.append("title", coachTitle);
+      formData.append("availability_type", availability_type);
+      formData.append("payment_type", payment_type);
+      formData.append("price", price);
+      formData.append("is_paid", is_paid);
+      formData.append("availability_slot", JSON.stringify(slots));
+      formData.append("availability_timing", availability_timing);
+      formData.append("is_repeated", is_repeated);
+      formData.append("image", coachingImg);
+      formData.append("domain", domain);
+      formData.append("industry", industry);
+>>>>>>> 4f2bd6b572b44ec033b71d2d6e71f02e8a455b5d
 
-    const headers = {
-      Authorization: `Bearer ${token}`,
-      "Content-type": "application/json",
-    };
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      };
 
-    axios
-      .post(url, formData, { headers: headers })
-      .then((res) => {
-        if (res.data.result) {
-          toast("Coaching created successfully", { type: "success" });
-        } else if (res.data.result == false) {
-          toast(res?.data?.message, { type: "warning" });
-        }
-      })
-      .catch((err) => {
-        console.log(err, "this is the error here");
-      });
+      setLoading(true);
+
+      axios
+        .post(url, formData, { headers: headers })
+        .then((res) => {
+          setLoading(false);
+          if (res.data.result) {
+            toast("Coaching created successfully", { type: "success" });
+          } else if (res.data.result == false) {
+            toast(res?.data?.message, { type: "warning" });
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err, "this is the error here");
+        });
+    }
   };
 
   const handleCoachingImg = (e) => {
@@ -348,7 +385,6 @@ const SlotAsCoach = (props) => {
     setCoachingImg(files);
   };
 
- 
   const getAllIndustry = () => {
     const url = endpoints.master.allIndustry;
     axios
@@ -364,7 +400,7 @@ const SlotAsCoach = (props) => {
       });
   };
 
-  const getAllDomain = () =>{
+  const getAllDomain = () => {
     const url = endpoints.master.allDomain;
     axios
       .get(url, { headers: headers })
@@ -377,13 +413,12 @@ const SlotAsCoach = (props) => {
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
- 
-  useEffect(() =>{
-    getAllIndustry()
-    getAllDomain()
-  },[])
+  useEffect(() => {
+    getAllIndustry();
+    getAllDomain();
+  }, []);
 
   return (
     <div className="formoutline_studentcv coachFormSt">
@@ -619,7 +654,10 @@ const SlotAsCoach = (props) => {
                   type="radio"
                   id="a25"
                   name="check-substitution-2"
-                  onClick={() => setPaid(false)}
+                  onClick={() => {
+                    setPaid(false);
+                    setPrice(0);
+                  }}
                 />
                 <label
                   for="a25"
@@ -697,12 +735,7 @@ const SlotAsCoach = (props) => {
           </div>
 
           <div className="confirmBtn">
-            <button
-              className={isConfirm ? "activeCnfBtn" : "inActiveCnfBtn"}
-              onClick={handleConfirmSlots}
-            >
-              Create Coaching
-            </button>
+            <Button title="Create Coaching" onClick={handleConfirmSlots} loading={loading}/>
           </div>
         </>
       )}

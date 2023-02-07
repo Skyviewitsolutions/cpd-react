@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./Workshop.css";
 import Homepage_header from "../../Component/Header/Homepage_header";
 import Footer from "../../Component/Footer/Footer";
@@ -17,74 +16,13 @@ import axios from "axios";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 import { toast } from "react-toastify";
+import WorkshopCard from "../../Component/WorkshopCard/WorkshopCard";
 import BookBtn from "../../Component/button/BookBtn/BookBtn";
+import {   useNavigate } from "react-router-dom";
 
-
-const WorkshopCard = (props) => {
-  const {
-    workshop,
-    showWorkshopOnCalendar,
-    enrollWorkshop,
-    enrollStatus,
-    img,
-    showBookBtn,
-    key,
-  } = props;
-
-  console.log(workshop , "this is the workshop here");
-
-  return (
-    <>
-      <div className="col-lg-4 col-md-12 col-12 workshop-card " key={key}>
-        <div className="card">
-          <div className="workshopcard_media">
-            <img src={workshop.image ? img : dommy_workshopImage} alt="" />
-            <div className="tags_onImage">
-              <h6>Workshop</h6>
-            </div>
-          </div>
-          <div className="workshopcard_descriptionBox">
-            <div className="d-flex justify-content-between align-items-center mb-2">
-              <h4>{workshop.title}</h4>
-              <h6>
-                Availability :{" "}
-                <span
-                  style={{ marginLeft: "9px" }}
-                  onClick={() => showWorkshopOnCalendar(workshop)}
-                >
-                  <BsFillCalendarDateFill color="#2c6959" size={17} />
-                </span>
-              </h6>
-            </div>
-
-            <div className="workshop_FreeBox">
-              <h6>{workshop.is_paid == 1 ? "Paid" : "Free"}</h6>
-              <div className="viewDetailsBox">
-                {showBookBtn && (
-                  <BookBtn
-                    status={enrollStatus}
-                    onClick={() => enrollWorkshop(workshop)}
-                    styles={{
-                      height: "30px",
-                      paddingTop: "2px",
-                    }}
-                  />
-                )}
-              </div>
-            </div>
-            <div className="domainBox">
-              <h6>Price : {workshop.price} $</h6>
-              <h6>Industries : All</h6>
-            </div>
-            <h6 id="enrolled">Currently Enrolled ({workshop.workshop_members_count}/{workshop.max_members})</h6>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
 
 const Workshop = () => {
+
   const navigate = useNavigate("");
   const [modalShow, setModalShow] = React.useState(false);
   const token = localStorage.getItem("token");
@@ -95,11 +33,12 @@ const Workshop = () => {
   const [myEnrolledWorkshop, setMyEnrolledWorkshop] = useState([]);
   const [myWorkshopList, setMyWorkshopList] = useState([]);
   const [showAllWorkshop, setShowAllWorkshop] = useState(true);
+  const [inputData , setInputData] = useState("")
+  const [workshopToBeShown , setWorkshopToBeShown] = useState([]);
+
   var userDetails = localStorage.getItem("users");
   var userType = JSON.parse(userDetails);
-  userType = userType.user_type;
-
-  //  getting workshop list ;
+  userType = userType?.user_type;
 
   const getAllWorkshop = () => {
     const url = endpoints.workshop.allWorkshop;
@@ -115,6 +54,7 @@ const Workshop = () => {
           var imgPath = res.data.workshop_image_path;
           setImagePath(imgPath);
           setAllWorkShopList(val);
+          setWorkshopToBeShown(val);
         }
       })
       .catch((err) => {
@@ -346,6 +286,7 @@ const Workshop = () => {
         if (res.data.result) {
           const val = res.data.data;
           setMyWorkshopList(val);
+          setWorkshopToBeShown(val);
         }
       })
       .catch((err) => {
@@ -361,7 +302,30 @@ const Workshop = () => {
     }
   }, []);
 
-  // 0/1/2/3=Cancelled/Pending/Confirmed/booknow
+  // 0/1/2/3=Cancelled/Pending/Confirmed/booknow;
+
+  const handleShowAllWorkshop = () =>{
+    setShowAllWorkshop(true)
+    setWorkshopToBeShown(allWorkShopList)
+  }
+
+  const handleShowMyWorkshop = () =>{
+    setShowAllWorkshop(false)
+    setWorkshopToBeShown(myWorkshopList)
+  }
+
+  const handleInputData = (val) =>{
+    var value = val.toLowerCase();
+    if(showAllWorkshop){
+      var filteredData = allWorkShopList.filter((data , index) =>{
+        return data.title.toLowerCase().includes(value)
+      })
+      setWorkshopToBeShown(filteredData)
+    }
+    else {
+      
+    }
+  }
 
   return (
     <>
@@ -402,7 +366,7 @@ const Workshop = () => {
                         background: showAllWorkshop ? "#2c6959" : "white",
                         color: showAllWorkshop ? "white" : "#2c6959",
                       }}
-                      onClick={() => setShowAllWorkshop(true)}
+                      onClick={handleShowAllWorkshop}
                     >
                       All
                     </button>
@@ -412,9 +376,9 @@ const Workshop = () => {
                         background: !showAllWorkshop ? "#2c6959" : "white",
                         color: !showAllWorkshop ? "white" : "#2c6959",
                       }}
-                      onClick={() => setShowAllWorkshop(false)}
+                      onClick={handleShowMyWorkshop}
                     >
-                      My coachings
+                      My workshops
                     </button>
                   </div>
                 )}
@@ -481,6 +445,7 @@ const Workshop = () => {
                       var status = datas.status;
                       enrollStatus = status;
                     }
+
                     return (
                       <>
                         <WorkshopCard

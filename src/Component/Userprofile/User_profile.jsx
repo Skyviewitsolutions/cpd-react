@@ -22,7 +22,6 @@ import axios from "axios";
 import CoachNotification from "../CoachNotification/CoachNotification";
 
 const User_profile = () => {
-  
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [usersData, setUsersData] = useState({});

@@ -30,6 +30,7 @@ import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import { TagsInput } from "react-tag-input-component";
 
 const AddEvent = () => {
+
   const navigate = useNavigate("");
   const location = useLocation();
 
@@ -300,12 +301,13 @@ const AddEvent = () => {
     } else if (!communityId) {
       toast("Community id is required", { type: "warning" });
     } else {
+    
       const token = localStorage.getItem("token");
       var data = new FormData();
       data.append("event_title", sessionTitle);
       data.append("event_description", sessionDesc);
       data.append("tags", sessionTags);
-      data.append("event_type", sessionType);
+      data.append("session_type", sessionType);
       data.append("event_duration", sessionDuration);
       data.append("max_members", maxStudent);
       data.append("event_photo", eventImgFile);
@@ -317,7 +319,9 @@ const AddEvent = () => {
       data.append("duration_payment", sessionDuration);
       data.append("price", price);
       data.append("timeslots", "12-1");
+      data.append('session_type' , )
       data.append("community_id", communityId);
+     
 
       setLoading(true);
 
