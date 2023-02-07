@@ -11,9 +11,10 @@ import Month_days from "../../../Component/DaySelection/Month_days";
 import "../../../fonts/Inter-Bold.ttf";
 import "../../../fonts/Inter-Regular.ttf";
 import BookSlot from "../BookSlot/BookSlot";
+
 const BookCoaches = (props) => {
   // const [modalShow, setModalShow] = React.useState(false);
-  // const {BookCoachesShow, setBookCoachesShow}=props;
+  const { BookCoachesShow, setBookCoachesShow } = props;
   const [BookSlotShow, setBookSlotShow] = useState(false);
   const [dayType, setDayType] = useState("days");
   const [days, setDays] = useState([]);
@@ -32,7 +33,7 @@ const BookCoaches = (props) => {
     }
     setUpdateWeekDays(!updateWeekDays);
   };
- 
+
   const addDaySlot = (val) => {
     let check = days.includes(val);
     if (check) {
@@ -178,9 +179,8 @@ const BookCoaches = (props) => {
                       onClick={() => {
                         // setBookCoachesShow(false);
                         setBookSlotShow(true);
-                        
-        }}>
-                    
+                      }}
+                    >
                       Book Slot
                     </Button>
                   </Modal.Footer>
@@ -189,8 +189,6 @@ const BookCoaches = (props) => {
                 <BookSlot
                   show={BookSlotShow}
                   onHide={() => setBookSlotShow(false)}
-                  
-
                 />
               </div>
             </Modal.Body>

@@ -39,10 +39,11 @@ import CareerFareDetails from './Screen/Career/CareerFareDetails';
 import CoachesForm from "./Screen/Coaches_screen/CoachesForm";
 import ViewDetail from "./Screen/Workshop/ViewDetail";
 import CoachesDetails from "./Screen/CoachDetails/CoachDetails";
-
+import MyCourses from "./Component/MyCourses/MyCourses";
 
 
 function App() {
+  
    
   return (
     <Router>
@@ -108,6 +109,7 @@ function App() {
         <Route exact path="/careerDetails" element={<CareerFareDetails /> } />
         <Route exact path="/forum" element={<ForumScreen /> } />
         <Route exact path="/workshopviewdetails" element={<ViewDetail /> } />
+        <Route exact path="/myCourses" element={<MyCourses />} />
       </Routes>
       
     </Router>

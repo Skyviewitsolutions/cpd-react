@@ -16,9 +16,11 @@ const Event_cards = (props) => {
   const image = picPath + data.event_photo;
   const navigate = useNavigate();
 
-  var days = data?.availability_days;
+  var days = data?.availability_date;
+  console.log(data , "days here")
   // days = days.replaceAll('"', "");
   // days = days.split(",");
+ 
 
   var timeslots = data?.timeslots;
 
@@ -37,13 +39,13 @@ const Event_cards = (props) => {
             <div className="avlbltyEvent">
             <h6 className="evntt-days">
               Available days : {" "}
-               {days.map((itm, ind) => {
+               {/* {days.map((itm, ind) => {
                  return (
                    <>
                      <span key={ind}>{itm} , </span>
                    </>
                  );
-               })}
+               })} */}
              </h6>
             </div>
           </Card.Title>

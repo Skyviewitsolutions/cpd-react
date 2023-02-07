@@ -56,7 +56,6 @@ export const endpoints = {
     cancelWorkshop : BASE_URL + "/coaches/workshop/respond-to-enrollment?booking_id=",
     confirmWorkshop : BASE_URL + "/coaches/workshop/respond-to-enrollment?booking_id=",
     myWorkshop : BASE_URL + "/coaches/workshop/get-list?by_self=1"
-
   } ,
   master : {
     allIndustry : BASE_URL + "/list-industry",

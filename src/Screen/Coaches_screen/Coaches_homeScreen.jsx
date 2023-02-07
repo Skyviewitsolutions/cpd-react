@@ -17,12 +17,11 @@ import { BsFillCalendarDateFill } from "react-icons/bs";
 import { Spinner } from "react-bootstrap";
 import { toast } from "react-toastify";
 import BookBtn from "../../Component/button/BookBtn/BookBtn";
-import { generatePath , useNavigate } from "react-router-dom";
-
+import { generatePath, useNavigate } from "react-router-dom";
+import useFetchCoachingsData from "../../assets/CustomHooks/useFetchCoachingsData";
 
 const CoachingCard = (props) => {
 
-  
   const {
     data,
     bookingStatus,
@@ -30,16 +29,21 @@ const CoachingCard = (props) => {
     showCoachingsOnCalendar,
     showBookBtn,
     bookCoaches,
-  }  = props;
+  } = props;
 
   const navigate = useNavigate();
 
-  const showCoachDetails = (dta) =>{
+  const showCoachDetails = (dta) => {
     const coachId = dta.created_by;
-    const path = generatePath("/coach-Details/:coachId" , {coachId : coachId});
-    navigate(path)
-  }
-  
+    const path = generatePath("/coach-Details/:coachId", { coachId: coachId });
+    navigate(path);
+  };
+
+  var description = data?.coach_info?.description;
+  var coachInfo = data?.coach_info;
+
+  const [showDescription, setshowDescription] = useState(false);
+
   return (
     <>
       <div class=" col-lg-6 col-md-12 col-12 ">
@@ -47,7 +51,10 @@ const CoachingCard = (props) => {
           <div className="card CoachScreen_coachesList">
             <div className="row">
               <div className="col-lg-3 col-md-3 col-12 img-box">
-                <div class=" img-box img-placeholder" onClick={() => showCoachDetails(data)}>
+                <div
+                  class=" img-box img-placeholder"
+                  onClick={() => showCoachDetails(data)}
+                >
                   <img
                     src={dommy_person}
                     alt="#"
@@ -56,18 +63,25 @@ const CoachingCard = (props) => {
                 </div>
               </div>
               <div className="col-lg-4 col-md-5 col-12 nameBox">
-                <div className="coachscreen_coachname">
+                <div className="coachscreen_coachname position-relative">
                   <h5>
                     {data?.coach_info?.first_name} {data?.coach_info?.last_name}
                   </h5>
+
+                  <GrPowerForceShutdown
+                    onMouseOver={() => setshowDescription(true)}
+                    onMouseOut={() => setshowDescription(false)}
+                  />
+                  {showDescription && (
+                    <div className="coachDesc">{description}</div>
+                  )}
                 </div>
 
                 <h6>Country</h6>
                 <p>{data.coach_info?.nationality}</p>
                 <h6> Expertise</h6>
                 <p>
-                  {data?.coach_info?.job_title[0]} |{" "}
-                  {data?.coach_info?.industry[0]}
+                  {coachInfo?.category} | {coachInfo?.subCategory}
                 </p>
               </div>
               <div className="col-lg-5  col-md-4 col-12 availabilityBox">
@@ -111,6 +125,7 @@ const CoachingCard = (props) => {
   );
 };
 
+
 const Coaches_homeScreen = () => {
 
   const [showCalendar, setShowCalendar] = useState(false);
@@ -122,13 +137,17 @@ const Coaches_homeScreen = () => {
   const [showAllCoaching, setShowAllCoaching] = useState(true);
   const [myCoachings, setMyCoachings] = useState([]);
   const [coachingListToBeShown, setCoachingListToBeShown] = useState([]);
+  const [allEnrolledWorkshops, setAllEnrolledWorkshops] = useState([]);
+  const [showBookCoachesSlot, setBookCoachesSlot] = useState(false);
+
+  const allCoachesList = useFetchCoachingsData(endpoints.coaches.allCoachingList);
+  console.log(allCoachesList , "hll")
+
   var userDetails = localStorage.getItem("users");
   var userType = JSON.parse(userDetails);
   userType = userType.user_type;
 
-
   const getCoachingList = () => {
-
     const token = localStorage.getItem("token");
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -345,35 +364,6 @@ const Coaches_homeScreen = () => {
     }
   };
 
-  const bookCoaches = (coachData) => {
-    var id = coachData._id;
-    var url = `${endpoints.coaches.enrollCoaching}${id}`;
-
-    console.log(url);
-
-    const headers = {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    };
-
-    setLoading(true);
-
-    axios
-      .get(url, { headers: headers })
-      .then((res) => {
-        setLoading(false);
-        if (res.data.result) {
-          toast("Coaching booked successfully", { type: "success" });
-        } else if (res.data.result == false) {
-          toast(res.data.message, { type: "warning" });
-        }
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.log(err, "this is the error here");
-      });
-  };
-
   const getAllEnrolledCoachings = () => {
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -415,13 +405,65 @@ const Coaches_homeScreen = () => {
       });
   };
 
+  const getAllEnrollWorkshops = () => {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    const url = endpoints.workshop.myEnrolledWorkshop;
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if (res.data.result) {
+          var val = res.data.data;
+          setAllEnrolledWorkshops(val);
+        }
+      })
+      .catch((err) => {
+        console.log(err, "this is the error");
+      });
+  };
+
   useEffect(() => {
     getAllEnrolledCoachings();
+    getAllEnrollWorkshops();
     getCoachingList();
     if (userType == 2) {
       getMyCoachingsList();
     }
   }, []);
+
+  const bookCoaches = (coachData) => {
+    var id = coachData._id;
+    var url = `${endpoints.coaches.enrollCoaching}${id}`;
+
+    console.log(url);
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    setLoading(true);
+
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        setLoading(false);
+        if (res.data.result) {
+          getMyCoachingsList();
+          getAllEnrolledCoachings();
+          toast("Coaching booked successfully", { type: "success" });
+        } else if (res.data.result == false) {
+          toast(res.data.message, { type: "warning" });
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err, "this is the error here");
+      });
+  };
 
   // 0/1/2/3=Cancelled/Pending/Confirmed/booknow;
 
@@ -549,6 +591,11 @@ const Coaches_homeScreen = () => {
         showCalendar={showCalendar}
         setShowCalendar={setShowCalendar}
         eventsToBeShown={eventsToBeShown}
+      />
+
+      <BookCoaches
+        BookCoachesShow={showBookCoachesSlot}
+        setBookCoachesShow={showBookCoachesSlot}
       />
       <Footer />
     </>

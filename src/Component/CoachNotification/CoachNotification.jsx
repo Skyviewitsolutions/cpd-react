@@ -8,6 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { endpoints } from "../services/endpoints";
 
 const CoachNotification = (props) => {
+
   const { showNotification, setShowNotification } = props;
   const [allNotifiedCoachings, setAllNotifiedCoachings] = useState([]);
   const token = localStorage.getItem("token");
@@ -77,7 +78,8 @@ const CoachNotification = (props) => {
       .then((res) => {
         setLoading(false);
         if (res.data.result) {
-          toast("Coaching request cancelled successfully", { type: "success" });
+          getAllNotifiedCoachings();
+          toast("Request cancelled successfully", { type: "success" });
         }
       })
       .catch((err) => {
@@ -101,7 +103,8 @@ const CoachNotification = (props) => {
       .then((res) => {
         setLoading(false);
         if (res.data.result) {
-          toast("Coaching request cancelled successfully", { type: "success" });
+          getAllNotifiedCoachings();
+          toast("Request cancelled successfully", { type: "success" });
         }
       })
       .catch((err) => {
@@ -125,6 +128,7 @@ const CoachNotification = (props) => {
       .then((res) => {
         setLoading(false);
         if (res.data.result) {
+          getAllNotifiedWorkshops();
           toast("Workshop request cancelled successfully", { type: "success" });
         }
       })
@@ -149,7 +153,8 @@ const CoachNotification = (props) => {
       .then((res) => {
         setLoading(false);
         if (res.data.result) {
-          toast("Workshop request cancelled successfully", { type: "success" });
+          getAllNotifiedWorkshops();
+          toast("Workshop request confirmed successfully", { type: "success" });
         }
       })
       .catch((err) => {

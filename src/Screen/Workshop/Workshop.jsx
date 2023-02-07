@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./Workshop.css";
 import Homepage_header from "../../Component/Header/Homepage_header";
 import Footer from "../../Component/Footer/Footer";
@@ -18,9 +17,11 @@ import { BsFillCalendarDateFill } from "react-icons/bs";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 import { toast } from "react-toastify";
 import BookBtn from "../../Component/button/BookBtn/BookBtn";
+import { generatePath , useNavigate } from "react-router-dom";
 
 
 const WorkshopCard = (props) => {
+
   const {
     workshop,
     showWorkshopOnCalendar,
@@ -30,12 +31,17 @@ const WorkshopCard = (props) => {
     showBookBtn,
     key,
   } = props;
+  const navigate = useNavigate()
 
-  console.log(workshop , "this is the workshop here");
+  const showCoachDetails = (dta) => {
+    const coachId = dta.created_by;
+    const path = generatePath("/coach-Details/:coachId", { coachId: coachId });
+    navigate(path);
+  };
 
   return (
     <>
-      <div className="col-lg-4 col-md-12 col-12 workshop-card " key={key}>
+      <div className="col-lg-4 col-md-12 col-12 workshop-card " key={key} onClick={() => showCoachDetails(workshop)}>
         <div className="card">
           <div className="workshopcard_media">
             <img src={workshop.image ? img : dommy_workshopImage} alt="" />
@@ -58,26 +64,34 @@ const WorkshopCard = (props) => {
             </div>
 
             <div className="workshop_FreeBox">
-              <h6>{workshop.is_paid == 1 ? "Paid" : "Free"}</h6>
-              <div className="viewDetailsBox">
-                {showBookBtn && (
-                  <BookBtn
-                    status={enrollStatus}
-                    onClick={() => enrollWorkshop(workshop)}
-                    styles={{
-                      height: "30px",
-                      paddingTop: "2px",
-                    }}
-                  />
-                )}
-              </div>
+              {/* <h6>{(workshop.is_paid == 1 )? "Paid" : "Free"}</h6> */}
+              <div className="viewDetailsBox"></div>
             </div>
             <div className="domainBox">
               <h6>Price : {workshop.price} $</h6>
-              <h6>Industries : All</h6>
+              <h6>Domain : {workshop?.domain_info?.title}</h6>
             </div>
-            <h6 id="enrolled">Currently Enrolled ({workshop.workshop_members_count}/{workshop.max_members})</h6>
+            <div className="col-12 d-flex justify-content-between align-items-center">
+              <h6 id="enrolled col-7">
+                Currently Enrolled ({workshop.workshop_members_count}/
+                {workshop.max_members})
+              </h6>
+              <div className="col-5">
+              {showBookBtn && (
+                <BookBtn
+                  status={enrollStatus}
+                  onClick={() => enrollWorkshop(workshop)}
+                  styles={{
+                    height: "30px",
+                    paddingTop: "2px",
+                  }}
+                />
+              )}
+            </div>
+            </div>
+           
           </div>
+          
         </div>
       </div>
     </>
@@ -85,6 +99,7 @@ const WorkshopCard = (props) => {
 };
 
 const Workshop = () => {
+
   const navigate = useNavigate("");
   const [modalShow, setModalShow] = React.useState(false);
   const token = localStorage.getItem("token");
@@ -414,7 +429,7 @@ const Workshop = () => {
                       }}
                       onClick={() => setShowAllWorkshop(false)}
                     >
-                      My coachings
+                      My workshops
                     </button>
                   </div>
                 )}
@@ -481,6 +496,7 @@ const Workshop = () => {
                       var status = datas.status;
                       enrollStatus = status;
                     }
+
                     return (
                       <>
                         <WorkshopCard
