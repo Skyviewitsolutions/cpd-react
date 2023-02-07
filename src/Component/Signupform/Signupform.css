@@ -3,6 +3,9 @@
   align-items:center;
   justify-content:space-between;
 }
+.loginSignup{
+  margin-bottom:0px !important;
+}
 .social_box{
   width:100%;
   display: flex;

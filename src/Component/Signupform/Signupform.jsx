@@ -91,22 +91,37 @@ const Signupform = (props) => {
 
   return (
     <>
-      <div className="row mb-3">
+      <div className="row mb-1">
         <div className=""></div>
         <div className="col-lg-4 col-md-6 col-12 signUpPage">
           <h4>Sign UP</h4>
         </div>
-        <div className="col-lg-4 col-md-6 col-12 signUpChoice">
+        {/* <div className="col-lg-4 col-md-6 col-12 signUpChoice">
           <select class="form-select" onChange={(e)=>setUserType(e.target.value)}>
             <option value="1">Student</option>
             <option value="2">Speaker / Coach</option>
             <option value="3">Employer</option>
             <option value="4">University</option>
           </select>
-        </div>
+        </div> */}
       </div>
 
       <div>
+
+
+      <Form.Group className="mb-2">
+          <label>Select User</label>
+          <div >
+          <select class="form-select" onChange={(e)=>setUserType(e.target.value)}>
+            <option value="1">Student</option>
+            <option value="2">Speaker / Coach</option>
+            <option value="3">Employer</option>
+            <option value="4">University</option>
+          </select>
+         
+         </div>
+        </Form.Group>
+
         <Form.Group className="mb-2">
           <label>Name</label>
 

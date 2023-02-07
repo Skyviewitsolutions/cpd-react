@@ -328,20 +328,6 @@ const SlotAsCoach = (props) => {
         endTime: startTime,
       };
 
-<<<<<<< HEAD
-    const formData = new FormData();
-    formData.append("title", coachTitle);
-    formData.append("availability_type", availability_type);
-    formData.append("payment_type", payment_type);
-    formData.append("price", price);
-    formData.append("is_paid", is_paid);
-    formData.append("availability_slot", JSON.stringify(slots));
-    formData.append("availability_timing", availability_timing);
-    formData.append("is_repeated", is_repeated);
-    formData.append("image", coachingImg);
-    formData.append('domain' ,  domain);
-    formData.append("industry" , industry);
-=======
       const formData = new FormData();
       formData.append("title", coachTitle);
       formData.append("availability_type", availability_type);
@@ -354,7 +340,6 @@ const SlotAsCoach = (props) => {
       formData.append("image", coachingImg);
       formData.append("domain", domain);
       formData.append("industry", industry);
->>>>>>> 4f2bd6b572b44ec033b71d2d6e71f02e8a455b5d
 
       const headers = {
         Authorization: `Bearer ${token}`,

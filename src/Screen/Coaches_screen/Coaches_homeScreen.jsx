@@ -105,8 +105,9 @@ const CoachingCard = (props) => {
                      <h5> :
                     {" "}
                     {timing?.[0]} to {timing?.[1]}
-                  </span>
-                </h6>
+                  </h5>
+                </div>
+                <div className="coaches_homescreen_availbalilityInner">
                 <h6>
                   Price  </h6>  <h5> :<span> $</span>{" "}
                  

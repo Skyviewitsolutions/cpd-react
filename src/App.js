@@ -39,13 +39,7 @@ import CareerFareDetails from './Screen/Career/CareerFareDetails';
 import CoachesForm from "./Screen/Coaches_screen/CoachesForm";
 import ViewDetail from "./Screen/Workshop/ViewDetail";
 import CoachesDetails from "./Screen/CoachDetails/CoachDetails";
-<<<<<<< HEAD
-import MyCourse from "./Screen/MyCourse/MyCourse";
-import BookCoaches from "./Component/Modal/BookCoaches/BookCoaches";
-
-=======
 import MyCourses from "./Component/MyCourses/MyCourses";
->>>>>>> 4f2bd6b572b44ec033b71d2d6e71f02e8a455b5d
 
 
 function App() {
@@ -115,13 +109,7 @@ function App() {
         <Route exact path="/careerDetails" element={<CareerFareDetails /> } />
         <Route exact path="/forum" element={<ForumScreen /> } />
         <Route exact path="/workshopviewdetails" element={<ViewDetail /> } />
-<<<<<<< HEAD
-        <Route exact path="/mycourse" element={<MyCourse /> } />
-        <Route exact path="/bookCoaches" element={<BookCoaches /> } />
-
-=======
         <Route exact path="/myCourses" element={<MyCourses />} />
->>>>>>> 4f2bd6b572b44ec033b71d2d6e71f02e8a455b5d
       </Routes>
       
     </Router>
