@@ -1,7 +1,5 @@
-
 import logo from "./logo.svg";
 import "./App.css";
-// import HomeScreens from './Screen/HomeScreens';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Resume_creation from "./Screen/Resume_creation";
 import Home_screens from "./Screen/Home_screens";
@@ -34,15 +32,16 @@ import CreateCommunity from "./Component/CreateCommunity/CreateCommunity";
 import AddCommunitySidebar from "./Component/AddCommunitySidebar/AddCommunitySidebar";
 import Communities from "./Screen/Communities/Communities";
 import JobScreen from "./Screen/Job/JobScreen"
-// import CareerScreen from "./Screen/Career/CareerScreen";
 import CareerFareLinear from "./Screen/Career/CareerFareLinear";
 import ForumScreen from "./Screen/Forum/ForumScreen"
 import AvailableResource from "./Screen/AvailableResource/AvailableResource";
 import CareerFareDetails from './Screen/Career/CareerFareDetails';
 import CoachesForm from "./Screen/Coaches_screen/CoachesForm";
 import ViewDetail from "./Screen/Workshop/ViewDetail";
-// import Chat from '../src/Component/Modal/chat/Chat';
-// import ChatHome from "./Component/Modal/chat/ChatHome";
+import CoachesDetails from "./Screen/CoachDetails/CoachDetails";
+import MyCourse from "./Screen/MyCourse/MyCourse";
+import BookCoaches from "./Component/Modal/BookCoaches/BookCoaches";
+
 
 
 function App() {
@@ -52,7 +51,6 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home_screens />} />
         <Route exact path="/loginpage" element={<Loginpage />} />
-        {/* <Route exact path="/resume_cv" element={<Resume />} /> */}
         <Route exact path="/resume" element={<Student_cv />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/resume_creation" element={<Resume_creation />} />
@@ -64,14 +62,13 @@ function App() {
         <Route exact path="/create_community" element={<CreateCommunity />} />
         <Route exact path="/availableResource" element={<AvailableResource /> } />
         <Route exact path="/coachesForm" element={<CoachesForm /> } />
-        {/* <Route exact path="/chat" element={<Chat />} /> */}
         <Route
           exact
           path="/sidebar_community"
           element={<AddCommunitySidebar />}
         />
         <Route
-          exact
+          exactf
           path="/forgot_password_details"
           element={<ForgotPasswordDetails />}
         />
@@ -102,6 +99,7 @@ function App() {
         <Route exact path="/event_details" element={<EventDetails />} />
         {/* Coaches section */}
         <Route exact Path="/coaches_form" element={<CoachesForm/>} />
+        <Route exact path="/coach-Details/:coachId" element={<CoachesDetails />}/>
         {/* <Route exact path="/speaker_cv" element={<CoachesForm2/>} /> */}
         <Route exact path="/finalresume" element={<FinalResume />} />
         {/* <Route exact path="/chathome" element={<ChatHome />} /> */}
@@ -112,7 +110,9 @@ function App() {
         <Route exact path="/careerDetails" element={<CareerFareDetails /> } />
         <Route exact path="/forum" element={<ForumScreen /> } />
         <Route exact path="/workshopviewdetails" element={<ViewDetail /> } />
-      
+        <Route exact path="/mycourse" element={<MyCourse /> } />
+        <Route exact path="/bookCoaches" element={<BookCoaches /> } />
+
       </Routes>
       
     </Router>

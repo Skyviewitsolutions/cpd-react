@@ -61,7 +61,8 @@ const CoachingCard = (props) => {
                     {data?.coach_info?.first_name} {data?.coach_info?.last_name}
                   </h5>
                 </div>
-
+                <h6>Title</h6>
+                     <p>Test Title</p>
                 <h6>Country</h6>
                 <p>{data.coach_info?.nationality}</p>
                 <h6> Expertise</h6>
@@ -71,37 +72,45 @@ const CoachingCard = (props) => {
                 </p>
               </div>
               <div className="col-lg-5  col-md-4 col-12 availabilityBox">
-                <h6>
-                  Availability :{" "}
-                  <span
-                    style={{ marginLeft: "9px" }}
-                    onClick={() => showCoachingsOnCalendar(data)}
-                  >
+                <div className="coaches_homescreen_availbalilityInner">
+                      <h6>
+                        Availability{" "}
+                        </h6>
+                       <h5
+                       style={{ marginLeft: "9px" }}
+                       onClick={() => showCoachingsOnCalendar(data)}
+                       > <span style={{marginRight:"10px"}}> :</span>
                     <BsFillCalendarDateFill color="#2c6959" size={17} />
-                  </span>
-                </h6>
+                       </h5>
+                       </div>
+                       <div className="coaches_homescreen_availbalilityInner">
                 <h6>
-                  TimeSlot :{" "}
-                  <span>
+                  TimeSlot{" "}
+                  </h6>
+                     <h5> :
                     {" "}
                     {timing[0]} to {timing[1]}
-                  </span>
-                </h6>
+                     </h5>
+                     </div>
+                     <div className="coaches_homescreen_availbalilityInner">
                 <h6>
-                  Price :<span> $</span>{" "}
-                  <span>
+                  Price  </h6>  <h5> :<span> $</span>{" "}
+                 
                     {data.price}{" "}
                     {data.payment_type == "1" ? "Hourly" : "Sessional"}
-                  </span>
-                </h6>
+                  </h5>
+                  </div>
 
                 {showBookBtn && (
-                  <BookBtn
-                    status={bookingStatus}
-                    onClick={() => bookCoaches(data)}
-                    styles={{ position: "absolute" }}
-                  />
+                         <div className="coachesScreenBook">
+                       <BookBtn
+                       status={bookingStatus}
+                       onClick={() => bookCoaches(data)}
+                      //  styles={{ position: "absolute" }}
+                        />
+                        </div>
                 )}
+
               </div>
             </div>
           </div>

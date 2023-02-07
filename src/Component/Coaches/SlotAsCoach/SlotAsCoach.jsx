@@ -321,6 +321,8 @@ const SlotAsCoach = (props) => {
     formData.append("availability_timing", availability_timing);
     formData.append("is_repeated", is_repeated);
     formData.append("image", coachingImg);
+    formData.append('domain' ,  domain);
+    formData.append("industry" , industry);
 
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -438,7 +440,7 @@ const SlotAsCoach = (props) => {
                   {allDomain.map((domain, index) => {
                     return (
                       <>
-                        <option value={domain.title} key={index}>
+                        <option value={domain._id} key={index}>
                           {domain.title}
                         </option>
                       </>
@@ -462,7 +464,7 @@ const SlotAsCoach = (props) => {
                   {allIndustry.map((industry, index) => {
                     return (
                       <>
-                        <option value={industry.title} key={index}>
+                        <option value={industry._id} key={index}>
                           {industry.title}
                         </option>
                       </>

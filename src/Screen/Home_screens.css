@@ -73,6 +73,7 @@
       flex-direction: column;
     }
     .all_notification {
+      margin-top: 10px;
       align-items: center;
       display: flex;
       justify-content: space-between;

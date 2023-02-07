@@ -107,7 +107,7 @@ const Signupform = (props) => {
       </div>
 
       <div>
-        <Form.Group className="mb-4">
+        <Form.Group className="mb-2">
           <label>Name</label>
 
           <Logininput
@@ -121,7 +121,7 @@ const Signupform = (props) => {
           <span style={{color:"red" ,fontSize:"14px"}}>{errorMsg.name}</span>
         </Form.Group>
 
-        <Form.Group className="mb-4" controlId="formBasicEmail">
+        <Form.Group className="mb-2" controlId="formBasicEmail">
           <label>Email Address</label>
 
           <Logininput
@@ -136,7 +136,7 @@ const Signupform = (props) => {
             <span style={{color:"red" ,fontSize:"14px"}}>{errorMsg.email}</span>
         </Form.Group>
 
-        <Form.Group className="mb-4" controlId="formBasicPassword">
+        <Form.Group className="mb-2" controlId="formBasicPassword">
           <label>Password</label>
           <Logininput
             licon={<IoIosLock />}
@@ -159,7 +159,7 @@ const Signupform = (props) => {
          <span style={{color:"red" ,fontSize:"14px"}}>{errorMsg.password}</span>
         </Form.Group>
 
-        <Form.Group className="mb-4" controlId="formBasicPassword">
+        <Form.Group className="mb-2" controlId="formBasicPassword">
           <label>Confirm Password</label>
           <Logininput
             licon={<IoIosLock />}

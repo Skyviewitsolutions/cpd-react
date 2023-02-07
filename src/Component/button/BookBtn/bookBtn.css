@@ -1,4 +1,5 @@
 .bookBtn {
+    position: absolute;
     bottom: 0px;
     margin-right: 10px;
     height: 40px;
@@ -11,4 +12,11 @@
     border-radius: 26px;
     opacity: 1;
     padding: 6px 20px;
+}
+@media screen and (max-device-width: 480px) {
+    .coach_List_bookButton {
+        position: relative;
+       width:100%;
+       
+      }
 }

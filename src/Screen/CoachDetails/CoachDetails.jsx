@@ -116,7 +116,7 @@ const CoachesDetails = () => {
   };
   const { coachId } = useParams();
 
-  const getCoachings = () => {
+const getCoachings = () => {
     const url = `${endpoints.coaches.allCoachingList}?user_id=${coachId}`;
     axios
       .get(url, { headers: headers })

@@ -1,6 +1,6 @@
 .loginpage_form label {
    font-size: 17px;
-   margin-bottom: 10px;
+         margin-bottom: 0px;
    font-weight: 600;
 }
 .login_bottom{
@@ -29,13 +29,13 @@ a.forgotPassword {
    margin-left: 32%;
 }
 .LoginSocial{
-   margin-left: 26%;
+   margin-left: 15%;
    font-size: 16px!important;
 }
 .col.md-7.flex-center.socialIcons img {
-   height: 45px!important;
-   width: 45px!important;
-   margin-left: 10px;
+   height: 40px!important;
+   width: 40px!important;
+   /* margin-left: 10px; */
    margin-top: 4%;
    cursor: pointer;
 }
