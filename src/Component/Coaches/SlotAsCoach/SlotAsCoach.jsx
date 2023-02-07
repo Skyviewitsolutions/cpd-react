@@ -287,7 +287,6 @@ const SlotAsCoach = (props) => {
             end: new Date(endDte),
             title: coachTitle,
           };
-
           events.push(evnt);
         });
         setEventsToBeShown(events);
