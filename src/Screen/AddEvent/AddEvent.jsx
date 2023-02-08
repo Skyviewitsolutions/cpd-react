@@ -29,6 +29,7 @@ import { endpoints } from "../../Component/services/endpoints";
 import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import { TagsInput } from "react-tag-input-component";
 
+
 const AddEvent = () => {
 
   const navigate = useNavigate("");
@@ -155,56 +156,7 @@ const AddEvent = () => {
     }
   }, [communityOption]);
 
-  // code for drag and drop images ;
-
-  // useEffect(() => {
-
-  //   document
-  //     .querySelectorAll(".eventForm_dropzone__input")
-  //     .forEach((inputElement) => {
-  //       const dropZoneElement = inputElement.closest(".eventForm_dropzone");
-
-  //       dropZoneElement.addEventListener("click", (e) => {
-  //         inputElement.click();
-  //       });
-
-  //       inputElement.addEventListener("change", (e) => {
-  //         if (inputElement.files.length) {
-  //           updateThumbnail(dropZoneElement, inputElement.files[0]);
-  //         }
-  //       });
-
-  //       dropZoneElement.addEventListener("dragover", (e) => {
-  //         e.preventDefault();
-  //         dropZoneElement.classList.add("eventForm_dropzone--over");
-  //       });
-
-  //       ["dragleave", "dragend"].forEach((type) => {
-  //         dropZoneElement.addEventListener(type, (e) => {
-  //           dropZoneElement.classList.remove("eventForm_dropzone--over");
-  //         });
-  //       });
-
-  //       dropZoneElement.addEventListener("drop", (e) => {
-  //         e.preventDefault();
-
-  //         if (e.dataTransfer.files.length) {
-  //           inputElement.files = e.dataTransfer.files;
-  //           updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
-  //         }
-
-  //         dropZoneElement.classList.remove("eventForm_dropzone--over");
-  //       });
-  //     });
-
-  // }, [eventImgFile]);
-
-  /**
-  [23:11, 11/22/2022] Manisha Singh: * Updates the thumbnail on a drop zone element.
-     *
-     * @param {HTMLElement} dropZoneElement
-     * @param {File} file
-     */
+  
   function updateThumbnail(dropZoneElement, file) {
     let thumbnailElement = dropZoneElement.querySelector(
       ".eventForm_dropzone__thumb"
@@ -280,6 +232,7 @@ const AddEvent = () => {
   };
 
   const submit = () => {
+
     if (!sessionTitle) {
       toast("session title is required", { type: "warning" });
     } else if (!sessionDesc) {
@@ -296,8 +249,6 @@ const AddEvent = () => {
       toast("Please upload image", { type: "warning" });
     } else if (!eventVideo) {
       toast("please upload video", { type: "warning" });
-      // } else if (!eventDocs) {
-      //   toast("event docs is required", { type: "warning" });
     } else if (!communityId) {
       toast("Community id is required", { type: "warning" });
     } else {
@@ -319,10 +270,11 @@ const AddEvent = () => {
       data.append("duration_payment", sessionDuration);
       data.append("price", price);
       data.append("timeslots", "12-1");
-      data.append('session_type' , )
+      data.append('price_type' , sessionType);
+      data.append('availability_type' , 1)
       data.append("community_id", communityId);
-     
-
+      
+     console.log("hello world")
       setLoading(true);
 
       var config = {

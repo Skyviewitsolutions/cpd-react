@@ -1,0 +1,408 @@
+.explore {
+  padding: 10px;
+  background-color: #d6f6ed;
+  margin-top: 10px;
+  text-align: center;
+}
+.explore a {
+  color: #2c6959;
+  text-decoration: none;
+}
+.explore a:hover {
+  text-decoration: underline;
+  font-weight: 700;
+}
+.explore h5 {
+  font-weight: 500;
+  color: #2c6959;
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+}
+.explore h6 {
+  font-family: Inter-Regular;
+  font-size: 14px;
+  color: #232423;
+}
+.networking_searchbox {
+  border-radius: none;
+  border: none;
+  border: 1px solid #2c6959;
+}
+
+.coachesDetailsbutton {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.coachesDetailsbutton button {
+  font-size: 15px;
+  border-radius: 26px;
+  border: none;
+  color: white;
+  background-color: #2c6959;
+  padding: 5px 20px 5px 20px;
+}
+
+@media screen and (max-width: 600px) {
+  .explore h5 {
+    font-size: 20px;
+  }
+  .explore h6 {
+    font-size: 12px;
+  }
+}
+.coachesDetailsCard {
+  border: 1px solid red;
+}
+
+.coachesDetailsWrapper {
+  padding: 10px 20px 10px 20px;
+}
+
+.coachesDetailsSection1 {
+  display: flex;
+  padding: 30px 30px 30px 30px;
+}
+.coachesDetailsSection1 img {
+  max-width: 120px;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.coachesDetailsDescription {
+  width: 70%;
+  padding-left: 20px;
+}
+
+.coachesDetailsheading {
+  font-size: 30px;
+  color: #2c6959;
+  padding-bottom: 10px;
+}
+.Workshop_section2 {
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: white;
+  padding-top: 20px;
+}
+.workshop-card .card {
+  box-shadow: 3px 11px 20px #00000029;
+  border: 0.5px solid #d1cfcf;
+  border-radius: 7px;
+  background: #ffffff;
+  margin-bottom: 20px;
+}
+.workshopcard_media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.coachesDetailslistcardtitle {
+  display: flex;
+  justify-content: space-between;
+}
+.coachesDetailslistcardtitle h4 {
+  width: 90%;
+  height: 20px;
+}
+.workshopcard_media img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  position: relative;
+}
+.workshopcard_media .tags_onImage {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ed1066;
+}
+.workshopcard_media .tags_onImage h6 {
+  font-size: 12px;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  font-family: Inter-Bold;
+  margin-bottom: 0%;
+}
+.coachesDetailslistcard_descriptionBox {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.coachesDetailslistcard_descriptionBox h4 {
+  color: black;
+  font-size: 13px;
+  font-family: Inter-Bold;
+  margin-bottom: 10px;
+}
+.coachesDetailslistcard_descriptionBox h5 {
+  padding-top: 10px;
+  color: rgb(153, 152, 152);
+  font-size: 13px;
+  font-family: Inter-Bold;
+}
+.coachesDetailslistcard_descriptionBox h6 {
+  font-size: 12px;
+  font-family: Inter-Bold;
+  color: #232423;
+  /* padding-right: 35px; */
+}
+.workshop_FreeBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.workshop_FreeBox h6 {
+  margin-bottom: 0%;
+}
+.coachesDetailslistcard_descriptionBox .domainBox {
+  /* display: flex;
+        justify-content: space-between;
+        align-items: center; */
+  padding-top: 10px;
+}
+.coachesDetailslistcard_descriptionBox .colorText {
+  color: #2c6959;
+}
+.coachesDetailslistcard_descriptionBox #enrolled {
+  color: #ed1066;
+  font-size: 12px;
+  padding-top: 10px;
+}
+.viewDetailsBox img {
+  width: 18px;
+  height: 18px;
+  margin-right: 3px;
+}
+.viewDetailsBox span {
+  /* padding-left: 10px; */
+  font-size: 12px;
+  font-family: Inter-Bold;
+}
+.viewDetailsBox #heart-icon {
+  color: #232423;
+  font-size: 20px !important;
+}
+#enrolled span {
+  color: #232423 !important;
+}
+
+.coachesDetailsbutton button:hover {
+  font-weight: 600;
+  background-color: #d1cfcf;
+  /* border:2px solid #2c6959; */
+  color: #2c6959;
+}
+
+.coachesDetailsbuttonpending button {
+  font-size: 15px;
+  border-radius: 26px;
+  border: none;
+  color: white;
+  background-color: #abb521;
+  padding: 5px 20px 5px 20px;
+}
+
+.coachesDetailsbuttonpending button:hover {
+  font-weight: 600;
+  background-color: #d1cfcf;
+  /* border:2px solid #2c6959; */
+  color: #abb521;
+}
+
+.coachesDetailsbuttonconfirmed button {
+  font-size: 15px;
+  border-radius: 26px;
+  border: none;
+  color: white;
+  background-color: #4fcf5c;
+  padding: 5px 15px 5px 15px;
+}
+
+.coachesDetailsbuttonconfirmed button:hover {
+  font-weight: 600;
+  background-color: #d1cfcf;
+  /* border:2px solid #2c6959; */
+  color: #4fcf5c;
+}
+@media only screen and (max-width: 767px) {
+  .coachesDetailsSection1 {
+    display: flex;
+    flex-direction: column;
+  }
+  .coachesDetailsWrapper {
+    padding: 10px 10px 10px 10px;
+  }
+  .coachesDetailsDescription {
+    padding-left: 0%;
+    padding-top: 20px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-device-width: 480px) {
+  .workshop_headingblock {
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 0px;
+  }
+  .workshop_headingblock h1 {
+    font-size: 30px;
+  }
+  .workshop_headingblock h5 {
+    font-size: 15px;
+
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  .workshop_headingblock h6 {
+    font-size: 10px;
+  }
+  .workshop_imageblock {
+    padding-right: 0px;
+
+    width: 100%;
+    height: 280px;
+  }
+  .workshop_searchBox {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .workshop_searchBox h5 {
+    font-size: 14px;
+  }
+  .workshop_searchBar input {
+    padding: 5px;
+    padding-left: 20px;
+  }
+  #workshop_search {
+    color: #2c6959;
+    position: absolute;
+    top: 10px;
+    right: 30px;
+  }
+  .coachesDetailslistcard_descriptionBox h4 {
+    color: black;
+    font-size: 13px;
+    font-family: Inter-Bold;
+    margin-bottom: 0px;
+  }
+  .coachesDetailslistcard_descriptionBox h6 {
+    padding-right: 0px;
+  }
+}
+@media screen and (min-device-width: 481px) and (max-device-width: 767px) {
+  .workshop_headingblock {
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 0px;
+  }
+  .workshop_headingblock h1 {
+    font-size: 30px;
+  }
+  .workshop_headingblock h5 {
+    font-size: 15px;
+
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  .workshop_headingblock h6 {
+    font-size: 10px;
+  }
+  .workshop_imageblock {
+    padding-right: 0px;
+
+    width: 100%;
+    height: 280px;
+  }
+  .workshop_searchBox {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .workshop_searchBox h5 {
+    font-size: 14px;
+  }
+  .workshop_searchBar input {
+    padding: 5px;
+    padding-left: 20px;
+  }
+  #workshop_search {
+    color: #2c6959;
+    position: absolute;
+    top: 10px;
+    right: 30px;
+  }
+  .coachesDetailslistcard_descriptionBox h4 {
+    color: black;
+    font-size: 13px;
+    font-family: Inter-Bold;
+    margin-bottom: 0px;
+  }
+  .coachesDetailslistcard_descriptionBox h6 {
+    padding-right: 0px;
+  }
+}
+@media screen and (min-device-width: 768px) and (max-device-width: 961px) {
+  .coachesDetailsDescription {
+    width: 100%;
+  }
+  .workshop_headingblock {
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 0px;
+  }
+  .workshop_headingblock h1 {
+    font-size: 30px;
+  }
+  .workshop_headingblock h5 {
+    font-size: 15px;
+
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  .workshop_headingblock h6 {
+    font-size: 10px;
+  }
+  .workshop_imageblock {
+    padding-right: 0px;
+
+    width: 100%;
+    height: 280px;
+  }
+  .workshop_searchBox {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .workshop_searchBox h5 {
+    font-size: 14px;
+  }
+  .workshop_searchBar input {
+    padding: 5px;
+    padding-left: 20px;
+  }
+  #workshop_search {
+    color: #2c6959;
+    position: absolute;
+    top: 10px;
+    right: 30px;
+  }
+  .coachesDetailslistcard_descriptionBox h4 {
+    color: black;
+    font-size: 13px;
+    font-family: Inter-Bold;
+    margin-bottom: 0px;
+  }
+  .coachesDetailslistcard_descriptionBox h6 {
+    padding-right: 0px;
+  }
+}
+@media screen and (min-device-width: 961px) and (max-device-width: 1024px) {
+  .workshop-card {
+    width: 100%;
+  }
+}

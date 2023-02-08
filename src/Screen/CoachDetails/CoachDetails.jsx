@@ -11,120 +11,124 @@ import UserImg from "../../assets/Images/user.jpeg";
 import axios from "axios";
 import { getMyCoachings } from "../../utils/coaches";
 import { toast, ToastContainer } from "react-toastify";
+import WorkshopCard from "../../Component/WorkshopCard/WorkshopCard";
 import BookBtn from "../../Component/button/BookBtn/BookBtn";
+import CoachingCard from "../../Component/CoachingCard/CoachingCard";
 
-const CoachingCard = (props) => {
-  const { coaching, key, imgPath, bookingStatus, bookCoaches } = props;
+// const CoachingCard = (props) => {
+//   const { coaching, key, imgPath, bookingStatus, bookCoaches } = props;
 
-  const coachingImg = imgPath + "/" + coaching.image;
+//   const coachingImg = imgPath + "/" + coaching.image;
 
-  return (
-    <>
-      <div className="col-lg-3 col-md-6 col-12 workshop-card" key={key}>
-        <div className="card">
-          <div className="workshopcard_media">
-            <img
-              src={coaching.image ? coachingImg : coachesDetailscardimages}
-              alt=""
-            />
-          </div>
-          <div className="coachesDetailslistcard_descriptionBox">
-            <div className="coachesDetailslistcardtitle">
-              <h4>{coaching.title}</h4>
-              <BsCalendarDateFill
-                style={{ color: "#2c6959", fontSize: "20px" }}
-              />
-            </div>
+//   return (
+//     <>
+//       <div className="col-lg-3 col-md-6 col-12 workshop-card" key={key}>
+//         <div className="card">
+//           <div className="workshopcard_media">
+//             <img
+//               src={coaching.image ? coachingImg : coachesDetailscardimages}
+//               alt=""
+//             />
+//           </div>
+//           <div className="coachesDetailslistcard_descriptionBox">
+//             <div className="coachesDetailslistcardtitle">
+//               <h4>{coaching.title}</h4>
+//               <BsCalendarDateFill
+//                 style={{ color: "#2c6959", fontSize: "20px" }}
+//               />
+//             </div>
 
-            <div className="workshop_FreeBox">
-              <h6>{coaching.is_paid == 1 ? `$ ${coaching.price}` : "Free"}</h6>
-              <h6>Domain : {coaching.domain}</h6>
-            </div>
-            <div className="domainBox">
-              <div className="row">
-                <div className="col-lg-7 col-md-8 col-12">
-                  <h6 id="enrolled"></h6>
-                </div>
-                <div className="col-lg-5 col-md-4 col-12">
-                  <div className=" coachesDetailsbuttonpending">
-                    <BookBtn
-                      status={bookingStatus}
-                      onClick={() => bookCoaches(coaching)}
-                      styles={{
-                        height: "30px",
-                        paddingTop: "2px",
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
+//             <div className="workshop_FreeBox">
+//               <h6>{coaching.is_paid == 1 ? `$ ${coaching.price}` : "Free"}</h6>
+//               <h6>Domain : {coaching.domain}</h6>
+//             </div>
+//             <div className="domainBox">
+//               <div className="row">
+//                 <div className="col-lg-7 col-md-8 col-12">
+//                   <h6 id="enrolled"></h6>
+//                 </div>
+//                 <div className="col-lg-5 col-md-4 col-12">
+//                   <div className=" coachesDetailsbuttonpending">
+//                     <BookBtn
+//                       status={bookingStatus}
+//                       onClick={() => bookCoaches(coaching)}
+//                       styles={{
+//                         height: "30px",
+//                         paddingTop: "2px",
+//                       }}
+//                     />
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
 
-const WorkshopCard = (props) => {
-  
-  const { workshop, key, imgPath, enrollWorkshop, enrollStatus, showBookBtn } =
-    props;
+// const WorkshopCard = (props) => {
 
-  const image = imgPath + "/" + workshop.image;
+//   const { workshop, key, imgPath, enrollWorkshop, enrollStatus, showBookBtn } =
+//     props;
 
-  return (
-    <>
-      <div className="col-lg-3 col-md-6 col-12 workshop-card">
-        <div className="card">
-          <div className="workshopcard_media">
-            <img src={workshop.image && image} alt="" />
-          </div>
-          <div className="coachesDetailslistcard_descriptionBox">
-            <div className="coachesDetailslistcardtitle">
-              <h4>{workshop.title}</h4>
-              <BsCalendarDateFill
-                style={{ color: "#2c6959", fontSize: "20px" }}
-              />
-            </div>
+//   const image = imgPath + "/" + workshop.image;
 
-            <div className="workshop_FreeBox">
-              <h6>{workshop.is_paid == 1 ? `${workshop.price} $` : "Free"}</h6>
-              <h6>Domain : {workshop.domain}</h6>
-            </div>
-            <div className="domainBox">
-              <div className="row d-flex">
-                <div className="col-lg-7 col-md-8 col-12 d-flex justify-content-between">
-                  <h6 id="enrolled">
-                    Currently Enrolled ({workshop.workshop_members_count}/
-                    {workshop.max_members})
-                  </h6>
-                </div>
+//   return (
+//     <>
+//       <div className="col-lg-3 col-md-6 col-12 workshop-card">
+//         <div className="card">
+//           <div className="workshopcard_media">
+//             <img src={workshop.image && image} alt="" />
+//           </div>
+//           <div className="coachesDetailslistcard_descriptionBox">
+//             <div className="coachesDetailslistcardtitle">
+//               <h4>{workshop.title}</h4>
+//               <BsCalendarDateFill
+//                 style={{ color: "#2c6959", fontSize: "20px" }}
+//               />
+//             </div>
 
-                <div className="col-lg-5 col-md-4 col-12">
-                  <div className="">
-                    {showBookBtn && (
-                      <BookBtn
-                        status={enrollStatus}
-                        onClick={() => enrollWorkshop(workshop)}
-                        styles={{
-                          height: "30px",
-                          paddingTop: "2px",
-                        }}
-                      />
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
+//             <div className="workshop_FreeBox">
+//               <h6>{workshop.is_paid == 1 ? `${workshop.price} $` : "Free"}</h6>
+//               <h6>Domain : {workshop.domain}</h6>
+//             </div>
+//             <div className="domainBox">
+//               <div className="row d-flex">
+//                 <div className="col-lg-7 col-md-8 col-12 d-flex justify-content-between">
+//                   <h6 id="enrolled">
+//                     Currently Enrolled ({workshop.workshop_members_count}/
+//                     {workshop.max_members})
+//                   </h6>
+//                 </div>
+
+//                 <div className="col-lg-5 col-md-4 col-12">
+//                   <div className="">
+//                     {showBookBtn && (
+//                       <BookBtn
+//                         status={enrollStatus}
+//                         onClick={() => enrollWorkshop(workshop)}
+//                         styles={{
+//                           height: "30px",
+//                           paddingTop: "2px",
+//                         }}
+//                       />
+//                     )}
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
 
 const CoachesDetails = () => {
+  
   const [allCoachings, setAllCoachings] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
   const [coachingImgPath, setCoachingImgPath] = useState("");
@@ -266,6 +270,7 @@ const CoachesDetails = () => {
         if (res.data.result) {
           toast("workshop enrolled successfully", { type: "success" });
           getAllEnrollWorkshops();
+          getWorkshops();
         } else if (res.data.result == false) {
           toast(res.data.message, { type: "warning" });
         }
@@ -291,6 +296,8 @@ const CoachesDetails = () => {
       .then((res) => {
         setLoading(false);
         if (res.data.result) {
+          getAllEnrolledCoachings();
+          getMyCoachings()
           toast("Coaching booked successfully", { type: "success" });
         } else if (res.data.result == false) {
           toast(res.data.message, { type: "warning" });
@@ -309,7 +316,6 @@ const CoachesDetails = () => {
         <div className="row ">
           <div className="col-lg-12 col-md-12 col-12 explore">
             <h5>Explore Coaching and Workshop</h5>
-           
           </div>
         </div>
       </div>
@@ -344,12 +350,16 @@ const CoachesDetails = () => {
             <div className="col-lg-12 col-md-12 col-12 ">
               <h5 className="coachesDetailsheading">Coaching List</h5>
               <div className="row">
+
                 {allCoachings.length != 0 &&
                   allCoachings.map((coaching, index) => {
+
                     var id = coaching._id;
                     var enrolled = myEnrolledCoachings.filter((itm, ind) => {
                       return itm.coaching_id == id;
                     });
+
+                    var image = coachImgPath + coaching.image
 
                     var bookingStatus = 3;
 
@@ -358,16 +368,19 @@ const CoachesDetails = () => {
                       var status = datas.status;
                       bookingStatus = status;
                     }
+
                     return (
                       <>
-                        <CoachingCard
-                          coaching={coaching}
-                          key={index}
-                          imgPath={coachingImgPath}
-                          bookCoaches={bookCoaches}
-                          showBookBtn={true}
-                          bookingStatus={bookingStatus}
-                        />
+                        <div className="col-lg-3 col-md-6 col-12 workshop-card">
+                          <CoachingCard
+                            coaching={coaching}
+                            key={index}
+                            image={image}
+                            bookCoaches={bookCoaches}
+                            showBookBtn={true}
+                            bookingStatus={bookingStatus}
+                          />
+                        </div>
                       </>
                     );
                   })}
@@ -384,6 +397,7 @@ const CoachesDetails = () => {
             <div className="col-lg-12 col-md-12 col-12 ">
               <h5 className="coachesDetailsheading">Workshop List</h5>
               <div className="row">
+
                 {allWorkshops.length != 0 &&
                   allWorkshops.map((workshop, index) => {
                     var id = workshop._id;
@@ -391,7 +405,7 @@ const CoachesDetails = () => {
                     var enrollStatus = 3;
 
                     var enrolled = myEnrolledWorkshops.filter((itm, ind) => {
-                      return itm.coaching_id == id;
+                      return itm.workshop_id == id;
                     });
 
                     if (enrolled.length != 0) {
@@ -400,16 +414,21 @@ const CoachesDetails = () => {
                       enrollStatus = status;
                     }
 
+                    var image = workshopImgPath + "/" + workshop.image
+
                     return (
                       <>
-                        <WorkshopCard
-                          workshop={workshop}
-                          key={index}
-                          imgPath={workshopImgPath}
-                          enrollWorkshop={enrollWorkshop}
-                          enrollStatus={enrollStatus}
-                          showBookBtn={true}
-                        />
+                        <div className="col-lg-3 col-md-6 col-12 workshop-card">
+                          <WorkshopCard
+                            workshop={workshop}
+                            key={index}
+                            img={image}
+                            imageName={workshop.image}
+                            enrollWorkshop={enrollWorkshop}
+                            enrollStatus={enrollStatus}
+                            showBookBtn={true}
+                          />
+                        </div>
                       </>
                     );
                   })}

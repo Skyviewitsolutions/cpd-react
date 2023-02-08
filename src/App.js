@@ -39,7 +39,8 @@ import CareerFareDetails from './Screen/Career/CareerFareDetails';
 import CoachesForm from "./Screen/Coaches_screen/CoachesForm";
 import ViewDetail from "./Screen/Workshop/ViewDetail";
 import CoachesDetails from "./Screen/CoachDetails/CoachDetails";
-import MyCourses from "./Component/MyCourses/MyCourses";
+import BookCoaches from "./Component/Modal/BookCoaches/BookCoaches";
+import MyCourses from "./Screen/MyCourses/MyCourses";
 
 
 function App() {
@@ -99,9 +100,7 @@ function App() {
         {/* Coaches section */}
         <Route exact Path="/coaches_form" element={<CoachesForm/>} />
         <Route exact path="/coach-Details/:coachId" element={<CoachesDetails />}/>
-        {/* <Route exact path="/speaker_cv" element={<CoachesForm2/>} /> */}
         <Route exact path="/finalresume" element={<FinalResume />} />
-        {/* <Route exact path="/chathome" element={<ChatHome />} /> */}
         <Route exact path="/workshop_screen" element={<Workshop />} />
         <Route exact path="/coaches_screen" element={<Coaches_homeScreen />} />
         <Route exact path="/job" element={<JobScreen /> } />
@@ -109,7 +108,9 @@ function App() {
         <Route exact path="/careerDetails" element={<CareerFareDetails /> } />
         <Route exact path="/forum" element={<ForumScreen /> } />
         <Route exact path="/workshopviewdetails" element={<ViewDetail /> } />
-        <Route exact path="/myCourses" element={<MyCourses />} />
+        <Route exact path="/myCourses" element={<MyCourses /> } />
+        <Route exact path="/bookCoaches" element={<BookCoaches /> } />
+
       </Routes>
       
     </Router>

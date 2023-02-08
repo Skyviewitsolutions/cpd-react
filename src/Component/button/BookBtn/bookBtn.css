@@ -12,3 +12,10 @@
     opacity: 1;
     padding: 6px 20px;
 }
+@media screen and (max-device-width: 480px) {
+    .coach_List_bookButton {
+        position: relative;
+       width:100%;
+       
+      }
+}

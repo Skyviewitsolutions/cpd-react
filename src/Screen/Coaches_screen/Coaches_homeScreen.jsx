@@ -75,47 +75,50 @@ const CoachingCard = (props) => {
                     <div className="coachDesc">{description}</div>
                   )}
                 </div>
-
+                <h6>Title</h6>
+                <p className="text-capitalize">{data.title}</p>
                 <h6>Country</h6>
                 <p>{data.coach_info?.nationality}</p>
                 <h6> Expertise</h6>
                 <p>
                   {coachInfo?.category} | {coachInfo?.subCategory}
                 </p>
-                <h5 className="text-capitalize py-2">{data.title}</h5>
                 
               </div>
               <div className="col-lg-5  col-md-4 col-12 availabilityBox">
-                <h6>
-                  Availability :{" "}
-                  <span
+                <div className="coaches_homescreen_availbalilityInner">
+                  <h6>Availability </h6>
+                  <h5
                     style={{ marginLeft: "9px" }}
                     onClick={() => showCoachingsOnCalendar(data)}
                   >
+                    <span style={{ marginRight: "10px" }}> :</span>
                     <BsFillCalendarDateFill color="#2c6959" size={17} />
-                  </span>
-                </h6>
-                <h6>
-                  TimeSlot :{" "}
-                  <span>
+                  </h5>
+                </div>
+                <div className="coaches_homescreen_availbalilityInner">
+                  <h6>TimeSlot</h6>
+                  <h5>
+                    :{timing?.[0]} to {timing?.[1]}
+                  </h5>
+                </div>
+                <div className="coaches_homescreen_availbalilityInner">
+                  <h6>Price </h6>{" "}
+                  <h5>
                     {" "}
-                    {timing?.[0]} to {timing?.[1]}
-                  </span>
-                </h6>
-                <h6>
-                  Price :<span> $</span>{" "}
-                  <span>
-                    {data.price}{" "}
+                    :<span> $</span> {data.price}{" "}
                     {data.payment_type == "1" ? "Hourly" : "Sessional"}
-                  </span>
-                </h6>
+                  </h5>
+                </div>
 
                 {showBookBtn && (
-                  <BookBtn
-                    status={bookingStatus}
-                    onClick={() => bookCoaches(data)}
-                    styles={{ position: "absolute" }}
-                  />
+                  <div className="coachesScreenBook">
+                    <BookBtn
+                      status={bookingStatus}
+                      onClick={() => bookCoaches(data)}
+                       styles={{ position: "absolute" }}
+                    />
+                  </div>
                 )}
               </div>
             </div>
@@ -163,7 +166,7 @@ const Coaches_homeScreen = () => {
         if (res.data.result) {
           const val = res.data.data;
           setAllCoachings(val);
-          setCoachingListToBeShown(val)
+          setCoachingListToBeShown(val);
         }
       })
       .catch((err) => {
@@ -368,7 +371,6 @@ const Coaches_homeScreen = () => {
   };
 
   const getAllEnrolledCoachings = () => {
-
     const headers = {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
@@ -409,7 +411,6 @@ const Coaches_homeScreen = () => {
       });
   };
 
-  
   useEffect(() => {
     getAllEnrolledCoachings();
     getCoachingList();
@@ -453,34 +454,31 @@ const Coaches_homeScreen = () => {
 
   // writing code for filtering the coachings ;
 
-  const handleShowAllCoachings = () =>{
-    setShowAllCoaching(true)
-    setCoachingListToBeShown(allCoachings)
-  }
+  const handleShowAllCoachings = () => {
+    setShowAllCoaching(true);
+    setCoachingListToBeShown(allCoachings);
+  };
 
-  const handleShowMyCoachings = () =>{
-    setShowAllCoaching(false)
-    setCoachingListToBeShown(myCoachings)
-  }
+  const handleShowMyCoachings = () => {
+    setShowAllCoaching(false);
+    setCoachingListToBeShown(myCoachings);
+  };
 
   const handleFilterCoachings = (val) => {
     var value = val.toLowerCase();
-    setInputData(val)
-    if(showAllCoaching){
-      var filteredData = allCoachings.filter((item,index) =>{
-        return item.title.toLowerCase().includes(value)
-      })
-     setCoachingListToBeShown(filteredData)
+    setInputData(val);
+    if (showAllCoaching) {
+      var filteredData = allCoachings.filter((item, index) => {
+        return item.title.toLowerCase().includes(value);
+      });
+      setCoachingListToBeShown(filteredData);
+    } else {
+      var filteredData = myCoachings.filter((item, index) => {
+        return item.title.toLowerCase().includes(value);
+      });
+      setCoachingListToBeShown(filteredData);
     }
-    else {
-      var filteredData = myCoachings.filter((item,index) =>{
-        return item.title.toLowerCase().includes(value)
-      })
-      setCoachingListToBeShown(filteredData)
-    }
-  }
-  
- 
+  };
 
   return (
     <>
@@ -570,8 +568,8 @@ const Coaches_homeScreen = () => {
                   coachingListToBeShown.map((data, index) => {
                     var id = data._id;
                     var timing = data?.availability_timing;
-                    console.log(timing ,"timing here")
-                    timing = timing ?  timing?.split(",") : null
+                    console.log(timing, "timing here");
+                    timing = timing ? timing?.split(",") : null;
 
                     var bookingStatus = 3;
 
@@ -643,10 +641,11 @@ const Coaches_homeScreen = () => {
         eventsToBeShown={eventsToBeShown}
       />
 
-      <BookCoaches
+      {/* <BookCoaches
         BookCoachesShow={showBookCoachesSlot}
         setBookCoachesShow={showBookCoachesSlot}
-      />
+      /> */}
+
       <Footer />
     </>
   );
