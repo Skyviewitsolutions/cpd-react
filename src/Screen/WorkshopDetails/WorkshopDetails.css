@@ -77,3 +77,9 @@
 .link ul{
     list-style-type: none;
 }
+.workshopRating {
+    display: flex;
+}
+.workshopRating svg{
+    color:darkgoldenrod;
+}

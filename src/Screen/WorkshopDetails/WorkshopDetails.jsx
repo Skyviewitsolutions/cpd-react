@@ -4,6 +4,7 @@ import Homepage_header from '../../Component/Header/Homepage_header';
 import './WorkshopDetails.css';
 import  profileimg from '../../assets/Images/profileimg.png';
 import workshopPre from '../../assets/Images/workshopPre.jfif';
+import {GiRoundStar} from "react-icons/gi";
 const WorkshopDetails = () => {
   return (
    <>
@@ -110,6 +111,13 @@ const WorkshopDetails = () => {
         </div>
     <div className="col-lg-9">
         <h6>James Whatt</h6>
+        <div className="workshopRating">
+        <GiRoundStar/>
+        <GiRoundStar/>
+        <GiRoundStar/>
+        <GiRoundStar/>
+        <GiRoundStar/>
+        </div>
         <p> 4days ago</p>
     </div>
   <div className="col-lg-12 col-md-12 col-12">
@@ -128,6 +136,13 @@ const WorkshopDetails = () => {
         </div>
     <div className="col-lg-9">
         <h6>James Whatt</h6>
+        <div className="workshopRating">
+        <GiRoundStar/>
+        <GiRoundStar/>
+        <GiRoundStar/>
+        <GiRoundStar/>
+        <GiRoundStar/>
+        </div>
         <p> 4days ago</p>
     </div>
   <div className="col-lg-12 col-md-12 col-12">
@@ -146,6 +161,13 @@ const WorkshopDetails = () => {
         </div>
     <div className="col-lg-9">
         <h6>James Whatt</h6>
+        <div className="workshopRating">
+        <GiRoundStar/>
+        <GiRoundStar/>
+        <GiRoundStar/>
+        <GiRoundStar/>
+        <GiRoundStar/>
+        </div>
         <p> 4days ago</p>
     </div>
   <div className="col-lg-12 col-md-12 col-12">
@@ -164,6 +186,14 @@ const WorkshopDetails = () => {
         </div>
     <div className="col-lg-9">
         <h6>James Whatt</h6>
+        <div className="workshopRating">
+        <GiRoundStar/>
+        <GiRoundStar/>
+        <GiRoundStar/>
+        <GiRoundStar/>
+        <GiRoundStar/>
+        </div>
+       
         <p> 4days ago</p>
     </div>
   <div className="col-lg-12 col-md-12 col-12">
