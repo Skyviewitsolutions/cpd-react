@@ -11,10 +11,12 @@ import Month_days from "../../../Component/DaySelection/Month_days";
 import "../../../fonts/Inter-Bold.ttf";
 import "../../../fonts/Inter-Regular.ttf";
 import BookSlot from "../BookSlot/BookSlot";
-import {BsPlusCircleFill} from 'react-icons/bs';
+import {BsPlusCircleFill} from "react-icons/bs";
+
 const BookCoaches = (props) => {
+  
   // const [modalShow, setModalShow] = React.useState(false);
-  // const {BookCoachesShow, setBookCoachesShow}=props;
+  const { BookCoachesShow, setBookCoachesShow } = props;
   const [BookSlotShow, setBookSlotShow] = useState(false);
   const [dayType, setDayType] = useState("days");
   const [days, setDays] = useState([]);

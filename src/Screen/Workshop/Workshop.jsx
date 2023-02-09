@@ -21,6 +21,7 @@ import BookBtn from "../../Component/button/BookBtn/BookBtn";
 import { useNavigate  , generatePath} from "react-router-dom";
 
 const Workshop = () => {
+  
   const navigate = useNavigate("");
   const [modalShow, setModalShow] = React.useState(false);
   const token = localStorage.getItem("token");
@@ -37,6 +38,8 @@ const Workshop = () => {
   var userDetails = localStorage.getItem("users");
   var userType = JSON.parse(userDetails);
   userType = userType?.user_type;
+
+ 
 
   const getAllWorkshop = () => {
     const url = endpoints.workshop.allWorkshop;
@@ -438,6 +441,8 @@ const Workshop = () => {
                       </>
                     );
                   })}
+
+                  {workshopToBeShown.length == 0 && <div style={{height : "40vh"}}></div>}
               </div>
             </div>
           </div>

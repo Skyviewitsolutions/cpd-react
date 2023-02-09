@@ -17,7 +17,7 @@ const SignUp = () => {
       <div className="sign-up-section loginpage_form common-form-user">
         <div className="container">
           <div className="row">
-            <div className="col-lg-6 col-md-12 col-12 mt-5 about_cpd_signup">
+            <div className="col-lg-6 col-md-12 col-12 mt-3 about_cpd_signup">
               <img
                 src={cpd_logo}
                 alt=""
@@ -41,7 +41,7 @@ const SignUp = () => {
               </button>
             </div>
             <div className="col-lg-1 "></div>
-            <div className="col-lg-5 col-md-12 col-12 mt-5">
+            <div className="col-lg-5 col-md-12 col-12 mt-3">
               <Signupform />
             </div>
           </div>

@@ -1,6 +1,6 @@
 .loginpage_form label {
   font-size: 17px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   font-weight: 600;
 }
 .login_bottom{
@@ -11,7 +11,7 @@
 .loginpage_form h4 {
   font-weight: 600;
   font-size: 32px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 input.loginCheckbox {
   height: 25px;
@@ -168,7 +168,7 @@ div#or h6 {
   box-shadow: 0px 8px 14px #00000029;
   border-radius: 4px;
   font-size: 20px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 .about_con_login h4 {
   font-size: 40px;

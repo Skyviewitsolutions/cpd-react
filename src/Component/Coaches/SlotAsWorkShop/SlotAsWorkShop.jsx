@@ -10,7 +10,9 @@ import "../../../Screen/Coaches_screen/CoachesForm.css";
 import { endpoints } from "../../services/endpoints";
 import Button from "../../button/Button/Button";
 
+
 const SlotAsWorkShop = (props) => {
+
   const { showCalendar, setShowCalendar, eventsToBeShown, setEventsToBeShown } =
     props;
 

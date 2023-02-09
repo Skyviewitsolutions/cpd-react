@@ -5,6 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { endpoints } from "../../services/endpoints";
 import MyCoachingList from "../MyCoachingList/MyCoachingList";
 import Button from "../../button/Button/Button";
+import CreateSlots from "../../Slots/CreateSlots";
 
 const SlotAsCoach = (props) => {
 
@@ -494,140 +495,7 @@ const SlotAsCoach = (props) => {
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center">
-              <input
-                type="radio"
-                id="weekly"
-                checked={daysFormat == "weekly"}
-                onChange={() => setDaysFormat("weekly")}
-              />
-              <label htmlFor="weekly">Weekly</label>
-            </div>
-            <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center">
-              <input
-                type="radio"
-                id="monthly"
-                checked={daysFormat == "monthly"}
-                onChange={() => setDaysFormat("monthly")}
-              />
-              <label htmlFor="monthly">Monthly</label>
-            </div>
-            <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center repeadtd">
-              <input
-                type="checkbox"
-                name=""
-                id="repeat"
-                onChange={() => setIsRepeated(!isRepeated)}
-                checked={isRepeated}
-              />
-              <label htmlFor="repead">Repeated</label>
-            </div>
-          </div>
-
-          {daysFormat === "weekly" && (
-            <div className="row week_days">
-              {allDays.map((day, index) => {
-                return (
-                  <>
-                    <h5
-                      onClick={() => handleSelectdDays(day)}
-                      key={index}
-                      style={{
-                        background:
-                          selectedDays.indexOf(day) != -1 ? "#2c6959" : "white",
-                        color:
-                          selectedDays.indexOf(day) != -1 ? "white" : "grey",
-                      }}
-                    >
-                      {day[0]}
-                    </h5>
-                  </>
-                );
-              })}
-            </div>
-          )}
-
-          {daysFormat === "monthly" && (
-            <div className="row week_days">
-              {allDates.map((date, index) => {
-                return (
-                  <>
-                    <h5
-                      onClick={() => handleSelectdDates(date)}
-                      style={{
-                        background:
-                          selectedDates.indexOf(date) != -1
-                            ? "#2c6959"
-                            : "white",
-                        color:
-                          selectedDates.indexOf(date) != -1 ? "white" : "grey",
-                        marginBottom: "7px",
-                      }}
-                    >
-                      {date}
-                    </h5>
-                  </>
-                );
-              })}
-            </div>
-          )}
-
-          {daysFormat === "weekly" && (
-            <div className="month_calendar d-flex ">
-              <div className="col-lg-2 col-md-3 col-6 ">
-                <h6>Start Date</h6>
-                <input
-                  type="date"
-                  onChange={(e) => setStartDate(e.target.value)}
-                  value={startDate}
-                />
-              </div>
-              <div className="col-lg-2 col-md-3 col-6 ">
-                <h6>End Date</h6>
-                <input
-                  type="date"
-                  onChange={(e) => setEndDate(e.target.value)}
-                  value={endDate}
-                />
-              </div>
-            </div>
-          )}
-
-          <div className="time_slots d-flex ">
-            <div className="col-lg-2 col-md-3 col-6 ">
-              <h6>Start Time</h6>
-              <select
-                name=""
-                id=""
-                onChange={(e) => setStartTime(e.target.value)}
-              >
-                {time.map((itm, ind) => {
-                  return (
-                    <>
-                      <option value={itm}>{itm}</option>
-                    </>
-                  );
-                })}
-              </select>
-            </div>
-            <div className="col-lg-2 col-md-3 col-6 ">
-              <h6>End Time</h6>
-              <select
-                name=""
-                id=""
-                onChange={(e) => setEndTime(e.target.value)}
-              >
-                {time.map((itm, ind) => {
-                  return (
-                    <>
-                      <option value={itm}>{itm}</option>
-                    </>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
+         <CreateSlots />
           <div className="caledarIcons" onClick={() => setShowCalendar(true)}>
             <BsFillCalendarDateFill color="#2c6959" size={32} />
           </div>
@@ -725,7 +593,9 @@ const SlotAsCoach = (props) => {
         </>
       )}
       <ToastContainer />
-      <MyCoachingList />
+      
+
+
     </div>
   );
 };
