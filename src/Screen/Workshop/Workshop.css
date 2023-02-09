@@ -8,6 +8,13 @@
   background-color: #f1f9ff;
   padding-bottom: 10px;
 }
+.coachingBtn {
+  min-width: 125px;
+  /* padding: 10px 34px; */
+  padding: 20;
+  /* margin: 10px; */
+  padding: 10px 9px 10px 9px;
+}
 .workshop_headingblock {
   padding-left: 70px;
   padding-top: 60px;
@@ -199,6 +206,13 @@
     padding-top: 20px;
     padding-bottom: 0px;
   }
+  .coachingBtn {
+    min-width: 125px;
+    /* padding: 10px 34px; */
+    padding: 20;
+    margin: 10px;
+    padding: 10px 9px 10px 9px;
+  }
   .workshop_headingblock h1 {
     font-size: 30px;
   }
@@ -245,6 +259,13 @@
   }
 }
 @media screen and (min-device-width: 481px) and (max-device-width: 767px) {
+  .coachingBtn {
+    min-width: 125px;
+    /* padding: 10px 34px; */
+    padding: 20;
+    margin: 10px;
+    padding: 10px 9px 10px 9px;
+  }
   .workshop_imageblock {
     width: 300px;
   }
@@ -299,6 +320,13 @@
   }
 }
 @media screen and (min-device-width: 768px) and (max-device-width: 961px) {
+  .coachingBtn {
+    min-width: 125px;
+    /* padding: 10px 34px; */
+    padding: 20;
+    margin: 10px;
+    padding: 10px 9px 10px 9px;
+  }
   .workshop_headingblock {
     padding-left: 20px;
     padding-top: 50px;
@@ -351,6 +379,13 @@
   }
 }
 @media screen and (min-device-width: 961px) and (max-device-width: 1024px) {
+  .coachingBtn {
+    min-width: 125px;
+    /* padding: 10px 34px; */
+    padding: 20;
+    margin: 10px;
+    padding: 10px 9px 10px 9px;
+  }
   .workshop-card {
     width: 100%;
   }

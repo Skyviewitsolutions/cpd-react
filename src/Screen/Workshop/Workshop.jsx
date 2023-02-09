@@ -18,11 +18,9 @@ import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 import { toast } from "react-toastify";
 import WorkshopCard from "../../Component/WorkshopCard/WorkshopCard";
 import BookBtn from "../../Component/button/BookBtn/BookBtn";
-import {   useNavigate } from "react-router-dom";
-
+import { useNavigate  , generatePath} from "react-router-dom";
 
 const Workshop = () => {
-
   const navigate = useNavigate("");
   const [modalShow, setModalShow] = React.useState(false);
   const token = localStorage.getItem("token");
@@ -33,8 +31,8 @@ const Workshop = () => {
   const [myEnrolledWorkshop, setMyEnrolledWorkshop] = useState([]);
   const [myWorkshopList, setMyWorkshopList] = useState([]);
   const [showAllWorkshop, setShowAllWorkshop] = useState(true);
-  const [inputData , setInputData] = useState("")
-  const [workshopToBeShown , setWorkshopToBeShown] = useState([]);
+  const [inputData, setInputData] = useState("");
+  const [workshopToBeShown, setWorkshopToBeShown] = useState([]);
 
   var userDetails = localStorage.getItem("users");
   var userType = JSON.parse(userDetails);
@@ -304,28 +302,37 @@ const Workshop = () => {
 
   // 0/1/2/3=Cancelled/Pending/Confirmed/booknow;
 
-  const handleShowAllWorkshop = () =>{
-    setShowAllWorkshop(true)
-    setWorkshopToBeShown(allWorkShopList)
-  }
+  const handleShowAllWorkshop = () => {
+    setShowAllWorkshop(true);
+    setWorkshopToBeShown(allWorkShopList);
+  };
 
-  const handleShowMyWorkshop = () =>{
-    setShowAllWorkshop(false)
-    setWorkshopToBeShown(myWorkshopList)
-  }
+  const handleShowMyWorkshop = () => {
+    setShowAllWorkshop(false);
+    setWorkshopToBeShown(myWorkshopList);
+  };
 
-  const handleInputData = (val) =>{
+  const handleInputData = (val) => {
     var value = val.toLowerCase();
-    if(showAllWorkshop){
-      var filteredData = allWorkShopList.filter((data , index) =>{
-        return data.title.toLowerCase().includes(value)
-      })
-      setWorkshopToBeShown(filteredData)
+    setInputData(val);
+    if (showAllWorkshop) {
+      var filteredData = allWorkShopList.filter((data, index) => {
+        return data.title.toLowerCase().includes(value);
+      });
+      setWorkshopToBeShown(filteredData);
+    } else {
+      var filteredData = myWorkshopList.filter((data, index) => {
+        return data.title.toLowerCase().includes(value);
+      });
+      setWorkshopToBeShown(filteredData);
     }
-    else {
-      
-    }
-  }
+  };
+
+  const showCoachDetails = (dta) => {
+    const coachId = dta.created_by;
+    const path = generatePath("/coach-Details/:coachId", { coachId: coachId });
+    navigate(path);
+  };
 
   return (
     <>
@@ -349,13 +356,59 @@ const Workshop = () => {
               <h5>This Week's Top Enroll Workshop</h5>
             </div>
             <div className="col-12 col-md-12 col-lg-8">
-              <div className="workshop_searchBar d-flex justify-content-around">
+              <div className="row">
+                <div className="col-lg-8 col-md-12 col-12">
+                  <div className="workshop_searchBar">
+                <div className="form-group">
+                 
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search Here"
+                    value={inputData}
+                    onChange={(e) => handleInputData(e.target.value)}
+                  />
+                   <HiSearch id="workshop_search" />
+                </div> </div>
+                </div>
+                {userType == 2 && (
+                  <>
+                <div className="col-lg-2 col-md-4 col-6"> 
+                <button
+                      className="coachingBtn"
+                      style={{
+                        background: showAllWorkshop ? "#2c6959" : "white",
+                        color: showAllWorkshop ? "white" : "#2c6959",
+                      }}
+                      onClick={handleShowAllWorkshop}
+                    >
+                      All
+                    </button>
+                </div>
+                <div className="col-lg-2 col-md-4 col-6"> 
+                <button
+                      className="coachingBtn"
+                      style={{
+                        background: !showAllWorkshop ? "#2c6959" : "white",
+                        color: !showAllWorkshop ? "white" : "#2c6959",
+                      }}
+                      onClick={handleShowMyWorkshop}
+                    >
+                      My workshops
+                    </button>
+                </div>
+                </>
+                )}
+              </div>
+              {/* <div className="workshop_searchBar d-flex justify-content-around">
                 <div className="form-group d-flex position-relative col-lg-6 col-12">
                   <HiSearch id="workshop_search" />
                   <input
                     type="text"
                     class="form-control"
                     placeholder="Search Here"
+                    value={inputData}
+                    onChange={(e) => handleInputData(e.target.value)}
                   />
                 </div>
                 {userType == 2 && (
@@ -382,7 +435,7 @@ const Workshop = () => {
                     </button>
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
@@ -393,9 +446,8 @@ const Workshop = () => {
             </div>
             <div className="col-lg-9 col-md-12 col-12 ">
               <div className="row">
-                {showAllWorkshop &&
-                  allWorkShopList.length != 0 &&
-                  allWorkShopList.map((workshop, index) => {
+                {workshopToBeShown.length != 0 &&
+                  workshopToBeShown.map((workshop, index) => {
                     const img = `${imagePath}/${workshop.image}`;
                     var id = workshop._id;
                     var timing = workshop.availability_timing;
@@ -414,49 +466,19 @@ const Workshop = () => {
                     }
                     return (
                       <>
-                        <WorkshopCard
-                          workshop={workshop}
-                          showWorkshopOnCalendar={showWorkshopOnCalendar}
-                          enrollWorkshop={enrollWorkshop}
-                          enrollStatus={enrollStatus}
-                          img={img}
-                          key={index}
-                          showBookBtn={true}
-                        />
-                      </>
-                    );
-                  })}
-
-                {!showAllWorkshop &&
-                  myWorkshopList.map((workshop, index) => {
-                    const img = `${imagePath}/${workshop.image}`;
-                    var id = workshop._id;
-                    var timing = workshop.availability_timing;
-                    timing = timing.split(",");
-
-                    var enrollStatus = 3;
-
-                    var enrolled = myEnrolledWorkshop.filter((itm, ind) => {
-                      return itm.workshop_id == id;
-                    });
-
-                    if (enrolled.length != 0) {
-                      var datas = enrolled[0];
-                      var status = datas.status;
-                      enrollStatus = status;
-                    }
-
-                    return (
-                      <>
-                        <WorkshopCard
-                          workshop={workshop}
-                          showWorkshopOnCalendar={showWorkshopOnCalendar}
-                          enrollWorkshop={enrollWorkshop}
-                          enrollStatus={enrollStatus}
-                          img={img}
-                          key={index}
-                          showBookBtn={false}
-                        />
+                        <div className="col-lg-4 col-md-12 col-12 workshop-card ">
+                          <WorkshopCard
+                            workshop={workshop}
+                            showWorkshopOnCalendar={showWorkshopOnCalendar}
+                            enrollWorkshop={enrollWorkshop}
+                            enrollStatus={enrollStatus}
+                            img={img}
+                            key={index}
+                            showBookBtn={true}
+                            imageName={workshop.image}
+                            showCoachDetails={showCoachDetails}
+                          />
+                        </div>
                       </>
                     );
                   })}
