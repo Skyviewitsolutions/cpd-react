@@ -1,4 +1,4 @@
-import React, {useState}from 'react'
+import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "react-bootstrap/Navbar";
@@ -34,13 +34,13 @@ import carrerwhite from "../../assets/Images/carrerwhite.png";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import {BsFillFileEarmarkPostFill} from "react-icons/bs";
+import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 
-import './Header2.css';
+import "./Header2.css";
 const Header2 = () => {
-    const navigate = useNavigate("");
-    const [isHovering, setIsHovering] = useState(false);
-    const token = localStorage.getItem("token");
+  const navigate = useNavigate("");
+  const [isHovering, setIsHovering] = useState(false);
+  const token = localStorage.getItem("token");
   var userDetails = localStorage.getItem("users");
   const [activeNavbar, setActiveNavbar] = useState("");
   userDetails = JSON.parse(userDetails);
@@ -51,10 +51,9 @@ const Header2 = () => {
     window.location.reload();
   };
 
-
   return (
     <>
-    <div className="first-Nave">
+      <div className="first-Nave">
         <Navbar bg="light" expand="lg" className="header1_afterlogin ">
           <Navbar.Brand>
             <img
@@ -75,45 +74,11 @@ const Header2 = () => {
                 <img src={home} alt="" className="nav-icons" />
                 <h6>Home</h6>
               </Nav.Link>
-              {/* <Nav.Link className="nav_img working" onClick={() => handleResume()}>
-                <BsFillFileEarmarkPostFill className="nav-icons" size={22} style={{marginBottom : "5px"  , marginTop : "4px"}} color="#2c6959"/>
-                <h6>My Resume</h6>
-              </Nav.Link> */}
-              {/* <Nav.Link
-                className="nav_img working"
-                onClick={() => navigate("/myCommunity")}
-              >
-                <img src={my_Community} alt="" className="nav-icons" />
-                <h6>My Community</h6>
-              </Nav.Link> */}
-              {/* <Nav.Link className="nav_img working"  onClick={() => navigate("/myCourses")}>
-                <img src={my_course} alt="" className="nav-icons" />
-                <h6>My Course</h6>
-              </Nav.Link> */}
-              {/* <Nav.Link
-                className="nav_img working"
-                onClick={() => navigate("/myEvents")}
-              >
-                <img src={my_events} alt="" className="nav-icons" />
-                <h6>My Events</h6>
-              </Nav.Link> */}
-              {/* <Nav.Link className="nav_img working">
-                <img src={my_jobs} alt="" className="nav-icons" />
-                <h6>My Jobs</h6>
-              </Nav.Link> */}
-             
-              {/* <Nav.Link className="nav_img working">
-                <img src={message} alt="" className="nav-icons" />
-                <h6>Notification</h6>
-              </Nav.Link> */}
+
               <Nav.Link className="nav_img working">
                 <img src={learning} alt="" className="nav-icons" />
                 <h6>Learning</h6>
               </Nav.Link>
-              {/* <Nav.Link className="nav_img working">
-                <img src={learning} alt="" className="nav-icons" />
-                <h6>My Calendar</h6>
-              </Nav.Link> */}
 
               {token ? (
                 <Form className="d-flex userprofile_block">
@@ -136,7 +101,6 @@ const Header2 = () => {
                             Logout
                           </span>
                         </div>
-                       
                       </div>
                     )}
                   </div>
@@ -161,7 +125,7 @@ const Header2 = () => {
         </Navbar>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Header2
+export default Header2;

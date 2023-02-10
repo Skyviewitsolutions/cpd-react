@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
-import "./AddCommunitySidebar.css";
-import { FaBars } from "react-icons/fa";
+import React, {useEffect} from 'react';
+import { BsFilterLeft } from "react-icons/bs";
 import $ from "jquery";
 
-const AddCommunitySidebar = () => {
+const CustomFilter = () => {
 
   useEffect(() => {
     $(document).ready(function () {
       toggleNav();
-    },[]);
+    }, []);
 
     function toggleNav(params) {
       var windowWidth = $(window).width();
@@ -39,19 +38,18 @@ const AddCommunitySidebar = () => {
     });
   }, []);
 
-
-
   return (
-    <>
-    <div className="addCommunitysidebar">
+    <div className="workshopsidebar">
       <div className="sibar-community-toggle">
         <div class="btn sideBarBtn">
-          <span class="ffa-bars">
-            <FaBars className="faBars" />
-          </span>
-          <div class="texthideShow">Filters</div>
+          {/* <span class="ffa-bars">
+                <FaBars className="faBars" />
+              </span> */}
+          <div class="texthideShow">
+            <BsFilterLeft />
+          </div>
         </div>
-        
+
         <nav class="sidebar">
           <div class="text">Details</div>
           <ul>
@@ -135,41 +133,11 @@ const AddCommunitySidebar = () => {
                 <span>Public Sector</span>
               </a>
             </li>
-            <li>
-              <a href="#">
-                <button className="BtnMore">More+</button>
-              </a>
-            </li>
-            <h6 className="AddCmntyMenuText">Other</h6>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Sports</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Health</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Music</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <button className="ClearAllAddCmntybtn">Clear All</button>
-              </a>
-            </li>
           </ul>
         </nav>
       </div>
-      </div>
-    </>
+    </div>
   );
 };
 
-export default AddCommunitySidebar;
+export default CustomFilter;

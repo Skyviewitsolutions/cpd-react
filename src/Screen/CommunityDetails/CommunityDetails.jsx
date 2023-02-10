@@ -17,6 +17,7 @@ import DetailsCard from "../../Component/Cards/DetailsCard";
 import { endpoints } from "../../Component/services/endpoints";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import CustomFilter from "../CustomFilter/CustomFilter";
 
 const CommunityDetails = (props) => {
 
@@ -65,11 +66,11 @@ const CommunityDetails = (props) => {
     <>
       <Homepage_header />
       <Networking_headers />
-      <div className="container">
+      <div className="p-4">
         <Community_header communityDetails={selectedCommunity} />
         <div className="row">
           <div className="col-lg-3 d-lg-block d-none mt-5 ps-5 pe-5 mb-5 d-lg-block d-none">
-            <Sidenav_communityFinance />
+            <CustomFilter />
           </div>
           <div className="col-lg-9 col-md-12 col-12">
             <div className="row ">

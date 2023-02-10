@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const CreateSlots = () => {
+
   const [daysFormat, setDaysFormat] = useState("weekly");
   const [startDate, setStartDate] = useState(
     new Date()
@@ -263,7 +264,7 @@ const CreateSlots = () => {
             checked={daysFormat == "weekly"}
             onChange={() => setDaysFormat("weekly")}
           />
-          <label htmlFor="weekly">Weekly</label>
+          <label htmlFor="weekly" style={{marginBottom : "0px"}}>Weekly</label>
         </div>
         <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center">
           <input
@@ -272,7 +273,7 @@ const CreateSlots = () => {
             checked={daysFormat == "monthly"}
             onChange={() => setDaysFormat("monthly")}
           />
-          <label htmlFor="monthly">Monthly</label>
+          <label htmlFor="monthly" style={{marginBottom : "0px"}}>Monthly</label>
         </div>
         <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center repeadtd">
           <input
@@ -282,7 +283,7 @@ const CreateSlots = () => {
             onChange={() => setIsRepeated(!isRepeated)}
             checked={isRepeated}
           />
-          <label htmlFor="repead">Repeated</label>
+          <label htmlFor="repead" style={{marginBottom : "0px"}}>Repeated</label>
         </div>
       </div>
 

@@ -6,18 +6,17 @@ import { FaRegUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import user from "../../assets/Icons/Artboard58.svg";
 
-
 const Community_header = (props) => {
-
+  
   var { communityDetails } = props;
   communityDetails = communityDetails.communityDetails;
-  
+
   const navigate = useNavigate("");
   const BackEvent = () => {
     navigate("/event");
   };
 
-  console.log(communityDetails ,"comunityDetails")
+  console.log(communityDetails, "comunityDetails");
 
   return (
     <>

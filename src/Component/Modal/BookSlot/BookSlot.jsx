@@ -84,8 +84,6 @@ const BookSlot = (props) => {
   </div> */}
 
 
-
-
   <Modal
       {...props}
       size="lg"

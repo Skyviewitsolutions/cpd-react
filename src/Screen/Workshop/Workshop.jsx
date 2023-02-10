@@ -18,7 +18,11 @@ import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 import { toast } from "react-toastify";
 import WorkshopCard from "../../Component/WorkshopCard/WorkshopCard";
 import BookBtn from "../../Component/button/BookBtn/BookBtn";
-import { useNavigate  , generatePath} from "react-router-dom";
+import { useNavigate, generatePath } from "react-router-dom";
+import CustomFilter from "../CustomFilter/CustomFilter";
+import CreateWorkshopForm from "../../Component/Modal/CreateWorkshopForm/CreateWorkshopForm";
+import NoDataImg from "../../assets/Images/noDataFound.png";
+
 
 const Workshop = () => {
   
@@ -34,12 +38,11 @@ const Workshop = () => {
   const [showAllWorkshop, setShowAllWorkshop] = useState(true);
   const [inputData, setInputData] = useState("");
   const [workshopToBeShown, setWorkshopToBeShown] = useState([]);
+  const [showWorkshopForm , setShowWorkshopForm] = useState(false)
 
   var userDetails = localStorage.getItem("users");
   var userType = JSON.parse(userDetails);
   userType = userType?.user_type;
-
- 
 
   const getAllWorkshop = () => {
     const url = endpoints.workshop.allWorkshop;
@@ -332,8 +335,10 @@ const Workshop = () => {
   };
 
   const showCoachDetails = (dta) => {
-    const coachId = dta.created_by;
-    const path = generatePath("/coach-Details/:coachId", { coachId: coachId });
+    const workshopId = dta._id;
+    const path = generatePath("/workshopDetails/:workshopId", {
+      workshopId: workshopId,
+    });
     navigate(path);
   };
 
@@ -354,53 +359,55 @@ const Workshop = () => {
               </div>
             </div>
           </div>
-          <div className="row workshop_searchBox">
-            <div className="col-12 col-md-12 col-lg-4">
+          <div className="row workshop_searchBox col-12">
+            <div className="col-8 col-md-12 col-lg-4">
               <h5>This Week's Top Enroll Workshop</h5>
             </div>
             <div className="col-12 col-md-12 col-lg-8">
               <div className="row">
-                <div className="col-lg-8 col-md-12 col-12">
+                <div className="col-lg-7 col-md-12 col-12">
                   <div className="workshop_searchBar">
-                <div className="form-group">
-                 
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Search Here"
-                    value={inputData}
-                    onChange={(e) => handleInputData(e.target.value)}
-                  />
-                   <HiSearch id="workshop_search" />
-                </div> </div>
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Search Here"
+                        value={inputData}
+                        onChange={(e) => handleInputData(e.target.value)}
+                      />
+                      <HiSearch id="workshop_search" />
+                    </div>{" "}
+                  </div>
                 </div>
                 {userType == 2 && (
                   <>
-                <div className="col-lg-2 col-md-4 col-6"> 
-                <button
-                      className="coachingBtn"
-                      style={{
-                        background: showAllWorkshop ? "#2c6959" : "white",
-                        color: showAllWorkshop ? "white" : "#2c6959",
-                      }}
-                      onClick={handleShowAllWorkshop}
-                    >
-                      All
-                    </button>
-                </div>
-                <div className="col-lg-2 col-md-4 col-6"> 
-                <button
-                      className="coachingBtn"
-                      style={{
-                        background: !showAllWorkshop ? "#2c6959" : "white",
-                        color: !showAllWorkshop ? "white" : "#2c6959",
-                      }}
-                      onClick={handleShowMyWorkshop}
-                    >
-                      My workshops
-                    </button>
-                </div>
-                </>
+                    <div className="coachBtnCont col-5 justify-content-between">
+                      <button
+                        className="coachingBtn"
+                        style={{
+                          background: showAllWorkshop ? "#2c6959" : "white",
+                          color: showAllWorkshop ? "white" : "#2c6959",
+                        }}
+                        onClick={handleShowAllWorkshop}
+                      >
+                        All
+                      </button>
+                   
+                      <button
+                        className="coachingBtn"
+                        style={{
+                          background: !showAllWorkshop ? "#2c6959" : "white",
+                          color: !showAllWorkshop ? "white" : "#2c6959",
+                        }}
+                        onClick={handleShowMyWorkshop}
+                      >
+                        My workshops
+                      </button>
+                      <button className="coachingBtn createCoachingBtn" onClick={() => setShowWorkshopForm(true)}>
+                        Create
+                      </button>
+                    </div>
+                  </>
                 )}
               </div>
               {/* <div className="workshop_searchBar d-flex justify-content-around">
@@ -444,10 +451,10 @@ const Workshop = () => {
         </section>
         <section className="Workshop_section2">
           <div className="row">
-            <div className="col-lg-3 col-md-12 col-12 ">
-              <WorkshsopSidenav />
+            <div className="col-lg-2 col-md-12 col-12 ">
+              <CustomFilter />
             </div>
-            <div className="col-lg-9 col-md-12 col-12 ">
+            <div className="col-lg-10 col-md-12 col-12 ">
               <div className="row">
                 {workshopToBeShown.length != 0 &&
                   workshopToBeShown.map((workshop, index) => {
@@ -469,7 +476,7 @@ const Workshop = () => {
                     }
                     return (
                       <>
-                        <div className="col-lg-4 col-md-12 col-12 workshop-card ">
+                        <div className="col-lg-4 col-md-12 col-12 workshop-card px-4">
                           <WorkshopCard
                             workshop={workshop}
                             showWorkshopOnCalendar={showWorkshopOnCalendar}
@@ -486,8 +493,13 @@ const Workshop = () => {
                     );
                   })}
 
-                  {workshopToBeShown.length == 0 && <div style={{height : "40vh"}}></div>}
+               
               </div>
+              {workshopToBeShown.length == 0 && (
+                  <div className="noDataCont">
+                    <img src={NoDataImg} alt="" />
+                  </div>
+                )}
             </div>
           </div>
           {/* <WorkshopEnroll show={true} onHide={() => setModalShow(false)} /> */}
@@ -497,6 +509,9 @@ const Workshop = () => {
             eventsToBeShown={eventsToBeShown}
             setEventsToBeShown={setEventsToBeShown}
           />
+
+          <CreateWorkshopForm showWorkshopForm={showWorkshopForm} setShowWorkshopForm={setShowWorkshopForm}/>
+
         </section>
       </div>
       <Footer />

@@ -35,11 +35,10 @@ import carrerwhite from "../../assets/Images/carrerwhite.png";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import {BsFillFileEarmarkPostFill} from "react-icons/bs";
-
+import { BsFillFileEarmarkPostFill } from "react-icons/bs";
+import Header2 from "./Header2";
 
 const Homepage_header = () => {
-
   const navigate = useNavigate("");
   const [isHovering, setIsHovering] = useState(false);
   const token = localStorage.getItem("token");
@@ -61,6 +60,8 @@ const Homepage_header = () => {
 
   const logOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("users");
+    localStorage.setItem("loginedIn", false);
     toast("Logout Successfully");
     navigate("/");
     window.location.reload();
@@ -118,122 +119,136 @@ const Homepage_header = () => {
   };
 
   const handleResume = () => {
-    if(userDetails.user_type == 1){
+    if (userDetails.user_type == 1) {
       navigate("/resume");
-    }
-    else if(userDetails.user_type == 2){
-      navigate("/coachesForm")
+    } else if (userDetails.user_type == 2) {
+      navigate("/coachesForm");
     }
   };
 
   return (
     <>
-      <div className="first-Nave">
-        <Navbar bg="light" expand="lg" className="header1_afterlogin ">
-          <Navbar.Brand>
-            <img
-              src={cpd_logo}
-              alt=""
-              className="cpd_logo"
-              onClick={() => navigate("/")}
-            />
-          </Navbar.Brand>
-
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto justify-content-end nav_middlebox flex-grow-1 pe-3">
-              <Nav.Link
-                className="nav_img working"
+      {token ? (
+        <div className="first-Nave">
+          <Navbar bg="light" expand="lg" className="header1_afterlogin ">
+            <Navbar.Brand>
+              <img
+                src={cpd_logo}
+                alt=""
+                className="cpd_logo"
                 onClick={() => navigate("/")}
-              >
-                <img src={home} alt="" className="nav-icons" />
-                <h6>Home</h6>
-              </Nav.Link>
-              <Nav.Link className="nav_img working" onClick={() => handleResume()}>
-                <BsFillFileEarmarkPostFill className="nav-icons" size={22} style={{marginBottom : "5px"  , marginTop : "4px"}} color="#2c6959"/>
-                <h6>My Resume</h6>
-              </Nav.Link>
-              <Nav.Link
-                className="nav_img working"
-                onClick={() => navigate("/myCommunity")}
-              >
-                <img src={my_Community} alt="" className="nav-icons" />
-                <h6>My Community</h6>
-              </Nav.Link>
-              <Nav.Link className="nav_img working"  onClick={() => navigate("/myCourses")}>
-                <img src={my_course} alt="" className="nav-icons" />
-                <h6>My Course</h6>
-              </Nav.Link>
-              <Nav.Link
-                className="nav_img working"
-                onClick={() => navigate("/myEvents")}
-              >
-                <img src={my_events} alt="" className="nav-icons" />
-                <h6>My Events</h6>
-              </Nav.Link>
-              <Nav.Link className="nav_img working">
-                <img src={my_jobs} alt="" className="nav-icons" />
-                <h6>My Jobs</h6>
-              </Nav.Link>
-             
-              <Nav.Link className="nav_img working">
-                <img src={message} alt="" className="nav-icons" />
-                <h6>Notification</h6>
-              </Nav.Link>
-              <Nav.Link className="nav_img working">
-                <img src={learning} alt="" className="nav-icons" />
-                <h6>Learning</h6>
-              </Nav.Link>
-              <Nav.Link className="nav_img working">
-                <img src={learning} alt="" className="nav-icons" />
-                <h6>My Calendar</h6>
-              </Nav.Link>
+              />
+            </Navbar.Brand>
 
-              {token ? (
-                <Form className="d-flex userprofile_block">
-                  <div
-                    className="userprofile_row1"
-                    onMouseOver={() => setIsHovering(true)}
-                  >
-                    <img src={pimg} alt="" className="home" />
-                    <span className="userName">{userDetails?.name}</span>
-
-                    {isHovering && (
-                      <div className="logouts">
-                        <div className="user_profile" onClick={logOut}>
-                          <span style={{ fontWeight: "bold" }}>
-                            <HiOutlineLogout />
-                          </span>
-                          <span
-                            style={{ marginLeft: "10px", fontWeight: "600" }}
-                          >
-                            Logout
-                          </span>
-                        </div>
-                       
-                      </div>
-                    )}
-                  </div>
-                </Form>
-              ) : (
-                <Nav.Link className="nav_img">
-                  <button
-                    type="submit"
-                    className="BtnLogin"
-                    onClick={() => navigate("/loginpage")}
-                  >
-                    {" "}
-                    <span>
-                      <AiOutlineLogin />
-                    </span>{" "}
-                    Login{" "}
-                  </button>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto justify-content-end nav_middlebox flex-grow-1 pe-3">
+                <Nav.Link
+                  className="nav_img working"
+                  onClick={() => navigate("/")}
+                >
+                  <img src={home} alt="" className="nav-icons" />
+                  <h6>Home</h6>
                 </Nav.Link>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-      </div>
+                <Nav.Link
+                  className="nav_img working"
+                  onClick={() => handleResume()}
+                >
+                  <BsFillFileEarmarkPostFill
+                    className="nav-icons"
+                    size={22}
+                    style={{ marginBottom: "5px", marginTop: "4px" }}
+                    color="#2c6959"
+                  />
+                  <h6>My Resume</h6>
+                </Nav.Link>
+                <Nav.Link
+                  className="nav_img working"
+                  onClick={() => navigate("/myCommunity")}
+                >
+                  <img src={my_Community} alt="" className="nav-icons" />
+                  <h6>My Community</h6>
+                </Nav.Link>
+                <Nav.Link
+                  className="nav_img working"
+                  onClick={() => navigate("/myCourses")}
+                >
+                  <img src={my_course} alt="" className="nav-icons" />
+                  <h6>My Course</h6>
+                </Nav.Link>
+                <Nav.Link
+                  className="nav_img working"
+                  onClick={() => navigate("/myEvents")}
+                >
+                  <img src={my_events} alt="" className="nav-icons" />
+                  <h6>My Events</h6>
+                </Nav.Link>
+                <Nav.Link className="nav_img working">
+                  <img src={my_jobs} alt="" className="nav-icons" />
+                  <h6>My Jobs</h6>
+                </Nav.Link>
+
+                <Nav.Link className="nav_img working">
+                  <img src={message} alt="" className="nav-icons" />
+                  <h6>Notification</h6>
+                </Nav.Link>
+                <Nav.Link className="nav_img working">
+                  <img src={learning} alt="" className="nav-icons" />
+                  <h6>Learning</h6>
+                </Nav.Link>
+                <Nav.Link className="nav_img working">
+                  <img src={learning} alt="" className="nav-icons" />
+                  <h6>My Calendar</h6>
+                </Nav.Link>
+
+                {token ? (
+                  <Form className="d-flex userprofile_block">
+                    <div
+                      className="userprofile_row1"
+                      onMouseOver={() => setIsHovering(true)}
+                    >
+                      <img src={pimg} alt="" className="home" />
+                      <span className="userName">{userDetails?.name}</span>
+
+                      {isHovering && (
+                        <div className="logouts">
+                          <div className="user_profile" onClick={logOut}>
+                            <span style={{ fontWeight: "bold" }}>
+                              <HiOutlineLogout />
+                            </span>
+                            <span
+                              style={{ marginLeft: "10px", fontWeight: "600" }}
+                            >
+                              Logout
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </Form>
+                ) : (
+                  <Nav.Link className="nav_img">
+                    <button
+                      type="submit"
+                      className="BtnLogin"
+                      onClick={() => navigate("/loginpage")}
+                    >
+                      {" "}
+                      <span>
+                        <AiOutlineLogin />
+                      </span>{" "}
+                      Login{" "}
+                    </button>
+                  </Nav.Link>
+                )}
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+        </div>
+      ) : (
+        <Header2 />
+      )}
+
       {/***********************SECOND NAVBAR IN HOME PAGE************************/}
 
       <div className="second-Nave d-lg-block d-none">
@@ -294,6 +309,7 @@ const Homepage_header = () => {
           <ToastContainer />
         </Nav>
       </div>
+
       {/****************************slider in mobile and tab ***************************/}
       <div className="headerslider">
         <OwlCarousel

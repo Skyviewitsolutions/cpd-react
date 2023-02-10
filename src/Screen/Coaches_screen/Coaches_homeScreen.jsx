@@ -18,7 +18,11 @@ import { Spinner } from "react-bootstrap";
 import { toast } from "react-toastify";
 import BookBtn from "../../Component/button/BookBtn/BookBtn";
 import { generatePath, useNavigate } from "react-router-dom";
+import CreateCoachingForm from "../../Component/Modal/CreateCoachingForm/CreateCoachingForm";
+import CustomFilter from "../CustomFilter/CustomFilter";
 import useFetchCoachingsData from "../../assets/CustomHooks/useFetchCoachingsData";
+import CreateBtn from "../../Component/button/CreateBtn/CreateBtn";
+import NoDataImg from "../../assets/Images/noDataFound.png";
 
 const CoachingCard = (props) => {
   const {
@@ -27,6 +31,7 @@ const CoachingCard = (props) => {
     timing,
     showCoachingsOnCalendar,
     showBookBtn,
+    coachImgPath,
     bookCoaches,
   } = props;
 
@@ -40,6 +45,7 @@ const CoachingCard = (props) => {
 
   var description = data?.coach_info?.description;
   var coachInfo = data?.coach_info;
+  var image = coachImgPath + "/" + coachInfo?.avtar;
 
   const [showDescription, setshowDescription] = useState(false);
 
@@ -55,7 +61,7 @@ const CoachingCard = (props) => {
                   onClick={() => showCoachDetails(data)}
                 >
                   <img
-                    src={dommy_person}
+                    src={coachInfo?.avtar ? image : dommy_person}
                     alt="#"
                     className="card__body-cover-image"
                   />
@@ -82,7 +88,6 @@ const CoachingCard = (props) => {
                 <p>
                   {coachInfo?.category} | {coachInfo?.subCategory}
                 </p>
-                
               </div>
               <div className="col-lg-5  col-md-4 col-12 availabilityBox">
                 <div className="coaches_homescreen_availbalilityInner">
@@ -101,19 +106,12 @@ const CoachingCard = (props) => {
                     :{timing?.[0]} to {timing?.[1]}
                   </h5>
                 </div>
+
                 <div className="coaches_homescreen_availbalilityInner">
                   <h6>Price </h6>{" "}
                   <h5>
                     {" "}
                     :<span> $</span> {data.price}{" "}
-                    {timing?.[0]} to {timing?.[1]}
-                  </h5>
-                </div>
-                <div className="coaches_homescreen_availbalilityInner">
-                <h6>
-                  Price  </h6>  <h5> :<span> $</span>{" "}
-                 
-                    {data.price}{" "}
                     {data.payment_type == "1" ? "Hourly" : "Sessional"}
                   </h5>
                 </div>
@@ -123,7 +121,7 @@ const CoachingCard = (props) => {
                     <BookBtn
                       status={bookingStatus}
                       onClick={() => bookCoaches(data)}
-                       styles={{ position: "absolute" }}
+                      styles={{ position: "absolute" }}
                     />
                   </div>
                 )}
@@ -137,7 +135,6 @@ const CoachingCard = (props) => {
 };
 
 const Coaches_homeScreen = () => {
-
   const [showCalendar, setShowCalendar] = useState(false);
   const [allCoachings, setAllCoachings] = useState([]);
   const [eventsToBeShown, setEventsToBeShown] = useState([]);
@@ -150,6 +147,9 @@ const Coaches_homeScreen = () => {
   const [inputData, setInputData] = useState("");
   const [allEnrolledWorkshops, setAllEnrolledWorkshops] = useState([]);
   const [showBookCoachesSlot, setBookCoachesSlot] = useState(false);
+  const [showCoachingsForm, setShowCoachingsForm] = useState(false);
+  const [coachImgPath, setCoachImgPath] = useState("");
+  const logedIn = localStorage.getItem("logedIn");
 
   const allCoachesList = useFetchCoachingsData(
     endpoints.coaches.allCoachingList
@@ -157,7 +157,7 @@ const Coaches_homeScreen = () => {
 
   var userDetails = localStorage.getItem("users");
   var userType = JSON.parse(userDetails);
-  userType = userType.user_type;
+  userType = userType?.user_type;
 
   const getCoachingList = () => {
     const token = localStorage.getItem("token");
@@ -172,6 +172,8 @@ const Coaches_homeScreen = () => {
       .then((res) => {
         if (res.data.result) {
           const val = res.data.data;
+          var coachPath = res.data?.avatar_image_path;
+          setCoachImgPath(coachPath);
           setAllCoachings(val);
           setCoachingListToBeShown(val);
         }
@@ -427,34 +429,38 @@ const Coaches_homeScreen = () => {
   }, []);
 
   const bookCoaches = (coachData) => {
-    var id = coachData._id;
-    var url = `${endpoints.coaches.enrollCoaching}${id}`;
+    if (logedIn) {
+      var id = coachData._id;
+      var url = `${endpoints.coaches.enrollCoaching}${id}`;
 
-    console.log(url);
+      console.log(url);
 
-    const headers = {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    };
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      };
 
-    setLoading(true);
+      setLoading(true);
 
-    axios
-      .get(url, { headers: headers })
-      .then((res) => {
-        setLoading(false);
-        if (res.data.result) {
-          getMyCoachingsList();
-          getAllEnrolledCoachings();
-          toast("Coaching booked successfully", { type: "success" });
-        } else if (res.data.result == false) {
-          toast(res.data.message, { type: "warning" });
-        }
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.log(err, "this is the error here");
-      });
+      axios
+        .get(url, { headers: headers })
+        .then((res) => {
+          setLoading(false);
+          if (res.data.result) {
+            getMyCoachingsList();
+            getAllEnrolledCoachings();
+            toast("Coaching booked successfully", { type: "success" });
+          } else if (res.data.result == false) {
+            toast(res.data.message, { type: "warning" });
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err, "this is the error here");
+        });
+    } else {
+      toast("Please login ", { type: "warning" });
+    }
   };
 
   // 0/1/2/3=Cancelled/Pending/Confirmed/booknow;
@@ -487,6 +493,8 @@ const Coaches_homeScreen = () => {
     }
   };
 
+  console.log(logedIn, "logedIn");
+
   return (
     <>
       <Homepage_header />
@@ -495,141 +503,62 @@ const Coaches_homeScreen = () => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-2 d-lg-block d-none coachScreen_left">
-              <h5>Book Coaches</h5>
-              <Sidenavbar />
+              <h5 style={{ marginBottom: "20px" }}>Book Coaches</h5>
+              <CustomFilter />
             </div>
             <div className="col-lg-10 col-md-12 col-12 coachScreen_right">
-
-<div className="row">
-  <div className="col-lg-8 col-md-12 col-12">
-  <div className="coach_searchBar ">
-                <div className="form-group ">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Search Here"
-                    value={inputData}
-                    onChange={(e) => handleFilterCoachings(e.target.value)}
-                  />
-                  <HiSearch id="coach_search" />
-                </div>
-                </div>
-  </div>
- 
-  {userType == 2 && (
-    
- <>
-  <div className="col-lg-2 col-md-4 col-6">
-  <button
-                      className="coachingBtn"
-                      style={{
-                        background: showAllCoaching ? "#2c6959" : "white",
-                        color: showAllCoaching ? "white" : "#2c6959",
-                      }}
-                      onClick={handleShowAllCoachings}
-                    >
-                      All
-                    </button>
-  </div>
-  <div className="col-lg-2 col-md-4 col-6">
-  <button
-                      className="coachingBtn"
-                      style={{
-                        background: !showAllCoaching ? "#2c6959" : "white",
-                        color: !showAllCoaching ? "white" : "#2c6959",
-                      }}
-                      onClick={handleShowMyCoachings}
-                    >
-                      My workshops
-                    </button>
-  </div>
-  </>
-  )}                                                                                               
- 
-</div>
-
-
-
-
-              
-
-              {/* <div className="coach_searchBar d-flex justify-content-around">
-                <div className="form-group d-flex position-relative col-lg-6 col-12">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Search Here"
-                    value={inputData}
-                    onChange={(e) => handleFilterCoachings(e.target.value)}
-                  />
-                  <HiSearch id="coach_search" />
-                </div>
-                {userType == 2 && (
-                  <div className="row d-flex col-5 ml-4 justify-content-around">
-                    <button
-                      className="coachingBtn"
-                      style={{
-                        background: showAllCoaching ? "#2c6959" : "white",
-                        color: showAllCoaching ? "white" : "#2c6959",
-                      }}
-                      onClick={handleShowAllCoachings}
-                    >
-                      All
-                    </button>
-                    <button
-                      className="coachingBtn"
-                      style={{
-                        background: !showAllCoaching ? "#2c6959" : "white",
-                        color: !showAllCoaching ? "white" : "#2c6959",
-                      }}
-                      onClick={handleShowMyCoachings}
-                    >
-                      My coachings
-                    </button>
+              <div className="row">
+                <div className="col-lg-7 col-md-12 col-12">
+                  <div className="coach_searchBar ">
+                    <div className="form-group ">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Search Here"
+                        value={inputData}
+                        onChange={(e) => handleFilterCoachings(e.target.value)}
+                      />
+                      <HiSearch id="coach_search" />
+                    </div>
                   </div>
+                </div>
+
+                {logedIn && userType == 2 && (
+                  <>
+                    <div className="coachBtnCont col-5">
+                      <button
+                        className="coachingBtn"
+                        style={{
+                          background: showAllCoaching ? "#2c6959" : "white",
+                          color: showAllCoaching ? "white" : "#2c6959",
+                        }}
+                        onClick={handleShowAllCoachings}
+                      >
+                        All
+                      </button>
+
+                      <button
+                        className="coachingBtn"
+                        style={{
+                          background: !showAllCoaching ? "#2c6959" : "white",
+                          color: !showAllCoaching ? "white" : "#2c6959",
+                        }}
+                        onClick={handleShowMyCoachings}
+                      >
+                        My workshops
+                      </button>
+
+                      <CreateBtn onClick={() => setShowCoachingsForm(true)} />
+                    </div>
+                  </>
                 )}
-              </div> */}
+              </div>
 
               <div className="row ">
-                {/* here we are getting all the coachings lister */}
-                {/* {showAllCoaching == false &&
-                  myCoachings.length != 0 &&
-                  myCoachings.map((data, index) => {
-                    var id = data._id;
-                    var timing = data.availability_timing;
-                    timing = timing.split(",");
-
-                    var bookingStatus = 3;
-
-                    var enrolled = allEnrolledCoachings.filter((itm, ind) => {
-                      return itm.coaching_id == id;
-                    });
-
-                    if (enrolled.length != 0) {
-                      var datas = enrolled[0];
-                      var status = datas.status;
-                      bookingStatus = status;
-                    }
-
-                    return (
-                      <>
-                        <CoachingCard
-                          data={data}
-                          bookingStatus={bookingStatus}
-                          timing={timing}
-                          showBookBtn={false}
-                          bookCoaches={bookCoaches}
-                          showCoachingsOnCalendar={showCoachingsOnCalendar}
-                        />
-                      </>
-                    );
-                  })} */}
-
                 {coachingListToBeShown.length != 0 &&
                   coachingListToBeShown.map((data, index) => {
                     var id = data._id;
                     var timing = data?.availability_timing;
-                    console.log(timing, "timing here");
                     timing = timing ? timing?.split(",") : null;
 
                     var bookingStatus = 3;
@@ -651,6 +580,7 @@ const Coaches_homeScreen = () => {
                           timing={timing}
                           showBookBtn={showAllCoaching}
                           key={index}
+                          coachImgPath={coachImgPath}
                           bookCoaches={bookCoaches}
                           showCoachingsOnCalendar={showCoachingsOnCalendar}
                         />
@@ -658,39 +588,15 @@ const Coaches_homeScreen = () => {
                     );
                   })}
 
-                {/* {showAllCoaching == true &&
-                  allCoachings.length != 0 &&
-                  allCoachings.map((data, index) => {
-                    var id = data._id;
-                    var timing = data.availability_timing;
-                    timing = timing.split(",");
-
-                    var bookingStatus = 3;
-
-                    var enrolled = allEnrolledCoachings.filter((itm, ind) => {
-                      return itm.coaching_id == id;
-                    });
-
-                    if (enrolled.length != 0) {
-                      var datas = enrolled[0];
-                      var status = datas.status;
-                      bookingStatus = status;
-                    }
-
-                    return (
-                      <>
-                        <CoachingCard
-                          data={data}
-                          bookingStatus={bookingStatus}
-                          timing={timing}
-                          bookCoaches={bookCoaches}
-                          showBookBtn={true}
-                          showCoachingsOnCalendar={showCoachingsOnCalendar}
-                        />
-                      </>
-                    );
-                  })} */}
+               
               </div>
+
+              {coachingListToBeShown.length == 0 && (
+                  <div className="noDataCont">
+                    <img src={NoDataImg} alt="" />
+                  </div>
+                )}
+                
             </div>
           </div>
         </div>
@@ -702,10 +608,15 @@ const Coaches_homeScreen = () => {
         eventsToBeShown={eventsToBeShown}
       />
 
-      {/* <BookCoaches
+      <BookCoaches
         BookCoachesShow={showBookCoachesSlot}
         setBookCoachesShow={showBookCoachesSlot}
-      /> */}
+      />
+
+      <CreateCoachingForm
+        showCoachingsForm={showCoachingsForm}
+        setShowCoachingsForm={setShowCoachingsForm}
+      />
 
       <Footer />
     </>

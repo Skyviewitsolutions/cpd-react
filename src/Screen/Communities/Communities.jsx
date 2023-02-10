@@ -15,6 +15,8 @@ import AddEvent_Modal from "../../Component/Modal/AddEvent_Modal";
 import { toast, ToastContainer } from "react-toastify";
 import Networking_headers from "../../Component/Header/Networking_headers";
 import Add_committee from "../../Component/Cards/Add_committee";
+import NoDataImg from "../../assets/Images/noDataFound.png";
+import CustomFilter from '../CustomFilter/CustomFilter';
 
 
 const Communities = () => {
@@ -146,10 +148,10 @@ const Communities = () => {
     <Homepage_header />
       <Networking_headers />
       {/*  */}
-      <div className="container">
+      <div className="p-4">
         <div class="row mb-4">
           <div className="col-sm-5 col-md-6 col-lg-2 mt-5 ">
-            <Sidenavbar />
+            <CustomFilter />
           </div>
 
           <div className="col-sm-5 col-md-6 col-lg-10 mt-5">
@@ -190,7 +192,7 @@ const Communities = () => {
 
                   return (
                     <>
-                      <div className="col-sm-12 col-md-6 col-lg-4 ">
+                      <div className="col-sm-12 col-md-6 col-lg-4 px-4">
                         <DomainCard
                           data={itm}
                           key={index}
@@ -200,22 +202,18 @@ const Communities = () => {
                           getAllCommunity={getAllCommunity}
                         />
                       </div>
-                      
-                      {/* <div className="col-sm-12 col-md-6 col-lg-4 ">
-                        <Add_committee
-                          data={itm}
-                          key={index}
-                          imagePath={imagePath}
-                          // isSubscribed={isSubscribed}
-                          // getMyCommunity={getMyCommunity}
-                          // getAllCommunity={getAllCommunity}
-                        />
-                      </div> */}
+                    
 
                     </>
                   );
                 })}
             </div>
+
+            {allCommunity.length == 0 && (
+                  <div className="noDataCont">
+                    <img src={NoDataImg} alt="" />
+                  </div>
+                )}
 
             {/* here we are adding modal */}
 

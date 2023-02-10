@@ -14,6 +14,7 @@ import AddEvent_Modal from "../../Component/Modal/AddEvent_Modal";
 import { BsChatDots } from "react-icons/bs";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 // import Chat from "../../Component/Chat/Chat";
+import CustomFilter from "../CustomFilter/CustomFilter";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 
 const EventDetails = (props) => {
@@ -200,7 +201,7 @@ const EventDetails = (props) => {
     <>
       <Homepage_header />
       <Networking_headers />
-      <div className="container">
+      <div className="p-4">
         <Event_header eventDetails={location.state.eventDetails} />
         <div className="calendarIcon" onClick={() => setShowCalendar(true)}>
           <BsFillCalendarDateFill color="#2c6959" size={32} />
@@ -210,7 +211,7 @@ const EventDetails = (props) => {
         </div> */}
         <div className="row">
           <div className="col-lg-3 d-lg-block d-none mt-5 ps-5 pe-5 mb-5 d-lg-block d-none">
-            <Sidenav_communityFinance />
+           <CustomFilter />
           </div>
           <div className="col-lg-9 col-md-12 col-12">
             <></>
@@ -234,7 +235,7 @@ const EventDetails = (props) => {
 
                   return (
                     <>
-                      <div className="col-sm-12 col-md-6 col-lg-4 ">
+                      <div className="col-sm-12 col-md-6 col-lg-4 px-3">
                         <Domain_cards
                           data={itm}
                           key={index}

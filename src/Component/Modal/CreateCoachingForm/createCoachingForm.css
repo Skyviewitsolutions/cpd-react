@@ -1,0 +1,18 @@
+.creatCoachingCont{
+    border: 2px solid green;
+    background-color: white;
+    padding: 20px;
+}
+
+.clenderIcons2{
+    position: absolute;
+    top: 43px !important ;
+   
+}
+
+.coachingCutOptions{
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    cursor: pointer;
+}

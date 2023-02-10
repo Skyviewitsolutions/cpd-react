@@ -50,6 +50,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 const CoachesForm = () => {
 
+
   const [opencoachesPreview, setOpenCoachesPreview] = useState(false);
   const [daysFormat, setDaysFormat] = useState("weekly");
   const [isRepeated, setIsRepeated] = useState(false);
@@ -505,8 +506,9 @@ const CoachesForm = () => {
   };
 
   const getUserCvData = () => {
-    const url = endpoints.authentication.userProfile;
 
+    const url = endpoints.authentication.userProfile;
+   
     const headers = {
       Authorization: `Bearer ${token}`,
       // "Content-Type": "application/json",
@@ -823,7 +825,7 @@ const CoachesForm = () => {
           <div class="customer_records_dynamic"></div>
           <div className="row">
             <div className="col-lg-12 col-md-12 col-12">
-              <h5 className="heading_second">Add Experience</h5>
+              <h5 className="heading_seconds">Add Experience</h5>
             </div>
           </div>
           {allExperience.map((itm, index) => {

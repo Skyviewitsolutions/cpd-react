@@ -366,6 +366,7 @@ const SlotAsCoach = (props) => {
     }
   };
 
+  
   const handleCoachingImg = (e) => {
     const files = e.target.files[0];
     setCoachingImg(files);
@@ -426,7 +427,6 @@ const SlotAsCoach = (props) => {
                   class="form-control field py-4 mb-3"
                   id=""
                   placeholder="Enter coaching title"
-                  // error="Please enter text"
                   value={coachTitle}
                   onChange={(e) => setCoachTitle(e.target.value)}
                 />

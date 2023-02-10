@@ -1,4 +1,3 @@
-
 import React from "react";
 import "./Networking.css";
 import { useState, useEffect } from "react";
@@ -16,10 +15,12 @@ import AddEvent_Modal from "../Component/Modal/AddEvent_Modal";
 import { endpoints } from "../Component/services/endpoints";
 import Networking_headers from "../Component/Header/Networking_headers";
 import axios from "axios";
-import '../fonts/Inter-SemiBold.ttf';
+import "../fonts/Inter-SemiBold.ttf";
 import { HiSearch } from "react-icons/hi";
 import { FaPlusCircle } from "react-icons/fa";
-
+import NoDataImg from "../assets/Images/noDataFound.png"
+import CustomFilter from "./CustomFilter/CustomFilter";
+import CreateBtn from "../Component/button/CreateBtn/CreateBtn";
 
 const Networking = () => {
 
@@ -60,7 +61,7 @@ const Networking = () => {
   useEffect(() => {
     getAllEvents(getAllEvents);
   }, []);
-  
+
   return (
     <>
       <Homepage_header />
@@ -68,84 +69,93 @@ const Networking = () => {
       <div className="networking_wrapper">
         <div className="row">
           <div className="col-lg-3  ">
-          <AddCommunitySidebar />
+           <CustomFilter />
           </div>
-          <div className="col-lg-9 col-md-12 col-12">
+          <div className="col-lg-9 col-md-12 col-12 ">
             <section>
-            <div className="row">
-              <div className="col-lg-8 col-md-12 col-12">
-                <div className="networkingsearchBox">
-                  <div className="form-group">
-                    <HiSearch id="networking_search" />
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Search Here"
+              <div className="row">
+                <div className="col-lg-8 col-md-12 col-12">
+                  <div className="networkingsearchBox">
+                    <div className="form-group">
+                      <HiSearch id="networking_search" />
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Search Here"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="col-lg-2 col-md-3 col-6"
+                  onClick={() => navigate("/community")}
+                >
+                  <button className="view_communities">View Communities</button>
+                </div>
+                <div className="col-lg-2 col-md-2 col-6 ">
+                  <div className="addEventplusButton">
+                    {/* <FaPlusCircle
+                      className="addEventPlus"
+                      onClick={() => navigate("/addEvent")}
                     />
+                    <span id="createEventText">Create Event</span> */}
+                    <CreateBtn />
                   </div>
                 </div>
               </div>
-              <div
-                className="col-lg-2 col-md-3 col-6"
-                onClick={() => navigate("/community")}
-              >
-                <button className="view_communities">View Communities</button>
-              </div>
-              <div className="col-lg-2 col-md-2 col-6 ">
-            <div className="addEventplusButton">
-            <FaPlusCircle className="addEventPlus" onClick={() => navigate("/addEvent")} />
-            <span id="createEventText">Create Event</span>
-            </div>
-              </div>
-              </div>
-              </section>
-          <section className='eventCardsection'>
-            <div className="row">
-            <div className="col-lg-12 col-md-12 col-12">
-                <div className="latest">
-                  <h3>Latest</h3>
-                  <button onClick={() => setShowAllEvents(!showAllEvents)}>
-                    {showAllEvents ? "View Less" : "View All"}
-                  </button>
+            </section>
+            <section className="eventCardsection">
+              <div className="row">
+                <div className="col-lg-12 col-md-12 col-12">
+                  <div className="latest">
+                    <h3>Latest</h3>
+                    <button onClick={() => setShowAllEvents(!showAllEvents)}>
+                      {showAllEvents ? "View Less" : "View All"}
+                    </button>
+                  </div>
                 </div>
               </div>
-              </div>
               <div className="row">
-              {showAllEvents
-                ? allEvent.length != 0 &&
-                  allEvent.map((itm, index) => {
-                    console.log(itm , "itm here");
-                    return (
-                      <>
-                        <div className="col-sm-12 col-md-6 col-lg-4 ">
-                          <Event_cards
-                            data={itm}
-                            key={index}
-                            picPath={picPath}
-                          />
-                        </div>
-                      </>
-                    );
-                  })
-                : shortEvent.map((itm, index) => {
-                    return (
-                      <>
-                        <div className="col-sm-12 col-md-6 col-lg-4 ">
-                          <Event_cards
-                            data={itm}
-                            key={index}
-                            picPath={picPath}
-                          />
-                        </div>
-                      </>
-                    );
-                  })}
+                {showAllEvents
+                  ? allEvent.length != 0 &&
+                    allEvent.map((itm, index) => {
+                      console.log(itm, "itm here");
+                      return (
+                        <>
+                          <div className="col-sm-12 col-md-6 col-lg-4 ">
+                            <Event_cards
+                              data={itm}
+                              key={index}
+                              picPath={picPath}
+                            />
+                          </div>
+                        </>
+                      );
+                    })
+                  : shortEvent.map((itm, index) => {
+                      return (
+                        <>
+                          <div className="col-sm-12 col-md-6 col-lg-4 ">
+                            <Event_cards
+                              data={itm}
+                              key={index}
+                              picPath={picPath}
+                            />
+                          </div>
+                        </>
+                      );
+                    })}
               </div>
-          </section>
+              {allEvent.length == 0 && (
+                  <div className="noDataCont">
+                    <img src={NoDataImg} alt="" />
+                  </div>
+                )}
+            </section>
           </div>
         </div>
       </div>
-       <Footer />
+      <Footer />
     </>
   );
 };

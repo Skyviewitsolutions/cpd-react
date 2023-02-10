@@ -1,5 +1,10 @@
 const BASE_URL = "https://admin.cpdedu.com/api/v1";
 
+var userDetails = localStorage.getItem("users");
+var userData = userDetails && JSON.parse(userDetails);
+var userId = userData && userData._id
+
+
 export const endpoints = {
 
   authentication: {
@@ -43,7 +48,7 @@ export const endpoints = {
     allCoachingNotification : BASE_URL +  '/coaches/coaching/booking-list',
     cancellCoaching : BASE_URL + "/coaches/coaching/respond-to-enrollment?booking_id=",
     confirmCoaching : BASE_URL + "/coaches/coaching/respond-to-enrollment?booking_id=",
-    myCoachings : BASE_URL + "/coaches/coaching/get-list?by_self=1",
+    myCoachings : BASE_URL + "/coaches/coaching/get-list?user_id=" + userId,
     allCoachingList : BASE_URL + '/coaches/coaching/get-list'
   } ,
 
@@ -55,7 +60,8 @@ export const endpoints = {
     allEnrollRequestWorkshop : BASE_URL + "/coaches/workshop/booking-list",
     cancelWorkshop : BASE_URL + "/coaches/workshop/respond-to-enrollment?booking_id=",
     confirmWorkshop : BASE_URL + "/coaches/workshop/respond-to-enrollment?booking_id=",
-    myWorkshop : BASE_URL + "/coaches/workshop/get-list?by_self=1"
+    myWorkshop : BASE_URL + "/coaches/workshop/get-list?user_id=" + userId,
+    getWorkshopDetailsById : BASE_URL + "/coaches/workshop/get-list?workshop_id="
   } ,
   master : {
     allIndustry : BASE_URL + "/list-industry",
