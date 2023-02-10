@@ -14,15 +14,19 @@ import BookSlot from "../BookSlot/BookSlot";
 import {BsPlusCircleFill} from "react-icons/bs";
 
 const BookCoaches = (props) => {
-  
   // const [modalShow, setModalShow] = React.useState(false);
   const { BookCoachesShow, setBookCoachesShow } = props;
+=========
+import {BsPlusCircleFill} from 'react-icons/bs';
+const BookCoaches = (props) => {
+  // const [modalShow, setModalShow] = React.useState(false);
+  // const {BookCoachesShow, setBookCoachesShow}=props;
+>>>>>>>>> Temporary merge branch 2
   const [BookSlotShow, setBookSlotShow] = useState(false);
   const [dayType, setDayType] = useState("days");
   const [days, setDays] = useState([]);
   const [timeSlots, setTimeSlots] = useState([]);
   const [updateWeekDays, setUpdateWeekDays] = useState(false);
-                 const [slot, setSlot]=useState(false);
 
   const addTimeSlot = (val) => {
     let check = timeSlots.includes(val);
@@ -36,7 +40,7 @@ const BookCoaches = (props) => {
     }
     setUpdateWeekDays(!updateWeekDays);
   };
-
+ 
   const addDaySlot = (val) => {
     let check = days.includes(val);
     if (check) {
@@ -56,8 +60,7 @@ const BookCoaches = (props) => {
           {...props}
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
-          centered 
-         show={true}
+          centered
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter"></Modal.Title>
@@ -101,10 +104,8 @@ const BookCoaches = (props) => {
                 </div>
 
                 <div className="col-lg-6 col-md-6 col-12">
-                  <div className=" col-12 col-md-12 col-lg-12 ">
+                  <div className=" col-12 col-md-12 col-lg-12 coachesmodal_availableDays">
                     <h5 style={{ paddingRight: "10px" }}> Available Days</h5>
-                      </div>
-                      <div className=" col-12 col-md-12 col-lg-12 coachesmodal_availableDays">
                     <div class="form-check eventForm_daysDate">
                       <input
                         class="form-check-input"
@@ -139,6 +140,11 @@ const BookCoaches = (props) => {
                         Date
                       </label>
                     </div>
+                  </div>
+                  <div className="col-8 col-md-8 col-lg-6 week_outbox">
+                    <div className="eventForm_weekBox">
+                      <h5>Week</h5> <FaCalendarAlt id="calender_icon" />
+                    </div>
                     <div class="form-check">
                       <input
                         class="form-check-input"
@@ -151,7 +157,6 @@ const BookCoaches = (props) => {
                       </label>
                     </div>
                   </div>
-                
 
                   <div className="eventForm_weekDays col-lg-12 col-md-12 col-12">
                     {dayType === "days" ? (
@@ -167,62 +172,8 @@ const BookCoaches = (props) => {
                       />
                     )}
                   </div>
-                       <div className="col-12 col-md-12 col-lg-12 ">
 
-
-                        <div className="row">
-                        <div className="col-lg-4 col-md-4 col-12">
-                        <div className="bookCoachesSlotBox">
-                          sun-mon
-                        </div>
-                        </div>
-                        <div className="col-lg-4 col-md-4 col-12">
-                        <div className="bookCoachesSlotBox">
-                          sun-mon
-                        </div>
-                        </div>
-                        <div className="col-lg-4 col-md-4 col-12">
-                        <div className="bookCoachesaddSlot">
-                          
-                          <BsPlusCircleFill onClick={() => setSlot(!slot)}/> </div>
-                          </div>
-                        </div>
-                        </div>
-
-                        {slot && 
-                          <div className="bookCoachesadd">
-                         
-                          <div className="bookCoaches">
-                        
-                          <label htmlFor=" ">Start time</label>
-                          <input type="text" name="" id="" />
-                          
-                           </div>
-                           <div className="bookCoachesEndTime">
-                         
-                          <label htmlFor=" ">End time</label>
-                          <input type="text" name="" id="" />
-                          </div>
-                          
-                           
-                           </div>
-                           
-                        }
-                       
-                       
-                      
-                       {/* <div className="bookCoachestimeblock">
-                        <div className=" starttime"> 
-                        <label htmlFor=" ">Start time</label>
-                        <input type="text" name="" id="" />
-                        </div>
-                        <div className=" endtime"> 
-                        <label htmlFor=" ">End time</label>
-                        <input type="text" name="" id="" />
-                        </div>
-                       </div> */}
-
-                     <Modal.Footer>
+                  <Modal.Footer>
                     <Button
                       className="coachesmodalcloseButton"
                       onClick={props.onHide}
@@ -235,8 +186,9 @@ const BookCoaches = (props) => {
                       onClick={() => {
                         // setBookCoachesShow(false);
                         setBookSlotShow(true);
-                      }}
-                    >
+                        
+        }}>
+                    
                       Book Slot
                     </Button>
                   </Modal.Footer>
@@ -245,6 +197,8 @@ const BookCoaches = (props) => {
                 <BookSlot
                   show={BookSlotShow}
                   onHide={() => setBookSlotShow(false)}
+                  
+
                 />
               </div>
             </Modal.Body>

@@ -66,7 +66,6 @@ const CoachingCard = (props) => {
                   <h5>
                     {data?.coach_info?.first_name} {data?.coach_info?.last_name}
                   </h5>
-
                   <GrPowerForceShutdown
                     onMouseOver={() => setshowDescription(true)}
                     onMouseOut={() => setshowDescription(false)}
@@ -107,6 +106,14 @@ const CoachingCard = (props) => {
                   <h5>
                     {" "}
                     :<span> $</span> {data.price}{" "}
+                    {timing?.[0]} to {timing?.[1]}
+                  </h5>
+                </div>
+                <div className="coaches_homescreen_availbalilityInner">
+                <h6>
+                  Price  </h6>  <h5> :<span> $</span>{" "}
+                 
+                    {data.price}{" "}
                     {data.payment_type == "1" ? "Hourly" : "Sessional"}
                   </h5>
                 </div>
@@ -492,7 +499,61 @@ const Coaches_homeScreen = () => {
               <Sidenavbar />
             </div>
             <div className="col-lg-10 col-md-12 col-12 coachScreen_right">
-              <div className="coach_searchBar d-flex justify-content-around">
+
+<div className="row">
+  <div className="col-lg-8 col-md-12 col-12">
+  <div className="coach_searchBar ">
+                <div className="form-group ">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search Here"
+                    value={inputData}
+                    onChange={(e) => handleFilterCoachings(e.target.value)}
+                  />
+                  <HiSearch id="coach_search" />
+                </div>
+                </div>
+  </div>
+ 
+  {userType == 2 && (
+    
+ <>
+  <div className="col-lg-2 col-md-4 col-6">
+  <button
+                      className="coachingBtn"
+                      style={{
+                        background: showAllCoaching ? "#2c6959" : "white",
+                        color: showAllCoaching ? "white" : "#2c6959",
+                      }}
+                      onClick={handleShowAllCoachings}
+                    >
+                      All
+                    </button>
+  </div>
+  <div className="col-lg-2 col-md-4 col-6">
+  <button
+                      className="coachingBtn"
+                      style={{
+                        background: !showAllCoaching ? "#2c6959" : "white",
+                        color: !showAllCoaching ? "white" : "#2c6959",
+                      }}
+                      onClick={handleShowMyCoachings}
+                    >
+                      My workshops
+                    </button>
+  </div>
+  </>
+  )}                                                                                               
+ 
+</div>
+
+
+
+
+              
+
+              {/* <div className="coach_searchBar d-flex justify-content-around">
                 <div className="form-group d-flex position-relative col-lg-6 col-12">
                   <input
                     type="text"
@@ -527,7 +588,7 @@ const Coaches_homeScreen = () => {
                     </button>
                   </div>
                 )}
-              </div>
+              </div> */}
 
               <div className="row ">
                 {/* here we are getting all the coachings lister */}

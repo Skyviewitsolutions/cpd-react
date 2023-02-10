@@ -6,7 +6,8 @@ import UserImg from "../../assets/Images/user2.jpeg";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { endpoints } from "../services/endpoints";
-
+import  profileimg from '../../assets/Images/profileimg.png';
+import {MdOutlineNotificationsActive} from 'react-icons/md';
 const CoachNotification = (props) => {
 
   const { showNotification, setShowNotification } = props;
@@ -164,8 +165,9 @@ const CoachNotification = (props) => {
   };
 
   return (
-    <Modal show={showNotification}>
-      <div className="coachNotif">
+    <Modal show={showNotification}
+    size="lg">
+    {/*    <div className="coachNotif">
         <div className="coachHeader">
           <h5>All Notification</h5>
           <div className="coachCut" onClick={() => setShowNotification(false)}>
@@ -176,7 +178,7 @@ const CoachNotification = (props) => {
           <h6 className="px-3 py-2 bg-secondary text-light text-center">
             Coachings
           </h6>
-          {allNotifiedCoachings.length != 0 &&
+         {allNotifiedCoachings.length != 0 &&
             allNotifiedCoachings.map((item, index) => {
               var userProfile = item?.user_profile;
               var status = item?.status;
@@ -189,10 +191,12 @@ const CoachNotification = (props) => {
                     >
                       <div className="userImg col-2">
                         <img src={UserImg} alt="" />
+                     
                       </div>
                       <div className="userDetails col-10 d-flex flex-column justify-content-center">
                         <h5 className="text-secondary fs-6">
                           {userProfile?.first_name} {userProfile?.last_name}
+                         
                         </h5>
                         <div className="justify-content-start">
                           <button
@@ -210,11 +214,18 @@ const CoachNotification = (props) => {
                         </div>
                       </div>
                     </div>
-                  )}
+                  
                 </>
               );
-            })}
-        </div>
+            })
+          } 
+
+          </div>
+
+
+
+
+
         <div>
           <h6 className="px-3 py-2 bg-secondary text-light text-center">
             Workshops
@@ -259,7 +270,141 @@ const CoachNotification = (props) => {
             })}
         </div>
         <ToastContainer />
+      </div>*/}
+
+<div className="row">
+  <div className="col-lg-12 col-md-12 col-12 ">
+    <div className="notificationHeader">  
+  <h5> All Notification <span><MdOutlineNotificationsActive/></span></h5>
+  <div className="coachCut" onClick={() => setShowNotification(false)}>
+            <IoCloseSharp size={19} color="white" />
+          </div>
+  </div>
+  </div>
+  </div>
+<div className="notificationOuter">
+  <div className="row">
+  <div className="col-lg-12 col-md-12 col-12">
+    <h4>Coaches</h4>
+  </div>
+  
+  {allNotifiedCoachings.length != 0 &&
+            allNotifiedCoachings.map((item, index) => {
+              var userProfile = item?.user_profile;
+              var status = item?.status;
+              return (
+                <>
+                  {status == 1 && (
+  
+  
+<>
+    <div className="col-lg-2 col-md-2 col-3">
+  <div className="notificationavatar">
+  <img src={UserImg} alt="" />
+  </div>
+  </div> 
+
+  <div className="col-lg-10 col-md-10 col-9">
+    <div className="row">
+      <div className="col-lg-6 col-md-12 col-12"> 
+      <div className="notificationName">
+      <h5>{userProfile?.first_name} {userProfile?.last_name}</h5> 
+      <p>Title </p> 
       </div>
+      </div>
+     
+      <div className="col-lg-2 col-md-3 col-4 vertically-center">
+        <div className="notificationcancel">
+        <button onClick={() => CancelCoachingRequest(item)}>cancel</button>
+         </div>
+         </div>
+      <div className="col-lg-2 col-md-3 col-4 vertically-center" >
+      <div className="notificationconfirme">
+      <button onClick={() => ConfirmedCoachingRequest(item)}>confirmed</button>
+      </div>
+      </div>
+      
+    </div>
+    </div>
+    </>
+  )}
+  </>
+);
+})}
+
+  </div>
+  </div>
+
+
+{/* <div className="row">
+  <div className="col-lg-12 col-md-12 col-12 ">
+    <div className="notificationHeader">  
+  <h5> All Notification <span><MdOutlineNotificationsActive/></span></h5>
+  <div className="coachCut" onClick={() => setShowNotification(false)}>
+            <IoCloseSharp size={19} color="white" />
+          </div>
+  </div>
+  </div> 
+  </div>*/}
+<div className="notificationOuter">
+  <div className="row">
+  <div className="col-lg-12 col-md-12 col-12">
+    <h4> Workshop</h4>
+  </div>
+  
+  {allNotifiedWorkshops.length != 0 &&
+            allNotifiedWorkshops.map((item, index) => {
+              var userProfile = item?.user_profile;
+              var status = item?.status;
+              return (
+                <>
+                  {status == 1 && (
+  
+  
+<>
+    <div className="col-lg-2 col-md-2 col-3">
+  <div className="notificationavatar">
+  <img src={UserImg} alt="" />
+  </div>
+  </div> 
+
+  <div className="col-lg-10 col-md-10 col-9">
+    <div className="row">
+      <div className="col-lg-6 col-md-12 col-12"> 
+      <div className="notificationName">
+      <h5>{userProfile?.first_name} {userProfile?.last_name}</h5> 
+      <p>Title </p> 
+      </div>
+      </div>
+     
+      <div className="col-lg-2 col-md-3 col-4 vertically-center">
+        <div className="notificationcancel">
+          
+        <button onClick={() => cancelWorkshopRequest(item)}>cancel</button>
+         </div>
+         </div>
+      <div className="col-lg-2 col-md-3 col-4 vertically-center" >
+      <div className="notificationconfirme">
+      <button onClick={() => confirmWorkshopRequest(item)}>confirmed</button>
+      </div>
+      </div>
+      
+    </div>
+    </div>
+    </>
+  )}
+  </>
+);
+})}
+
+  </div>
+  </div>
+
+
+
+
+
+
     </Modal>
   );
 };

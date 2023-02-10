@@ -1,4 +1,5 @@
 .coachScreen{
+  padding-top:40px;
   background-color:  #F1F9FF;
   padding-bottom: 50px;
   padding-left: 40px;
@@ -10,16 +11,16 @@
   color:#232423;
   font-family: Inter-Bold;
   font-size: 25px;
-  padding-top: 25px;
+  /* padding-top: 25px; */
 }
 
  .coach_searchBar{
-  margin-top: 25px;
+  /* margin-top: 25px; */
   position: relative;
 }
 
 .coachingBtn{
-  width: 180px;
+  /* width: 180px; */
 }
 
 .coach_searchBar input{

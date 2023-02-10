@@ -39,8 +39,12 @@ import CareerFareDetails from './Screen/Career/CareerFareDetails';
 import CoachesForm from "./Screen/Coaches_screen/CoachesForm";
 import ViewDetail from "./Screen/Workshop/ViewDetail";
 import CoachesDetails from "./Screen/CoachDetails/CoachDetails";
+// import MyCourses from "./Component/MyCourses/MyCourses";
 import Header2 from "./Component/Header/Header2";
-import MyCourses from "./Screen/MyCourses/MyCourses"
+import BookCoaches from "./Component/Modal/BookCoaches/BookCoaches";
+import MyCourses from "./Screen/MyCourses/MyCourses";
+import CommunityNewSidebar from "./Component/navbar/CommunityNewSidebar";
+import WorkshopDetails from "./Screen/WorkshopDetails/WorkshopDetails";
 
 
 function App() {
@@ -108,8 +112,12 @@ function App() {
         <Route exact path="/careerDetails" element={<CareerFareDetails /> } />
         <Route exact path="/forum" element={<ForumScreen /> } />
         <Route exact path="/workshopviewdetails" element={<ViewDetail /> } />
-        <Route exact path="/myCourses" element={<MyCourses />} />
+        {/* <Route exact path="/myCourses" element={<MyCourses />} /> */}
         <Route exact path="/Header2" element={<Header2 />} />
+        <Route exact path="/myCourses" element={<MyCourses /> } />
+        <Route exact path="/bookCoaches" element={<BookCoaches /> } />
+        <Route exact path="/communityHeader" element={<CommunityNewSidebar /> } />
+        <Route exact path="/workshopDetails" element={<WorkshopDetails /> } />
       </Routes>
       
     </Router>
