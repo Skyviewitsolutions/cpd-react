@@ -17,30 +17,31 @@ import { useState } from "react";
 import Logininput from "../Inputbox/Logininput";
 import axios from "axios";
 import validator from "validator";
-import {endpoints} from "../services/endpoints"
+import { endpoints } from "../services/endpoints";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const Signupform = (props) => {
-  
+
   const [showPassword, setShowpassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState({});
-  const [userType, setUserType] = useState("1");
+  const [userType, setUserType] = useState("");
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
-
   const submit = () => {
-
     const url = endpoints.authentication.signUp;
-
-    if (name === "") {
+    if (userType == "") {
+      setErrorMsg({ userType: "Please select user type" });
+    } else if (name === "") {
       setErrorMsg({ name: "Please enter name" });
     } else if (email === "") {
       setErrorMsg({ email: "Please enter email" });
@@ -65,25 +66,22 @@ const Signupform = (props) => {
         "Content-Type": "application/json",
       };
 
-      setLoading(true)
+      setLoading(true);
 
       axios
         .post(url, data, { headers: headers })
         .then((res) => {
-        
-          setLoading(false)
+          setLoading(false);
           if (res.data.result === true) {
-
-          navigate("/loginpage");
-            toast("Registered Successfully" , {type : "success"});
-          }
-          else if(res.data.result === false){
-            // toast(res.data.data.message , {type : "error"}) 
-            console.log(res.data.data.message,"vlhvlhsf")
+            toast("Registered Successfully", { type: "success" });
+            navigate("/loginpage");
+          } else if (res.data.result === false) {
+            // toast(res.data.data.message , {type : "error"})
+            console.log(res.data.data.message, "vlhvlhsf");
           }
         })
         .catch((err) => {
-          setLoading(false)
+          setLoading(false);
           console.log(err, "this is the error here");
         });
     }
@@ -107,19 +105,22 @@ const Signupform = (props) => {
       </div>
 
       <div>
-
-
-      <Form.Group className="mb-2">
-          <label>Select User</label>
-          <div >
-          <select class="form-select" onChange={(e)=>setUserType(e.target.value)}>
-            <option value="1">Student</option>
-            <option value="2">Speaker / Coach</option>
-            <option value="3">Employer</option>
-            <option value="4">University</option>
-          </select>
-         
-         </div>
+        <Form.Group className="mb-2">
+          <div>
+            <select
+              class="form-select"
+              onChange={(e) => setUserType(e.target.value)}
+            >
+              <option value="">Select User</option>
+              <option value="1">Student</option>
+              <option value="2">Speaker / Coach</option>
+              <option value="3">Employer</option>
+              <option value="4">University</option>
+            </select>
+            <span style={{ color: "red", fontSize: "14px" }}>
+              {errorMsg.userType}
+            </span>
+          </div>
         </Form.Group>
 
         <Form.Group className="mb-2">
@@ -131,9 +132,10 @@ const Signupform = (props) => {
             place={"Enter name"}
             value={name}
             setValue={(e) => setName(e.target.value)}
-            
           />
-          <span style={{color:"red" ,fontSize:"14px"}}>{errorMsg.name}</span>
+          <span style={{ color: "red", fontSize: "14px" }}>
+            {errorMsg.name}
+          </span>
         </Form.Group>
 
         <Form.Group className="mb-2" controlId="formBasicEmail">
@@ -142,13 +144,15 @@ const Signupform = (props) => {
           <Logininput
             licon={<GrMail />}
             type={"text"}
-            place={"enter email"}
+            place={"Enter email"}
             // ricon={<BsFillCheckCircleFill />}
             value={email}
             setValue={(e) => setEmail(e.target.value)}
             // errors={errorMsg.email}
           />
-            <span style={{color:"red" ,fontSize:"14px"}}>{errorMsg.email}</span>
+          <span style={{ color: "red", fontSize: "14px" }}>
+            {errorMsg.email}
+          </span>
         </Form.Group>
 
         <Form.Group className="mb-2" controlId="formBasicPassword">
@@ -171,37 +175,39 @@ const Signupform = (props) => {
               )
             }
           />
-         <span style={{color:"red" ,fontSize:"14px"}}>{errorMsg.password}</span>
+          <span style={{ color: "red", fontSize: "14px" }}>
+            {errorMsg.password}
+          </span>
         </Form.Group>
 
         <Form.Group className="mb-2" controlId="formBasicPassword">
           <label>Confirm Password</label>
           <Logininput
             licon={<IoIosLock />}
-            type={showPassword ? "text" : "password"}
+            type={showConfirmPassword ? "text" : "password"}
             place={"Enter password"}
             value={confPassword}
             errors={errorMsg.confPassword}
             setValue={(e) => setConfPassword(e.target.value)}
             ricon={
-              showPassword === false ? (
+              showConfirmPassword === false ? (
                 <AiOutlineEyeInvisible
-                  onClick={() => setShowpassword(true)}
+                  onClick={() => setShowConfirmPassword(true)}
                   style={{ color: "gray" }}
                 />
               ) : (
-                <BsEye onClick={() => setShowpassword(false)} />
+                <BsEye onClick={() => setShowConfirmPassword(false)} />
               )
             }
           />
-          <span style={{color:"red" ,fontSize:"14px"}}>{errorMsg.confPassword}</span>
+          <span style={{ color: "red", fontSize: "14px" }}>
+            {errorMsg.confPassword}
+          </span>
         </Form.Group>
 
-        <Btn btn_name={"Sign Up"} submit={submit} loading={loading}/>
+        <Btn btn_name={"Sign Up"} submit={submit} loading={loading} />
         {/* <span>You have already account?<a href="/loginpage" className="logInanker">Login</a></span> */}
-      
       </div>
-     
 
       <div className=" row login_bottom">
         <div className="col-lg-5 col-md-5 col-sm-5">
@@ -215,7 +221,9 @@ const Signupform = (props) => {
         <div className="col-lg-5 col-md-5 col-sm-5 social_login">
           <div className="row ">
             <div className="col-lg-12 col-md-12 col-sm-12 ">
-              <b style={{ fontSize: "14px" }} className="LoginSocial">Login via Social</b>
+              <b style={{ fontSize: "14px" }} className="LoginSocial">
+                Login via Social
+              </b>
             </div>
           </div>
           <div className="row social_icon">
@@ -226,18 +234,18 @@ const Signupform = (props) => {
             </div>
           </div>
         </div>
-      </div> 
+      </div>
       <p className="loginSignup">
-          Already have an account ? {" "}
-          <span
-            style={{ color: "#2c6959",cursor:"pointer" }}
-            onClick={() => navigate("/loginpage")}
-            className="context-menu"
-          >
+        Already have an account ?{" "}
+        <span
+          style={{ color: "#2c6959", cursor: "pointer" }}
+          onClick={() => navigate("/loginpage")}
+          className="context-menu"
+        >
           Login
-          </span>
-        </p>
-        <ToastContainer/>
+        </span>
+      </p>
+      <ToastContainer />
     </>
   );
 };

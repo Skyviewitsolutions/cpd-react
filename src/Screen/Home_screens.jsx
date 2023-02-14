@@ -11,7 +11,6 @@ import Certification from "../Component/Certification_homepage/Certification";
 import User_profile from "../Component/Userprofile/User_profile";
 import { ToastContainer } from "react-toastify";
 
-
 const Home_screens = () => {
   
   const token = localStorage.getItem("token");

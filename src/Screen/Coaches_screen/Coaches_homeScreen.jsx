@@ -147,6 +147,7 @@ const CoachingCard = (props) => {
 };
 
 const Coaches_homeScreen = () => {
+  
   const [showCalendar, setShowCalendar] = useState(false);
   const [allCoachings, setAllCoachings] = useState([]);
   const [eventsToBeShown, setEventsToBeShown] = useState([]);
@@ -288,9 +289,7 @@ const Coaches_homeScreen = () => {
     }
   };
 
-  const handleBookNow = () =>{
-    
-  }
+
 
   // 0/1/2/3=Cancelled/Pending/Confirmed/booknow;
 
@@ -335,7 +334,7 @@ const Coaches_homeScreen = () => {
     });
 
     setCoachingListToBeShown2(filterCoachingByDomain);
-  }, [filterByDomain]);
+  }, [filterByDomain , filterByDomain]);
 
   useEffect(() => {
     var filterCoachingByIndustry = coachingListToBeShown.filter(
@@ -346,7 +345,7 @@ const Coaches_homeScreen = () => {
       }
     );
     setCoachingListToBeShown2(filterCoachingByIndustry);
-  }, [filterByIndustry]);
+  }, [filterByIndustry , filterByDomain]);
 
 
 
@@ -442,7 +441,7 @@ const Coaches_homeScreen = () => {
                           showBookBtn={showAllCoaching}
                           key={index}
                           coachImgPath={coachImgPath}
-                          bookCoaches={handleBookNow}
+                          bookCoaches={bookCoaches}
                           showCoachingsOnCalendar={showCoachingsOnCalendar}
                         />
                       </>

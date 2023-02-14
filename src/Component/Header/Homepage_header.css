@@ -494,15 +494,12 @@ bottom:50%;
   .headerslider .owl-nav button.owl-prev {
     /* left: 0;
     position: absolute; */
-    bottom:50%;
+    bottom:20%;
   }
   .headerslider .owl-nav button.owl-next {
     /* right: 0;
     position: absolute; */
-  bottom:50%;
-  }
-  .headerslider {
-
+  bottom:20%;
   }
 }
 
@@ -542,4 +539,12 @@ bottom:50%;
   cursor: pointer;
 }
 
+.logoutBtn{
+  background-color: #F0F0F0;
+  padding: 9px 18px;
+}
+
+.logoutBtn span{
+  font-size:  15px !important;
+}
 

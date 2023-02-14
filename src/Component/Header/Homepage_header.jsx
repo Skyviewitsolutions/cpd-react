@@ -39,6 +39,7 @@ import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 import Header2 from "./Header2";
 
 const Homepage_header = () => {
+
   const navigate = useNavigate("");
   const [isHovering, setIsHovering] = useState(false);
   const token = localStorage.getItem("token");
@@ -212,7 +213,7 @@ const Homepage_header = () => {
 
                       {isHovering && (
                         <div className="logouts">
-                          <div className="user_profile" onClick={logOut}>
+                          <div className="logoutBtn" onClick={logOut}>
                             <span style={{ fontWeight: "bold" }}>
                               <HiOutlineLogout />
                             </span>

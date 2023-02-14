@@ -22,42 +22,30 @@ import Homepage_header from "../../Component/Header/Homepage_header";
 import Footer from "../../Component/Footer/Footer";
 import CoachesPreview from "../../Component/Modal/CoachesPreview/CoachesPreview";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
-import Button from "../../Component/button/Button/Button"
+import Button from "../../Component/button/Button/Button";
 import { endpoints } from "../../Component/services/endpoints";
 import { getAcedemicYears } from "../../utils/getAcademicYear";
 import SlotAsCoach from "../../Component/Coaches/SlotAsCoach/SlotAsCoach";
 import SlotAsWorkShop from "../../Component/Coaches/SlotAsWorkShop/SlotAsWorkShop";
 import { toast, ToastContainer } from "react-toastify";
+import CompanyImg from "../../assets/Images/company.png";
+import { getDomainList, getIndustryList } from "../../utils/api";
 
 
 const CoachesForm = () => {
 
-  const [daysFormat, setDaysFormat] = useState("weekly");
-  const [isRepeated, setIsRepeated] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
-  const [paid, setPaid] = useState(false);
-  const [sessionType, setSessionType] = useState("");
   const token = localStorage.getItem("token");
   const [eventsToBeShown, setEventsToBeShown] = useState([]);
   const [allCategory, setAllCategory] = useState([]);
   const [allSubCategory, setAllSubCategory] = useState([]);
   const [coachesPreview, setCoachesPreview] = useState(false);
-  const [coachesTitle, setCoachesTitle] = useState("");
-  const [workShopTitle, setWorkShopTitle] = useState("");
-  
-
-  var allDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-  const [selectedDays, setSelectedDays] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [allIndustry, setAllIndustry] = useState([]);
+  const [allDomain, setAllDomain] = useState([]);
+  const [industry, setIndustry] = useState("");
+  const [domain, setDomain] = useState("");
+  const [subIndustry , setSubIndustry] = useState("");
 
   // creating useState for holding the form date ;
   const [firstName, setFirstName] = useState("");
@@ -99,16 +87,6 @@ const CoachesForm = () => {
 
   // creating extra experience useState ;
   const [hobbies, setHobbies] = useState([]);
-
-  // creating recomendation useState here ;
-
-  // useState as coach form ;
-  const [coachPaid, setCoachPaid] = useState(false);
-  const [coachSessionType, setCoachSessionType] = useState("");
-  // useState as Workshop form;
-
-  const [workshopPaid, setWorkshopPaid] = useState(false);
-  const [workshopSessionType, setWorkshopSessionType] = useState("");
 
   const getAllSubCategory = (categoryId) => {
     const url = `${endpoints.coaches.getCoachSubCategory}?category_id=${categoryId}`;
@@ -442,8 +420,8 @@ const CoachesForm = () => {
       formData.append("company", company);
       formData.append("start_year_employment", jobStartYear);
       formData.append("end_year_employment", jobEndYear);
-      formData.append("domain", jobDomain);
-      formData.append("industry", jobIndustry);
+      formData.append("career_domain", jobDomain);
+      formData.append("career_industry", jobIndustry);
       formData.append("isCurrent", currentJob);
       formData.append("skills", skills);
       formData.append("hobbies", hobbies);
@@ -451,6 +429,10 @@ const CoachesForm = () => {
       formData.append("category", category);
       formData.append("subCategory", subCategory);
       formData.append("description", description);
+      formData.append("domain" , domain);
+      formData.append("industry" , industry); 
+      formData.append("subindustry" , subIndustry)
+
 
       const url = endpoints.coaches.createCoachProfile;
       setLoading(true);
@@ -482,9 +464,8 @@ const CoachesForm = () => {
   };
 
   const getUserCvData = () => {
-
     const url = endpoints.authentication.userProfile;
-   
+
     const headers = {
       Authorization: `Bearer ${token}`,
       // "Content-Type": "application/json",
@@ -495,7 +476,6 @@ const CoachesForm = () => {
       .then((res) => {
         if (res.data.result === true) {
           const usersData = res.data.data;
-
           if (usersData) {
             setAllExperience([]);
             if (Object.keys(usersData).length) {
@@ -525,6 +505,7 @@ const CoachesForm = () => {
               const crntRole = usersData.isCurrent;
 
               for (var i = 0; i < jbTitle.length; i++) {
+               
                 var endYear = jbEndYear[i];
                 var currentRole =
                   endYear == new Date().getFullYear() ? "true" : "false";
@@ -563,7 +544,7 @@ const CoachesForm = () => {
                 const contentType = response.headers.get("content-type");
                 const blob = await response.blob();
                 const file = new File([blob], fileName, { contentType });
-                
+
                 setCoachImg(file);
               });
             }
@@ -574,7 +555,6 @@ const CoachesForm = () => {
         console.log(err, "user data error");
       });
   };
-
 
   useEffect(() => {
     const usersDetails = JSON.parse(localStorage.getItem("users"));
@@ -615,8 +595,8 @@ const CoachesForm = () => {
       formData.append("company", company);
       formData.append("start_year_employment", jobStartYear);
       formData.append("end_year_employment", jobEndYear);
-      formData.append("domain", jobDomain);
-      formData.append("industry", jobIndustry);
+      formData.append("career_domain", jobDomain);
+      formData.append("career_industry", jobIndustry);
       formData.append("isCurrent", currentJob);
       formData.append("skills", skills);
       formData.append("hobbies", hobbies);
@@ -624,6 +604,9 @@ const CoachesForm = () => {
       formData.append("category", category);
       formData.append("subCategory", subCategory);
       formData.append("description", description);
+      formData.append("domain" , domain);
+      formData.append("industry" , industry); 
+      formData.append("subindustry" , subIndustry);
 
       const url = endpoints.coaches.updateCoachProfile;
       setLoading(true);
@@ -647,7 +630,33 @@ const CoachesForm = () => {
           console.log(err, "this is the error");
         });
     }
-  }
+  };
+
+  // here we are fetching the industry and domain;
+
+  useEffect(() => {
+    getIndustryList()
+      .then((res) => {
+        if (res.data.data) {
+          var data = res.data.data;
+          setAllIndustry(data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    getDomainList()
+      .then((res) => {
+        if (res.data.data) {
+          var data = res.data.data;
+          setAllDomain(data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
@@ -752,52 +761,52 @@ const CoachesForm = () => {
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4 ">
-            <div class="form-group">
-                  {coachImg ? (
-                    <>
-                      <label htmlFor="takePhoto">Upload Img</label>
-                      <h5 class="form-control" htmlFor="takePhone">
-                        {coachImg.name}
-                      </h5>
-                      <input
-                        type="file"
-                        class="form-control"
-                        placeholder="Enter here"
-                        accept="image/png, image/gif, image/jpeg"
-                        onChange={(e) => handleUploadImg(e)}
-                        id="takePhoto"
-                        style={{ display: "none" }}
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <label htmlFor="takePhoto">Upload Img</label>
-                      <input
-                        type="file"
-                        class="form-control"
-                        placeholder="Enter here"
-                        accept="image/png, image/gif, image/jpeg"
-                        onChange={(e) => handleUploadImg(e)}
-                        id="takePhoto"
-                      />
-                    </>
-                  )}
-                </div>
+              <div class="form-group">
+                {coachImg ? (
+                  <>
+                    <label htmlFor="takePhoto">Upload Img</label>
+                    <h5 class="form-control" htmlFor="takePhone">
+                      {coachImg.name}
+                    </h5>
+                    <input
+                      type="file"
+                      class="form-control"
+                      placeholder="Enter here"
+                      accept="image/png, image/gif, image/jpeg"
+                      onChange={(e) => handleUploadImg(e)}
+                      id="takePhoto"
+                      style={{ display: "none" }}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <label htmlFor="takePhoto">Upload Img</label>
+                    <input
+                      type="file"
+                      class="form-control"
+                      placeholder="Enter here"
+                      accept="image/png, image/gif, image/jpeg"
+                      onChange={(e) => handleUploadImg(e)}
+                      id="takePhoto"
+                    />
+                  </>
+                )}
+              </div>
             </div>
             <div className="col-12 col-md-12 col-lg-7  ">
-            <label for="exampleInputPassword1">Description</label>
-            <div class="form-group domain_textarea">
-              <textarea
-                type="text"
-                class="form-control "
-                placeholder="Enter some information related Domain and Industry"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
+              <label for="exampleInputPassword1">Description</label>
+              <div class="form-group domain_textarea">
+                <textarea
+                  type="text"
+                  class="form-control "
+                  placeholder="Enter some information related Domain and Industry"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
             </div>
           </div>
-          </div>
-          
+
           <div class="customer_records_dynamic"></div>
           <div className="row">
             <div className="col-lg-12 col-md-12 col-12">
@@ -809,7 +818,7 @@ const CoachesForm = () => {
               <>
                 <div className="studentcv_experiencelogoBox" key={index}>
                   <div className="studentCV_logobox">
-                    <img src={company_logo} alt="" />
+                    <img src={CompanyImg} alt="" />
                     <div className="studentCV_universityDetail">
                       <h5>{itm.jobTitle}</h5>
                       <h6>{itm.company}</h6>
@@ -1027,25 +1036,25 @@ const CoachesForm = () => {
               </div>
             </div>
           </div>
-          
+
           <hr className="studentcv_hr" />
           <div className="row">
             <div className="col-12 col-md-6 col-lg-4 ">
               <div class="form-group">
-                <label for="exampleInputPassword1">Category</label>
+                <label for="exampleInputPassword1">Domain</label>
                 <select
                   class="form-select end-year "
                   aria-label="Default select example"
-                  value={category}
+                  value={domain}
                   required
-                  onChange={(e) => handleCategorySelection(e.target.value)}
+                  onChange={(e) => setDomain(e.target.value)}
                 >
                   <option value="">Choose</option>
-                  {allCategory.map((category, ind) => {
+                  {allDomain.map((domain, ind) => {
                     return (
                       <>
-                        <option value={category.title} key={ind}>
-                          {category.title}
+                        <option value={domain.title} key={ind}>
+                          {domain.title}
                         </option>
                       </>
                     );
@@ -1054,43 +1063,64 @@ const CoachesForm = () => {
               </div>
             </div>
 
-            {category != "" && (
-              <div className="col-12 col-md-6 col-lg-4 ">
-                <div class="form-group">
-                  <label for="exampleInputPassword1">SubCategory</label>
-                  <select
-                    class="form-select end-year "
-                    aria-label="Default select example"
-                    value={subCategory}
-                    required
-                    onChange={(e) => setSubCategory(e.target.value)}
-                  >
-                    <option value="">Choose</option>
-                    {allSubCategory.map((itm, index) => {
-                      return (
-                        <>
-                          <option value={itm.title}>{itm.title}</option>
-                        </>
-                      );
-                    })}
-                  </select>
-                </div>
+            <div className="col-12 col-md-6 col-lg-4 ">
+              <div class="form-group">
+                <label for="exampleInputPassword1">Industry</label>
+                <select
+                  class="form-select end-year "
+                  aria-label="Default select example"
+                  value={industry}
+                  required
+                  onChange={(e) => setIndustry(e.target.value)}
+                >
+                  <option value="">Choose</option>
+                  {allIndustry.map((itm, index) => {
+                    return (
+                      <>
+                        <option value={itm.title} key={index}>
+                          {itm.title}
+                        </option>
+                      </>
+                    );
+                  })}
+                </select>
               </div>
-            )}
+            </div>
+            <div className="col-lg-4 col-md-6 col-12 ">
+              <div class="form-group">
+                <label for="exampleInputPassword1">Sub Industry</label>
+
+                <input
+                  type="text"
+                  class="form-control field"
+                  id=""
+                  placeholder="Enter here"
+                  value={subIndustry}
+                  onChange={(e) => setSubIndustry(e.target.value)}
+                />
+              </div>
+            </div>
 
             <div className="row mt-4">
               <div className="col-lg-6"></div>
               <div className="col-lg-3 col-md-3 col-12">
-                <Button title={update ?  "Update" : "Submit"} loading={loading} onClick={update === true ? updateProfile : submit}/>
+                <Button
+                  title={update ? "Update" : "Submit"}
+                  loading={loading}
+                  onClick={update === true ? updateProfile : submit}
+                />
               </div>
               <div className="col-lg-3 col-md-3 col-12">
-                <Button title="Preview Profile" onClick={() => setCoachesPreview(true)}/>
+                <Button
+                  title="Preview Profile"
+                  onClick={() => setCoachesPreview(true)}
+                />
               </div>
             </div>
           </div>
         </div>
+
         {/* <div className="formoutline_studentcv coachFormSt">
-          
           <SlotAsCoach
             showCalendar={showCalendar}
             setShowCalendar={setShowCalendar}

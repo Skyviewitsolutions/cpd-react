@@ -65,21 +65,21 @@ div#popup-2 {
   left: 799.525px;
 }
 
-/* .domainCardName_box {
+.domainCardName_box {
   display: flex;
-  justify-content: flex-end;
-} */
+  justify-content: flex-start;
+}
 
-/* .domainCardName_box h6 {
+.domainCardName_box h6 {
   cursor: pointer;
   font-weight: 500;
   color: #2c6959;
   font-size: 13px;
-} */
-/* .domainCardName_box img {
+}
+.domainCardName_box img {
   width: 16px;
   height: 16px;
-} */
+}
 .criteria_join {
   width: 100%;
   display: flex;

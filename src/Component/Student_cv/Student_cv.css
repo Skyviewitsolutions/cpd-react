@@ -82,10 +82,10 @@
         margin-bottom: 21px;
     }
 
-    .studentCV_logobox img{
+    /* .studentCV_logobox img{
         width:120px;
         height:60px;
-    }
+    } */
 
     .studentCV_logobox {
         display: flex;

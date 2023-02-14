@@ -7,6 +7,7 @@ import Signupform from "../../Component/Signupform/Signupform";
 import cpd_logo from "../../assets/Images/cpd_logo.png";
 import { useNavigate } from "react-router-dom";
 
+
 const SignUp = () => {
   
   const navigate = useNavigate("");

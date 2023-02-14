@@ -74,7 +74,7 @@ const Networking = () => {
           <div className="col-lg-9 col-md-12 col-12 ">
             <section>
               <div className="row">
-                <div className="col-lg-8 col-md-12 col-12">
+                <div className="col-lg-7 col-md-12 col-12">
                   <div className="networkingsearchBox">
                     <div className="form-group">
                       <HiSearch id="networking_search" />
@@ -87,22 +87,19 @@ const Networking = () => {
                   </div>
                 </div>
                 <div
-                  className="col-lg-2 col-md-3 col-6"
+                  className="col-lg-3 col-md-3 col-6"
                   onClick={() => navigate("/community")}
                 >
-                  <button className="networkingcreatebutton"> View Community </button>
-                  {/* <Button title="View Communities" style={{marginTop : "0px"}}/> */}
+                  <Button title="View Communities" style={{marginTop : "0px"}}/>
                 </div>
                 <div className="col-lg-2 col-md-2 col-6 ">
                   <div className="addEventplusButton">
-                    
                     {/* <FaPlusCircle
                       className="addEventPlus"
                       onClick={() => navigate("/addEvent")}
                     />
                     <span id="createEventText">Create Event</span> */}
-                    {/* <CreateBtn onClick={() => navigate("/addEvent")}/> */}
-                    <button className="networkingcreatebutton"  onClick={() => navigate("/addEvent")}> Create</button>
+                    <CreateBtn onClick={() => navigate("/addEvent")}/>
                   </div>
                 </div>
               </div>

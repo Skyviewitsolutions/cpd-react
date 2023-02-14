@@ -1,21 +1,20 @@
 import React from "react";
 import Footer from "../../Component/Footer/Footer";
 import "./MyEvent.css";
-// import '../Component/Cards/Event_cards';
 import MyEventCards from "../../Component/Cards/MyEventCards";
-import Sidenav_communityFinance from "../../Component/navbar/Sidenav_communityFinance";
 import Homepage_header from "../../Component/Header/Homepage_header";
 import { useState, useEffect } from "react";
 import { endpoints } from "../../Component/services/endpoints";
 import axios from "axios";
 import Networking_headers from "../../Component/Header/Networking_headers";
-
+import NoDataImg from "../../assets/Images/noDataFound.png";
+import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 
 const MyEvent = () => {
-  
+
   const [createdEvent, setCreatedEvent] = useState([]);
   const [imagePath, setImagePath] = useState("");
-  const [videoPath , setVideoPath] = useState("")
+  const [videoPath, setVideoPath] = useState("");
   const [imgFiles, setImgFiles] = useState(null);
 
   const createEvent = () => {
@@ -28,14 +27,14 @@ const MyEvent = () => {
     axios
       .get(createEventsUrl, { headers: headers })
       .then((res) => {
-        console.log(res ,"response here")
+        console.log(res, "response here");
         if (res.data.result === true) {
           const val = res.data.data;
           const imgPath = res.data.image_path;
           const videoPath = res.data.video_path;
           setImagePath(imgPath);
-          setVideoPath(videoPath)
-          setCreatedEvent(val)
+          setVideoPath(videoPath);
+          setCreatedEvent(val);
         }
       })
       .catch((err) => {
@@ -51,10 +50,10 @@ const MyEvent = () => {
     <>
       <Homepage_header />
       <Networking_headers />
-      <div className="container">
+      <div className="">
         <div className=" row">
           <div className="col-lg-3 d-lg-block d-none mt-5 ps-5 pe-5 mb-5 d-lg-block d-none">
-            <Sidenav_communityFinance />
+            <CustomFilter />
           </div>
 
           <div className="col-12 col-md-12 col-lg-9 mt-5">
@@ -76,6 +75,12 @@ const MyEvent = () => {
                     </>
                   );
                 })}
+
+              {createdEvent.length == 0 && (
+                <div className="noDataCont">
+                  <img src={NoDataImg} alt="" />
+                </div>
+              )}
             </div>
           </div>
         </div>

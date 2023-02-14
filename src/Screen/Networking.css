@@ -14,7 +14,7 @@
   }
   .addEventplusButton{
    
-    /* padding-left: 50px; */
+    padding-left: 50px;
   }
   #createEventText{
     font-size: 13px;
@@ -75,15 +75,6 @@
 
 }
 
-.networkingcreatebutton {
-    font-size:16px;
-    border: none;
-    background: #2c6959;
-    color: white;
-    padding: 15px 25px;
-    font-weight: 600;
-}
-
 .latest button{
     width:100px;
     height:35px;
@@ -92,7 +83,7 @@
     color:#2c6959;
     border: none;
     background-color: transparent;
-    /* border:2px solid #2c6959; */
+    border:2px solid #2c6959;
     font-weight: bold;
 }
 .eventCardsection{
@@ -142,9 +133,6 @@
     .addEventplusButton {
         padding-left: 20px;
     }
-    .networkingcreatebutton {
-        margin-top:10px;
-    }
     .networking_wrapper{
    
         padding:10px 10px 10px 10px;
@@ -155,14 +143,11 @@
     .view_communities{
         margin-top: 10px;
     }
-    /* .addEventplusButton{
+    .addEventplusButton{
         margin-top:10px;
-    } */
+    }
     .eventCardsection{
         margin-top: 20px;
-    }
-    .networkingsearchBox{
-        margin-top:10px;
     }
    
   }

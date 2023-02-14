@@ -11,10 +11,9 @@ import Networking_headers from "../../Component/Header/Networking_headers";
 import AddCommunitySidebar from "../../Component/AddCommunitySidebar/AddCommunitySidebar";
 import MyCommunityCards from "../../Component/Cards/MyCommunityCards";
 import { toast } from "react-toastify";
-
+import NoDataImg from "../../assets/Images/noDataFound.png";
 
 const MyCommunity = () => {
-
   const [createdCommunity, setCreatedCommunity] = useState([]);
   const [imagePath, setImagePath] = useState("");
   const [sortCreateCommunity, setSortCreatedCommunity] = useState([]);
@@ -62,7 +61,6 @@ const MyCommunity = () => {
 
   // my community
   const myCommunity = () => {
-
     const myCommunityApi = endpoints.community.myCommunity;
     const token = localStorage.getItem("token");
 
@@ -98,33 +96,31 @@ const MyCommunity = () => {
     myCommunity();
   }, []);
 
-
   // here we are writing code for deleting the community ;
 
-  const deleteCommunity = (id) =>{
-    
+  const deleteCommunity = (id) => {
     const deleteCommunityUrl = `${endpoints.community.disableCommunity}${id}`;
-    console.log(deleteCommunityUrl , "delete community url");
+    console.log(deleteCommunityUrl, "delete community url");
 
     const headers = {
-      "Authorization" : `Bearer ${token}` ,
-      "accept" : "application/json"
-    }
+      Authorization: `Bearer ${token}`,
+      accept: "application/json",
+    };
 
-    axios.get(deleteCommunityUrl , {headers : headers})
-    .then((res) =>{
-      console.log(res ,"delete api response")
-      if(res.data.result){
-        createCommunity();
-        toast("Community deleted successfully" , {type : "success"})
-      }else {
-        
-      }
-    })
-    .catch((err) =>{
-      console.log(err , "response here")
-    })
-  }
+    axios
+      .get(deleteCommunityUrl, { headers: headers })
+      .then((res) => {
+        console.log(res, "delete api response");
+        if (res.data.result) {
+          createCommunity();
+          toast("Community deleted successfully", { type: "success" });
+        } else {
+        }
+      })
+      .catch((err) => {
+        console.log(err, "response here");
+      });
+  };
 
   return (
     <>
@@ -133,8 +129,9 @@ const MyCommunity = () => {
       <div className="container">
         <div className=" row">
           <div className="col-lg-3 col-md-12 col-sm-12 mt-5">
-           
-          {createdCommunity.length != 0 && myJoinCommmunity.length !== 0 && <AddCommunitySidebar /> }
+            {createdCommunity.length != 0 && myJoinCommmunity.length !== 0 && (
+              <AddCommunitySidebar />
+            )}
           </div>
 
           <div className="col-lg-9 col-md-12 col-sm-12 mt-5">
@@ -149,8 +146,8 @@ const MyCommunity = () => {
             </div>
 
             <div className="row">
-              {showCreatedCommunity
-                ? createdCommunity.length != 0 ?
+              {showCreatedCommunity ? (
+                createdCommunity.length != 0 ? (
                   createdCommunity.map((itm, index) => {
                     return (
                       <>
@@ -166,24 +163,33 @@ const MyCommunity = () => {
                         </div>
                       </>
                     );
-                  }) : <h6 className="noData">No data available !</h6>
-                : sortCreateCommunity.length != 0 ? sortCreateCommunity.map((itm, index) => {
-                    return (
-                      <>
-                        <div className="col-lg-4 col-md-6 col-12 mt-3 mb-5">
-                          <MyCreatedCommunityCard
-                            data={itm}
-                            key={index}
-                            imagePath={imagePath}
-                            myCommunity={myCommunity}
-                            deleteCommunity={deleteCommunity}
-                          />
-                        </div>
-                      </>
-                    );
-                  }) : <h6 className="noData">No data available !</h6>
-                  
-                  } 
+                  })
+                ) : (
+                  <div className="noDataCont">
+                  <img src={NoDataImg} alt="" />
+                </div>
+                )
+              ) : sortCreateCommunity.length != 0 ? (
+                sortCreateCommunity.map((itm, index) => {
+                  return (
+                    <>
+                      <div className="col-lg-4 col-md-6 col-12 mt-3 mb-5">
+                        <MyCreatedCommunityCard
+                          data={itm}
+                          key={index}
+                          imagePath={imagePath}
+                          myCommunity={myCommunity}
+                          deleteCommunity={deleteCommunity}
+                        />
+                      </div>
+                    </>
+                  );
+                })
+              ) : (
+                <div className="noDataCont">
+                  <img src={NoDataImg} alt="" />
+                </div>
+              )}
             </div>
 
             <div className="myjoinCommunity">
@@ -196,8 +202,8 @@ const MyCommunity = () => {
               </button>
             </div>
             <div className="row">
-              {showMyJoinCommunity
-                ? myJoinCommmunity.length !== 0 ?
+              {showMyJoinCommunity ? (
+                myJoinCommmunity.length !== 0 ? (
                   myJoinCommmunity.map((item, index) => {
                     return (
                       <>
@@ -212,24 +218,33 @@ const MyCommunity = () => {
                         </div>
                       </>
                     );
-                  }) : <h6 className="noData">No data available !</h6>
-                : sortMyJoinCommunity.length != 0 ?
-                  sortMyJoinCommunity.map((item, index) => {
-                    return (
-                      <>
-                        <div className="col-lg-4 col-md-6 col-12 mt-3 mb-5">
-                          <MyCommunityCards
-                            data={item}
-                            key={index}
-                            imgFiles={imgFiles}
-                            myJoinCommmunity={myJoinCommmunity}
-                            myCommunity={myCommunity}
-                          />
-                        </div>
-                      </>
-                    );
-                  }) : <h6 className="noData">No data available !</h6>
-                }
+                  })
+                ) : (
+                  <div className="noDataCont">
+                  <img src={NoDataImg} alt="" />
+                </div>
+                )
+              ) : sortMyJoinCommunity.length != 0 ? (
+                sortMyJoinCommunity.map((item, index) => {
+                  return (
+                    <>
+                      <div className="col-lg-4 col-md-6 col-12 mt-3 mb-5">
+                        <MyCommunityCards
+                          data={item}
+                          key={index}
+                          imgFiles={imgFiles}
+                          myJoinCommmunity={myJoinCommmunity}
+                          myCommunity={myCommunity}
+                        />
+                      </div>
+                    </>
+                  );
+                })
+              ) : (
+                <div className="noDataCont">
+                  <img src={NoDataImg} alt="" />
+                </div>
+              )}
             </div>
           </div>
         </div>

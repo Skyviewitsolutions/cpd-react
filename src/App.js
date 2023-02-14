@@ -51,7 +51,7 @@ import DashboardLayouts from "./Layouts/DashboardLayouts";
 function App() {
   
   
-  return (
+  return (<>
     <Router>
       <Routes>
         <Route exact path="/" element={<Home_screens />} />
@@ -119,10 +119,12 @@ function App() {
         <Route exact path="/bookCoaches" element={<BookCoaches /> } />
         <Route exact path="/communityHeader" element={<CommunityNewSidebar /> } />
         <Route exact path="/workshopDetails/:workshopId" element={<WorkshopDetails /> } />
+
       </Routes>
       
     </Router>
-  );
+    <ToastContainer />
+    </>);
 }
 
 export default App;

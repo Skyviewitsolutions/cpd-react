@@ -10,10 +10,9 @@ import axios from "axios";
 import BookBtn from "../../Component/button/BookBtn/BookBtn";
 import WorkshopCard from "../../Component/WorkshopCard/WorkshopCard";
 import CoachingCard from "../../Component/CoachingCard/CoachingCard";
-
+import NoDataImg from "../../assets/Images/noDataFound.png";
 
 const MyCourses = () => {
-
   const [coachingImgPath, setCoachingImgPath] = useState("");
   const [workshopImgPath, setWorkshopImgPath] = useState("");
   const [myEnrolledCoachings, setMyEnrolledCoachings] = useState([]);
@@ -112,7 +111,9 @@ const MyCourses = () => {
                   })}
 
                 {myEnrolledCoachings.length == 0 && (
-                  <h6>No coachings found !</h6>
+                  <div className="noDataCont">
+                    <img src={NoDataImg} alt="" />
+                  </div>
                 )}
               </div>
             </div>
@@ -146,7 +147,11 @@ const MyCourses = () => {
                     );
                   })}
 
-                {myEnrolledWorkshop.length == 0 && <h6>No workshop found !</h6>}
+                {myEnrolledWorkshop.length == 0 && (
+                  <div className="noDataCont">
+                    <img src={NoDataImg} alt="" />
+                  </div>
+                )}
               </div>
             </div>
           </div>

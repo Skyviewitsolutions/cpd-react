@@ -114,7 +114,7 @@ const CustomFilter = (props) => {
         </div>
 
         <nav class="sidebar">
-          <div class="text">Details</div>
+          <div class="text">Filter</div>
           <ul>
             <h6 className="AddCmntyMenuText">Domain</h6>
             {allDomain.length != 0 &&

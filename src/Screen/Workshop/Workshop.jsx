@@ -200,7 +200,7 @@ const Workshop = () => {
     });
 
     setWorkshopToBeShown2(filterWorkshopByDomain);
-  }, [filterByDomain]);
+  }, [filterByDomain , filterByIndustry]);
 
   useEffect(() => {
     var filterWorkshopByIndustry = workshopToBeShown.filter(
@@ -211,7 +211,7 @@ const Workshop = () => {
       }
     );
     setWorkshopToBeShown2(filterWorkshopByIndustry);
-  }, [filterByIndustry]);
+  }, [filterByIndustry , filterByDomain]);
 
 
 
