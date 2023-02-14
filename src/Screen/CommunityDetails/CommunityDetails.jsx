@@ -17,7 +17,7 @@ import DetailsCard from "../../Component/Cards/DetailsCard";
 import { endpoints } from "../../Component/services/endpoints";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import CustomFilter from "../CustomFilter/CustomFilter";
+import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 
 const CommunityDetails = (props) => {
 

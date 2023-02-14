@@ -19,12 +19,15 @@ import { toast } from "react-toastify";
 import BookBtn from "../../Component/button/BookBtn/BookBtn";
 import { generatePath, useNavigate } from "react-router-dom";
 import CreateCoachingForm from "../../Component/Modal/CreateCoachingForm/CreateCoachingForm";
-import CustomFilter from "../CustomFilter/CustomFilter";
+import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 import useFetchCoachingsData from "../../assets/CustomHooks/useFetchCoachingsData";
 import CreateBtn from "../../Component/button/CreateBtn/CreateBtn";
 import NoDataImg from "../../assets/Images/noDataFound.png";
+import { getCalendarData } from "../../utils/calendar";
+
 
 const CoachingCard = (props) => {
+
   const {
     data,
     bookingStatus,
@@ -135,6 +138,7 @@ const CoachingCard = (props) => {
 };
 
 const Coaches_homeScreen = () => {
+
   const [showCalendar, setShowCalendar] = useState(false);
   const [allCoachings, setAllCoachings] = useState([]);
   const [eventsToBeShown, setEventsToBeShown] = useState([]);
@@ -144,16 +148,16 @@ const Coaches_homeScreen = () => {
   const [showAllCoaching, setShowAllCoaching] = useState(true);
   const [myCoachings, setMyCoachings] = useState([]);
   const [coachingListToBeShown, setCoachingListToBeShown] = useState([]);
+  const [coachingListToBeShown2, setCoachingListToBeShown2] = useState([]);
   const [inputData, setInputData] = useState("");
-  const [allEnrolledWorkshops, setAllEnrolledWorkshops] = useState([]);
-  const [showBookCoachesSlot, setBookCoachesSlot] = useState(false);
+  const [showBookCoachesSlot, setShowBookCoachesSlot] = useState(false);
   const [showCoachingsForm, setShowCoachingsForm] = useState(false);
   const [coachImgPath, setCoachImgPath] = useState("");
   const logedIn = localStorage.getItem("logedIn");
 
-  const allCoachesList = useFetchCoachingsData(
-    endpoints.coaches.allCoachingList
-  );
+  // filter UseState here;
+  const [filterByDomain, setFilterByDomain] = useState([]);
+  const [filterByIndustry, setFilterByIndustry] = useState([]);
 
   var userDetails = localStorage.getItem("users");
   var userType = JSON.parse(userDetails);
@@ -176,6 +180,7 @@ const Coaches_homeScreen = () => {
           setCoachImgPath(coachPath);
           setAllCoachings(val);
           setCoachingListToBeShown(val);
+          setCoachingListToBeShown2(val);
         }
       })
       .catch((err) => {
@@ -183,200 +188,11 @@ const Coaches_homeScreen = () => {
       });
   };
 
-  // get all days of the month ;
-
-  var allDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-  const getDaysOfMonth = async (day) => {
-    var d = new Date();
-    var getTot = daysInMonth(d.getMonth(), d.getFullYear()); //Get total
-    var date = [];
-    for (var i = 1; i <= getTot; i++) {
-      //looping through days in month
-      var newDate = new Date(d.getFullYear(), d.getMonth(), i);
-      if (newDate.getDay() == day) {
-        date.push(newDate);
-      }
-    }
-
-    function daysInMonth(month, year) {
-      return new Date(year, month, 0).getDate();
-    }
-    return date;
-  };
-
-  // get selected dates of thee year ;
-
-  const buildDates = async (startDate, months) => {
-    return Array.from(
-      {
-        length: months,
-      },
-      function (_, i) {
-        var date = new Date(startDate.getTime());
-        var mnth = date.getMonth();
-        date.setMonth(mnth + i);
-        if (date.getMonth() !== (mnth + i) % 12) {
-          date.setDate(0);
-        }
-        return date;
-      }
-    );
-  };
-
   const showCoachingsOnCalendar = async (data) => {
-    setShowCalendar(true);
-    var events = [];
-
-    var availability_type = data.availability_type;
     var slots = JSON.parse(data.availability_slot);
-    var isRepeated = data.is_repeated == "1" ? true : false;
-    var title = data?.title;
-
-    if (availability_type === "1") {
-      var dateArray = [];
-      var selectedDays = slots.days;
-      var startTime = slots.startTime;
-      var startDate = slots.startDate;
-      var endDate = slots.endDate;
-      var endTime = slots.endTime;
-
-      if (isRepeated) {
-        for (var i = 0; i < selectedDays.length; i++) {
-          var daysNum = allDays.indexOf(selectedDays[i]);
-          var dates = await getDaysOfMonth(daysNum);
-          dateArray.push(...dates);
-        }
-      } else {
-        for (var i = 0; i < selectedDays.length; i++) {
-          var daysNum = allDays.indexOf(selectedDays[i]);
-          var dates = await getDaysOfMonth(daysNum);
-          dates = dates[0];
-          dateArray.push(dates);
-        }
-      }
-
-      var endDate = slots.endDate;
-
-      if (endDate) {
-        var filteredDate = dateArray.filter((date, index) => {
-          console.log(new Date(endDate).getTime(), "enddd");
-          return date.getTime() < new Date(endDate).getTime();
-        });
-        dateArray = filteredDate;
-      }
-
-      dateArray.map((itm) => {
-        var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-        var month =
-          itm.getMonth() + 1 < 10
-            ? `0${itm.getMonth() + 1}`
-            : itm.getDate() + 1;
-        var year = itm.getFullYear();
-
-        var startDte = `${year}-${month}-${date}T${startTime}`;
-        var endDte = `${year}-${month}-${date}T${endTime}`;
-
-        var evnt = {
-          start: new Date(startDte),
-          end: new Date(endDte),
-          title: title,
-        };
-
-        events.push(evnt);
-      });
-      setEventsToBeShown(events);
-    } else if (availability_type === "2") {
-      var dateArray = [];
-      var selectedDates = slots.dates;
-      var startTime = slots.startTime;
-      var startDate = slots.startDate;
-      var endDate = slots.endDate;
-      var endTime = slots.endTime;
-
-      if (isRepeated) {
-        var allDates = [];
-        var startMonth = new Date(startDate).getMonth();
-
-        // var dates = await getDates(startDate, endDate);
-
-        var currentDate = new Date();
-        var mm = currentDate.getMonth() + 1;
-        var yyyy = currentDate.getFullYear();
-
-        var dates = selectedDates.map((num, index) => {
-          var numm = num.length < 2 ? `0${num}` : num;
-          var createdDate = `${mm}/${numm}/${yyyy}`;
-          var date = new Date(createdDate);
-          return date;
-        });
-
-        for (var j = 0; j < dates.length; j++) {
-          var count = 11 - startMonth;
-          var date = await buildDates(dates[j], count);
-          allDates.push(...date);
-        }
-
-        allDates.map((itm) => {
-          var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-          var month =
-            itm.getMonth() + 1 < 10
-              ? `0${itm.getMonth() + 1}`
-              : itm.getDate() + 1;
-          var year = itm.getFullYear();
-          var startDte = `${year}-${month}-${date}T${startTime}`;
-          var endDte = `${year}-${month}-${date}T${endTime}`;
-
-          var evnt = {
-            start: new Date(startDte),
-            end: new Date(endDte),
-            title: "Event 1",
-          };
-
-          events.push(evnt);
-        });
-        setEventsToBeShown(events);
-      } else {
-        var currentDate = new Date();
-        var mm = currentDate.getMonth() + 1;
-        var yyyy = currentDate.getFullYear();
-
-        var allDates = selectedDates.map((num, index) => {
-          var numm = num.length < 2 ? `0${num}` : num;
-          var createdDate = `${mm}/${numm}/${yyyy}`;
-          var date = new Date(createdDate);
-          return date;
-        });
-
-        allDates.map((itm) => {
-          var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-          var month =
-            itm.getMonth() + 1 < 10
-              ? `0${itm.getMonth() + 1}`
-              : itm.getDate() + 1;
-          var year = itm.getFullYear();
-          var startDte = `${year}-${month}-${date}T${startTime}`;
-          var endDte = `${year}-${month}-${date}T${endTime}`;
-
-          var evnt = {
-            start: new Date(startDte),
-            end: new Date(endDte),
-            title: title,
-          };
-
-          events.push(evnt);
-        });
-        setEventsToBeShown(events);
-      }
-    }
+    const calendarData = await getCalendarData(slots);
+    setEventsToBeShown(calendarData);
+    setShowCalendar(true);
   };
 
   const getAllEnrolledCoachings = () => {
@@ -410,6 +226,7 @@ const Coaches_homeScreen = () => {
     axios
       .get(url, { headers: headers })
       .then((res) => {
+        console.log(res, "response");
         if (res.data.result) {
           var val = res.data.data;
           setMyCoachings(val);
@@ -463,6 +280,10 @@ const Coaches_homeScreen = () => {
     }
   };
 
+  const handleBookNow = () =>{
+    
+  }
+
   // 0/1/2/3=Cancelled/Pending/Confirmed/booknow;
 
   // writing code for filtering the coachings ;
@@ -470,11 +291,13 @@ const Coaches_homeScreen = () => {
   const handleShowAllCoachings = () => {
     setShowAllCoaching(true);
     setCoachingListToBeShown(allCoachings);
+    setCoachingListToBeShown2(allCoachings);
   };
 
   const handleShowMyCoachings = () => {
     setShowAllCoaching(false);
     setCoachingListToBeShown(myCoachings);
+    setCoachingListToBeShown2(myCoachings);
   };
 
   const handleFilterCoachings = (val) => {
@@ -485,15 +308,39 @@ const Coaches_homeScreen = () => {
         return item.title.toLowerCase().includes(value);
       });
       setCoachingListToBeShown(filteredData);
+      setCoachingListToBeShown2(filteredData);
     } else {
       var filteredData = myCoachings.filter((item, index) => {
         return item.title.toLowerCase().includes(value);
       });
-      setCoachingListToBeShown(filteredData);
+      setCoachingListToBeShown2(filteredData);
     }
   };
 
-  console.log(logedIn, "logedIn");
+  // here we are filtering the coaching according to the domain and industry;
+
+  useEffect(() => {
+    var filterCoachingByDomain = coachingListToBeShown.filter((itm, index) => {
+      var domain = itm.domain;
+      var domainTitle = domain && domain?.title.toLowerCase();
+      return filterByDomain.includes(domainTitle);
+    });
+
+    setCoachingListToBeShown2(filterCoachingByDomain);
+  }, [filterByDomain]);
+
+  useEffect(() => {
+    var filterCoachingByIndustry = coachingListToBeShown.filter(
+      (itm, index) => {
+        var industry = itm.industry;
+        var industryTitle = industry && industry?.title.toLowerCase();
+        return filterByIndustry.includes(industryTitle);
+      }
+    );
+    setCoachingListToBeShown2(filterCoachingByIndustry);
+  }, [filterByIndustry]);
+
+
 
   return (
     <>
@@ -504,7 +351,13 @@ const Coaches_homeScreen = () => {
           <div className="row">
             <div className="col-lg-2 d-lg-block d-none coachScreen_left">
               <h5 style={{ marginBottom: "20px" }}>Book Coaches</h5>
-              <CustomFilter />
+
+              <CustomFilter
+                filterByDomain={filterByDomain}
+                setFilterByDomain={setFilterByDomain}
+                filterByIndustry={filterByIndustry}
+                setFilterByIndustry={setFilterByIndustry}
+              />
             </div>
             <div className="col-lg-10 col-md-12 col-12 coachScreen_right">
               <div className="row">
@@ -545,7 +398,7 @@ const Coaches_homeScreen = () => {
                         }}
                         onClick={handleShowMyCoachings}
                       >
-                        My workshops
+                        My Coachings
                       </button>
 
                       <CreateBtn onClick={() => setShowCoachingsForm(true)} />
@@ -555,8 +408,8 @@ const Coaches_homeScreen = () => {
               </div>
 
               <div className="row ">
-                {coachingListToBeShown.length != 0 &&
-                  coachingListToBeShown.map((data, index) => {
+                {coachingListToBeShown2.length != 0 &&
+                  coachingListToBeShown2.map((data, index) => {
                     var id = data._id;
                     var timing = data?.availability_timing;
                     timing = timing ? timing?.split(",") : null;
@@ -581,22 +434,19 @@ const Coaches_homeScreen = () => {
                           showBookBtn={showAllCoaching}
                           key={index}
                           coachImgPath={coachImgPath}
-                          bookCoaches={bookCoaches}
+                          bookCoaches={handleBookNow}
                           showCoachingsOnCalendar={showCoachingsOnCalendar}
                         />
                       </>
                     );
                   })}
-
-               
               </div>
 
               {coachingListToBeShown.length == 0 && (
-                  <div className="noDataCont">
-                    <img src={NoDataImg} alt="" />
-                  </div>
-                )}
-                
+                <div className="noDataCont">
+                  <img src={NoDataImg} alt="" />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -616,6 +466,9 @@ const Coaches_homeScreen = () => {
       <CreateCoachingForm
         showCoachingsForm={showCoachingsForm}
         setShowCoachingsForm={setShowCoachingsForm}
+        getCoachingList={getCoachingList}
+        getMyCoachingsList={getMyCoachingsList}
+        setShowAllCoaching={setShowAllCoaching}
       />
 
       <Footer />

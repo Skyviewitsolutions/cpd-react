@@ -19,9 +19,10 @@ import { toast } from "react-toastify";
 import WorkshopCard from "../../Component/WorkshopCard/WorkshopCard";
 import BookBtn from "../../Component/button/BookBtn/BookBtn";
 import { useNavigate, generatePath } from "react-router-dom";
-import CustomFilter from "../CustomFilter/CustomFilter";
+import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 import CreateWorkshopForm from "../../Component/Modal/CreateWorkshopForm/CreateWorkshopForm";
 import NoDataImg from "../../assets/Images/noDataFound.png";
+import { getCalendarData } from "../../utils/calendar";
 
 
 const Workshop = () => {
@@ -38,7 +39,10 @@ const Workshop = () => {
   const [showAllWorkshop, setShowAllWorkshop] = useState(true);
   const [inputData, setInputData] = useState("");
   const [workshopToBeShown, setWorkshopToBeShown] = useState([]);
+  const [workshopToBeShown2, setWorkshopToBeShown2] = useState([]);
   const [showWorkshopForm , setShowWorkshopForm] = useState(false)
+  const [filterByIndustry , setFilterByIndustry] = useState([])
+  const [filterByDomain , setFilterByDomain] = useState([]);
 
   var userDetails = localStorage.getItem("users");
   var userType = JSON.parse(userDetails);
@@ -59,6 +63,7 @@ const Workshop = () => {
           setImagePath(imgPath);
           setAllWorkShopList(val);
           setWorkshopToBeShown(val);
+          setWorkshopToBeShown2(val);
         }
       })
       .catch((err) => {
@@ -66,173 +71,15 @@ const Workshop = () => {
       });
   };
 
-  // handling calendar to show workshop on calendar;
 
-  // get all days of the month ;
 
-  var allDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
 
-  var getDates = function (start, end) {
-    for (
-      var arr = [], dt = new Date(start);
-      dt <= new Date(end);
-      dt.setDate(dt.getDate() + 1)
-    ) {
-      arr.push(new Date(dt));
-    }
-    return arr;
-  };
-
-  // get all days of the month ;
-
-  const getDaysOfMonth = async (day, num) => {
-    var d = new Date();
-    var getTot = daysInMonth(d.getMonth() + num, d.getFullYear()); //Get total
-    var date = [];
-    for (var i = 1; i <= getTot; i++) {
-      //looping through days in month
-      var newDate = new Date(d.getFullYear(), d.getMonth() + num, i);
-      if (newDate.getDay() == day) {
-        date.push(newDate);
-      }
-    }
-
-    function daysInMonth(month, year) {
-      return new Date(year, month, 0).getDate();
-    }
-    return date;
-  };
-
-  // get selected dates of thee year ;
-
-  const buildDates = async (startDate, months) => {
-    return Array.from(
-      {
-        length: months,
-      },
-      function (_, i) {
-        var date = new Date(startDate.getTime());
-        var mnth = date.getMonth();
-        date.setMonth(mnth + i);
-        if (date.getMonth() !== (mnth + i) % 12) {
-          date.setDate(0);
-        }
-        return date;
-      }
-    );
-  };
-
-  const showWorkshopOnCalendar = async (data) => {
-    setShowCustomCalendar(true);
-
-    var availability_type = data.availability_type;
-    var slots = JSON.parse(data.availability_slot);
-    var isRepeated = data.is_repeated == "1" ? true : false;
-    var title = data?.title;
-
-    var selectedDays = slots.days;
-    var duration = slots.duration;
-    var startTime = slots.startTime;
-    var startDate = slots.startDate;
-    var endDate = slots.endDate;
-    var endTime = slots.endTime;
-
-    var events = [];
-
-    var strtTime = startTime.slice(0, 2);
-    var edTime = endTime.slice(0, 2);
-
-    var hoursPerDay = edTime - strtTime;
-    var totalDaysRequired = Math.ceil(duration / hoursPerDay);
-
-    if (availability_type === "1") {
-      var dateArray = [];
-      for (var i = 0; i < selectedDays.length; i++) {
-        var daysNum = allDays.indexOf(selectedDays[i]);
-
-        for (var j = 0; j < 3; j++) {
-          var dates = await getDaysOfMonth(daysNum, j);
-          dateArray.push(...dates);
-        }
-      }
-
-      dateArray = dateArray.map((itm, index) => {
-        var dta = itm.getTime();
-        return dta;
-      });
-      dateArray.sort();
-      dateArray = dateArray.map((itm, index) => {
-        var dta = new Date(itm);
-        return dta;
-      });
-
-      dateArray = dateArray.slice(0, totalDaysRequired);
-
-      dateArray.map((itm) => {
-        var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-        var month =
-          itm.getMonth() + 1 < 10
-            ? `0${itm.getMonth() + 1}`
-            : itm.getDate() + 1;
-        var year = itm.getFullYear();
-
-        var startDte = `${year}-${month}-${date}T${startTime}`;
-        var endDte = `${year}-${month}-${date}T${endTime}`;
-
-        var evnt = {
-          start: new Date(startDte),
-          end: new Date(endDte),
-          title: title,
-        };
-
-        events.push(evnt);
-      });
-      setEventsToBeShown(events);
-    } else if (availability_type === "2") {
-      var dateArray = [];
-
-      var allDates = [];
-      var startMonth = new Date(startDate).getMonth();
-
-      var dates = await getDates(startDate, endDate);
-
-      for (var j = 0; j < dates.length; j++) {
-        var count = 11 - startMonth;
-        var date = await buildDates(dates[j], count);
-        allDates.push(...date);
-      }
-
-      allDates = allDates.slice(0, totalDaysRequired);
-      allDates.map((itm) => {
-        var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-        var month =
-          itm.getMonth() + 1 < 10
-            ? `0${itm.getMonth() + 1}`
-            : itm.getDate() + 1;
-        var year = itm.getFullYear();
-        var startDte = `${year}-${month}-${date}T${startTime}`;
-        var endDte = `${year}-${month}-${date}T${endTime}`;
-
-        var evnt = {
-          start: new Date(startDte),
-          end: new Date(endDte),
-          title: title,
-        };
-
-        events.push(evnt);
-      });
-      setEventsToBeShown(events);
-    }
-  };
-
+ const showWorkshopOnCalendar = async (data) =>{
+  var slots = JSON.parse(data.availability_slot);
+  const calendarData = await getCalendarData(slots);
+  setEventsToBeShown(calendarData);
+  setShowCustomCalendar(true)
+ }
   // writing code for enrolling the workshop
 
   const enrollWorkshop = (workShopData) => {
@@ -290,7 +137,7 @@ const Workshop = () => {
         if (res.data.result) {
           const val = res.data.data;
           setMyWorkshopList(val);
-          setWorkshopToBeShown(val);
+          // setWorkshopToBeShown(val);
         }
       })
       .catch((err) => {
@@ -311,11 +158,14 @@ const Workshop = () => {
   const handleShowAllWorkshop = () => {
     setShowAllWorkshop(true);
     setWorkshopToBeShown(allWorkShopList);
+    setWorkshopToBeShown2(allWorkShopList);
   };
 
   const handleShowMyWorkshop = () => {
     setShowAllWorkshop(false);
     setWorkshopToBeShown(myWorkshopList);
+    setWorkshopToBeShown2(myWorkshopList);
+    
   };
 
   const handleInputData = (val) => {
@@ -326,11 +176,13 @@ const Workshop = () => {
         return data.title.toLowerCase().includes(value);
       });
       setWorkshopToBeShown(filteredData);
+      setWorkshopToBeShown2(filteredData);
     } else {
       var filteredData = myWorkshopList.filter((data, index) => {
         return data.title.toLowerCase().includes(value);
       });
       setWorkshopToBeShown(filteredData);
+      setWorkshopToBeShown2(filteredData);
     }
   };
 
@@ -341,6 +193,31 @@ const Workshop = () => {
     });
     navigate(path);
   };
+
+  // here we are filtering the coaching according to the domain and industry;
+
+  useEffect(() => {
+    var filterWorkshopByDomain = workshopToBeShown.filter((itm, index) => {
+      var domain = itm.domain;
+      var domainTitle = domain && domain?.title.toLowerCase();
+      return filterByDomain.includes(domainTitle);
+    });
+
+    setWorkshopToBeShown2(filterWorkshopByDomain);
+  }, [filterByDomain]);
+
+  useEffect(() => {
+    var filterWorkshopByIndustry = workshopToBeShown.filter(
+      (itm, index) => {
+        var industry = itm.industry;
+        var industryTitle = industry && industry?.title.toLowerCase();
+        return filterByIndustry.includes(industryTitle);
+      }
+    );
+    setWorkshopToBeShown2(filterWorkshopByIndustry);
+  }, [filterByIndustry]);
+
+
 
   return (
     <>
@@ -452,12 +329,17 @@ const Workshop = () => {
         <section className="Workshop_section2">
           <div className="row">
             <div className="col-lg-2 col-md-12 col-12 ">
-              <CustomFilter />
+            <CustomFilter
+                filterByDomain={filterByDomain}
+                setFilterByDomain={setFilterByDomain}
+                filterByIndustry={filterByIndustry}
+                setFilterByIndustry={setFilterByIndustry}
+              />
             </div>
             <div className="col-lg-10 col-md-12 col-12 ">
               <div className="row">
-                {workshopToBeShown.length != 0 &&
-                  workshopToBeShown.map((workshop, index) => {
+                {workshopToBeShown2.length != 0 &&
+                  workshopToBeShown2.map((workshop, index) => {
                     const img = `${imagePath}/${workshop.image}`;
                     var id = workshop._id;
                     var timing = workshop.availability_timing;
@@ -484,7 +366,7 @@ const Workshop = () => {
                             enrollStatus={enrollStatus}
                             img={img}
                             key={index}
-                            showBookBtn={true}
+                            showBookBtn={showAllWorkshop}
                             imageName={workshop.image}
                             showCoachDetails={showCoachDetails}
                           />
@@ -493,7 +375,6 @@ const Workshop = () => {
                     );
                   })}
 
-               
               </div>
               {workshopToBeShown.length == 0 && (
                   <div className="noDataCont">
@@ -502,15 +383,15 @@ const Workshop = () => {
                 )}
             </div>
           </div>
+
           {/* <WorkshopEnroll show={true} onHide={() => setModalShow(false)} /> */}
           <CustomCalendar
             showCalendar={showCustomCalendar}
             setShowCalendar={setShowCustomCalendar}
             eventsToBeShown={eventsToBeShown}
-            setEventsToBeShown={setEventsToBeShown}
           />
 
-          <CreateWorkshopForm showWorkshopForm={showWorkshopForm} setShowWorkshopForm={setShowWorkshopForm}/>
+          <CreateWorkshopForm showWorkshopForm={showWorkshopForm} setShowWorkshopForm={setShowWorkshopForm} getAllWorkshop={getAllWorkshop} getMyWorkshop={getMyWorkshop} setShowAllWorkshop={setShowAllWorkshop}/>
 
         </section>
       </div>

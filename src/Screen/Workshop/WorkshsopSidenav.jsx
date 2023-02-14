@@ -5,6 +5,7 @@ import {BsFilterLeft} from 'react-icons/bs';
 import $ from "jquery";
 
 const WorkshsopSidenav = () => {
+
     useEffect(() => {
         $(document).ready(function () {
           toggleNav();
@@ -40,15 +41,11 @@ const WorkshsopSidenav = () => {
       }, []);
     
     
-    
       return (
         <>
         <div className="workshopsidebar">
           <div className="sibar-community-toggle">
             <div class="btn sideBarBtn">
-              {/* <span class="ffa-bars">
-                <FaBars className="faBars" />
-              </span> */}
               <div class="texthideShow">
                 <BsFilterLeft/>
               </div>

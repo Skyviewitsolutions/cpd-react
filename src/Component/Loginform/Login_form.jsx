@@ -22,7 +22,6 @@ import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
 
 const Login_form = (props) => {
-  
   const navigate = useNavigate("");
   const [showPassword, setShowpassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -44,7 +43,7 @@ const Login_form = (props) => {
       setErrorMsg({ password: "Password must be greater then 3 digit " });
     } else {
       setErrorMsg("");
-      
+
       const formData = new FormData();
 
       formData.append("email", email);
@@ -58,19 +57,19 @@ const Login_form = (props) => {
           setLoading(false);
           if (res.data.result === true) {
             const user_data = res.data.user;
-            console.log(user_data, "user_data here");
             const token = res.data.access_token;
             localStorage.setItem("token", token);
             localStorage.setItem("users", JSON.stringify(user_data));
-            localStorage.setItem("logedIn" , true);
+            localStorage.setItem("logedIn", true);
 
             toast("Login successfully", { type: "success" });
             setLoading(false);
             const isCvUploaded = res.data.user?.isCvAvailable;
             localStorage.setItem("isCvUploaded", isCvUploaded);
-            if (isCvUploaded) {
+            console.log(isCvUploaded , "isCVUploaded here");
+            if (isCvUploaded == true) {
               navigate("/");
-            } else if (!isCvUploaded) {
+            } else {
               const userType = user_data.user_type;
               if (userType == 2) {
                 navigate("/coachesForm");

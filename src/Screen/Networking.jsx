@@ -1,7 +1,6 @@
 import React from "react";
 import "./Networking.css";
 import { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Event_cards from "../Component/Cards/Event_cards";
@@ -19,8 +18,9 @@ import "../fonts/Inter-SemiBold.ttf";
 import { HiSearch } from "react-icons/hi";
 import { FaPlusCircle } from "react-icons/fa";
 import NoDataImg from "../assets/Images/noDataFound.png"
-import CustomFilter from "./CustomFilter/CustomFilter";
+import CustomFilter from "../Component/CustomFilter/CustomFilter";
 import CreateBtn from "../Component/button/CreateBtn/CreateBtn";
+import Button from "../Component/button/Button/Button";
 
 const Networking = () => {
 
@@ -74,7 +74,7 @@ const Networking = () => {
           <div className="col-lg-9 col-md-12 col-12 ">
             <section>
               <div className="row">
-                <div className="col-lg-8 col-md-12 col-12">
+                <div className="col-lg-7 col-md-12 col-12">
                   <div className="networkingsearchBox">
                     <div className="form-group">
                       <HiSearch id="networking_search" />
@@ -87,10 +87,10 @@ const Networking = () => {
                   </div>
                 </div>
                 <div
-                  className="col-lg-2 col-md-3 col-6"
+                  className="col-lg-3 col-md-3 col-6"
                   onClick={() => navigate("/community")}
                 >
-                  <button className="view_communities">View Communities</button>
+                  <Button title="View Communities" style={{marginTop : "0px"}}/>
                 </div>
                 <div className="col-lg-2 col-md-2 col-6 ">
                   <div className="addEventplusButton">
@@ -99,7 +99,7 @@ const Networking = () => {
                       onClick={() => navigate("/addEvent")}
                     />
                     <span id="createEventText">Create Event</span> */}
-                    <CreateBtn />
+                    <CreateBtn onClick={() => navigate("/addEvent")}/>
                   </div>
                 </div>
               </div>

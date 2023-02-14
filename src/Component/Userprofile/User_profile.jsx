@@ -84,6 +84,7 @@ const User_profile = () => {
 
             var totalExperience =
               parseInt(endYearEmployment) - parseInt(startYearEmployment);
+              console.log(endYearEmployment , "endyear ")
             setTotalExperience(totalExperience);
           }
         }

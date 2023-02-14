@@ -1,5 +1,4 @@
 import React, { useState , useEffect } from "react";
-import { getMyCoachings } from "../../../utils/coaches";
 import OwlCarousel from "react-owl-carousel";
 import { endpoints } from "../../services/endpoints";
 import axios from "axios";

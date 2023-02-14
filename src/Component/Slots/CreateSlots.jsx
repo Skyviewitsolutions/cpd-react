@@ -6,11 +6,27 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 import { toast, ToastContainer } from "react-toastify";
 import "./createSlot.css";
 import { useEffect } from "react";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { getCalendarData } from "../../utils/calendar";
 
-const CreateSlots = () => {
+const CreateSlots = (props) => {
 
-  const [daysFormat, setDaysFormat] = useState("weekly");
+  const {
+    selectedDays,
+    setSelectedDays,
+    daysFormat,
+    setDaysFormat,
+    isRepeated,
+    setIsRepeated,
+    dateSlot,
+    setDateSlot,
+    daysSlot,
+    setDaysSlot,
+    selectedDates,
+    setSelectedDates,
+    title,
+    setEventsToBeShown,
+  } = props;
+
   const [startDate, setStartDate] = useState(
     new Date()
       .toLocaleDateString()
@@ -20,57 +36,13 @@ const CreateSlots = () => {
       .join("-")
   );
 
-  const [endDate, setEndDate] = useState("");
-  const [isConfirm, setIsConfirm] = useState(false);
-  const [selectedDates, setSelectedDates] = useState([]);
-  const [isRepeated, setIsRepeated] = useState([]);
-  const [selectedDays, setSelectedDays] = useState([]);
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [daysSlot, setDaysSlot] = useState([]);
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [clickedDay, setClickedDay] = useState("");
   const [clickedDate, setClickedDate] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState([]);
-  const [dateSlot, setDateSlot] = useState([]);
-  const [selectedDay2, setSelectedDays2] = useState([]);
-
-  var allDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-  const time2 = [
-    "01:00:00",
-    "02:00:00",
-    "03:00:00",
-    "04:00:00",
-    "05:00:00",
-    "06:00:00",
-    "07:00:00",
-    "08:00:00",
-    "09:00:00",
-    "10:00:00",
-    "11:00:00",
-    "12:00:00",
-    "13:00:00",
-    "14:00:00",
-    "15:00:00",
-    "16:00:00",
-    "17:00:00",
-    "18:00:00",
-    "19:00:00",
-    "20:00:00",
-    "21:00:00",
-    "22:00:00",
-    "23:00:00",
-    "24:00:00",
-  ];
+  const [updateCalendar, setUpdateCalendar] = useState(false);
 
   const time = [
     "01:00 AM",
@@ -97,11 +69,6 @@ const CreateSlots = () => {
     "10:00 PM",
     "11:00 PM",
     "12:00 PM",
-  ];
-
-  var allDates = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
   ];
 
   const handleUpdateTime = () => {
@@ -189,6 +156,8 @@ const CreateSlots = () => {
         }
       }
     }
+
+    setUpdateCalendar(!updateCalendar);
   };
 
   const addDays = (day) => {
@@ -223,13 +192,6 @@ const CreateSlots = () => {
     }
   }, [clickedDate]);
 
-  useEffect(() => {
-    var data = daysSlot.filter((itm, index) => {
-      return itm.day;
-    });
-    setSelectedDays2(data);
-  }, [selectedDays]);
-
   const removeDay = (day) => {
     var filteredData = daysSlot.filter((itm, index) => {
       return itm.day != day;
@@ -254,6 +216,37 @@ const CreateSlots = () => {
     setSelectedTimeSlot([]);
   };
 
+  const handleDaysFormat = (format) => {
+    setDaysFormat(format);
+    if (format === "weekly") {
+      setSelectedDates([]);
+      setDateSlot([]);
+    } else if (format === "monthly") {
+      setSelectedDays([]);
+      setDaysSlot([]);
+    }
+  };
+
+  const getCalendarDatas = async () => {
+    // here we getting the data for the calendar;
+    var dta = {
+      isRepeated: isRepeated,
+      selectedDays: selectedDays,
+      daysFormat: daysFormat,
+      selectedDates: selectedDates,
+      daysSlot: daysSlot,
+      dateSlot: dateSlot,
+      title: title,
+    };
+
+    const calendarData = await getCalendarData(dta);
+    setEventsToBeShown(calendarData);
+  };
+
+  useEffect(() => {
+    getCalendarDatas();
+  }, [updateCalendar , title , isRepeated]);
+
   return (
     <>
       <div className="row">
@@ -262,18 +255,22 @@ const CreateSlots = () => {
             type="radio"
             id="weekly"
             checked={daysFormat == "weekly"}
-            onChange={() => setDaysFormat("weekly")}
+            onChange={() => handleDaysFormat("weekly")}
           />
-          <label htmlFor="weekly" style={{marginBottom : "0px"}}>Weekly</label>
+          <label htmlFor="weekly" style={{ marginBottom: "0px" }}>
+            Weekly
+          </label>
         </div>
         <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center">
           <input
             type="radio"
             id="monthly"
             checked={daysFormat == "monthly"}
-            onChange={() => setDaysFormat("monthly")}
+            onChange={() => handleDaysFormat("monthly")}
           />
-          <label htmlFor="monthly" style={{marginBottom : "0px"}}>Monthly</label>
+          <label htmlFor="monthly" style={{ marginBottom: "0px" }}>
+            Monthly
+          </label>
         </div>
         <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center repeadtd">
           <input
@@ -283,7 +280,9 @@ const CreateSlots = () => {
             onChange={() => setIsRepeated(!isRepeated)}
             checked={isRepeated}
           />
-          <label htmlFor="repead" style={{marginBottom : "0px"}}>Repeated</label>
+          <label htmlFor="repead" style={{ marginBottom: "0px" }}>
+            Repeated
+          </label>
         </div>
       </div>
 
@@ -358,7 +357,7 @@ const CreateSlots = () => {
         </div>
       )}
 
-      {daysFormat === "weekly" && (
+      {/* {daysFormat === "monthly" && (
         <div className="month_calendar d-flex ">
           <div className="col-lg-2 col-md-3 col-6 ">
             <h6>Start Date</h6>
@@ -378,7 +377,7 @@ const CreateSlots = () => {
           </div>
           <ToastContainer />
         </div>
-      )}
+      )} */}
     </>
   );
 };

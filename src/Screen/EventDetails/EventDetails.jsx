@@ -14,7 +14,7 @@ import AddEvent_Modal from "../../Component/Modal/AddEvent_Modal";
 import { BsChatDots } from "react-icons/bs";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 // import Chat from "../../Component/Chat/Chat";
-import CustomFilter from "../CustomFilter/CustomFilter";
+import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 
 const EventDetails = (props) => {

@@ -2,8 +2,9 @@ const BASE_URL = "https://admin.cpdedu.com/api/v1";
 
 var userDetails = localStorage.getItem("users");
 var userData = userDetails && JSON.parse(userDetails);
-var userId = userData && userData._id
+var userId = userData && userData._id;
 
+console.log(userId , "userId here")
 
 export const endpoints = {
 
@@ -42,7 +43,7 @@ export const endpoints = {
     getCoachSubCategory : BASE_URL + '/coaches/subcategories',
     // coachings part here
     createCoaching : BASE_URL + "/coaches/coaching/create" ,
-    allCoachesList : BASE_URL + "/coaches/coaching/get-list" ,
+    allCoachesList : BASE_URL + "/coaches/coaching/get-list" + "?skip_user_id=" + userId,
     enrollCoaching : BASE_URL + "/coaches/coaching/enroll?coaching_id=",
     enrolledCoaching : BASE_URL + "/coaches/coaching/enrollments" ,
     allCoachingNotification : BASE_URL +  '/coaches/coaching/booking-list',
@@ -54,7 +55,7 @@ export const endpoints = {
 
   workshop : {
     createWorkshop : BASE_URL + "/coaches/workshop/create" ,
-    allWorkshop : BASE_URL + "/coaches/workshop/get-list" ,
+    allWorkshop : BASE_URL + "/coaches/workshop/get-list" + "?skip_user_id=" + userId,
     enrollWorkshop : BASE_URL + "/coaches/workshop/enroll?workshop_id=",
     myEnrolledWorkshop : BASE_URL + "/coaches/workshop/enrollments",
     allEnrollRequestWorkshop : BASE_URL + "/coaches/workshop/booking-list",

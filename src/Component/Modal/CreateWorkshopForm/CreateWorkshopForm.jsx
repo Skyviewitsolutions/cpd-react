@@ -6,34 +6,16 @@ import { toast, ToastContainer } from "react-toastify";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 import { Modal } from "react-bootstrap";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { getDomainList, getIndustryList } from "../../../utils/api";
+import CustomCalendar from "../../Calendar/CustomCalendar";
+import axios from "axios";
+import { endpoints } from "../../services/endpoints";
 
 
 const CreateWorkshopForm = (props) => {
-  const {
-    setShowWorkshopForm,
-    showWorkshopForm,
-    showCalendar,
-    setShowCalendar,
-    eventsToBeShown,
-    setEventsToBeShown,
-  } = props;
 
-  const [selectedDays, setSelectedDays] = useState([]);
-  const [daysFormat, setDaysFormat] = useState("weekly");
-  const [isRepeated, setIsRepeated] = useState(false);
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [startDate, setStartDate] = useState(
-    new Date()
-      .toLocaleDateString()
-      .replaceAll("/", "-")
-      .split("-")
-      .reverse()
-      .join("-")
-  );
-  const [endDate, setEndDate] = useState("");
-  const [isConfirm, setIsConfirm] = useState(false);
-  const [selectedDates, setSelectedDates] = useState([]);
+  const { setShowWorkshopForm, showWorkshopForm,getAllWorkshop ,getMyWorkshop , setShowAllWorkshop} = props;
+
   const [workshopImg, setWorshopImg] = useState(null);
   const [maxNumber, setMaxNumber] = useState(0);
   const [workShopDuration, setWorkShopDuration] = useState(0);
@@ -41,31 +23,109 @@ const CreateWorkshopForm = (props) => {
   const [paid, setPaid] = useState(false);
   const [price, setPrice] = useState(0);
   const [sessionType, setSessionType] = useState("");
-  const [showForm, setShowForm] = useState(false);
   const [industry, setIndustry] = useState("");
   const [domain, setDomain] = useState("");
   const [allDomain, setAllDomain] = useState([]);
   const [allIndustry, setAllIndustry] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showCalendar , setShowCalendar] = useState(false)
+  const [eventsToBeShown , setEventsToBeShown] = useState([]);
 
   var token = localStorage.getItem("token");
 
-  const headers = {
-    Authorization: `Bearer ${token}`,
+// creating useState for slotsCreations ;
+
+const [selectedDays, setSelectedDays] = useState([]);
+const [daysFormat, setDaysFormat] = useState("weekly");
+const [isRepeated, setIsRepeated] = useState(false);
+const [dateSlot, setDateSlot] = useState([]);
+const [daysSlot, setDaysSlot] = useState([]);
+const [selectedDates, setSelectedDates] = useState([]);
+
+  
+  const handleworkshopImg = (e) => {
+    const files = e.target.files[0]
+    setWorshopImg(files);
   };
 
-  var allDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
+  useEffect(() =>{
+    getIndustryList().then((res)=> {if(res.data.data) {var data = res.data.data; setAllIndustry(data)}}).catch((err) => {console.log(err)});
+    getDomainList().then((res) => {if(res.data.data) {var data = res.data.data; setAllDomain(data)}}).catch((err) => {console.log(err)})
+   },[])
 
-  const handleworkshopImg = () => {};
-  const handleConfirmSlots = () => {};
+   const handleConfirmSlots = async () => {
+
+    if (!title) {
+      toast("please fill the workshop title", { type: "warning" });
+    } else if (!workShopDuration) {
+      toast("workshop duration is required", { type: "warning" });
+    } else if (!workshopImg) {
+      toast("workshop image is required", { type: "warning" });
+    } else if (!domain) {
+      toast("please select workshop domain", { type: "warning" });
+    } else if (!industry) {
+      toast("please select workshop industry", { type: "warning" });
+    } else if (!maxNumber) {
+      toast("Max number of student is required", { type: "warning" });
+    } else if (!sessionType) {
+      toast("please select session type", { type: "warning" });
+    } else {
+      const url = endpoints.workshop.createWorkshop;
+
+      var availability_type = daysFormat == "weekly" ? 1 : 2;
+      var payment_type = sessionType == "hourly" ? 1 : 2;
+      var is_paid = paid == true ? 1 : 0;
+      var availability_timing = ['12:00:00' , '01:00:00'];
+
+      var slots = {
+        isRepeated: isRepeated,
+        selectedDays: selectedDays,
+        daysFormat: daysFormat,
+        selectedDates: selectedDates,
+        daysSlot: daysSlot,
+        dateSlot: dateSlot,
+        title: title,
+      };
+
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("availability_type", availability_type);
+      formData.append("payment_type", payment_type);
+      formData.append("price", price);
+      formData.append("is_paid", is_paid);
+      formData.append("availability_slot", JSON.stringify(slots));
+      formData.append("availability_timing", availability_timing);
+      formData.append("is_repeated", 1);
+      formData.append("max_members", maxNumber);
+      formData.append("image", workshopImg);
+      formData.append("domain", domain);
+      formData.append("industry", industry);
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      setLoading(true);
+      axios
+        .post(url, formData, { headers: headers })
+        .then((res) => {
+          setLoading(false);
+          if (res.data.result) {
+            getAllWorkshop()
+            getMyWorkshop()
+            setShowAllWorkshop(true)
+            toast("workshop created successfully", { type: "success" });
+          } else if (res.data.result == false) {
+            toast(res.data.message, { type: "warning" });
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err, "this is the error here");
+        });
+    }
+  };
+
 
   return (
     <Modal
@@ -181,7 +241,9 @@ const CreateWorkshopForm = (props) => {
               </div>
             </div>
           </div>
-          <CreateSlots />
+
+          <CreateSlots selectedDays={selectedDays} setSelectedDays={setSelectedDays} daysFormat={daysFormat} setDaysForma={setDaysFormat} isRepeated={isRepeated} setIsRepeated={setIsRepeated} dateSlot={dateSlot} setDateSlot={setDateSlot} daysSlot={daysSlot} setDaysSlot={setDaysSlot} selectedDates={selectedDates} setSelectedDates={setSelectedDates} title={title} setEventsToBeShown={setEventsToBeShown} />
+
           <div className="caledarIcons  clnderIcons" onClick={() => setShowCalendar(true)}>
             <BsFillCalendarDateFill color="#2c6959" size={32} />
           </div>
@@ -283,6 +345,7 @@ const CreateWorkshopForm = (props) => {
           <IoIosCloseCircleOutline size={26} color="red" />
         </div>
       </div>
+      <CustomCalendar showCalendar={showCalendar} setShowCalendar={setShowCalendar} eventsToBeShown={eventsToBeShown}/>
     </Modal>
   );
 };

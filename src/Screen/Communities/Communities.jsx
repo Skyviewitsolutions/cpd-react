@@ -16,7 +16,7 @@ import { toast, ToastContainer } from "react-toastify";
 import Networking_headers from "../../Component/Header/Networking_headers";
 import Add_committee from "../../Component/Cards/Add_committee";
 import NoDataImg from "../../assets/Images/noDataFound.png";
-import CustomFilter from '../CustomFilter/CustomFilter';
+import CustomFilter from '../../Component/CustomFilter/CustomFilter';
 
 
 const Communities = () => {

@@ -405,6 +405,7 @@ const SlotAsWorkShop = (props) => {
                 <input
                   type="number"
                   class="form-control field py-4 mb-3"
+                  min={0}
                   id=""
                   value={workShopDuration}
                   onChange={(e) => setWorkShopDuration(e.target.value)}
@@ -434,6 +435,7 @@ const SlotAsWorkShop = (props) => {
                   type="number"
                   class="form-control field py-4 mb-3"
                   id=""
+                  min={0}
                   value={maxNumber}
                   onChange={(e) => setMaxNumber(e.target.value)}
                   placeholder="Enter max number of students"
@@ -572,6 +574,7 @@ const SlotAsWorkShop = (props) => {
                 type="number"
                 class="form-control py-4"
                 placeholder="Enter here"
+                min={0}
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />

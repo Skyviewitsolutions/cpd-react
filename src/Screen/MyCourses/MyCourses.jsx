@@ -11,7 +11,9 @@ import BookBtn from "../../Component/button/BookBtn/BookBtn";
 import WorkshopCard from "../../Component/WorkshopCard/WorkshopCard";
 import CoachingCard from "../../Component/CoachingCard/CoachingCard";
 
+
 const MyCourses = () => {
+
   const [coachingImgPath, setCoachingImgPath] = useState("");
   const [workshopImgPath, setWorkshopImgPath] = useState("");
   const [myEnrolledCoachings, setMyEnrolledCoachings] = useState([]);
