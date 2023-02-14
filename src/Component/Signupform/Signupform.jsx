@@ -228,7 +228,7 @@ const Signupform = (props) => {
         </div>
       </div> 
       <p className="loginSignup">
-          Already have an account?
+          Already have an account ? {" "}
           <span
             style={{ color: "#2c6959",cursor:"pointer" }}
             onClick={() => navigate("/loginpage")}

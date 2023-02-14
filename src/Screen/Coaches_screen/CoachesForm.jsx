@@ -1,6 +1,5 @@
 import React from "react";
 import "./CoachesForm.css";
-import Form from "react-bootstrap/Form";
 import {
   json,
   useLocation,
@@ -10,39 +9,22 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-import { FaCalendarAlt } from "react-icons/fa";
-import Spinner from "react-bootstrap/Spinner";
-import { BsFillPlusCircleFill } from "react-icons/bs";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { FiEdit } from "react-icons/fi";
-import { MdAddCircle } from "react-icons/md";
 import { AiFillMinusCircle } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import "../../../src/fonts/Inter-Bold.ttf";
 import "../../../src/fonts/Inter-Regular.ttf";
-import { CgAttachment } from "react-icons/cg";
-import { BiCurrentLocation } from "react-icons/bi";
-import educationLogo from "../../assets/Images/educationLogo.png";
 import company_logo from "../../assets/Images/company_logo.png";
 import { TagsInput } from "react-tag-input-component";
-import TimeKeeper from "react-timekeeper";
-import { BsPlusCircleFill } from "react-icons/bs";
-import Week_days from "../../Component/DaySelection/Week_days";
-import Month_days from "../../Component/DaySelection/Month_days";
-import $, { fn, timers, uniqueSort } from "jquery";
 import Homepage_header from "../../Component/Header/Homepage_header";
 import Footer from "../../Component/Footer/Footer";
 import CoachesPreview from "../../Component/Modal/CoachesPreview/CoachesPreview";
-import { useTab } from "@mui/base";
-import { sizeHeight } from "@mui/system";
-import { BsFillCalendarDateFill } from "react-icons/bs";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
-import { NavItem } from "react-bootstrap";
-import moment from "moment";
+import Button from "../../Component/button/Button/Button"
 import { endpoints } from "../../Component/services/endpoints";
 import { getAcedemicYears } from "../../utils/getAcademicYear";
-import { allCountry } from "../../utils/allCountry";
 import SlotAsCoach from "../../Component/Coaches/SlotAsCoach/SlotAsCoach";
 import SlotAsWorkShop from "../../Component/Coaches/SlotAsWorkShop/SlotAsWorkShop";
 import { toast, ToastContainer } from "react-toastify";
@@ -50,7 +32,6 @@ import { toast, ToastContainer } from "react-toastify";
 
 const CoachesForm = () => {
 
-  const [opencoachesPreview, setOpenCoachesPreview] = useState(false);
   const [daysFormat, setDaysFormat] = useState("weekly");
   const [isRepeated, setIsRepeated] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
@@ -117,7 +98,6 @@ const CoachesForm = () => {
   const [update, setUpdate] = useState(false);
 
   // creating extra experience useState ;
-
   const [hobbies, setHobbies] = useState([]);
 
   // creating recomendation useState here ;
@@ -125,8 +105,6 @@ const CoachesForm = () => {
   // useState as coach form ;
   const [coachPaid, setCoachPaid] = useState(false);
   const [coachSessionType, setCoachSessionType] = useState("");
-
-
   // useState as Workshop form;
 
   const [workshopPaid, setWorkshopPaid] = useState(false);
@@ -247,7 +225,6 @@ const CoachesForm = () => {
     setCrntJobRole(crntJobRole[ind]);
     setUpdateExperience(true);
     setStldExperienceIndex(ind);
-    console.log("hee");
   };
 
   const updateSelectedExperience = () => {
@@ -505,8 +482,9 @@ const CoachesForm = () => {
   };
 
   const getUserCvData = () => {
-    const url = endpoints.authentication.userProfile;
 
+    const url = endpoints.authentication.userProfile;
+   
     const headers = {
       Authorization: `Bearer ${token}`,
       // "Content-Type": "application/json",
@@ -823,7 +801,7 @@ const CoachesForm = () => {
           <div class="customer_records_dynamic"></div>
           <div className="row">
             <div className="col-lg-12 col-md-12 col-12">
-              <h5 className="heading_second">Add Experience</h5>
+              <h5 className="heading_seconds">Add Experience</h5>
             </div>
           </div>
           {allExperience.map((itm, index) => {
@@ -1087,7 +1065,7 @@ const CoachesForm = () => {
                     required
                     onChange={(e) => setSubCategory(e.target.value)}
                   >
-                    <option>Choose</option>
+                    <option value="">Choose</option>
                     {allSubCategory.map((itm, index) => {
                       return (
                         <>
@@ -1103,35 +1081,16 @@ const CoachesForm = () => {
             <div className="row mt-4">
               <div className="col-lg-6"></div>
               <div className="col-lg-3 col-md-3 col-12">
-                <button
-                  className="coachesFormSubmit"
-                  onClick={update === true ? updateProfile : submit}
-                >
-                  {loading ? (
-                    <Spinner
-                      animation="border"
-                      variant="light"
-                      style={{ width: "20px", height: "20px" }}
-                    />
-                  ) : update ? (
-                    "Update"
-                  ) : (
-                    "Submit"
-                  )}
-                </button>
+                <Button title={update ?  "Update" : "Submit"} loading={loading} onClick={update === true ? updateProfile : submit}/>
               </div>
               <div className="col-lg-3 col-md-3 col-12">
-                <button
-                  className="coachesFormSubmit"
-                  onClick={() => setCoachesPreview(true)}
-                >
-                  Preview profile
-                </button>
+                <Button title="Preview Profile" onClick={() => setCoachesPreview(true)}/>
               </div>
             </div>
           </div>
         </div>
-        <div className="formoutline_studentcv coachFormSt">
+        {/* <div className="formoutline_studentcv coachFormSt">
+          
           <SlotAsCoach
             showCalendar={showCalendar}
             setShowCalendar={setShowCalendar}
@@ -1157,7 +1116,7 @@ const CoachesForm = () => {
             workshopPaid={workshopPaid}
             setWorkshopPaid={setWorkshopPaid}
           />
-        </div>
+        </div> */}
       </div>
 
       <ToastContainer />

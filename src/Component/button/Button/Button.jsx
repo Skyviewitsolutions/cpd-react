@@ -3,12 +3,13 @@ import { Spinner } from "react-bootstrap";
 import "./button.css";
 
 const Button = (props) => {
-  const { title, loading, onClick } = props;
+  const { title, loading, onClick , style } = props;
   return (
     <>
       <button
         className="customBtn"
         onClick={onClick}
+        style={style}
       >
         {loading ? (
           <Spinner

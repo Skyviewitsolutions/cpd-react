@@ -11,7 +11,6 @@
   top: 15px;
   font-size: 70px !important;
   line-height: 20px;
-
   color: #2c6959;
   font-weight: bolder;
   left: -15px;
@@ -61,3 +60,33 @@
   color: white;
   font-weight: 700;
 }
+.eventForm_weekDays button.owl-prev {
+  float: left;
+  display: block !important;
+}
+.eventForm_weekDays button.owl-next {
+  float: right;
+  position: absolute;
+  right: 0;
+}
+.eventForm_weekDays button {
+  margin-top: 0px !important;
+}
+.eventForm_weekDays .owl-nav {
+  position: relative;
+  top: -75px !important;
+}
+/* .eventForm_weekDays .owl-nav {
+  position: absolute;
+  top: 0;
+  margin-top: 0;
+} 
+.eventForm_weekDays button.owl-prev {
+  left: 0;
+}
+.eventForm_weekDays button.owl-next {
+  float: right;
+  position: absolute;
+  right: 0;
+}
+ */

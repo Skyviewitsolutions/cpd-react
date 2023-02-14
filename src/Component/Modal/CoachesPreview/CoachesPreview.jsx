@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
 import "./coachesPreview.css";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +10,7 @@ import { useLocation } from "react-router-dom";
 import "../../../fonts/Inter-Bold.ttf";
 import Spinner from "react-bootstrap/Spinner";
 import "../../../fonts/Inter-Regular.ttf";
+import Button from "../../button/Button/Button"
 import dummyUserPerson from "../../../assets/Images/dummyImages.webp";
 
 const CoachesPreview = (props) => {
@@ -168,36 +168,12 @@ const CoachesPreview = (props) => {
                       <hr />
 
                       <div className="d-flex justify-content-end">
-                        <div style={{ maxWidth: "150px" }}>
-                          <button
-                            className="resume_submitbutton"
-                            onClick={() => setCoachesPreview(false)}
-                          >
-                            cancel
-                          </button>
-                        </div>
-                        <div>
-                          <div
-                            style={{ maxWidth: "150px", marginLeft: "23px" }}
-                          >
-                            <button
-                              className="resume_submitbutton"
-                              onClick={() => handleSubmit()}
-                            >
-                              {loading ? (
-                                <Spinner
-                                  animation="border"
-                                  variant="light"
-                                  style={{ width: "20px", height: "20px" }}
-                                />
-                              ) : update ? (
-                                "Update"
-                              ) : (
-                                "Submit"
-                              )}
-                            </button>
-                          </div>
-                        </div>
+                       
+                          <Button title="Cancel" onClick={() => setCoachesPreview(false)}/>
+                      
+                            <Button title={update ? "Update" : "Submit"} loading={loading} onClick={() => handleSubmit()}/>
+                         
+                        
                       </div>
                     </div>
                   </div>

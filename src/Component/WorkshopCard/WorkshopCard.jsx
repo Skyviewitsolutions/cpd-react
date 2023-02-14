@@ -7,6 +7,7 @@ import { BsFillCalendarDateFill } from "react-icons/bs";
 import BookBtn from "../button/BookBtn/BookBtn";
 
 const WorkshopCard = (props) => {
+  
   const {
     workshop,
     showWorkshopOnCalendar,

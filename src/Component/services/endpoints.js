@@ -1,5 +1,11 @@
 const BASE_URL = "https://admin.cpdedu.com/api/v1";
 
+var userDetails = localStorage.getItem("users");
+var userData = userDetails && JSON.parse(userDetails);
+var userId = userData && userData._id;
+
+console.log(userId , "userId here")
+
 export const endpoints = {
 
   authentication: {
@@ -37,25 +43,26 @@ export const endpoints = {
     getCoachSubCategory : BASE_URL + '/coaches/subcategories',
     // coachings part here
     createCoaching : BASE_URL + "/coaches/coaching/create" ,
-    allCoachesList : BASE_URL + "/coaches/coaching/get-list" ,
+    allCoachesList : BASE_URL + "/coaches/coaching/get-list" + "?skip_user_id=" + userId,
     enrollCoaching : BASE_URL + "/coaches/coaching/enroll?coaching_id=",
     enrolledCoaching : BASE_URL + "/coaches/coaching/enrollments" ,
     allCoachingNotification : BASE_URL +  '/coaches/coaching/booking-list',
     cancellCoaching : BASE_URL + "/coaches/coaching/respond-to-enrollment?booking_id=",
     confirmCoaching : BASE_URL + "/coaches/coaching/respond-to-enrollment?booking_id=",
-    myCoachings : BASE_URL + "/coaches/coaching/get-list?by_self=1",
+    myCoachings : BASE_URL + "/coaches/coaching/get-list?user_id=" + userId,
     allCoachingList : BASE_URL + '/coaches/coaching/get-list'
   } ,
 
   workshop : {
     createWorkshop : BASE_URL + "/coaches/workshop/create" ,
-    allWorkshop : BASE_URL + "/coaches/workshop/get-list" ,
+    allWorkshop : BASE_URL + "/coaches/workshop/get-list" + "?skip_user_id=" + userId,
     enrollWorkshop : BASE_URL + "/coaches/workshop/enroll?workshop_id=",
     myEnrolledWorkshop : BASE_URL + "/coaches/workshop/enrollments",
     allEnrollRequestWorkshop : BASE_URL + "/coaches/workshop/booking-list",
     cancelWorkshop : BASE_URL + "/coaches/workshop/respond-to-enrollment?booking_id=",
     confirmWorkshop : BASE_URL + "/coaches/workshop/respond-to-enrollment?booking_id=",
-    myWorkshop : BASE_URL + "/coaches/workshop/get-list?by_self=1"
+    myWorkshop : BASE_URL + "/coaches/workshop/get-list?user_id=" + userId,
+    getWorkshopDetailsById : BASE_URL + "/coaches/workshop/get-list?workshop_id="
   } ,
   master : {
     allIndustry : BASE_URL + "/list-industry",

@@ -9,122 +9,10 @@ import { endpoints } from "../../Component/services/endpoints";
 import { useParams } from "react-router-dom";
 import UserImg from "../../assets/Images/user.jpeg";
 import axios from "axios";
-import { getMyCoachings } from "../../utils/coaches";
 import { toast, ToastContainer } from "react-toastify";
 import WorkshopCard from "../../Component/WorkshopCard/WorkshopCard";
 import BookBtn from "../../Component/button/BookBtn/BookBtn";
 import CoachingCard from "../../Component/CoachingCard/CoachingCard";
-
-// const CoachingCard = (props) => {
-//   const { coaching, key, imgPath, bookingStatus, bookCoaches } = props;
-
-//   const coachingImg = imgPath + "/" + coaching.image;
-
-//   return (
-//     <>
-//       <div className="col-lg-3 col-md-6 col-12 workshop-card" key={key}>
-//         <div className="card">
-//           <div className="workshopcard_media">
-//             <img
-//               src={coaching.image ? coachingImg : coachesDetailscardimages}
-//               alt=""
-//             />
-//           </div>
-//           <div className="coachesDetailslistcard_descriptionBox">
-//             <div className="coachesDetailslistcardtitle">
-//               <h4>{coaching.title}</h4>
-//               <BsCalendarDateFill
-//                 style={{ color: "#2c6959", fontSize: "20px" }}
-//               />
-//             </div>
-
-//             <div className="workshop_FreeBox">
-//               <h6>{coaching.is_paid == 1 ? `$ ${coaching.price}` : "Free"}</h6>
-//               <h6>Domain : {coaching.domain}</h6>
-//             </div>
-//             <div className="domainBox">
-//               <div className="row">
-//                 <div className="col-lg-7 col-md-8 col-12">
-//                   <h6 id="enrolled"></h6>
-//                 </div>
-//                 <div className="col-lg-5 col-md-4 col-12">
-//                   <div className=" coachesDetailsbuttonpending">
-//                     <BookBtn
-//                       status={bookingStatus}
-//                       onClick={() => bookCoaches(coaching)}
-//                       styles={{
-//                         height: "30px",
-//                         paddingTop: "2px",
-//                       }}
-//                     />
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// const WorkshopCard = (props) => {
-
-//   const { workshop, key, imgPath, enrollWorkshop, enrollStatus, showBookBtn } =
-//     props;
-
-//   const image = imgPath + "/" + workshop.image;
-
-//   return (
-//     <>
-//       <div className="col-lg-3 col-md-6 col-12 workshop-card">
-//         <div className="card">
-//           <div className="workshopcard_media">
-//             <img src={workshop.image && image} alt="" />
-//           </div>
-//           <div className="coachesDetailslistcard_descriptionBox">
-//             <div className="coachesDetailslistcardtitle">
-//               <h4>{workshop.title}</h4>
-//               <BsCalendarDateFill
-//                 style={{ color: "#2c6959", fontSize: "20px" }}
-//               />
-//             </div>
-
-//             <div className="workshop_FreeBox">
-//               <h6>{workshop.is_paid == 1 ? `${workshop.price} $` : "Free"}</h6>
-//               <h6>Domain : {workshop.domain}</h6>
-//             </div>
-//             <div className="domainBox">
-//               <div className="row d-flex">
-//                 <div className="col-lg-7 col-md-8 col-12 d-flex justify-content-between">
-//                   <h6 id="enrolled">
-//                     Currently Enrolled ({workshop.workshop_members_count}/
-//                     {workshop.max_members})
-//                   </h6>
-//                 </div>
-
-//                 <div className="col-lg-5 col-md-4 col-12">
-//                   <div className="">
-//                     {showBookBtn && (
-//                       <BookBtn
-//                         status={enrollStatus}
-//                         onClick={() => enrollWorkshop(workshop)}
-//                         styles={{
-//                           height: "30px",
-//                           paddingTop: "2px",
-//                         }}
-//                       />
-//                     )}
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
 
 
 const CoachesDetails = () => {
@@ -297,7 +185,6 @@ const CoachesDetails = () => {
         setLoading(false);
         if (res.data.result) {
           getAllEnrolledCoachings();
-          getMyCoachings()
           toast("Coaching booked successfully", { type: "success" });
         } else if (res.data.result == false) {
           toast(res.data.message, { type: "warning" });

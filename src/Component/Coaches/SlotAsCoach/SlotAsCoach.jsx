@@ -7,6 +7,7 @@ import MyCoachingList from "../MyCoachingList/MyCoachingList";
 import Button from "../../button/Button/Button";
 import CreateSlots from "../../Slots/CreateSlots";
 
+
 const SlotAsCoach = (props) => {
 
   const { setShowCalendar, setEventsToBeShown } = props;
@@ -58,37 +59,8 @@ const SlotAsCoach = (props) => {
     "Saturday",
   ];
 
-  const time = [
-    "01:00:00",
-    "02:00:00",
-    "03:00:00",
-    "04:00:00",
-    "05:00:00",
-    "06:00:00",
-    "07:00:00",
-    "08:00:00",
-    "09:00:00",
-    "10:00:00",
-    "11:00:00",
-    "12:00:00",
-    "13:00:00",
-    "14:00:00",
-    "15:00:00",
-    "16:00:00",
-    "17:00:00",
-    "18:00:00",
-    "19:00:00",
-    "20:00:00",
-    "21:00:00",
-    "22:00:00",
-    "23:00:00",
-    "24:00:00",
-  ];
+ 
 
-  var allDates = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
-  ];
 
   const handleSelectdDays = (day) => {
     if (selectedDays.indexOf(day) == -1) {
@@ -366,6 +338,7 @@ const SlotAsCoach = (props) => {
     }
   };
 
+  
   const handleCoachingImg = (e) => {
     const files = e.target.files[0];
     setCoachingImg(files);
@@ -406,6 +379,7 @@ const SlotAsCoach = (props) => {
     getAllDomain();
   }, []);
 
+
   return (
     <div className="formoutline_studentcv coachFormSt">
       <div className="col-lg-12 col-md-12 col-12">
@@ -426,7 +400,6 @@ const SlotAsCoach = (props) => {
                   class="form-control field py-4 mb-3"
                   id=""
                   placeholder="Enter coaching title"
-                  // error="Please enter text"
                   value={coachTitle}
                   onChange={(e) => setCoachTitle(e.target.value)}
                 />
@@ -560,7 +533,8 @@ const SlotAsCoach = (props) => {
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault3"
-                  checked={sessionType == "sessional"}
+                  // checked={sessionType == "sessional"}
+                  checked={true}
                   onChange={() => setSessionType("sessional")}
                 />
                 <label
@@ -580,6 +554,7 @@ const SlotAsCoach = (props) => {
               <input
                 type="number"
                 class="form-control py-4"
+                min={0}
                 placeholder="Enter here"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}

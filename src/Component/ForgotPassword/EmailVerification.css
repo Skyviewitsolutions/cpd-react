@@ -1,6 +1,7 @@
 .loginpage_form label {
   font-size: 17px;
-  margin-bottom: 0px;
+  margin-bottom: 7px;
+  margin-top: 7px;
   font-weight: 600;
 }
 .login_bottom{

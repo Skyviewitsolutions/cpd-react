@@ -1,12 +1,12 @@
 // import React from 'react'
-// import './Week_days.css';
+// import './.css';
 // import 'owl.carousel/dist/assets/owl.theme.default.css'
 // import 'owl.carousel/dist/assets/owl.carousel.css';
 // import OwlCarousel from 'react-owl-carousel';
 
 // import $ from "jquery";
 // import { useState,useEffect } from "react";
-// const Week_days2 = ({timeSlots, addTimeSlot}) => {
+// const 2 = ({timeSlots, addTimeSlot}) => {
 //     useEffect(()=>{
 //         // sync the state to the input
 //         $(".image-checkbox").on("click", function (e) {
@@ -112,4 +112,4 @@
 //     </>
 //   )
 // }
-// export default Week_days2
+// export default 2

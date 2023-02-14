@@ -45,6 +45,7 @@ import BookCoaches from "./Component/Modal/BookCoaches/BookCoaches";
 import MyCourses from "./Screen/MyCourses/MyCourses";
 import CommunityNewSidebar from "./Component/navbar/CommunityNewSidebar";
 import WorkshopDetails from "./Screen/WorkshopDetails/WorkshopDetails";
+import DashboardLayouts from "./Layouts/DashboardLayouts";
 
 
 function App() {
@@ -117,7 +118,7 @@ function App() {
         <Route exact path="/myCourses" element={<MyCourses /> } />
         <Route exact path="/bookCoaches" element={<BookCoaches /> } />
         <Route exact path="/communityHeader" element={<CommunityNewSidebar /> } />
-        <Route exact path="/workshopDetails" element={<WorkshopDetails /> } />
+        <Route exact path="/workshopDetails/:workshopId" element={<WorkshopDetails /> } />
       </Routes>
       
     </Router>

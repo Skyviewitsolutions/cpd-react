@@ -62,6 +62,7 @@ const Login_form = (props) => {
             const token = res.data.access_token;
             localStorage.setItem("token", token);
             localStorage.setItem("users", JSON.stringify(user_data));
+            localStorage.setItem("logedIn" , true);
 
             toast("Login successfully", { type: "success" });
             setLoading(false);

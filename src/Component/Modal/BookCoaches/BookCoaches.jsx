@@ -13,15 +13,10 @@ import "../../../fonts/Inter-Regular.ttf";
 import BookSlot from "../BookSlot/BookSlot";
 import {BsPlusCircleFill} from "react-icons/bs";
 
+
 const BookCoaches = (props) => {
   // const [modalShow, setModalShow] = React.useState(false);
-  const { BookCoachesShow, setBookCoachesShow } = props;
-=========
-import {BsPlusCircleFill} from 'react-icons/bs';
-const BookCoaches = (props) => {
-  // const [modalShow, setModalShow] = React.useState(false);
-  // const {BookCoachesShow, setBookCoachesShow}=props;
->>>>>>>>> Temporary merge branch 2
+  const {BookCoachesShow, setBookCoachesShow}=props;
   const [BookSlotShow, setBookSlotShow] = useState(false);
   const [dayType, setDayType] = useState("days");
   const [days, setDays] = useState([]);
@@ -57,7 +52,7 @@ const BookCoaches = (props) => {
     <>
       <div className="bookCoachesModal">
         <Modal
-          {...props}
+          show={BookCoachesShow}
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered

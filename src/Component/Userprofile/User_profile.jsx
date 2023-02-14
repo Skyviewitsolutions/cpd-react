@@ -21,7 +21,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CoachNotification from "../CoachNotification/CoachNotification";
 
+
 const User_profile = () => {
+
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [usersData, setUsersData] = useState({});
@@ -67,7 +69,8 @@ const User_profile = () => {
           setUsersData(val);
 
           var userImgPath = res.data.avtarPath;
-          var userImg = userImgPath + res.data.data?.avtar_file;
+          var userImg = userImgPath + res.data.data?.avtar;
+          console.log(res.data , "userImg here")
 
           setUserImg(userImg);
 
@@ -81,6 +84,7 @@ const User_profile = () => {
 
             var totalExperience =
               parseInt(endYearEmployment) - parseInt(startYearEmployment);
+              console.log(endYearEmployment , "endyear ")
             setTotalExperience(totalExperience);
           }
         }

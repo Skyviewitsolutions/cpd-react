@@ -1136,7 +1136,7 @@ const Student_cv = () => {
             <div className="row">
               <div className="col-lg-12 col-md-12 col-12">
                 <h5
-                  className="heading_second"
+                  className="heading_seconds"
                   style={{
                     display: "flex",
                     flexDriection: "row",

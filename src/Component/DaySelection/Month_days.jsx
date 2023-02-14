@@ -79,13 +79,13 @@ const Month_days = ({ timeSlots, addTimeSlot , removeDate , clickedDate}) => {
         margin: 10,
       },
       600: {
-        items: 7,
+        items: 6,
       },
       700: {
-        items: 7,
+        items: 6,
       },
       1000: {
-        items: 7,
+        items: 6,
       },
     },
   };
