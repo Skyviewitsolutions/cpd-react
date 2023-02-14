@@ -25,7 +25,9 @@ import CreateBtn from "../../Component/button/CreateBtn/CreateBtn";
 import NoDataImg from "../../assets/Images/noDataFound.png";
 import { getCalendarData } from "../../utils/calendar";
 
+
 const CoachingCard = (props) => {
+
   const {
     data,
     bookingStatus,
@@ -47,7 +49,6 @@ const CoachingCard = (props) => {
   var description = data?.coach_info?.description;
   var coachInfo = data?.coach_info;
   var image = coachImgPath + "/" + coachInfo?.avtar;
-console.log(description);
   const [showDescription, setshowDescription] = useState(false);
 
   return (
@@ -122,8 +123,7 @@ console.log(description);
                   <h6>Price </h6>{" "}
                   <h5>
                     {" "}
-                    <span style={{ marginRight: "10px" }}> :</span>
-                    <span> $</span> {data.price}{" "}
+                    :<span> $</span> {data.price}{" "}
                     {data.payment_type == "1" ? "Hourly" : "Sessional"}
                   </h5>
                 </div>
@@ -156,11 +156,16 @@ const Coaches_homeScreen = () => {
   const [showAllCoaching, setShowAllCoaching] = useState(true);
   const [myCoachings, setMyCoachings] = useState([]);
   const [coachingListToBeShown, setCoachingListToBeShown] = useState([]);
+  const [coachingListToBeShown2, setCoachingListToBeShown2] = useState([]);
   const [inputData, setInputData] = useState("");
   const [showBookCoachesSlot, setShowBookCoachesSlot] = useState(false);
   const [showCoachingsForm, setShowCoachingsForm] = useState(false);
   const [coachImgPath, setCoachImgPath] = useState("");
   const logedIn = localStorage.getItem("logedIn");
+
+  // filter UseState here;
+  const [filterByDomain, setFilterByDomain] = useState([]);
+  const [filterByIndustry, setFilterByIndustry] = useState([]);
 
   var userDetails = localStorage.getItem("users");
   var userType = JSON.parse(userDetails);
@@ -183,6 +188,7 @@ const Coaches_homeScreen = () => {
           setCoachImgPath(coachPath);
           setAllCoachings(val);
           setCoachingListToBeShown(val);
+          setCoachingListToBeShown2(val);
         }
       })
       .catch((err) => {
@@ -282,6 +288,10 @@ const Coaches_homeScreen = () => {
     }
   };
 
+  const handleBookNow = () =>{
+    
+  }
+
   // 0/1/2/3=Cancelled/Pending/Confirmed/booknow;
 
   // writing code for filtering the coachings ;
@@ -289,11 +299,13 @@ const Coaches_homeScreen = () => {
   const handleShowAllCoachings = () => {
     setShowAllCoaching(true);
     setCoachingListToBeShown(allCoachings);
+    setCoachingListToBeShown2(allCoachings);
   };
 
   const handleShowMyCoachings = () => {
     setShowAllCoaching(false);
     setCoachingListToBeShown(myCoachings);
+    setCoachingListToBeShown2(myCoachings);
   };
 
   const handleFilterCoachings = (val) => {
@@ -304,13 +316,39 @@ const Coaches_homeScreen = () => {
         return item.title.toLowerCase().includes(value);
       });
       setCoachingListToBeShown(filteredData);
+      setCoachingListToBeShown2(filteredData);
     } else {
       var filteredData = myCoachings.filter((item, index) => {
         return item.title.toLowerCase().includes(value);
       });
-      setCoachingListToBeShown(filteredData);
+      setCoachingListToBeShown2(filteredData);
     }
   };
+
+  // here we are filtering the coaching according to the domain and industry;
+
+  useEffect(() => {
+    var filterCoachingByDomain = coachingListToBeShown.filter((itm, index) => {
+      var domain = itm.domain;
+      var domainTitle = domain && domain?.title.toLowerCase();
+      return filterByDomain.includes(domainTitle);
+    });
+
+    setCoachingListToBeShown2(filterCoachingByDomain);
+  }, [filterByDomain]);
+
+  useEffect(() => {
+    var filterCoachingByIndustry = coachingListToBeShown.filter(
+      (itm, index) => {
+        var industry = itm.industry;
+        var industryTitle = industry && industry?.title.toLowerCase();
+        return filterByIndustry.includes(industryTitle);
+      }
+    );
+    setCoachingListToBeShown2(filterCoachingByIndustry);
+  }, [filterByIndustry]);
+
+
 
   return (
     <>
@@ -321,7 +359,13 @@ const Coaches_homeScreen = () => {
           <div className="row">
             <div className="col-lg-2 d-lg-block d-none coachScreen_left">
               <h5 style={{ marginBottom: "20px" }}>Book Coaches</h5>
-              <CustomFilter />
+
+              <CustomFilter
+                filterByDomain={filterByDomain}
+                setFilterByDomain={setFilterByDomain}
+                filterByIndustry={filterByIndustry}
+                setFilterByIndustry={setFilterByIndustry}
+              />
             </div>
             <div className="col-lg-10 col-md-12 col-12 coachScreen_right">
               <div className="row">
@@ -372,8 +416,8 @@ const Coaches_homeScreen = () => {
               </div>
 
               <div className="row ">
-                {coachingListToBeShown.length != 0 &&
-                  coachingListToBeShown.map((data, index) => {
+                {coachingListToBeShown2.length != 0 &&
+                  coachingListToBeShown2.map((data, index) => {
                     var id = data._id;
                     var timing = data?.availability_timing;
                     timing = timing ? timing?.split(",") : null;
@@ -398,7 +442,7 @@ const Coaches_homeScreen = () => {
                           showBookBtn={showAllCoaching}
                           key={index}
                           coachImgPath={coachImgPath}
-                          bookCoaches={bookCoaches}
+                          bookCoaches={handleBookNow}
                           showCoachingsOnCalendar={showCoachingsOnCalendar}
                         />
                       </>

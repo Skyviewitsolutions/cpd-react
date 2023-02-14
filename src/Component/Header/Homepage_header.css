@@ -494,12 +494,15 @@ bottom:50%;
   .headerslider .owl-nav button.owl-prev {
     /* left: 0;
     position: absolute; */
-    bottom:20%;
+    bottom:50%;
   }
   .headerslider .owl-nav button.owl-next {
     /* right: 0;
     position: absolute; */
-  bottom:20%;
+  bottom:50%;
+  }
+  .headerslider {
+
   }
 }
 

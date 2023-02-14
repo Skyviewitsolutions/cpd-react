@@ -54,6 +54,8 @@ const CustomFilter = (props) => {
         if (res.data.data) {
           var data = res.data.data;
           setAllIndustry(data);
+          var industryData = data.map((itm) => {return itm.title.toLowerCase()})
+          setFilterByIndustry(industryData)
         }
       })
       .catch((err) => {
@@ -65,6 +67,8 @@ const CustomFilter = (props) => {
         if (res.data.data) {
           var data = res.data.data;
           setAllDomain(data);
+          var domainData = data.map((itm) => {return itm.title.toLowerCase()})
+          setFilterByDomain(domainData)
         }
       })
       .catch((err) => {
@@ -72,18 +76,32 @@ const CustomFilter = (props) => {
       });
   }, []);
 
-  // const handleFilter = (value) =>{
-  //   var val = value.toLowerCase();
-  //   if(filterBy.includes(val)){
-  //     var filteredData = filterBy.filter((item,index) => {return item.toLowerCase() != val})
-  //     setFilterBy(filteredData)
-  //   }
-  //   else {
-  //     setFilterBy((itm) =>{
-  //       return [...itm , val]
-  //     })
-  //   }
-  // }
+  const handleFilterByDomain = (value) =>{
+    var val = value.toLowerCase();
+    if(filterByDomain.includes(val)){
+      var filteredData = filterByDomain.filter((item,index) => {return item.toLowerCase() != val})
+      setFilterByDomain(filteredData)
+    }
+    else {
+      setFilterByDomain((itm) =>{
+        return [...itm , val]
+      })
+    }
+  }
+
+
+  const handleFilterByIndustry = (value) =>{
+    var val = value.toLowerCase();
+    if(filterByIndustry.includes(val)){
+      var filteredData = filterByIndustry.filter((item,index) => {return item.toLowerCase() != val})
+      setFilterByIndustry(filteredData)
+    }
+    else {
+      setFilterByIndustry((itm) =>{
+        return [...itm , val]
+      })
+    }
+  }
 
 
   return (
@@ -105,7 +123,7 @@ const CustomFilter = (props) => {
                   <>
                     <li key={index}>
                       <a href="#">
-                        <input type="checkbox" className="checkBoxAdCmnty" />
+                        <input type="checkbox" className="checkBoxAdCmnty" onClick={() => handleFilterByDomain(domain.title)} checked={filterByDomain.includes(domain.title.toLowerCase())}/>
                         <span>{domain.title}</span>
                       </a>
                     </li>
@@ -122,7 +140,7 @@ const CustomFilter = (props) => {
                   <>
                     <li key={index}>
                       <a href="#">
-                        <input type="checkbox" className="checkBoxAdCmnty" />
+                        <input type="checkbox" className="checkBoxAdCmnty" onClick={() => handleFilterByIndustry(industry.title)} checked={filterByIndustry.includes(industry.title.toLowerCase())}/>
                         <span>{industry.title}</span>
                       </a>
                     </li>

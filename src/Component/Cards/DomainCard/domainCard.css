@@ -73,7 +73,8 @@ div#popup-2 {
 
 .domainCardName_box {
   display: flex;
-  align-items: center;
+  justify-content: flex-end;
+  /* align-items: center; */
   margin-top: 5px;
 }
 
@@ -82,13 +83,13 @@ div#popup-2 {
   font-weight: 500;
   color: #2c6959;
   font-size: 13px;
-  border: 2px solid rgb(182, 178, 178);
+  /* border: 2px solid rgb(182, 178, 178); */
   padding: 3px 6px;
   border-radius: 4px;
 }
 
 .domainCardName_box h6:hover {
-  border: 2px solid green;
+  border: none !important;
  
 }
 
@@ -158,23 +159,25 @@ div#popup-2 {
 
 .domaintooltip .tooltiptextabc {
   visibility: hidden;
-  height:150px;
-  width: 250px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  background-color: #fff;
-  color:black;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -190px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  padding-bottom: 10px !important;
-  padding-left: 7px;
+    height: 150px;
+    width: 250px;
+    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
+    background-color: #fff;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+   
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 30%;
+   
+    margin-left: -170px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    padding-bottom: 10px !important;
+    padding-left: 7px;
 }
 .domaintooltip .tooltiptextabc h5{
   color:#2c6959;
@@ -190,13 +193,13 @@ div#popup-2 {
 
 .domaintooltip .tooltiptextabc::after {
   content: "";
-  position: absolute;
-  top: 100%;
-  left: 60%;
-  margin-left: -5px;
-  border-width: 8px;
-  border-style: solid;
-  border-color: rgb(219, 214, 214) transparent transparent transparent;
+    position: absolute;
+    top: 100%;
+    left: 60%;
+    margin-left: -5px;
+    border-width: 15px;
+    border-style: solid;
+    border-color: rgb(219, 214, 214) transparent transparent transparent;
 }
 
 .domaintooltip:hover .tooltiptextabc {
@@ -213,7 +216,11 @@ div#popup-2 {
 }
 
 .subType h6{
-  border: none !important ;
+  min-width: 100px;
+    border: none !important;
+    text-align: left;
+    font-size: 16px;
+  
 }
 
 .subType span{

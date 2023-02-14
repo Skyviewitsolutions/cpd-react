@@ -61,7 +61,7 @@ const Event_cards = (props) => {
             </button>
             {/* <h6  onClick={() =>navigate('/event_details',{state:{eventDetails:data}})}>
             </h6> */}
-            <span className="tooltiptextabc">
+            <span className="eventtooltiptextabc">
                   <h5>{data?.creator_name}</h5>
                   <div className="subType">
                     <h6>Event Title  </h6>{" "}:{" "}

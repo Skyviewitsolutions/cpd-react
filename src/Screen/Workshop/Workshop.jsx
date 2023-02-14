@@ -39,7 +39,10 @@ const Workshop = () => {
   const [showAllWorkshop, setShowAllWorkshop] = useState(true);
   const [inputData, setInputData] = useState("");
   const [workshopToBeShown, setWorkshopToBeShown] = useState([]);
+  const [workshopToBeShown2, setWorkshopToBeShown2] = useState([]);
   const [showWorkshopForm , setShowWorkshopForm] = useState(false)
+  const [filterByIndustry , setFilterByIndustry] = useState([])
+  const [filterByDomain , setFilterByDomain] = useState([]);
 
   var userDetails = localStorage.getItem("users");
   var userType = JSON.parse(userDetails);
@@ -60,15 +63,13 @@ const Workshop = () => {
           setImagePath(imgPath);
           setAllWorkShopList(val);
           setWorkshopToBeShown(val);
+          setWorkshopToBeShown2(val);
         }
       })
       .catch((err) => {
         console.log(err, "this is the error h");
       });
   };
-
-
-
 
  const showWorkshopOnCalendar = async (data) =>{
   var slots = JSON.parse(data.availability_slot);
@@ -154,12 +155,13 @@ const Workshop = () => {
   const handleShowAllWorkshop = () => {
     setShowAllWorkshop(true);
     setWorkshopToBeShown(allWorkShopList);
+    setWorkshopToBeShown2(allWorkShopList);
   };
 
   const handleShowMyWorkshop = () => {
     setShowAllWorkshop(false);
     setWorkshopToBeShown(myWorkshopList);
-    
+    setWorkshopToBeShown2(myWorkshopList);
   };
 
   const handleInputData = (val) => {
@@ -170,11 +172,13 @@ const Workshop = () => {
         return data.title.toLowerCase().includes(value);
       });
       setWorkshopToBeShown(filteredData);
+      setWorkshopToBeShown2(filteredData);
     } else {
       var filteredData = myWorkshopList.filter((data, index) => {
         return data.title.toLowerCase().includes(value);
       });
       setWorkshopToBeShown(filteredData);
+      setWorkshopToBeShown2(filteredData);
     }
   };
 
@@ -185,6 +189,30 @@ const Workshop = () => {
     });
     navigate(path);
   };
+
+  // here we are filtering the coaching according to the domain and industry;
+
+  useEffect(() => {
+    var filterWorkshopByDomain = workshopToBeShown.filter((itm, index) => {
+      var domain = itm.domain;
+      var domainTitle = domain && domain?.title.toLowerCase();
+      return filterByDomain.includes(domainTitle);
+    });
+
+    setWorkshopToBeShown2(filterWorkshopByDomain);
+  }, [filterByDomain]);
+
+  useEffect(() => {
+    var filterWorkshopByIndustry = workshopToBeShown.filter(
+      (itm, index) => {
+        var industry = itm.industry;
+        var industryTitle = industry && industry?.title.toLowerCase();
+        return filterByIndustry.includes(industryTitle);
+      }
+    );
+    setWorkshopToBeShown2(filterWorkshopByIndustry);
+  }, [filterByIndustry]);
+
 
 
   return (
@@ -297,12 +325,17 @@ const Workshop = () => {
         <section className="Workshop_section2">
           <div className="row">
             <div className="col-lg-2 col-md-12 col-12 ">
-              <CustomFilter />
+            <CustomFilter
+                filterByDomain={filterByDomain}
+                setFilterByDomain={setFilterByDomain}
+                filterByIndustry={filterByIndustry}
+                setFilterByIndustry={setFilterByIndustry}
+              />
             </div>
             <div className="col-lg-10 col-md-12 col-12 ">
               <div className="row">
-                {workshopToBeShown.length != 0 &&
-                  workshopToBeShown.map((workshop, index) => {
+                {workshopToBeShown2.length != 0 &&
+                  workshopToBeShown2.map((workshop, index) => {
                     const img = `${imagePath}/${workshop.image}`;
                     var id = workshop._id;
                     var timing = workshop.availability_timing;
@@ -347,7 +380,6 @@ const Workshop = () => {
             </div>
           </div>
 
-          {/* <WorkshopEnroll show={true} onHide={() => setModalShow(false)} /> */}
           <CustomCalendar
             showCalendar={showCustomCalendar}
             setShowCalendar={setShowCustomCalendar}

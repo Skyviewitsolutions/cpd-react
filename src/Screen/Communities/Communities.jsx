@@ -150,11 +150,11 @@ const Communities = () => {
       {/*  */}
       <div className="p-4">
         <div class="row mb-4">
-          <div className="col-sm-5 col-md-6 col-lg-2 mt-5 ">
+          <div className="  col-lg-3 mt-5 ">
             <CustomFilter />
           </div>
 
-          <div className="col-sm-5 col-md-6 col-lg-10 mt-5">
+          <div className="col-sm-12 col-md-12 col-lg-9 mt-5">
             <div className="row  ">
               <div className="col-12 col-md-12 col-lg-8 mb-3">
                 <inputbox className="form-control networking_searchbox">
@@ -162,16 +162,19 @@ const Communities = () => {
                 </inputbox>
               </div>
               <div
-                className="col-8 col-md-6 col-lg-3"
-                onClick={() => navigate("/networking")}
+                className="col-8 col-md-6 col-lg-2"
+                onClick={() => navigate( "/networking" )}
               >
-                <button className="BackToCommunites">Back to Events</button>
+                <button className="networkingcommunitybtn"> Back to Events </button>
+                {/* <button className="BackToCommunites">Back to Events</button> */}
               </div>
-              <div className="col-4 col-md-6 col-lg-1 addCmntyCont" >
-                <Plus_button  onClick={() => navigate("/create_community")}
+              <div className="col-4 col-md-6 col-lg-2">
+              {/* <div className="col-4 col-md-6 col-lg-2 addCmntyCont" > */}
+              <button className="networkingcommunitybtn"> Add Community </button>
+                {/* <Plus_button  onClick={() => navigate( "/create_community" )}
                   text=""
-                />
-                <h6 className="addCmntys">Add Community</h6>
+                /> */}
+                {/* <h6 className="addCmntys">Add Community</h6> */}
               </div>
             </div>
 
