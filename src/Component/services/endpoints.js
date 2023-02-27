@@ -50,7 +50,11 @@ export const endpoints = {
     cancellCoaching : BASE_URL + "/coaches/coaching/respond-to-enrollment?booking_id=",
     confirmCoaching : BASE_URL + "/coaches/coaching/respond-to-enrollment?booking_id=",
     myCoachings : BASE_URL + "/coaches/coaching/get-list?user_id=" + userId,
-    allCoachingList : BASE_URL + '/coaches/coaching/get-list'
+    coachingsByCoachId : BASE_URL + "/coaches/coaching/get-list?user_id=",
+    allCoachingList : BASE_URL + '/coaches/coaching/get-list',
+    deleteCoaching : BASE_URL + "/coaches/coaching/delete?id=",
+    updateCoaching : BASE_URL + "/coaches/coaching/update",
+    getCoachingDetailsById : BASE_URL + "/coaches/coaching/get-list?coaching_id="
   } ,
 
   workshop : {
@@ -62,7 +66,10 @@ export const endpoints = {
     cancelWorkshop : BASE_URL + "/coaches/workshop/respond-to-enrollment?booking_id=",
     confirmWorkshop : BASE_URL + "/coaches/workshop/respond-to-enrollment?booking_id=",
     myWorkshop : BASE_URL + "/coaches/workshop/get-list?user_id=" + userId,
-    getWorkshopDetailsById : BASE_URL + "/coaches/workshop/get-list?workshop_id="
+    WorkshopByCoachId : BASE_URL + "/coaches/workshop/get-list?user_id=",
+    getWorkshopDetailsById : BASE_URL + "/coaches/workshop/get-list?workshop_id=",
+    deleteWorkshop : BASE_URL + "/coaches/workshop/delete?id=",
+    updateWorkshop : BASE_URL + "/coaches/workshop/update"
   } ,
   master : {
     allIndustry : BASE_URL + "/list-industry",

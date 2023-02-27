@@ -33,6 +33,8 @@ import company_logo from "../../assets/Images/company_logo.png";
 import { TagsInput } from "react-tag-input-component";
 import $, { fn, uniqueSort } from "jquery";
 import PreviewResumeModal from "../Modal/PreviewResumeModal/PreviewResumeModal";
+import CollegeImage from "../../assets/Images/college.png";
+import CompanyImg from "../../assets/Images/company.png";
 
 const Student_cv = () => {
   const navigate = useNavigate("");
@@ -191,6 +193,7 @@ const Student_cv = () => {
             setOpenPreviewModal(false);
             localStorage.setItem("isCvUploaded", true);
             getUserCvData();
+            navigate("/");
           }
         })
         .catch((err) => {
@@ -286,7 +289,6 @@ const Student_cv = () => {
   // here we are writing code for getting the userscv details if it has some data ;
 
   const getUserCvData = () => {
-
     const url = endpoints.authentication.userProfile;
 
     const headers = {
@@ -496,7 +498,8 @@ const Student_cv = () => {
           if (res.data.result === true) {
             toast("Profile updated successfully", { type: "success" });
             setOpenPreviewModal(false);
-            getUserCvData()
+            getUserCvData();
+            navigate("/");
           }
         })
         .catch((err) => {
@@ -711,7 +714,6 @@ const Student_cv = () => {
   };
 
   const updateSelectedExperience = () => {
-    
     if (sltdJobTitle == "") {
       toast("Job title is required", { type: "warning" });
     } else if (sltdEmploymentType == "") {
@@ -901,15 +903,6 @@ const Student_cv = () => {
     } else if (contact === "") {
       toast("Please enter contact", { type: "warning" });
       contRef.current.focus();
-      // } else if (nationality === "") {
-      //   toast("Please enter nationality", { type: "error" });
-      //   nationalRef.current.focus();
-      // } else if (dob === "") {
-      //   toast("Please enter DOB", { type: "warning" });
-      //   dob.current.focus();
-      // } else if (gender === "") {
-      //   toast("Please enter gender", { type: "warning" });
-      //   genderRef.current.focus();
     } else {
       var data = {
         firstName: name,
@@ -961,15 +954,6 @@ const Student_cv = () => {
     } else if (contact === "") {
       toast("Please enter contact", { type: "warning" });
       contRef.current.focus();
-      // } else if (nationality === "") {
-      //   toast("Please enter nationality", { type: "error" });
-      //   nationalRef.current.focus();
-      // } else if (dob === "") {
-      //   toast("Please enter DOB", { type: "warning" });
-      //   dob.current.focus();
-      // } else if (gender === "") {
-      //   toast("Please enter gender", { type: "warning" });
-      //   genderRef.current.focus();
     } else {
       setOpenPreviewModal(true);
     }
@@ -1103,14 +1087,14 @@ const Student_cv = () => {
                   {uploadImg ? (
                     <>
                       <label htmlFor="takePhoto">Upload Img</label>
-                      <h5 class="form-control" htmlFor="takePhone">
+                      <h5 class="form-control" htmlFor="takePhoto">
                         {uploadImg.name}
                       </h5>
                       <input
                         type="file"
                         class="form-control"
                         placeholder="Enter here"
-                        accept="image/png, image/gif, image/jpeg"
+                        accept="image/png, image/jpeg, image/jpg"
                         onChange={(e) => handleImage(e)}
                         id="takePhoto"
                         style={{ display: "none" }}
@@ -1153,7 +1137,7 @@ const Student_cv = () => {
                 <>
                   <div className="studentcv_experiencelogoBox" key={index}>
                     <div className="studentCV_logobox">
-                      <img src={educationLogo} alt="" />
+                      <img src={CollegeImage} alt="" />
                       <div className="studentCV_universityDetail ">
                         <h5>{itm.collegeName}</h5>
 
@@ -1317,7 +1301,7 @@ const Student_cv = () => {
                 <>
                   <div className="studentcv_experiencelogoBox" key={index}>
                     <div className="studentCV_logobox">
-                      <img src={company_logo} alt="" />
+                      <img src={CompanyImg} alt="" />
                       <div className="studentCV_universityDetail">
                         <h5>{itm.jobTitle}</h5>
                         <h6>{itm.company}</h6>

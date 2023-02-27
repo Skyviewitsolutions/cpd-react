@@ -12,10 +12,17 @@ code {
     monospace;
 }
 
+/* here we are defining some of the root color */
+:root {
+ --black: #393a39;
+ --gray : #5e5e5e;
+ --lightgray : #666666;
+ --primary : #2c6959;
+}
+
 @font-face {
   font-family: "Inter-Black";  
   src: url("./fonts/Inter-Black.ttf");
-
 }
 
 @font-face {

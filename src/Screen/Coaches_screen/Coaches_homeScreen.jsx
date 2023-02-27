@@ -23,11 +23,13 @@ import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 import useFetchCoachingsData from "../../assets/CustomHooks/useFetchCoachingsData";
 import CreateBtn from "../../Component/button/CreateBtn/CreateBtn";
 import NoDataImg from "../../assets/Images/noDataFound.png";
+import Loader from "../../Component/Loader/Loader";
+import { FiEdit } from "react-icons/fi";
+import { AiOutlineDelete } from "react-icons/ai";
+import { BiInfoCircle } from "react-icons/bi";
 import { getCalendarData } from "../../utils/calendar";
 
-
 const CoachingCard = (props) => {
-
   const {
     data,
     bookingStatus,
@@ -36,6 +38,11 @@ const CoachingCard = (props) => {
     showBookBtn,
     coachImgPath,
     bookCoaches,
+    showEdit,
+    handleEdit,
+    deleteCoaching,
+    selectedCoaching,
+    loading,
   } = props;
 
   const navigate = useNavigate();
@@ -49,12 +56,11 @@ const CoachingCard = (props) => {
   var description = data?.coach_info?.description;
   var coachInfo = data?.coach_info;
   var image = coachImgPath + "/" + coachInfo?.avtar;
-  const [showDescription, setshowDescription] = useState(false);
 
   return (
     <>
-      <div class=" col-lg-6 col-md-12 col-12 ">
-        <div className="card_large">
+      <div class=" col-lg-6 col-md-12 col-12 position-relative">
+        <div className="card_large ">
           <div className="card CoachScreen_coachesList">
             <div className="row">
               <div className="col-lg-3 col-md-3 col-12 img-box">
@@ -62,37 +68,23 @@ const CoachingCard = (props) => {
                   class=" img-box img-placeholder"
                   onClick={() => showCoachDetails(data)}
                 >
-                  <img
-                    src={coachInfo?.avtar ? image : dommy_person}
-                    alt="#"
-                    // className="card__body-cover-image"
-                  />
+                  <img src={coachInfo?.avtar ? image : dommy_person} alt="#" />
                 </div>
               </div>
               <div className="col-lg-4 col-md-5 col-12 nameBox">
-                <div className="coachscreen_coachname position-relative">
+                <div className="coachscreen_coachname ">
                   <h5>
                     {data?.coach_info?.first_name} {data?.coach_info?.last_name}
                   </h5>
                   <div className="coaches_tooltip">
-                  <GrPowerForceShutdown
-                    // onMouseOver={() => setshowDescription(true)}
-                    // onMouseOut={() => setshowDescription(false)}
-                  />
-                  <div className="tooltiptext ">
-                <p> {description}</p>
-                   
-                 
-                    {/* <h5>tooltip Heading</h5>
-                    <p>tooltip Heading paragraph</p> */}
+                    <GrPowerForceShutdown />
+                    <div className="tooltiptext ">
+                      <p> {description}</p>
+                    </div>
                   </div>
-                  </ div>
-                  {/* {showDescription && (
-                    <div className="coachDesc">{description}</div>
-                  )} */}
                 </div>
-                <h6>Title</h6>
-                <p className="text-capitalize">{data.title}</p>
+                {/* <h6>Title</h6>
+                <p className="text-capitalize">{data.title}</p> */}
                 <h6>Country</h6>
                 <p>{data.coach_info?.nationality}</p>
                 <h6> Expertise</h6>
@@ -103,37 +95,49 @@ const CoachingCard = (props) => {
               <div className="col-lg-5  col-md-4 col-12 availabilityBox">
                 <div className="coaches_homescreen_availbalilityInner">
                   <h6>Availability </h6>
-                  <h5
-                    // style={{ marginLeft: "9px" }}
-                    onClick={() => showCoachingsOnCalendar(data)}
-                  >
+                  <h5 onClick={() => showCoachingsOnCalendar(data)}>
                     <span style={{ marginRight: "10px" }}> :</span>
                     <BsFillCalendarDateFill color="#2c6959" size={20} />
                   </h5>
                 </div>
                 <div className="coaches_homescreen_availbalilityInner">
-                  <h6>TimeSlot</h6>
-                  <h5>
-                  <span style={{ marginRight: "10px" }}> :</span>
-                    {timing?.[0]} to {timing?.[1]}
+                  <h6>Title</h6>
+                  <h5 style={{ fontSize: "13px", fontWeight: "500" }}>
+                    <span style={{ marginRight: "10px" }}> :</span>
+                    {data.title}
                   </h5>
                 </div>
 
-                <div className="coaches_homescreen_availbalilityInner">
-                  <h6>Price </h6>{" "}
-                  <h5>
-                    {" "}
-                    :<span> $</span> {data.price}{" "}
-                    {data.payment_type == "1" ? "Hourly" : "Sessional"}
-                  </h5>
-                </div>
+                {data.price != 0 ? (
+                  <div className="coaches_homescreen_availbalilityInner">
+                    <h6>Price </h6>
+                    <h5>
+                      :<span> $</span> {data.price}{" "}
+                      {data.payment_type == "1" ? "Hourly" : "Sessional"}
+                    </h5>
+                  </div>
+                ) : (
+                  <div className="coaches_homescreen_availbalilityInner">
+                    <h6>Free </h6>
+                  </div>
+                )}
 
                 {showBookBtn && (
                   <div className="coachesScreenBook">
                     <BookBtn
                       status={bookingStatus}
                       onClick={() => bookCoaches(data)}
+                      loading={selectedCoaching != data._id && loading}
                       styles={{ position: "absolute" }}
+                    />
+                  </div>
+                )}
+                {showEdit && (
+                  <div className="coachingEdit  position-absolute">
+                    <FiEdit color="#2c6959" onClick={() => handleEdit(data)} />
+                    <AiOutlineDelete
+                      color="#2c6959"
+                      onClick={() => deleteCoaching(data._id)}
                     />
                   </div>
                 )}
@@ -146,8 +150,138 @@ const CoachingCard = (props) => {
   );
 };
 
+const CoachingCard2 = (props) => {
+  const {
+    data,
+    bookingStatus,
+    timing,
+    showCoachingsOnCalendar,
+    showBookBtn,
+    coachImgPath,
+    bookCoaches,
+    showEdit,
+    handleEdit,
+    deleteCoaching,
+    selectedCoaching,
+    loading,
+    showAllCoaching
+  } = props;
+
+  const navigate = useNavigate();
+
+  const showCoachDetails = (dta) => {
+    if(showAllCoaching){
+    const coachId = dta.created_by;
+    const path = generatePath("/coach-Details/:coachId", { coachId: coachId });
+    navigate(path);
+    }
+  };
+
+  var description = data?.coach_info?.description;
+  var coachInfo = data?.coach_info;
+  var image = coachImgPath + "/" + coachInfo?.avtar;
+
+ const handleCalendar = (e , data) =>{
+  e.stopPropagation();
+  showCoachingsOnCalendar(data)
+ }
+
+  return (
+    <>
+      <div className="col-lg-6 col-md-12 col-sm-12 position-relative">
+        <div className="coachingCrd bg-white border-2  ">
+          <div
+            onClick={() => showCoachDetails(data)}
+            className="d-flex justify-content-between"
+          >
+            <div className="col-lg-3 col-md-2 col-sm-12 ">
+              <img
+                src={coachInfo?.avtar ? image : dommy_person}
+                alt="#"
+                className="coachImg"
+              />
+            </div>
+            <div className="col-lg-4 col-md-5 col-sm-12">
+              <div className="d-flex  pr-4 ">
+                <h5 className="coachName">
+                  {data?.coach_info?.first_name} {data?.coach_info?.last_name}
+                </h5>
+                <div className="coaches_tooltip flex-1 d-flex justify-content-center">
+                  <BiInfoCircle
+                    size={25}
+                    className="idetailsIcon"
+                    color="#727273"
+                  />
+                  <div className="tooltiptext">
+                    <p>{description} hel</p>
+                  </div>
+                </div>
+              </div>
+              <div className="coachContr">
+                <h6>Country</h6>
+                <span>{data.coach_info?.nationality}</span>
+              </div>
+              <div className="coachContr">
+                <h6>Expertise</h6>
+                <span>
+                  {coachInfo?.category} | {coachInfo?.subCategory}
+                </span>
+              </div>
+            </div>
+            <div className="col-lg-5 col-md-5 col-sm-12 d-flex  flex-column">
+              <div className="d-flex coachCont2 justify-content-between align-items-center mb-2">
+                <h6>Availability</h6>:
+                <span onClick={(e) =>handleCalendar(e , data)}>
+                  <BsFillCalendarDateFill color="#2c6959" size={20} />
+                </span>
+              </div>
+              <div className="d-flex coachCont2 justify-content-between">
+                <h6>Title</h6>:<span>{data.title}</span>
+              </div>
+              {data.price != 0 ? (
+                <div className="d-flex coachCont2 justify-content-between align-items-center">
+                  <h6>Price</h6>:
+                  <span>
+                    {data.price} $ /
+                    {data.payment_type == "1" ? "hour" : "session"}
+                  </span>
+                </div>
+              ) : (
+                <div className="d-flex coachCont2 justify-content-between align-items-center">
+                  <h6>Free</h6>
+                </div>
+              )}
+            </div>
+          </div>
+          {showBookBtn && (
+            <div className="mt-3 position-absolute w-1 bookbtnBold" >
+              <BookBtn
+                status={bookingStatus}
+                onClick={() => bookCoaches(data)}
+                loading={selectedCoaching != data._id && loading}
+              />
+            </div>
+          )}
+          {showEdit && (
+            <div className="d-flex justify-content-end mr-4 ">
+              <div className="coachingEdit mt-3 editBtnBold">
+                <FiEdit color="#2c6959" onClick={() => handleEdit(data)} />
+                <AiOutlineDelete
+                  color="#2c6959"
+                  onClick={() => deleteCoaching(data._id)}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
+
+
 const Coaches_homeScreen = () => {
-  
+
   const [showCalendar, setShowCalendar] = useState(false);
   const [allCoachings, setAllCoachings] = useState([]);
   const [eventsToBeShown, setEventsToBeShown] = useState([]);
@@ -163,6 +297,10 @@ const Coaches_homeScreen = () => {
   const [showCoachingsForm, setShowCoachingsForm] = useState(false);
   const [coachImgPath, setCoachImgPath] = useState("");
   const logedIn = localStorage.getItem("logedIn");
+  const [selectedCoaching, setSelectedCoaching] = useState("");
+  const [imagePath, setImagePath] = useState("");
+  const [updateCoaching, setUpdateCoaching] = useState(false);
+  const [selectedCoachingForUpdate, setSelectedCoachingForUpdate] = useState([]);
 
   // filter UseState here;
   const [filterByDomain, setFilterByDomain] = useState([]);
@@ -178,6 +316,7 @@ const Coaches_homeScreen = () => {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     };
+
     const url = endpoints.coaches.allCoachesList;
 
     axios
@@ -198,10 +337,10 @@ const Coaches_homeScreen = () => {
   };
 
   const showCoachingsOnCalendar = async (data) => {
+    setShowCalendar(true);
     var slots = JSON.parse(data.availability_slot);
     const calendarData = await getCalendarData(slots);
     setEventsToBeShown(calendarData);
-    setShowCalendar(true);
   };
 
   const getAllEnrolledCoachings = () => {
@@ -239,6 +378,10 @@ const Coaches_homeScreen = () => {
         if (res.data.result) {
           var val = res.data.data;
           setMyCoachings(val);
+          if (!showAllCoaching) {
+            setCoachingListToBeShown(val);
+            setCoachingListToBeShown2(val);
+          }
         }
       })
       .catch((err) => {
@@ -255,17 +398,16 @@ const Coaches_homeScreen = () => {
   }, []);
 
   const bookCoaches = (coachData) => {
-    if (logedIn) {
+    var token = localStorage.getItem("token");
+    if (token) {
       var id = coachData._id;
       var url = `${endpoints.coaches.enrollCoaching}${id}`;
-
-      console.log(url);
-
       const headers = {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       };
 
+      setSelectedCoaching(id);
       setLoading(true);
 
       axios
@@ -289,7 +431,9 @@ const Coaches_homeScreen = () => {
     }
   };
 
-
+  const handleBookCoaches = (coachesData) => {
+    setShowBookCoachesSlot(true);
+  };
 
   // 0/1/2/3=Cancelled/Pending/Confirmed/booknow;
 
@@ -334,7 +478,7 @@ const Coaches_homeScreen = () => {
     });
 
     setCoachingListToBeShown2(filterCoachingByDomain);
-  }, [filterByDomain , filterByDomain]);
+  }, [filterByDomain, filterByDomain]);
 
   useEffect(() => {
     var filterCoachingByIndustry = coachingListToBeShown.filter(
@@ -345,9 +489,33 @@ const Coaches_homeScreen = () => {
       }
     );
     setCoachingListToBeShown2(filterCoachingByIndustry);
-  }, [filterByIndustry , filterByDomain]);
+  }, [filterByIndustry, filterByDomain]);
 
+  // writing code for updating and deleting coachings;
 
+  const deleteCoaching = (id) => {
+    const url = `${endpoints.coaches.deleteCoaching}${id}`;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if (res.data.result) {
+          getMyCoachingsList();
+          toast("coaching deleted successfully", { type: "success" });
+        }
+      })
+      .catch((err) => {
+        console.log(err, "delete workshop error");
+      });
+  };
+
+  const handleEdit = (data) => {
+    setUpdateCoaching(true);
+    setSelectedCoachingForUpdate(data);
+    setShowCoachingsForm(true);
+  };
 
   return (
     <>
@@ -355,10 +523,11 @@ const Coaches_homeScreen = () => {
 
       <section className="coachScreen">
         <div className="container-fluid">
-          <div className="row">
+          <div className="row d-flex justify-content-between">
             <div className="col-lg-2 d-lg-block d-none coachScreen_left">
-              <h5 style={{ marginBottom: "20px" }}>Book Coaches</h5>
-
+              <h5 className="ml-3" style={{ marginLeft: "9px" }}>
+                Book Coaches
+              </h5>
               <CustomFilter
                 filterByDomain={filterByDomain}
                 setFilterByDomain={setFilterByDomain}
@@ -407,7 +576,6 @@ const Coaches_homeScreen = () => {
                       >
                         My Coachings
                       </button>
-
                       <CreateBtn onClick={() => setShowCoachingsForm(true)} />
                     </div>
                   </>
@@ -420,9 +588,7 @@ const Coaches_homeScreen = () => {
                     var id = data._id;
                     var timing = data?.availability_timing;
                     timing = timing ? timing?.split(",") : null;
-
                     var bookingStatus = 3;
-
                     var enrolled = allEnrolledCoachings.filter((itm, ind) => {
                       return itm.coaching_id == id;
                     });
@@ -434,7 +600,7 @@ const Coaches_homeScreen = () => {
                     }
                     return (
                       <>
-                        <CoachingCard
+                        <CoachingCard2
                           data={data}
                           bookingStatus={bookingStatus}
                           timing={timing}
@@ -442,7 +608,14 @@ const Coaches_homeScreen = () => {
                           key={index}
                           coachImgPath={coachImgPath}
                           bookCoaches={bookCoaches}
+                          // loading={loading}
+                          // bookCoaches={handleBookCoaches}
+                          selectedCoaching={selectedCoaching}
                           showCoachingsOnCalendar={showCoachingsOnCalendar}
+                          showEdit={!showAllCoaching}
+                          deleteCoaching={deleteCoaching}
+                          handleEdit={handleEdit}
+                          showAllCoaching={showAllCoaching}
                         />
                       </>
                     );
@@ -476,8 +649,14 @@ const Coaches_homeScreen = () => {
         getCoachingList={getCoachingList}
         getMyCoachingsList={getMyCoachingsList}
         setShowAllCoaching={setShowAllCoaching}
+        updateCoaching={updateCoaching}
+        setUpdateCoaching={setUpdateCoaching}
+        selectedCoachingForUpdate={selectedCoachingForUpdate}
+        setSelectedCoachingForUpdate={setSelectedCoachingForUpdate}
+        imagePath={imagePath}
       />
 
+      {/* {!loading && <Loader />} */}
       <Footer />
     </>
   );

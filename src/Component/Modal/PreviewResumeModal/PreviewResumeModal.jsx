@@ -9,6 +9,9 @@ import edu_logo from "../../../assets/Images/edu_logo.jpeg";
 import "../../../fonts/Inter-Bold.ttf";
 import "../../../fonts/Inter-Regular.ttf";
 import dommyuserperson from "../../../assets/Images/dommyuserperson.jfif";
+import CollegeImage from "../../../assets/Images/college.png";
+import CompanyImg from "../../../assets/Images/company.png";
+
 
 const PreviewResumeModal = (props) => {
 
@@ -131,7 +134,7 @@ const PreviewResumeModal = (props) => {
                           <>
                             <div className="resume_company">
                               <div className="resume_educationimg">
-                                <img src={infosysdommy} alt="" />
+                                <img src={CompanyImg} alt="" />
                               </div>
 
                               <div className="resume_companyhistory">
@@ -153,7 +156,7 @@ const PreviewResumeModal = (props) => {
                           <>
                             <div className="resume_company">
                               <div className="resume_educationimg">
-                                <img src={edu_logo} alt="" />
+                                <img src={CollegeImage} alt="" />
                               </div>
                               <div className="resume_companyhistory">
                                 <h6>{itm.collegeName}</h6>

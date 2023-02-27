@@ -12,16 +12,22 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import WorkshopCard from "../../Component/WorkshopCard/WorkshopCard";
 import BookBtn from "../../Component/button/BookBtn/BookBtn";
+import { generatePath, useNavigate } from "react-router-dom";
+import NoDataImg from "../../assets/Images/noDataFound.png";
 import CoachingCard from "../../Component/CoachingCard/CoachingCard";
+import { getCalendarData } from "../../utils/calendar";
+import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 
 
 const CoachesDetails = () => {
-  
+
   const [allCoachings, setAllCoachings] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
   const [coachingImgPath, setCoachingImgPath] = useState("");
   const [workshopImgPath, setWorkshopImgPath] = useState("");
   const [coachImgPath, setCoachImgPath] = useState("");
+  const [eventsToBeShown, setEventsToBeShown] = useState([]);
+  const [showCustomCalendar, setShowCustomCalendar] = useState(false);
   const [myEnrolledCoachings, setMyEnrolledCoachings] = useState([]);
   const [myEnrolledWorkshops, setMyEnrolledWorkshops] = useState([]);
   const [coachDetails, setCoachDetails] = useState({
@@ -31,7 +37,9 @@ const CoachesDetails = () => {
     category: "",
     avatar: "",
   });
+
   const [loading, setLoading] = useState([]);
+  const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
   const headers = {
@@ -40,7 +48,7 @@ const CoachesDetails = () => {
   const { coachId } = useParams();
 
   const getCoachings = () => {
-    const url = `${endpoints.coaches.allCoachingList}?user_id=${coachId}`;
+    const url = `${endpoints.coaches.coachingsByCoachId}${coachId}`;
     axios
       .get(url, { headers: headers })
       .then((res) => {
@@ -56,8 +64,11 @@ const CoachesDetails = () => {
       });
   };
 
+  // 63db41c1048b6f3a6a00c382;
+
   const getWorkshops = () => {
-    const url = `${endpoints.workshop.allWorkshop}?user_id=${coachId}`;
+    const url = `${endpoints.workshop.WorkshopByCoachId}${coachId}`;
+    console.log(url, "url here");
     axios
       .get(url, { headers: headers })
       .then((res) => {
@@ -196,6 +207,29 @@ const CoachesDetails = () => {
       });
   };
 
+  const showWorkshopDetails = (dta) => {
+    const workshopId = dta._id;
+    const path = generatePath("/workshopDetails/:workshopId", {
+      workshopId: workshopId,
+    });
+    navigate(path);
+  };
+
+  const showCoachingDetails = (dta) => {
+    const coachingId = dta._id;
+    const path = generatePath("/coachingDetails/:coachingId", {
+      coachingId: coachingId,
+    });
+    navigate(path);
+  };
+
+  const showWorkshopOnCalendar = async (data) => {
+    var slots = JSON.parse(data.availability_slot);
+    const calendarData = await getCalendarData(slots);
+    setEventsToBeShown(calendarData);
+    setShowCustomCalendar(true);
+  };
+
   return (
     <>
       <Homepage_header />
@@ -227,7 +261,7 @@ const CoachesDetails = () => {
               </span>
             </h4>
             <h6>
-              Speacility: {coachDetails.category} | {coachDetails.subCategory}
+              Speacility : {coachDetails.category} | {coachDetails.subCategory}
             </h6>
             <p>{coachDetails.description}</p>
           </div>
@@ -237,19 +271,15 @@ const CoachesDetails = () => {
             <div className="col-lg-12 col-md-12 col-12 ">
               <h5 className="coachesDetailsheading">Coaching List</h5>
               <div className="row">
-
                 {allCoachings.length != 0 &&
                   allCoachings.map((coaching, index) => {
-
                     var id = coaching._id;
                     var enrolled = myEnrolledCoachings.filter((itm, ind) => {
                       return itm.coaching_id == id;
                     });
 
-                    var image = coachImgPath + coaching.image
-
+                    var image = coachImgPath + coaching.image;
                     var bookingStatus = 3;
-
                     if (enrolled.length != 0) {
                       var datas = enrolled[0];
                       var status = datas.status;
@@ -266,13 +296,19 @@ const CoachesDetails = () => {
                             bookCoaches={bookCoaches}
                             showBookBtn={true}
                             bookingStatus={bookingStatus}
+                            showWorkshopOnCalendar={showWorkshopOnCalendar}
+                            showCoachingDetails={showCoachingDetails}
                           />
                         </div>
                       </>
                     );
                   })}
 
-                {allCoachings.length == 0 && <h6>No coachings found !</h6>}
+                {allCoachings.length == 0 && (
+                  <div className="noDataCont">
+                    <img src={NoDataImg} alt="" />
+                  </div>
+                )}
                 <div className="viewDetailsBox"></div>
               </div>
             </div>
@@ -284,7 +320,6 @@ const CoachesDetails = () => {
             <div className="col-lg-12 col-md-12 col-12 ">
               <h5 className="coachesDetailsheading">Workshop List</h5>
               <div className="row">
-
                 {allWorkshops.length != 0 &&
                   allWorkshops.map((workshop, index) => {
                     var id = workshop._id;
@@ -301,7 +336,7 @@ const CoachesDetails = () => {
                       enrollStatus = status;
                     }
 
-                    var image = workshopImgPath + "/" + workshop.image
+                    var image = workshopImgPath + "/" + workshop.image;
 
                     return (
                       <>
@@ -311,8 +346,10 @@ const CoachesDetails = () => {
                             key={index}
                             img={image}
                             imageName={workshop.image}
+                            showCoachDetails={showWorkshopDetails}
                             enrollWorkshop={enrollWorkshop}
                             enrollStatus={enrollStatus}
+                            showWorkshopOnCalendar={showWorkshopOnCalendar}
                             showBookBtn={true}
                           />
                         </div>
@@ -320,10 +357,19 @@ const CoachesDetails = () => {
                     );
                   })}
 
-                {allWorkshops.length == 0 && <h6>No workshop found !</h6>}
+                {allWorkshops.length == 0 && (
+                  <div className="noDataCont">
+                    <img src={NoDataImg} alt="" />
+                  </div>
+                )}
               </div>
             </div>
           </div>
+          <CustomCalendar
+            showCalendar={showCustomCalendar}
+            setShowCalendar={setShowCustomCalendar}
+            eventsToBeShown={eventsToBeShown}
+          />
         </section>
       </div>
       <Footer />

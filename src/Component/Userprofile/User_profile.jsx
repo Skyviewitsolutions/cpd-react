@@ -30,6 +30,7 @@ const User_profile = () => {
   const [userImg, setUserImg] = useState("");
   const [totalExperience, setTotalExperience] = useState(0);
   const [showNotification, setShowNotification] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0);
   var userDetails = localStorage.getItem("users");
 
   const [university_name, setUniversity_name] = useState("");
@@ -70,7 +71,6 @@ const User_profile = () => {
 
           var userImgPath = res.data.avtarPath;
           var userImg = userImgPath + res.data.data?.avtar;
-          console.log(res.data , "userImg here")
 
           setUserImg(userImg);
 
@@ -84,7 +84,6 @@ const User_profile = () => {
 
             var totalExperience =
               parseInt(endYearEmployment) - parseInt(startYearEmployment);
-              console.log(endYearEmployment , "endyear ")
             setTotalExperience(totalExperience);
           }
         }
@@ -105,9 +104,15 @@ const User_profile = () => {
     if (userType == 1) {
       navigate("/resume");
     } else if (userType == 2) {
-      navigate("/coachesForm");
+      navigate("/coaches-form");
     }
   };
+
+  const handleNotification = () =>{
+    if(notificationCount > 0){
+      setShowNotification(true)
+    }
+  }
 
   return (
     <>
@@ -119,10 +124,10 @@ const User_profile = () => {
           {userType == 2 && (
             <div
               className="coachNotification"
-              onClick={() => setShowNotification(true)}
+              onClick={handleNotification}
             >
               <AiTwotoneBell color="white" size={26} className="bellIcon" />
-              <h6 className="badge">4</h6>
+              {notificationCount != 0 && <h6 className="badge">{notificationCount}</h6>}
             </div>
           )}
         </div>
@@ -143,18 +148,19 @@ const User_profile = () => {
             </div>
           )}
           <div className="heading_box">
-            <h6 className="heading">
-              <span> Total Experience: </span>
-              {totalExperience} years
+            <h6 className="heading userIn">
+              <span> Total Experience :</span>
+              <span> {totalExperience} years </span>
             </h6>
-            <h6 className="heading">
-              <span> Industries: {industry}</span>
+            <h6 className="heading userIn">
+              <span style={{ width: "120px" }}> Industries :</span>{" "}
+              <span> {industry}</span>
             </h6>
-            <h6 className="heading">
-              <span>Domains: {domain}</span>
+            <h6 className="heading userIn">
+              <span>Domains </span> : <span>{domain}</span>
             </h6>
-            <h6 className="heading">
-              <span>Skills: {allSkills.toString()}</span>
+            <h6 className="heading userIn">
+              <span>Skills </span>: <span> {allSkills.toString()}</span>
             </h6>
           </div>
 
@@ -271,9 +277,12 @@ const User_profile = () => {
             <Index_button text="See All" brline="gray" />
           </div>
         </div>
+
         <CoachNotification
           showNotification={showNotification}
           setShowNotification={setShowNotification}
+          notificationCount={notificationCount}
+          setNotificationCount={setNotificationCount}
         />
       </div>
     </>

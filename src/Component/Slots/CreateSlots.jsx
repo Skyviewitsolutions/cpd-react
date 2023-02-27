@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import { getCalendarData } from "../../utils/calendar";
 
 const CreateSlots = (props) => {
-
   const {
     selectedDays,
     setSelectedDays,
@@ -218,15 +217,17 @@ const CreateSlots = (props) => {
 
   const handleDaysFormat = (format) => {
     setDaysFormat(format);
-    if (format === "weekly") {
+    if(format === "weekly") {
       setSelectedDates([]);
       setDateSlot([]);
-    } else if (format === "monthly") {
+    } else if(format === "monthly") {
       setSelectedDays([]);
       setDaysSlot([]);
     }
   };
 
+  console.log(daysFormat , "daysFormat");
+  
   const getCalendarDatas = async () => {
     // here we getting the data for the calendar;
     var dta = {
@@ -245,7 +246,7 @@ const CreateSlots = (props) => {
 
   useEffect(() => {
     getCalendarDatas();
-  }, [updateCalendar , title , isRepeated]);
+  }, [updateCalendar, title, isRepeated]);
 
   return (
     <>

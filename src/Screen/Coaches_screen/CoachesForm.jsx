@@ -46,6 +46,7 @@ const CoachesForm = () => {
   const [industry, setIndustry] = useState("");
   const [domain, setDomain] = useState("");
   const [subIndustry , setSubIndustry] = useState("");
+  const navigate = useNavigate();
 
   // creating useState for holding the form date ;
   const [firstName, setFirstName] = useState("");
@@ -206,6 +207,7 @@ const CoachesForm = () => {
   };
 
   const updateSelectedExperience = () => {
+
     if (sltdJobTitle == "") {
       toast("Job title is required", { type: "warning" });
     } else if (sltdEmploymentType == "") {
@@ -448,6 +450,7 @@ const CoachesForm = () => {
           setLoading(false);
           if (res.data.result) {
             getUserCvData();
+            navigate("/")
             toast("Profile created successfully", { type: "success" });
           }
         })
@@ -464,6 +467,7 @@ const CoachesForm = () => {
   };
 
   const getUserCvData = () => {
+
     const url = endpoints.authentication.userProfile;
 
     const headers = {
@@ -471,11 +475,15 @@ const CoachesForm = () => {
       // "Content-Type": "application/json",
     };
 
+   
+
     axios
       .get(url, { headers: headers })
       .then((res) => {
         if (res.data.result === true) {
           const usersData = res.data.data;
+          console.log(usersData , "usersData here")
+
           if (usersData) {
             setAllExperience([]);
             if (Object.keys(usersData).length) {
@@ -492,7 +500,11 @@ const CoachesForm = () => {
               setSkills(usersData?.skills);
               setHobbies(usersData?.hobbies);
               setDescription(usersData?.description);
-
+              if(usersData.subindustry && usersData?.subindustry != undefined && usersData.subindustry != null ){
+                setSubIndustry(usersData?.subindustry);
+              }
+              setDomain(usersData?.domain?.[0]);
+              setIndustry(usersData?.industry?.[0])
               // writing code for all eductional part ;
 
               const jbTitle = usersData.job_title;
@@ -500,11 +512,11 @@ const CoachesForm = () => {
               const compny = usersData.company;
               const JbStrtYear = usersData.start_year_employment;
               const jbEndYear = usersData.end_year_employment;
-              const jbDomain = usersData.domain;
-              const jbIndustry = usersData.industry;
+              const jbDomain = usersData.career_domain;
+              const jbIndustry = usersData.career_industry;
               const crntRole = usersData.isCurrent;
 
-              for (var i = 0; i < jbTitle.length; i++) {
+              for (var i = 1; i < jbTitle.length; i++) {
                
                 var endYear = jbEndYear[i];
                 var currentRole =
@@ -621,6 +633,7 @@ const CoachesForm = () => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
+            navigate("/")
             toast("Profile updated successfully", { type: "success" });
             getUserCvData();
           }
@@ -1120,33 +1133,7 @@ const CoachesForm = () => {
           </div>
         </div>
 
-        {/* <div className="formoutline_studentcv coachFormSt">
-          <SlotAsCoach
-            showCalendar={showCalendar}
-            setShowCalendar={setShowCalendar}
-            eventsToBeShown={eventsToBeShown}
-            setEventsToBeShown={setEventsToBeShown}
-            coachesTitle={coachesTitle}
-            setCoachesTitle={setCoachesTitle}
-            coachPaid={coachPaid}
-            setCoachPaid={setCoachPaid}
-            coachSessionType={coachSessionType}
-            setCoachSessionType={setCoachSessionType}
-          />
-
-          <SlotAsWorkShop
-            showCalendar={showCalendar}
-            setShowCalendar={setShowCalendar}
-            eventsToBeShown={eventsToBeShown}
-            setEventsToBeShown={setEventsToBeShown}
-            workShopTitle={workShopTitle}
-            setWorkShopTitle={setWorkShopTitle}
-            workshopSessionType={workshopSessionType}
-            setWorkshopSessionType={setWorkshopSessionType}
-            workshopPaid={workshopPaid}
-            setWorkshopPaid={setWorkshopPaid}
-          />
-        </div> */}
+      
       </div>
 
       <ToastContainer />
@@ -1167,7 +1154,10 @@ const CoachesForm = () => {
         allExperience={allExperience}
         skills={skills}
         update={update}
+        domain={domain}
+        industry={industry}
         updateProfile={updateProfile}
+        dob={dob}
         loading={loading}
       />
       <CustomCalendar

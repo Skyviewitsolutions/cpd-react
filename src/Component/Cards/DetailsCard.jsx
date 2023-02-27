@@ -53,7 +53,7 @@ const DetailsCard = (props) => {
             <button
               className="evntBtnViewDtls"
               onClick={() =>
-                navigate("/event_details", { state: { eventDetails: data } })
+                navigate("/event-details", { state: { eventDetails: data } })
               }
             >
               

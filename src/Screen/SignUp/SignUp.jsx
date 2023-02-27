@@ -36,7 +36,7 @@ const SignUp = () => {
               </p>
               <button
                 className="login_aboutCpd"
-                onClick={() => navigate("/loginpage")}
+                onClick={() => navigate("/login")}
               >
                 Login to know more
               </button>

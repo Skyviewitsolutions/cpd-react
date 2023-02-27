@@ -13,8 +13,19 @@ import { endpoints } from "../../services/endpoints";
 
 
 const CreateWorkshopForm = (props) => {
-
-  const { setShowWorkshopForm, showWorkshopForm,getAllWorkshop ,getMyWorkshop , setShowAllWorkshop} = props;
+  
+  const {
+    setShowWorkshopForm,
+    showWorkshopForm,
+    getAllWorkshop,
+    getMyWorkshop,
+    setShowAllWorkshop,
+    updateWorkshop,
+    imagePath,
+    setUpdateWorkshop,
+    selectedWorkshopForUpdate,
+    setSelectedWorkshopForUpdate,
+  } = props;
 
   const [workshopImg, setWorshopImg] = useState(null);
   const [maxNumber, setMaxNumber] = useState(0);
@@ -25,36 +36,77 @@ const CreateWorkshopForm = (props) => {
   const [sessionType, setSessionType] = useState("");
   const [industry, setIndustry] = useState("");
   const [domain, setDomain] = useState("");
+  const [industryId, setIndustryId] = useState("");
+  const [domainId, setDomainId] = useState("");
   const [allDomain, setAllDomain] = useState([]);
   const [allIndustry, setAllIndustry] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showCalendar , setShowCalendar] = useState(false)
-  const [eventsToBeShown , setEventsToBeShown] = useState([]);
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [eventsToBeShown, setEventsToBeShown] = useState([]);
+  const [selectedWorkshopId, setSelectedWorkshopId] = useState("");
 
   var token = localStorage.getItem("token");
 
-// creating useState for slotsCreations ;
+  // creating useState for slotsCreations ;
 
-const [selectedDays, setSelectedDays] = useState([]);
-const [daysFormat, setDaysFormat] = useState("weekly");
-const [isRepeated, setIsRepeated] = useState(false);
-const [dateSlot, setDateSlot] = useState([]);
-const [daysSlot, setDaysSlot] = useState([]);
-const [selectedDates, setSelectedDates] = useState([]);
+  const [selectedDays, setSelectedDays] = useState([]);
+  const [daysFormat, setDaysFormat] = useState("weekly");
+  const [isRepeated, setIsRepeated] = useState(false);
+  const [dateSlot, setDateSlot] = useState([]);
+  const [daysSlot, setDaysSlot] = useState([]);
+  const [selectedDates, setSelectedDates] = useState([]);
 
-  
   const handleworkshopImg = (e) => {
-    const files = e.target.files[0]
+    const files = e.target.files[0];
     setWorshopImg(files);
   };
 
-  useEffect(() =>{
-    getIndustryList().then((res)=> {if(res.data.data) {var data = res.data.data; setAllIndustry(data)}}).catch((err) => {console.log(err)});
-    getDomainList().then((res) => {if(res.data.data) {var data = res.data.data; setAllDomain(data)}}).catch((err) => {console.log(err)})
-   },[])
+  useEffect(() => {
+    getIndustryList()
+      .then((res) => {
+        if (res.data.data) {
+          var data = res.data.data;
+          setAllIndustry(data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    getDomainList()
+      .then((res) => {
+        if (res.data.data) {
+          var data = res.data.data;
+          setAllDomain(data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-   const handleConfirmSlots = async () => {
+  const refreshAllInputField = () => {
+    setPaid(false);
+    setPrice(0);
+    setWorshopImg(null);
+    setIndustry("");
+    setDomain("");
+    setIndustryId("");
+    setDomainId("");
+    setEventsToBeShown([]);
+    setDateSlot([]);
+    setDaysSlot([]);
+    setSelectedWorkshopId("");
+    setSelectedWorkshopForUpdate({});
+    setTitle("");
+    setDaysFormat("weekly");
+    setSelectedDates([]);
+    setSelectedDays([]);
+    setSessionType("");
+    setWorkShopDuration(0);
+    setMaxNumber(0);
+  };
 
+  const submitWorkshop = async () => {
     if (!title) {
       toast("please fill the workshop title", { type: "warning" });
     } else if (!workShopDuration) {
@@ -75,7 +127,7 @@ const [selectedDates, setSelectedDates] = useState([]);
       var availability_type = daysFormat == "weekly" ? 1 : 2;
       var payment_type = sessionType == "hourly" ? 1 : 2;
       var is_paid = paid == true ? 1 : 0;
-      var availability_timing = ['12:00:00' , '01:00:00'];
+      var availability_timing = ["12:00:00", "01:00:00"];
 
       var slots = {
         isRepeated: isRepeated,
@@ -85,6 +137,161 @@ const [selectedDates, setSelectedDates] = useState([]);
         daysSlot: daysSlot,
         dateSlot: dateSlot,
         title: title,
+        duration: workShopDuration,
+      };
+
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("availability_type", availability_type);
+      formData.append("payment_type", payment_type);
+      formData.append("price", price);
+      formData.append("is_paid", 0);
+      formData.append("availability_slot", JSON.stringify(slots));
+      formData.append("availability_timing", availability_timing);
+      formData.append("is_repeated", 1);
+      formData.append("max_members", maxNumber);
+      formData.append("image", workshopImg);
+      formData.append("domain", domainId);
+      formData.append("industry", industryId);
+      formData.append("workshop_duration", workShopDuration);
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      setLoading(true);
+      axios
+        .post(url, formData, { headers: headers })
+        .then((res) => {
+          setLoading(false);
+          if (res.data.result) {
+            getAllWorkshop();
+            getMyWorkshop();
+            setShowWorkshopForm(false);
+            setShowAllWorkshop(false);
+            refreshAllInputField();
+            toast("workshop created successfully", { type: "success" });
+          } else if (res.data.result == false) {
+            toast(res.data.message, { type: "warning" });
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err, "this is the error here");
+        });
+    }
+  };
+
+  const handleDomainSelection = (val) => {
+    setDomain(val);
+    var domanId = allDomain.find((itm, index) => {
+      return itm.title === val;
+    });
+
+    domanId = domanId._id;
+    setDomainId(domanId);
+  };
+
+  const handleIndustrySelection = (val) => {
+    setIndustry(val);
+    var indstryId = allIndustry.find((itm, index) => {
+      return itm.title === val;
+    });
+    indstryId = indstryId._id;
+    setIndustryId(indstryId);
+  };
+
+  // writing code for updating the workshop;
+
+  useEffect(() => {
+    if (updateWorkshop === true) {
+      var dta = selectedWorkshopForUpdate;
+      console.log(dta, "dta here");
+
+      setMaxNumber(dta.max_members);
+
+      var domainId = dta.domain?._id;
+      var domainName = allDomain.find((itm, index) => {
+        return itm.domain_id === domainId;
+      });
+
+      domainName = domainName.title;
+      setDomain(domainName);
+
+      var industryId = dta.industry?._id;
+      var industryName = allIndustry.find((itm, index) => {
+        return itm.industry_id === industryId;
+      });
+      industryName = industryName.title;
+      setIndustry(industryName);
+
+      setDomainId(dta.domain?.domain_id);
+      setIndustryId(dta.industry?.industry_id);
+      setTitle(dta.title);
+
+      var repeated = dta.is_repeated == 0 ? false : true;
+      var paid = dta.is_paid == 0 ? false : true;
+      var sessionTyp = dta.payment_type == 1 ? "hourly" : "sessional";
+      setSessionType(sessionTyp);
+      setIsRepeated(repeated);
+      setPrice(dta.price);
+      setPaid(paid);
+      setSelectedWorkshopId(dta._id);
+      // setWorkShopDuration(dta.workshop_duration)
+
+      var slots = JSON.parse(dta?.availability_slot);
+      console.log(slots, "slots here");
+      setSelectedDays(slots?.selectedDays || []);
+      setSelectedDates(slots?.selectedDates || []);
+      setDaysSlot(slots?.daysSlot);
+      setDateSlot(slots?.dateSlot);
+      setWorkShopDuration(slots?.duration);
+      setDaysFormat(slots?.daysFormat);
+
+      var imageUrl = imagePath + "/" + dta.image;
+
+      const fileName = "workshop.jpg";
+
+      fetch(imageUrl).then(async (response) => {
+        const contentType = response.headers.get("content-type");
+        const blob = await response.blob();
+        const file = new File([blob], fileName, { contentType });
+        setWorshopImg(file);
+      });
+    }
+  }, [updateWorkshop]);
+
+  const updateWorkshops = () => {
+    const url = endpoints.workshop.updateWorkshop;
+    if (!title) {
+      toast("please fill the workshop title", { type: "warning" });
+      // } else if (!workShopDuration) {
+      //   toast("workshop duration is required", { type: "warning" });
+    } else if (!workshopImg) {
+      toast("workshop image is required", { type: "warning" });
+    } else if (!domain) {
+      toast("please select workshop domain", { type: "warning" });
+    } else if (!industry) {
+      toast("please select workshop industry", { type: "warning" });
+    } else if (!maxNumber) {
+      toast("Max number of student is required", { type: "warning" });
+    } else if (!sessionType) {
+      toast("please select session type", { type: "warning" });
+    } else {
+      var availability_type = daysFormat == "weekly" ? 1 : 2;
+      var payment_type = sessionType == "hourly" ? 1 : 2;
+      var is_paid = paid == true ? 1 : 0;
+      var availability_timing = ["12:00:00", "01:00:00"];
+
+      var slots = {
+        isRepeated: isRepeated,
+        selectedDays: selectedDays,
+        daysFormat: daysFormat,
+        selectedDates: selectedDates,
+        daysSlot: daysSlot,
+        dateSlot: dateSlot,
+        title: title,
+        duration: workShopDuration,
       };
 
       const formData = new FormData();
@@ -98,8 +305,10 @@ const [selectedDates, setSelectedDates] = useState([]);
       formData.append("is_repeated", 1);
       formData.append("max_members", maxNumber);
       formData.append("image", workshopImg);
-      formData.append("domain", domain);
-      formData.append("industry", industry);
+      formData.append("domain", domainId);
+      formData.append("industry", industryId);
+      formData.append("id", selectedWorkshopId);
+      formData.append("workshop_duration", workShopDuration);
 
       const headers = {
         Authorization: `Bearer ${token}`,
@@ -111,10 +320,13 @@ const [selectedDates, setSelectedDates] = useState([]);
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            getAllWorkshop()
-            getMyWorkshop()
-            setShowAllWorkshop(true)
-            toast("workshop created successfully", { type: "success" });
+            getAllWorkshop();
+            getMyWorkshop();
+            setShowAllWorkshop(false);
+            setShowWorkshopForm(false);
+            setUpdateWorkshop(false);
+            refreshAllInputField();
+            toast("workshop updated successfully", { type: "success" });
           } else if (res.data.result == false) {
             toast(res.data.message, { type: "warning" });
           }
@@ -126,7 +338,6 @@ const [selectedDates, setSelectedDates] = useState([]);
     }
   };
 
-
   return (
     <Modal
       show={showWorkshopForm}
@@ -135,7 +346,7 @@ const [selectedDates, setSelectedDates] = useState([]);
       centered
     >
       <div className="formoutline_studentcv coachFormSt ">
-        <div style={{ width: "150%" , paddingBottom : "20px" }}>
+        <div style={{ width: "150%", paddingBottom: "20px" }}>
           <div className="row d-flex">
             <div className="col-lg-4 col-md-6 col-12 ">
               <div class="form-group">
@@ -152,11 +363,12 @@ const [selectedDates, setSelectedDates] = useState([]);
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
               <div class="form-group">
-                <label for="exampleInputPassword1">Duration</label>
+                <label for="exampleInputPassword1">Duration (in hours)</label>
                 <input
                   type="number"
                   class="form-control field py-4 mb-3"
                   id=""
+                  min={0}
                   value={workShopDuration}
                   onChange={(e) => setWorkShopDuration(e.target.value)}
                   placeholder="Enter workshop Duration in (hours)"
@@ -167,15 +379,35 @@ const [selectedDates, setSelectedDates] = useState([]);
           <div className="row">
             <div className="col-12 col-md-6 col-lg-4 ">
               <div class="form-group">
-                <label htmlFor="takePhoto">Upload Img</label> <br />
-                <input
-                  type="file"
-                  class="form-control  py-4 mb-3 "
-                  placeholder="Enter here"
-                  required
-                  onChange={(e) => handleworkshopImg(e)}
-                  className="imgInput"
-                />
+                {workshopImg ? (
+                  <>
+                    <label htmlFor="takePhoto">Upload Img</label>
+                    <h5 class="form-control" htmlFor="takePhone">
+                      {workshopImg.name}
+                    </h5>
+                    <input
+                      type="file"
+                      class="form-control"
+                      placeholder="Enter here"
+                      accept="image/png, image/gif, image/jpeg"
+                      onChange={(e) => handleworkshopImg(e)}
+                      id="takePhoto"
+                      style={{ display: "none" }}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <label htmlFor="takePhoto">Upload Img</label>
+                    <input
+                      type="file"
+                      class="form-control"
+                      placeholder="Enter here"
+                      accept="image/png, image/gif, image/jpeg"
+                      onChange={(e) => handleworkshopImg(e)}
+                      id="takePhoto"
+                    />
+                  </>
+                )}
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
@@ -186,6 +418,7 @@ const [selectedDates, setSelectedDates] = useState([]);
                   class="form-control field py-4 mb-3"
                   id=""
                   value={maxNumber}
+                  min={0}
                   onChange={(e) => setMaxNumber(e.target.value)}
                   placeholder="Enter max number of students"
                 />
@@ -201,13 +434,13 @@ const [selectedDates, setSelectedDates] = useState([]);
                   aria-label="Default select example"
                   value={domain}
                   required
-                  onChange={(e) => setDomain(e.target.value)}
+                  onChange={(e) => handleDomainSelection(e.target.value)}
                 >
                   <option value="">Choose</option>
                   {allDomain.map((domain, ind) => {
                     return (
                       <>
-                        <option value={domain._id} key={ind}>
+                        <option value={domain.title} key={ind}>
                           {domain.title}
                         </option>
                       </>
@@ -225,13 +458,13 @@ const [selectedDates, setSelectedDates] = useState([]);
                   aria-label="Default select example"
                   value={industry}
                   required
-                  onChange={(e) => setIndustry(e.target.value)}
+                  onChange={(e) => handleIndustrySelection(e.target.value)}
                 >
-                  <option>Choose</option>
+                  <option value="">Choose</option>
                   {allIndustry.map((industry, index) => {
                     return (
                       <>
-                        <option value={industry._id} key={index}>
+                        <option value={industry.title} key={index}>
                           {industry.title}
                         </option>
                       </>
@@ -242,9 +475,27 @@ const [selectedDates, setSelectedDates] = useState([]);
             </div>
           </div>
 
-          <CreateSlots selectedDays={selectedDays} setSelectedDays={setSelectedDays} daysFormat={daysFormat} setDaysForma={setDaysFormat} isRepeated={isRepeated} setIsRepeated={setIsRepeated} dateSlot={dateSlot} setDateSlot={setDateSlot} daysSlot={daysSlot} setDaysSlot={setDaysSlot} selectedDates={selectedDates} setSelectedDates={setSelectedDates} title={title} setEventsToBeShown={setEventsToBeShown} />
+          <CreateSlots
+            selectedDays={selectedDays}
+            setSelectedDays={setSelectedDays}
+            daysFormat={daysFormat}
+            setDaysFormat={setDaysFormat}
+            isRepeated={isRepeated}
+            setIsRepeated={setIsRepeated}
+            dateSlot={dateSlot}
+            setDateSlot={setDateSlot}
+            daysSlot={daysSlot}
+            setDaysSlot={setDaysSlot}
+            selectedDates={selectedDates}
+            setSelectedDates={setSelectedDates}
+            title={title}
+            setEventsToBeShown={setEventsToBeShown}
+          />
 
-          <div className="caledarIcons  clnderIcons" onClick={() => setShowCalendar(true)}>
+          <div
+            className="caledarIcons  clnderIcons"
+            onClick={() => setShowCalendar(true)}
+          >
             <BsFillCalendarDateFill color="#2c6959" size={32} />
           </div>
           {/* here adding the fees structure */}
@@ -281,71 +532,86 @@ const [selectedDates, setSelectedDates] = useState([]);
                 </label>
               </div>
             </div>
-            <div className="d-flex">
-              <div class="form-check" style={{ marginLeft: "25px" }}>
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="flexRadioDefault"
-                  id="flexRadioDefault5"
-                  checked={sessionType == "hourly"}
-                  onChange={() => setSessionType("hourly")}
-                />
-                <label
-                  class="form-check-label  textsession"
-                  for="flexRadioDefault5"
-                >
-                  By Hours
-                </label>
-              </div>
 
-              <div class="form-check" style={{ marginLeft: "25px" }}>
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="flexRadioDefault"
-                  id="flexRadioDefault6"
-                  checked={sessionType == "sessional"}
-                  onChange={() => setSessionType("sessional")}
-                />
-                <label
-                  class="form-check-label textsession"
-                  for="flexRadioDefault6"
-                >
-                  By Session
-                </label>
+            {paid && (
+              <div className="d-flex">
+                <div class="form-check" style={{ marginLeft: "25px" }}>
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    id="flexRadioDefault5"
+                    checked={sessionType == "hourly"}
+                    onChange={() => setSessionType("hourly")}
+                  />
+                  <label
+                    class="form-check-label  textsession"
+                    for="flexRadioDefault5"
+                  >
+                    Pay by Hours
+                  </label>
+                </div>
+
+                <div class="form-check" style={{ marginLeft: "25px" }}>
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    id="flexRadioDefault6"
+                    checked={sessionType == "sessional"}
+                    onChange={() => setSessionType("sessional")}
+                  />
+                  <label
+                    class="form-check-label textsession"
+                    for="flexRadioDefault6"
+                  >
+                    Pay by Session
+                  </label>
+                </div>
               </div>
-            </div>
+            )}
           </div>
           {/* here we aare adding payment div */}
-          <div className="col-lg-4 col-md-6 col-12 my-3 ">
-            <div class="form-group">
-              <label for="exampleInputPassword1">Price in ($)</label>
-              <input
-                type="number"
-                class="form-control py-4"
-                placeholder="Enter here"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
+
+          {paid === true && (
+            <div className="col-lg-4 col-md-6 col-12 my-3 ">
+              <div class="form-group">
+                <label for="exampleInputPassword1">Price in ($)</label>
+                <input
+                  type="number"
+                  class="form-control py-4"
+                  placeholder="Enter here"
+                  value={price}
+                  min={0}
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </div>
             </div>
-          </div>
+          )}
           <div className="confirmBtn">
             <Button
-              title="Create Workshop"
-              onClick={handleConfirmSlots}
+              title={updateWorkshop ? "Update Workshop" : "Create Workshop"}
+              onClick={updateWorkshop ? updateWorkshops : submitWorkshop}
               loading={loading}
             />
           </div>
         </div>
         <div
           className="coachingCutOptions"
-          onClick={() => setShowWorkshopForm(false)}
+          onClick={() => {
+            setShowWorkshopForm(false);
+            refreshAllInputField();
+            setUpdateWorkshop(false);
+          }}
         >
           <IoIosCloseCircleOutline size={26} color="red" />
         </div>
       </div>
-      <CustomCalendar showCalendar={showCalendar} setShowCalendar={setShowCalendar} eventsToBeShown={eventsToBeShown}/>
+      <CustomCalendar
+        showCalendar={showCalendar}
+        setShowCalendar={setShowCalendar}
+        eventsToBeShown={eventsToBeShown}
+      />
     </Modal>
   );
 };

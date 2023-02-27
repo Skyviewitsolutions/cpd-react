@@ -79,7 +79,7 @@ const MyEventCards = (props) => {
             <button
               className="evntBtnViewDtls"
               onClick={() =>
-                navigate("/event_details", { state: { eventDetails: data } })
+                navigate("/event-details", { state: { eventDetails: data } })
               }
             >
               <img src={eye} alt="" style={{ marginRight: "4px" }}></img>

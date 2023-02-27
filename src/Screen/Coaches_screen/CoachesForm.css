@@ -254,4 +254,6 @@
 
 .studentCV_logobox img{
   object-fit: cover;
+  width: 69px;
+  margin-right: 9px;
 }

@@ -169,10 +169,6 @@ const AddEvent_Form_second = () => {
 
                 </div>
 
-
-
-
-
                 <div className="col-12 col-md-12 col-lg-12">
                   <label for="exampleInputEmail1" class="form-label">
                     Paste Zoom Invite Link Here

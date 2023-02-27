@@ -9,9 +9,10 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { endpoints } from "../../Component/services/endpoints";
 
-const WorkshopDetails = () => {
-  const { workshopId } = useParams();
 
+const WorkshopDetails = () => {
+
+  const { workshopId } = useParams();
   const token = localStorage.getItem("token");
   const [workshopDtails, setWorkshopDtails] = useState({});
   const [imgPath , setImgPath] = useState([]);

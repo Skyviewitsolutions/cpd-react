@@ -21,9 +21,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
 
-
 const Login_form = (props) => {
-
   const navigate = useNavigate("");
   const [showPassword, setShowpassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -63,18 +61,18 @@ const Login_form = (props) => {
             localStorage.setItem("token", token);
             localStorage.setItem("users", JSON.stringify(user_data));
             localStorage.setItem("logedIn", true);
-            
+
             toast("Login successfully", { type: "success" });
             setLoading(false);
             const isCvUploaded = res.data.user?.isCvAvailable;
             localStorage.setItem("isCvUploaded", isCvUploaded);
-            console.log(isCvUploaded , "isCVUploaded here");
+            console.log(isCvUploaded, "isCVUploaded here");
             if (isCvUploaded == true) {
               navigate("/");
             } else {
               const userType = user_data.user_type;
               if (userType == 2) {
-                navigate("/coachesForm");
+                navigate("/coaches-form");
               } else if (userType == 1) {
                 navigate("/resume");
               }
@@ -95,7 +93,6 @@ const Login_form = (props) => {
     <>
       <div className="loginpage_form">
         <h4>Login</h4>
-
         <Form onSubmit={submit}>
           <div className="mb-4" controlId="formBasicEmail">
             <label>Email Address</label>
@@ -137,7 +134,7 @@ const Login_form = (props) => {
 
           <Form.Group className="mb-4 formBasicCheckbox">
             <div className="check_and_forgot">
-              <div className="lg_check">
+              <div className="lg_check d-flex align-items-center">
                 <input
                   type="checkbox"
                   id="sign_check"
@@ -151,7 +148,7 @@ const Login_form = (props) => {
               </div>
               <div
                 className="forgot-link"
-                onClick={() => navigate("/forgot_password")}
+                onClick={() => navigate("forgot-password")}
               >
                 <a href="" className="forgotPassword">
                   Forgot password?
@@ -160,7 +157,7 @@ const Login_form = (props) => {
             </div>
           </Form.Group>
 
-          <Btn btn_name={"login"} submit={submit} loading={loading} />
+          <Btn btn_name={"Login"} submit={submit} loading={loading} />
         </Form>
 
         <div className=" row login_bottom">
@@ -170,14 +167,12 @@ const Login_form = (props) => {
             </button>
           </div>
           <div className="col-lg-2 col-md-2 col-sm-2 orLogin" id="or">
-            <h6>-or-</h6>
+            <h6>- or -</h6>
           </div>
           <div className="col-lg-5 col-md-5 col-12 social_login">
             <div className="row ">
-              <div className="col-lg-12 col-md-12 col-sm-12 ">
-                <b style={{ fontSize: "14px" }} className="LoginSocial">
-                  Login via Social
-                </b>
+              <div className="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center">
+                <b className="LoginSocial ">Login via Social</b>
               </div>
             </div>
             <div className="row social_icon">
@@ -190,9 +185,9 @@ const Login_form = (props) => {
           </div>
         </div>
         <p className="loginSignup">
-          Not a member?{" "}
+          Not a member ?{" "}
           <span
-            style={{ color: "#2c6959", cursor: "pointer" }}
+            style={{ color: "#2c6959", cursor: "pointer", fontWeight: "bold" }}
             onClick={() => navigate("/signup")}
             className="context-menu"
           >

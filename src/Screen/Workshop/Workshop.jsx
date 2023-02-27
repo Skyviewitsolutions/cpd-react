@@ -23,10 +23,9 @@ import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 import CreateWorkshopForm from "../../Component/Modal/CreateWorkshopForm/CreateWorkshopForm";
 import NoDataImg from "../../assets/Images/noDataFound.png";
 import { getCalendarData } from "../../utils/calendar";
-
+import Loader from "../../Component/Loader/Loader";
 
 const Workshop = () => {
-  
   const navigate = useNavigate("");
   const [modalShow, setModalShow] = React.useState(false);
   const token = localStorage.getItem("token");
@@ -40,9 +39,13 @@ const Workshop = () => {
   const [inputData, setInputData] = useState("");
   const [workshopToBeShown, setWorkshopToBeShown] = useState([]);
   const [workshopToBeShown2, setWorkshopToBeShown2] = useState([]);
-  const [showWorkshopForm , setShowWorkshopForm] = useState(false)
-  const [filterByIndustry , setFilterByIndustry] = useState([])
-  const [filterByDomain , setFilterByDomain] = useState([]);
+  const [showWorkshopForm, setShowWorkshopForm] = useState(false);
+  const [filterByIndustry, setFilterByIndustry] = useState([]);
+  const [filterByDomain, setFilterByDomain] = useState([]);
+  const [updateWorkshop, setUpdateWorkshop] = useState(false);
+  const [selectedWorkshopForUpdate, setSelectedWorkshopForUpdate] = useState(
+    {}
+  );
 
   var userDetails = localStorage.getItem("users");
   var userType = JSON.parse(userDetails);
@@ -71,12 +74,12 @@ const Workshop = () => {
       });
   };
 
- const showWorkshopOnCalendar = async (data) =>{
-  var slots = JSON.parse(data.availability_slot);
-  const calendarData = await getCalendarData(slots);
-  setEventsToBeShown(calendarData);
-  setShowCustomCalendar(true)
- }
+  const showWorkshopOnCalendar = async (data) => {
+    var slots = JSON.parse(data.availability_slot);
+    const calendarData = await getCalendarData(slots);
+    setEventsToBeShown(calendarData);
+    setShowCustomCalendar(true);
+  };
   // writing code for enrolling the workshop
 
   const enrollWorkshop = (workShopData) => {
@@ -134,7 +137,10 @@ const Workshop = () => {
         if (res.data.result) {
           const val = res.data.data;
           setMyWorkshopList(val);
-          // setWorkshopToBeShown(val);
+          if (!showAllWorkshop) {
+            setWorkshopToBeShown(val);
+            setWorkshopToBeShown2(val);
+          }
         }
       })
       .catch((err) => {
@@ -198,22 +204,41 @@ const Workshop = () => {
       var domainTitle = domain && domain?.title.toLowerCase();
       return filterByDomain.includes(domainTitle);
     });
-
     setWorkshopToBeShown2(filterWorkshopByDomain);
-  }, [filterByDomain , filterByIndustry]);
+  }, [filterByDomain, filterByIndustry]);
 
   useEffect(() => {
-    var filterWorkshopByIndustry = workshopToBeShown.filter(
-      (itm, index) => {
-        var industry = itm.industry;
-        var industryTitle = industry && industry?.title.toLowerCase();
-        return filterByIndustry.includes(industryTitle);
-      }
-    );
+    var filterWorkshopByIndustry = workshopToBeShown.filter((itm, index) => {
+      var industry = itm.industry;
+      var industryTitle = industry && industry?.title.toLowerCase();
+      return filterByIndustry.includes(industryTitle);
+    });
     setWorkshopToBeShown2(filterWorkshopByIndustry);
-  }, [filterByIndustry , filterByDomain]);
+  }, [filterByIndustry, filterByDomain]);
 
+  const handleEdit = (data) => {
+    setUpdateWorkshop(true);
+    setSelectedWorkshopForUpdate(data);
+    setShowWorkshopForm(true);
+  };
 
+  const deleteWorkshop = (id) => {
+    const url = `${endpoints.workshop.deleteWorkshop}${id}`;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if (res.data.result) {
+          getMyWorkshop();
+          toast("workshop deleted successfully", { type: "success" });
+        }
+      })
+      .catch((err) => {
+        console.log(err, "delete workshop error");
+      });
+  };
 
   return (
     <>
@@ -233,12 +258,12 @@ const Workshop = () => {
             </div>
           </div>
           <div className="row workshop_searchBox col-12">
-            <div className="col-8 col-md-12 col-lg-4">
+            <div className="col-8 col-md-12 col-lg-2">
               <h5>This Week's Top Enroll Workshop</h5>
             </div>
-            <div className="col-12 col-md-12 col-lg-8">
+            <div className="col-12 col-md-12 col-lg-10">
               <div className="row">
-                <div className="col-lg-7 col-md-12 col-12">
+                <div className="col-lg-8 col-md-12 col-12">
                   <div className="workshop_searchBar">
                     <div className="form-group">
                       <input
@@ -254,7 +279,10 @@ const Workshop = () => {
                 </div>
                 {userType == 2 && (
                   <>
-                    <div className="coachBtnCont col-5 justify-content-between">
+                    <div
+                      className="coachBtnCont col-lg-4 col-md-12 col-12 justify-content-between"
+                      style={{ width: "33%" }}
+                    >
                       <button
                         className="coachingBtn"
                         style={{
@@ -265,7 +293,7 @@ const Workshop = () => {
                       >
                         All
                       </button>
-                   
+
                       <button
                         className="coachingBtn"
                         style={{
@@ -276,56 +304,23 @@ const Workshop = () => {
                       >
                         My workshops
                       </button>
-                      <button className="coachingBtn createCoachingBtn" onClick={() => setShowWorkshopForm(true)}>
+                      <button
+                        className="coachingBtn createCoachingBtn"
+                        onClick={() => setShowWorkshopForm(true)}
+                      >
                         Create
                       </button>
                     </div>
                   </>
                 )}
               </div>
-              {/* <div className="workshop_searchBar d-flex justify-content-around">
-                <div className="form-group d-flex position-relative col-lg-6 col-12">
-                  <HiSearch id="workshop_search" />
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Search Here"
-                    value={inputData}
-                    onChange={(e) => handleInputData(e.target.value)}
-                  />
-                </div>
-                {userType == 2 && (
-                  <div className="row d-flex col-5 ml-4 justify-content-around">
-                    <button
-                      className="coachingBtn"
-                      style={{
-                        background: showAllWorkshop ? "#2c6959" : "white",
-                        color: showAllWorkshop ? "white" : "#2c6959",
-                      }}
-                      onClick={handleShowAllWorkshop}
-                    >
-                      All
-                    </button>
-                    <button
-                      className="coachingBtn"
-                      style={{
-                        background: !showAllWorkshop ? "#2c6959" : "white",
-                        color: !showAllWorkshop ? "white" : "#2c6959",
-                      }}
-                      onClick={handleShowMyWorkshop}
-                    >
-                      My workshops
-                    </button>
-                  </div>
-                )}
-              </div> */}
             </div>
           </div>
         </section>
         <section className="Workshop_section2">
           <div className="row">
             <div className="col-lg-2 col-md-12 col-12 ">
-            <CustomFilter
+              <CustomFilter
                 filterByDomain={filterByDomain}
                 setFilterByDomain={setFilterByDomain}
                 filterByIndustry={filterByIndustry}
@@ -365,18 +360,20 @@ const Workshop = () => {
                             showBookBtn={showAllWorkshop}
                             imageName={workshop.image}
                             showCoachDetails={showCoachDetails}
+                            showEdit={!showAllWorkshop}
+                            handleEdit={handleEdit}
+                            deleteWorkshop={deleteWorkshop}
                           />
                         </div>
                       </>
                     );
                   })}
-
               </div>
               {workshopToBeShown.length == 0 && (
-                  <div className="noDataCont">
-                    <img src={NoDataImg} alt="" />
-                  </div>
-                )}
+                <div className="noDataCont">
+                  <img src={NoDataImg} alt="" />
+                </div>
+              )}
             </div>
           </div>
 
@@ -386,8 +383,18 @@ const Workshop = () => {
             eventsToBeShown={eventsToBeShown}
           />
 
-          <CreateWorkshopForm showWorkshopForm={showWorkshopForm} setShowWorkshopForm={setShowWorkshopForm} getAllWorkshop={getAllWorkshop} getMyWorkshop={getMyWorkshop} setShowAllWorkshop={setShowAllWorkshop}/>
-
+          <CreateWorkshopForm
+            showWorkshopForm={showWorkshopForm}
+            setShowWorkshopForm={setShowWorkshopForm}
+            getAllWorkshop={getAllWorkshop}
+            getMyWorkshop={getMyWorkshop}
+            setShowAllWorkshop={setShowAllWorkshop}
+            updateWorkshop={updateWorkshop}
+            setUpdateWorkshop={setUpdateWorkshop}
+            selectedWorkshopForUpdate={selectedWorkshopForUpdate}
+            setSelectedWorkshopForUpdate={setSelectedWorkshopForUpdate}
+            imagePath={imagePath}
+          />
         </section>
       </div>
       <Footer />

@@ -25,7 +25,8 @@ const Community_header = (props) => {
           <div className="col-lg-7 col-md-12 col-sm-12 community_left">
             <div className="community_details">
               <h4>Community Name : {communityDetails.display_name}</h4>
-              <p>Discription : {communityDetails.description}</p>
+              {/* <p>Discription : {communityDetails.description}</p> */}
+              <p>Discription : here we are writing each and every options in this project from which we are writing anything which will be very userful</p>
               <h6>
                 <span>Criteria To Join : </span> {communityDetails.criteria}
                 {/* <span id="eligible">(Eligible)</span> */}

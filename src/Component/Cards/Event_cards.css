@@ -76,9 +76,10 @@
   justify-content: space-between;
   align-items: center !important;
 }
-button.evntBtnViewDtls {
+.evntBtnViewDtls {
   background: none;
-  border: 2px solid rgb(162, 160, 160);
+  border:none;
+  /* border: 2px solid rgb(162, 160, 160); */
   border-radius: 5px;
   font-size: 14px;
   font-weight: 600;
@@ -86,8 +87,8 @@ button.evntBtnViewDtls {
   text-transform: capitalize;
   padding: 4px 7px;
 }
-button.evntBtnViewDtls:hover {
-  border: 2px solid #2c6959;
+.evntBtnViewDtls:hover {
+  /* border: 2px solid #2c6959; */
 }
 
 .Ename_boxes h6 {
@@ -169,4 +170,76 @@ span.evntcrdDurtion {
 .shareBtn2>div{
   display: flex !important ;
  
+}
+
+
+
+.domaintooltip .eventtooltiptextabc {
+  visibility: hidden;
+    height: 150px;
+    width: 250px;
+    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
+    background-color: #fff;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding:10px;
+    /* padding: 5px 0; */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 45%;
+    margin-left: -50px;
+    /* margin-left: -190px; */
+    opacity: 0;
+    transition: opacity 0.3s;
+    padding-bottom: 10px !important;
+    padding-left: 7px;
+}
+.domaintooltip .eventtooltiptextabc h5{
+  color:#2c6959;
+  font-family: Inter-Bold;
+}
+.domaintooltip .eventtooltiptextabc p{ 
+  height:80px;
+  overflow-y: scroll;
+  font-size: 12px;
+  font-family: Inter-Regular;
+}
+
+
+.domaintooltip .eventtooltiptextabc::after {
+  content: "";
+    position: absolute;
+    top: 100%;
+    left: 60%;
+    margin-left: -5px;
+    border-width: 15px;
+    border-style: solid;
+    border-color: rgb(219, 214, 214) transparent transparent transparent;
+}
+
+.domaintooltip:hover .eventtooltiptextabc {
+  visibility: visible;
+  opacity: 1;
+}
+
+.eventtooltiptextabc h5{
+  text-transform: capitalize;
+}
+.eventtooltiptextabc  .subType {
+  display: flex;
+  margin-bottom: 0px;
+}
+
+.eventtooltiptextabc .subType h6{
+  min-width: 100px;
+    border: none !important;
+    text-align: left;
+    font-size: 16px;
+  
+}
+
+.eventtooltiptextabc .subType span{
+  font-size: 14px;
 }

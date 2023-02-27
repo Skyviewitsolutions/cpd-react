@@ -89,6 +89,7 @@
 
     .studentCV_logobox {
         display: flex;
+        align-items: center;
     }
 
     .studentCV_universityDetail{
@@ -98,6 +99,7 @@
     .studentCV_universityDetail h5{
         font-family: Inter-Bold;
         font-size: 15px;
+        text-transform: capitalize;
         margin-bottom: 0px;
     }
 
@@ -110,6 +112,7 @@
 
     .studentCV_universityDetail h6{
         font-size: 12px;
+        padding: 2px 0px;
     }
 
     #create_resume{

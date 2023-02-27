@@ -3,8 +3,8 @@
   background-color: #f1f9ff;
 }
 .Workshop_section1 {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   background-color: #f1f9ff;
   padding-bottom: 10px;
 }
@@ -68,8 +68,8 @@
   right: 30px;
 }
 .workshop_searchBox {
-  padding-left: 30px;
-  padding-right: 50px;
+  padding-left: 10px;
+  /* padding-right: 50px; */
   display: flex;
   align-items: center;
 }
@@ -124,7 +124,7 @@
   color: white;
   text-align: center;
   padding: 5px;
-  font-family: Inter-Bold;
+
   margin-bottom: 0%;
 }
 .workshopcard_descriptionBox {
@@ -136,9 +136,11 @@
 .workshopcard_descriptionBox h4 {
   color: black;
   font-size: 15px;
-  font-family: Inter-Bold;
   margin-bottom: 0px;
+  font-family: "Poppins-SemiBold";
+  color: var(--black);
 }
+
 .workshopcard_descriptionBox h5 {
   color: rgb(153, 152, 152);
   font-size: 13px;
@@ -146,7 +148,8 @@
 }
 .workshopcard_descriptionBox h6 {
   font-size: 12px;
-  font-family: Inter-Bold;
+  font-family: "Poppins-SemiBold";
+  color: var(--black);
   color: #232423;
   padding-right: 5px;
 }
@@ -391,11 +394,11 @@
   }
 }
 
-.enrollBtn{
+.enrollBtn {
   padding: 4px 12px;
   background: #2c6959;
-  color :white;
-  border : none ;
+  color: white;
+  border: none;
   font-size: 14px;
   border-radius: 50px;
   width: 100px;

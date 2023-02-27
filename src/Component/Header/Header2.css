@@ -14,6 +14,7 @@
     background-color: rgb(255, 255, 255) !important;
     border-bottom: 5px solid #2c6959;
     height: 10%;
+    padding-bottom: 0px;
   }
   
   .nav_img {
@@ -47,8 +48,10 @@
   
   .nav_img h6 {
     margin-top: 5px;
-    font-size: 14px;
+    font-size: 13px;
+    color: var(--black);
     font-weight: 500;
+    font-family: 'Poppins-SemiBold';
   }
   
   .dperson {
@@ -77,6 +80,7 @@
     font-size: 12px;
     font-weight: 500;
     cursor: pointer;
+    font-family: 'Poppins-Regular';
   }
   span.userName {
     position: relative;

@@ -110,7 +110,7 @@ const Header2 = () => {
                   <button
                     type="submit"
                     className="BtnLogin"
-                    onClick={() => navigate("/loginpage")}
+                    onClick={() => navigate("/login")}
                   >
                     {" "}
                     <span>

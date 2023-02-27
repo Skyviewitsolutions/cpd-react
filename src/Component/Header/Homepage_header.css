@@ -1,10 +1,27 @@
+.navbar-expand-lg .navbar-nav .nav-link {
+  margin: 0px 10px;
+}
+
+.nav-justified .nav-item .nav-link {
+  width: 100%;
+  padding: 0px !important;
+}
+
+.nav-justified .nav-item, .nav-justified>.nav-link {
+  flex-basis: 0;
+  flex-grow: 1;
+  justify-content: center;
+  text-align: center;
+  padding: 4px 10px !important;
+  align-items: center;
+  display: flex;
+}
 .opacity_nav{
   opacity:0.5;
 }
 .cpd_logo {
   margin: 5px;
   width: 140px;
-
   align-items: center;
 }
 [disabled]{
@@ -60,7 +77,6 @@
 }
 .userprofile_block {
   align-items: center;
-  padding-top: 10px;
   display: flex;
   flex-direction: column;
 }
@@ -125,23 +141,31 @@ span.userName {
 .nav2_img h6 {
   margin: 0px;
   padding-bottom: 0px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
+  padding-top: 7px;
   cursor: pointer;
+  
 }
 .nav2_img h5 {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   padding-top: 0px;
   cursor: pointer;
+  
 }
 .click_forem_box {
   text-align: left;
+  
+}
+.forEmpl{
+  margin: 10px 0px;
 }
 .click_forem_box h5 {
   font-size: 14px;
   font-weight: 500;
-  margin-bottom: 0%;
+  color: var(--gray);
+
   padding-bottom: 0px;
   
 }
@@ -522,7 +546,7 @@ bottom:50%;
 }
 
 .userprofile_row1 {
-  padding: 10px;
+  padding: 0px 10px;
 }
 
 .logouts {

@@ -22,9 +22,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const Signupform = (props) => {
-
   const [showPassword, setShowpassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [name, setName] = useState("");
@@ -74,7 +72,7 @@ const Signupform = (props) => {
           setLoading(false);
           if (res.data.result === true) {
             toast("Registered Successfully", { type: "success" });
-            navigate("/loginpage");
+            navigate("/login");
           } else if (res.data.result === false) {
             // toast(res.data.data.message , {type : "error"})
             console.log(res.data.data.message, "vlhvlhsf");
@@ -91,17 +89,12 @@ const Signupform = (props) => {
     <>
       <div className="row mb-1">
         <div className=""></div>
-        <div className="col-lg-4 col-md-6 col-12 signUpPage">
-          <h4>Sign UP</h4>
+        <div
+          className="col-lg-4 col-md-6 col-12 signUpPage"
+          style={{ marginBottom: "0px" }}
+        >
+          <h4>Sign up</h4>
         </div>
-        {/* <div className="col-lg-4 col-md-6 col-12 signUpChoice">
-          <select class="form-select" onChange={(e)=>setUserType(e.target.value)}>
-            <option value="1">Student</option>
-            <option value="2">Speaker / Coach</option>
-            <option value="3">Employer</option>
-            <option value="4">University</option>
-          </select>
-        </div> */}
       </div>
 
       <div>
@@ -110,6 +103,7 @@ const Signupform = (props) => {
             <select
               class="form-select"
               onChange={(e) => setUserType(e.target.value)}
+              className="selectUser"
             >
               <option value="">Select User</option>
               <option value="1">Student</option>
@@ -127,7 +121,7 @@ const Signupform = (props) => {
           <label>Name</label>
 
           <Logininput
-            licon={<FaUserAlt />}
+            licon={<FaUserAlt size={17} />}
             type={"text"}
             place={"Enter name"}
             value={name}
@@ -142,7 +136,7 @@ const Signupform = (props) => {
           <label>Email Address</label>
 
           <Logininput
-            licon={<GrMail />}
+            licon={<GrMail size={19} />}
             type={"text"}
             place={"Enter email"}
             // ricon={<BsFillCheckCircleFill />}
@@ -220,7 +214,7 @@ const Signupform = (props) => {
         </div>
         <div className="col-lg-5 col-md-5 col-sm-5 social_login">
           <div className="row ">
-            <div className="col-lg-12 col-md-12 col-sm-12 ">
+            <div className="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center">
               <b style={{ fontSize: "14px" }} className="LoginSocial">
                 Login via Social
               </b>
@@ -239,7 +233,7 @@ const Signupform = (props) => {
         Already have an account ?{" "}
         <span
           style={{ color: "#2c6959", cursor: "pointer" }}
-          onClick={() => navigate("/loginpage")}
+          onClick={() => navigate("/login")}
           className="context-menu"
         >
           Login

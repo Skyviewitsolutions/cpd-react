@@ -13,6 +13,7 @@ import "../../../fonts/Inter-Regular.ttf";
 import Button from "../../button/Button/Button"
 import dummyUserPerson from "../../../assets/Images/dummyImages.webp";
 
+
 const CoachesPreview = (props) => {
 
   const {
@@ -28,6 +29,7 @@ const CoachesPreview = (props) => {
     category,
     subCategory,
     setCoachesPreview,
+    domain , industry,
     updateProfile ,
     hobbies,
     coachesPreview,
@@ -95,8 +97,7 @@ const CoachesPreview = (props) => {
                       <h5>Details</h5>
                       <p>{gender}</p>
                       <p>Nationality : {nationality}</p>
-                      <p>DOB:{dob}</p>
-
+                      <p>DOB : {dob}</p>
                       <h5> Domain & Industry</h5>
                       <p>Tech (IT Sector)</p>
                       <h5>Professional Skills</h5>
@@ -146,22 +147,22 @@ const CoachesPreview = (props) => {
 
                       <hr />
 
-                      <h5>Category & SubCategory</h5>
+                      <h5>Domain & Industry</h5>
                       <div className="row">
                         <div className="col-lg-6 col-md-6 col-12">
                           <p>
                             <span className="resume_domainspan">
-                              Category :
+                              Domain :
                             </span>{" "}
-                            {category}
+                            {domain}
                           </p>
                         </div>
                         <div className="col-lg-6 col-md-6 col-12">
                           <p>
                             <span className="resume_domainspan">
-                              SubCategory:
+                              Industry :
                             </span>{" "}
-                            {subCategory}
+                            {industry}
                           </p>
                         </div>
                       </div>

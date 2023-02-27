@@ -219,7 +219,7 @@ const Event = () => {
                 {/* <Event_button text="Back to Events" /> */}
               </div>
               <div className="col-4 col-md-6 col-lg-1">
-                <Plus_button  onClick={() => navigate("/create_community")}
+                <Plus_button  onClick={() => navigate("/create-community")}
                   // onClick={() => setShowCommunityForm(true)}
                   text=""
                 />

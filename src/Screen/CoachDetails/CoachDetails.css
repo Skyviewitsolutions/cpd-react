@@ -74,12 +74,32 @@
 .coachesDetailsDescription {
   width: 70%;
   padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Poppins-Regular';
+}
+
+.coachesDetailsDescription h4{
+  font-family: 'Poppins-SemiBold';
+  color: var(--black);
+  font-size: 20px;
+}
+
+.coachesDetailsDescription h6{
+  font-family: 'Poppins-Regular';
+  font-size: 15px;
+}
+
+.coachesDetailsDescription p{
+  font-size: 13px;
 }
 
 .coachesDetailsheading {
-  font-size: 30px;
+  font-size: 22px;
   color: #2c6959;
   padding-bottom: 10px;
+  font-family: 'Poppins-SemiBold';
 }
 .Workshop_section2 {
   padding-left: 20px;

@@ -82,7 +82,7 @@ const MyCreatedCommunityCard = (props) => {
 
   const handleUpdateCommunity = (dta) => {
     var cmData = { ...dta, imagePath: imagePath };
-    navigate("/create_community", { state: cmData });
+    navigate("/create-community", { state: cmData });
   };
 
 

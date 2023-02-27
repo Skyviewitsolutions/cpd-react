@@ -1,0 +1,16 @@
+.layout-container{
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.layoutBody{
+    min-height: 240px;
+}
+
+.layoutFooter{
+    /* position: fixed; */
+    bottom: 0px;
+    width: 100%;
+}

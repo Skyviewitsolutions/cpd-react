@@ -85,7 +85,8 @@ button.signUp_aboutCpd a {
   font-weight: 700;
   text-align: center;
   margin-top: 25px;
-  font-size: 28px;
+  font-size: 22px;
+  color: var(--black);
 }
 
 

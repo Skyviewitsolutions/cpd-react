@@ -17,13 +17,12 @@ import axios from "axios";
 import "../fonts/Inter-SemiBold.ttf";
 import { HiSearch } from "react-icons/hi";
 import { FaPlusCircle } from "react-icons/fa";
-import NoDataImg from "../assets/Images/noDataFound.png"
+import NoDataImg from "../assets/Images/noDataFound.png";
 import CustomFilter from "../Component/CustomFilter/CustomFilter";
 import CreateBtn from "../Component/button/CreateBtn/CreateBtn";
 import Button from "../Component/button/Button/Button";
 
 const Networking = () => {
-
   const navigate = useNavigate("");
   const [modalShow, setModalShow] = useState(false);
   const [picPath, setPicPath] = useState("");
@@ -69,12 +68,12 @@ const Networking = () => {
       <div className="networking_wrapper">
         <div className="row">
           <div className="col-lg-3  ">
-           <CustomFilter />
+            <CustomFilter />
           </div>
           <div className="col-lg-9 col-md-12 col-12 ">
             <section>
               <div className="row">
-                <div className="col-lg-7 col-md-12 col-12">
+                <div className="col-lg-8 col-md-6 col-12">
                   <div className="networkingsearchBox">
                     <div className="form-group">
                       <HiSearch id="networking_search" />
@@ -86,20 +85,19 @@ const Networking = () => {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="col-lg-3 col-md-3 col-6"
-                  onClick={() => navigate("/community")}
-                >
-                  <Button title="View Communities" style={{marginTop : "0px"}}/>
-                </div>
-                <div className="col-lg-2 col-md-2 col-6 ">
+                <div className="col-lg-4 col-md-6 col-12 d-flex">
+                  <button className="networkingcreatebutton" onClick={() => navigate("/community")}>
+                    View Community
+                  </button>
+                  {/* <Button title="View Communities" style={{marginTop : "0px"}}/> */}
                   <div className="addEventplusButton">
-                    {/* <FaPlusCircle
-                      className="addEventPlus"
+                    <button
+                      className="networkingcreatebutton"
                       onClick={() => navigate("/addEvent")}
-                    />
-                    <span id="createEventText">Create Event</span> */}
-                    <CreateBtn onClick={() => navigate("/addEvent")}/>
+                    >
+                      {" "}
+                      Create
+                    </button>
                   </div>
                 </div>
               </div>
@@ -147,10 +145,10 @@ const Networking = () => {
                     })}
               </div>
               {allEvent.length == 0 && (
-                  <div className="noDataCont">
-                    <img src={NoDataImg} alt="" />
-                  </div>
-                )}
+                <div className="noDataCont">
+                  <img src={NoDataImg} alt="" />
+                </div>
+              )}
             </section>
           </div>
         </div>

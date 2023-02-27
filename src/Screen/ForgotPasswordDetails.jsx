@@ -28,7 +28,7 @@ const ForgotPasswordDetails = () => {
                 the benefits that professional development can bring you in the
                 real world.{" "}
               </p>
-              <button className="login_aboutCpd" onClick={() => navigate("/loginpage")}>
+              <button className="login_aboutCpd" onClick={() => navigate("/login")}>
                 Login to know more
               </button>
             </div>

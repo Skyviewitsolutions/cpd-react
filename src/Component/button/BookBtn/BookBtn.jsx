@@ -1,15 +1,25 @@
 import React from "react";
 import "./bookBtn.css";
+import { Spinner } from "react-bootstrap";
+
 
 const BookBtn = (props) => {
 
-    const { onClick, status , styles  } = props;
+    const { onClick, status , styles , loading  } = props;
 
   return (
     <>
       {status == 3 && (
         <button className="bookBtn" onClick={onClick} style={{...styles}}>
-          Book Now
+         {loading ? (
+          <Spinner
+            animation="border"
+            variant="light"
+            style={{ width: "20px", height: "20px" }}
+          />
+        ) : (
+           "Book Now"
+        )}
         </button>
       )}
       {status == 1 && (

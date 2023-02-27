@@ -1,19 +1,10 @@
-.loginpage_form label {
-  font-size: 17px;
-  margin-bottom: 7px;
-  margin-top: 7px;
-  font-weight: 600;
-}
+/* 
 .login_bottom{
 
    padding-top: 10px;
    align-items: center;
 }
-.loginpage_form h4 {
-  font-weight: 600;
-  font-size: 32px;
-  margin-bottom: 15px;
-}
+
 input.loginCheckbox {
   height: 25px;
   width: 30px;
@@ -121,18 +112,7 @@ div#or h6 {
   padding-left: 10px;
   font-size: 23px;
 }
-.loginpage_form #itext input {
-  margin-left: 15px;
-  border: none;
-  width: 90%;
-  height: 100%;
-  outline: none;
-  font-size: 18px;
-  padding-left: 42px;
-}
-.loginpage_form #itext input::placeholder {
-  color: #959595;
-}
+
 .check_and_forgot .lg_check label {
   margin-bottom: 0px !important;
   margin-left: 10px;
@@ -169,8 +149,8 @@ div#or h6 {
   box-shadow: 0px 8px 14px #00000029;
   border-radius: 4px;
   font-size: 20px;
-  /* margin-bottom: 10px; */
-}
+
+} 
 .about_con_login h4 {
   font-size: 40px;
   font-weight: 700;
@@ -306,7 +286,7 @@ div#or h6 {
 }
 
 
-/* Media Query for Tablets Ipads portrait mode */
+
 @media (min-width: 768px) and (max-width: 1024px){
   .about_con_login img.limg_login {
      min-width: 280px;
@@ -365,4 +345,5 @@ div#or h6 {
  .login-page-section .loginpage_form {
      padding-left: 0px;
   }
-}
+} 
+*/

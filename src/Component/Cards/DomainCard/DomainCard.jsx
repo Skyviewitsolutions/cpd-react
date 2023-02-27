@@ -44,7 +44,7 @@ const DomainCard = (props) => {
   const navigate = useNavigate();
 
   const community_Finance = () => {
-    navigate("/community_Finance");
+    navigate("/community-Finance");
   };
 
   const joinCommunity = (id) => {
@@ -155,15 +155,15 @@ const DomainCard = (props) => {
                 <span className="tooltiptextabc">
                   <h5>{data?.display_name}</h5>
                   <div className="subType">
-                    <h6>Sub Type : </h6>
+                    <h6>Sub Type  </h6>{" "}:{" "}
                     <span>{data?.sub_type}</span>
                   </div>
                   <div className="subType">
-                    <h6>Status : </h6>
+                    <h6>Status  </h6> {" "}:{" "}
                     <span>{data?.visibility}</span>
                   </div>
                   <div className="subType">
-                    <h6>Members : </h6>
+                    <h6>Members  </h6>{" "}:{" "}
                     <span>{data?.members_count}</span>
                   </div>
                 </span>
@@ -238,5 +238,3 @@ const DomainCard = (props) => {
 };
 
 export default DomainCard;
-
-

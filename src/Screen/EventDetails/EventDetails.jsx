@@ -13,7 +13,6 @@ import { toast, ToastContainer } from "react-toastify";
 import AddEvent_Modal from "../../Component/Modal/AddEvent_Modal";
 import { BsChatDots } from "react-icons/bs";
 import { BsFillCalendarDateFill } from "react-icons/bs";
-// import Chat from "../../Component/Chat/Chat";
 import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 
@@ -206,9 +205,7 @@ const EventDetails = (props) => {
         <div className="calendarIcon" onClick={() => setShowCalendar(true)}>
           <BsFillCalendarDateFill color="#2c6959" size={32} />
         </div>{" "}
-        {/* <div className="eventDetailsChat" onClick={() => setShowChat(true)}>
-          <BsChatDots />
-        </div> */}
+
         <div className="row">
           <div className="col-lg-3 d-lg-block d-none mt-5 ps-5 pe-5 mb-5 d-lg-block d-none">
            <CustomFilter />
@@ -246,16 +243,7 @@ const EventDetails = (props) => {
                         />
                       </div>
 
-                      {/* <div className="col-sm-12 col-md-6 col-lg-4 ">
-                        <Add_committee
-                          data={itm}
-                          key={index}
-                          imagePath={imagePath}
-                          // isSubscribed={isSubscribed}
-                          // getMyCommunity={getMyCommunity}
-                          // getAllCommunity={getAllCommunity}
-                        />
-                      </div> */}
+                      
                     </>
                   );
                 })}
@@ -269,7 +257,6 @@ const EventDetails = (props) => {
         setShowCalendar={setShowCalendar}
       />
       <Footer />
-      {/* <Chat showChat={showChat} setShowChat={setShowChat} />   */}
     </>
   );
 };

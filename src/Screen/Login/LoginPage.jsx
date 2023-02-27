@@ -3,9 +3,7 @@ import "./loginPage.css";
 import Header from "../../Component/Header/Header";
 import { Link, useNavigate } from "react-router-dom";
 import cpd_logo from "../../assets/Images/cpd_logo.png";
-// import Aboutcpd from '../Component/aboutcpd/Aboutcpd.jsx';
 import Login_form from "../../Component/Loginform/Login_form.jsx";
-
 
 
 const LoginPage = () => {

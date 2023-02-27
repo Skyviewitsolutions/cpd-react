@@ -39,7 +39,6 @@ import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 import Header2 from "./Header2";
 
 const Homepage_header = () => {
-
   const navigate = useNavigate("");
   const [isHovering, setIsHovering] = useState(false);
   const token = localStorage.getItem("token");
@@ -101,7 +100,7 @@ const Homepage_header = () => {
     if (selected === "coaches") {
       localStorage.setItem("activeNavbar", selected);
       setActiveNavbar(selected);
-      navigate("/coaches_screen");
+      navigate("/coachings");
     } else if (selected === "events") {
       localStorage.setItem("activeNavbar", selected);
       setActiveNavbar(selected);
@@ -109,7 +108,7 @@ const Homepage_header = () => {
     } else if (selected === "workShop") {
       localStorage.setItem("activeNavbar", selected);
       setActiveNavbar(selected);
-      navigate("/workshop_screen");
+      navigate("/workshops");
     } else if (selected === "job") {
       localStorage.setItem("activeNavbar", selected);
       setActiveNavbar(selected);
@@ -123,7 +122,7 @@ const Homepage_header = () => {
     if (userDetails.user_type == 1) {
       navigate("/resume");
     } else if (userDetails.user_type == 2) {
-      navigate("/coachesForm");
+      navigate("/coaches-form");
     }
   };
 
@@ -232,7 +231,7 @@ const Homepage_header = () => {
                     <button
                       type="submit"
                       className="BtnLogin"
-                      onClick={() => navigate("/loginpage")}
+                      onClick={() => navigate("/login")}
                     >
                       {" "}
                       <span>
@@ -297,13 +296,13 @@ const Homepage_header = () => {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link className="click_forem_box working">
+            <Nav.Link className="click_forem_box working" >
               <h5>
-                <a href="">Available Resources</a>
+               Available Resources
               </h5>
-              <h4>For Employers</h4>
+              <h5 className="forEmpl">For Employers</h5>
               <h6 id="click_forem">
-                <a href="">Click to Forum</a>
+               Click to Forum
               </h6>
             </Nav.Link>
           </Nav.Item>
@@ -323,10 +322,7 @@ const Homepage_header = () => {
           nav
         >
           <div class="item">
-            <div
-              className="slidernav2"
-              onClick={() => navigate("/coaches_screen")}
-            >
+            <div className="slidernav2" onClick={() => navigate("/coachings")}>
               <div className="sliderInner">
                 <img src={coacheswhite} alt="" className="coaches" />
                 <h6>Book</h6>
@@ -337,7 +333,7 @@ const Homepage_header = () => {
           <div class="item">
             <div
               className="slidernav2"
-              onClick={() => navigate("/workshop_screen")}
+              onClick={() => navigate("/workshops")}
               style={{ cursor: "pointer" }}
             >
               <div className="sliderInner">

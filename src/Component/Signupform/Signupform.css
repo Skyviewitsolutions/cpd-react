@@ -4,7 +4,11 @@
   justify-content:space-between;
 }
 .loginSignup{
-  margin-bottom:0px !important;
+  margin-bottom: 20px !important;
+  font-family: "Poppins-Regular";
+  color: var(--lightgray);
+  font-size: 14px;
+  margin-top: 9px;
 }
 .social_box{
   width:100%;
@@ -108,3 +112,11 @@ label {
   }
 }
 
+.selectUser {
+  border: 1.2px solid #cecece;
+  border-radius: 4px;
+  width: 100%;
+  padding: 12px 8px;
+  font-family: 'Poppins-Regular';
+  color: var(--gray);
+}

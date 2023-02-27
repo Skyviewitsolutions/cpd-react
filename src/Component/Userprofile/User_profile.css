@@ -3,7 +3,11 @@
       border: 1px solid rgb(237, 233, 233);
         box-shadow: 2px 2px 3px 2px rgb(203, 199, 199);
   }
-  
+
+   
+  .userIn span:last-child{
+    text-align: right;
+  }
   .profile {
     padding-bottom: 50px;
     display: flex;

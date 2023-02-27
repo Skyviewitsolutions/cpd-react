@@ -6,6 +6,7 @@
     height: auto;
     position: relative;
     background-repeat: no-repeat;
+    font-family: 'Poppins-Regular';
     background-size: cover;
     background-image: url("../../assets/Images/footer_image.svg");
   }

@@ -1,4 +1,3 @@
-
 import React from "react";
 import "./Event_cards.css";
 import Card from "react-bootstrap/Card";
@@ -54,14 +53,14 @@ const Event_cards = (props) => {
             <button
               className="evntBtnViewDtls"
               onClick={() =>
-                navigate("/event_details", { state: { eventDetails: data } })
+                navigate("/event-details", { state: { eventDetails: data } })
               }
             >
               <img src={eye} alt="" style={{marginRight : "4px"}}></img> view details
             </button>
             {/* <h6  onClick={() =>navigate('/event_details',{state:{eventDetails:data}})}>
             </h6> */}
-            <span className="tooltiptextabc">
+            <span className="eventtooltiptextabc">
                   <h5>{data?.creator_name}</h5>
                   <div className="subType">
                     <h6>Event Title  </h6>{" "}:{" "}
