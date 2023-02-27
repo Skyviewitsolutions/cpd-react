@@ -1,5 +1,5 @@
 import React from "react";
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import Homepage_header from "../../Component/Header/Homepage_header";
 import "./addEvent.css";
 import { TagsInput } from "react-tag-input-component";
@@ -8,6 +8,12 @@ import VedioIcons from "../../assets/Icons/vedioIcon.svg";
 import { endpoints } from "../../Component/services/endpoints";
 import axios from "axios";
 import CreateSlots from "../../Component/Slots/CreateSlots";
+import { ToastContainer , toast } from "react-toastify";
+import Button from "../../Component/button/Button/Button";
+import { useNavigate , useLocation } from "react-router-dom";
+
+
+
 
 const AddEvent = () => {
 
@@ -24,10 +30,16 @@ const AddEvent = () => {
   const [duration, setDuration] = useState("");
   const [maxStudents, setMaxStudents] = useState("");
   const [paid, setPaid] = useState(false);
-  const [communityName , setCommunityName] = useState("")
-  const [communityId , setCommunityId] = useState("");
+  const [communityName, setCommunityName] = useState("");
+  const [communityId, setCommunityId] = useState("");
   const [price, setPrice] = useState(false);
-  const [communityOption , setCommunityOption] = useState([])
+  const [communityOption, setCommunityOption] = useState([]);
+  const [loading , setLoading] = useState(false);
+  const [selectedEventId , setSelectedEventId] = useState("");
+  const [priceType , setPriceType] = useState("");
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // creating useState for slotsCreations ;
 
@@ -71,6 +83,7 @@ const AddEvent = () => {
     axios
       .get(getCommunity)
       .then((res) => {
+        console.log(res , "community response here")
         if (res.data.result === true) {
           const val = res.data.data;
           setCommunityOption(val);
@@ -80,6 +93,173 @@ const AddEvent = () => {
         console.log(err, "this is the error");
       });
   }, []);
+
+
+  // write code for updating and submitting the events;
+
+  const submit = () => {
+    if (!sessionTitle) {
+      toast("session title is required", { type: "warning" });
+    } else if (!sessionDesc) {
+      toast("session descrition is required", { type: "warning" });
+    } else if (!sessionTags) {
+      toast("session tags is required", { type: "warning" });
+    } else if (!sessionType) {
+      toast("session type is required", { type: "warning" });
+    } else if (!duration) {
+      toast("session duration is required", { type: "warning" });
+    } else if (!maxStudents) {
+      toast("max number of student is required", { type: "warning" });
+    } else if (!eventImgFile) {
+      toast("Please upload image", { type: "warning" });
+    } else if (!eventVideo) {
+      toast("please upload video", { type: "warning" });
+    } else if (!communityId) {
+      toast("Community id is required", { type: "warning" });
+    } else {
+      const token = localStorage.getItem("token");
+
+      var availability_type = daysFormat == "weekly" ? 1 : 2;
+      var is_paid = paid == true ? 1 : 0;
+      var is_repeated = isRepeated ? 1 : 0;
+      var payment_type 
+      if(sessionType === "online"){
+        payment_type = 1
+      }
+      else if(sessionType === "offline"){
+        payment_type = 2
+      }
+      else if(sessionType == "hybrid"){
+        payment_type = 3
+      }
+      var price_type = priceType == "hourly" ? 1 : 2;
+
+      var slots = {
+        isRepeated: isRepeated,
+        selectedDays: selectedDays,
+        daysFormat: daysFormat,
+        selectedDates: selectedDates,
+        daysSlot: daysSlot,
+        dateSlot: dateSlot,
+        title: sessionTitle,
+      };
+
+      var data = new FormData();
+      data.append("event_title", sessionTitle);
+      data.append("event_description", sessionDesc);
+      data.append("tags", sessionTags);
+      data.append("session_type", sessionType);
+      data.append("event_duration", duration);
+      data.append("max_members", maxStudents);
+      data.append("event_photo", eventImgFile);
+      data.append("event_video", eventVideo);
+      data.append("attachment", eventDocs);
+      data.append("availability", availability_type);
+      data.append("days", selectedDays);
+      data.append("paid", is_paid);
+      data.append("duration_payment", payment_type);
+      data.append("price", price);
+      data.append("timeslots", slots);
+      data.append("price_type", price_type);
+      data.append("availability_type", availability_type);
+      data.append("community_id", communityId);
+      data.append("is_repeated" , is_repeated);
+      data.append("sheduleDate" , )
+
+      setLoading(true);
+
+      var config = {
+        method: "post",
+        url: endpoints.events.addEvent,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (res) {
+          setLoading(false);
+          if (res.data.result) {
+            toast("Event created sucessfully", { type: "success" });
+            navigate("/myEvents")
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          setLoading(false);
+        });
+    }
+  };
+
+  const UpdateEvent = () => {
+    const updateEventUrl = `${endpoints.events.updateEvent}${selectedEventId}`;
+
+    if (!sessionTitle) {
+      toast("session title is required", { type: "warning" });
+    } else if (!sessionDesc) {
+      toast("session descrition is required", { type: "warning" });
+    } else if (!sessionTags) {
+      toast("session tags is required", { type: "warning" });
+    } else if (!sessionType) {
+      toast("session type is required", { type: "warning" });
+    } else if (!duration) {
+      toast("session duration is required", { type: "warning" });
+    } else if (!maxStudents) {
+      toast("max number of student is required", { type: "warning" });
+    } else if (!eventImgFile) {
+      toast("Please upload image", { type: "warning" });
+    } else if (!eventVideo) {
+      toast("please upload video", { type: "warning" });
+      // } else if (!eventDocs) {
+      //   toast("event docs is required", { type: "warning" });
+    } else if (!communityId) {
+      toast("Community id is required", { type: "warning" });
+    } else {
+      const token = localStorage.getItem("token");
+      var data = new FormData();
+      data.append("event_title", sessionTitle);
+      data.append("event_description", sessionDesc);
+      data.append("tags", sessionTags);
+      data.append("event_type", sessionType);
+      data.append("event_duration", duration);
+      data.append("max_members", maxStudents);
+      data.append("event_photo", eventImgFile);
+      data.append("event_video", eventVideo);
+      data.append("attachment", eventDocs);
+      data.append("availability", daysFormat);
+      data.append("days", selectedDays);
+      data.append("paid", paid);
+      data.append("duration_payment", duration);
+      data.append("price", price);
+      data.append("timeslots", "12-1");
+      data.append("community_id", communityId);
+      
+      setLoading(true);
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+        Accept: "application/json",
+      };
+
+      axios
+        .post(updateEventUrl, data, { headers: headers })
+        .then((res) => {
+          console.log(res);
+          setLoading(false);
+          if (res.data.result) {
+            toast("Events updated successfully", { type: "success" });
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err, "this is the error here");
+        });
+    }
+  };
+
 
   return (
     <div className="addEventCont">
@@ -126,14 +306,14 @@ const AddEvent = () => {
                     class="form-check-input eventFormSessionType_checkbox "
                     type="radio"
                     value=""
-                    id="Online"
                     name="sessionMode"
+                    id="Online"
                     checked={sessionType === "online"}
                     onChange={(e) => setSessionType("online")}
                   />
                   <label
                     class="form-check-label eventFormSessionType_label"
-                    for="Online"
+                    htmlFor="Online"
                   >
                     Online
                   </label>
@@ -143,14 +323,14 @@ const AddEvent = () => {
                     class="form-check-input eventFormSessionType_checkbox"
                     type="radio"
                     value=""
-                    id="Offline"
                     name="sessionMode"
+                    id="Offline"
                     checked={sessionType === "offline"}
                     onChange={(e) => setSessionType("offline")}
                   />
                   <label
                     class="form-check-label eventFormSessionType_label"
-                    for="Offline"
+                    htmlFor="Offline"
                   >
                     Offline
                   </label>
@@ -160,14 +340,14 @@ const AddEvent = () => {
                     class="form-check-input eventFormSessionType_checkbox"
                     type="radio"
                     value=""
-                    id="Hybrid"
                     name="sessionMode"
+                    id="Hybrid"
                     checked={sessionType === "hybrid"}
                     onChange={(e) => setSessionType("hybrid")}
                   />
                   <label
                     class="form-check-label eventFormSessionType_label"
-                    for="Hybrid"
+                    htmlFor="Hybrid"
                   >
                     Hybrid
                   </label>
@@ -210,7 +390,7 @@ const AddEvent = () => {
                   <label
                     for="a25"
                     className={`btnfree ${
-                      !paid ? "btn-primary" : "btn-default"
+                      !paid ? "btnPrimary" : "btnDefault"
                     } `}
                   >
                     Free
@@ -226,7 +406,7 @@ const AddEvent = () => {
                   <label
                     for="a50"
                     className={`btnfree ${
-                      paid ? "btn-primary" : "btn-default"
+                      paid ? "btnPrimary" : "btnDefault"
                     } `}
                   >
                     Paid
@@ -242,10 +422,10 @@ const AddEvent = () => {
                     <input
                       class="form-check-input"
                       type="radio"
-                      name="flexRadioDefault"
+                      name="sessionType"
                       id="flexRadioDefault2"
-                      checked={sessionType == "hourly"}
-                      onChange={() => setSessionType("hourly")}
+                      checked={priceType == "hourly"}
+                      onChange={() => setPriceType("hourly")}
                     />
                     <label
                       class="form-check-label  textsession"
@@ -263,10 +443,10 @@ const AddEvent = () => {
                     <input
                       class="form-check-input"
                       type="radio"
-                      name="flexRadioDefault"
+                      name="sessionType"
                       id="flexRadioDefault3"
-                      checked={sessionType == "sessional"}
-                      onChange={() => setSessionType("sessional")}
+                      checked={priceType == "sessional"}
+                      onChange={() => setPriceType("sessional")}
                     />
                     <label
                       class="form-check-label textsession"
@@ -357,7 +537,7 @@ const AddEvent = () => {
                 </label>
               </div>
             </div>
-            <div className="eventSlots" style={{width : "150%"}}>
+            <div className="eventSlots" style={{ width: "150%" }}>
               <CreateSlots
                 selectedDays={selectedDays}
                 setSelectedDays={setSelectedDays}
@@ -374,31 +554,34 @@ const AddEvent = () => {
                 title={sessionTitle}
                 setEventsToBeShown={setEventsToBeShown}
               />
-           </div>
+            </div>
 
-           <div className="inputBox">
-            <label htmlFor="">Select Community</label>
-            <select
-                  class="form-select "
-                  aria-label="Default select example"
-                  value={communityName}
-                  onChange={(e) => handleCommunity(e)}
-                >
-                  <option value="">Choose Community</option>
-                  {communityOption.map((item, index) => {
-                    return (
-                      <>
-                        <option value={item.display_name}>
-                          {item.display_name}
-                        </option>
-                      </>
-                    );
-                  })}
-                </select>
-           </div>
+            <div className="inputBox">
+              <label htmlFor="">Select Community</label>
+              <select
+                class="form-select "
+                aria-label="Default select example"
+                value={communityName}
+                onChange={(e) => handleCommunity(e)}
+              >
+                <option value="">Choose Community</option>
+                {communityOption.map((item, index) => {
+                  return (
+                    <>
+                      <option value={item.display_name}>
+                        {item.display_name}
+                      </option>
+                    </>
+                  );
+                })}
+              </select>
+            </div>
+
+            <Button title={update ? "Update & Preview" : "Submit & Preview"} loading={loading} onClick={update ? UpdateEvent : submit}/>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

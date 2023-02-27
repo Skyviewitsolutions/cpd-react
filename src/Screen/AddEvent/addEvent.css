@@ -595,6 +595,10 @@ span.session_photo {
   margin: 18px 0px;
 }
 
+.eventSlots .month_image-checkbox {
+  line-height: 12px;
+}
+
 .eventSlots .owl-carousel .owl-stage-outer {
   width: 102%;
 }
@@ -604,10 +608,26 @@ span.session_photo {
 }
 
 .eventSlots .eventForm_monthDays_carousel button.owl-prev span {
-  line-height: 24px;
-  left: -26px;
+  line-height: 40px;
+  left: -23px;
 }
-.eventSlots .eventForm_monthDays_carousel button.owl-prev span {
-  line-height: 24px;
-  left: -28px;
+.eventSlots .eventForm_monthDays_carousel button.owl-next span {
+  line-height: 33px;
+  left: 1px;
+}
+
+/* button default and active mode desing */
+
+.btnPrimary {
+  background: var(--primary) !important;
+  color: white;
+}
+
+.btnDefault {
+  background-color: white;
+  color: var(--lightgray);
+}
+
+.sessionType {
+  margin-top: 9px;
 }

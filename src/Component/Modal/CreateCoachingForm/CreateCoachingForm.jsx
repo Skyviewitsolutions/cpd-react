@@ -32,7 +32,6 @@ const CreateCoachingForm = (props) => {
   const token = localStorage.getItem("token");
   const [coachTitle, setCoachTitle] = useState("");
   const [sessionType, setSessionType] = useState("");
-
   const [price, setPrice] = useState(0);
   const [paid, setPaid] = useState(false);
   const [coachingImg, setCoachingImg] = useState(null);

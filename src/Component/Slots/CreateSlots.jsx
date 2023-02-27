@@ -8,7 +8,9 @@ import "./createSlot.css";
 import { useEffect } from "react";
 import { getCalendarData } from "../../utils/calendar";
 
+
 const CreateSlots = (props) => {
+
   const {
     selectedDays,
     setSelectedDays,
@@ -226,7 +228,6 @@ const CreateSlots = (props) => {
     }
   };
 
-  console.log(daysFormat , "daysFormat");
   
   const getCalendarDatas = async () => {
     // here we getting the data for the calendar;

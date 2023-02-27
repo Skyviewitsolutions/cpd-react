@@ -20,9 +20,9 @@ import validator from "validator";
 import { endpoints } from "../services/endpoints";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Signupform = (props) => {
+
   const [showPassword, setShowpassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [name, setName] = useState("");
@@ -71,11 +71,10 @@ const Signupform = (props) => {
         .then((res) => {
           setLoading(false);
           if (res.data.result === true) {
-            toast("Registered Successfully", { type: "success" });
+            toast("Registered Successfully", { type: "success"  });
             navigate("/login");
           } else if (res.data.result === false) {
-            // toast(res.data.data.message , {type : "error"})
-            console.log(res.data.data.message, "vlhvlhsf");
+            toast(res.data.message , {type : "error"})
           }
         })
         .catch((err) => {

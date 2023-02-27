@@ -51,7 +51,7 @@ const Communities = () => {
           const imgPath = res.data.image_path;
           setImagePath(imgPath);
           // const communityId=res.data[0]._id;
-          const comunityId = res.data.data[0]._id;
+          const comunityId = res.data.data?.[0]._id;
           localStorage.setItem("comunityId", comunityId);
           setCommunityId(comunityId);
 
@@ -169,7 +169,7 @@ const Communities = () => {
               </div>
               <div className="col-4 col-md-6 col-lg-2">
               {/* <div className="col-4 col-md-6 col-lg-2 addCmntyCont" > */}
-              <button className="networkingcommunitybtn"> Add Community </button>
+              <button className="networkingcommunitybtn" onClick={() => navigate( "/create-community" )}> Add Community </button>
                 {/* <Plus_button  onClick={() => navigate( "/create_community" )}
                   text=""
                 /> */}
