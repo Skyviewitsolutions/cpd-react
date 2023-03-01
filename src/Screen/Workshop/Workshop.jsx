@@ -26,6 +26,7 @@ import { getCalendarData } from "../../utils/calendar";
 import Loader from "../../Component/Loader/Loader";
 
 const Workshop = () => {
+  
   const navigate = useNavigate("");
   const [modalShow, setModalShow] = React.useState(false);
   const token = localStorage.getItem("token");
@@ -75,6 +76,7 @@ const Workshop = () => {
   };
 
   const showWorkshopOnCalendar = async (data) => {
+    setEventsToBeShown([])
     var slots = JSON.parse(data.availability_slot);
     const calendarData = await getCalendarData(slots);
     setEventsToBeShown(calendarData);
@@ -83,6 +85,8 @@ const Workshop = () => {
   // writing code for enrolling the workshop
 
   const enrollWorkshop = (workShopData) => {
+    const token = localStorage.getItem('token');
+    if(token){
     var id = workShopData._id;
     const url = `${endpoints.workshop.enrollWorkshop}${id}`;
     const headers = {
@@ -100,6 +104,10 @@ const Workshop = () => {
       .catch((err) => {
         console.log(err, "error here");
       });
+    }
+    else {
+      toast("Please login" , {type : "warning"})
+    }
   };
 
   // getting all the enrolled workshop list;

@@ -1,0 +1,236 @@
+.workshopDetailsfirst h6 {
+    font-family: 'Poppins-Regular';
+    font-size: 15px;
+}
+
+.workshopDetailsSection1 {
+    background-image: url("../../assets/Images/bgcpdcoaches.png");
+}
+
+.workshopDetailsfirst h3 {
+    font-family: 'Poppins-Regular';
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.workshopDetailsfirst p {
+    font-family: 'Poppins-Regular';
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.workshopDetailsBox1 h4 {
+    font-family: 'Poppins-Regular';
+    font-weight: 700;
+}
+
+.workshopDetailsBox1 ul li p {
+    font-family: 'Poppins-Regular';
+    font-size: 13px;
+}
+
+.reviewBox h6 {
+    font-family: 'Poppins-Regular';
+}
+
+.reviewBox p {
+    font-family: 'Poppins-Regular';
+    font-size: 13px;
+}
+
+.workshopReveiwBody h2 {
+    font-family: 'Poppins-Regular';
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.workshopDetailsBox1 li {
+    float: left !important;
+}
+
+.workshopReveiwBody ul li {
+    font-family: 'Poppins-Regular';
+    font-size: 14px;
+}
+
+.coaching-details-discription {
+    margin-top: 20px;
+    font-family: 'Poppins-Regular';
+    font-weight: 900;
+}
+
+.workshopReveiw {
+    padding-left: 0px !important;
+    width: 25%;
+    margin-left: 40px;
+}
+
+.coaching-details-discription-text {
+    line-height: 25px;
+    margin-bottom: 50px;
+    font-family: 'Poppins-Regular';
+    font-size: 13px;
+}
+
+.featute-review-text {
+    font-family: 'Poppins-Regular';
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.riview-section {
+    width: 100%;
+    display: flex;
+}
+
+.riview-section-row {
+    width: 100% !important;
+}
+
+.riview-section-left {
+    width: 35%;
+
+}
+
+.riview-section-right {
+    width: 65%;
+
+}
+
+@media only screen and (max-width: 600px) {
+    .workshopDetailsfirst {
+        padding-left: 0px;
+        margin-top: 170px;
+    }
+
+    .workshopReveiw {
+        position: absolute;
+        top: -240px;
+        left: 0px;
+        width: 100%;
+        padding-left: 0px;
+        margin-left: 0px;
+    }
+
+    .workshopMedia {
+        position: relative;
+        bottom: 230px;
+    }
+
+    .coaching-details-discription {
+        padding: 0px 45px;
+    }
+
+    .coaching-details-discription-text {
+        padding: 0px 50px;
+    }
+
+    .workshopReveiwBody {
+        padding-top: 35px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    .workshopDetailsSection2 {
+        padding: 260px 5px 20px 5px;
+    }
+
+    .workshopDetailsSection1 {
+
+        padding: 75px 10px 20px 10px;
+        margin-top: 0px;
+    }
+
+    .reviewBox p {
+        padding-top: 0px;
+    }
+
+    .featute-review-text {
+        padding-left: 25px;
+        font-size: 20px;
+    }
+
+    .reviewBox {
+        margin-bottom: 0px !important;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+
+    .workshopDetailsfirst {
+
+        margin-top: 170px;
+        padding-top: 100px;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    .workshopReveiw {
+        position: absolute;
+        top: -240px;
+        left: 0px;
+        width: 100%;
+        padding-left: 0px;
+        margin-left: 0px;
+    }
+
+    .workshopMedia {
+        position: relative;
+        bottom: 360px;
+    }
+
+    .coaching-details-discription {
+        padding: 0px 45px;
+    }
+
+    .coaching-details-discription-text {
+        padding: 0px 45px;
+    }
+
+    .workshopReveiwBody {
+        box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+        position: relative;
+        top: -86px;
+        width: 85%;
+       
+        margin: 8px 50px 0px 50px;
+ 
+        left: 0px;
+    }
+
+    .workshopDetailsSection2 {
+        padding: 260px 5px 20px 5px;
+    }
+
+    .workshopDetailsSection1 {
+
+        padding: 90px 10px 80px 10px;
+        margin-top: 50px;
+    }
+
+    .reviewBox p {
+        padding-top: 0px;
+    }
+
+    .featute-review-text {
+        padding-left: 55px;
+        font-size: 20px;
+    }
+
+    .reviewBox {
+        margin-bottom: 0px !important;
+        padding-left: 45px;
+    }
+
+    .workshopMediaImg {
+        width: 100%;
+        height: 320px;
+        padding: 0px 60px;
+    }
+    .workshopDetailsBox1 {
+        padding: 20px;
+        border: 1px solid gray;
+        margin: 10px 50px 0px 47px;
+        width: 86%;
+    }
+   
+}

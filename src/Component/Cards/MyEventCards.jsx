@@ -12,7 +12,9 @@ import { endpoints } from "../services/endpoints";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+
 const MyEventCards = (props) => {
+
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [deleteIconColor, setDeleteColor] = useState("gray");
@@ -20,15 +22,16 @@ const MyEventCards = (props) => {
   const image = imagePath + data.event_photo;
   const token = localStorage.getItem("token");
 
-  var days = data?.days;
-  days = days.replaceAll('"', "");
-  days = days.split(",");
+  // var days = data?.days;
+  // days = days.replaceAll('"', "");
+  // days = days.split(",");
 
-  var timeslots = data?.timeslots;
+  // var timeslots = data?.timeslots;
+  var days = []
 
   const handleUpdateEvent = (dta) => {
     var dtta = { ...dta, image_path: imagePath, video_path: videoPath };
-    navigate("/addEvent", { state: dtta });
+    navigate("/add-event", { state: dtta });
   };
 
   const deleteEvent = (id) => {

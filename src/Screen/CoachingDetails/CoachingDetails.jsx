@@ -3,6 +3,9 @@ import "./coachingDetails.css";
 import Footer from "../../Component/Footer/Footer";
 import Homepage_header from "../../Component/Header/Homepage_header";
 import profileimg from "../../assets/Images/profileimg.png";
+import dummypersion from "../../assets/Images/dummypersion.jpeg";
+import dummyimg from "../../assets/Images/dummyimg.jpeg";
+import bgimg from "../../assets/Images/bgcpdcoaches.png";
 import workshopPre from "../../assets/Images/workshopPre.jfif";
 import { GiRoundStar } from "react-icons/gi";
 import { useParams } from "react-router-dom";
@@ -95,8 +98,8 @@ const CoachingDetails = () => {
 
                 <div className="row">
                   <div className="col-lg-12 col-md-12 col-12">
-                    <h5 style={{ marginTop: "20px" }}>Description</h5>
-                    <p style={{ lineHeight: "25px", marginBottom: "50px" }}>
+                    <h5 className="coaching-details-discription">Description</h5>
+                    <p className="coaching-details-discription-text">
                       Do you want to become a programmer? Do you want to learn
                       how to create games, automate your browser, visualize
                       data, and much more? Python has rapidly become one of the
@@ -111,15 +114,17 @@ const CoachingDetails = () => {
                 </div>
               </div>
               <div className="row">
+                <h2 className="featute-review-text">Featured review</h2>
                 <div className="col-lg-6 col-md-6 col-12">
                   <div className="reviewBox">
-                    <div className="row">
-                      <div className="col-lg-3">
+                    <div className="row riview-section-row">
+                      <div className="col-lg-3 col-md-6 col-sm-6 riview-section-left">
                         <div className="reveiewProfile">
-                          <img src={profileimg} alt="" />
+                          <img src={dummypersion} alt="" />
                         </div>
                       </div>
-                      <div className="col-lg-9">
+                      <div className="col-lg-9 col-md-6 col-sm-6 riview-section-right">
+                       <div className="coachings-rtings">
                         <h6>James Whatt</h6>
                         <div className="workshopRating">
                           <GiRoundStar />
@@ -129,107 +134,129 @@ const CoachingDetails = () => {
                           <GiRoundStar />
                         </div>
                         <p> 4days ago</p>
+                        </div>
                       </div>
-                      <div className="col-lg-12 col-md-12 col-12">
-                        <p>
-                          Helpful if starting new, but a lot of information is
-                          out of date, understandably, but an update would be
-                          appreciated. Resources for other places to look for
-                          would also be very useful.
-                        </p>
+                      
+                        <div className="col-lg-12 col-md-12 col-12">
+                          <p className="coachings-riviews-text">
+                            Helpful if starting new, but a lot of information is
+                            out of date, understandably, but an update would be
+                            appreciated. Resources for other places to look for
+                            would also be very useful.
+                          </p>
+                        
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div className="col-lg-6 col-md-6 col-12">
-                  <div className="reviewBox">
-                    <div className="row">
-                      <div className="col-lg-3">
-                        <div className="reveiewProfile">
-                          <img src={profileimg} alt="" />
-                        </div>
-                      </div>
-                      <div className="col-lg-9">
-                        <h6>James Whatt</h6>
-                        <div className="workshopRating">
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                        </div>
-                        <p> 4days ago</p>
-                      </div>
-                      <div className="col-lg-12 col-md-12 col-12">
-                        <p>
-                          Helpful if starting new, but a lot of information is
-                          out of date, understandably, but an update would be
-                          appreciated. Resources for other places to look for
-                          would also be very useful.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-6 col-md-6 col-12">
-                  <div className="reviewBox">
-                    <div className="row">
-                      <div className="col-lg-3">
-                        <div className="reveiewProfile">
-                          <img src={profileimg} alt="" />
-                        </div>
-                      </div>
-                      <div className="col-lg-9">
-                        <h6>James Whatt</h6>
-                        <div className="workshopRating">
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                        </div>
-                        <p> 4days ago</p>
-                      </div>
-                      <div className="col-lg-12 col-md-12 col-12">
-                        <p>
-                          Helpful if starting new, but a lot of information is
-                          out of date, understandably, but an update would be
-                          appreciated. Resources for other places to look for
-                          would also be very useful.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-6 col-md-6 col-12">
-                  <div className="reviewBox">
-                    <div className="row">
-                      <div className="col-lg-3">
-                        <div className="reveiewProfile">
-                          <img src={profileimg} alt="" />
-                        </div>
-                      </div>
-                      <div className="col-lg-9">
-                        <h6>James Whatt</h6>
-                        <div className="workshopRating">
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                        </div>
 
-                        <p> 4days ago</p>
+
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-12">
+                <div className="reviewBox">
+                    <div className="row riview-section-row">
+                      <div className="col-lg-3 col-md-6 col-sm-6 riview-section-left">
+                        <div className="reveiewProfile">
+                          <img src={dummypersion} alt="" />
+                        </div>
                       </div>
-                      <div className="col-lg-12 col-md-12 col-12">
-                        <p>
-                          Helpful if starting new, but a lot of information is
-                          out of date, understandably, but an update would be
-                          appreciated. Resources for other places to look for
-                          would also be very useful.
-                        </p>
+                      <div className="col-lg-9 col-md-6 col-sm-6 riview-section-right">
+                       <div className="coachings-rtings">
+                        <h6>James Whatt</h6>
+                        <div className="workshopRating">
+                          <GiRoundStar />
+                          <GiRoundStar />
+                          <GiRoundStar />
+                          <GiRoundStar />
+                          <GiRoundStar />
+                        </div>
+                        <p> 4days ago</p>
+                        </div>
+                      </div>
+                      
+                        <div className="col-lg-12 col-md-12 col-12">
+                          <p className="coachings-riviews-text">
+                            Helpful if starting new, but a lot of information is
+                            out of date, understandably, but an update would be
+                            appreciated. Resources for other places to look for
+                            would also be very useful.
+                          </p>
+                        
                       </div>
                     </div>
+
+
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-12">
+                <div className="reviewBox">
+                    <div className="row riview-section-row">
+                      <div className="col-lg-3 col-md-6 col-sm-6 riview-section-left">
+                        <div className="reveiewProfile">
+                          <img src={dummypersion} alt="" />
+                        </div>
+                      </div>
+                      <div className="col-lg-9 col-md-6 col-sm-6 riview-section-right">
+                       <div className="coachings-rtings">
+                        <h6>James Whatt</h6>
+                        <div className="workshopRating">
+                          <GiRoundStar />
+                          <GiRoundStar />
+                          <GiRoundStar />
+                          <GiRoundStar />
+                          <GiRoundStar />
+                        </div>
+                        <p> 4days ago</p>
+                        </div>
+                      </div>
+                      
+                        <div className="col-lg-12 col-md-12 col-12">
+                          <p className="coachings-riviews-text">
+                            Helpful if starting new, but a lot of information is
+                            out of date, understandably, but an update would be
+                            appreciated. Resources for other places to look for
+                            would also be very useful.
+                          </p>
+                        
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-12">
+                <div className="reviewBox">
+                    <div className="row riview-section-row">
+                      <div className="col-lg-3 col-md-6 col-sm-6 riview-section-left">
+                        <div className="reveiewProfile">
+                          <img src={dummypersion} alt="" />
+                        </div>
+                      </div>
+                      <div className="col-lg-9 col-md-6 col-sm-6 riview-section-right">
+                       <div className="coachings-rtings">
+                        <h6>James Whatt</h6>
+                        <div className="workshopRating">
+                          <GiRoundStar />
+                          <GiRoundStar />
+                          <GiRoundStar />
+                          <GiRoundStar />
+                          <GiRoundStar />
+                        </div>
+                        <p> 4days ago</p>
+                        </div>
+                      </div>
+                      
+                        <div className="col-lg-12 col-md-12 col-12">
+                          <p className="coachings-riviews-text">
+                            Helpful if starting new, but a lot of information is
+                            out of date, understandably, but an update would be
+                            appreciated. Resources for other places to look for
+                            would also be very useful.
+                          </p>
+                        
+                      </div>
+                    </div>
+
+
                   </div>
                 </div>
               </div>
@@ -241,8 +268,7 @@ const CoachingDetails = () => {
                 <div className="workshopMediaImg">
                   <img
                     src={
-                      coachingDetails.image &&
-                      imgPath + "/" + coachingDetails.image
+                      dummyimg
                     }
                     alt=""
                   />

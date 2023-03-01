@@ -9,6 +9,11 @@ import axios from "axios";
 import Networking_headers from "../../Component/Header/Networking_headers";
 import NoDataImg from "../../assets/Images/noDataFound.png";
 import CustomFilter from "../../Component/CustomFilter/CustomFilter";
+import EventsCard from "../../Component/EventsCard/EventsCard";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import CustomCalendar from "../../Component/Calendar/CustomCalendar";
+import { fontFamily } from "@mui/system";
 
 const MyEvent = () => {
 
@@ -16,8 +21,12 @@ const MyEvent = () => {
   const [imagePath, setImagePath] = useState("");
   const [videoPath, setVideoPath] = useState("");
   const [imgFiles, setImgFiles] = useState(null);
+  const [eventsToBeShown, setEventsToBeShown] = useState([]);
+  const [showCustomCalendar , setShowCustomCalendar] = useState(false)
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
-  const createEvent = () => {
+  const getMyEvents = () => {
     const createEventsUrl = endpoints.events.createdEvents;
     const token = localStorage.getItem("token");
     const headers = {
@@ -43,8 +52,37 @@ const MyEvent = () => {
   };
 
   useEffect(() => {
-    createEvent();
+    getMyEvents();
   }, []);
+
+  const viewDetails = (data) => {
+    navigate("/event-details", { state: { eventDetails: data } });
+  };
+
+  const handleUpdateEvent = (data) => {
+    var dtta = { ...data, image_path: imagePath, video_path: videoPath };
+    navigate("/add-event", { state: dtta });
+  };
+
+  const handleDeleteEvent = (id) => {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/json",
+    };
+    const url = `${endpoints.events.delete}${id}`;
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        console.log(res);
+        if (res.data.result == true) {
+          toast("Events deleted successfully", { type: "success" });
+          getMyEvents();
+        }
+      })
+      .catch((err) => {
+        console.log(err, "events error");
+      });
+  };
 
   return (
     <>
@@ -57,20 +95,38 @@ const MyEvent = () => {
           </div>
 
           <div className="col-12 col-md-12 col-lg-9 mt-5">
-            <h4 style={{ fontWeight: "700" }}> My Events List</h4>
+            <h4
+              style={{
+                fontWeight: "700",
+                fontFamily: "Poppins-SemiBold",
+                color: "var(--black)",
+              }}
+            >
+              My Events List
+            </h4>
             <div className="row">
               {createdEvent.length != 0 &&
                 createdEvent.map((itm, index) => {
                   return (
                     <>
                       <div className="col-lg-4 col-md-6 col-12 mt-3 mb-5">
-                        <MyEventCards
-                          data={itm}
-                          key={index}
-                          imagePath={imagePath}
-                          videoPath={videoPath}
-                          createEvent={createEvent}
-                        />
+                        {itm && (
+                          <EventsCard
+                            data={itm}
+                            key={index}
+                            imagePath={imagePath}
+                            videoPath={videoPath}
+                            createEvent={getMyEvents}
+                            viewDetails={viewDetails}
+                            showEdit={true}
+                            handleUpdateEvent={handleUpdateEvent}
+                            handleDeleteEvent={handleDeleteEvent}
+                            showCustomCalendar={showCustomCalendar}
+                            setShowCustomCalendar={setShowCustomCalendar}
+                            eventsToBeShown={eventsToBeShown}
+                            setEventsToBeShown={setEventsToBeShown}
+                          />
+                        )}
                       </div>
                     </>
                   );
@@ -85,6 +141,12 @@ const MyEvent = () => {
           </div>
         </div>
       </div>
+      <CustomCalendar
+        showCalendar={showCustomCalendar}
+        setShowCalendar={setShowCustomCalendar}
+        eventsToBeShown={eventsToBeShown}
+      />
+      <ToastContainer />
       <Footer />
     </>
   );

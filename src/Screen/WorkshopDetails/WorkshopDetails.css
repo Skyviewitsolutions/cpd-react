@@ -1,85 +1,79 @@
-.workshopDetailsSection1{
-    background-color: black;
-    color:white;
-    padding:80px 10px 80px 10px;
+.workshopDetailsSection1 {
+  /* background-color: black; */
+  color: white;
+  padding: 80px 10px 80px 10px;
 }
-.workshopDetailsSection1 .container-fluid{
-    width:100%;
-
+.workshopDetailsSection1 .container-fluid {
+  width: 100%;
 }
-.workshopDetailsSection2{
-    position: relative;
-    /* border:1px solid red; */
-    padding:50px 150px 20px 150px;
+.workshopDetailsSection2 {
+  position: relative;
+  /* border:1px solid red; */
+  padding: 50px 150px 20px 150px;
 }
-.workshopDetailsBox1{
-    padding:20px;
-    border:1px solid gray;
+.workshopDetailsBox1 {
+  padding: 20px;
+  border: 1px solid gray;
 }
-.workshopDetailsBox1 ul{
-    padding-top:10px;
+.workshopDetailsBox1 ul {
+  padding-top: 10px;
 }
-.workshopDetailsfirst{
-    padding-left:200px;
+.workshopDetailsfirst {
+  padding-left: 200px;
 }
-.workshopDetailsBox1 li{
-   
-    width:50%;
-    float:right;
+.workshopDetailsBox1 li {
+  width: 50%;
+  float: right;
 }
 .reveiewProfile {
-    
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
- 
-   
-    
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
 }
-.reveiewProfile img{
-    width:100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
+.reveiewProfile img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 }
-.reviewBox{
-    padding:10px;
-    margin-bottom: 50px;
-    /* border-top: 1px solid gray; */
+.reviewBox {
+  padding: 10px;
+  margin-bottom: 50px;
+  /* border-top: 1px solid gray; */
 }
-.reviewBox p{
-    padding-top:10px;
-    line-height: 25px;
+.reviewBox p {
+  padding-top: 10px;
+  line-height: 25px;
 }
-.workshopReveiw{
-    position: absolute;
-    padding-left:40px;
-    top:-220px;
+.workshopReveiw {
+  position: absolute;
+  padding-left: 40px;
+  top: -220px;
 }
-.workshopMediaImg{
-    width:100%;
-    height:220px;
+.workshopMediaImg {
+  width: 100%;
+  height: 220px;
 }
-.workshopMediaImg img{
-    width:100%;
-   height: 100%;
+.workshopMediaImg img {
+  width: 100%;
+  height: 100%;
 }
-.workshopReveiwBody li{
-    line-height: 25px;
+.workshopReveiwBody li {
+  line-height: 25px;
 }
-.workshopReveiwBody{
-    padding:20px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+.workshopReveiwBody {
+  padding: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-.link{
-    display:flex;
+.link {
+  display: flex;
 }
-.link ul{
-    list-style-type: none;
+.link ul {
+  list-style-type: none;
 }
 .workshopRating {
-    display: flex;
+  display: flex;
 }
-.workshopRating svg{
-    color:darkgoldenrod;
+.workshopRating svg {
+  color: darkgoldenrod;
 }

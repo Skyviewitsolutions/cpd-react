@@ -13,8 +13,6 @@ import Button from "../../Component/button/Button/Button";
 import { useNavigate , useLocation } from "react-router-dom";
 
 
-
-
 const AddEvent = () => {
 
   const [sessionTitle, setSessionTitle] = useState("");
@@ -83,7 +81,6 @@ const AddEvent = () => {
     axios
       .get(getCommunity)
       .then((res) => {
-        console.log(res , "community response here")
         if (res.data.result === true) {
           const val = res.data.data;
           setCommunityOption(val);
@@ -144,6 +141,7 @@ const AddEvent = () => {
         title: sessionTitle,
       };
 
+
       var data = new FormData();
       data.append("event_title", sessionTitle);
       data.append("event_description", sessionDesc);
@@ -151,20 +149,24 @@ const AddEvent = () => {
       data.append("session_type", sessionType);
       data.append("event_duration", duration);
       data.append("max_members", maxStudents);
-      data.append("event_photo", eventImgFile);
-      data.append("event_video", eventVideo);
-      data.append("attachment", eventDocs);
+      data.append("formFilePic", eventImgFile);
+      data.append("formFileVid", eventVideo);
+      data.append("formFileAttach", eventDocs);
       data.append("availability", availability_type);
       data.append("days", selectedDays);
       data.append("paid", is_paid);
       data.append("duration_payment", payment_type);
       data.append("price", price);
-      data.append("timeslots", slots);
+      data.append("timeslots", JSON.stringify(slots));
       data.append("price_type", price_type);
       data.append("availability_type", availability_type);
       data.append("community_id", communityId);
       data.append("is_repeated" , is_repeated);
-      data.append("sheduleDate" , )
+      data.append("availibilityDate" ,selectedDays);
+      data.append("sheduleDate" ,availability_type );
+      data.append("sheduleTime" ,JSON.stringify(slots));
+      data.append("availibilityDateTiming" ,duration);
+
 
       setLoading(true);
 
@@ -218,23 +220,56 @@ const AddEvent = () => {
       toast("Community id is required", { type: "warning" });
     } else {
       const token = localStorage.getItem("token");
+      var availability_type = daysFormat == "weekly" ? 1 : 2;
+      var is_paid = paid == true ? 1 : 0;
+      var is_repeated = isRepeated ? 1 : 0;
+      var payment_type 
+      if(sessionType === "online"){
+        payment_type = 1
+      }
+      else if(sessionType === "offline"){
+        payment_type = 2
+      }
+      else if(sessionType == "hybrid"){
+        payment_type = 3
+      }
+      var price_type = priceType == "hourly" ? 1 : 2;
+
+      var slots = {
+        isRepeated: isRepeated,
+        selectedDays: selectedDays,
+        daysFormat: daysFormat,
+        selectedDates: selectedDates,
+        daysSlot: daysSlot,
+        dateSlot: dateSlot,
+        title: sessionTitle,
+      };
+     
       var data = new FormData();
       data.append("event_title", sessionTitle);
       data.append("event_description", sessionDesc);
       data.append("tags", sessionTags);
-      data.append("event_type", sessionType);
+      data.append("session_type", sessionType);
       data.append("event_duration", duration);
       data.append("max_members", maxStudents);
-      data.append("event_photo", eventImgFile);
-      data.append("event_video", eventVideo);
-      data.append("attachment", eventDocs);
-      data.append("availability", daysFormat);
+      data.append("formFilePic", eventImgFile);
+      data.append("formFileVid", eventVideo);
+      data.append("formFileAttach", eventDocs);
+      data.append("availability", availability_type);
       data.append("days", selectedDays);
-      data.append("paid", paid);
-      data.append("duration_payment", duration);
+      data.append("paid", is_paid);
+      data.append("duration_payment", payment_type);
       data.append("price", price);
-      data.append("timeslots", "12-1");
+      data.append("timeslots", JSON.stringify(slots));
+      data.append("price_type", price_type);
+      data.append("availability_type", availability_type);
       data.append("community_id", communityId);
+      data.append("is_repeated" , is_repeated);
+      data.append("availibilityDate" ,selectedDays);
+      data.append("sheduleDate" ,availability_type );
+      data.append("sheduleTime" ,JSON.stringify(slots));
+      data.append("availibilityDateTiming" ,duration);
+
       
       setLoading(true);
 
@@ -250,7 +285,8 @@ const AddEvent = () => {
           console.log(res);
           setLoading(false);
           if (res.data.result) {
-            toast("Events updated successfully", { type: "success" });
+            toast("Event updated successfully", { type: "success" });
+            navigate("/myEvents");
           }
         })
         .catch((err) => {
@@ -259,6 +295,94 @@ const AddEvent = () => {
         });
     }
   };
+
+
+  // This is the code for updating the events if we have selected the any events;
+
+  const selectedEvents = location.state;
+
+  const updateSelectedEvents = () => {
+    setUpdate(true);
+    setSessionTitle(selectedEvents?.event_title);
+    setSessionDes(selectedEvents?.event_description);
+  
+    setSessionTags(selectedEvents?.tags);
+    setSessionType(selectedEvents?.session_type);
+
+    setDuration(selectedEvents?.event_duration);
+    setMaxStudents(selectedEvents?.max_members);
+    setSelectedEventId(selectedEvents?._id);
+
+    var paid = selectedEvents?.paid;
+    if (paid == 1) {
+      setPaid(true);
+    } else {
+      setPaid(false);
+    }
+
+    setPrice(selectedEvents?.price);
+    var priceType = selectedEvents?.price_type == 1 ? "hourly" : "sessional"
+    setPriceType(priceType);
+
+    var event_pic_url =
+      selectedEvents?.image_path + selectedEvents?.event_photo;
+    setEventImg(event_pic_url);
+    const fileName = "eventPic.jpg";
+
+    fetch(event_pic_url , {headers : {'Access-Control-Allow-Origin' : '*'}}).then(async (response) => {
+      const contentType = response.headers.get("content-type");
+      const blob = await response.blob();
+      const file = new File([blob], fileName, { contentType });
+      setEventImgFile(file);
+    });
+
+    var event_video_pic_url =
+      selectedEvents?.video_path + selectedEvents?.event_video;
+
+    setEventVideoImg(event_video_pic_url);
+
+    const eventVideoFile = "eventVideo.jpg";
+
+    fetch(event_video_pic_url).then(async (response) => {
+      const contentType = response.headers.get("content-type");
+      const blob = await response.blob();
+      const file = new File([blob], eventVideoFile, { contentType });
+      setEventVideo(file);
+    });
+
+    var isRepeated = selectedEvents?.is_repeated == 1 ? true : false
+    setIsRepeated(isRepeated);
+
+    var communityId = selectedEvents?.community_id;
+
+    if (communityOption.length != 0) {
+      setCommunityId(communityId);
+      var selectedCommunity = communityOption.filter((itm, ind) => {
+        return itm._id == communityId;
+      });
+
+      selectedCommunity = selectedCommunity[0];
+      setCommunityName(selectedCommunity?.display_name);
+    }
+
+    
+
+    var slots = JSON.parse(selectedEvents?.timeslots);
+
+    console.log(slots)
+    setSelectedDays(slots?.selectedDays);
+    setSelectedDates(slots?.selectedDates);
+    setDaysSlot(slots?.daysSlot);
+    setDateSlot(slots?.dateSlot);
+    setDaysFormat(slots?.daysFormat);
+
+  };
+
+  useEffect(() => {
+    if (selectedEvents) {
+      updateSelectedEvents();
+    }
+  }, [communityOption]);
 
 
   return (

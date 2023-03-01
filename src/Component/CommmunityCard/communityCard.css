@@ -1,0 +1,72 @@
+.domainCard_title h6{
+    font-family: 'Poppins-SemiBold';
+    text-transform: capitalize;
+    color: white;
+}
+
+.domainCard_outline{
+   
+}
+
+.domainCard_definition h6{
+    font-family: 'Poppins-Regular';
+    color: var(--gray);
+    font-size: 12px;
+}
+
+.domaintooltipT{
+    font-family: 'Poppins-Regular';
+    color: white !important;
+    background-color: var(--primary);
+    font-size: 11px !important;
+    width: 120px;
+    text-transform: capitalize;
+    text-align: center;
+    border-radius: 3px !important;
+    padding: 7px !important;
+}
+
+.criteria_join h6{
+    color: var(--black) !important;
+    font-family: 'Poppins-SemiBold';
+    font-size: 13px;
+}
+
+.criteria_join span{
+    color: var(--gray);
+    font-size: 11px;
+}
+
+.domain_cards_members{
+    border: 1px solid rgb(174, 174, 174);
+    border-radius: 2px;
+    padding: 0px 6px;
+    display: flex;
+    align-items: center;
+}
+
+.domain_cards_members h5 {
+    font-family: 'Poppins-SemiBold';
+    color: var(--black);
+    font-size: 12px;
+}
+.domain_cards_members h6{
+    color: var(--lightgray);
+    margin-top: 0px !important;
+    margin-left: 10px !important;
+    font-size: 13px;
+    margin-right: 10px !important;
+}
+
+.tooltiptextabc h5{
+    font-family: 'Poppins-SemiBold';
+    font-size: 14px;
+}
+.subType h6{
+    font-family: "poppins-Regular";
+}
+
+.subType span{
+    font-family: 'Poppins-Regular';
+    font-size: 11px;
+}

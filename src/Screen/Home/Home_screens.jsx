@@ -1,15 +1,16 @@
 import React from "react";
-import Homepage_header from "../Component/Header/Homepage_header";
+import Homepage_header from "../../Component/Header/Homepage_header";
 import "./Home_screens.css";
-import Footer from "../Component/Footer/Footer";
-import filter_home from "../assets/Images/filter_home.svg";
-import comment_red from "../assets/Images/comment_red.svg";
-import Homepage_cards from "../Component/Cards/Homepage_cards";
-import Homepage_chats from "../Component/Homepage_chats/Homepage_chats";
-import Recommended_session from "../Component/Recommended_session/Recommended_session";
-import Certification from "../Component/Certification_homepage/Certification";
-import User_profile from "../Component/Userprofile/User_profile";
+import Footer from "../../Component/Footer/Footer";
+import filter_home from "../../assets/Images/filter_home.svg";
+import comment_red from "../../assets/Images/comment_red.svg";
+import Homepage_cards from "../../Component/Cards/Homepage_cards";
+import Homepage_chats from "../../Component/Homepage_chats/Homepage_chats";
+import Recommended_session from "../../Component/Recommended_session/Recommended_session";
+import Certification from "../../Component/Certification_homepage/Certification";
+import User_profile from "../../Component/Userprofile/User_profile";
 import { ToastContainer } from "react-toastify";
+
 
 const Home_screens = () => {
   

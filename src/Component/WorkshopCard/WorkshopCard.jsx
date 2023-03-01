@@ -34,66 +34,7 @@ const WorkshopCard = (props) => {
   var sessionType = workshop.payment_type == 1 ? "hour" : "session";
 
   return (
-    // <div className="workshopCard">
-    //   <div className="card" key={key}>
-    //     <div className="workshopcard_media">
-    //       <img
-    //         src={imageName && img}
-    //         alt=""
-    //         onClick={() => showCoachDetails(workshop)}
-    //       />
-    //       <div className="tags_onImage">
-    //         <h6>Workshop</h6>
-    //       </div>
-    //     </div>
-    //     <div className="workshopcard_descriptionBox">
-    //       <div className="d-flex justify-content-between align-items-center">
-    //         <h4>{workshop.title}</h4>
-    //         <h6>
-    //           Availability :{" "}
-    //           <span
-    //             style={{ marginLeft: "9px" }}
-    //             onClick={() => showWorkshopOnCalendar(workshop)}
-    //           >
-    //             <BsFillCalendarDateFill color="#2c6959" size={17} />
-    //           </span>
-    //         </h6>
-    //       </div>
-
-    //       <div className="workshop_FreeBox">
-    //         <div className="viewDetailsBox"></div>
-    //       </div>
-    //       <div className="domainBox">
-    //         <h6>Price : {workshop.price} $</h6>
-    //         <div >
-    //           <h6>Domain : {domain}</h6>
-    //           <h6>Industry : {industry}</h6>
-    //         </div>
-    //       </div>
-    //       <div className="col-12 d-flex justify-content-between align-items-center">
-    //         <h6 id="enrolled col-7">
-    //           Currently Enrolled ({workshop.workshop_members_count}/
-    //           {workshop.max_members})
-    //         </h6>
-    //         <div className="col-5 d-flex justify-content-end">
-    //           {showBookBtn && (
-    //             <BookBtn
-    //               status={enrollStatus}
-    //               onClick={() => enrollWorkshop(workshop)}
-    //               styles={{
-    //                 height: "30px",
-    //               }}
-    //             />
-    //           )}
-    //           {showEdit && <div className="workshopEdit">
-    //               <FiEdit color="#2c6959" onClick={() => handleEdit(workshop)}/>
-    //               <AiOutlineDelete color="#2c6959" onClick={() => deleteWorkshop(workshop._id)}/>
-    //             </div>}
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
+    
 
     <div className="workshopCard">
       <div className="card" key={key}>
@@ -134,7 +75,7 @@ const WorkshopCard = (props) => {
           </div>
           <div className="col-6">
             <div className="d-flex worshopBx align-items-center">
-              <h6>Availability</h6>:
+              <h6 style = {{width : "60%"}}>Availability</h6>:
               <span
                 style={{ marginLeft: "9px" }}
                 onClick={() => showWorkshopOnCalendar(workshop)}

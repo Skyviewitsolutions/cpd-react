@@ -217,6 +217,10 @@
     align-items:  center;
   }
 
+  .profile_photo_box img{
+    object-fit: cover;
+  }
+
   .userImgIcon{
     width: 90%;
     height: 90%;

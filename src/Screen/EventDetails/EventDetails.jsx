@@ -15,30 +15,25 @@ import { BsChatDots } from "react-icons/bs";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
+import EventsCard from "../../Component/EventsCard/EventsCard";
+import CommunityCard from "../../Component/CommmunityCard/CommunityCard";
+
 
 const EventDetails = (props) => {
-  
-  const location = useLocation();
 
+  const location = useLocation();
   const [allCommunity, setAllCommunity] = useState([]);
   const [imagePath, setImagePath] = useState("");
-  const [showCommunityForm, setShowCommunityForm] = useState(false);
   const [communityId, setCommunityId] = useState("");
-  const [showCalendar, setShowCalendar] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [myCommunity, setMyCommunity] = useState([]);
 
   // adding form data here ;
 
-  const [topics, setTopics] = useState("");
-  const [displayName, setDisplayName] = useState("");
-  const [description, setDescriptions] = useState("");
-  const [tags, setTags] = useState("");
-  const [imgFiles, setImgFiles] = useState(null);
-
+ 
   const navigate = useNavigate();
 
   const getCommunityUrl = endpoints.community.getAllCommunity;
-  const addCommunityUrl = endpoints.community.addCommunity;
 
   const getAllCommunity = () => {
     axios
@@ -91,110 +86,72 @@ const EventDetails = (props) => {
     getMyCommunity();
   }, []);
 
-  // Add community api implementation
+  // adding join api
 
-  const addCommunity = () => {
-    if (!topics) {
-      toast("Topic is required", { type: "warning" });
-    } else if (!displayName) {
-      toast("Display name is required", { type: "warning" });
-    } else if (!description) {
-      toast("Description is required", { type: "warning" });
-    } else if (!tags) {
-      toast("Tags is required", { type: "warning" });
-    } else {
-      const token = localStorage.getItem("token");
+  const joinCommunity = (id) => {
+    const token = localStorage.getItem("token");
 
-      const formData = new FormData();
-
-      formData.append("topic", topics);
-      formData.append("display_name", displayName);
-      formData.append("description", description);
-      formData.append("image", imgFiles);
-      formData.append("criteria", tags);
-
+    if (token) {
+      setLoading(true);
       const headers = {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       };
 
+      const url = `${endpoints.community.joinCommunity}${id}`;
+
       axios
-        .post(addCommunityUrl, formData, { headers: headers })
+        .get(url, { headers: headers })
         .then((res) => {
+          setLoading(false);
           if (res.data.result) {
-            toast("community created successfully", { type: "success" });
+            toast("Community joined successfully", { type: "success" });
+            getAllCommunity();
+            getMyCommunity();
           } else if (!res.data.result) {
             toast(res.data?.message, { type: "warning" });
           }
         })
         .catch((err) => {
-          console.log(err, "this is the error");
+          setLoading(false);
+          console.log(err);
         });
+    } else {
+      toast("Please login", { warning: "warning" });
     }
-
-    // Update community Api Implementation
-    const token = localStorage.getItem("token");
-    const headers = {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
-    };
-    const Updateapi = `https://admin.cpdedu.com/api/v1/community/update/=${communityId}`;
-
-    axios
-      .post(Updateapi, { headers: headers })
-      .then((res) => {
-        if (res.data.result) {
-          toast("community created successfully", { type: "success" });
-        } else if (!res.data.result) {
-          toast(res.data?.message, { type: "warning" });
-        }
-      })
-      .catch((err) => {
-        console.log(err, "this is the community update error");
-      });
   };
 
-  // adding join api
-
-  useEffect(() => {
+  const leaveCommunity = (id) => {
     const token = localStorage.getItem("token");
 
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    const api = `https://admin.cpdedu.com/api/v1/community/join/=${communityId}`;
+    if (token) {
+      setLoading(true);
 
-    axios
-      .get(api, { headers: headers })
-      .then((res) => {
-        console.log(res, "Community join");
-      })
-      .catch((err) => {
-        console.log(err, "this is the community join error");
-      });
-  }, []);
-
-  // adding leave api
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    const api = `https://admin.cpdedu.com/api/v1community/leave/=${communityId}`;
-
-    axios
-      .get(api, { headers: headers })
-      .then((res) => {
-        console.log(res, "Leave Community");
-      })
-      .catch((err) => {
-        console.log(err, "this is the community leave error");
-      });
-  }, []);
-
-  const [showChat, setShowChat] = useState(false);
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      };
+      const url = `${endpoints.community.leaveCommunity}${id}`;
+      axios
+        .get(url, { headers: headers })
+        .then((res) => {
+          setLoading(false);
+          if (res.data.result) {
+            toast("Community left successfully", { type: "success" });
+            getAllCommunity();
+            getMyCommunity();
+          } else if (!res.data.result) {
+            toast(res.data?.message, { type: "warning" });
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err);
+        });
+    } else {
+      toast("Please login", { type: "warning" });
+    }
+  };
 
   return (
     <>
@@ -202,23 +159,19 @@ const EventDetails = (props) => {
       <Networking_headers />
       <div className="p-4">
         <Event_header eventDetails={location.state.eventDetails} />
-        <div className="calendarIcon" onClick={() => setShowCalendar(true)}>
-          <BsFillCalendarDateFill color="#2c6959" size={32} />
-        </div>{" "}
 
         <div className="row">
-          <div className="col-lg-3 d-lg-block d-none mt-5 ps-5 pe-5 mb-5 d-lg-block d-none">
-           <CustomFilter />
+          <div className="col-lg-3 d-lg-block d-none  ps-5 pe-5 mb-5 d-lg-block d-none">
+            <CustomFilter />
           </div>
           <div className="col-lg-9 col-md-12 col-12">
-            <></>
             <div className="row">
-              <div className="col-12 col-md-12 col-lg-12 mt-5 evntBtn">
+              <div className="col-12 col-md-12 col-lg-12  evntBtn eventDetailsTitle">
                 <h5>Domain Based</h5>
               </div>
             </div>
             <div className="eventListPersonShow"></div>
-            <div className="row mt-3">
+            <div className="row mt-2">
               {allCommunity.length != 0 &&
                 allCommunity.map((itm, index) => {
                   const id = itm._id;
@@ -233,17 +186,21 @@ const EventDetails = (props) => {
                   return (
                     <>
                       <div className="col-sm-12 col-md-6 col-lg-4 px-3">
-                        <Domain_cards
+                        
+                        <CommunityCard
                           data={itm}
                           key={index}
                           imagePath={imagePath}
                           isSubscribed={isSubscribed}
                           getMyCommunity={getMyCommunity}
                           getAllCommunity={getAllCommunity}
+                          showSubscribe={true}
+                          joinCommunity={joinCommunity}
+                          leaveCommunity={leaveCommunity}
+                          showEdit={false}
+                          loading={loading}
                         />
                       </div>
-
-                      
                     </>
                   );
                 })}
@@ -252,10 +209,7 @@ const EventDetails = (props) => {
         </div>
       </div>
 
-      <CustomCalendar
-        showCalendar={showCalendar}
-        setShowCalendar={setShowCalendar}
-      />
+      <ToastContainer />
       <Footer />
     </>
   );

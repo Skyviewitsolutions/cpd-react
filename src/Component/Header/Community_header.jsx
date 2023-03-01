@@ -2,57 +2,67 @@ import React from "react";
 import "./Community_header.css";
 import Plus_button from "../button/Plus_button";
 import Event_button from "../button/Event_button";
-import { FaRegUser } from "react-icons/fa";
+import { FaRegUser, FaUsers } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import user from "../../assets/Icons/Artboard58.svg";
+import { BiPlusCircle } from "react-icons/bi";
+import Button from "../button/Button/Button";
+
 
 const Community_header = (props) => {
   
   var { communityDetails } = props;
   communityDetails = communityDetails.communityDetails;
+  const token = localStorage.getItem("token");
+
 
   const navigate = useNavigate("");
   const BackEvent = () => {
-    navigate("/event");
+    navigate("/networking");
   };
-
-  console.log(communityDetails, "comunityDetails");
 
   return (
     <>
-      <div className="Communityheader">
+      <div className="Communityheader cmntyHeadercont">
         <div className="row">
           <div className="col-lg-7 col-md-12 col-sm-12 community_left">
             <div className="community_details">
-              <h4>Community Name : {communityDetails.display_name}</h4>
-              {/* <p>Discription : {communityDetails.description}</p> */}
-              <p>Discription : here we are writing each and every options in this project from which we are writing anything which will be very userful</p>
-              <h6>
-                <span>Criteria To Join : </span> {communityDetails.criteria}
-                {/* <span id="eligible">(Eligible)</span> */}
-              </h6>
+              <div className="cmTitle d-flex align-items-center cmnTitle">
+                <h5>Community</h5>{" "}
+                <span style={{ marginBottom: "8px" }}>:</span>
+                <h6>{communityDetails.display_name}</h6>
+              </div>
+
+              <div className="cmDetails d-flex cmnTitle">
+                <h5>Descriptions </h5>{" "}
+                <span style={{ marginBottom: "8px" }}>:</span>
+                <h6>{communityDetails.description}</h6>
+              </div>
+
+              <div className="cmDetails d-flex cmnTitle">
+                <h5>Criteria </h5>{" "}
+                <span style={{ marginBottom: "8px" }}>:</span>
+                <h6>{communityDetails.criteria}</h6>
+              </div>
             </div>
           </div>
-          <div className="col-lg-5 col-md-12 col-sm-12">
-            <div className="UserDetails">
-              <div className="row">
-                <div className="col-sm-4">
-                  <img src={user} />
-                  <h6>
-                    Member : <span>{communityDetails.members_count}</span>
-                  </h6>
-                </div>
-                <div className="col-sm-4">
-                  <Event_button
-                    text="Back To Event"
-                    onClick={() => BackEvent()}
-                  />
-                </div>
-                <div className="col-sm-4">
-                  <Plus_button onClick={() => navigate("/addEvent")} />
-                  <h5 onClick={() => navigate("/addEvent")}> Create Event</h5>
-                </div>
+          <div className="col-lg-5 col-md-12 col-sm-12 d-flex align-items-center">
+            <div className="userDetails">
+              <div className="eventMem d-flex flex-column align-items-center">
+                <FaUsers size={42} color="var(--primary)" />
+                <h6> Members ({communityDetails.members_count})</h6>
               </div>
+              <div className="eventBtn">
+                <Button title="Back To Event" onClick={() => BackEvent()} />
+              </div>
+              {token && 
+              <div
+                className="createEvnet"
+                onClick={() => navigate("/create-community")}
+              >
+                <h6>Create Community</h6>
+                <BiPlusCircle color="white" size={20} />
+              </div>}
             </div>
           </div>
         </div>

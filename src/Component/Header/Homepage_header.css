@@ -182,7 +182,6 @@ margin-top: -10px;
   width: 100%;
   margin:0px;
   padding: 0px;
-  overflow: hidden;
 }
 
 .second-Nave{
@@ -554,8 +553,8 @@ bottom:50%;
   background-color: white;
   justify-content: center;
   align-items: center;
-  top: 80px;
-  right: 0;
+  top: 70px;
+  right: -10px;
   margin-right: 2%;
   z-index: 25;
   font-weight: 700;
@@ -566,6 +565,9 @@ bottom:50%;
 .logoutBtn{
   background-color: #F0F0F0;
   padding: 9px 18px;
+  font-family: 'Poppins-SemiBold';
+  color: var(--gray);
+
 }
 
 .logoutBtn span{

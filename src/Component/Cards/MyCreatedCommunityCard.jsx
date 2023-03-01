@@ -23,7 +23,6 @@ import axios from "axios";
 const MyCreatedCommunityCard = (props) => {
   
   const [loading, setLoading] = useState(false);
-  const [showCommunityForm, setShowCommunityForm] = useState(false);
   const [showModal , setShowModal] = useState(false)
   const { data, key, imagePath, createCommunity, deleteCommunity } = props;
   const [selectedCommunityIdForMember , setSelectedCommunityForMember] = useState("")
@@ -84,7 +83,6 @@ const MyCreatedCommunityCard = (props) => {
     var cmData = { ...dta, imagePath: imagePath };
     navigate("/create-community", { state: cmData });
   };
-
 
   const handleMembers = (id) =>{
     setShowModal(true);

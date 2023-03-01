@@ -1,50 +1,57 @@
-import React, { useState } from "react";
-import "./domainCard.css";
-import event_cardimg from "../../../assets/Images/event_cardimg.svg";
-import eye from "../../../assets/Images/eye.svg";
-import { CiUser } from "react-icons/ci";
-import Subscribe from "../../button/Subscribe";
+import React, { useState, useEffect } from "react";
+import "./communityCard.css";
 import { useNavigate } from "react-router-dom";
-import { endpoints } from "../../services/endpoints";
-import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
-import "../../Socials/Socials.css";
 import { InlineShareButtons } from "sharethis-reactjs";
-import MembersDetails from "../../Modal/MembersDetails/MembersDetails";
+import MembersDetails from "../Modal/MembersDetails/MembersDetails";
+import { toast, ToastContainer } from "react-toastify";
+import event_cardimg from "../../assets/Images/event_cardimg.svg";
+import eye from "../../assets/Images/eye.svg";
+import Subscribe from "../button/Subscribe";
+import { FaUser } from "react-icons/fa";
+import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
+import { FiEdit } from "react-icons/fi";
 
-
-const DomainCard = (props) => {
-
+const CommunityCard = (props) => {
+  
   const {
     data,
     key,
     imagePath,
     isSubscribed,
-    leaveCommunity ,
-    joinCommunity ,
-    loading
-    
+    showSubscribe,
+    showEdit,
+    leaveCommunity,
+    joinCommunity,
+    handleUpdateCommunity ,
+    deleteCommunity,
+    loading,
   } = props;
 
-  const image = imagePath + data.image;
-  const [selectedCommunityIdForMember , setSelectedCommunityForMember] = useState("")
-  const [show , setShow] = useState(false);
+  const image = imagePath + data?.image;
+  const [selectedCommunityIdForMember, setSelectedCommunityForMember] =
+    useState("");
+    const token = localStorage.getItem("token")
+  const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
 
-  
- 
-  const  handleMembers = (id) =>{
-    setSelectedCommunityForMember(id)
-    setShow(true)
-  }
+  const handleMembers = (id) => {
+    if(token){
+    setSelectedCommunityForMember(id);
+    setShow(true);
+    }
+    else {
+      toast("Please login" , {type : "warning"})
+    }
+  };
 
+ 
   return (
     <>
       <div className="domainCard_outline">
         <div className="Card ">
           <div className="domainCard_media">
-            <img src={data.image ? image : event_cardimg} alt="" />
+            <img src={data?.image ? image : event_cardimg} alt="" />
             <div className="domainCard_title">
               <h6
                 onClick={() =>
@@ -69,30 +76,32 @@ const DomainCard = (props) => {
                       state: { communityDetails: data },
                     })
                   }
+                  className="domaintooltipT"
                 >
-                  <img src={eye} alt=""></img> view details
+                  view details{" "}
+                  <AiOutlineEye
+                    color="white"
+                    size={15}
+                    style={{ marginLeft: "6px" }}
+                  />
                 </h6>
                 <span className="tooltiptextabc">
                   <h5>{data?.display_name}</h5>
                   <div className="subType">
-                    <h6>Sub Type  </h6>{" "}:{" "}
-                    <span>{data?.sub_type}</span>
+                    <h6>Sub Type </h6> : <span>{data?.sub_type}</span>
                   </div>
                   <div className="subType">
-                    <h6>Status  </h6> {" "}:{" "}
-                    <span>{data?.visibility}</span>
+                    <h6>Status </h6> : <span>{data?.visibility}</span>
                   </div>
                   <div className="subType">
-                    <h6>Members  </h6>{" "}:{" "}
-                    <span>{data?.members_count}</span>
+                    <h6>Members </h6> : <span>{data?.members_count}</span>
                   </div>
                 </span>
               </div>
             </div>
             <div className="criteria_join" style={{ marginBottom: 5 }}>
               <h6>
-                {" "}
-                <span id="join">Criteria to Join:</span> {data?.criteria}
+                Criteria to Join &nbsp; : &nbsp;<span>{data?.criteria}</span>
               </h6>
             </div>
             <div className="shareBtn">
@@ -115,10 +124,10 @@ const DomainCard = (props) => {
                   padding: 12, // padding within buttons (INTEGER)
                   radius: 4, // the corner radius on each button (INTEGER)
                   show_total: false,
-                  size: 40, // the size of each button (INTEGER)
+                  size: 32, // the size of each button (INTEGER)
                   // OPTIONAL PARAMETERS
                   url: "https://cpdedu.com/event", // (defaults to current url)
-                  image: data.image ? image : event_cardimg, // (defaults to og:image or twitter:image)
+                  image: data?.image ? image : event_cardimg, // (defaults to og:image or twitter:image)
                   description: data?.description, // (defaults to og:description or twitter:description)
                   title: data?.display_name, // (defaults to og:title or twitter:title)
                   message:
@@ -128,26 +137,49 @@ const DomainCard = (props) => {
               />
             </div>
             <div className="member" style={{ marginTop: 10 }}>
-              <div className="domain_cards_members"  onClick={() =>handleMembers(data._id)}>
+              <div
+                className="domain_cards_members"
+                onClick={() => handleMembers(data._id)}
+              >
                 <h5>Members : </h5>
                 <h6>{data?.members_count}</h6>
-                <CiUser className="domain_cards_user_icon" />
+                <FaUser size={12} color="var(--lightgray)" />
               </div>
+              {showSubscribe &&
+                (isSubscribed ? (
+                  <Subscribe
+                    text="UNSUBSCRIBE"
+                    onClick={() => leaveCommunity(data._id)}
+                    loading={loading}
+                  />
+                ) : (
+                  <Subscribe
+                    text="SUBSCRIBE"
+                    onClick={() => joinCommunity(data._id)}
+                    loading={loading}
+                  />
+                ))}
 
-              {isSubscribed ? (
-                <Subscribe
-                  text="UNSUBSCRIBE"
-                  onClick={() => leaveCommunity(data._id)}
-                  loading={loading}
-                />
-              ) : (
-                <Subscribe
-                  text="SUBSCRIBE"
-                  onClick={() => joinCommunity(data._id)}
-                  loading={loading}
+              {show && (
+                <MembersDetails
+                  show={show}
+                  setShow={setShow}
+                  selectedCommunityIdForMember={selectedCommunityIdForMember}
                 />
               )}
-              {show &&  <MembersDetails show={show} setShow={setShow} selectedCommunityIdForMember={selectedCommunityIdForMember}/>}
+
+              {showEdit && (
+                <div className="workshopEdit">
+                  <FiEdit
+                    color="#2c6959"
+                    onClick={() => handleUpdateCommunity(data)}
+                  />
+                  <AiOutlineDelete
+                    color="#2c6959"
+                    onClick={() => deleteCommunity(data._id)}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -157,4 +189,4 @@ const DomainCard = (props) => {
   );
 };
 
-export default DomainCard;
+export default CommunityCard;

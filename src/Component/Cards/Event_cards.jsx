@@ -15,13 +15,14 @@ const Event_cards = (props) => {
   const image = picPath + data.event_photo;
   const navigate = useNavigate();
 
-  var days = data?.availability_date;
-  console.log(data , "days here")
+  // var days = data?.availability_date;
   // days = days.replaceAll('"', "");
   // days = days.split(",");
  
 
-  var timeslots = data?.timeslots;
+  // var timeslots = data?.timeslots;
+
+  console.log(data , "data here which we are getting here");
 
   return (
     <>

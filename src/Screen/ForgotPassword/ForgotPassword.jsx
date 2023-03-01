@@ -1,10 +1,9 @@
 import React from 'react'
 import './ForgotPassword.css';
-
-import EmailVerificationForm from "../Component/ForgotPassword/EmailVerificationForm";
-import Header from '../Component/Header/Header';
+import EmailVerificationForm from "../../Component/ForgotPassword/EmailVerificationForm";
+import Header from '../../Component/Header/Header';
 import { Link, useNavigate } from "react-router-dom";
-import cpd_logo from "../assets/Images/cpd_logo.png";
+import cpd_logo from "../../assets/Images/cpd_logo.png";
 const ForgotPasssword = () => {
     const navigate = useNavigate("");
   return (

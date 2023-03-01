@@ -12,8 +12,12 @@ import AddCommunitySidebar from "../../Component/AddCommunitySidebar/AddCommunit
 import MyCommunityCards from "../../Component/Cards/MyCommunityCards";
 import { toast } from "react-toastify";
 import NoDataImg from "../../assets/Images/noDataFound.png";
+import CustomFilter from "../../Component/CustomFilter/CustomFilter";
+import CommunityCard from "../../Component/CommmunityCard/CommunityCard";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const MyCommunity = () => {
+  
   const [createdCommunity, setCreatedCommunity] = useState([]);
   const [imagePath, setImagePath] = useState("");
   const [sortCreateCommunity, setSortCreatedCommunity] = useState([]);
@@ -23,6 +27,7 @@ const MyCommunity = () => {
   const [imgFiles, setImgFiles] = useState("");
   const [sortMyJoinCommunity, setSortMyJoinCommunity] = useState([]);
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   // created community
 
@@ -71,7 +76,6 @@ const MyCommunity = () => {
     axios
       .get(myCommunityApi, { headers: headers })
       .then((res) => {
-        console.log(res, "all community here");
         if (res.data.result === true) {
           const val = res.data.data;
           const imgPath = res.data.image_path;
@@ -122,64 +126,50 @@ const MyCommunity = () => {
       });
   };
 
+  const handleUpdateCommunity = (dta) => {
+    var cmData = { ...dta, imagePath: imagePath };
+    navigate("/create-community", { state: cmData });
+  };
+
   return (
     <>
       <Homepage_header />
       <Networking_headers />
-      <div className="container">
+      <div className="px-4">
         <div className=" row">
           <div className="col-lg-3 col-md-12 col-sm-12 mt-5">
             {createdCommunity.length != 0 && myJoinCommmunity.length !== 0 && (
-              <AddCommunitySidebar />
+              <CustomFilter />
             )}
           </div>
 
           <div className="col-lg-9 col-md-12 col-sm-12 mt-5">
             <div className="cretedCommunity">
               <h4 style={{ fontWeight: "700" }}>Created Community List </h4>
-              <button
+              {/* <button
                 onClick={() => setShowCreatedCommunity(!showCreatedCommunity)}
                 className="showHideCreateCommunity"
               >
                 {showCreatedCommunity ? "View Less" : "View All"}
-              </button>
+              </button> */}
             </div>
 
             <div className="row">
-              {showCreatedCommunity ? (
-                createdCommunity.length != 0 ? (
-                  createdCommunity.map((itm, index) => {
-                    return (
-                      <>
-                        <div className="col-lg-4 col-md-6 col-12 mt-3 mb-5">
-                          <MyCreatedCommunityCard
-                            data={itm}
-                            key={index}
-                            imagePath={imagePath}
-                            createCommunity={createCommunity}
-                            myCommunity={myCommunity}
-                            deleteCommunity={deleteCommunity}
-                          />
-                        </div>
-                      </>
-                    );
-                  })
-                ) : (
-                  <div className="noDataCont">
-                  <img src={NoDataImg} alt="" />
-                </div>
-                )
-              ) : sortCreateCommunity.length != 0 ? (
-                sortCreateCommunity.map((itm, index) => {
+              {createdCommunity.length != 0 ? (
+                createdCommunity.map((itm, index) => {
                   return (
                     <>
                       <div className="col-lg-4 col-md-6 col-12 mt-3 mb-5">
-                        <MyCreatedCommunityCard
+                        <CommunityCard
                           data={itm}
                           key={index}
                           imagePath={imagePath}
+                          createCommunity={createCommunity}
                           myCommunity={myCommunity}
+                          handleUpdateCommunity={handleUpdateCommunity}
                           deleteCommunity={deleteCommunity}
+                          showSubscribe={false}
+                          showEdit={true}
                         />
                       </div>
                     </>
@@ -194,47 +184,27 @@ const MyCommunity = () => {
 
             <div className="myjoinCommunity">
               <h4 style={{ fontWeight: "700" }}>My Community List </h4>
-              <button
+              {/* <button
                 onClick={() => setShowMyJoinCommunity(!showMyJoinCommunity)}
                 className="showHideCreateCommunity"
               >
                 {showMyJoinCommunity ? "View Less" : "View All"}
-              </button>
+              </button> */}
             </div>
             <div className="row">
-              {showMyJoinCommunity ? (
-                myJoinCommmunity.length !== 0 ? (
-                  myJoinCommmunity.map((item, index) => {
-                    return (
-                      <>
-                        <div className="col-lg-4 col-md-6 col-12 mt-3 mb-5">
-                          <MyCommunityCards
-                            data={item}
-                            key={index}
-                            imgFiles={imgFiles}
-                            myJoinCommmunity={myJoinCommmunity}
-                            myCommunity={myCommunity}
-                          />
-                        </div>
-                      </>
-                    );
-                  })
-                ) : (
-                  <div className="noDataCont">
-                  <img src={NoDataImg} alt="" />
-                </div>
-                )
-              ) : sortMyJoinCommunity.length != 0 ? (
-                sortMyJoinCommunity.map((item, index) => {
+              {myJoinCommmunity.length !== 0 ? (
+                myJoinCommmunity.map((item, index) => {
                   return (
                     <>
                       <div className="col-lg-4 col-md-6 col-12 mt-3 mb-5">
-                        <MyCommunityCards
+                        <CommunityCard
                           data={item}
                           key={index}
-                          imgFiles={imgFiles}
-                          myJoinCommmunity={myJoinCommmunity}
+                          imagePath={imagePath}
+                          createCommunity={createCommunity}
                           myCommunity={myCommunity}
+                          showSubscribe={true}
+                          showEdit={false}
                         />
                       </div>
                     </>

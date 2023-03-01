@@ -1,26 +1,45 @@
 .Communityheader {
-    padding: 10px 16px;
-    
+    padding: 7px 16px;
+    padding-top: 24px;
     margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: -18px;
+    margin-bottom: 8px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
   .community_details {
-    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 6px;
   }
-  .community_details h4 {
-    font-size: 24px;
-    font-weight: 600;
+
+  .cmTitle h5{
+    width: 100px;
+    font-family: 'Poppins-SemiBold';
+    color: var(--black);
   }
-  .community_details p {
-    font-size: 16px;
-    font-weight: 400;
+  .cmDetails h5{
+    width: 100px;
+    font-family: 'Poppins-SemiBold';
+    color: var(--black);
+    font-size: 14px;
   }
-  .community_details h6 {
-    font-size: 16px;
-    font-weight: 500;
+
+  .cmTitle h6{
+    margin-left: 8px;
+    text-transform: capitalize;
+    color: var(--gray);
+    font-family: 'Poppins-SemiBold';
   }
+  .cmDetails h6{
+    margin-left: 8px;
+    text-transform: capitalize;
+    color: var(--gray);
+    font-family: 'Poppins-Regular';
+    font-size: 13px;
+  }
+
+  
   .UserDetails {
     height: 120px;
   }
@@ -94,3 +113,50 @@
           padding: 0px;
       }
   }
+
+
+  /* bhola gupta css */
+
+  .userDetails{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .eventMem h6{
+    font-family: 'Poppins-SemiBold';
+    color: var(--lightgray);
+    font-size: 13px;
+  }
+
+  .createEvnet{
+    display: flex;
+    background-color: var(--primary);
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    padding: 15px 20px;
+    font-family: "Poppins-SemiBold";
+    color: #ffffff;
+    border-radius: 4px;
+    margin: 10px 0px;
+    margin-right: 20px;
+    justify-content: center;
+    min-width: 180px;
+    height: 45px;
+    font-size: 13px;
+  }
+
+  .createEvnet:hover{
+    background-color: #488877;
+  }
+
+  .createEvnet h6{
+    color: white;
+    font-family: 'Poppins-SemiBold';
+    font-size: 13px;
+    margin-bottom: 0px;
+    margin-right: 12px;
+  }
+

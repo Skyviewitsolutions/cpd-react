@@ -10,6 +10,7 @@ import { endpoints } from "../../services/endpoints";
 import axios from "axios";
 
 const MembersDetails = (props) => {
+
   const { show, setShow, selectedCommunityIdForMember } = props;
   const token = localStorage.getItem("token");
 
@@ -17,6 +18,7 @@ const MembersDetails = (props) => {
   const [imagePath , setImagePath] = useState("")
 
   const getMembers = () => {
+
     const url = `${endpoints.community.joinedMembers}${selectedCommunityIdForMember}`;
 
     const headers = {
@@ -36,7 +38,7 @@ const MembersDetails = (props) => {
         }
       })
       .catch((err) => {
-        console.log(err, "error here");
+        console.log(err, "error here members");
       });
   };
 

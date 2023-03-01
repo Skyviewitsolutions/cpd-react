@@ -4,8 +4,8 @@
     margin:0px;
     padding: 0px;
     overflow: hidden;
-
 }
+
 .CommunityDetails {
     margin: auto;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -14,12 +14,13 @@
     padding: 20px;
     margin-bottom: 20px;
 }
+
 .typeChecked{
     height: 45px;
-   
     align-items: center;
    cursor: pointer;
 }
+
 .form-check.private {
     margin-left: 25px;
 }
@@ -140,4 +141,13 @@ input#subTypeField {
         margin-left:40%;
        
     }
+}
+
+.visibility .form-check{
+    display: flex;
+    align-items: center;
+}
+
+.visibility .form-check label{
+    margin-left: 6px;
 }

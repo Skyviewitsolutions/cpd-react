@@ -73,7 +73,6 @@ const CoachesDetails = () => {
       .get(url, { headers: headers })
       .then((res) => {
         if (res.data.result) {
-          console.log(res, "workshops here");
           var data = res.data.data;
           var path = res.data.workshop_image_path;
           setWorkshopImgPath(path);
@@ -90,6 +89,7 @@ const CoachesDetails = () => {
     axios
       .get(url, { headers: headers })
       .then((res) => {
+        console.log(res , "response of coach details")
         if (res.data.result) {
           var data = res.data.data[0];
           var imagePath = res.data.avtarPath;
@@ -100,7 +100,7 @@ const CoachesDetails = () => {
         }
       })
       .catch((err) => {
-        console.log(err, "this is the error");
+        console.log(err, "this is the error of details");
       });
   };
 
@@ -158,6 +158,8 @@ const CoachesDetails = () => {
   const enrollWorkshop = (workShopData) => {
     var id = workShopData._id;
     const url = `${endpoints.workshop.enrollWorkshop}${id}`;
+
+    if(token){
     const headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -177,34 +179,44 @@ const CoachesDetails = () => {
       .catch((err) => {
         console.log(err, "error here");
       });
+    }
+    else {
+      toast("Please login" , {type : "warning"})
+    }
   };
 
   const bookCoaches = (coachData) => {
+
     var id = coachData._id;
     var url = `${endpoints.coaches.enrollCoaching}${id}`;
 
-    const headers = {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    };
+    if (token) {
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      };
 
-    setLoading(true);
+      setLoading(true);
 
-    axios
-      .get(url, { headers: headers })
-      .then((res) => {
-        setLoading(false);
-        if (res.data.result) {
-          getAllEnrolledCoachings();
-          toast("Coaching booked successfully", { type: "success" });
-        } else if (res.data.result == false) {
-          toast(res.data.message, { type: "warning" });
-        }
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.log(err, "this is the error here");
-      });
+      axios
+        .get(url, { headers: headers })
+        .then((res) => {
+          setLoading(false);
+          if (res.data.result) {
+            getAllEnrolledCoachings();
+            toast("Coaching booked successfully", { type: "success" });
+          } else if (res.data.result == false) {
+            toast(res.data.message, { type: "warning" });
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err, "this is the error here");
+        });
+    }
+    else {
+      toast("Please login" , {type : "warning"})
+    }
   };
 
   const showWorkshopDetails = (dta) => {
@@ -224,11 +236,19 @@ const CoachesDetails = () => {
   };
 
   const showWorkshopOnCalendar = async (data) => {
+    setEventsToBeShown([])
     var slots = JSON.parse(data.availability_slot);
     const calendarData = await getCalendarData(slots);
     setEventsToBeShown(calendarData);
     setShowCustomCalendar(true);
   };
+
+  console.log(coachDetails ,"coachDetails here");
+
+  // getting domain and industry of coach ;
+
+  var domain = coachDetails?.domain?.[0];
+  var industry = coachDetails?.industry?.[0];
 
   return (
     <>
@@ -245,8 +265,8 @@ const CoachesDetails = () => {
           <div className="coachesDetailsimagesBox">
             <img
               src={
-                coachDetails?.avatar
-                  ? `${coachImgPath}${coachDetails?.avatar}`
+                coachDetails?.avtar
+                  ? `${coachImgPath}${coachDetails?.avtar}`
                   : UserImg
               }
               alt=""
@@ -261,7 +281,7 @@ const CoachesDetails = () => {
               </span>
             </h4>
             <h6>
-              Speacility : {coachDetails.category} | {coachDetails.subCategory}
+              Speacility : {domain} | {industry}
             </h6>
             <p>{coachDetails.description}</p>
           </div>
@@ -278,7 +298,8 @@ const CoachesDetails = () => {
                       return itm.coaching_id == id;
                     });
 
-                    var image = coachImgPath + coaching.image;
+                    var image = coachingImgPath + "/" + coaching.image;
+                   
                     var bookingStatus = 3;
                     if (enrolled.length != 0) {
                       var datas = enrolled[0];
@@ -293,6 +314,7 @@ const CoachesDetails = () => {
                             coaching={coaching}
                             key={index}
                             image={image}
+                            imageName={coaching.image}
                             bookCoaches={bookCoaches}
                             showBookBtn={true}
                             bookingStatus={bookingStatus}

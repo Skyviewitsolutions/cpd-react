@@ -2,9 +2,9 @@ import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Resume_creation from "./Screen/Resume_creation";
-import Home_screens from "./Screen/Home_screens";
+import Home_screens from "./Screen/Home/Home_screens";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Networking from "./Screen/Networking";
+import Networking from "./Screen/Networking/Networking";
 import Loginpage from "./Screen/Login/LoginPage";
 import Signup from "./Screen/SignUp/SignUp";
 import Event from "./Screen/Event";
@@ -26,7 +26,7 @@ import Workshop from "./Screen/Workshop/Workshop";
 import AddEvent_Form_second from "../src/Component/form/AddEvent_Form_second";
 import EventDetails from "./Screen/EventDetails/EventDetails";
 import FinalResume from "./Component/Student_cv/FinalResume";
-import ForgotPasssword from "./Screen/ForgotPassword";
+import ForgotPasssword from "./Screen/ForgotPassword/ForgotPassword";
 import ForgotPasswordDetails from "./Screen/ForgotPasswordDetails";
 import CreateCommunity from "./Component/CreateCommunity/CreateCommunity";
 import AddCommunitySidebar from "./Component/AddCommunitySidebar/AddCommunitySidebar";
@@ -107,7 +107,7 @@ function App() {
             path="/community_RetailLocation"
             element={<Community_RetailLocation />}
           ></Route>
-          <Route path="/addEvent" element={<AddEvent />} />
+          <Route path="/add-event" element={<AddEvent />} />
           <Route exact path="/myEvents" element={<MyEvent />} />
           <Route exact path="/myCommunity" element={<MyCommunity />} />
           <Route exact path="/event-details" element={<EventDetails />} />

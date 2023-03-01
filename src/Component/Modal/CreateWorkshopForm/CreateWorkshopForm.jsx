@@ -128,6 +128,7 @@ const CreateWorkshopForm = (props) => {
       var payment_type = sessionType == "hourly" ? 1 : 2;
       var is_paid = paid == true ? 1 : 0;
       var availability_timing = ["12:00:00", "01:00:00"];
+      var is_repeated = isRepeated ? 1 : 0;
 
       var slots = {
         isRepeated: isRepeated,
@@ -145,10 +146,10 @@ const CreateWorkshopForm = (props) => {
       formData.append("availability_type", availability_type);
       formData.append("payment_type", payment_type);
       formData.append("price", price);
-      formData.append("is_paid", 0);
+      formData.append("is_paid", is_paid);
       formData.append("availability_slot", JSON.stringify(slots));
       formData.append("availability_timing", availability_timing);
-      formData.append("is_repeated", 1);
+      formData.append("is_repeated", is_repeated);
       formData.append("max_members", maxNumber);
       formData.append("image", workshopImg);
       formData.append("domain", domainId);
@@ -282,6 +283,8 @@ const CreateWorkshopForm = (props) => {
       var payment_type = sessionType == "hourly" ? 1 : 2;
       var is_paid = paid == true ? 1 : 0;
       var availability_timing = ["12:00:00", "01:00:00"];
+       var is_repeated = isRepeated ? 1 : 0;
+
 
       var slots = {
         isRepeated: isRepeated,
@@ -302,7 +305,7 @@ const CreateWorkshopForm = (props) => {
       formData.append("is_paid", is_paid);
       formData.append("availability_slot", JSON.stringify(slots));
       formData.append("availability_timing", availability_timing);
-      formData.append("is_repeated", 1);
+      formData.append("is_repeated", is_repeated);
       formData.append("max_members", maxNumber);
       formData.append("image", workshopImg);
       formData.append("domain", domainId);

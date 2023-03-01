@@ -1,9 +1,13 @@
 .upcoming h3{
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 700;
-
+    color: var(--black);
+    font-family: 'Poppins-SemiBold';
+    margin-left: 8px;
 }
-
+.networkingsearchBox{
+    margin-left: 9px;
+}
 .addCmntyCont{
     align-items: center;
     display: flex;

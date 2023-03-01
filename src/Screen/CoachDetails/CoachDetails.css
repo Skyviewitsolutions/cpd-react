@@ -422,3 +422,7 @@
     width: 100%;
   }
 }
+
+.coachesDetailsimagesBox img{
+  object-fit: cover;
+}

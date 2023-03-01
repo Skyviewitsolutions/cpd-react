@@ -18,6 +18,9 @@ import { endpoints } from "../../Component/services/endpoints";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import CustomFilter from "../../Component/CustomFilter/CustomFilter";
+import EventsCard from "../../Component/EventsCard/EventsCard";
+import CustomCalendar from "../../Component/Calendar/CustomCalendar";
+import { ToastContainer } from "react-toastify";
 
 
 const CommunityDetails = (props) => {
@@ -29,6 +32,8 @@ const CommunityDetails = (props) => {
   const [picPath, setPicPath] = useState("");
   const [shortCommunityEvent, setShortCommunityEvent] = useState([]);
   const [showAllEvents, setShowAllEvents] = useState(false);
+  const [showCustomCalendar , setShowCustomCalendar] = useState(false);
+  const [eventsToBeShown , setEventsToBeShown] = useState([])
 
   const communityEventApi = endpoints.events.getAllEvents;
 
@@ -61,7 +66,9 @@ const CommunityDetails = (props) => {
     communityEvent();
   }, []);
 
-  
+  const viewDetails = () =>{
+
+  }
 
   return (
     <>
@@ -70,57 +77,55 @@ const CommunityDetails = (props) => {
       <div className="p-4">
         <Community_header communityDetails={selectedCommunity} />
         <div className="row">
-          <div className="col-lg-3 d-lg-block d-none mt-5 ps-5 pe-5 mb-5 d-lg-block d-none">
+          <div className="col-lg-3 d-lg-block d-none mt-1 ps-5 pe-5 mb-5 d-lg-block d-none">
             <CustomFilter />
           </div>
           <div className="col-lg-9 col-md-12 col-12">
             <div className="row ">
-              <div className="col-12 col-md-12 col-lg-12 mt-5 cmntyBtn">
+              <div className="col-12 col-md-12 col-lg-12 mt-2 cmntyBtn lttitle">
                 <h5>Latest Session</h5>
-                <button
+                {/* <button
                   className="btn btn-success showDetailsbtn"
                   onClick={() => setShowAllEvents(!showAllEvents)}
                 >
                   {showAllEvents ? "View Less" : "View All"}
-                </button>
+                </button> */}
               </div>
             </div>
             <div className="eventListPersonShow"></div>
 
-            <div className="row mt-5">
-              {showAllEvents
-                ? communityEventDetails.length != 0 &&
-                  communityEventDetails.map((itm, index) => {
-                    return (
-                      <>
-                        <div className="col-sm-12 col-md-6 col-lg-4 ">
-                          <DetailsCard
+            <div className="row mt-2">
+              {communityEventDetails.length != 0 &&
+                communityEventDetails.map((itm, index) => {
+                  return (
+                    <>
+                      <div className="col-sm-12 col-md-6 col-lg-4 ">
+                       
+                        <EventsCard
                             data={itm}
                             key={index}
-                            picPath={picPath}
+                            imagePath={picPath}
+                            viewDetails={viewDetails}
+                            showEdit={false}
+                            showCustomCalendar={showCustomCalendar}
+                            setShowCustomCalendar={setShowCustomCalendar}
+                            eventsToBeShown={eventsToBeShown}
+                            setEventsToBeShown={setEventsToBeShown}
                           />
-                        </div>
-                      </>
-                    );
-                  })
-                : shortCommunityEvent.map((itm, index) => {
-                    return (
-                      <>
-                        <div className="col-sm-12 col-md-6 col-lg-4 ">
-                          <DetailsCard
-                            data={itm}
-                            key={index}
-                            picPath={picPath}
-                          />
-                        </div>
-                      </>
-                    );
-                  })}
+                      </div>
+                    </>
+                  );
+                })}
             </div>
           </div>
         </div>
       </div>
-
+      <CustomCalendar
+        showCalendar={showCustomCalendar}
+        setShowCalendar={setShowCustomCalendar}
+        eventsToBeShown={eventsToBeShown}
+      />         
+      <ToastContainer />
       <Footer />
     </>
   );

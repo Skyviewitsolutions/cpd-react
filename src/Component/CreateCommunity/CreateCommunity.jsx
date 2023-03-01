@@ -12,6 +12,7 @@ import { warning } from "@remix-run/router";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import $ from "jquery";
+import Button from "../button/Button/Button";
 
 
 const CreateCommunity = () => {
@@ -400,7 +401,7 @@ const CreateCommunity = () => {
                       </div>
                     </div>
                     <div className="col-md-6 mb-4 pb-2">
-                      <div className="form-outline">
+                      <div className="form-outline visibility">
                         <label className="form-label" for="phoneNumber">
                           Visibility
                         </label>
@@ -415,11 +416,11 @@ const CreateCommunity = () => {
                               value=""
                               onChange={(e) => setVisibility("public")}
                             />
-                            Public
+                           
                             <label
                               className="form-check-label"
                               for="Public"
-                            ></label>
+                            > Public</label>
                           </div>
                           <div className="form-check private">
                             <input
@@ -431,11 +432,11 @@ const CreateCommunity = () => {
                               value=""
                               onChange={(e) => setVisibility("private")}
                             />
-                            Private
+                          
                             <label
                               className="form-check-label"
                               for="Private"
-                            ></label>
+                            >  Private</label>
                           </div>
                         </div>
                       </div>
@@ -470,6 +471,7 @@ const CreateCommunity = () => {
                     </div>
                     <div className="col-md-6 mb-4 pb-2">
                       <div className="form-outline subType d-none">
+                        <div style={{width : "100%"}}>
                         <label className="form-label" for="">
                           Sub Type
                         </label>
@@ -477,8 +479,10 @@ const CreateCommunity = () => {
                           id="subTypeField"
                           className="form-control cmntyForm"
                           value={subType}
+                          style={{width : "100%"}}
                           onChange={(e) => setSubType(e.target.value)}
                         />
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -488,13 +492,7 @@ const CreateCommunity = () => {
                         <label for="" className="form-label">
                           Tag
                         </label>
-                        {/* <TagsInput
-                          name="tags"
-                          placeHolder="Enter Tags"
-                          classNames="cmntyForm"
-                          value={tags}
-                          onChange={setTags}
-                        /> */}
+                       
                         <TagsInput
                           value={tags}
                           onChange={setTags}
@@ -516,24 +514,8 @@ const CreateCommunity = () => {
                   </div>
 
                   <div class="mb-2">
-                    <button
-                      class="btn communitySubmitButton"
-                      type="submit"
-                      onClick={update ? updateCommunity : submitCommunity}
-                    >
-                      {loading ? (
-                        <Spinner
-                          animation="border"
-                          variant="light"
-                          style={{ width: "20px", height: "20px" }}
-                        />
-                      ) : update ? (
-                        "Update"
-                      ) : (
-                        "Submit"
-                      )}
-                     
-                    </button>
+                    
+                    <Button onClick={update ? updateCommunity : submitCommunity} loading={loading} title={ update ? "Update" :  "Submit" }/>
                     <Spinner />
                   </div>
                 </div>

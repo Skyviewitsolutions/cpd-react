@@ -123,6 +123,7 @@ const CreateCoachingForm = (props) => {
       var payment_type = sessionType == "hourly" ? 1 : 2;
       var is_paid = paid == true ? 1 : 0;
       var is_repeated = isRepeated ? 1 : 0;
+      var availability_timing = ["12:00:00", "01:00:00"];
 
       var slots = {
         isRepeated: isRepeated,
@@ -141,7 +142,7 @@ const CreateCoachingForm = (props) => {
       formData.append("price", price);
       formData.append("is_paid", is_paid);
       formData.append("availability_slot", JSON.stringify(slots));
-      formData.append("availability_timing", ["12:00:00", "01:00:00"]);
+      formData.append("availability_timing", availability_timing);
       formData.append("is_repeated", is_repeated);
       formData.append("image", coachingImg);
       formData.append("domain", domainId);
@@ -149,7 +150,6 @@ const CreateCoachingForm = (props) => {
 
       const headers = {
         Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
       };
 
       setLoading(true);
@@ -224,7 +224,6 @@ const CreateCoachingForm = (props) => {
 
       const headers = {
         Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
       };
 
       setLoading(true);
@@ -256,6 +255,7 @@ const CreateCoachingForm = (props) => {
   useEffect(() => {
     if (updateCoaching === true) {
       var dta = selectedCoachingForUpdate;
+      console.log(dta , "dta here")
       var domainId = dta.domain?._id;
 
       var domainName = allDomain.find((itm, index) => {
@@ -286,7 +286,6 @@ const CreateCoachingForm = (props) => {
       setSelectedCoachingId(dta._id);
 
       var slots = JSON.parse(dta?.availability_slot);
-      console.log(slots, "slots here");
       setSelectedDays(slots?.selectedDays);
       setSelectedDates(slots?.selectedDates);
       setDaysSlot(slots?.daysSlot);

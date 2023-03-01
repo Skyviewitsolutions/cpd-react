@@ -5,6 +5,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 3px;
   }
   .community_details {
     height: 120px;
@@ -99,4 +100,13 @@
       .community_left {
         border-right: none!important;
     }
+  }
+
+  .cmnTitle h5{
+    width: 140px !important;
+  }
+  .cmntyHeadercont{
+  margin-top: -9px !important;
+  margin-bottom: 8px !important;
+  padding-top: 3px !important;
   }

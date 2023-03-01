@@ -1,0 +1,31 @@
+.eventCont {
+  width: 100%;
+  margin-right: 4px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0px 3px 6px #00000029;
+  margin-bottom: 20px;
+}
+
+.eventImg {
+  width: 100%;
+  height: 206px;
+}
+.eventImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.viewDetailsBtn {
+  background-color: var(--primary);
+  color: white !important;
+  border-radius: 2px;
+  padding: 4px 8px;
+  font-family: "Poppins-Regular";
+  width: 100% !important;
+  text-align: center;
+  font-size: 11px !important;
+  margin-top: 3px;
+  cursor: pointer;
+}

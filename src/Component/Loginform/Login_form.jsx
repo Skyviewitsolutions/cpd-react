@@ -21,7 +21,9 @@ import { ToastContainer, toast } from "react-toastify";
 import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
 
+
 const Login_form = (props) => {
+
   const navigate = useNavigate("");
   const [showPassword, setShowpassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -33,6 +35,7 @@ const Login_form = (props) => {
   const loginUrl = "https://admin.cpdedu.com/api/v1/login";
 
   const submit = () => {
+    
     if (email === "") {
       setErrorMsg({ email: "Please enter valid email" });
     } else if (!validator.isEmail(email)) {
@@ -45,10 +48,8 @@ const Login_form = (props) => {
       setErrorMsg("");
 
       const formData = new FormData();
-
       formData.append("email", email);
       formData.append("password", password);
-
       setLoading(true);
 
       axios

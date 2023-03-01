@@ -13,15 +13,7 @@ const DetailsCard = (props) => {
   const image = picPath + data.event_photo;
   const navigate = useNavigate();
 
-  // var days = data?.days;
-  // days = days.replaceAll('"', "");
-  // days = days.split(",");
-
-  var timeslots = data?.timeslots;
-  console.log(timeslots, "timeslots here");
-
-  var days = []
-
+  var days = [] 
 
   return (
     <>
@@ -56,11 +48,9 @@ const DetailsCard = (props) => {
                 navigate("/event-details", { state: { eventDetails: data } })
               }
             >
-              
               <img src={eye} alt="" style={{marginRight : "4px"}}></img> view details
             </button>
-            {/* <h6  onClick={() =>navigate('/event_details',{state:{eventDetails:data}})}>
-            </h6> */}
+           
           </div>
           <div className="Etiming_boxes">
             <h6>

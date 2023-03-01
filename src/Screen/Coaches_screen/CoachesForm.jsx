@@ -206,6 +206,7 @@ const CoachesForm = () => {
     setStldExperienceIndex(ind);
   };
 
+
   const updateSelectedExperience = () => {
 
     if (sltdJobTitle == "") {
@@ -237,7 +238,6 @@ const CoachesForm = () => {
       jobStrtYr[sltdExperienceIndex] = sltdJobStartYear;
       jobEndYr[sltdExperienceIndex] = sltdJobEndYear;
       employmntTyp[sltdExperienceIndex] = sltdEmploymentType;
-      // isCrntJob[sltdExperienceIndex] = sltdIsCurrentJob;
 
       setJobDomain(dmain);
       setJobIndustry(indstry);
@@ -441,7 +441,6 @@ const CoachesForm = () => {
 
       const headers = {
         Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
       };
 
       axios
@@ -450,6 +449,7 @@ const CoachesForm = () => {
           setLoading(false);
           if (res.data.result) {
             getUserCvData();
+            localStorage.setItem("isCvUploaded" , true)
             navigate("/")
             toast("Profile created successfully", { type: "success" });
           }
@@ -625,7 +625,6 @@ const CoachesForm = () => {
 
       const headers = {
         Authorization: `Bearer ${token}`,
-        // "Content-Type": "application/json",
       };
 
       axios

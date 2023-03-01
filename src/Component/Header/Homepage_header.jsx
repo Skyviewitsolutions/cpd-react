@@ -19,9 +19,6 @@ import learning from "../../assets/Icons/Artboard7.svg";
 import coaches from "../../assets/Images/coaches.svg";
 import workshop from "../../assets/Images/workshop.svg";
 import networking from "../../assets/Images/networking.svg";
-import enroll_courcess from "../../assets/Icons/Artboard15.svg";
-import { BsFillBriefcaseFill } from "react-icons/bs";
-import { RiNotification2Fill } from "react-icons/ri";
 import job from "../../assets/Images/job.svg";
 import fare from "../../assets/Images/fare.svg";
 import { Link, useNavigate, NavLink } from "react-router-dom";
@@ -39,6 +36,7 @@ import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 import Header2 from "./Header2";
 
 const Homepage_header = () => {
+
   const navigate = useNavigate("");
   const [isHovering, setIsHovering] = useState(false);
   const token = localStorage.getItem("token");
@@ -223,7 +221,7 @@ const Homepage_header = () => {
                             </span>
                           </div>
                         </div>
-                      )}
+                      )} 
                     </div>
                   </Form>
                 ) : (
@@ -233,11 +231,10 @@ const Homepage_header = () => {
                       className="BtnLogin"
                       onClick={() => navigate("/login")}
                     >
-                      {" "}
                       <span>
                         <AiOutlineLogin />
                       </span>{" "}
-                      Login{" "}
+                      Login
                     </button>
                   </Nav.Link>
                 )}
