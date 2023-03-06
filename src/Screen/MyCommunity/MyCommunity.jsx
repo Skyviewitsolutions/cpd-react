@@ -16,8 +16,9 @@ import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 import CommunityCard from "../../Component/CommmunityCard/CommunityCard";
 import { useNavigate, useLocation } from "react-router-dom";
 
+
 const MyCommunity = () => {
-  
+
   const [createdCommunity, setCreatedCommunity] = useState([]);
   const [imagePath, setImagePath] = useState("");
   const [sortCreateCommunity, setSortCreatedCommunity] = useState([]);
@@ -28,6 +29,7 @@ const MyCommunity = () => {
   const [sortMyJoinCommunity, setSortMyJoinCommunity] = useState([]);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  const [loading , setLoading] = useState(false);
 
   // created community
 
@@ -131,6 +133,73 @@ const MyCommunity = () => {
     navigate("/create-community", { state: cmData });
   };
 
+  // writing code for joining and leaving the community ;
+  const joinCommunity = (id) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      setLoading(true);
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      };
+
+      const url = `${endpoints.community.joinCommunity}${id}`;
+
+      axios
+        .get(url, { headers: headers })
+        .then((res) => {
+          console.log(res, "join community response");
+          setLoading(false);
+          if (res.data.result) {
+            toast("Community joined successfully", { type: "success" });
+            createCommunity();
+            myCommunity();
+          } else if (!res.data.result) {
+            toast(res.data?.message, { type: "warning" });
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err);
+        });
+    } else {
+      toast("Please login", { warning: "warning" });
+    }
+  };
+
+  const leaveCommunity = (id) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      setLoading(true);
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      };
+      const url = `${endpoints.community.leaveCommunity}${id}`;
+      axios
+        .get(url, { headers: headers })
+        .then((res) => {
+          setLoading(false);
+          if (res.data.result) {
+            toast("Community left successfully", { type: "success" });
+            createCommunity();
+            myCommunity();
+          } else if (!res.data.result) {
+            toast(res.data?.message, { type: "warning" });
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err);
+        });
+    } else {
+      toast("Please login", { type: "warning" });
+    }
+  };
+
   return (
     <>
       <Homepage_header />
@@ -194,6 +263,14 @@ const MyCommunity = () => {
             <div className="row">
               {myJoinCommmunity.length !== 0 ? (
                 myJoinCommmunity.map((item, index) => {
+                  const id = item._id;
+                  var isSubscribed = myJoinCommmunity.some((element) => {
+                    if (element._id === id) {
+                      return true;
+                    }
+                    return false;
+                  });
+
                   return (
                     <>
                       <div className="col-lg-4 col-md-6 col-12 mt-3 mb-5">
@@ -204,7 +281,10 @@ const MyCommunity = () => {
                           createCommunity={createCommunity}
                           myCommunity={myCommunity}
                           showSubscribe={true}
+                          joinCommunity={joinCommunity}
+                          leaveCommunity={leaveCommunity}
                           showEdit={false}
+                          isSubscribed={isSubscribed}
                         />
                       </div>
                     </>

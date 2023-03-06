@@ -119,8 +119,8 @@ const CreateWorkshopForm = (props) => {
       toast("please select workshop industry", { type: "warning" });
     } else if (!maxNumber) {
       toast("Max number of student is required", { type: "warning" });
-    } else if (!sessionType) {
-      toast("please select session type", { type: "warning" });
+    // } else if (!sessionType) {
+    //   toast("please select session type", { type: "warning" });
     } else {
       const url = endpoints.workshop.createWorkshop;
 
@@ -166,7 +166,7 @@ const CreateWorkshopForm = (props) => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            getAllWorkshop();
+            // getAllWorkshop();
             getMyWorkshop();
             setShowWorkshopForm(false);
             setShowAllWorkshop(false);
@@ -323,7 +323,7 @@ const CreateWorkshopForm = (props) => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            getAllWorkshop();
+            // getAllWorkshop();
             getMyWorkshop();
             setShowAllWorkshop(false);
             setShowWorkshopForm(false);

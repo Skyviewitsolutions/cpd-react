@@ -4,7 +4,6 @@ var userDetails = localStorage.getItem("users");
 var userData = userDetails && JSON.parse(userDetails);
 var userId = userData && userData._id;
 
-console.log(userId , "userId here")
 
 export const endpoints = {
 
@@ -33,7 +32,12 @@ export const endpoints = {
     inviteCommunity : BASE_URL + "/events/invite-whole-community?" ,
     addEvent : BASE_URL + "/events/add" ,
     updateEvent : BASE_URL + "/events/update/",
-    delete : BASE_URL + "/events/disable/"
+    delete : BASE_URL + "/events/disable/",
+    joinEvent : BASE_URL + "/events/join/",
+    leaveEvent : BASE_URL + "/events/leave/",
+    myEvents : BASE_URL + "/events/my-event",
+    eventDetails : BASE_URL + "/event/get-details/",
+    eventsByCommunityId : BASE_URL + "/events/get-events-by-community-id/"
   },
 
   coaches : {

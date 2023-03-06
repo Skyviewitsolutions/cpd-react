@@ -216,7 +216,7 @@ export const getCalendarData = async (data) => {
 
         var slots = dateSlot[j];
         slots = slots.slots;
-
+        console.log(slots , 'slots here')
         slots.map((slot, index) => {
           date.map((itm, ind) => {
             var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
@@ -251,12 +251,14 @@ export const getCalendarData = async (data) => {
         var date = new Date(createdDate);
         return date;
       });
-
-      var slots = dateSlot[j];
+      
+      for(var k = 0; k < allDates.length ; k++){
+      var slots = dateSlot[k];
       slots = slots.slots;
-
+      
+      var itm = allDates[k]
       slots.map((slot, index) => {
-        allDates.map((itm, ind) => {
+        // allDates.map((itm, ind) => {
           var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
           var month =
             itm.getMonth() + 1 < 10
@@ -275,8 +277,9 @@ export const getCalendarData = async (data) => {
           };
 
           events.push(evnt);
-        });
+        // });
       });
+    }
     }
   }
   return events;

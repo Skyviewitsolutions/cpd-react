@@ -18,7 +18,7 @@ const Community_header = (props) => {
 
   const navigate = useNavigate("");
   const BackEvent = () => {
-    navigate("/networking");
+    navigate("/community");
   };
 
   return (
@@ -53,7 +53,7 @@ const Community_header = (props) => {
                 <h6> Members ({communityDetails.members_count})</h6>
               </div>
               <div className="eventBtn">
-                <Button title="Back To Event" onClick={() => BackEvent()} />
+                <Button title="Back To Community" onClick={() => BackEvent()} />
               </div>
               {token && 
               <div

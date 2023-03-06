@@ -105,6 +105,7 @@ const WorkshopCard = (props) => {
                 onClick={() => enrollWorkshop(workshop)}
                 styles={{
                   height: "30px",
+                  margin : '5px 0px'
                 }}
               />
             )}

@@ -16,34 +16,46 @@ import Networking_headers from "../../Component/Header/Networking_headers";
 import DetailsCard from "../../Component/Cards/DetailsCard";
 import { endpoints } from "../../Component/services/endpoints";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 import EventsCard from "../../Component/EventsCard/EventsCard";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
-import { ToastContainer } from "react-toastify";
-
+import { ToastContainer, toast } from "react-toastify";
+import { generatePath, useNavigate } from "react-router-dom";
+import NoDataImg from "../../assets/Images/noDataFound.png"
 
 const CommunityDetails = (props) => {
-
   const location = useLocation();
+  const navigate = useNavigate();
   const selectedCommunity = location.state;
-
   const [communityEventDetails, setCommunityEventDetails] = useState([]);
   const [picPath, setPicPath] = useState("");
   const [shortCommunityEvent, setShortCommunityEvent] = useState([]);
   const [showAllEvents, setShowAllEvents] = useState(false);
-  const [showCustomCalendar , setShowCustomCalendar] = useState(false);
-  const [eventsToBeShown , setEventsToBeShown] = useState([])
+  const [showCustomCalendar, setShowCustomCalendar] = useState(false);
+  const [imagePath, setImagePath] = useState("");
+  const [eventsToBeShown, setEventsToBeShown] = useState([]);
 
-  const communityEventApi = endpoints.events.getAllEvents;
+  const getMyEventsApi = endpoints.events.myEvents;
+
+  const { communityId } = useParams();
+  console.log(communityId, "communityId");
+
+  const [myEvent, setMyEvent] = useState([]);
+  const token = localStorage.getItem("token");
+  const [loading, setLoading] = useState(false);
 
   const communityEvent = () => {
+    const communityEventApi = `${endpoints.events.eventsByCommunityId}${communityId}`;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
     axios
-      .get(communityEventApi)
+      .get(communityEventApi, { headers: headers })
       .then((res) => {
+        console.log(res, "response here which can be shown");
         if (res.data.result === true) {
           var val = res.data.data;
-          console.log(val, "value");
 
           setCommunityEventDetails(val);
           const path = res.data.image_path;
@@ -62,13 +74,107 @@ const CommunityDetails = (props) => {
       });
   };
 
+  const getMyEvents = () => {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    axios
+      .get(getMyEventsApi, { headers: headers })
+      .then((res) => {
+        if (res.data.result === true) {
+          const val = res.data.data;
+          const imgPath = res.data.image_path;
+          const videoPath = res.data.video_path;
+          setImagePath(imgPath);
+          // setVideoPath(videoPath);
+          setMyEvent(val);
+        }
+      })
+      .catch((err) => {
+        console.log(err, "this is events error");
+      });
+  };
+
   useEffect(() => {
     communityEvent();
+    getMyEvents();
   }, []);
 
-  const viewDetails = () =>{
+  const viewDetails = (data) => {
+    var eventId = data._id;
+    const path = generatePath("/event-full-details/:eventId", {
+      eventId: eventId,
+    });
+    navigate(path);
+  };
 
-  }
+  // writing code for joining and leaving the event
+
+  const joinEvent = (id) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      setLoading(true);
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      };
+
+      const url = `${endpoints.events.joinEvent}${id}`;
+
+      axios
+        .get(url, { headers: headers })
+        .then((res) => {
+          console.log(res, "join community response");
+          setLoading(false);
+          if (res.data.result) {
+            toast("Events joined successfully", { type: "success" });
+            communityEvent();
+            getMyEvents();
+          } else if (!res.data.result) {
+            toast(res.data?.message, { type: "warning" });
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err);
+        });
+    } else {
+      toast("Please login", { warning: "warning" });
+    }
+  };
+
+  const leaveEvent = (id) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      setLoading(true);
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      };
+      const url = `${endpoints.events.leaveEvent}${id}`;
+      axios
+        .get(url, { headers: headers })
+        .then((res) => {
+          setLoading(false);
+          if (res.data.result) {
+            toast("Events left successfully", { type: "success" });
+            communityEvent();
+            getMyEvents();
+          } else if (!res.data.result) {
+            toast(res.data?.message, { type: "warning" });
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err);
+        });
+    } else {
+      toast("Please login", { type: "warning" });
+    }
+  };
 
   return (
     <>
@@ -97,25 +203,41 @@ const CommunityDetails = (props) => {
             <div className="row mt-2">
               {communityEventDetails.length != 0 &&
                 communityEventDetails.map((itm, index) => {
+                  const id = itm._id;
+                  var isSubscribed = myEvent.some((element) => {
+                    if (element._id === id) {
+                      return true;
+                    }
+                    return false;
+                  });
                   return (
                     <>
                       <div className="col-sm-12 col-md-6 col-lg-4 ">
-                       
                         <EventsCard
-                            data={itm}
-                            key={index}
-                            imagePath={picPath}
-                            viewDetails={viewDetails}
-                            showEdit={false}
-                            showCustomCalendar={showCustomCalendar}
-                            setShowCustomCalendar={setShowCustomCalendar}
-                            eventsToBeShown={eventsToBeShown}
-                            setEventsToBeShown={setEventsToBeShown}
-                          />
+                          data={itm}
+                          key={index}
+                          imagePath={picPath}
+                          viewDetails={viewDetails}
+                          showEdit={false}
+                          showCustomCalendar={showCustomCalendar}
+                          setShowCustomCalendar={setShowCustomCalendar}
+                          eventsToBeShown={eventsToBeShown}
+                          setEventsToBeShown={setEventsToBeShown}
+                          showSubscribe={true}
+                          isSubscribed={isSubscribed}
+                          joinEvent={joinEvent}
+                          leaveEvent={leaveEvent}
+                        />
                       </div>
                     </>
                   );
                 })}
+
+              {communityEventDetails.length == 0 && (
+                <div className="noDataCont">
+                  <img src={NoDataImg} alt="" />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -124,7 +246,7 @@ const CommunityDetails = (props) => {
         showCalendar={showCustomCalendar}
         setShowCalendar={setShowCustomCalendar}
         eventsToBeShown={eventsToBeShown}
-      />         
+      />
       <ToastContainer />
       <Footer />
     </>

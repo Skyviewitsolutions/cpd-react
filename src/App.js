@@ -47,6 +47,7 @@ import CommunityNewSidebar from "./Component/navbar/CommunityNewSidebar";
 import WorkshopDetails from "./Screen/WorkshopDetails/WorkshopDetails";
 import MainLayout from "./Layouts/MainLayout";
 import CoachingDetails from "./Screen/CoachingDetails/CoachingDetails";
+import EventFullDetails from "./Screen/EventFullDetails/EventFullDetails";
 
 
 function App() {
@@ -94,7 +95,7 @@ function App() {
           ></Route>
           <Route
             exact
-            path="/community-details"
+            path="/community-details/:communityId"
             element={<CommunityDetails />}
           ></Route>
           <Route
@@ -151,6 +152,7 @@ function App() {
           />
           {/* This is the dashboard layout here */}
           <Route exact path="/dashboardLayout" element={<MainLayout />} />
+          <Route exact path="/event-full-details/:eventId" element={<EventFullDetails />} />
         </Routes>
       </Router>
       <ToastContainer autoClose={3000}/>

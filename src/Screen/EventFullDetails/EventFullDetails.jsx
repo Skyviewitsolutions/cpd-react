@@ -1,59 +1,53 @@
-import React, { useEffect, useState } from "react";
-import "./coachingDetails.css";
-import Footer from "../../Component/Footer/Footer";
+import React , {useState , useEffect} from "react";
+import "./eventFullDetails.css";
 import Homepage_header from "../../Component/Header/Homepage_header";
-import profileimg from "../../assets/Images/profileimg.png";
-import dummypersion from "../../assets/Images/dummypersion.jpeg";
-import dummyimg from "../../assets/Images/dummyimg.jpeg";
-import bgimg from "../../assets/Images/bgcpdcoaches.png";
-import workshopPre from "../../assets/Images/workshopPre.jfif";
 import { GiRoundStar } from "react-icons/gi";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import profileimg from "../../assets/Images/profileimg.png";
+import Footer from "../../Component/Footer/Footer";
+import { useParams , useLocation , useNavigate } from "react-router-dom";
 import { endpoints } from "../../Component/services/endpoints";
+import axios from "axios";
+import { event } from "jquery";
 
 
-const CoachingDetails = () => {
+const EventFullDetails = () => {
 
-  const { coachingId } = useParams();
-  const [coachingDetails, setCoachingDetails] = useState({});
+
+  const {eventId} = useParams();
   const token = localStorage.getItem("token");
-  const [imgPath, setImgPath] = useState([]);
+  const [imgPath , setImgPath] = useState([]);
+  const [eventDetails , setEventDetails] = useState({});
+  const navigate = useNavigate();
 
   const headers = {
     Authorization: `Bearer ${token}`,
   };
 
-  const getCoachingDetailsById = () => {
-    const url = `${endpoints.coaches.getCoachingDetailsById}${coachingId}`;
+  const getEventDetails = () =>{
+    const url = `${endpoints.events.eventDetails}${eventId}`;
     axios
       .get(url, { headers: headers })
       .then((res) => {
-        console.log(res, "response here of coachings here");
         if (res.data.result) {
-          const val = res.data.data?.[0];
-          if (val) {
-            setCoachingDetails(val);
-            var path = res.data?.coaching_image_path;
-            setImgPath(path);
-          }
+          console.log(res , "response");
+          const val = res.data.data
+          setEventDetails(val);
+          var path = res.data?.image_path
+          setImgPath(path)
         }
       })
       .catch((err) => {
         console.log(err, "error here");
       });
-  };
+  }
 
-  useEffect(() => {
-    getCoachingDetailsById();
-  }, []);
+  useEffect(() =>{
+    getEventDetails();
+  },[]);
 
-  var industry = coachingDetails?.industry?.title
-  var domain = coachingDetails?.domain?.title
+  const eventImage = imgPath + eventDetails?.event_photo;
 
-  const coachInfo = coachingDetails?.coach_info;
-  console.log(coachInfo , "coaching details");
-
+  console.log(eventDetails , "eventDetails");
 
   return (
     <>
@@ -62,32 +56,33 @@ const CoachingDetails = () => {
       <section className="workshopDetailsSection1">
         <div className="container-fluid">
           <div className="workshopDetailsfirst">
-          <div className="evDtlTitle">
+
+            <div className="evDtlTitle">
                <h5>Learn</h5>
                <span>:</span>
-               <h6>{coachingDetails?.title}</h6>
+               <h6>{eventDetails?.event_title}</h6>
             </div>
-           
+            <div className="evntDtlsBox ">
+               <h5>Descriptions</h5>
+               <span>:</span>
+               <h6>{eventDetails?.event_description}</h6>
+            </div>
+            <div className="evntDtlsBox ">
+               <h5>Max Members</h5>
+               <span>:</span>
+               <h6>{eventDetails?.max_members}</h6>
+            </div>
             <div className="evntDtlsBox ">
                <h5>Joined Members</h5>
                <span>:</span>
-               <h6>{coachingDetails?.coaching_members_count}</h6>
+               <h6>{eventDetails?.members_count}</h6>
             </div>
             <div className="evntDtlsBox ">
-               <h5>Domain</h5>
+               <h5>Session Type</h5>
                <span>:</span>
-               <h6>{domain}</h6>
+               <h6>{eventDetails?.session_type}</h6>
             </div>
-            <div className="evntDtlsBox ">
-               <h5>Industry</h5>
-               <span>:</span>
-               <h6>{industry}</h6>
-            </div>
-            <div className="evntDtlsBox ">
-               <h5>Author</h5>
-               <span>:</span>
-               <h6>{coachInfo?.first_name} {coachInfo?.last_name} </h6>
-            </div>
+
           </div>
         </div>
       </section>
@@ -122,8 +117,8 @@ const CoachingDetails = () => {
 
                 <div className="row">
                   <div className="col-lg-12 col-md-12 col-12">
-                    <h5 className="coaching-details-discription">Description</h5>
-                    <p className="coaching-details-discription-text">
+                    <h5 style={{ marginTop: "20px" }}>Description</h5>
+                    <p style={{ lineHeight: "25px", marginBottom: "50px" }}>
                       Do you want to become a programmer? Do you want to learn
                       how to create games, automate your browser, visualize
                       data, and much more? Python has rapidly become one of the
@@ -138,17 +133,15 @@ const CoachingDetails = () => {
                 </div>
               </div>
               <div className="row">
-                <h2 className="featute-review-text">Featured review</h2>
                 <div className="col-lg-6 col-md-6 col-12">
                   <div className="reviewBox">
-                    <div className="row riview-section-row">
-                      <div className="col-lg-3 col-md-6 col-sm-6 riview-section-left">
+                    <div className="row">
+                      <div className="col-lg-3">
                         <div className="reveiewProfile">
-                          <img src={dummypersion} alt="" />
+                          <img src={profileimg} alt="" />
                         </div>
                       </div>
-                      <div className="col-lg-9 col-md-6 col-sm-6 riview-section-right">
-                       <div className="coachings-rtings">
+                      <div className="col-lg-9">
                         <h6>James Whatt</h6>
                         <div className="workshopRating">
                           <GiRoundStar />
@@ -158,33 +151,27 @@ const CoachingDetails = () => {
                           <GiRoundStar />
                         </div>
                         <p> 4days ago</p>
-                        </div>
                       </div>
-                      
-                        <div className="col-lg-12 col-md-12 col-12">
-                          <p className="coachings-riviews-text">
-                            Helpful if starting new, but a lot of information is
-                            out of date, understandably, but an update would be
-                            appreciated. Resources for other places to look for
-                            would also be very useful.
-                          </p>
-                        
+                      <div className="col-lg-12 col-md-12 col-12">
+                        <p>
+                          Helpful if starting new, but a lot of information is
+                          out of date, understandably, but an update would be
+                          appreciated. Resources for other places to look for
+                          would also be very useful.
+                        </p>
                       </div>
                     </div>
-
-
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-12">
-                <div className="reviewBox">
-                    <div className="row riview-section-row">
-                      <div className="col-lg-3 col-md-6 col-sm-6 riview-section-left">
+                  <div className="reviewBox">
+                    <div className="row">
+                      <div className="col-lg-3">
                         <div className="reveiewProfile">
-                          <img src={dummypersion} alt="" />
+                          <img src={profileimg} alt="" />
                         </div>
                       </div>
-                      <div className="col-lg-9 col-md-6 col-sm-6 riview-section-right">
-                       <div className="coachings-rtings">
+                      <div className="col-lg-9">
                         <h6>James Whatt</h6>
                         <div className="workshopRating">
                           <GiRoundStar />
@@ -194,33 +181,27 @@ const CoachingDetails = () => {
                           <GiRoundStar />
                         </div>
                         <p> 4days ago</p>
-                        </div>
                       </div>
-                      
-                        <div className="col-lg-12 col-md-12 col-12">
-                          <p className="coachings-riviews-text">
-                            Helpful if starting new, but a lot of information is
-                            out of date, understandably, but an update would be
-                            appreciated. Resources for other places to look for
-                            would also be very useful.
-                          </p>
-                        
+                      <div className="col-lg-12 col-md-12 col-12">
+                        <p>
+                          Helpful if starting new, but a lot of information is
+                          out of date, understandably, but an update would be
+                          appreciated. Resources for other places to look for
+                          would also be very useful.
+                        </p>
                       </div>
                     </div>
-
-
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-12">
-                <div className="reviewBox">
-                    <div className="row riview-section-row">
-                      <div className="col-lg-3 col-md-6 col-sm-6 riview-section-left">
+                  <div className="reviewBox">
+                    <div className="row">
+                      <div className="col-lg-3">
                         <div className="reveiewProfile">
-                          <img src={dummypersion} alt="" />
+                          <img src={profileimg} alt="" />
                         </div>
                       </div>
-                      <div className="col-lg-9 col-md-6 col-sm-6 riview-section-right">
-                       <div className="coachings-rtings">
+                      <div className="col-lg-9">
                         <h6>James Whatt</h6>
                         <div className="workshopRating">
                           <GiRoundStar />
@@ -230,33 +211,27 @@ const CoachingDetails = () => {
                           <GiRoundStar />
                         </div>
                         <p> 4days ago</p>
-                        </div>
                       </div>
-                      
-                        <div className="col-lg-12 col-md-12 col-12">
-                          <p className="coachings-riviews-text">
-                            Helpful if starting new, but a lot of information is
-                            out of date, understandably, but an update would be
-                            appreciated. Resources for other places to look for
-                            would also be very useful.
-                          </p>
-                        
+                      <div className="col-lg-12 col-md-12 col-12">
+                        <p>
+                          Helpful if starting new, but a lot of information is
+                          out of date, understandably, but an update would be
+                          appreciated. Resources for other places to look for
+                          would also be very useful.
+                        </p>
                       </div>
                     </div>
-
-
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-12">
-                <div className="reviewBox">
-                    <div className="row riview-section-row">
-                      <div className="col-lg-3 col-md-6 col-sm-6 riview-section-left">
+                  <div className="reviewBox">
+                    <div className="row">
+                      <div className="col-lg-3">
                         <div className="reveiewProfile">
-                          <img src={dummypersion} alt="" />
+                          <img src={profileimg} alt="" />
                         </div>
                       </div>
-                      <div className="col-lg-9 col-md-6 col-sm-6 riview-section-right">
-                       <div className="coachings-rtings">
+                      <div className="col-lg-9">
                         <h6>James Whatt</h6>
                         <div className="workshopRating">
                           <GiRoundStar />
@@ -265,22 +240,18 @@ const CoachingDetails = () => {
                           <GiRoundStar />
                           <GiRoundStar />
                         </div>
+
                         <p> 4days ago</p>
-                        </div>
                       </div>
-                      
-                        <div className="col-lg-12 col-md-12 col-12">
-                          <p className="coachings-riviews-text">
-                            Helpful if starting new, but a lot of information is
-                            out of date, understandably, but an update would be
-                            appreciated. Resources for other places to look for
-                            would also be very useful.
-                          </p>
-                        
+                      <div className="col-lg-12 col-md-12 col-12">
+                        <p>
+                          Helpful if starting new, but a lot of information is
+                          out of date, understandably, but an update would be
+                          appreciated. Resources for other places to look for
+                          would also be very useful.
+                        </p>
                       </div>
                     </div>
-
-
                   </div>
                 </div>
               </div>
@@ -290,7 +261,13 @@ const CoachingDetails = () => {
             <div className="workshopReveiw">
               <div className="workshopMedia">
                 <div className="workshopMediaImg">
-                  <img src={coachingDetails.image && (imgPath + "/" + coachingDetails.image)}  alt=""  />
+                  <img
+                    src={
+                      eventDetails?.event_photo &&
+                      imgPath + "/" + eventDetails?.event_photo
+                    }
+                    alt=""
+                  />
                 </div>
               </div>
               <div className="workshopReveiwBody">
@@ -321,4 +298,4 @@ const CoachingDetails = () => {
   );
 };
 
-export default CoachingDetails;
+export default EventFullDetails;

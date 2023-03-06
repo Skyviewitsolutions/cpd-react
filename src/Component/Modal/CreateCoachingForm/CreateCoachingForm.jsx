@@ -159,7 +159,7 @@ const CreateCoachingForm = (props) => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            getCoachingList();
+            // getCoachingList();
             getMyCoachingsList();
             setShowAllCoaching(false);
             setShowCoachingsForm(false);
@@ -233,7 +233,7 @@ const CreateCoachingForm = (props) => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            getCoachingList();
+            // getCoachingList();
             getMyCoachingsList();
             setShowAllCoaching(false);
             setShowCoachingsForm(false);
@@ -255,7 +255,6 @@ const CreateCoachingForm = (props) => {
   useEffect(() => {
     if (updateCoaching === true) {
       var dta = selectedCoachingForUpdate;
-      console.log(dta , "dta here")
       var domainId = dta.domain?._id;
 
       var domainName = allDomain.find((itm, index) => {
@@ -286,6 +285,7 @@ const CreateCoachingForm = (props) => {
       setSelectedCoachingId(dta._id);
 
       var slots = JSON.parse(dta?.availability_slot);
+      console.log(slots , "slots")
       setSelectedDays(slots?.selectedDays);
       setSelectedDates(slots?.selectedDates);
       setDaysSlot(slots?.daysSlot);
@@ -323,6 +323,7 @@ const CreateCoachingForm = (props) => {
     indstryId = indstryId._id;
     setIndustryId(indstryId);
   };
+
 
   return (
     <>

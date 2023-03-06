@@ -15,6 +15,7 @@ import { FiEdit } from "react-icons/fi";
 import { AiFillMinusCircle } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import "../../../src/fonts/Inter-Bold.ttf";
+import dummyUserPerson from "../../assets/Images/dommyuserperson.jfif"
 import "../../../src/fonts/Inter-Regular.ttf";
 import company_logo from "../../assets/Images/company_logo.png";
 import { TagsInput } from "react-tag-input-component";
@@ -56,6 +57,7 @@ const CoachesForm = () => {
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
   const [coachImg, setCoachImg] = useState(null);
+  const [coachImg2 , setCoachImg2] = useState('')
   const [skills, setSkills] = useState([]);
   const [allNational, setAllNational] = useState([]);
   const [category, setCategory] = useState("");
@@ -464,6 +466,7 @@ const CoachesForm = () => {
   const handleUploadImg = (e) => {
     const files = e.target.files[0];
     setCoachImg(files);
+    setCoachImg2(files)
   };
 
   const getUserCvData = () => {
@@ -476,7 +479,6 @@ const CoachesForm = () => {
     };
 
    
-
     axios
       .get(url, { headers: headers })
       .then((res) => {
@@ -549,16 +551,18 @@ const CoachesForm = () => {
               setJobDomain(jbDomain);
 
               var imgUrl = res.data.avtarPath + usersData.avtar;
-
+              console.log(imgUrl , "imgUlr")
+              setCoachImg2(imgUrl);
+              // setCoachImg(imgUrl)
               const fileName = "myFile.jpg";
 
               fetch(imgUrl).then(async (response) => {
-                const contentType = response.headers.get("content-type");
+                // const contentType = response.headers.get("content-type");
                 const blob = await response.blob();
-                const file = new File([blob], fileName, { contentType });
-
-                setCoachImg(file);
+                const file = new File([blob], fileName);
+                // setCoachImg(file);
               });
+
             }
           }
         }
@@ -774,11 +778,13 @@ const CoachesForm = () => {
             </div>
             <div className="col-12 col-md-6 col-lg-4 ">
               <div class="form-group">
-                {coachImg ? (
+                {/* {coachImg2 ? (
                   <>
                     <label htmlFor="takePhoto">Upload Img</label>
-                    <h5 class="form-control" htmlFor="takePhone">
-                      {coachImg.name}
+                    <h5 class="form-control" htmlFor="takePhone" style={{overflow : "hidden" , marginRight : '10px'}}>
+                      <span>
+                      {coachImg2}
+                      </span>
                     </h5>
                     <input
                       type="file"
@@ -791,7 +797,7 @@ const CoachesForm = () => {
                     />
                   </>
                 ) : (
-                  <>
+                  <> */}
                     <label htmlFor="takePhoto">Upload Img</label>
                     <input
                       type="file"
@@ -801,9 +807,20 @@ const CoachesForm = () => {
                       onChange={(e) => handleUploadImg(e)}
                       id="takePhoto"
                     />
-                  </>
-                )}
+                  {/* </>
+                )} */}
               </div>
+              <div className="col-lg-3 col-md-3 col-12">
+                    <div className="resume_img2">
+                      <img
+                        src={
+                          coachImg
+                            ? (URL.createObjectURL(coachImg) || coachImg2)
+                            : (coachImg2 || dummyUserPerson )
+                        }
+                      />
+                    </div>
+                  </div>
             </div>
             <div className="col-12 col-md-12 col-lg-7  ">
               <label for="exampleInputPassword1">Description</label>
@@ -1150,11 +1167,13 @@ const CoachesForm = () => {
         hobbies={hobbies}
         category={category}
         subCategory={subCategory}
+        
         allExperience={allExperience}
         skills={skills}
         update={update}
         domain={domain}
         industry={industry}
+        coachImg2={coachImg2}
         updateProfile={updateProfile}
         dob={dob}
         loading={loading}

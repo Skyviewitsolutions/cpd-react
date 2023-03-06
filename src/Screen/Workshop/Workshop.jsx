@@ -25,8 +25,10 @@ import NoDataImg from "../../assets/Images/noDataFound.png";
 import { getCalendarData } from "../../utils/calendar";
 import Loader from "../../Component/Loader/Loader";
 
+
 const Workshop = () => {
   
+
   const navigate = useNavigate("");
   const [modalShow, setModalShow] = React.useState(false);
   const token = localStorage.getItem("token");
@@ -204,6 +206,16 @@ const Workshop = () => {
     navigate(path);
   };
 
+  const handleDetails = (dta) =>{
+    const communityId = dta._id;
+    const path = generatePath("/community-details/:communityId", {
+      communityId: communityId,
+    });
+    navigate(path , { communityDetails : JSON.stringify(dta)});
+  }
+
+  
+
   // here we are filtering the coaching according to the domain and industry;
 
   useEffect(() => {
@@ -249,7 +261,7 @@ const Workshop = () => {
   };
 
   return (
-    <>
+    <div className="workshopContainer">
       <Homepage_header />
       <div className="workshopwiper">
         <section className="Workshop_section1">
@@ -267,7 +279,7 @@ const Workshop = () => {
           </div>
           <div className="row workshop_searchBox col-12">
             <div className="col-8 col-md-12 col-lg-2">
-              <h5>This Week's Top Enroll Workshop</h5>
+              <h5 className="workshopHdTitle">This Week's Top Enroll Workshop</h5>
             </div>
             <div className="col-12 col-md-12 col-lg-10">
               <div className="row">
@@ -327,7 +339,7 @@ const Workshop = () => {
         </section>
         <section className="Workshop_section2">
           <div className="row">
-            <div className="col-lg-2 col-md-12 col-12 ">
+            <div className="col-lg-2 col-md-12 col-12 mb-4 " style={{marginTop : '-12px'}}>
               <CustomFilter
                 filterByDomain={filterByDomain}
                 setFilterByDomain={setFilterByDomain}
@@ -335,7 +347,7 @@ const Workshop = () => {
                 setFilterByIndustry={setFilterByIndustry}
               />
             </div>
-            <div className="col-lg-10 col-md-12 col-12 ">
+            <div className="col-lg-10 col-md-12 col-12 mt-3">
               <div className="row">
                 {workshopToBeShown2.length != 0 &&
                   workshopToBeShown2.map((workshop, index) => {
@@ -406,7 +418,7 @@ const Workshop = () => {
         </section>
       </div>
       <Footer />
-    </>
+      </div>
   );
 };
 

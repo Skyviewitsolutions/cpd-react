@@ -57,6 +57,7 @@
 }
 
 .worshopBx span{
+    white-space: nowrap;
     width: 50%;
     font-size: 12px;
     font-family: 'Poppins-Regular';

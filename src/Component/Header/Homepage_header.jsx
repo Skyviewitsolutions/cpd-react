@@ -36,7 +36,6 @@ import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 import Header2 from "./Header2";
 
 const Homepage_header = () => {
-
   const navigate = useNavigate("");
   const [isHovering, setIsHovering] = useState(false);
   const token = localStorage.getItem("token");
@@ -208,7 +207,7 @@ const Homepage_header = () => {
                       <img src={pimg} alt="" className="home" />
                       <span className="userName">{userDetails?.name}</span>
 
-                      {isHovering && (
+                      {/* {isHovering && (
                         <div className="logouts">
                           <div className="logoutBtn" onClick={logOut}>
                             <span style={{ fontWeight: "bold" }}>
@@ -221,7 +220,11 @@ const Homepage_header = () => {
                             </span>
                           </div>
                         </div>
-                      )} 
+                      )}  */}
+                    </div>
+                    <div className="logoutss"  onClick={logOut}>
+                      <HiOutlineLogout />
+                      <span>Logout</span>
                     </div>
                   </Form>
                 ) : (
@@ -293,14 +296,10 @@ const Homepage_header = () => {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link className="click_forem_box working" >
-              <h5>
-               Available Resources
-              </h5>
+            <Nav.Link className="click_forem_box working">
+              <h5>Available Resources</h5>
               <h5 className="forEmpl">For Employers</h5>
-              <h6 id="click_forem">
-               Click to Forum
-              </h6>
+              <h6 id="click_forem">Click to Forum</h6>
             </Nav.Link>
           </Nav.Item>
           <ToastContainer />

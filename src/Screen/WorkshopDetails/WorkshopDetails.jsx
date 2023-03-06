@@ -43,8 +43,10 @@ const WorkshopDetails = () => {
     getWorkshopDetailsById();
   }, []);
 
-  var industry = workshopDtails?.industry;
-  var domain = workshopDtails?.domain
+  var industry = workshopDtails?.industry?.title
+  var domain = workshopDtails?.domain?.title
+
+  console.log(workshopDtails , "workshop Details here");
 
   return (
     <>
@@ -53,14 +55,31 @@ const WorkshopDetails = () => {
       <section className="workshopDetailsSection1">
         <div className="container-fluid">
           <div className="workshopDetailsfirst">
-            <h6>Development Programming Languages Python</h6>
-            <h3> Learn : {workshopDtails.title}</h3>
-            <p>
-              Learn A-Z everything about Python, from the basics, tho advanced
-              topics like{" "}
-            </p>
-            <p>Domain : {domain && domain.title} </p>
-            <p>Industry : {industry && industry.title}</p>
+          <div className="evDtlTitle">
+               <h5>Learn</h5>
+               <span>:</span>
+               <h6>{workshopDtails?.title}</h6>
+            </div>
+            <div className="evntDtlsBox ">
+               <h5>Max Members</h5>
+               <span>:</span>
+               <h6>{workshopDtails?.max_members}</h6>
+            </div>
+            <div className="evntDtlsBox ">
+               <h5>Joined Members</h5>
+               <span>:</span>
+               <h6>{workshopDtails?.workshop_members_count}</h6>
+            </div>
+            <div className="evntDtlsBox ">
+               <h5>Domain</h5>
+               <span>:</span>
+               <h6>{domain}</h6>
+            </div>
+            <div className="evntDtlsBox ">
+               <h5>Industry</h5>
+               <span>:</span>
+               <h6>{industry}</h6>
+            </div>
           </div>
         </div>
       </section>

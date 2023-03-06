@@ -6,4 +6,9 @@
   background-color: rgb(195, 198, 199);
   border-radius: 4px;
   text-align: center;
+  margin-bottom: 8px;
+}
+
+.bookSlotCont{
+  width: 70%;
 }

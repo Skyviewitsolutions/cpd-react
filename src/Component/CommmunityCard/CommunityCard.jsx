@@ -10,6 +10,7 @@ import Subscribe from "../button/Subscribe";
 import { FaUser } from "react-icons/fa";
 import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
+import { generatePath } from "react-router-dom";
 
 const CommunityCard = (props) => {
   
@@ -45,6 +46,13 @@ const CommunityCard = (props) => {
     }
   };
 
+  const handleDetails = (dta) =>{
+    const communityId = dta._id;
+    const path = generatePath("/community-details/:communityId", {
+      communityId: communityId,
+    });
+    navigate(path , {state: { communityDetails: data } });
+  }
  
   return (
     <>
@@ -54,11 +62,6 @@ const CommunityCard = (props) => {
             <img src={data?.image ? image : event_cardimg} alt="" />
             <div className="domainCard_title">
               <h6
-                onClick={() =>
-                  navigate("/community-details", {
-                    state: { communityDetails: data },
-                  })
-                }
               >
                 {data?.display_name}
               </h6>
@@ -71,11 +74,7 @@ const CommunityCard = (props) => {
             <div className="domainCardName_box">
               <div className="domaintooltip">
                 <h6
-                  onClick={() =>
-                    navigate("/community-details", {
-                      state: { communityDetails: data },
-                    })
-                  }
+                  onClick={() => handleDetails(data) }
                   className="domaintooltipT"
                 >
                   view details{" "}

@@ -27,7 +27,9 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { BiInfoCircle } from "react-icons/bi";
 import { getCalendarData } from "../../utils/calendar";
 
+
 const CoachingCard2 = (props) => {
+
   const {
     data,
     bookingStatus,
@@ -61,10 +63,9 @@ const CoachingCard2 = (props) => {
     showCoachingsOnCalendar(data);
   };
 
-  var coachDomain = coachInfo?.domain?.[0];
-  var coachIndustry = coachInfo?.industry?.[0];
+  var coachingDomain = data?.domain?.title;
+  var coachingIndustry = data?.industry?.title;
 
-  
 
   return (
     <>
@@ -102,9 +103,9 @@ const CoachingCard2 = (props) => {
                 <span>{data.coach_info?.nationality}</span>
               </div>
               <div className="coachContr">
-                <h6>Expertise</h6>
+                <h6>Domain & Industry</h6>
                 <span>
-                  {coachDomain} | {coachIndustry}
+                  {coachingDomain} | {coachingIndustry}
                 </span>
               </div>
             </div>
@@ -159,7 +160,9 @@ const CoachingCard2 = (props) => {
   );
 };
 
+
 const Coaches_homeScreen = () => {
+
   const [showCalendar, setShowCalendar] = useState(false);
   const [allCoachings, setAllCoachings] = useState([]);
   const [eventsToBeShown, setEventsToBeShown] = useState([]);

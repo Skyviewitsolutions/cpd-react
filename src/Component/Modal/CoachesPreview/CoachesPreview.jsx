@@ -20,6 +20,7 @@ const CoachesPreview = (props) => {
     firstName,
     lastName,
     contactNumber,
+    coachImg2,
     nationality,
     dob,
     gender,
@@ -50,7 +51,6 @@ const CoachesPreview = (props) => {
       submit()
     }
   }
-
   return (
     <>
       <Modal
@@ -74,8 +74,8 @@ const CoachesPreview = (props) => {
                       <img
                         src={
                           coachImg
-                            ? URL.createObjectURL(coachImg)
-                            : dummyUserPerson
+                            ? (URL.createObjectURL(coachImg) || coachImg2)
+                            : (coachImg2 || dummyUserPerson )
                         }
                       />
                     </div>

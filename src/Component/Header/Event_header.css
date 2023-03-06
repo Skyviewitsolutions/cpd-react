@@ -37,6 +37,7 @@
     color: var(--gray);
     font-family: 'Poppins-Regular';
     font-size: 13px;
+    width: 74%;
   }
 
   
@@ -141,12 +142,14 @@
     color: #ffffff;
     border-radius: 4px;
     margin: 10px 0px;
-    margin-right: 20px;
     justify-content: center;
     min-width: 180px;
-    height: 45px;
+    height: 44px;
     font-size: 13px;
   }
+  .eventBtn {
+    margin-left: 20px;
+}
 
   .createEvnet:hover{
     background-color: #488877;

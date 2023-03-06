@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./communities.css";
-import Event_cards from "../../Component/Cards/Event_cards";
-import Event_button from "../../Component/button/Event_button";
-import Plus_button from "../../Component/button/Plus_button";
-import Sidenavbar from "../../Component/sidenavbar_community/Sidenavbar";
 import Homepage_header from "../../Component/Header/Homepage_header";
 import Footer from "../../Component/Footer/Footer";
 import DomainCard from "../../Component/Cards/DomainCard/DomainCard";
@@ -21,13 +17,16 @@ import { HiSearch } from "react-icons/hi";
 import Button from "../../Component/button/Button/Button";
 import CommunityCard from "../../Component/CommmunityCard/CommunityCard";
 
+
 const Communities = () => {
 
   const [allCommunity, setAllCommunity] = useState([]);
+  const [communityData , setCommunityData] = useState([]);
   const [imagePath, setImagePath] = useState("");
   const [showCommunityForm, setShowCommunityForm] = useState(false);
   const [communityId, setCommunityId] = useState("");
   const [myCommunity, setMyCommunity] = useState([]);
+  const [inputCommunity , setInputCommunity] = useState("");
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem('token');
 
@@ -50,15 +49,14 @@ const Communities = () => {
       .then((res) => {
         if (res.data.result === true) {
           const val = res.data.data;
-
           const imgPath = res.data.image_path;
           setImagePath(imgPath);
           // const communityId=res.data[0]._id;
           const comunityId = res.data.data?.[0]._id;
           localStorage.setItem("comunityId", comunityId);
           setCommunityId(comunityId);
-
           setAllCommunity(val);
+          setCommunityData(val);
         }
       })
       .catch((err) => {
@@ -205,6 +203,23 @@ const Communities = () => {
     }
   };
 
+  const handleSearch = (e) => {
+    var val = e.target.value;
+    val = val.toLowerCase();
+    setInputCommunity(e.target.value)
+
+    const filterEvent = communityData.filter((item, index) => {
+      var communityTitle = item.display_name.toLowerCase();
+      return communityTitle.includes(val);
+    });
+
+    setAllCommunity(filterEvent);
+    if(val == ""){
+      setAllCommunity(communityData)
+    }
+  };
+
+
   return (
     <>
       <Homepage_header />
@@ -219,14 +234,17 @@ const Communities = () => {
           <div className="col-sm-12 col-md-12 col-lg-9 ">
             <div className="row d-flex align-items-center ">
               <div className="col-lg-7 col-md-6 col-12">
-                <div className="networkingsearchBox">
+                <div className="workshop_searchBar">
                   <div className="form-group">
-                    <HiSearch id="networking_search" />
+                   
                     <input
                       type="text"
                       class="form-control"
                       placeholder="Search Here"
+                      value={inputCommunity}
+                      onChange={(e) => handleSearch(e)}
                     />
+                     <HiSearch id="networking_search" />
                   </div>
                 </div>
               </div>

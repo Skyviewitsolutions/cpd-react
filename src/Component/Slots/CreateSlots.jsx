@@ -8,9 +8,7 @@ import "./createSlot.css";
 import { useEffect } from "react";
 import { getCalendarData } from "../../utils/calendar";
 
-
 const CreateSlots = (props) => {
-
   const {
     selectedDays,
     setSelectedDays,
@@ -219,16 +217,15 @@ const CreateSlots = (props) => {
 
   const handleDaysFormat = (format) => {
     setDaysFormat(format);
-    if(format === "weekly") {
+    if (format === "weekly") {
       setSelectedDates([]);
       setDateSlot([]);
-    } else if(format === "monthly") {
+    } else if (format === "monthly") {
       setSelectedDays([]);
       setDaysSlot([]);
     }
   };
 
-  
   const getCalendarDatas = async () => {
     // here we getting the data for the calendar;
     var dta = {
@@ -240,7 +237,7 @@ const CreateSlots = (props) => {
       dateSlot: dateSlot,
       title: title,
     };
-
+    console.log(dta, "bhola");
     const calendarData = await getCalendarData(dta);
     setEventsToBeShown(calendarData);
   };
@@ -248,6 +245,8 @@ const CreateSlots = (props) => {
   useEffect(() => {
     getCalendarDatas();
   }, [updateCalendar, title, isRepeated]);
+
+  console.log(selectedTimeSlot , "selectedTime");
 
   return (
     <>
@@ -308,19 +307,21 @@ const CreateSlots = (props) => {
         </div>
       </div>
 
-      <div className="row mb-3 mt-3">
-        {selectedTimeSlot.length != 0 &&
-          selectedTimeSlot.map((time, index) => {
-            return (
-              <>
-                <div className="col-lg-2 col-md-3 col-6" key={index}>
-                  <div className="bookSlotTime">
-                    {time.startTime} - {time.endTime}
+      <div className="row mb-3 mt-3 bookSlotCont">
+        <div className="row">
+          {selectedTimeSlot.length != 0 &&
+            selectedTimeSlot.map((time, index) => {
+              return (
+                <>
+                  <div className="col-lg-3 col-md-4 col-6" key={index}>
+                    <div className="bookSlotTime">
+                      {time.startTime} - {time.endTime}
+                    </div>
                   </div>
-                </div>
-              </>
-            );
-          })}
+                </>
+              );
+            })}
+        </div>
       </div>
 
       {showTimePicker && (

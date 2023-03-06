@@ -13,6 +13,7 @@ import { InlineShareButtons } from "sharethis-reactjs";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useState } from "react";
 import { getCalendarData } from "../../utils/calendar";
+import Subscribe from "../button/Subscribe";
 // here we are designing a single card for all the events ;
 
 const EventsCard = (props) => {
@@ -30,26 +31,32 @@ const EventsCard = (props) => {
     handleDeleteEvent,
     handleUpdateEvent,
     eventsToBeShown,
+    showSubscribe ,
+    joinEvent ,
+    leaveEvent,
+    isSubscribed ,
+    loading ,
+
     setEventsToBeShown,
-    showCustomCalendar ,
+    showCustomCalendar,
     setShowCustomCalendar,
   } = props;
 
   const image = imagePath + data?.event_photo;
-
 
   var isPaid = data?.paid == 1 ? true : false;
 
   var sessionType = data?.priceType == 1 ? "hourly" : "Sessional";
 
   const showEventCalendar = async (data) => {
-    setEventsToBeShown([])
+    setEventsToBeShown([]);
     setShowCustomCalendar(true);
     var slots = JSON.parse(data?.timeslots);
     const calendarData = await getCalendarData(slots);
     setEventsToBeShown(calendarData);
-    
   };
+
+  console.log(data , "data here")
 
   return (
     <div className="eventCont">
@@ -77,7 +84,7 @@ const EventsCard = (props) => {
             )}
           </div>
           <div className="d-flex worshopBx align-items-center enrolled">
-            Max Members ({data?.max_members})
+             Members ({data?.members_count})
           </div>
         </div>
         <div className="col-6">
@@ -148,6 +155,20 @@ const EventsCard = (props) => {
             />
           </div>
         )}
+        {showSubscribe &&
+          (isSubscribed ? (
+            <Subscribe
+              text="UNSUBSCRIBE"
+              onClick={() => leaveEvent(data._id)}
+              loading={loading}
+            />
+          ) : (
+            <Subscribe
+              text="SUBSCRIBE"
+              onClick={() => joinEvent(data._id)}
+              loading={loading}
+            />
+          ))}
       </div>
     </div>
   );

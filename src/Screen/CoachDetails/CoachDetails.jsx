@@ -275,7 +275,7 @@ const CoachesDetails = () => {
 
           <div className="coachesDetailsDescription">
             <h4>
-              Coache Name :{" "}
+              Coach Name :{" "}
               <span style={{ color: "#2c6959" }}>
                 {coachDetails.first_name} {coachDetails.last_name}
               </span>

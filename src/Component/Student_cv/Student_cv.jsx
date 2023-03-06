@@ -36,7 +36,9 @@ import PreviewResumeModal from "../Modal/PreviewResumeModal/PreviewResumeModal";
 import CollegeImage from "../../assets/Images/college.png";
 import CompanyImg from "../../assets/Images/company.png";
 
+
 const Student_cv = () => {
+
   const navigate = useNavigate("");
   const location = useLocation("");
 
@@ -179,7 +181,7 @@ const Student_cv = () => {
 
       const headers = {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
+        // "Content-Type": "multipart/form-data",
       };
 
       setLoading(true);
@@ -408,9 +410,10 @@ const Student_cv = () => {
               fetch(imgUrl).then(async (response) => {
                 const contentType = response.headers.get("content-type");
                 const blob = await response.blob();
-                const file = new File([blob], fileName, { contentType });
+                const file = new File([blob], fileName  );
                 setUploadImg(file);
               });
+
             }
           }
         }
@@ -486,7 +489,7 @@ const Student_cv = () => {
 
       const headers = {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
+        // "Content-Type": "multipart/form-data",
       };
 
       setLoading(true);
@@ -1594,7 +1597,7 @@ const Student_cv = () => {
                 </div>
               </div>
               <div className="col-lg-4 col-md-6 col-12  ">
-                <div class="form-group">
+                {/* <div class="form-group">
                   <label for="exampleInputPassword1">Coach Name</label>
                   <select
                     class="form-select end-year "
@@ -1608,6 +1611,16 @@ const Student_cv = () => {
                     <option value="Rahul dubey">Rahul dubey</option>
                     <option value="William">William</option>
                   </select>
+                </div> */}
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Coach Name</label>
+                  <input
+                    type="text"
+                    class="form-control "
+                    placeholder="Enter here"
+                    value={coachName}
+                    onChange={(e) => setCoachName(e.target.value)}
+                  />
                 </div>
               </div>
               <div className="col-lg-4 col-md-6 col-12  ">

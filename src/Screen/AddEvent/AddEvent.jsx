@@ -329,7 +329,7 @@ const AddEvent = () => {
     setEventImg(event_pic_url);
     const fileName = "eventPic.jpg";
 
-    fetch(event_pic_url , {headers : {'Access-Control-Allow-Origin' : '*'}}).then(async (response) => {
+    fetch(event_pic_url ).then(async (response) => {
       const contentType = response.headers.get("content-type");
       const blob = await response.blob();
       const file = new File([blob], fileName, { contentType });

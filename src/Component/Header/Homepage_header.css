@@ -546,6 +546,8 @@ bottom:50%;
 
 .userprofile_row1 {
   padding: 0px 10px;
+  margin-top: -19px;
+
 }
 
 .logouts {
@@ -574,3 +576,19 @@ bottom:50%;
   font-size:  15px !important;
 }
 
+.logoutss {
+  margin-top: 9px;
+  color: var(--gray);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 7px;
+  display: flex;
+  border-radius: 2px;
+  align-items: center;
+  border: 1px solid #9b9595;
+  cursor: pointer;
+}
+
+.logoutss span{
+  margin-left: 4px;
+}
