@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import $ from "jquery";
 import Button from "../button/Button/Button";
+import showToast from "../CustomToast/CustomToast";
 
 
 const CreateCommunity = () => {
@@ -108,24 +109,24 @@ const CreateCommunity = () => {
   const submitCommunity = () => {
 
     if (communityName === "") {
-      toast("Please Enter Community Name", { type: "warning" });
+      showToast("Please Enter Community Name",  "warning" );
       communityNameRef.current.focus();
     } else if (criteriaToJoin === "") {
-      toast("Please Write Your Creiteria", { type: "warning" });
+      showToast("Please Write Your Creiteria",  "warning" );
       joinCriteriaRef.current.focus();
     } else if (description === "") {
-      toast("Please Write Your Discription", { type: "warning" });
+      showToast("Please Write Your Discription",  "warning" );
       descriptionRef.current.focus();
     } else if (imgFiles === "") {
-      toast("Please upload Your Image", { type: "warning" });
+      showToast("Please upload Your Image",  "warning" );
     } else if (visibility === "") {
-      toast("Please Choose Your Visibility ", { type: "warning" });
+      showToast("Please Choose Your Visibility ",  "warning" );
     } else if (communityType === "") {
-      toast("Please Choose Your Community Type ", { type: "warning" });
+      showToast("Please Choose Your Community Type ",  "warning" );
     } else if (subType === "") {
-      toast("Please Enter Your Sub Type ", { type: "warning" });
+      showToast("Please Enter Your Sub Type ",  "warning" );
     } else if (tags === "") {
-      toast("Please Enter Your Tags", { type: "warning" });
+      showToast("Please Enter Your Tags",  "warning" );
       tagsRef.current.focus();
     } else {
       const token = localStorage.getItem("token");
@@ -148,7 +149,7 @@ const CreateCommunity = () => {
         .then((res) => {
           if (res.data.result === true) {
             setLoading(false);
-            toast("community created successfully", { type: "success" });
+            showToast("community created successfully",  "success" );
            
             setTimeout(() => {
               navigate("/myCommunity");
@@ -157,7 +158,7 @@ const CreateCommunity = () => {
            
           } else if (!res.data.result) {
             setLoading(false);
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -174,21 +175,21 @@ const CreateCommunity = () => {
     const url = `${updateCommunityUrl}${selectedCommunityId}`
 
     if (communityName === "") {
-      toast("Please Enter Community Name", { type: "warning" });
+      showToast("Please Enter Community Name", "warning" );
     } else if (criteriaToJoin === "") {
-      toast("Please Write Your Creiteria", { type: "warning" });
+      showToast("Please Write Your Creiteria", "warning" );
     } else if (description === "") {
-      toast("Please Write Your Discription", { type: "warning" });
+      showToast("Please Write Your Discription", "warning" );
     } else if (imgFiles === "") {
-      toast("Please upload Your Image", { type: "warning" });
+      showToast("Please upload Your Image", "warning" );
     } else if (visibility === "") {
-      toast("Please Choose Your Visibility ", { type: "warning" });
+      showToast("Please Choose Your Visibility ", "warning" );
     } else if (communityType === "") {
-      toast("Please Choose Your Community Type ", { type: "warning" });
+      showToast("Please Choose Your Community Type ", "warning" );
     } else if (subType === "") {
-      toast("Please Enter Your Sub Type ", { type: "warning" });
+      showToast("Please Enter Your Sub Type ", "warning" );
     } else if (tags === "") {
-      toast("Please Enter Your Tags", { type: "warning" });
+      showToast("Please Enter Your Tags", "warning" );
     } else {
       const token = localStorage.getItem("token");
       const formData = new FormData();
@@ -214,11 +215,11 @@ const CreateCommunity = () => {
           console.log(res , "updated response")
           if (res.data.result === true) {
             setLoading(false);
-            toast("community updated successfully", { type: "success" });
+            showToast("community updated successfully",  "success" );
             navigate("/myCommunity");
           } else if (!res.data.result) {
             setLoading(false);
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -252,7 +253,7 @@ const CreateCommunity = () => {
           // console.log(val,"All DOmain Data here...")
           setDomainData(val);
         } else if (res.data.result === false) {
-          toast(res.data.message, { type: "errror" });
+          showToast(res.data.message,  "errror" );
         }
       })
       .catch((err) => {
@@ -276,7 +277,7 @@ const CreateCommunity = () => {
           const val = res.data.data;
           setIndusryData(val);
         } else if (res.data.result === false) {
-          toast(res.data.message, { type: "errror" });
+          showToast(res.data.message,  "errror" );
         }
       })
       .catch((err) => {

@@ -1,51 +1,4 @@
-/* .userprofile_try {
-  margin: 0%;
-  margin-top: 30px;
-  padding: 0%;
-  box-sizing: border-box;
-  height: auto;
-  padding-bottom: 10%;
-  position: relative;
-}
-.userprofile_div {
-  display: flex;
-  flex-direction: column;
-}
-#comment_red {
-  position: relative;
-  
-  top:20px;
-  height: 70px;
-  width: 70px;
-}
 
-.home_cards {
-    display: flex;
-    flex-direction: column;
-  }
-  .all_notification {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;  
-  }
-  .all_notification h6 {
-    font-weight: 700;
-    font-size: 18px;
-    color: black;
-  }
-  .filter img {
-    width: 20px;
-    height: 20px;
-  }
-  .filter span {
-    font-size: 18px;
-    font-weight: 700;
-  }
-  .chat_side{
-    display:flex;
-    flex-direction: column;
-  } */
 .userprofile_try {
     margin: 0%;
     margin-top: 30px;
@@ -73,17 +26,26 @@
       flex-direction: column;
     }
     .all_notification {
-      margin-top: 10px;
       align-items: center;
       display: flex;
       justify-content: space-between;
-      margin-bottom: 5px;  
+      padding: 0px 13px;
+      margin-bottom: 8px;
+
     }
     .all_notification h6 {
       font-weight: 700;
       font-size: 18px;
-      color: black;
+      color: var(--black);
+      font-family: 'Poppins-SemiBold';
+      margin-bottom: 0px;
+
     }
+
+  .all_notification span{
+    font-family: "Poppins-SemiBold";
+    color: var(--black);
+  }
     .filter img {
       width: 20px;
       height: 20px;
@@ -102,7 +64,7 @@
       display: flex;
       flex-direction: column;
       margin-bottom: 25px;
-      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
   }
   .homeSreenPage{
     width: 100%;
@@ -158,4 +120,25 @@
     height: 1500px;
     overflow-x: hidden;
     overflow-y: scroll;
+
    }
+
+   
+.hmgCrdCont::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey !important;
+  border-radius: 10px !important;
+}
+
+/* Handle */
+.hmgCrdCont::-webkit-scrollbar-thumb {
+  background: var(--primary) !important;
+  border-radius: 10px !important;
+}
+
+/* Handle on hover */
+.hmgCrdCont::-webkit-scrollbar-thumb:hover {
+  background: var(--primary) !important;
+}
+.hmgCrdCont::-webkit-scrollbar {
+  width: 0px !important;
+}

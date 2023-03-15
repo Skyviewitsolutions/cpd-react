@@ -98,7 +98,7 @@ const User_profile = () => {
   }, []);
 
   var userType = JSON.parse(userDetails);
-  userType = userType.user_type;
+  userType = userType?.user_type;
 
   const viewProfile = () => {
     if (userType == 1) {
@@ -114,7 +114,6 @@ const User_profile = () => {
     }
   }
 
-  console.log(usersData , "usersData here");
 
   return (
     <>

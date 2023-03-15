@@ -8,6 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { endpoints } from "../services/endpoints";
 import profileimg from "../../assets/Images/profileimg.png";
 import { MdOutlineNotificationsActive } from "react-icons/md";
+import showToast from "../CustomToast/CustomToast";
 
 
 const CoachNotification = (props) => {
@@ -89,7 +90,7 @@ const CoachNotification = (props) => {
         setLoading(false);
         if (res.data.result) {
           getAllNotifiedCoachings();
-          toast("Request cancelled successfully", { type: "success" });
+          showToast("Request cancelled successfully",  "success" );
         }
       })
       .catch((err) => {
@@ -114,7 +115,7 @@ const CoachNotification = (props) => {
         setLoading(false);
         if (res.data.result) {
           getAllNotifiedCoachings();
-          toast("Request cancelled successfully", { type: "success" });
+          showToast("Request cancelled successfully",  "success" );
         }
       })
       .catch((err) => {
@@ -139,7 +140,7 @@ const CoachNotification = (props) => {
         setLoading(false);
         if (res.data.result) {
           getAllNotifiedWorkshops();
-          toast("Workshop request cancelled successfully", { type: "success" });
+          showToast("Workshop request cancelled successfully",  "success" );
         }
       })
       .catch((err) => {
@@ -164,7 +165,7 @@ const CoachNotification = (props) => {
         setLoading(false);
         if (res.data.result) {
           getAllNotifiedWorkshops();
-          toast("Workshop request confirmed successfully", { type: "success" });
+          showToast("Workshop request confirmed successfully",  "success" );
         }
       })
       .catch((err) => {
@@ -209,7 +210,7 @@ const CoachNotification = (props) => {
               var userProfile = item?.user_profile;
               var status = item?.status;
               var coachingInfo = item?.coaching_info;
-              var userImage = coachingUserImgPath + "/" + userProfile.avtar;
+              var userImage = coachingUserImgPath + "/" + userProfile?.avtar;
               return (
                 <>
                   {status == 1 && (
@@ -217,7 +218,7 @@ const CoachNotification = (props) => {
                     <div className="row d-flex justify-content-center my-1">
                       <div className="col-lg-2 col-md-2 col-3">
                         <div className="notificationavatar">
-                          <img src={userProfile.avtar ?  userImage :  UserImg} alt="" />
+                          <img src={userProfile?.avtar ?  userImage :  UserImg} alt="" />
                         </div>
                       </div>
 

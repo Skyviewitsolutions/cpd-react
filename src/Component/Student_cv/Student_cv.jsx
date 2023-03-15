@@ -35,10 +35,9 @@ import $, { fn, uniqueSort } from "jquery";
 import PreviewResumeModal from "../Modal/PreviewResumeModal/PreviewResumeModal";
 import CollegeImage from "../../assets/Images/college.png";
 import CompanyImg from "../../assets/Images/company.png";
-
+import showToast from "../CustomToast/CustomToast";
 
 const Student_cv = () => {
-
   const navigate = useNavigate("");
   const location = useLocation("");
 
@@ -134,13 +133,13 @@ const Student_cv = () => {
 
   const submit = () => {
     if (name === "") {
-      toast("Please enter first name", { type: "warning" });
+      showToast("Please enter first name", "warning");
       fNameRef.current.focus();
     } else if (lName === "") {
-      toast("Please enter last name", { type: "warning" });
+      showToast("Please enter last name", "warning");
       LNameRef.current.focus();
     } else if (contact === "") {
-      toast("Please enter contact", { type: "warning" });
+      showToast("Please enter contact", "warning");
       contRef.current.focus();
     } else {
       const formData = new FormData();
@@ -191,7 +190,7 @@ const Student_cv = () => {
         .then((res) => {
           setLoading(false);
           if (res.data.result === true) {
-            toast("Profile created successfully", { type: "success" });
+            showToast("Profile created successfully", "success");
             setOpenPreviewModal(false);
             localStorage.setItem("isCvUploaded", true);
             getUserCvData();
@@ -231,7 +230,7 @@ const Student_cv = () => {
         if (res.data.result === true) {
           setAlldomain(res.data.data);
         } else if (res.data.result === false) {
-          toast(res.data.message, { type: "error" });
+          showToast(res.data.message, "error");
         }
       })
       .catch((err) => {
@@ -252,7 +251,7 @@ const Student_cv = () => {
         if (res.data.result === true) {
           setAllIndustry(res.data.data);
         } else if (res.data.result === false) {
-          toast(res.data.message, { type: "error" });
+          showToast(res.data.message, "error");
         }
       })
       .catch((err) => {
@@ -410,10 +409,9 @@ const Student_cv = () => {
               fetch(imgUrl).then(async (response) => {
                 const contentType = response.headers.get("content-type");
                 const blob = await response.blob();
-                const file = new File([blob], fileName  );
+                const file = new File([blob], fileName);
                 setUploadImg(file);
               });
-
             }
           }
         }
@@ -442,13 +440,13 @@ const Student_cv = () => {
     const url = endpoints.authentication.updateProfile;
 
     if (name === "") {
-      toast("Please enter first name", { type: "warning" });
+      showToast("Please enter first name", "warning");
       fNameRef.current.focus();
     } else if (lName === "") {
-      toast("Please enter last name", { type: "warning" });
+      showToast("Please enter last name", "warning");
       LNameRef.current.focus();
     } else if (contact === "") {
-      toast("Please enter contact", { type: "warning" });
+      showToast("Please enter contact", "warning");
       contRef.current.focus();
     } else {
       const formData = new FormData();
@@ -499,7 +497,7 @@ const Student_cv = () => {
         .then((res) => {
           setLoading(false);
           if (res.data.result === true) {
-            toast("Profile updated successfully", { type: "success" });
+            showToast("Profile updated successfully", "success");
             setOpenPreviewModal(false);
             getUserCvData();
             navigate("/");
@@ -531,7 +529,7 @@ const Student_cv = () => {
       sltdProgram == "" ||
       sltdField == ""
     ) {
-      toast("please fill the eductional details", { type: "warning" });
+      showToast("please fill the eductional details", "warning");
     } else {
       const collegeDta = {
         id: allCollege.length + 1,
@@ -584,15 +582,15 @@ const Student_cv = () => {
 
   const updateSelectedCollege = () => {
     if (setSltdSchool == "") {
-      toast("Please fill the college details", { type: "warning" });
+      showToast("Please fill the college details", "warning");
     } else if (sltdStartYear == "") {
-      toast("Start year is required", { type: "warning" });
+      showToast("Start year is required", "warning");
     } else if (sltdEndYear == "") {
-      toast("End year is required", { type: "warning" });
+      showToast("End year is required", "warning");
     } else if (sltdProgram == "") {
-      toast("Program is required", { type: "warning" });
+      showToast("Program is required", "warning");
     } else if (sltdField == "") {
-      toast("Field study is required", { type: "warning" });
+      showToast("Field study is required", "warning");
     } else {
       var schol = school;
       var endYr = endYear;
@@ -648,7 +646,7 @@ const Student_cv = () => {
       sltdIndustry == "" ||
       sltdCompany == ""
     ) {
-      toast("Please fill the experience details", { type: "warning" });
+      showToast("Please fill the experience details", "warning");
     } else {
       const jobDta = {
         id: allExperience.length + 1,
@@ -718,17 +716,17 @@ const Student_cv = () => {
 
   const updateSelectedExperience = () => {
     if (sltdJobTitle == "") {
-      toast("Job title is required", { type: "warning" });
+      showToast("Job title is required", "warning");
     } else if (sltdEmploymentType == "") {
-      toast("Employee Type is required", { type: "warning" });
+      showToast("Employee Type is required", "warning");
     } else if (sltdJobStartYear == "") {
-      toast("Start year is required", { type: "warning" });
+      showToast("Start year is required", "warning");
     } else if (sltdDomain == "") {
-      toast("Domain is required", { type: "warning" });
+      showToast("Domain is required", "warning");
     } else if (sltdIndustry == "") {
-      toast("Industry is required", { type: "warning" });
+      showToast("Industry is required", "warning");
     } else if (sltdCompany == "") {
-      toast("company is required", { type: "warning" });
+      showToast("company is required", "warning");
     } else {
       var cmpny = company;
       var dmain = jobDomain;
@@ -898,13 +896,13 @@ const Student_cv = () => {
 
   const goToReviewResume = () => {
     if (name === "") {
-      toast("Please enter first name", { type: "warning" });
+      showToast("Please enter first name", "warning");
       fNameRef.current.focus();
     } else if (lName === "") {
-      toast("Please enter last name", { type: "warning" });
+      showToast("Please enter last name", "warning");
       LNameRef.current.focus();
     } else if (contact === "") {
-      toast("Please enter contact", { type: "warning" });
+      showToast("Please enter contact", "warning");
       contRef.current.focus();
     } else {
       var data = {
@@ -949,13 +947,13 @@ const Student_cv = () => {
 
   const handlePreviewResume = () => {
     if (name === "") {
-      toast("Please enter first name", { type: "warning" });
+      showToast("Please enter first name", "warning");
       fNameRef.current.focus();
     } else if (lName === "") {
-      toast("Please enter last name", { type: "warning" });
+      showToast("Please enter last name", "warning");
       LNameRef.current.focus();
     } else if (contact === "") {
-      toast("Please enter contact", { type: "warning" });
+      showToast("Please enter contact", "warning");
       contRef.current.focus();
     } else {
       setOpenPreviewModal(true);
@@ -1196,9 +1194,10 @@ const Student_cv = () => {
                       onChange={(e) => {
                         var val = e.target.value;
                         if (sltdEndYear !== "" && val > sltdEndYear) {
-                          toast("start year cannot be greater then end year", {
-                            type: "warning",
-                          });
+                          showToast(
+                            "start year cannot be greater then end year",
+                            "warning"
+                          );
                         } else {
                           setSltdStartYear(e.target.value);
                         }
@@ -1221,9 +1220,10 @@ const Student_cv = () => {
                       onChange={(e) => {
                         var val = e.target.value;
                         if (val < sltdStartYear) {
-                          toast("End year cannot be less then start year", {
-                            type: "warning",
-                          });
+                          showToast(
+                            "End year cannot be less then start year",
+                            "warning"
+                          );
                         } else {
                           setSltdEndYear(e.target.value);
                         }
@@ -1390,9 +1390,8 @@ const Student_cv = () => {
                       var val = e.target.value;
 
                       if (sltdJobEndYear !== "" && val > sltdJobEndYear) {
-                        toast("start year cannot be greater then end year", {
-                          type: "warning",
-                        });
+                        showToast("start year cannot be greater then end year",  "warning",
+                        );
                       } else {
                         setSltdJobStartYear(e.target.value);
                       }
@@ -1415,9 +1414,8 @@ const Student_cv = () => {
                       var val = e.target.value;
                       setSltdIsCurrentJob(false);
                       if (val < sltdJobStartYear) {
-                        toast("end year cannot be less than start year", {
-                          type: "warning",
-                        });
+                        showToast("end year cannot be less than start year",  "warning",
+                        );
                       } else {
                         setSltdJobEndYear(e.target.value);
                       }

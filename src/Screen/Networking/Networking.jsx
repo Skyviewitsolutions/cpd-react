@@ -25,6 +25,8 @@ import { toast, ToastContainer } from "react-toastify";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 import { BiPlusCircle } from "react-icons/bi";
 import { generatePath } from "react-router-dom";
+import showToast from "../../Component/CustomToast/CustomToast";
+
 
 
 const Networking = () => {
@@ -143,11 +145,11 @@ const Networking = () => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            toast("Events joined successfully", { type: "success" });
+            showToast("Events joined successfully", "success" );
             getAllEvents();
             getMyEvents();
           } else if (!res.data.result) {
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message, "warning" );
           }
         })
         .catch((err) => {
@@ -155,7 +157,7 @@ const Networking = () => {
           console.log(err);
         });
     } else {
-      toast("Please login", { warning: "warning" });
+      showToast("Please login", "warning" );
     }
   };
 
@@ -175,11 +177,11 @@ const Networking = () => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            toast("Events left successfully", { type: "success" });
+            showToast("Events left successfully",  "success" );
             getAllEvents();
             getMyEvents();
           } else if (!res.data.result) {
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -187,11 +189,10 @@ const Networking = () => {
           console.log(err);
         });
     } else {
-      toast("Please login", { type: "warning" });
+      showToast("Please login", "warning" );
     }
   };
 
-  console.log(eventData , "myEvents h");
 
   return (
     <>
@@ -199,7 +200,7 @@ const Networking = () => {
       <Networking_headers />
       <div className="networking_wrapper">
         <div className="row">
-          <div className="col-lg-3  ">
+          <div className="col-lg-3  " style={{ width: "21%" }}>
             <CustomFilter />
           </div>
           <div className="col-lg-9 col-md-12 col-12 ">

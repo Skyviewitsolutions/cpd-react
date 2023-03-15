@@ -6,6 +6,7 @@ import { endpoints } from "../../services/endpoints";
 import MyCoachingList from "../MyCoachingList/MyCoachingList";
 import Button from "../../button/Button/Button";
 import CreateSlots from "../../Slots/CreateSlots";
+import showToast from "../../CustomToast/CustomToast";
 
 
 const SlotAsCoach = (props) => {
@@ -269,15 +270,15 @@ const SlotAsCoach = (props) => {
 
   const handleConfirmSlots = async () => {
     if (coachTitle == "") {
-      toast("Please fill the coaching title", { type: "warning" });
+      showToast("Please fill the coaching title", "warning");
     } else if (!coachingImg) {
-      toast("coaching image is required", { type: "warning" });
+      showToast("coaching image is required", "warning");
     } else if (!domain) {
-      toast("please select coaching domain", { type: "warning" });
+      showToast("please select coaching domain", "warning");
     } else if (!industry) {
-      toast("please select coaching industry", { type: "warning" });
+      showToast("please select coaching industry", "warning");
     } else if (!sessionType) {
-      toast("please select session type", { type: "warning" });
+      showToast("please select session type", "warning");
     } else {
       updateDataToCalendar();
       // here we are writing the code for updating the data from here ;
@@ -326,9 +327,9 @@ const SlotAsCoach = (props) => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            toast("Coaching created successfully", { type: "success" });
+            showToast("Coaching created successfully","success" );
           } else if (res.data.result == false) {
-            toast(res?.data?.message, { type: "warning" });
+            showToast(res?.data?.message, "warning" );
           }
         })
         .catch((err) => {

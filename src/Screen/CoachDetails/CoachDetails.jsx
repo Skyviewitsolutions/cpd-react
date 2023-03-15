@@ -17,6 +17,7 @@ import NoDataImg from "../../assets/Images/noDataFound.png";
 import CoachingCard from "../../Component/CoachingCard/CoachingCard";
 import { getCalendarData } from "../../utils/calendar";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
+import showToast from "../../Component/CustomToast/CustomToast";
 
 
 const CoachesDetails = () => {
@@ -169,11 +170,11 @@ const CoachesDetails = () => {
       .then((res) => {
         console.log(res, "this is the response");
         if (res.data.result) {
-          toast("workshop enrolled successfully", { type: "success" });
+          showToast("workshop enrolled successfully",  "success" );
           getAllEnrollWorkshops();
           getWorkshops();
         } else if (res.data.result == false) {
-          toast(res.data.message, { type: "warning" });
+          showToast(res.data.message,  "warning" );
         }
       })
       .catch((err) => {
@@ -181,7 +182,7 @@ const CoachesDetails = () => {
       });
     }
     else {
-      toast("Please login" , {type : "warning"})
+      showToast("Please login" ,  "warning")
     }
   };
 
@@ -204,9 +205,9 @@ const CoachesDetails = () => {
           setLoading(false);
           if (res.data.result) {
             getAllEnrolledCoachings();
-            toast("Coaching booked successfully", { type: "success" });
+            showToast("Coaching booked successfully",  "success" );
           } else if (res.data.result == false) {
-            toast(res.data.message, { type: "warning" });
+            showToast(res.data.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -215,7 +216,7 @@ const CoachesDetails = () => {
         });
     }
     else {
-      toast("Please login" , {type : "warning"})
+      showToast("Please login" ,  "warning")
     }
   };
 

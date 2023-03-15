@@ -526,11 +526,12 @@ span.session_photo {
   font-family: "Poppins-Regular";
   color: var(--lightgray);
   font-size: 14px;
-  padding: 8px 6px;
-  border-color: 1.3px solid rgb(154, 152, 152);
+  padding: 10px 6px;
+  border: 1.3px solid rgb(154, 152, 152);
   border-radius: 4px;
   width: 90%;
   margin: 8px 0px;
+  box-shadow: none !important;
 }
 
 .session_photo {

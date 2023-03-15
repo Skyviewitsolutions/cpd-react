@@ -20,6 +20,7 @@ import validator from "validator";
 import { endpoints } from "../services/endpoints";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import showToast from "../CustomToast/CustomToast";
 
 const Signupform = (props) => {
 
@@ -71,10 +72,10 @@ const Signupform = (props) => {
         .then((res) => {
           setLoading(false);
           if (res.data.result === true) {
-            toast("Registered Successfully", { type: "success"  });
+            showToast("Registered Successfully",  "success" );
             navigate("/login");
           } else if (res.data.result === false) {
-            toast(res.data.message , {type : "error"})
+            showToast(res.data.message , "error")
           }
         })
         .catch((err) => {

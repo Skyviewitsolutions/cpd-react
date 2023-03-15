@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <> 
     <div className='headerScreen'>
-     <Nav class="navbar navbar-expand-lg bg-white lheader"> 
+     <Nav className="navbar navbar-expand-lg bg-white lheader"> 
      <Navbar.Brand>
      <img src={cpd_logo} alt="" className='logo' onClick={() => navigate('/')}/>
      </Navbar.Brand>

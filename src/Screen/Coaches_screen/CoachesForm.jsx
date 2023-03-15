@@ -31,6 +31,7 @@ import SlotAsWorkShop from "../../Component/Coaches/SlotAsWorkShop/SlotAsWorkSho
 import { toast, ToastContainer } from "react-toastify";
 import CompanyImg from "../../assets/Images/company.png";
 import { getDomainList, getIndustryList } from "../../utils/api";
+import showToast from "../../Component/CustomToast/CustomToast";
 
 
 const CoachesForm = () => {
@@ -140,7 +141,7 @@ const CoachesForm = () => {
       sltdIndustry == "" ||
       sltdCompany == ""
     ) {
-      toast("Please fill the experience details", { type: "warning" });
+      showToast("Please fill the experience details",  "warning" );
     } else {
       const jobDta = {
         id: allExperience.length + 1,
@@ -212,17 +213,17 @@ const CoachesForm = () => {
   const updateSelectedExperience = () => {
 
     if (sltdJobTitle == "") {
-      toast("Job title is required", { type: "warning" });
+      showToast("Job title is required",  "warning" );
     } else if (sltdEmploymentType == "") {
-      toast("Employee Type is required", { type: "warning" });
+      showToast("Employee Type is required",  "warning" );
     } else if (sltdJobStartYear == "") {
-      toast("Start year is required", { type: "warning" });
+      showToast("Start year is required",  "warning" );
     } else if (sltdDomain == "") {
-      toast("Domain is required", { type: "warning" });
+      showToast("Domain is required",  "warning" );
     } else if (sltdIndustry == "") {
-      toast("Industry is required", { type: "warning" });
+      showToast("Industry is required",  "warning" );
     } else if (sltdCompany == "") {
-      toast("company is required", { type: "warning" });
+      showToast("company is required",  "warning" );
     } else {
       var cmpny = company;
       var dmain = jobDomain;
@@ -401,15 +402,15 @@ const CoachesForm = () => {
       e.preventDefault();
     }
     if (firstName == "") {
-      toast("First name is required", { type: "warning" });
+      showToast("First name is required",  "warning");
     } else if (lastName == "") {
-      toast("Last name is required", { type: "warning" });
+      showToast("Last name is required",  "warning");
     } else if (contactNumber == "") {
-      toast("Please enter phone no.", { type: "warning" });
+      showToast("Please enter phone no.",  "warning");
     } else if (nationality == "") {
-      toast("Please select nationality", { type: "warning" });
+      showToast("Please select nationality",  "warning");
     } else if (dob == "") {
-      toast("Please select date of birth", { type: "warning" });
+      showToast("Please select date of birth",  "warning");
     } else {
       // here hitting the api for saving the coaches data;
       const formData = new FormData();
@@ -453,7 +454,7 @@ const CoachesForm = () => {
             getUserCvData();
             localStorage.setItem("isCvUploaded" , true)
             navigate("/")
-            toast("Profile created successfully", { type: "success" });
+            showToast("Profile created successfully", "success");
           }
         })
         .catch((err) => {
@@ -588,15 +589,15 @@ const CoachesForm = () => {
     }
 
     if (firstName == "") {
-      toast("First name is required", { type: "warning" });
+      showToast("First name is required",  "warning" );
     } else if (lastName == "") {
-      toast("Last name is required", { type: "warning" });
+      showToast("Last name is required",  "warning" );
     } else if (contactNumber == "") {
-      toast("Please enter phone no.", { type: "warning" });
+      showToast("Please enter phone no.",  "warning" );
     } else if (nationality == "") {
-      toast("Please select nationality", { type: "warning" });
+      showToast("Please select nationality",  "warning" );
     } else if (dob == "") {
-      toast("Please select date of birth", { type: "warning" });
+      showToast("Please select date of birth",  "warning" );
     } else {
       // here hitting the api for saving the coaches data;
       const formData = new FormData();
@@ -637,7 +638,7 @@ const CoachesForm = () => {
           setLoading(false);
           if (res.data.result) {
             navigate("/")
-            toast("Profile updated successfully", { type: "success" });
+            showToast("Profile updated successfully",  "success" );
             getUserCvData();
           }
         })
@@ -932,9 +933,9 @@ const CoachesForm = () => {
                     var val = e.target.value;
 
                     if (sltdJobEndYear !== "" && val > sltdJobEndYear) {
-                      toast("start year cannot be greater then end year", {
-                        type: "warning",
-                      });
+                      showToast("start year cannot be greater then end year", 
+                        "warning",
+                      );
                     } else {
                       setSltdJobStartYear(e.target.value);
                     }
@@ -957,9 +958,8 @@ const CoachesForm = () => {
                     var val = e.target.value;
                     setSltdIsCurrentJob(false);
                     if (val < sltdJobStartYear) {
-                      toast("end year cannot be less than start year", {
-                        type: "warning",
-                      });
+                      showToast("end year cannot be less than start year",  "warning"
+                      );
                     } else {
                       setSltdJobEndYear(e.target.value);
                     }

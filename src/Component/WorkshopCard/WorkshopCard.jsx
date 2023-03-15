@@ -11,6 +11,7 @@ import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 
 const WorkshopCard = (props) => {
+  
   const {
     workshop,
     showWorkshopOnCalendar,
@@ -59,9 +60,9 @@ const WorkshopCard = (props) => {
             >
               {isPaid ? (
                 <>
-                  <h6 style={{ width: "30%" }}>Price</h6>:
+                  <h6 style={{ width: "25%" }}>Price</h6>:
                   <span style={{ marginLeft: "9px" }}>
-                    {workshop.price} $ / {sessionType}
+                    {workshop.price} HKD / {sessionType}
                   </span>
                 </>
               ) : (

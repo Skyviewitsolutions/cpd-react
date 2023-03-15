@@ -1,7 +1,7 @@
 // Here we are creating calendar custom;
 
 import React, { useState, useEffect } from "react";
-import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import { Calendar, dateFnsLocalizer,momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import format from "date-fns/format";
 import "./Calendar.css";
@@ -12,108 +12,101 @@ import { Modal } from "react-bootstrap/";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import enUS from "date-fns/locale/en-US";
-import {IoCloseSharp} from "react-icons/io5"
+import { IoCloseSharp } from "react-icons/io5";
 
 require("react-big-calendar/lib/css/react-big-calendar.css");
 
 const CustomCalendar = (props) => {
-
-  const {showCalendar , setShowCalendar , eventsToBeShown} = props ;
+  const { showCalendar, setShowCalendar, eventsToBeShown } = props;
 
   const locales = {
     "en-US": enUS,
   };
 
-  const localizer = dateFnsLocalizer({
-    format,
-    parse,
-    startOfWeek,
-    getDay,
-    locales,
-  });
+  const localizer = momentLocalizer(moment);
 
- const  events=[
+  const events = [
     {
-      end: new Date('2023-01-17T10:00:00.000Z'),
-      start: new Date('2023-01-17T04:00:00.000Z'),
-      title: 'Event 1'
+      end: new Date("2023-01-17T10:00:00.000Z"),
+      start: new Date("2023-01-17T04:00:00.000Z"),
+      title: "Event 1",
     },
     {
-      end: new Date('2023-01-18T01:30:00'), 
-      start: new Date('2023-01-18T11:30:00'),
-      title: 'Event 2'
+      end: new Date("2023-01-18T01:30:00"),
+      start: new Date("2023-01-18T11:30:00"),
+      title: "Event 2",
     },
     {
-      end: new Date('2023-01-17T06:00:00.000Z'),
-      start: new Date('2023-01-17T04:00:00.000Z'),
-      title: 'Event 3'
+      end: new Date("2023-01-17T06:00:00.000Z"),
+      start: new Date("2023-01-17T04:00:00.000Z"),
+      title: "Event 3",
     },
     {
-      end: new Date('2023-01-17T05:00:00.000Z'),
-      start: new Date('2023-01-17T04:00:00.000Z'),
-      title: 'Event 4'
+      end: new Date("2023-01-17T05:00:00.000Z"),
+      start: new Date("2023-01-17T04:00:00.000Z"),
+      title: "Event 4",
     },
     {
-      end: new Date('2023-01-17T05:30:00.000Z'),
-      start: new Date('2023-01-17T04:30:00.000Z'),
-      title: 'Event 5'
+      end: new Date("2023-01-17T05:30:00.000Z"),
+      start: new Date("2023-01-17T04:30:00.000Z"),
+      title: "Event 5",
     },
     {
-      end: new Date('2023-01-17T05:30:00.000Z'),
-      start: new Date('2023-01-17T04:30:00.000Z'),
-      title: 'Event 6'
+      end: new Date("2023-01-17T05:30:00.000Z"),
+      start: new Date("2023-01-17T04:30:00.000Z"),
+      title: "Event 6",
     },
     {
-      end: new Date('2023-01-17T05:00:00.000Z'),
-      start: new Date('2023-01-17T04:00:00.000Z'),
-      title: 'Event 7'
+      end: new Date("2023-01-17T05:00:00.000Z"),
+      start: new Date("2023-01-17T04:00:00.000Z"),
+      title: "Event 7",
     },
     {
-      end: new Date('2023-01-17T05:00:00.000Z'),
-      start: new Date('2023-01-17T04:00:00.000Z'),
-      title: 'Event 8'
+      end: new Date("2023-01-17T05:00:00.000Z"),
+      start: new Date("2023-01-17T04:00:00.000Z"),
+      title: "Event 8",
     },
     {
-      end: new Date('2023-01-17T05:00:00.000Z'),
-      start: new Date('2023-01-17T04:00:00.000Z'),
-      title: 'Event 9'
+      end: new Date("2023-01-17T05:00:00.000Z"),
+      start: new Date("2023-01-17T04:00:00.000Z"),
+      title: "Event 9",
     },
     {
-      end: new Date('2023-01-17T07:00:00.000Z'),
-      start: new Date('2023-01-17T05:00:00.000Z'),
-      title: 'Event 10'
+      end: new Date("2023-01-17T07:00:00.000Z"),
+      start: new Date("2023-01-17T05:00:00.000Z"),
+      title: "Event 10",
     },
     {
-      end: new Date('2023-01-17T07:30:00.000Z'),
-      start: new Date('2023-01-17T06:30:00.000Z'),
-      title: 'Event 11'
+      end: new Date("2023-01-17T07:30:00.000Z"),
+      start: new Date("2023-01-17T06:30:00.000Z"),
+      title: "Event 11",
     },
     {
-      end: new Date('2023-01-17T07:30:00.000Z'),
-      start: new Date('2023-01-17T06:30:00.000Z'),
-      title: 'Event 12'
+      end: new Date("2023-01-17T07:30:00.000Z"),
+      start: new Date("2023-01-17T06:30:00.000Z"),
+      title: "Event 12",
     },
     {
-      end: new Date('2023-01-17T07:30:00.000Z'),
-      start: new Date('2023-01-17T06:30:00.000Z'),
-      title: 'Event 13'
+      end: new Date("2023-01-17T07:30:00.000Z"),
+      start: new Date("2023-01-17T06:30:00.000Z"),
+      title: "Event 13",
     },
     {
-      end: new Date('2023-01-17T07:30:00.000Z'),
-      start: new Date('2023-01-17T06:30:00.000Z'),
-      title: 'Event 14'
+      end: new Date("2023-01-17T07:30:00.000Z"),
+      start: new Date("2023-01-17T06:30:00.000Z"),
+      title: "Event 14",
     },
     {
-      end: new Date('2023-01-17T02:30:00.000Z'),
-      start: new Date('2023-01-17T01:00:00.000Z'),
-      title: 'Event 15'
+      end: new Date("2023-01-17T02:30:00.000Z"),
+      start: new Date("2023-01-17T01:00:00.000Z"),
+      title: "Event 15",
     },
     {
-      end: new Date('2023-01-17T12:00:00.000Z'),
-      start: new Date('2023-01-17T10:30:00.000Z'),
-      title: 'Event 16'
-    }
-  ]
+      end: new Date("2023-01-17T12:00:00.000Z"),
+      start: new Date("2023-01-17T10:30:00.000Z"),
+      title: "Event 16",
+    },
+  ];
 
   const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
 
@@ -134,26 +127,25 @@ const CustomCalendar = (props) => {
   }
 
   const formats = {
-    weekdayFormat: (date, culture, localizer) => localizer.format(date, 'dddd', culture),
-  }
-
+    weekdayFormat: (date, culture, localizer) =>
+      localizer.format(date, "dddd", culture),
+  };
 
   return (
     <Modal show={showCalendar} size="lg">
       <h1 className="calendarTitle">Calendar</h1>
       <div className="calendarCont">
-       
         <Calendar
           localizer={localizer}
           events={eventsToBeShown}
           startAccessor="start"
           endAccessor="end"
           formats={formats}
-          style={{ height: 500, margin: "50px" , zIndex : -1 }}
+          style={{ height: 500, margin: "50px", zIndex: -1 }}
         />
 
         <div className="cutOption" onClick={() => setShowCalendar(false)}>
-        <IoCloseSharp />
+          <IoCloseSharp />
         </div>
       </div>
     </Modal>

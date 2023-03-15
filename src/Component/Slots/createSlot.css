@@ -12,3 +12,9 @@
 .bookSlotCont{
   width: 70%;
 }
+
+.timeSection h6{
+  font-family: "Poppins-SemiBold";
+  font-size: 14px;
+  color: var(--lightgray);
+}

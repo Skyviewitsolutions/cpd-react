@@ -133,3 +133,13 @@ code {
   font-family: "Poppins-ThinItalic";  
   src: url("./fonts/Poppins-ThinItalic.ttf");
 } 
+
+@font-face {
+  font-family: "Tirobangla-Regular";
+  src: url("./fonts/TIROBANGLA-REGULAR.TTF");
+}
+
+@font-face {
+  font-family: 'Tirobangla-Italic';
+  src: url("./fonts/TIROBANGLA-ITALIC.TTF");
+}

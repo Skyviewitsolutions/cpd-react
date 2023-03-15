@@ -13,7 +13,7 @@ const ForgotPasssword = () => {
           <div className="container">
             <div className="row" style={{height:"50px"}}></div>
             <div className="row">
-              <div className="col-lg-6 col-md-12 col-12  about_con_login">
+              <div className="col-lg-6 col-md-12 col-12  about_con_login ">
                 <img
                   src={cpd_logo}
                   alt=""
@@ -36,7 +36,7 @@ const ForgotPasssword = () => {
                   <Link to="/Login">Login to know more</Link>
                 </button>
               </div>
-              <div className="col-lg-6 col-md-12 col-12">
+              <div className="col-lg-6 col-md-12 col-12 d-flex align-center">
               <EmailVerificationForm/>
               </div>
             </div>

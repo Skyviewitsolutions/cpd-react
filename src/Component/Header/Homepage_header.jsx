@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Homepage_header.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -6,7 +6,6 @@ import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import pimg from "../../assets/Images/user_profile.svg";
-import points from "../../assets/Images/points.svg";
 import cpd_logo from "../../assets/Images/cpd_logo.png";
 // import home from "../../assets/Images/home.svg";
 import home from "../../assets/Icons/Artboard1.svg";
@@ -34,22 +33,25 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 import Header2 from "./Header2";
+import { FiUser } from "react-icons/fi";
+import showToast from "../CustomToast/CustomToast";
+
+// here we are importing the white icons;
+
+import coachesW from "../../assets/Icons/coachesWhite.png";
+import workshopW from "../../assets/Icons/workshopWhite.png";
+import networkingW from "../../assets/Icons/networkingWhite.png";
+import jobsW from "../../assets/Icons/jobsWhite.png";
+import fareW from "../../assets/Icons/fareWhite.png";
 
 const Homepage_header = () => {
+
   const navigate = useNavigate("");
   const [isHovering, setIsHovering] = useState(false);
   const token = localStorage.getItem("token");
   var userDetails = localStorage.getItem("users");
   const [activeNavbar, setActiveNavbar] = useState("");
   userDetails = JSON.parse(userDetails);
-
-  const handleMouseOver = () => {
-    setIsHovering(true);
-  };
-
-  const handleMouseOut = () => {
-    setIsHovering(false);
-  };
 
   document.addEventListener("click", () => {
     setIsHovering(false);
@@ -59,14 +61,12 @@ const Homepage_header = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("users");
     localStorage.setItem("loginedIn", false);
-    toast("Logout Successfully");
+    localStorage.removeItem("activeNavbar")
+    showToast("Logout Successfully", "success");
     navigate("/");
-    window.location.reload();
+    // window.location.reload();
   };
 
-  const profile = () => {
-    navigate("/resume");
-  };
 
   const options = {
     margin: 20,
@@ -121,7 +121,22 @@ const Homepage_header = () => {
     } else if (userDetails.user_type == 2) {
       navigate("/coaches-form");
     }
+    localStorage.removeItem("activeNavbar")
   };
+
+  // here we are writing code for the selection of the navbar ;
+
+  useEffect(() => {
+    const activeNav = localStorage.getItem("activeNavbar");
+    setActiveNavbar(activeNav);
+  }, []);
+
+  // here we are handling the navigation;
+
+  const handleNavigation = (path) =>{
+    navigate(path)
+    localStorage.removeItem("activeNavbar")
+  }
 
   return (
     <>
@@ -142,7 +157,7 @@ const Homepage_header = () => {
               <Nav className="me-auto justify-content-end nav_middlebox flex-grow-1 pe-3">
                 <Nav.Link
                   className="nav_img working"
-                  onClick={() => navigate("/")}
+                  onClick={() => handleNavigation("/")}
                 >
                   <img src={home} alt="" className="nav-icons" />
                   <h6>Home</h6>
@@ -161,21 +176,21 @@ const Homepage_header = () => {
                 </Nav.Link>
                 <Nav.Link
                   className="nav_img working"
-                  onClick={() => navigate("/myCommunity")}
+                  onClick={() => handleNavigation("/myCommunity")}
                 >
                   <img src={my_Community} alt="" className="nav-icons" />
                   <h6>My Community</h6>
                 </Nav.Link>
                 <Nav.Link
                   className="nav_img working"
-                  onClick={() => navigate("/myCourses")}
+                  onClick={() => handleNavigation("/myCourses")}
                 >
                   <img src={my_course} alt="" className="nav-icons" />
                   <h6>My Course</h6>
                 </Nav.Link>
                 <Nav.Link
                   className="nav_img working"
-                  onClick={() => navigate("/myEvents")}
+                  onClick={() => handleNavigation("/myEvents")}
                 >
                   <img src={my_events} alt="" className="nav-icons" />
                   <h6>My Events</h6>
@@ -198,49 +213,34 @@ const Homepage_header = () => {
                   <h6>My Calendar</h6>
                 </Nav.Link>
 
-                {token ? (
-                  <Form className="d-flex userprofile_block">
-                    <div
-                      className="userprofile_row1"
-                      onMouseOver={() => setIsHovering(true)}
-                    >
-                      <img src={pimg} alt="" className="home" />
-                      <span className="userName">{userDetails?.name}</span>
+                <Form className="d-flex userprofile_block">
+                  <div
+                    className="userprofile_row1"
+                    onMouseOver={() => setIsHovering(true)}
+                  >
+                    <img src={pimg} alt="" className="home" />
 
-                      {/* {isHovering && (
-                        <div className="logouts">
-                          <div className="logoutBtn" onClick={logOut}>
-                            <span style={{ fontWeight: "bold" }}>
-                              <HiOutlineLogout />
-                            </span>
-                            <span
-                              style={{ marginLeft: "10px", fontWeight: "600" }}
-                            >
-                              Logout
-                            </span>
-                          </div>
+                    {isHovering && (
+                      <div className="logouts">
+                        <div className=" userName">
+                          <span>{userDetails?.name}</span>
                         </div>
-                      )}  */}
-                    </div>
-                    <div className="logoutss"  onClick={logOut}>
-                      <HiOutlineLogout />
-                      <span>Logout</span>
-                    </div>
-                  </Form>
-                ) : (
-                  <Nav.Link className="nav_img">
-                    <button
-                      type="submit"
-                      className="BtnLogin"
-                      onClick={() => navigate("/login")}
-                    >
-                      <span>
-                        <AiOutlineLogin />
-                      </span>{" "}
-                      Login
-                    </button>
-                  </Nav.Link>
-                )}
+                        <div className="logoutBtn">
+                          <span style={{ fontWeight: "bold" }}>
+                            <FiUser />
+                          </span>
+                          <span style={{ marginLeft: "10px" }}>Profile</span>
+                        </div>
+                        <div className="logoutBtn" onClick={logOut}>
+                          <span style={{ fontWeight: "bold" }}>
+                            <HiOutlineLogout />
+                          </span>
+                          <span style={{ marginLeft: "10px" }}>Logout</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </Form>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
@@ -251,59 +251,103 @@ const Homepage_header = () => {
 
       {/***********************SECOND NAVBAR IN HOME PAGE************************/}
 
-      <div className="second-Nave d-lg-block d-none">
-        <Nav justify variant="tabs" className="header2_afterlogin">
-          <Nav.Item
-            className="nav2_img working"
-            onClick={() => handleNavbar("coaches")}
-          >
-            <Nav.Link>
+      <div className="row secondNave">
+        <div className="col-10 d-flex justify-between align-center">
+          {activeNavbar === "coaches" ? (
+            <div
+              className="headerBox activeHeader"
+              onClick={() => handleNavbar("coaches")}
+            >
+              <div className="activeHeaderBox">
+                <img src={coachesW} alt="" className="coaches" />
+                <h6>Book</h6>
+                <h5>Coaches</h5>
+              </div>
+            </div>
+          ) : (
+            <div className="headerBox " onClick={() => handleNavbar("coaches")}>
               <img src={coaches} alt="" className="coaches" />
               <h6>Book</h6>
               <h5>Coaches</h5>
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item
-            className="nav2_img working"
-            onClick={() => handleNavbar("workShop")}
-            style={{ cursor: "pointer" }}
-          >
-            <Nav.Link>
-              <img src={workshop} alt="" className="coaches" />
+            </div>
+          )}
+
+          {activeNavbar === "workShop" ? (
+            <div className="headerBox" onClick={() => handleNavbar("workShop")}>
+              <div className="activeHeaderBox">
+                <img
+                  src={workshopW}
+                  alt=""
+                  className="coaches"
+                  style={{ width: "24px" }}
+                />
+                <h6>Enroll Courses</h6>
+                <h5>Workshop</h5>
+              </div>
+            </div>
+          ) : (
+            <div className="headerBox" onClick={() => handleNavbar("workShop")}>
+              <img
+                src={workshop}
+                alt=""
+                className="coaches"
+                style={{ width: "24px" }}
+              />
               <h6>Enroll Courses</h6>
               <h5>Workshop</h5>
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item className="nav2_img" onClick={() => handleNavbar("events")}>
-            <Nav.Link>
-              <img src={networking} alt="" className="coaches" />
+            </div>
+          )}
+
+          {activeNavbar === "events" ? (
+            <div className="headerBox" onClick={() => handleNavbar("events")}>
+              <div className="activeHeaderBox">
+                <img
+                  src={networkingW}
+                  alt=""
+                  className="coaches"
+                  style={{ width: "24px" }}
+                />
+                <h6>Networking</h6>
+                <h5>Events</h5>
+              </div>
+            </div>
+          ) : (
+            <div className="headerBox" onClick={() => handleNavbar("events")}>
+              <img
+                src={networking}
+                alt=""
+                className="coaches"
+                style={{ width: "24px" }}
+              />
               <h6>Networking</h6>
               <h5>Events</h5>
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item className="nav2_img working">
-            <Nav.Link disabled>
-              <img src={job} alt="" className="coaches" />
-              <h6>Job</h6>
-              <h5>Board</h5>{" "}
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item className="nav2_img working">
-            <Nav.Link disabled>
-              <img src={fare} alt="" className="coaches" />
-              <h6>Career</h6>
-              <h5>Fare</h5>{" "}
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link className="click_forem_box working">
-              <h5>Available Resources</h5>
-              <h5 className="forEmpl">For Employers</h5>
-              <h6 id="click_forem">Click to Forum</h6>
-            </Nav.Link>
-          </Nav.Item>
-          <ToastContainer />
-        </Nav>
+            </div>
+          )}
+
+          <div className="headerBox">
+            <img src={job} alt="" className="coaches" />
+            <h6>Job</h6>
+            <h5>Board</h5>{" "}
+          </div>
+
+          <div className="headerBox">
+            <img
+              src={fare}
+              alt=""
+              className="coaches"
+              style={{ width: "24px" }}
+            />
+            <h6>Career</h6>
+            <h5>Fare</h5>{" "}
+          </div>
+        </div>
+        <div className="col-2 click_forem_box">
+          <div>
+            <h5>Available Resources</h5>
+            <h5 className="forEmpl">For Employers</h5>
+            <h6 className="clickFormu">Click to Forum</h6>
+          </div>
+        </div>
       </div>
 
       {/****************************slider in mobile and tab ***************************/}

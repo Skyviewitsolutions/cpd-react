@@ -12,10 +12,9 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { getDomainList, getIndustryList } from "../../../utils/api";
 import CustomCalendar from "../../Calendar/CustomCalendar";
 import Loader from "../../Loader/Loader";
-
+import showToast from "../../CustomToast/CustomToast";
 
 const CreateCoachingForm = (props) => {
-
   const {
     showCoachingsForm,
     setShowCoachingsForm,
@@ -45,6 +44,11 @@ const CreateCoachingForm = (props) => {
   const [eventsToBeShown, setEventsToBeShown] = useState([]);
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedCoachingId, setSelectedCoachingId] = useState("");
+
+  const [showDomainInputBox, setShowDomainInputBox] = useState(false);
+  const [showIndustryInputBox, setShowIndustryBox] = useState(false);
+  const [domainManualInput, setDomainManualInput] = useState("");
+  const [industryManualInput, setIndustryManualInput] = useState("");
 
   // creating useState for slotsCreations ;
 
@@ -77,6 +81,10 @@ const CreateCoachingForm = (props) => {
     setDaysFormat("weekly");
     setSelectedDates([]);
     setSelectedDays([]);
+    setDomainManualInput("");
+    setIndustryManualInput("");
+    setShowDomainInputBox(false);
+    setShowIndustryBox(false);
     setSessionType("");
   };
 
@@ -105,15 +113,15 @@ const CreateCoachingForm = (props) => {
 
   const submitCoaching = () => {
     if (coachTitle == "") {
-      toast("Please fill the coaching title", { type: "warning" });
+      showToast("Please fill the coaching title",  "warning" );
     } else if (!coachingImg) {
-      toast("coaching image is required", { type: "warning" });
+      showToast("coaching image is required",  "warning" );
     } else if (!domain) {
-      toast("please select coaching domain", { type: "warning" });
+      showToast("please select coaching domain",  "warning" );
     } else if (!industry) {
-      toast("please select coaching industry", { type: "warning" });
+      showToast("please select coaching industry",  "warning" );
     } else if (paid == true && !sessionType) {
-      toast("please select session type", { type: "warning" });
+      showToast("please select session type",  "warning" );
     } else {
       // here we are writing the code for updating the data from here ;
 
@@ -145,8 +153,14 @@ const CreateCoachingForm = (props) => {
       formData.append("availability_timing", availability_timing);
       formData.append("is_repeated", is_repeated);
       formData.append("image", coachingImg);
-      formData.append("domain", domainId);
-      formData.append("industry", industryId);
+      formData.append(
+        "domain",
+        showDomainInputBox ? domainManualInput : domainId
+      );
+      formData.append(
+        "industry",
+        showIndustryInputBox ? industryManualInput : industryId
+      );
 
       const headers = {
         Authorization: `Bearer ${token}`,
@@ -165,9 +179,9 @@ const CreateCoachingForm = (props) => {
             setShowCoachingsForm(false);
             refreshAllInputField();
             setShowAllCoaching(false);
-            toast("Coaching created successfully", { type: "success" });
+            showToast("Coaching created successfully", "success" );
           } else if (res.data.result == false) {
-            toast(res?.data?.message, { type: "warning" });
+            showToast(res?.data?.message, "warning" );
           }
         })
         .catch((err) => {
@@ -179,15 +193,15 @@ const CreateCoachingForm = (props) => {
 
   const updateCoachings = () => {
     if (coachTitle == "") {
-      toast("Please fill the coaching title", { type: "warning" });
+      showToast("Please fill the coaching title", "warning" );
     } else if (!coachingImg) {
-      toast("coaching image is required", { type: "warning" });
+      showToast("coaching image is required", "warning" );
     } else if (!domain) {
-      toast("please select coaching domain", { type: "warning" });
+      showToast("please select coaching domain", "warning" );
     } else if (!industry) {
-      toast("please select coaching industry", { type: "warning" });
+      showToast("please select coaching industry", "warning" );
     } else if (paid == true && !sessionType) {
-      toast("please select session type", { type: "warning" });
+      showToast("please select session type", "warning" );
     } else {
       // here we are writing the code for updating the data from here ;
 
@@ -218,8 +232,14 @@ const CreateCoachingForm = (props) => {
       formData.append("availability_timing", ["12:00:00", "01:00:00"]);
       formData.append("is_repeated", is_repeated);
       formData.append("image", coachingImg);
-      formData.append("domain", domainId);
-      formData.append("industry", industryId);
+      formData.append(
+        "domain",
+        showDomainInputBox ? domainManualInput : domainId
+      );
+      formData.append(
+        "industry",
+        showIndustryInputBox ? industryManualInput : industryId
+      );
       formData.append("id", selectedCoachingId);
 
       const headers = {
@@ -240,9 +260,9 @@ const CreateCoachingForm = (props) => {
             refreshAllInputField();
             setShowAllCoaching(false);
             setUpdateCoaching(false);
-            toast("Coaching updated successfully", { type: "success" });
+            showToast("Coaching updated successfully",  "success" );
           } else if (res.data.result == false) {
-            toast(res?.data?.message, { type: "warning" });
+            showToast(res?.data?.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -257,22 +277,17 @@ const CreateCoachingForm = (props) => {
       var dta = selectedCoachingForUpdate;
       var domainId = dta.domain?._id;
 
-      var domainName = allDomain.find((itm, index) => {
-        return itm.domain_id === domainId;
-      });
+      var domainName = dta.domain?.title;
 
-      domainName = domainName.title;
       setDomain(domainName);
 
       var industryId = dta.industry?._id;
-      var industryName = allIndustry.find((itm, index) => {
-        return itm.industry_id === industryId;
-      });
-      industryName = industryName.title;
+      var industryName = dta.industry?.title;
+
       setIndustry(industryName);
 
-      setDomainId(dta.domain?.domain_id);
-      setIndustryId(dta.industry?.industry_id);
+      setDomainId(domainId);
+      setIndustryId(industryId);
       setCoachTitle(dta.title);
 
       var repeated = dta.is_repeated == 0 ? false : true;
@@ -285,7 +300,6 @@ const CreateCoachingForm = (props) => {
       setSelectedCoachingId(dta._id);
 
       var slots = JSON.parse(dta?.availability_slot);
-      console.log(slots , "slots")
       setSelectedDays(slots?.selectedDays);
       setSelectedDates(slots?.selectedDates);
       setDaysSlot(slots?.daysSlot);
@@ -306,24 +320,35 @@ const CreateCoachingForm = (props) => {
   }, [updateCoaching]);
 
   const handleDomainSelection = (val) => {
-    setDomain(val);
-    var domanId = allDomain.find((itm, index) => {
-      return itm.title === val;
-    });
+    if (val === "Others") {
+      setShowDomainInputBox(true);
+      setDomain(val);
+    } else {
+      setShowDomainInputBox(false);
+      setDomain(val);
+      var domanId = allDomain.find((itm, index) => {
+        return itm.title === val;
+      });
 
-    domanId = domanId._id;
-    setDomainId(domanId);
+      domanId = domanId._id;
+      setDomainId(domanId);
+    }
   };
 
   const handleIndustrySelection = (val) => {
-    setIndustry(val);
-    var indstryId = allIndustry.find((itm, index) => {
-      return itm.title === val;
-    });
-    indstryId = indstryId._id;
-    setIndustryId(indstryId);
+    if (val === "Others") {
+      setShowIndustryBox(true);
+      setIndustry(val);
+    } else {
+      setIndustry(val);
+      setShowIndustryBox(false);
+      var indstryId = allIndustry.find((itm, index) => {
+        return itm.title === val;
+      });
+      indstryId = indstryId._id;
+      setIndustryId(indstryId);
+    }
   };
-
 
   return (
     <>
@@ -404,10 +429,27 @@ const CreateCoachingForm = (props) => {
                         </>
                       );
                     })}
+                    <option value="Others">Others</option>
                   </select>
                 </div>
               </div>
-
+              {showDomainInputBox && (
+                <div className="col-12 col-md-6 col-lg-4 ">
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Others</label>
+                    <input
+                      type="text"
+                      class="form-control field py-4 "
+                      id=""
+                      placeholder="Enter your domain "
+                      value={domainManualInput}
+                      onChange={(e) => setDomainManualInput(e.target.value)}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="row mb-3">
               <div className="col-12 col-md-6 col-lg-4 ">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Industry</label>
@@ -428,9 +470,25 @@ const CreateCoachingForm = (props) => {
                         </>
                       );
                     })}
+                    <option value="Others">Others</option>
                   </select>
                 </div>
               </div>
+              {showIndustryInputBox && (
+                <div className="col-12 col-md-6 col-lg-4 ">
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Others</label>
+                    <input
+                      type="text"
+                      class="form-control field py-4"
+                      id=""
+                      placeholder="Enter your industry"
+                      value={industryManualInput}
+                      onChange={(e) => setIndustryManualInput(e.target.value)}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
             <CreateSlots
@@ -450,12 +508,12 @@ const CreateCoachingForm = (props) => {
               setEventsToBeShown={setEventsToBeShown}
             />
 
-            <div
+            {/* <div
               className="caledarIcons clenderIcons2"
               onClick={() => setShowCalendar(true)}
             >
               <BsFillCalendarDateFill color="#2c6959" size={32} />
-            </div>
+            </div> */}
 
             <div className="eventForm_price">
               <div className="mt-3">
@@ -495,51 +553,52 @@ const CreateCoachingForm = (props) => {
                   </label>
                 </div>
               </div>
-              {paid &&
-              <div className="d-flex">
-                <div class="form-check" style={{ marginLeft: "25px" }}>
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault2"
-                    checked={sessionType == "hourly"}
-                    onChange={() => setSessionType("hourly")}
-                  />
-                  <label
-                    class="form-check-label  textsession"
-                    for="flexRadioDefault2"
-                    style={{ marginBottom: "0px" }}
-                  >
-                    Pay by Hours
-                  </label>
-                </div>
+              {paid && (
+                <div className="d-flex">
+                  <div class="form-check" style={{ marginLeft: "25px" }}>
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault2"
+                      checked={sessionType == "hourly"}
+                      onChange={() => setSessionType("hourly")}
+                    />
+                    <label
+                      class="form-check-label  textsession"
+                      for="flexRadioDefault2"
+                      style={{ marginBottom: "0px" }}
+                    >
+                      Pay by Hours
+                    </label>
+                  </div>
 
-                <div class="form-check" style={{ marginLeft: "25px" }}>
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault3"
-                    checked={sessionType == "sessional"}
-                    onChange={() => setSessionType("sessional")}
-                  />
-                  <label
-                    class="form-check-label textsession"
-                    for="flexRadioDefault3"
-                    style={{ marginBottom: "0px" }}
-                  >
-                    Pay by Session
-                  </label>
+                  <div class="form-check" style={{ marginLeft: "25px" }}>
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault3"
+                      checked={sessionType == "sessional"}
+                      onChange={() => setSessionType("sessional")}
+                    />
+                    <label
+                      class="form-check-label textsession"
+                      for="flexRadioDefault3"
+                      style={{ marginBottom: "0px" }}
+                    >
+                      Pay by Session
+                    </label>
+                  </div>
                 </div>
-              </div>}
+              )}
             </div>
 
             {/* here we aare adding payment div */}
             {paid && (
               <div className="col-lg-4 col-md-6 col-12 my-3 ">
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Price in ($)</label>
+                  <label for="exampleInputPassword1">Price in (HKD)</label>
                   <input
                     type="number"
                     class="form-control py-4"
@@ -565,7 +624,7 @@ const CreateCoachingForm = (props) => {
             onClick={() => {
               setShowCoachingsForm(false);
               refreshAllInputField();
-              setUpdateCoaching(false)
+              setUpdateCoaching(false);
             }}
           >
             <IoIosCloseCircleOutline size={26} color="red" />

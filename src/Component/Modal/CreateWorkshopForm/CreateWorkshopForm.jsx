@@ -10,10 +10,11 @@ import { getDomainList, getIndustryList } from "../../../utils/api";
 import CustomCalendar from "../../Calendar/CustomCalendar";
 import axios from "axios";
 import { endpoints } from "../../services/endpoints";
+import showToast from "../../CustomToast/CustomToast";
 
 
 const CreateWorkshopForm = (props) => {
-  
+
   const {
     setShowWorkshopForm,
     showWorkshopForm,
@@ -44,6 +45,11 @@ const CreateWorkshopForm = (props) => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [eventsToBeShown, setEventsToBeShown] = useState([]);
   const [selectedWorkshopId, setSelectedWorkshopId] = useState("");
+  const [showDomainInputBox, setShowDomainInputBox] = useState(false);
+  const [showIndustryInputBox, setShowIndustryBox] = useState(false);
+  const [domainManualInput, setDomainManualInput] = useState("");
+  const [industryManualInput, setIndustryManualInput] = useState("");
+
 
   var token = localStorage.getItem("token");
 
@@ -106,21 +112,21 @@ const CreateWorkshopForm = (props) => {
     setMaxNumber(0);
   };
 
+
   const submitWorkshop = async () => {
     if (!title) {
-      toast("please fill the workshop title", { type: "warning" });
+      showToast("please fill the workshop title",  "warning" );
     } else if (!workShopDuration) {
-      toast("workshop duration is required", { type: "warning" });
+      showToast("workshop duration is required",  "warning" );
     } else if (!workshopImg) {
-      toast("workshop image is required", { type: "warning" });
+      showToast("workshop image is required",  "warning" );
     } else if (!domain) {
-      toast("please select workshop domain", { type: "warning" });
+      showToast("please select workshop domain",  "warning" );
     } else if (!industry) {
-      toast("please select workshop industry", { type: "warning" });
+      showToast("please select workshop industry",  "warning" );
     } else if (!maxNumber) {
-      toast("Max number of student is required", { type: "warning" });
-    // } else if (!sessionType) {
-    //   toast("please select session type", { type: "warning" });
+      showToast("Max number of student is required",  "warning" );
+      
     } else {
       const url = endpoints.workshop.createWorkshop;
 
@@ -152,8 +158,14 @@ const CreateWorkshopForm = (props) => {
       formData.append("is_repeated", is_repeated);
       formData.append("max_members", maxNumber);
       formData.append("image", workshopImg);
-      formData.append("domain", domainId);
-      formData.append("industry", industryId);
+      formData.append(
+        "domain",
+        showDomainInputBox ? domainManualInput : domainId
+      );
+      formData.append(
+        "industry",
+        showIndustryInputBox ? industryManualInput : industryId
+      );
       formData.append("workshop_duration", workShopDuration);
 
       const headers = {
@@ -171,9 +183,9 @@ const CreateWorkshopForm = (props) => {
             setShowWorkshopForm(false);
             setShowAllWorkshop(false);
             refreshAllInputField();
-            toast("workshop created successfully", { type: "success" });
+            showToast("workshop created successfully",  "success" );
           } else if (res.data.result == false) {
-            toast(res.data.message, { type: "warning" });
+            showToast(res.data.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -184,22 +196,34 @@ const CreateWorkshopForm = (props) => {
   };
 
   const handleDomainSelection = (val) => {
-    setDomain(val);
-    var domanId = allDomain.find((itm, index) => {
-      return itm.title === val;
-    });
+    if (val === "Others") {
+      setShowDomainInputBox(true);
+      setDomain(val);
+    } else {
+      setShowDomainInputBox(false);
+      setDomain(val);
+      var domanId = allDomain.find((itm, index) => {
+        return itm.title === val;
+      });
 
-    domanId = domanId._id;
-    setDomainId(domanId);
+      domanId = domanId._id;
+      setDomainId(domanId);
+    }
   };
 
   const handleIndustrySelection = (val) => {
-    setIndustry(val);
-    var indstryId = allIndustry.find((itm, index) => {
-      return itm.title === val;
-    });
-    indstryId = indstryId._id;
-    setIndustryId(indstryId);
+    if (val === "Others") {
+      setShowIndustryBox(true);
+      setIndustry(val);
+    } else {
+      setIndustry(val);
+      setShowIndustryBox(false);
+      var indstryId = allIndustry.find((itm, index) => {
+        return itm.title === val;
+      });
+      indstryId = indstryId._id;
+      setIndustryId(indstryId);
+    }
   };
 
   // writing code for updating the workshop;
@@ -265,26 +289,25 @@ const CreateWorkshopForm = (props) => {
   const updateWorkshops = () => {
     const url = endpoints.workshop.updateWorkshop;
     if (!title) {
-      toast("please fill the workshop title", { type: "warning" });
+      showToast("please fill the workshop title",  "warning" );
       // } else if (!workShopDuration) {
       //   toast("workshop duration is required", { type: "warning" });
     } else if (!workshopImg) {
-      toast("workshop image is required", { type: "warning" });
+      showToast("workshop image is required",  "warning" );
     } else if (!domain) {
-      toast("please select workshop domain", { type: "warning" });
+      showToast("please select workshop domain",  "warning" );
     } else if (!industry) {
-      toast("please select workshop industry", { type: "warning" });
+      showToast("please select workshop industry",  "warning" );
     } else if (!maxNumber) {
-      toast("Max number of student is required", { type: "warning" });
+      showToast("Max number of student is required",  "warning" );
     } else if (!sessionType) {
-      toast("please select session type", { type: "warning" });
+      showToast("please select session type",  "warning" );
     } else {
       var availability_type = daysFormat == "weekly" ? 1 : 2;
       var payment_type = sessionType == "hourly" ? 1 : 2;
       var is_paid = paid == true ? 1 : 0;
       var availability_timing = ["12:00:00", "01:00:00"];
-       var is_repeated = isRepeated ? 1 : 0;
-
+      var is_repeated = isRepeated ? 1 : 0;
 
       var slots = {
         isRepeated: isRepeated,
@@ -308,8 +331,14 @@ const CreateWorkshopForm = (props) => {
       formData.append("is_repeated", is_repeated);
       formData.append("max_members", maxNumber);
       formData.append("image", workshopImg);
-      formData.append("domain", domainId);
-      formData.append("industry", industryId);
+      formData.append(
+        "domain",
+        showDomainInputBox ? domainManualInput : domainId
+      );
+      formData.append(
+        "industry",
+        showIndustryInputBox ? industryManualInput : industryId
+      );
       formData.append("id", selectedWorkshopId);
       formData.append("workshop_duration", workShopDuration);
 
@@ -329,9 +358,9 @@ const CreateWorkshopForm = (props) => {
             setShowWorkshopForm(false);
             setUpdateWorkshop(false);
             refreshAllInputField();
-            toast("workshop updated successfully", { type: "success" });
+            showToast("workshop updated successfully",  "success" );
           } else if (res.data.result == false) {
-            toast(res.data.message, { type: "warning" });
+            showToast(res.data.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -350,7 +379,7 @@ const CreateWorkshopForm = (props) => {
     >
       <div className="formoutline_studentcv coachFormSt ">
         <div style={{ width: "150%", paddingBottom: "20px" }}>
-          <div className="row d-flex">
+          <div className="row ">
             <div className="col-lg-4 col-md-6 col-12 ">
               <div class="form-group">
                 <label for="exampleInputPassword1">Title</label>
@@ -449,10 +478,27 @@ const CreateWorkshopForm = (props) => {
                       </>
                     );
                   })}
+                  <option value="Others">Others</option>
                 </select>
               </div>
             </div>
-
+            {showDomainInputBox && (
+              <div className="col-12 col-md-6 col-lg-4 ">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Others</label>
+                  <input
+                    type="text"
+                    class="form-control field py-4 "
+                    id=""
+                    placeholder="Enter your domain "
+                    value={domainManualInput}
+                    onChange={(e) => setDomainManualInput(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="row mb-3">
             <div className="col-12 col-md-6 col-lg-4 ">
               <div class="form-group">
                 <label for="exampleInputPassword1">Industry</label>
@@ -473,9 +519,25 @@ const CreateWorkshopForm = (props) => {
                       </>
                     );
                   })}
+                  <option value="Others">Others</option>
                 </select>
               </div>
             </div>
+            {showIndustryInputBox && (
+              <div className="col-12 col-md-6 col-lg-4 ">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Others</label>
+                  <input
+                    type="text"
+                    class="form-control field py-4"
+                    id=""
+                    placeholder="Enter your industry"
+                    value={industryManualInput}
+                    onChange={(e) => setIndustryManualInput(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           <CreateSlots
@@ -495,12 +557,12 @@ const CreateWorkshopForm = (props) => {
             setEventsToBeShown={setEventsToBeShown}
           />
 
-          <div
+          {/* <div
             className="caledarIcons  clnderIcons"
             onClick={() => setShowCalendar(true)}
           >
             <BsFillCalendarDateFill color="#2c6959" size={32} />
-          </div>
+          </div> */}
           {/* here adding the fees structure */}
           <div className="eventForm_price mt-3">
             <div>
@@ -579,7 +641,7 @@ const CreateWorkshopForm = (props) => {
           {paid === true && (
             <div className="col-lg-4 col-md-6 col-12 my-3 ">
               <div class="form-group">
-                <label for="exampleInputPassword1">Price in ($)</label>
+                <label for="exampleInputPassword1">Price in (HKD)</label>
                 <input
                   type="number"
                   class="form-control py-4"

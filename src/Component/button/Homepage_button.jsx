@@ -8,13 +8,7 @@ const Homepage_button = (props) => {
   return (
     <>
       <div>
-        <button
-          className="view"
-          style={{ borderColor: props.brColor, color: props.fontColor }}
-          onClick={onClick}
-        >
-          {props.text}
-        </button>
+        
       </div>
     </>
   );

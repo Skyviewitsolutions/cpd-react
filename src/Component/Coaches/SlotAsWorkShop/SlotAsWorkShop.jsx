@@ -10,6 +10,7 @@ import "../../../Screen/Coaches_screen/CoachesForm.css";
 import { endpoints } from "../../services/endpoints";
 import Button from "../../button/Button/Button";
 import CreateSlots from "../../Slots/CreateSlots";
+import showToast from "../../CustomToast/CustomToast";
 
 const SlotAsWorkShop = (props) => {
 
@@ -266,19 +267,19 @@ const SlotAsWorkShop = (props) => {
     updateDataToCalendar();
 
     if (!title) {
-      toast("please fill the workshop title", { type: "warning" });
+      showToast("please fill the workshop title",  "warning" );
     } else if (!workShopDuration) {
-      toast("workshop duration is required", { type: "warning" });
+      showToast("workshop duration is required",  "warning" );
     } else if (!workshopImg) {
-      toast("workshop image is required", { type: "warning" });
+      showToast("workshop image is required",  "warning" );
     } else if (!domain) {
-      toast("please select workshop domain", { type: "warning" });
+      showToast("please select workshop domain",  "warning" );
     } else if (!industry) {
-      toast("please select workshop industry", { type: "warning" });
+      showToast("please select workshop industry",  "warning" );
     } else if (!maxNumber) {
-      toast("Max number of student is required", { type: "warning" });
+      showToast("Max number of student is required",  "warning" );
     } else if (!sessionType) {
-      toast("please select session type", { type: "warning" });
+      showToast("please select session type",  "warning" );
     } else {
       const url = endpoints.workshop.createWorkshop;
 
@@ -322,9 +323,9 @@ const SlotAsWorkShop = (props) => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            toast("workshop created successfully", { type: "success" });
+            showToast("workshop created successfully",  "success" );
           } else if (res.data.result == false) {
-            toast(res.data.message, { type: "warning" });
+            showToast(res.data.message,  "warning" );
           }
         })
         .catch((err) => {

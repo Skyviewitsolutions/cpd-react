@@ -8,14 +8,15 @@ import { GiRoundStar } from "react-icons/gi";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { endpoints } from "../../Component/services/endpoints";
-
+import { useNavigate } from "react-router-dom";
 
 const WorkshopDetails = () => {
 
+  const navigate = useNavigate();
   const { workshopId } = useParams();
   const token = localStorage.getItem("token");
   const [workshopDtails, setWorkshopDtails] = useState({});
-  const [imgPath , setImgPath] = useState([]);
+  const [imgPath, setImgPath] = useState([]);
 
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -29,9 +30,8 @@ const WorkshopDetails = () => {
         if (res.data.result) {
           const val = res.data.data?.[0];
           setWorkshopDtails(val);
-          var path = res.data?.workshop_image_path
-          setImgPath(path)
-          
+          var path = res.data?.workshop_image_path;
+          setImgPath(path);
         }
       })
       .catch((err) => {
@@ -43,42 +43,47 @@ const WorkshopDetails = () => {
     getWorkshopDetailsById();
   }, []);
 
-  var industry = workshopDtails?.industry?.title
-  var domain = workshopDtails?.domain?.title
+  var industry = workshopDtails?.industry?.title;
+  var domain = workshopDtails?.domain?.title;
 
-  console.log(workshopDtails , "workshop Details here");
+  console.log(workshopDtails, "workshop Details here");
 
   return (
     <>
       <Homepage_header />
 
-      <section className="workshopDetailsSection1">
+      <section className="workshopDetailsSection1 position-relative">
         <div className="container-fluid">
+          <div className="breadCrum">
+            <h4 onClick={() => navigate("/")}>Home</h4> <span>></span>{" "}
+            <h4 onClick={() => navigate(-1)}>Workshops</h4> <span>></span>
+            <h4 style={{ borderBottom: "2px solid white" }}>Details</h4>
+          </div>
           <div className="workshopDetailsfirst">
-          <div className="evDtlTitle">
-               <h5>Learn</h5>
-               <span>:</span>
-               <h6>{workshopDtails?.title}</h6>
+            <div className="evDtlTitle">
+              <h5>Learn</h5>
+              <span>:</span>
+              <h6>{workshopDtails?.title}</h6>
             </div>
             <div className="evntDtlsBox ">
-               <h5>Max Members</h5>
-               <span>:</span>
-               <h6>{workshopDtails?.max_members}</h6>
+              <h5>Max Members</h5>
+              <span>:</span>
+              <h6>{workshopDtails?.max_members}</h6>
             </div>
             <div className="evntDtlsBox ">
-               <h5>Joined Members</h5>
-               <span>:</span>
-               <h6>{workshopDtails?.workshop_members_count}</h6>
+              <h5>Joined Members</h5>
+              <span>:</span>
+              <h6>{workshopDtails?.workshop_members_count}</h6>
             </div>
             <div className="evntDtlsBox ">
-               <h5>Domain</h5>
-               <span>:</span>
-               <h6>{domain}</h6>
+              <h5>Domain</h5>
+              <span>:</span>
+              <h6>{domain}</h6>
             </div>
             <div className="evntDtlsBox ">
-               <h5>Industry</h5>
-               <span>:</span>
-               <h6>{industry}</h6>
+              <h5>Industry</h5>
+              <span>:</span>
+              <h6>{industry}</h6>
             </div>
           </div>
         </div>
@@ -258,7 +263,13 @@ const WorkshopDetails = () => {
             <div className="workshopReveiw">
               <div className="workshopMedia">
                 <div className="workshopMediaImg">
-                  <img src={workshopDtails.image && (imgPath + "/" + workshopDtails.image)} alt="" />
+                  <img
+                    src={
+                      workshopDtails.image &&
+                      imgPath + "/" + workshopDtails.image
+                    }
+                    alt=""
+                  />
                 </div>
               </div>
               <div className="workshopReveiwBody">

@@ -14,6 +14,7 @@ import axios from "axios";
 import { data } from "jquery";
 import { toast, ToastContainer } from "react-toastify";
 import $ from "jquery"
+import showToast from "../CustomToast/CustomToast";
 const ProfileCv = () => {
  
   const token = localStorage.getItem("token");
@@ -46,51 +47,51 @@ const ProfileCv = () => {
   const submitProfileCv = () => {
     if (name === "") {
      
-      toast("Please enter your first name",{type:"warning"})
+      showToast("Please enter your first name","warning")
     } else if (lName === "") {
     
-      toast("Please enter your last name",{type:"warning"})
+      showToast("Please enter your last name","warning")
     } else if (contact === "") {
      
-      toast("Please enter your contact number",{type:"warning"})
+      showToast("Please enter your contact number","warning")
     } else if (contact.length !== 10) {
-      toast("Please Enter 10 digit mobile number",{type:"warning"})
+      showToast("Please Enter 10 digit mobile number","warning")
      
     } else if (nationality === "") {
-      toast("Please select your nationality",{type:"warning"})
+      showToast("Please select your nationality","warning")
       
     } else if (dob === "") {
-      toast("Please enter  your date of birth",{type:"warning"})
+      showToast("Please enter  your date of birth","warning")
       
     } else if (gender === "") {
-      toast("Please select your gender",{type:"warning"})
+      showToast("Please select your gender","warning")
       
     } else if (uploadCv === "") {
       
-      toast("Upload your profile pic",{type:"warning"})
+      showToast("Upload your profile pic","warning")
     } else if (school === "") {
-      toast("Please select your collage name",{type:"warning"})
+      showToast("Please select your collage name","warning")
       
     } else if (startYear === "") {
-      toast("Please select your start year",{type:"warning"})
+      showToast("Please select your start year","warning")
      
     } else if (endYear === "") {
-      toast("Please select your end year",{type:"warning"})
+      showToast("Please select your end year","warning")
     } else if (program === "") {
-      toast("Please enter your program",{type:"warning"})
+      showToast("Please enter your program","warning")
      
     } else if (fieldStudy === "") {
      
-      toast("Please enter your field study",{type:"warning"})
+      showToast("Please enter your field study","warning")
 
     } else if (domain === "") {
      
-      toast("Please select your domain",{type:"warning"})
+      showToast("Please select your domain","warning")
     } else if (industry === "") {
-      toast("Please select your industry",{type:"warning"})
+      showToast("Please select your industry","warning")
      
     } else if (description === "") {
-      toast("Please write  description",{type:"warning"})
+      showToast("Please write  description","warning")
   
     } else {
       const formData = new FormData();
@@ -121,11 +122,11 @@ const ProfileCv = () => {
 
         .then((res) => {
           if (res.data.result===true) {
-            toast("Profile create successfully", { type: "success" });
+            showToast("Profile create successfully",  "success");
             navigate("/");
             setLoading(false);
           } else if (res.data.result===false) {
-            toast(res.data.message, { type: "error" });
+            showToast(res.data.message,  "error");
             setLoading(false);
           }
         })
@@ -152,7 +153,7 @@ const ProfileCv = () => {
           setAlldomain(res.data.data);
           // toast(res.data.message, { type: "success" });
         } else if (res.data.result === false) {
-          toast(res.data.message, { type: "error" });
+          showToast(res.data.message, "error" );
         }
       })
       .catch((err) => {
@@ -180,7 +181,7 @@ const ProfileCv = () => {
         if (res.data.result === true) {
           setAllIndustry(res.data.data);
         } else if (res.data.result === false) {
-          toast(res.data.message, { type: "error" });
+          showToast(res.data.message,  "error");
         }
       })
       .catch((err) => {

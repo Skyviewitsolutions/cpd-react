@@ -53,8 +53,13 @@ const EventFullDetails = () => {
     <>
       <Homepage_header />
 
-      <section className="workshopDetailsSection1">
+      <section className="workshopDetailsSection1 position-relative">
         <div className="container-fluid">
+        <div className="breadCrum">
+            <h4 onClick={() => navigate("/")}>Home</h4> <span>></span>{" "}
+            <h4 onClick={() => navigate(-1)}>Events</h4> <span>></span>
+            <h4 style={{ borderBottom: "2px solid white" }}>Details</h4>
+          </div>
           <div className="workshopDetailsfirst">
 
             <div className="evDtlTitle">

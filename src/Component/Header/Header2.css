@@ -42,12 +42,11 @@
       min-width: 100px;
       max-width: 150px;
   }
-  .working h6{
+  /* .working h6{
     color:black;
-  }
+  } */
   
   .nav_img h6 {
-    margin-top: 5px;
     font-size: 13px;
     color: var(--black);
     font-weight: 500;
@@ -68,8 +67,8 @@
     flex-direction: column;
   }
   .userprofile_row1 img {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     margin-top: 10px;
     cursor: pointer;
     

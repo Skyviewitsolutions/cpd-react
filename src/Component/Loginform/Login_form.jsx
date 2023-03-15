@@ -20,6 +20,7 @@ import validator from "validator";
 import { ToastContainer, toast } from "react-toastify";
 import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
+import showToast from "../CustomToast/CustomToast";
 
 
 const Login_form = (props) => {
@@ -63,7 +64,7 @@ const Login_form = (props) => {
             localStorage.setItem("users", JSON.stringify(user_data));
             localStorage.setItem("logedIn", true);
 
-            toast("Login successfully", { type: "success" });
+            showToast("Login successfully", "success" );
             setLoading(false);
             const isCvUploaded = res.data.user?.isCvAvailable;
             localStorage.setItem("isCvUploaded", isCvUploaded);
@@ -79,7 +80,7 @@ const Login_form = (props) => {
               }
             }
           } else if (res.data.result) {
-            toast(res.data.message, { type: "error" });
+            showToast(res.data.message,  "error" );
             setLoading(false);
           }
         })
@@ -95,7 +96,7 @@ const Login_form = (props) => {
       <div className="loginpage_form">
         <h4>Login</h4>
         <Form onSubmit={submit}>
-          <div className="mb-4" controlId="formBasicEmail">
+          <div className="mb-4" >
             <label>Email Address</label>
             <Logininput
               licon={<GrMail />}
@@ -109,7 +110,7 @@ const Login_form = (props) => {
               {errorMsg.email}
             </span>
           </div>
-          <Form.Group className="mb-4" controlId="formBasicPassword">
+          <Form.Group className="mb-4" >
             <label>Password</label>
             <Logininput
               value={password}
@@ -141,7 +142,7 @@ const Login_form = (props) => {
                   id="sign_check"
                   className="loginCheckbox"
                 />{" "}
-                <label for="sign_check">
+                <label htmlFor="sign_check">
                   <span className="LoginCheckText">
                     Keep me sign in on this device{" "}
                   </span>
@@ -149,7 +150,7 @@ const Login_form = (props) => {
               </div>
               <div
                 className="forgot-link"
-                onClick={() => navigate("forgot-password")}
+                onClick={() => navigate("/forgot-password")}
               >
                 <a href="" className="forgotPassword">
                   Forgot password?

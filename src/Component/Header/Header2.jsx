@@ -37,6 +37,8 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 
 import "./Header2.css";
+import showToast from "../CustomToast/CustomToast";
+
 const Header2 = () => {
   const navigate = useNavigate("");
   const [isHovering, setIsHovering] = useState(false);
@@ -46,7 +48,7 @@ const Header2 = () => {
   userDetails = JSON.parse(userDetails);
   const logOut = () => {
     localStorage.removeItem("token");
-    toast("Logout Successfully");
+    showToast("Logout Successfully" , "success");
     navigate("/");
     window.location.reload();
   };

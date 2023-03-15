@@ -11,6 +11,7 @@ import CreateSlots from "../../Component/Slots/CreateSlots";
 import { ToastContainer , toast } from "react-toastify";
 import Button from "../../Component/button/Button/Button";
 import { useNavigate , useLocation } from "react-router-dom";
+import showToast from "../../Component/CustomToast/CustomToast";
 
 
 const AddEvent = () => {
@@ -96,23 +97,23 @@ const AddEvent = () => {
 
   const submit = () => {
     if (!sessionTitle) {
-      toast("session title is required", { type: "warning" });
+      showToast("session title is required",  "warning" );
     } else if (!sessionDesc) {
-      toast("session descrition is required", { type: "warning" });
+      showToast("session descrition is required",  "warning" );
     } else if (!sessionTags) {
-      toast("session tags is required", { type: "warning" });
+      showToast("session tags is required",  "warning" );
     } else if (!sessionType) {
-      toast("session type is required", { type: "warning" });
+      showToast("session type is required",  "warning" );
     } else if (!duration) {
-      toast("session duration is required", { type: "warning" });
+      showToast("session duration is required",  "warning" );
     } else if (!maxStudents) {
-      toast("max number of student is required", { type: "warning" });
+      showToast("max number of student is required",  "warning" );
     } else if (!eventImgFile) {
-      toast("Please upload image", { type: "warning" });
+      showToast("Please upload image",  "warning" );
     } else if (!eventVideo) {
-      toast("please upload video", { type: "warning" });
+      showToast("please upload video",  "warning" );
     } else if (!communityId) {
-      toast("Community id is required", { type: "warning" });
+      showToast("Community id is required",  "warning" );
     } else {
       const token = localStorage.getItem("token");
 
@@ -184,7 +185,7 @@ const AddEvent = () => {
         .then(function (res) {
           setLoading(false);
           if (res.data.result) {
-            toast("Event created sucessfully", { type: "success" });
+            showToast("Event created sucessfully",  "success" );
             navigate("/myEvents")
           }
         })
@@ -199,25 +200,25 @@ const AddEvent = () => {
     const updateEventUrl = `${endpoints.events.updateEvent}${selectedEventId}`;
 
     if (!sessionTitle) {
-      toast("session title is required", { type: "warning" });
+      showToast("session title is required",  "warning" );
     } else if (!sessionDesc) {
-      toast("session descrition is required", { type: "warning" });
+      showToast("session descrition is required",  "warning" );
     } else if (!sessionTags) {
-      toast("session tags is required", { type: "warning" });
+      showToast("session tags is required",  "warning" );
     } else if (!sessionType) {
-      toast("session type is required", { type: "warning" });
+      showToast("session type is required",  "warning" );
     } else if (!duration) {
-      toast("session duration is required", { type: "warning" });
+      showToast("session duration is required",  "warning" );
     } else if (!maxStudents) {
-      toast("max number of student is required", { type: "warning" });
+      showToast("max number of student is required",  "warning" );
     } else if (!eventImgFile) {
-      toast("Please upload image", { type: "warning" });
+      showToast("Please upload image",  "warning" );
     } else if (!eventVideo) {
-      toast("please upload video", { type: "warning" });
+      showToast("please upload video",  "warning" );
       // } else if (!eventDocs) {
       //   toast("event docs is required", { type: "warning" });
     } else if (!communityId) {
-      toast("Community id is required", { type: "warning" });
+      showToast("Community id is required",  "warning" );
     } else {
       const token = localStorage.getItem("token");
       var availability_type = daysFormat == "weekly" ? 1 : 2;
@@ -285,7 +286,7 @@ const AddEvent = () => {
           console.log(res);
           setLoading(false);
           if (res.data.result) {
-            toast("Event updated successfully", { type: "success" });
+            showToast("Event updated successfully",  "success" );
             navigate("/myEvents");
           }
         })
@@ -587,7 +588,7 @@ const AddEvent = () => {
             {/* here we aare adding payment div */}
             {paid && (
               <div class="inputBox">
-                <label for="exampleInputPassword1">Price in ($)</label>
+                <label for="exampleInputPassword1">Price in (HKD)</label>
                 <input
                   type="number"
                   class=""

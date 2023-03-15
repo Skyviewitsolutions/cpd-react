@@ -11,6 +11,7 @@ import BookBtn from "../../Component/button/BookBtn/BookBtn";
 import WorkshopCard from "../../Component/WorkshopCard/WorkshopCard";
 import CoachingCard from "../../Component/CoachingCard/CoachingCard";
 import NoDataImg from "../../assets/Images/noDataFound.png";
+import CustomToast from "../../Component/CustomToast/CustomToast";
 
 const MyCourses = () => {
   const [coachingImgPath, setCoachingImgPath] = useState("");
@@ -157,6 +158,7 @@ const MyCourses = () => {
           </div>
         </section>
       </div>
+
       <Footer />
     </>
   );

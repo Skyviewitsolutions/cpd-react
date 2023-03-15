@@ -14,6 +14,7 @@ import AddEvent_Modal from "../Component/Modal/AddEvent_Modal";
 import { toast, ToastContainer } from "react-toastify";
 import Networking_headers from "../Component/Header/Networking_headers";
 import Add_committee from "../Component/Cards/Add_committee";
+import showToast from "../Component/CustomToast/CustomToast";
 
 const Event = () => {
   
@@ -92,13 +93,13 @@ const Event = () => {
 
   const addCommunity = () => {
     if (!topics) {
-      toast("Topic is required", { type: "warning" });
+      showToast("Topic is required",  "warning" );
     } else if (!displayName) {
-      toast("Display name is required", { type: "warning" });
+      showToast("Display name is required",  "warning" );
     } else if (!description) {
-      toast("Description is required", { type: "warning" });
+      showToast("Description is required",  "warning" );
     } else if (!tags) {
-      toast("Tags is required", { type: "warning" });
+      showToast("Tags is required",  "warning" );
     } else {
       const token = localStorage.getItem("token");
      
@@ -120,10 +121,10 @@ const Event = () => {
         .post(addCommunityUrl, formData, { headers: headers })
         .then((res) => {
           if (res.data.result) {
-            toast("community created successfully", { type: "success" });
+            showToast("community created successfully",  "success" );
             navigate("/myCommunity");
           } else if (!res.data.result) {
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message, "warning" );
           }
         })
         .catch((err) => {
@@ -143,9 +144,9 @@ const Event = () => {
       .post(Updateapi, { headers: headers })
       .then((res) => {
         if (res.data.result) {
-          toast("community created successfully", { type: "success" });
+          showToast("community created successfully",  "success" );
         } else if (!res.data.result) {
-          toast(res.data?.message, { type: "warning" });
+          showToast(res.data?.message, "warning" );
         }
       })
       .catch((err) => {

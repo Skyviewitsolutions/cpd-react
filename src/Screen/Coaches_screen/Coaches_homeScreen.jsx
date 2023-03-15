@@ -26,6 +26,7 @@ import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BiInfoCircle } from "react-icons/bi";
 import { getCalendarData } from "../../utils/calendar";
+import showToast from "../../Component/CustomToast/CustomToast";
 
 
 const CoachingCard2 = (props) => {
@@ -66,6 +67,7 @@ const CoachingCard2 = (props) => {
   var coachingDomain = data?.domain?.title;
   var coachingIndustry = data?.industry?.title;
 
+ 
 
   return (
     <>
@@ -87,7 +89,7 @@ const CoachingCard2 = (props) => {
                 <h5 className="coachName">
                   {data?.coach_info?.first_name} {data?.coach_info?.last_name}
                 </h5>
-                <div className="coaches_tooltip flex-1 d-flex justify-content-center">
+                {/* <div className="coaches_tooltip flex-1 d-flex justify-content-center">
                   <BiInfoCircle
                     size={25}
                     className="idetailsIcon"
@@ -96,7 +98,7 @@ const CoachingCard2 = (props) => {
                   <div className="tooltiptext">
                     <p>{description} hel</p>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="coachContr">
                 <h6>Country</h6>
@@ -123,7 +125,7 @@ const CoachingCard2 = (props) => {
                 <div className="d-flex coachCont2 justify-content-between align-items-center">
                   <h6>Price</h6>:
                   <span>
-                    {data.price} $ /
+                    {data.price} HKD /
                     {data.payment_type == "1" ? "hour" : "session"}
                   </span>
                 </div>
@@ -184,6 +186,7 @@ const Coaches_homeScreen = () => {
   const [selectedCoachingForUpdate, setSelectedCoachingForUpdate] = useState(
     []
   );
+
 
   // filter UseState here;
   const [filterByDomain, setFilterByDomain] = useState([]);
@@ -300,9 +303,9 @@ const Coaches_homeScreen = () => {
           if (res.data.result) {
             getMyCoachingsList();
             getAllEnrolledCoachings();
-            toast("Coaching booked successfully", { type: "success" });
+            showToast("Coaching booked successfully",  "success" );
           } else if (res.data.result == false) {
-            toast(res.data.message, { type: "warning" });
+            showToast(res.data.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -310,7 +313,7 @@ const Coaches_homeScreen = () => {
           console.log(err, "this is the error here");
         });
     } else {
-      toast("Please login ", { type: "warning" });
+      showToast("Please login ",  "warning" );
     }
   };
 
@@ -356,7 +359,7 @@ const Coaches_homeScreen = () => {
   useEffect(() => {
     var filterCoachingByDomain = coachingListToBeShown.filter((itm, index) => {
       var domain = itm.domain;
-      var domainTitle = domain && domain?.title.toLowerCase();
+      var domainTitle = domain && domain?.title?.toLowerCase();
       return filterByDomain.includes(domainTitle);
     });
 
@@ -367,7 +370,7 @@ const Coaches_homeScreen = () => {
     var filterCoachingByIndustry = coachingListToBeShown.filter(
       (itm, index) => {
         var industry = itm.industry;
-        var industryTitle = industry && industry?.title.toLowerCase();
+        var industryTitle = industry && industry?.title?.toLowerCase();
         return filterByIndustry.includes(industryTitle);
       }
     );
@@ -386,7 +389,7 @@ const Coaches_homeScreen = () => {
       .then((res) => {
         if (res.data.result) {
           getMyCoachingsList();
-          toast("coaching deleted successfully", { type: "success" });
+          showToast("coaching deleted successfully",  "success" );
         }
       })
       .catch((err) => {
@@ -405,6 +408,7 @@ const Coaches_homeScreen = () => {
       <Homepage_header />
 
       <section className="coachScreen">
+       
         <div className="container-fluid">
           <div className="row d-flex justify-content-between">
             <div className="col-lg-2 d-lg-block d-none coachScreen_left">
@@ -441,8 +445,9 @@ const Coaches_homeScreen = () => {
                       <button
                         className="coachingBtn"
                         style={{
-                          background: showAllCoaching ? "#2c6959" : "white",
-                          color: showAllCoaching ? "white" : "#2c6959",
+                          // background: showAllCoaching ? "#2c6959" : "white",
+                          // color: showAllCoaching ? "white" : "#2c6959",
+                          border : showAllCoaching ? "2px solid #2c6959" : "2px solid #d4d9d6"
                         }}
                         onClick={handleShowAllCoachings}
                       >
@@ -452,14 +457,16 @@ const Coaches_homeScreen = () => {
                       <button
                         className="coachingBtn"
                         style={{
-                          background: !showAllCoaching ? "#2c6959" : "white",
-                          color: !showAllCoaching ? "white" : "#2c6959",
+                          // background: !showAllCoaching ? "#2c6959" : "white",
+                          // color: !showAllCoaching ? "white" : "#2c6959",
+                          border : !showAllCoaching ? "2px solid #2c6959" : "2px solid #d4d9d6"
                         }}
                         onClick={handleShowMyCoachings}
                       >
                         My Coachings
                       </button>
-                      <CreateBtn onClick={() => setShowCoachingsForm(true)} />
+                      <CreateBtn onClick={() => showCoachingsForm(true)} />
+                      {/* <CreateBtn onClick={() => showToast("hello world" , "warning")} /> */}
                     </div>
                   </>
                 )}
@@ -539,6 +546,8 @@ const Coaches_homeScreen = () => {
         imagePath={imagePath}
       />
 
+      
+      
       {/* {!loading && <Loader />} */}
       <Footer />
     </>

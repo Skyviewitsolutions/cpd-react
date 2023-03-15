@@ -1,128 +1,111 @@
-.chats_box{
-    border-radius: 5px;
+.chats_box {
+  border-radius: 5px;
 
-    border:1px solid red;
-    
-    border: 1px solid rgb(237, 233, 233);
-   
+  border: 1px solid red;
 
+  border: 1px solid rgb(237, 233, 233);
 }
-.chats{
-    
-    display: flex;
-    box-shadow: none;
-    flex-wrap: wrap;
-    padding-left:2%;
-    padding-right: 2%;
-    box-sizing: border-box;
-
-
+.chats {
+  display: flex;
+  box-shadow: none;
+  flex-wrap: wrap;
+  padding-left: 2%;
+  padding-right: 2%;
+  box-sizing: border-box;
 }
-.chats_header{
-    background-color: #2c6959;
-    border: none;
-    width:100%;
-    position:relative;
-    height: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
-
+.chats_header {
+  background-color: #2c6959;
+  border: none;
+  width: 100%;
+  position: relative;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
 }
-#online{
-    color:rgb(237, 237, 237);
-    font-size: 14px;
-    font-weight: lighter;
-
+#online {
+  color: rgb(237, 237, 237);
+  font-size: 14px;
+  font-weight: lighter;
 }
-.chats_header h5{
-    font-weight: 500;
-    color:white;
-    font-size: 18px;
+.chats_header h5 {
+  font-weight: 500;
+  color: white;
+  font-size: 18px;
 }
-.chats_header h6{
-    color:rgb(251, 251, 251);
-    font-size: 15px;
-    font-weight: lighter;
-    
+.chats_header h6 {
+  color: rgb(251, 251, 251);
+  font-size: 15px;
+  font-weight: lighter;
 }
-#search_chats{
-    color:rgb(188, 186, 186);
-    font-size: 15px;
-    width:100%;
-    height:45px;
-    border:none;
-    
+#search_chats {
+  color: rgb(188, 186, 186);
+  font-size: 15px;
+  width: 100%;
+  height: 45px;
+  border: none;
 }
-.search_box{
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgb(188, 186, 186);
-    outline:none;
-    width: 100%;
-    padding:0%;
-    margin:0%;
+.search_box {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(188, 186, 186);
+  outline: none;
+  width: 100%;
+  padding: 0%;
+  margin: 0%;
 }
-.search_box img{
-    width:20px;
-    height:20px;
-
+.search_box img {
+  width: 20px;
+  height: 20px;
 }
-.chats_details{
-    border-bottom:1px solid gainsboro;
-    height:80px;
-    width:100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.chats_details {
+  border-bottom: 1px solid gainsboro;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.chatroom_imgbox{
-    display: flex;
-    width:auto;
-    align-items: center;
+.chatroom_imgbox {
+  display: flex;
+  width: auto;
+  align-items: center;
 }
-.chatroom_imgbox img{
-    width: 60px;
-    height: 60px;
+.chatroom_imgbox img {
+  width: 60px;
+  height: 60px;
 }
-.chats_name{
-    display: flex;
-    flex-direction: column;
-    padding-left: 15px;
-
+.chats_name {
+  display: flex;
+  flex-direction: column;
+  padding-left: 15px;
 }
-.chats_name h5{
-    padding-top:0%;
-    margin-top: 0%;
-    font-size: 15px;
-    padding-bottom: 0%;
-   
-    
+.chats_name h5 {
+  padding-top: 0%;
+  margin-top: 0%;
+  font-size: 15px;
+  padding-bottom: 0%;
 }
-.chats_name h6{
-    
-    color:rgb(188, 186, 186);
-    font-size:13px;
+.chats_name h6 {
+  color: rgb(188, 186, 186);
+  font-size: 13px;
 }
-#chat_time{
-    color:rgb(188, 186, 186);
-    font-size: 13px;
-    padding-right: 10px;
-    
+#chat_time {
+  color: rgb(188, 186, 186);
+  font-size: 13px;
+  padding-right: 10px;
 }
-.hide{
-display: flex;
-flex-direction: row;
+.hide {
+  display: flex;
+  flex-direction: row;
 }
-.hide img{
-    
-    margin-left:10px;
-    width:10px;
-    height:15px;
+.hide img {
+  margin-left: 10px;
+  width: 10px;
+  height: 15px;
 }
-.search_chats{
-    font-size: 15px;
+.search_chats {
+  font-size: 15px;
 }
-

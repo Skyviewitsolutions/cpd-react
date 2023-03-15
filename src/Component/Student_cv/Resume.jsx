@@ -15,6 +15,7 @@ import axios from "axios";
 
 import { endpoints } from "../services/endpoints";
 import Spinner from "react-bootstrap/Spinner";
+import showToast from "../CustomToast/CustomToast";
 
 const Resume = () => {
   const navigate = useNavigate("");
@@ -50,35 +51,35 @@ const Resume = () => {
 
   const submit = () => {
     if (name === "") {
-      toast("Please enter first name", { type: "warning" });
+      showToast("Please enter first name",  "warning" );
     } else if (lName === "") {
-      toast("Please enter last name", { type: "warning" });
+      showToast("Please enter last name",  "warning" );
     } else if (contact === "") {
-      toast("Please enter contact", { type: "warning" });
+      showToast("Please enter contact",  "warning" );
     } else if (contact.length !== 10) {
-      toast("Please Enter 10 digit", { type: "warning" });
+      showToast("Please Enter 10 digit",  "warning" );
     } else if (nationality === "") {
-      toast("Please enter nationality", { type: "error" });
+      showToast("Please enter nationality",  "warning" );
     } else if (dob === "") {
-      toast("Please enter DOB", { type: "warning" });
+      showToast("Please enter DOB",  "warning" );
     } else if (gender === "") {
-      toast("Please enter gender", { type: "warning" });
+      showToast("Please enter gender",  "warning" );
     } else if (uploadCv === "") {
-      toast("Please upload CV", { type: "warning" });
+      showToast("Please upload CV",  "warning" );
     } else if (school === "") {
-      toast("Please enter School/College/University", { type: "warning" });
+      showToast("Please enter School/College/University", { type: "warning" });
     } else if (!startYear) {
-      toast("Please enter start year", { type: "warning" });
+      showToast("Please enter start year",  "warning" );
     } else if (endYear === "") {
-      toast("Please enter end year", { type: "warning" });
+      showToast("Please enter end year",  "warning" );
     } else if (program === "") {
-      toast("Please enter program", { type: "warning" });
+      showToast("Please enter program",  "warning" );
     } else if (fieldStudy === "") {
-      toast("Please enter field study", { type: "warning" });
+      showToast("Please enter field study",  "warning" );
     } else if (domain === "") {
-      toast("Please enter domain", { type: "warning" });
+      showToast("Please enter domain",  "warning" );
     } else if (industry === "") {
-      toast("Please enter industry", { type: "warning" });
+      showToast("Please enter industry",  "warning" );
     } else {
       const formData = new FormData();
       formData.append("first_name", name);
@@ -110,7 +111,7 @@ const Resume = () => {
         .then((res) => {
           setLoading(false)
           if (res.data.result===true) {
-            toast("Profile created successfully", { type: "success" });
+            showToast("Profile created successfully",  "success" );
             navigate("/")
           }
         })
@@ -144,7 +145,7 @@ const Resume = () => {
         if (res.data.result === true) {
           setAlldomain(res.data.data);
         } else if (res.data.result === false) {
-          toast(res.data.message, { type: "error" });
+          showToast(res.data.message,  "error" );
         }
       })
       .catch((err) => {
@@ -165,7 +166,7 @@ const Resume = () => {
         if (res.data.result === true) {
           setAllIndustry(res.data.data);
         } else if (res.data.result === false) {
-          toast(res.data.message, { type: "error" });
+          showToast(res.data.message,  "error" );
         }
       })
       .catch((err) => {
@@ -199,9 +200,6 @@ const Resume = () => {
     getIndustry();
     getNationality();
   }, []);
-
-
-
 
 
   return (

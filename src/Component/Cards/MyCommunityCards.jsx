@@ -11,6 +11,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { InlineShareButtons } from "sharethis-reactjs";
 import { useState } from "react";
 import MembersDetails from "../Modal/MembersDetails/MembersDetails";
+import showToast from "../CustomToast/CustomToast";
 
 
 const MyCommunityCards = (props) => {
@@ -45,9 +46,9 @@ const MyCommunityCards = (props) => {
           setLoading(false);
           if (res.data.result) {
             myCommunity()
-            toast("Community joined successfully", { type: "success" });
+            showToast("Community joined successfully","success" );
           } else if (!res.data.result) {
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message, "warning" );
           }
         })
         .catch((err) => {
@@ -55,7 +56,7 @@ const MyCommunityCards = (props) => {
           console.log(err);
         });
     } else {
-      toast("Please login", { warning: "warning" });
+      showToast("Please login",  "warning" );
     }
   };
 
@@ -76,10 +77,10 @@ const MyCommunityCards = (props) => {
           console.log(res, "join community response");
           setLoading(false);
           if (res.data.result) {
-            toast("Community left ", { type: "success" });
+            showToast("Community left ",  "success");
             myCommunity()
           } else if (!res.data.result) {
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -87,7 +88,7 @@ const MyCommunityCards = (props) => {
           console.log(err);
         });
     } else {
-      toast("Please login", { type: "warning" });
+      showToast("Please login",  "warning" );
     }
   };
 

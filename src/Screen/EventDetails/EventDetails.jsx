@@ -17,6 +17,7 @@ import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 import EventsCard from "../../Component/EventsCard/EventsCard";
 import CommunityCard from "../../Component/CommmunityCard/CommunityCard";
+import showToast from "../../Component/CustomToast/CustomToast";
 
 
 const EventDetails = (props) => {
@@ -105,11 +106,11 @@ const EventDetails = (props) => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            toast("Community joined successfully", { type: "success" });
+            showToast("Community joined successfully",  "success" );
             getAllCommunity();
             getMyCommunity();
           } else if (!res.data.result) {
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -117,7 +118,7 @@ const EventDetails = (props) => {
           console.log(err);
         });
     } else {
-      toast("Please login", { warning: "warning" });
+      showToast("Please login",  "warning" );
     }
   };
 
@@ -137,11 +138,11 @@ const EventDetails = (props) => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            toast("Community left successfully", { type: "success" });
+            showToast("Community left successfully",  "success" );
             getAllCommunity();
             getMyCommunity();
           } else if (!res.data.result) {
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -149,7 +150,7 @@ const EventDetails = (props) => {
           console.log(err);
         });
     } else {
-      toast("Please login", { type: "warning" });
+      showToast("Please login", "warning" );
     }
   };
 

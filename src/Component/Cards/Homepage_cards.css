@@ -1,224 +1,233 @@
-.card_outline{
- background-color: white;
-  box-shadow: 1px 1px 8px 6px rgb(232, 230, 230);
-margin-bottom:10px;
-  border-radius: 10px;
-  padding:1%;
-  cursor:pointer;
+.card_outline {
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  padding: 4px 9px;
+  cursor: pointer;
+  margin: 3px 8px 5% 8px;
 }
+
 .title_inner {
-  margin-top: 4%;
+  margin-top: 5%;
   display: flex;
   flex-direction: column;
 }
+
 .title_inner h6 {
-  padding-top: 0%;
-  padding-bottom: 0%;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 15px;
+  font-family: "Poppins-SemiBold";
   color: #2c6959;
+  margin-left: -6px;
+  margin-bottom: 17px;
 }
 .title_inner p {
-  font-size: 13px;
+  font-size: 12px;
   margin-bottom: 0%;
-} 
+  font-family: 'Poppins-Regular';
+  color: var(--lightgray);
+  line-height: 16px;
+}
 .university_block {
-   display: flex;
-   align-items: center;
-   padding-top: 5px;
+  display: flex;
+  align-items: center;
+  padding-top: 5px;
 }
 .university_block img {
   /* padding-top: 10px; */
- min-width: 60px;
- max-height: 120px;
- height: 60px;
+  min-width: 60px;
+  max-height: 120px;
+  height: 50px;
 }
 .university_name {
- height: 20px;
- border: none !important;
- padding: 0% !important;  
- display: flex;
- flex-direction: column;
- margin-top: -5%;
+  height: 20px;
+  border: none !important;
+  padding: 0% !important;
+  display: flex;
+  flex-direction: column;
+  margin-top: -5%;
 }
 
 .university_name h4 {
- border: none;
- margin-top: 0%;
+  border: none;
+  margin-top: 0%;
   padding-left: 0%;
- margin-left: 0%;  
- font-size: 15px;
- margin-bottom: 0%;
- padding-top: 0%;  
- padding-bottom: 1%;
+  margin-left: 0%;
+  font-size: 15px;
+  font-family: ''Poppins-SemiBold'';
+  margin-bottom: 3px;
+  padding-top: 0%;
+  color: var(--black);
+  font-family: 'Poppins-SemiBold';
+  padding-bottom: 1%;
 }
-.browser_homecard{
-padding-left: 0%;
+.browser_homecard {
+  padding-left: 0%;
 }
-.browser_homecard img{
-position: relative;
-right:20px;
-width:13px;
-height:13px;
-}
-.university_name h5
-{
- padding-top: 0%;
- margin-bottom: 0%;
- padding-bottom: 1%;
- color: gray;
- font-size: 12px;
-} 
-.university_name h6{
-padding-top: 0%;
- margin-bottom: 0%;
- 
- padding-bottom: 1%;
- color: gray;
- font-size: 12px;
-}
-/* .browser img {
+.browser_homecard img {
   position: relative;
-  right:20px;
- width: 13px;
- height: 10px;
-} */
-.time {
- width: 15px;
- height: 15px;
- padding-bottom: 2px;
+  right: 20px;
+  width: 13px;
+  height: 13px;
+}
+.university_name h5 {
+  padding-top: 0%;
+  margin-bottom: 3px;
+  padding-bottom: 1%;
+  /* color: gray; */
+  font-family: 'Poppins-Regular';
+  color: var(--lightgray);
+  font-size: 12px;
+}
+.university_name h6 {
+  padding-top: 0%;
+  margin-bottom: 3px;
+  padding-bottom: 1%;
+  /* color: gray; */
+  font-family: 'Poppins-Regular';
+  color: var(--lightgray);
+  font-size: 12px;
 }
 
-.three_dots{ 
-padding-left:35px;
+.time {
+  width: 15px;
+  height: 15px;
+  padding-bottom: 2px;
+  margin-left: 4px;
+}
+
+.three_dots {
   padding-top: 0px;
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.three_dots img{
-  min-width:10px;
-  height:5px;
+.three_dots img {
+  min-width: 10px;
+  height: 5px;
 }
-.uts_image{
+.uts_image {
   padding-left: 10px;
   padding-right: 10px;
 }
-.uts_image img{
-  width:100%;
+.uts_image img {
+  width: 100%;
 }
-.card_footer{
-  display: flex; 
+.card_footer {
+  display: flex;
   justify-content: space-between;
-
+  margin: 14px 0px;
+  padding: 0px 26px;
+  padding: -8px 34px;
+  margin-top: 17px !important;
 }
 .footer_icon {
   display: flex;
   align-items: center;
 }
 .footer_icon img {
-  width: 15px;
-  height: 13px;
-  
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
 }
 .footer_icon span {
   padding-left: 5px;
-  
+  font-family: "Poppins-SemiBold";
+  color: var(--black);
   font-weight: 500;
   font-size: 14px;
 }
-  @media screen and (max-device-width: 480px) {
-  .university_name h4{
+@media screen and (max-device-width: 480px) {
+  .university_name h4 {
     font-size: 13px;
   }
   .university_block img {
-   min-width: 30px;
-   max-height: 40px;
-  
- }
- .browser_homecard img{
-  position: relative;
-  right:5px;
-  width:13px;
-  height:13px;
- }
-  .three_dots{ 
- 
-      padding-top: 0px;
-      
-    }
-    .three_dots img{
-      position: relative;
-      bottom:20px;
-       right:10px;        /* left:190px; */
-    } 
-.title_inner h6{
-margin-top: 20px;
-font-size: 12px;
-
-}
-
-.card_footer{ 
-margin-bottom: 5px;}
-
-.footer_icon img{
-width:15px;
-height:15px;
-}
-  .university_name h4 {}
-  .university_name h5 {}
-  .university_name h6 {}
-  .three_dots{ 
-    padding-top: 25px;
-    height:10px;
+    min-width: 30px;
+    max-height: 40px;
   }
-  
+  .browser_homecard img {
+    position: relative;
+    right: 5px;
+    width: 13px;
+    height: 13px;
+  }
+  .three_dots {
+    padding-top: 0px;
+  }
+  .three_dots img {
+    position: relative;
+    bottom: 20px;
+    right: 10px; /* left:190px; */
+  }
+  .title_inner h6 {
+    margin-top: 20px;
+    font-size: 12px;
+  }
+
+  .card_footer {
+    margin-bottom: 5px;
+  }
+
+  .footer_icon img {
+    width: 15px;
+    height: 15px;
+  }
+  .university_name h4 {
+  }
+  .university_name h5 {
+  }
+  .university_name h6 {
+  }
+  .three_dots {
+    padding-top: 25px;
+    height: 10px;
+  }
 }
 @media screen and (min-device-width: 481px) and (max-device-width: 767px) {
+  .three_dots img {
+    position: relative;
+    top: 10px;
+    left: 30px;
+  }
+  .footer_icon img {
+    width: 20px;
+    height: 20px;
+  }
+  .title_inner h6 {
+    font-size: 14px;
+  }
+  .title_inner p {
+    font-size: 16px;
+  }
+  .card_footer {
+    margin-bottom: 5px;
+  }
 
-.three_dots img{
-  position: relative;
-  top:10px;
-  left:30px;
- 
-}
-.footer_icon img{
-  width:20px;
-  height:20px;
-}
-.title_inner h6{
-  font-size: 14px;  
-}
-.title_inner p{
-font-size: 16px;
-}
-.card_footer{ 
-margin-bottom: 5px;}
-
-.footer_icon img{
-width:20px;
-height:20px;
-}
-  
+  .footer_icon img {
+    width: 20px;
+    height: 20px;
+  }
 }
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  
-.three_dots img{
-  position: relative;
-  left:120px;
-  top:10px;
-  /* left:30px; */
- 
-}
-.title_inner h6{
-  font-size: 18px;  
-}
-.title_inner p{
-font-size: 16px;
-}
-.card_footer{ 
-margin-bottom: 5px;}
+  .three_dots img {
+    position: relative;
+    left: 120px;
+    top: 10px;
+    /* left:30px; */
+  }
+  .title_inner h6 {
+    font-size: 18px;
+  }
+  .title_inner p {
+    font-size: 16px;
+  }
+  .card_footer {
+    margin-bottom: 5px;
+  }
 
-.footer_icon img{
-width:25px;
-height:25px;
-}
+  .footer_icon img {
+    width: 25px;
+    height: 25px;
+  }
 }

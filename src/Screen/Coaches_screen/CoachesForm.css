@@ -178,7 +178,7 @@
   max-height: 54px !important;
   border-radius: 4px;
   padding: 11px 6px;
-  width: 95%;
+  width: 100%;
   border: 1px solid #ded6d6;
   margin-bottom: 15px;
 }
@@ -211,9 +211,13 @@
 .time_slots select , .month_calendar input{
   width: 100%;
   border-radius: 2px;
-  border: 1px solid rgb(171, 171, 171);
+  border: 1px solid rgb(159, 159, 159);
   padding: 0px 8px;
-  height: 50px !important;
+  height: 42px !important;
+  font-family: 'Poppins-Regular';
+  color: gray;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
 .time_slots select .option{

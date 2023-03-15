@@ -15,6 +15,7 @@ import NoDataImg from "../../assets/Images/noDataFound.png";
 import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 import CommunityCard from "../../Component/CommmunityCard/CommunityCard";
 import { useNavigate, useLocation } from "react-router-dom";
+import showToast from "../../Component/CustomToast/CustomToast";
 
 
 const MyCommunity = () => {
@@ -119,7 +120,7 @@ const MyCommunity = () => {
         console.log(res, "delete api response");
         if (res.data.result) {
           createCommunity();
-          toast("Community deleted successfully", { type: "success" });
+          showToast("Community deleted successfully",  "success" );
         } else {
         }
       })
@@ -152,11 +153,11 @@ const MyCommunity = () => {
           console.log(res, "join community response");
           setLoading(false);
           if (res.data.result) {
-            toast("Community joined successfully", { type: "success" });
+            showToast("Community joined successfully",  "success" );
             createCommunity();
             myCommunity();
           } else if (!res.data.result) {
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -164,7 +165,7 @@ const MyCommunity = () => {
           console.log(err);
         });
     } else {
-      toast("Please login", { warning: "warning" });
+      showToast("Please login",  "warning" );
     }
   };
 
@@ -184,11 +185,11 @@ const MyCommunity = () => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            toast("Community left successfully", { type: "success" });
+            showToast("Community left successfully",  "success" );
             createCommunity();
             myCommunity();
           } else if (!res.data.result) {
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -196,7 +197,7 @@ const MyCommunity = () => {
           console.log(err);
         });
     } else {
-      toast("Please login", { type: "warning" });
+      showToast("Please login",  "warning" );
     }
   };
 

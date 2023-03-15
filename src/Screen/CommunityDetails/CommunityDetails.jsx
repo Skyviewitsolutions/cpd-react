@@ -23,6 +23,7 @@ import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 import { ToastContainer, toast } from "react-toastify";
 import { generatePath, useNavigate } from "react-router-dom";
 import NoDataImg from "../../assets/Images/noDataFound.png"
+import showToast from "../../Component/CustomToast/CustomToast";
 
 const CommunityDetails = (props) => {
   const location = useLocation();
@@ -128,11 +129,11 @@ const CommunityDetails = (props) => {
           console.log(res, "join community response");
           setLoading(false);
           if (res.data.result) {
-            toast("Events joined successfully", { type: "success" });
+            showToast("Events joined successfully",  "success" );
             communityEvent();
             getMyEvents();
           } else if (!res.data.result) {
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -140,7 +141,7 @@ const CommunityDetails = (props) => {
           console.log(err);
         });
     } else {
-      toast("Please login", { warning: "warning" });
+      showToast("Please login",  "warning" );
     }
   };
 
@@ -160,11 +161,11 @@ const CommunityDetails = (props) => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            toast("Events left successfully", { type: "success" });
+            showToast("Events left successfully",  "success" );
             communityEvent();
             getMyEvents();
           } else if (!res.data.result) {
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -172,7 +173,7 @@ const CommunityDetails = (props) => {
           console.log(err);
         });
     } else {
-      toast("Please login", { type: "warning" });
+      showToast("Please login",  "warning" );
     }
   };
 

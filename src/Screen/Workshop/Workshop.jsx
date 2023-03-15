@@ -24,6 +24,8 @@ import CreateWorkshopForm from "../../Component/Modal/CreateWorkshopForm/CreateW
 import NoDataImg from "../../assets/Images/noDataFound.png";
 import { getCalendarData } from "../../utils/calendar";
 import Loader from "../../Component/Loader/Loader";
+import showToast from "../../Component/CustomToast/CustomToast";
+
 
 
 const Workshop = () => {
@@ -50,11 +52,13 @@ const Workshop = () => {
     {}
   );
 
+
   var userDetails = localStorage.getItem("users");
   var userType = JSON.parse(userDetails);
   userType = userType?.user_type;
 
   const getAllWorkshop = () => {
+    
     const url = endpoints.workshop.allWorkshop;
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -99,7 +103,7 @@ const Workshop = () => {
       .get(url, { headers: headers })
       .then((res) => {
         if (res.data.result) {
-          toast("workshop enrolled successfully", { type: "success" });
+          showToast("workshop enrolled successfully",  "success");
           getAllEnrolledList();
         }
       })
@@ -108,7 +112,7 @@ const Workshop = () => {
       });
     }
     else {
-      toast("Please login" , {type : "warning"})
+      showToast("Please login" ,  "warning")
     }
   };
 
@@ -252,7 +256,7 @@ const Workshop = () => {
       .then((res) => {
         if (res.data.result) {
           getMyWorkshop();
-          toast("workshop deleted successfully", { type: "success" });
+          showToast("workshop deleted successfully",  "success" );
         }
       })
       .catch((err) => {
@@ -283,7 +287,7 @@ const Workshop = () => {
             </div>
             <div className="col-12 col-md-12 col-lg-10">
               <div className="row">
-                <div className="col-lg-8 col-md-12 col-12">
+                <div className="col-lg-7 col-md-12 col-12">
                   <div className="workshop_searchBar">
                     <div className="form-group">
                       <input
@@ -300,14 +304,15 @@ const Workshop = () => {
                 {userType == 2 && (
                   <>
                     <div
-                      className="coachBtnCont col-lg-4 col-md-12 col-12 justify-content-between"
+                      className="coachBtnCont col-lg-5 col-md-12 col-12 d-flex justify-content-between"
                       style={{ width: "33%" }}
                     >
                       <button
                         className="coachingBtn"
                         style={{
-                          background: showAllWorkshop ? "#2c6959" : "white",
-                          color: showAllWorkshop ? "white" : "#2c6959",
+                          // background: showAllWorkshop ? "#2c6959" : "white",
+                          // color: showAllWorkshop ? "white" : "#2c6959",
+                          border : showAllWorkshop ? "2px solid #2c6959" : "2px solid #d4d9d6"
                         }}
                         onClick={handleShowAllWorkshop}
                       >
@@ -317,8 +322,9 @@ const Workshop = () => {
                       <button
                         className="coachingBtn"
                         style={{
-                          background: !showAllWorkshop ? "#2c6959" : "white",
-                          color: !showAllWorkshop ? "white" : "#2c6959",
+                          // background: !showAllWorkshop ? "#2c6959" : "white",
+                          // color: !showAllWorkshop ? "white" : "#2c6959",
+                          border : !showAllWorkshop ? "2px solid #2c6959" : "2px solid #d4d9d6"
                         }}
                         onClick={handleShowMyWorkshop}
                       >

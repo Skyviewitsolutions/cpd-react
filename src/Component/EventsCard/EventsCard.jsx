@@ -56,7 +56,6 @@ const EventsCard = (props) => {
     setEventsToBeShown(calendarData);
   };
 
-  console.log(data , "data here")
 
   return (
     <div className="eventCont">
@@ -76,7 +75,7 @@ const EventsCard = (props) => {
               <>
                 <h6 style={{ width: "20%" }}>Price</h6>:
                 <span style={{ marginLeft: "9px", width: "70%" }}>
-                  {data.price} $ / {sessionType}
+                  {data.price} HKD / {sessionType}
                 </span>
               </>
             ) : (

@@ -11,6 +11,7 @@ import { MdDelete } from "react-icons/md";
 import { endpoints } from "../services/endpoints";
 import axios from "axios";
 import { toast } from "react-toastify";
+import showToast from "../CustomToast/CustomToast";
 
 
 const MyEventCards = (props) => {
@@ -45,7 +46,7 @@ const MyEventCards = (props) => {
       .then((res) => {
         console.log(res);
         if (res.data.result == true) {
-          toast("Events deleted successfully", { type: "success" });
+          showToast("Events deleted successfully",  "success" );
           createEvent();
         }
       })

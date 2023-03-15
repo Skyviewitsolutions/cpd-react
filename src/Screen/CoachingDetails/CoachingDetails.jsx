@@ -11,7 +11,7 @@ import { GiRoundStar } from "react-icons/gi";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { endpoints } from "../../Component/services/endpoints";
-
+import { useNavigate } from "react-router-dom";
 
 const CoachingDetails = () => {
 
@@ -19,6 +19,8 @@ const CoachingDetails = () => {
   const [coachingDetails, setCoachingDetails] = useState({});
   const token = localStorage.getItem("token");
   const [imgPath, setImgPath] = useState([]);
+  const [currentPage , setCurrentPage] = useState("details");
+  const navigate = useNavigate();
 
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -48,45 +50,52 @@ const CoachingDetails = () => {
     getCoachingDetailsById();
   }, []);
 
-  var industry = coachingDetails?.industry?.title
-  var domain = coachingDetails?.domain?.title
+  var industry = coachingDetails?.industry?.title;
+  var domain = coachingDetails?.domain?.title;
 
   const coachInfo = coachingDetails?.coach_info;
-  console.log(coachInfo , "coaching details");
-
 
   return (
     <>
       <Homepage_header />
 
-      <section className="workshopDetailsSection1">
+      <section className="workshopDetailsSection1 position-relative">
+        
         <div className="container-fluid">
+        <div className="breadCrum">
+
+          <h4 onClick={() => navigate("/")}>Home</h4> <span>></span> <h4 onClick={() => navigate(-1)}>Coachings</h4> <span>></span><h4 style={{ borderBottom : "2px solid white"}}>Details</h4>
+        </div>
           <div className="workshopDetailsfirst">
-          <div className="evDtlTitle">
-               <h5>Learn</h5>
-               <span>:</span>
-               <h6>{coachingDetails?.title}</h6>
+            {/* here we are entering the breadCrum part  */}
+
+            <div className="evDtlTitle">
+              <h5>Learn</h5>
+              <span>:</span>
+              <h6>{coachingDetails?.title}</h6>
             </div>
-           
+
             <div className="evntDtlsBox ">
-               <h5>Joined Members</h5>
-               <span>:</span>
-               <h6>{coachingDetails?.coaching_members_count}</h6>
-            </div>
-            <div className="evntDtlsBox ">
-               <h5>Domain</h5>
-               <span>:</span>
-               <h6>{domain}</h6>
+              <h5>Joined Members</h5>
+              <span>:</span>
+              <h6>{coachingDetails?.coaching_members_count}</h6>
             </div>
             <div className="evntDtlsBox ">
-               <h5>Industry</h5>
-               <span>:</span>
-               <h6>{industry}</h6>
+              <h5>Domain</h5>
+              <span>:</span>
+              <h6>{domain}</h6>
             </div>
             <div className="evntDtlsBox ">
-               <h5>Author</h5>
-               <span>:</span>
-               <h6>{coachInfo?.first_name} {coachInfo?.last_name} </h6>
+              <h5>Industry</h5>
+              <span>:</span>
+              <h6>{industry}</h6>
+            </div>
+            <div className="evntDtlsBox ">
+              <h5>Author</h5>
+              <span>:</span>
+              <h6>
+                {coachInfo?.first_name} {coachInfo?.last_name}{" "}
+              </h6>
             </div>
           </div>
         </div>
@@ -122,7 +131,9 @@ const CoachingDetails = () => {
 
                 <div className="row">
                   <div className="col-lg-12 col-md-12 col-12">
-                    <h5 className="coaching-details-discription">Description</h5>
+                    <h5 className="coaching-details-discription">
+                      Description
+                    </h5>
                     <p className="coaching-details-discription-text">
                       Do you want to become a programmer? Do you want to learn
                       how to create games, automate your browser, visualize
@@ -148,35 +159,32 @@ const CoachingDetails = () => {
                         </div>
                       </div>
                       <div className="col-lg-9 col-md-6 col-sm-6 riview-section-right">
-                       <div className="coachings-rtings">
-                        <h6>James Whatt</h6>
-                        <div className="workshopRating">
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                        </div>
-                        <p> 4days ago</p>
+                        <div className="coachings-rtings">
+                          <h6>James Whatt</h6>
+                          <div className="workshopRating">
+                            <GiRoundStar />
+                            <GiRoundStar />
+                            <GiRoundStar />
+                            <GiRoundStar />
+                            <GiRoundStar />
+                          </div>
+                          <p> 4days ago</p>
                         </div>
                       </div>
-                      
-                        <div className="col-lg-12 col-md-12 col-12">
-                          <p className="coachings-riviews-text">
-                            Helpful if starting new, but a lot of information is
-                            out of date, understandably, but an update would be
-                            appreciated. Resources for other places to look for
-                            would also be very useful.
-                          </p>
-                        
+
+                      <div className="col-lg-12 col-md-12 col-12">
+                        <p className="coachings-riviews-text">
+                          Helpful if starting new, but a lot of information is
+                          out of date, understandably, but an update would be
+                          appreciated. Resources for other places to look for
+                          would also be very useful.
+                        </p>
                       </div>
                     </div>
-
-
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-12">
-                <div className="reviewBox">
+                  <div className="reviewBox">
                     <div className="row riview-section-row">
                       <div className="col-lg-3 col-md-6 col-sm-6 riview-section-left">
                         <div className="reveiewProfile">
@@ -184,35 +192,32 @@ const CoachingDetails = () => {
                         </div>
                       </div>
                       <div className="col-lg-9 col-md-6 col-sm-6 riview-section-right">
-                       <div className="coachings-rtings">
-                        <h6>James Whatt</h6>
-                        <div className="workshopRating">
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                        </div>
-                        <p> 4days ago</p>
+                        <div className="coachings-rtings">
+                          <h6>James Whatt</h6>
+                          <div className="workshopRating">
+                            <GiRoundStar />
+                            <GiRoundStar />
+                            <GiRoundStar />
+                            <GiRoundStar />
+                            <GiRoundStar />
+                          </div>
+                          <p> 4days ago</p>
                         </div>
                       </div>
-                      
-                        <div className="col-lg-12 col-md-12 col-12">
-                          <p className="coachings-riviews-text">
-                            Helpful if starting new, but a lot of information is
-                            out of date, understandably, but an update would be
-                            appreciated. Resources for other places to look for
-                            would also be very useful.
-                          </p>
-                        
+
+                      <div className="col-lg-12 col-md-12 col-12">
+                        <p className="coachings-riviews-text">
+                          Helpful if starting new, but a lot of information is
+                          out of date, understandably, but an update would be
+                          appreciated. Resources for other places to look for
+                          would also be very useful.
+                        </p>
                       </div>
                     </div>
-
-
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-12">
-                <div className="reviewBox">
+                  <div className="reviewBox">
                     <div className="row riview-section-row">
                       <div className="col-lg-3 col-md-6 col-sm-6 riview-section-left">
                         <div className="reveiewProfile">
@@ -220,35 +225,32 @@ const CoachingDetails = () => {
                         </div>
                       </div>
                       <div className="col-lg-9 col-md-6 col-sm-6 riview-section-right">
-                       <div className="coachings-rtings">
-                        <h6>James Whatt</h6>
-                        <div className="workshopRating">
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                        </div>
-                        <p> 4days ago</p>
+                        <div className="coachings-rtings">
+                          <h6>James Whatt</h6>
+                          <div className="workshopRating">
+                            <GiRoundStar />
+                            <GiRoundStar />
+                            <GiRoundStar />
+                            <GiRoundStar />
+                            <GiRoundStar />
+                          </div>
+                          <p> 4days ago</p>
                         </div>
                       </div>
-                      
-                        <div className="col-lg-12 col-md-12 col-12">
-                          <p className="coachings-riviews-text">
-                            Helpful if starting new, but a lot of information is
-                            out of date, understandably, but an update would be
-                            appreciated. Resources for other places to look for
-                            would also be very useful.
-                          </p>
-                        
+
+                      <div className="col-lg-12 col-md-12 col-12">
+                        <p className="coachings-riviews-text">
+                          Helpful if starting new, but a lot of information is
+                          out of date, understandably, but an update would be
+                          appreciated. Resources for other places to look for
+                          would also be very useful.
+                        </p>
                       </div>
                     </div>
-
-
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-12">
-                <div className="reviewBox">
+                  <div className="reviewBox">
                     <div className="row riview-section-row">
                       <div className="col-lg-3 col-md-6 col-sm-6 riview-section-left">
                         <div className="reveiewProfile">
@@ -256,31 +258,28 @@ const CoachingDetails = () => {
                         </div>
                       </div>
                       <div className="col-lg-9 col-md-6 col-sm-6 riview-section-right">
-                       <div className="coachings-rtings">
-                        <h6>James Whatt</h6>
-                        <div className="workshopRating">
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                        </div>
-                        <p> 4days ago</p>
+                        <div className="coachings-rtings">
+                          <h6>James Whatt</h6>
+                          <div className="workshopRating">
+                            <GiRoundStar />
+                            <GiRoundStar />
+                            <GiRoundStar />
+                            <GiRoundStar />
+                            <GiRoundStar />
+                          </div>
+                          <p> 4days ago</p>
                         </div>
                       </div>
-                      
-                        <div className="col-lg-12 col-md-12 col-12">
-                          <p className="coachings-riviews-text">
-                            Helpful if starting new, but a lot of information is
-                            out of date, understandably, but an update would be
-                            appreciated. Resources for other places to look for
-                            would also be very useful.
-                          </p>
-                        
+
+                      <div className="col-lg-12 col-md-12 col-12">
+                        <p className="coachings-riviews-text">
+                          Helpful if starting new, but a lot of information is
+                          out of date, understandably, but an update would be
+                          appreciated. Resources for other places to look for
+                          would also be very useful.
+                        </p>
                       </div>
                     </div>
-
-
                   </div>
                 </div>
               </div>
@@ -290,7 +289,13 @@ const CoachingDetails = () => {
             <div className="workshopReveiw">
               <div className="workshopMedia">
                 <div className="workshopMediaImg">
-                  <img src={coachingDetails.image && (imgPath + "/" + coachingDetails.image)}  alt=""  />
+                  <img
+                    src={
+                      coachingDetails.image &&
+                      imgPath + "/" + coachingDetails.image
+                    }
+                    alt=""
+                  />
                 </div>
               </div>
               <div className="workshopReveiwBody">

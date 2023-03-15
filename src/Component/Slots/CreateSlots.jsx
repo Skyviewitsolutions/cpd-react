@@ -7,8 +7,11 @@ import { toast, ToastContainer } from "react-toastify";
 import "./createSlot.css";
 import { useEffect } from "react";
 import { getCalendarData } from "../../utils/calendar";
+import showToast from "../CustomToast/CustomToast";
+
 
 const CreateSlots = (props) => {
+  
   const {
     selectedDays,
     setSelectedDays,
@@ -73,9 +76,9 @@ const CreateSlots = (props) => {
   const handleUpdateTime = () => {
     if (daysFormat == "weekly") {
       if (startTime == "") {
-        toast("please select start time", { type: "warning" });
+        showToast("please select start time",  "warning" );
       } else if (endTime == "") {
-        toast("please select end time", { type: "warning" });
+        showToast("please select end time",  "warning" );
       } else {
         if (!selectedDays.includes(clickedDay)) {
           setSelectedDays((itm) => {
@@ -115,9 +118,9 @@ const CreateSlots = (props) => {
       }
     } else if (daysFormat === "monthly") {
       if (startTime == "") {
-        toast("please select start time", { type: "warning" });
+        showToast("please select start time",  "warning" );
       } else if (endTime == "") {
-        toast("please select end time", { type: "warning" });
+        showToast("please select end time",  "warning" );
       } else {
         if (!selectedDates.includes(clickedDate)) {
           setSelectedDates((itm) => {
@@ -237,7 +240,6 @@ const CreateSlots = (props) => {
       dateSlot: dateSlot,
       title: title,
     };
-    console.log(dta, "bhola");
     const calendarData = await getCalendarData(dta);
     setEventsToBeShown(calendarData);
   };
@@ -246,12 +248,11 @@ const CreateSlots = (props) => {
     getCalendarDatas();
   }, [updateCalendar, title, isRepeated]);
 
-  console.log(selectedTimeSlot , "selectedTime");
 
   return (
     <>
       <div className="row">
-        <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center">
+        <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center" style={{width : "10%"}}>
           <input
             type="radio"
             id="weekly"
@@ -262,7 +263,7 @@ const CreateSlots = (props) => {
             Weekly
           </label>
         </div>
-        <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center">
+        <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center" style={{width : "18%"}}>
           <input
             type="radio"
             id="monthly"
@@ -325,7 +326,7 @@ const CreateSlots = (props) => {
       </div>
 
       {showTimePicker && (
-        <div className="time_slots d-flex align-items-center">
+        <div className="time_slots d-flex align-items-center timeSection">
           <div className="col-lg-2 col-md-3 col-6 ">
             <h6>Start Time</h6>
             <select

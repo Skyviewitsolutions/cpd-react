@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { toast , ToastContainer} from "react-toastify";
+import showToast from "../../Component/CustomToast/CustomToast"
+
 const Add_committee = (props) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -38,7 +40,7 @@ const Add_committee = (props) => {
           if(res.data.result){
             alert("hello")
              setLoading(false);
-            toast("Community joined successfully", { type: "success" });
+            showToast("Community joined successfully",  "success" );
           }
         })
         .catch((err) => {
@@ -46,7 +48,7 @@ const Add_committee = (props) => {
         });
     }
     else {
-      toast("Please login" ,{warning : "warning"})
+      showToast("Please login" , "warning")
     }
   };
 

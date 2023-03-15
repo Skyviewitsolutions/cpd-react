@@ -16,6 +16,7 @@ import { BiPlusCircle } from "react-icons/bi";
 import { HiSearch } from "react-icons/hi";
 import Button from "../../Component/button/Button/Button";
 import CommunityCard from "../../Component/CommmunityCard/CommunityCard";
+import showToast from "../../Component/CustomToast/CustomToast";
 
 
 const Communities = () => {
@@ -98,13 +99,13 @@ const Communities = () => {
 
   const addCommunity = () => {
     if (!topics) {
-      toast("Topic is required", { type: "warning" });
+      showToast("Topic is required",  "warning" );
     } else if (!displayName) {
-      toast("Display name is required", { type: "warning" });
+      showToast("Display name is required",  "warning" );
     } else if (!description) {
-      toast("Description is required", { type: "warning" });
+      showToast("Description is required",  "warning" );
     } else if (!tags) {
-      toast("Tags is required", { type: "warning" });
+      showToast("Tags is required",  "warning" );
     } else {
       const token = localStorage.getItem("token");
       const formData = new FormData();
@@ -123,10 +124,10 @@ const Communities = () => {
         .post(addCommunityUrl, formData, { headers: headers })
         .then((res) => {
           if (res.data.result) {
-            toast("community created successfully", { type: "success" });
+            showToast("community created successfully",  "success" );
             navigate("/myCommunity");
           } else if (!res.data.result) {
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -155,11 +156,11 @@ const Communities = () => {
           console.log(res, "join community response");
           setLoading(false);
           if (res.data.result) {
-            toast("Community joined successfully", { type: "success" });
+            showToast("Community joined successfully",  "success" );
             getAllCommunity();
             getMyCommunity();
           } else if (!res.data.result) {
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -167,7 +168,7 @@ const Communities = () => {
           console.log(err);
         });
     } else {
-      toast("Please login", { warning: "warning" });
+      showToast("Please login",  "warning" );
     }
   };
 
@@ -187,11 +188,11 @@ const Communities = () => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            toast("Community left successfully", { type: "success" });
+            showToast("Community left successfully",  "success" );
             getAllCommunity();
             getMyCommunity();
           } else if (!res.data.result) {
-            toast(res.data?.message, { type: "warning" });
+            showToast(res.data?.message,  "warning" );
           }
         })
         .catch((err) => {
@@ -199,7 +200,7 @@ const Communities = () => {
           console.log(err);
         });
     } else {
-      toast("Please login", { type: "warning" });
+      showToast("Please login",  "warning" );
     }
   };
 
@@ -225,7 +226,7 @@ const Communities = () => {
       <Homepage_header />
       <Networking_headers />
       {/*  */}
-      <div className="p-4">
+      <div className="networking_wrapper">
         <div class="row mb-4">
           <div className="col-lg-3" style={{ width: "21%" }}>
             <CustomFilter />

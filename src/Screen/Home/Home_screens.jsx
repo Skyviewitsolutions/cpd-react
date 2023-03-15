@@ -10,47 +10,49 @@ import Recommended_session from "../../Component/Recommended_session/Recommended
 import Certification from "../../Component/Certification_homepage/Certification";
 import User_profile from "../../Component/Userprofile/User_profile";
 import { ToastContainer } from "react-toastify";
+import MainLayout from "../../Layouts/MainLayout";
 
 
 const Home_screens = () => {
   
   const token = localStorage.getItem("token");
- 
+
   return (
     <>
-    <div className="homeSreenPage">
-      <Homepage_header />
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-lg-3 col-md-12 col-12 mt-5 userprofile_div">
-           {token && <User_profile/>} 
-           
-          </div>
-          <div className="col-lg-5 col-md-12 col-12  home_cards">
-            <div className="all_notification">
-              <h6> All notifications</h6>
-              <span> <img src={filter_home} height="20px" width="20px"/>Filter</span>
+      <MainLayout>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-lg-3 col-md-12 col-12 mt-5 userprofile_div">
+              {token && <User_profile />}
+              
             </div>
-            <div className="hmgCrdCont">
-            <Homepage_cards />
-            <Homepage_cards />
-            <Homepage_cards />
-            <Homepage_cards />
-            <Homepage_cards />
-            <Homepage_cards />
+            <div className="col-lg-5 col-md-12 col-12  home_cards">
+              <div className="all_notification">
+                <h6> All notifications</h6>
+                <span>
+                  {" "}
+                  <img src={filter_home} height="20px" width="20px" />
+                  Filter
+                </span>
+              </div>
+              <div className="hmgCrdCont">
+                <Homepage_cards />
+                <Homepage_cards />
+                <Homepage_cards />
+                <Homepage_cards />
+                <Homepage_cards />
+                <Homepage_cards />
+              </div>
+            </div>
+            <div className="col-lg-4 col-md-12 col-12  chats_side">
+              <Homepage_chats />
+              <Recommended_session />
+              <Certification />
             </div>
           </div>
-          <div className="col-lg-4 col-md-12 col-12  chats_side">
-            <Homepage_chats/>
-            <Recommended_session />
-            <Certification/>
-          </div>
+          <ToastContainer />
         </div>
-        <ToastContainer />
-      </div>
-      
-      <Footer />
-      </div>
+      </MainLayout>
     </>
   );
 };

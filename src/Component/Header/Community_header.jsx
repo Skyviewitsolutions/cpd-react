@@ -28,20 +28,19 @@ const Community_header = (props) => {
           <div className="col-lg-7 col-md-12 col-sm-12 community_left">
             <div className="community_details">
               <div className="cmTitle d-flex align-items-center cmnTitle">
-                <h5>Community</h5>{" "}
-                <span style={{ marginBottom: "8px" }}>:</span>
-                <h6>{communityDetails.display_name}</h6>
+                <h5  style={{width : '100%'}}>Community Name : {communityDetails.display_name}</h5>{" "}
+              
               </div>
 
               <div className="cmDetails d-flex cmnTitle">
-                <h5>Descriptions </h5>{" "}
-                <span style={{ marginBottom: "8px" }}>:</span>
+                {/* <h5>Descriptions </h5>{" "} */}
+                {/* <span style={{ marginBottom: "8px" }}>:</span> */}
                 <h6>{communityDetails.description}</h6>
               </div>
 
-              <div className="cmDetails d-flex cmnTitle">
-                <h5>Criteria </h5>{" "}
-                <span style={{ marginBottom: "8px" }}>:</span>
+              <div className="cmDetails d-flex ">
+                <h5 style={{width : "80px"}}>Criteria </h5>{" "}
+                <span style={{ marginBottom: "8px" , marginRight : '8px'}}> : </span>{" "}
                 <h6>{communityDetails.criteria}</h6>
               </div>
             </div>

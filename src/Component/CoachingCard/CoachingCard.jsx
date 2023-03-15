@@ -47,7 +47,7 @@ const CoachingCard = (props) => {
                 <>
                   <h6 style={{ width: "25%" }}>Price</h6>:
                   <span style={{ marginLeft: "9px" , width : '70%' }}>
-                    {coaching.price} $ / {sessionType}
+                    {coaching.price} HKD / {sessionType}
                   </span>
                 </>
               ) : (

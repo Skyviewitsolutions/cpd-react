@@ -1,31 +1,41 @@
-import React from 'react';
-import "./customToast.css";
 
-const CustomToast = () => {
+
+import React from "react";
+import { toast } from "react-toastify";
+
+const CustomToast = ({ message, type }) => {
   return (
-    <div class="container">
-    <div class="notification success">
-      <i class="fa-solid fa-check"></i>
-      <span>A successful Toast</span>
-      <i class="fa-solid fa-times"></i>
+    <div className={`custom-toast custom-toast-${type}`}>
+      <span>{message}</span>
     </div>
-    <div class="notification info">
-      <i class="fa-solid fa-info"></i>
-      <span>A informational Toast</span>
-      <i class="fa-solid fa-times"></i>
-    </div>
-    <div class="notification warning">
-      <i class="fa-solid fa-exclamation"></i>
-      <span>A warning Toast</span>
-      <i class="fa-solid fa-times"></i>
-    </div>
-    <div class="notification danger">
-      <i class="fa-solid fa-exclamation"></i>
-      <span>A destructive Toast</span>
-      <i class="fa-solid fa-times"></i>
-    </div>
-  </div>
-  )
-}
+  );
+};
 
-export default CustomToast
+const showToast = (message, type) => {
+  if(type === "success"){
+  toast(
+    <CustomToast message={message} type={type} />,
+    { autoClose: 1500, position: "top-right" , type : "success"}
+  );
+  }
+  else if(type === "warning"){
+    toast(
+      <CustomToast message={message} type={type} />,
+      { autoClose: 1500, position: "top-right" , type : "warning"}
+    );
+  }
+  else if(type === "info"){
+    toast(
+      <CustomToast message={message} type={type} />,
+      { autoClose: 1500, position: "top-right" , type : "info"}
+    );
+  }
+  else if(type === "error"){
+    toast(
+      <CustomToast message={message} type={type} />,
+      { autoClose: 1500, position: "top-right" , type : "error"}
+    );
+  }
+};
+
+export default showToast;
