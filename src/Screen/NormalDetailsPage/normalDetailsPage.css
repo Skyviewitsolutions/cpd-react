@@ -1,0 +1,415 @@
+.dtlscont {
+  width: 100%;
+}
+
+.dltsMain {
+  width: 100%;
+  height: 400px;
+  background: rgb(17, 17, 18, 0.6);
+  position: relative;
+}
+
+.dltsMain img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: -1;
+}
+
+.dltsline {
+  width: 100%;
+  height: 10px;
+  background-color: #ecfffb;
+}
+
+.wrkshoDtls {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  left: 7%;
+  max-width: 700px;
+}
+
+.wrkshTitle {
+  color: white;
+  font-family: "Poppins-SemiBold";
+  text-transform: capitalize;
+  font-size: 60px;
+}
+
+.wrkpara {
+  font-family: "Inter-Regular";
+  line-height: 25px;
+  font-size: 14px;
+}
+
+.wrkshpOther {
+  display: flex;
+  margin-top: 40px;
+  align-items: center;
+}
+
+.wrkshpOther h6 {
+  font-family: "Inter-Regular";
+  font-size: 14px;
+  margin-right: 20px;
+}
+
+.dltsSecond {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ecfffb;
+  padding: 20px 35px;
+}
+
+.dltsSecondLeft {
+  padding: 2px 6%;
+}
+
+.dltsSecondRght {
+  padding: 2px 6%;
+}
+
+.harbar {
+  display: flex;
+  color: var(--primary);
+  font-family: "Inter-Bold";
+  cursor: pointer;
+  align-items: center;
+}
+
+.harbar h5 {
+  font-size: 16px;
+  margin-bottom: 0px;
+  margin-right: 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.harbar h5:hover {
+  border-bottom: 2px solid var(--primary);
+}
+
+.harbar span {
+  margin-right: 2px;
+}
+
+.whatlearn {
+  background-color: white;
+  border-radius: 6px;
+  border: 1.4px solid grey;
+  padding: 16px 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.whatlearn h4 {
+  color: var(--primary);
+  font-family: "Inter-Bold";
+  font-size: 21px;
+}
+
+.whatLearnP {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 10px;
+  justify-content: space-between;
+}
+.whatLearnP h6 {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  font-family: "Poppins-Regular";
+  font-size: 14px;
+  color: var(--black);
+  width: 45%;
+}
+.whatlearn img {
+  width: 14px;
+  margin-right: 6px;
+}
+
+.crsCont {
+  color: var(--black);
+  font-family: "Poppins-SemiBold";
+}
+
+.crsttitlesc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.crsttitlesc p {
+  font-size: 13px;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+}
+
+.crsttitlesc span {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--gray);
+  margin: 0px 6px;
+}
+
+.crsttitlesc h6 {
+  color: var(--primary);
+}
+
+.accordiancont {
+  width: 100%;
+  background-color: white;
+}
+
+.wrkshopDescriptions {
+  padding: 15px 20px;
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid rgb(203, 201, 201) !important;
+  margin: 22px 0px;
+}
+
+.wrkshopDescriptions h5 {
+  color: var(--primary);
+  font-family: "Poppins-SemiBold";
+  padding: 6px 0px;
+  font-size: 28px;
+  border-bottom: 1px solid rgb(203, 201, 201) !important;
+}
+
+.wrkshopDescriptions p,
+.wrkshopDescriptions li {
+  font-size: 13px;
+  color: var(--black);
+  font-family: "Inter-Regular";
+  line-height: 20px;
+  font-weight: 500;
+  padding-right: 9px;
+  margin-bottom: 4px;
+}
+
+.wrkshopDescriptions p {
+  margin-bottom: 9px;
+}
+
+.vdoDtls {
+  width: 100%;
+  
+  background-color: white;
+}
+
+.vdoDtlsVdo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  /* z-index: -1; */
+  opacity: 0.3;
+}
+
+.vdoDtlsVdo {
+  position: relative;
+  height: 250px;
+  background: rgb(17, 17, 18, 0.6);
+  /* opacity: 0.7; */
+}
+.vdoPlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  align-items: center;
+}
+
+.vdoDtlsVdo h6 {
+  color: white;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Poppins-SemiBold";
+  font-size: 18px;
+}
+
+.vdoTxt {
+  padding: 12px 20px;
+}
+
+.vdoTxt h5 {
+  font-family: "Poppins-SemiBold";
+  color: var(--black);
+  font-size: 22px;
+  margin-bottom: 0px;
+  margin-top: 6px;
+}
+
+.addtoCrt {
+  background-color: var(--primary);
+  color: white;
+  width: 100%;
+  margin: 20px 0px;
+  font-family: "Poppins-SemiBold";
+  padding: 16px;
+  font-size: 17px;
+  border: none;
+  border-radius: 2px;
+}
+
+.crsIncld {
+  background-color: white;
+  margin: 18px 0px;
+  padding: 20px;
+}
+
+.crsIncld h6 {
+  color: var(--black);
+  font-family: "Poppins-SemiBold";
+  font-size: 18px;
+  margin-bottom: 13px;
+}
+
+.crsIncldBx {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.crsIncldBx h6 {
+  margin-bottom: 0px;
+  margin-left: 18px;
+  color: var(--gray);
+  font-family: "Poppins-Regular";
+  font-size: 14px;
+}
+.crsIncldBx h5 {
+  margin-bottom: 0px;
+
+  color: var(--black);
+  font-family: "Poppins-SemiBold";
+  font-size: 17px;
+  cursor: pointer;
+  border-bottom: 2px solid var(--black);
+}
+
+.coachPrfle {
+  margin: 14px 0px;
+  padding: 8px;
+  width: 100%;
+  background-color: white;
+}
+
+.coachPrfle img {
+  width: 100%;
+  height: 200px;
+  object-fit: conver;
+}
+
+.coachPrfle h6 {
+  color: var(--gray);
+  font-family: "Poppins-SemiBold";
+  font-size: 14px;
+  margin-left: 9px;
+  margin-top: 8px;
+}
+
+.coachPrfle h5 {
+  font-family: "Poppins-SemiBold";
+  color: var(--primary);
+  font-size: 27px;
+  margin-top: 15px;
+  margin-left: 9px;
+}
+
+.coachPrfle p {
+  font-family: "Inter-Regular";
+  color: var(--black);
+  line-height: 17px;
+  font-size: 13px;
+  margin-left: 9px;
+}
+
+.relatedCourse {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  background-color: white;
+  border: 1px solid rgb(203, 201, 201) !important;
+  border-radius: 4px;
+}
+
+.courseBox {
+  display: flex;
+  padding: 8px 9px;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(223, 220, 220);
+}
+
+.courseBox img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 2px;
+  margin-right: 12px;
+}
+
+.courseBox h5 {
+  color: var(--black);
+  font-size: 14px;
+  width: 78%;
+  min-height: 26px;
+  margin-top: 8px;
+}
+
+.courseBox div h6 {
+  display: flex;
+  color: var(--primary);
+  font-size: 14px;
+  align-items: center;
+}
+
+.courseBox div li {
+  color: var(--gray);
+  font-size: 12px;
+  font-family: "Poppins-Regular";
+  margin-left: 14px;
+}
+.pricePart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pricePart h6 {
+  color: var(--black);
+  font-family: "Poppins-SemiBold";
+  font-size: 18px;
+  white-space: nowrap;
+  /* width: 80px; */
+}
+
+.corsTitle {
+  margin-left: 10px;
+}
+
+.crsIncldBx button {
+  font-size: 14px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

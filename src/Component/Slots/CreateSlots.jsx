@@ -7,11 +7,10 @@ import { toast, ToastContainer } from "react-toastify";
 import "./createSlot.css";
 import { useEffect } from "react";
 import { getCalendarData } from "../../utils/calendar";
+import { AiFillCloseCircle } from "react-icons/ai";
 import showToast from "../CustomToast/CustomToast";
 
-
 const CreateSlots = (props) => {
-  
   const {
     selectedDays,
     setSelectedDays,
@@ -74,12 +73,15 @@ const CreateSlots = (props) => {
   ];
 
   const handleUpdateTime = () => {
+
     if (daysFormat == "weekly") {
       if (startTime == "") {
-        showToast("please select start time",  "warning" );
+        showToast("please select start time", "warning");
       } else if (endTime == "") {
-        showToast("please select end time",  "warning" );
+        showToast("please select end time", "warning");
       } else {
+
+        
         if (!selectedDays.includes(clickedDay)) {
           setSelectedDays((itm) => {
             return [...itm, clickedDay];
@@ -118,9 +120,9 @@ const CreateSlots = (props) => {
       }
     } else if (daysFormat === "monthly") {
       if (startTime == "") {
-        showToast("please select start time",  "warning" );
+        showToast("please select start time", "warning");
       } else if (endTime == "") {
-        showToast("please select end time",  "warning" );
+        showToast("please select end time", "warning");
       } else {
         if (!selectedDates.includes(clickedDate)) {
           setSelectedDates((itm) => {
@@ -248,11 +250,43 @@ const CreateSlots = (props) => {
     getCalendarDatas();
   }, [updateCalendar, title, isRepeated]);
 
+  // writing code for removing timeslot ;
+
+  const removeTimeSlot = (index) => {
+    const filterSlots = selectedTimeSlot.filter((item, ind) => {
+      return ind !== index;
+    });
+    setSelectedTimeSlot(filterSlots);
+    if (daysFormat === "weekly") {
+      var index = daysSlot.findIndex((item) => item.day == clickedDay);
+      var selectedData = daysSlot[index];
+
+      var dta = {
+        day: clickedDay,
+        slots: filterSlots,
+      };
+      
+      daysSlot[index] = dta;
+    } else if (daysFormat === "monthly") {
+      var index = dateSlot.findIndex((item) => item.date == clickedDate);
+      var dta = {
+        date: clickedDate,
+        slots: filterSlots,
+      };
+
+      dateSlot[index] = dta;
+    }
+  };
+
+  
 
   return (
     <>
       <div className="row">
-        <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center" style={{width : "10%"}}>
+        <div
+          className="col-lg-2 col-md-3 col-6 d-flex align-items-center"
+          style={{ width: "10%" }}
+        >
           <input
             type="radio"
             id="weekly"
@@ -263,7 +297,10 @@ const CreateSlots = (props) => {
             Weekly
           </label>
         </div>
-        <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center" style={{width : "18%"}}>
+        <div
+          className="col-lg-2 col-md-3 col-6 d-flex align-items-center"
+          style={{ width: "18%" }}
+        >
           <input
             type="radio"
             id="monthly"
@@ -314,10 +351,20 @@ const CreateSlots = (props) => {
             selectedTimeSlot.map((time, index) => {
               return (
                 <>
-                  <div className="col-lg-3 col-md-4 col-6" key={index}>
+                  <div
+                    className="col-lg-3 col-md-4 col-6 position-relative"
+                    key={index}
+                  >
                     <div className="bookSlotTime">
                       {time.startTime} - {time.endTime}
                     </div>
+                    <AiFillCloseCircle
+                      className="cutOptions "
+                      style={{ top: "-4px", right: "6px" }}
+                      size={18}
+                      color="red"
+                      onClick={() => removeTimeSlot(index)}
+                    />
                   </div>
                 </>
               );

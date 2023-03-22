@@ -676,3 +676,17 @@ a.click_forem_box.working.nav-link:hover {
 .logoutss span {
   margin-left: 4px;
 }
+
+
+/* here we are writing code for maintaining the navbar  */
+
+
+@media only screen and (max-width : 900px) {
+    .first-Nave{
+      display: none;
+    }
+
+    .secondNave{
+      display: none;
+    }
+}

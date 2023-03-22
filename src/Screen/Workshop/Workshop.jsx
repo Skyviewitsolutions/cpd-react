@@ -27,10 +27,8 @@ import Loader from "../../Component/Loader/Loader";
 import showToast from "../../Component/CustomToast/CustomToast";
 
 
-
 const Workshop = () => {
   
-
   const navigate = useNavigate("");
   const [modalShow, setModalShow] = React.useState(false);
   const token = localStorage.getItem("token");
@@ -218,8 +216,6 @@ const Workshop = () => {
     navigate(path , { communityDetails : JSON.stringify(dta)});
   }
 
-  
-
   // here we are filtering the coaching according to the domain and industry;
 
   useEffect(() => {
@@ -310,8 +306,6 @@ const Workshop = () => {
                       <button
                         className="coachingBtn"
                         style={{
-                          // background: showAllWorkshop ? "#2c6959" : "white",
-                          // color: showAllWorkshop ? "white" : "#2c6959",
                           border : showAllWorkshop ? "2px solid #2c6959" : "2px solid #d4d9d6"
                         }}
                         onClick={handleShowAllWorkshop}
@@ -322,8 +316,6 @@ const Workshop = () => {
                       <button
                         className="coachingBtn"
                         style={{
-                          // background: !showAllWorkshop ? "#2c6959" : "white",
-                          // color: !showAllWorkshop ? "white" : "#2c6959",
                           border : !showAllWorkshop ? "2px solid #2c6959" : "2px solid #d4d9d6"
                         }}
                         onClick={handleShowMyWorkshop}

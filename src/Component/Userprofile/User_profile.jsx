@@ -151,7 +151,7 @@ const User_profile = () => {
           <div className="heading_box">
             <h6 className="heading userIn">
               <span> Total Experience :</span>
-              <span> {totalExperience} years </span>
+              <span> {2} years </span>
             </h6>
             <h6 className="heading userIn">
               <span style={{ width: "120px" }}> Industries :</span>{" "}

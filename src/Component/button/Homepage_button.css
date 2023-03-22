@@ -1,11 +1,13 @@
 .view{
-    border:1px solid #2c6959;
+    border: 1px solid #2c6959;
     font-weight: 700px;
-    min-width:90px;
-    height:30px;
+    min-width: 94px;
+    color: #2c6959;
+    height: 31px;
     border-radius: 20px;
+    font-family: 'Poppins-Regular';
     background-color: white;
-    font-size: 13px;
+    font-size: 12.5px;
     
 }
 .view_button{

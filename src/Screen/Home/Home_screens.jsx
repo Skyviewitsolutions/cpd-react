@@ -11,11 +11,35 @@ import Certification from "../../Component/Certification_homepage/Certification"
 import User_profile from "../../Component/Userprofile/User_profile";
 import { ToastContainer } from "react-toastify";
 import MainLayout from "../../Layouts/MainLayout";
-
+import { useEffect } from "react";
+import BASE_URL, { endpoints } from "../../Component/services/endpoints";
+import { useState } from "react";
+import axios from "axios";
 
 const Home_screens = () => {
-  
   const token = localStorage.getItem("token");
+  const [allRecentFeeds, setAllRecentFeeds] = useState([]);
+
+  // writing code for getting all the recent feeds ;
+
+  const getAllRecentFeeds = () => {
+    const url = endpoints.master.allRecentFeeds;
+    axios
+      .get(url)
+      .then((res) => {
+        if (res.data.result) {
+          const val = res.data.data;
+          setAllRecentFeeds(val);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getAllRecentFeeds();
+  }, []);
 
   return (
     <>
@@ -24,7 +48,6 @@ const Home_screens = () => {
           <div className="row">
             <div className="col-lg-3 col-md-12 col-12 mt-5 userprofile_div">
               {token && <User_profile />}
-              
             </div>
             <div className="col-lg-5 col-md-12 col-12  home_cards">
               <div className="all_notification">
@@ -36,18 +59,16 @@ const Home_screens = () => {
                 </span>
               </div>
               <div className="hmgCrdCont">
-                <Homepage_cards />
-                <Homepage_cards />
-                <Homepage_cards />
-                <Homepage_cards />
-                <Homepage_cards />
-                <Homepage_cards />
+                {allRecentFeeds.length != 0 &&
+                  allRecentFeeds.map((feeds, index) => {
+                    return <Homepage_cards key={index} feeds={feeds} />;
+                  })}
               </div>
             </div>
             <div className="col-lg-4 col-md-12 col-12  chats_side">
-              <Homepage_chats />
+              {/* <Homepage_chats /> */}
               <Recommended_session />
-              <Certification />
+              {/* <Certification /> */}
             </div>
           </div>
           <ToastContainer />

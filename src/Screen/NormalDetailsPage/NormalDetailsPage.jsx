@@ -1,8 +1,6 @@
-
-
-import React from 'react'
+import React from "react";
 import MainLayout from "../../Layouts/MainLayout";
-// import "./normalDetailsPage.css";
+import "./normalDetailsPage.css";
 import BackGroundImg from "../../assets/Images/background.jpg";
 import Star from "../../assets/Icons/star.png";
 import DummyBanner from "../../assets/Icons/dummyBanner.png";
@@ -16,58 +14,18 @@ import User from "../../assets/Images/user3.jpg";
 import workshopImg1 from "../../assets/Images/workshopimg1.png";
 import workshopImg2 from "../../assets/Images/workshopimg2.jpeg";
 import {RiShareFill} from "react-icons/ri";
-import { useEffect , useState } from 'react';
-import { useNavigate , useParams } from 'react-router-dom';
-import axios from 'axios';
-import { endpoints } from '../../Component/services/endpoints';
 
-const WorkshopDetails = () => {
 
-  const navigate = useNavigate();
-  const { workshopId } = useParams();
-  const token = localStorage.getItem("token");
-  const [workshopDtails, setWorkshopDtails] = useState({});
-  const [imgPath, setImgPath] = useState([]);
-
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  };
-
-  const getWorkshopDetailsById = () => {
-    const url = `${endpoints.workshop.getWorkshopDetailsById}${workshopId}`;
-    axios
-      .get(url, { headers: headers })
-      .then((res) => {
-        if (res.data.result) {
-          const val = res.data.data?.[0];
-          setWorkshopDtails(val);
-          var path = res.data?.workshop_image_path;
-          setImgPath(path);
-        }
-      })
-      .catch((err) => {
-        console.log(err, "error here");
-      });
-  };
-
-  useEffect(() => {
-    getWorkshopDetailsById();
-  }, []);
-
-  var industry = workshopDtails?.industry?.title;
-  var domain = workshopDtails?.domain?.title;
+const NormalDetailsPage = () => {
 
   return (
-      <MainLayout>
+    <MainLayout>
       <div className="dtlscont">
         <div className="dltsline"></div>
         <div className="dltsMain">
-          
-       
-    {workshopDtails?.image ? <img src={imgPath + "/" + workshopDtails.image}/> : <img src={BackGroundImg} alt="" /> }
-
+          <img src={BackGroundImg} alt="" />
           <div className="wrkshoDtls">
-            <h1 className="wrkshTitle">{workshopDtails?.title}</h1>
+            <h1 className="wrkshTitle">Future of PHP</h1>
             <p className="wrkpara">
               The term PHP is an acronym for PHP: Hypertext Preprocessor. PHP is
               a server-side scripting language designed specifically for web
@@ -78,10 +36,9 @@ const WorkshopDetails = () => {
               language and it does not require a compiler.{" "}
             </p>
             <div className="wrkshpOther flex-wrap">
-              <h6>Max Members : {workshopDtails?.max_members}</h6>
-              <h6>Joined Members : {workshopDtails?.workshop_members_count}</h6>
-              <h6>Domain : {domain}</h6>
-               <h6>Industry : {industry}</h6>
+              <h6>Max Members : 50</h6>
+              <h6>Joined Members : 3</h6>
+              <h6>Session Type : Offline</h6>
             </div>
           </div>
         </div>
@@ -90,8 +47,8 @@ const WorkshopDetails = () => {
           <div className="row " style={{ width: "100%" }}>
             <div className="dltsSecondLeft col-lg-7 col-md-12 col-12">
               <div className="harbar">
-                <h5 onClick={() => navigate("/")}>Home</h5> <span>></span>
-                <h5 onClick={() => navigate(-1)}>Workshop</h5> <span>></span>
+                <h5>Home</h5> <span>></span>
+                <h5>Workshop</h5> <span>></span>
                 <h5>Details</h5>
               </div>
               <div className="whatlearn">
@@ -218,8 +175,7 @@ const WorkshopDetails = () => {
             <div className="dltsSecondRght col-lg-5 col-md-12 col-12">
               <div className="vdoDtls">
                 <div className="vdoDtlsVdo">
-                  {/* <img src={DummyBanner} alt="" /> */}
-                  {workshopDtails?.image ? <img src={imgPath + "/" + workshopDtails.image}/> : <img src={DummyBanner} alt="" /> }
+                  <img src={DummyBanner} alt="" />
                   <div className="vdoPlay">
                     <BsFillPlayFill size={36} />
                   </div>
@@ -258,7 +214,7 @@ const WorkshopDetails = () => {
                   <h6>Certificate of completion</h6>
                 </div>
                 <div className="crsIncldBx">
-                  {/* <h5>Share</h5> */}
+                  
                   <button className="addtoCrt"> <RiShareFill size={18} color="white" style={{marginRight : "10px" }} /> Share</button>
                 </div>
               </div>
@@ -280,7 +236,7 @@ const WorkshopDetails = () => {
         </div>
       </div>
     </MainLayout>
-  )
-}
+  );
+};
 
-export default WorkshopDetails
+export default NormalDetailsPage;

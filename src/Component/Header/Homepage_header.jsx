@@ -7,7 +7,6 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import pimg from "../../assets/Images/user_profile.svg";
 import cpd_logo from "../../assets/Images/cpd_logo.png";
-// import home from "../../assets/Images/home.svg";
 import home from "../../assets/Icons/Artboard1.svg";
 import my_Community from "../../assets/Icons/Artboard2.svg";
 import my_course from "../../assets/Icons/Artboard3.svg";
@@ -43,6 +42,8 @@ import workshopW from "../../assets/Icons/workshopWhite.png";
 import networkingW from "../../assets/Icons/networkingWhite.png";
 import jobsW from "../../assets/Icons/jobsWhite.png";
 import fareW from "../../assets/Icons/fareWhite.png";
+import MobileHeader from "./MobileHeader/MobileHeader";
+
 
 const Homepage_header = () => {
 
@@ -204,10 +205,7 @@ const Homepage_header = () => {
                   <img src={message} alt="" className="nav-icons" />
                   <h6>Notification</h6>
                 </Nav.Link>
-                <Nav.Link className="nav_img working">
-                  <img src={learning} alt="" className="nav-icons" />
-                  <h6>Learning</h6>
-                </Nav.Link>
+               
                 <Nav.Link className="nav_img working">
                   <img src={learning} alt="" className="nav-icons" />
                   <h6>My Calendar</h6>
@@ -350,82 +348,9 @@ const Homepage_header = () => {
         </div>
       </div>
 
-      {/****************************slider in mobile and tab ***************************/}
-      <div className="headerslider">
-        <OwlCarousel
-          className="owl-theme category d-lg-none"
-          id="category"
-          items={5}
-          margin={10}
-          dots={false}
-          {...options}
-          nav
-        >
-          <div class="item">
-            <div className="slidernav2" onClick={() => navigate("/coachings")}>
-              <div className="sliderInner">
-                <img src={coacheswhite} alt="" className="coaches" />
-                <h6>Book</h6>
-                <h5>Coaches</h5>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div
-              className="slidernav2"
-              onClick={() => navigate("/workshops")}
-              style={{ cursor: "pointer" }}
-            >
-              <div className="sliderInner">
-                <img src={enrollcourseswhite} alt="" className="coaches" />
-                <h6>Enroll Courses</h6>
-                <h5>Workshop</h5>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div className="slidernav2" onClick={() => navigate("/networking")}>
-              <div className="sliderInner">
-                <img src={networkingwhite} alt="" className="coaches" />
-                <h6>Networking</h6>
-                <h5>Events</h5>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div className="slidernav2">
-              <div className="sliderInner">
-                <img src={jobswhite} alt="" className="coaches" />
-                <h6>Job</h6>
-                <h5>Board</h5>
-              </div>
-            </div>
-          </div>
-
-          <div class="item">
-            <div className="slidernav2">
-              <div className="sliderInner">
-                <img src={carrerwhite} alt="" className="coaches" />
-                <h6>Carrer</h6>
-                <h5>Fare</h5>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div className="slidernav2">
-              <div className=" sliderInnerForum click_forem_box working">
-                <h5>
-                  <a href="">Available Resources</a>
-                </h5>
-                <h4>For Employers</h4>
-                <h6 id="click_forem">
-                  <a href="">Click to Forum</a>
-                </h6>
-              </div>
-            </div>
-          </div>
-        </OwlCarousel>
-      </div>
+      <MobileHeader userDetails={userDetails} handleNavbar={handleNavbar} activeNavbar={activeNavbar} setActiveNavbar={activeNavbar}/>
+      
+     
     </>
   );
 };

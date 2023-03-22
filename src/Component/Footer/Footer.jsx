@@ -24,10 +24,10 @@ const Footer = () => {
             <li>Show on Map</li>
           </ul>
           <div className="icon_outer">
-            <img src={youtube_footer} alt></img>
-            <img src={linkdin_footer} alt></img>
-            <img src={insta_footer} alt></img>
-            <img src={twitter_footer} alt></img>
+            <img src={youtube_footer} alt=""></img>
+            <img src={linkdin_footer} alt=""></img>
+            <img src={insta_footer} alt=""></img>
+            <img src={twitter_footer} alt=""></img>
           </div>
         </div>
         <div className="col-lg-3 col-md-6 col-12 footer_listname border-left">
@@ -38,7 +38,7 @@ const Footer = () => {
             <li>Monday-Friday:9.00-20.00</li>
             <li>Saturday:9.00-15.00</li>
             <li id="info">
-              <img src={footer_mail} alt></img>info@cpdedu.com
+              <img src={footer_mail} alt=""></img>info@cpdedu.com
             </li>
           </ul>
         </div>

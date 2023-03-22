@@ -29,6 +29,7 @@ import { getCalendarData } from "../../utils/calendar";
 import showToast from "../../Component/CustomToast/CustomToast";
 
 
+
 const CoachingCard2 = (props) => {
 
   const {
@@ -465,8 +466,7 @@ const Coaches_homeScreen = () => {
                       >
                         My Coachings
                       </button>
-                      <CreateBtn onClick={() => showCoachingsForm(true)} />
-                      {/* <CreateBtn onClick={() => showToast("hello world" , "warning")} /> */}
+                      <CreateBtn onClick={() => setShowCoachingsForm(true)} />
                     </div>
                   </>
                 )}
@@ -498,8 +498,6 @@ const Coaches_homeScreen = () => {
                           key={index}
                           coachImgPath={coachImgPath}
                           bookCoaches={bookCoaches}
-                          // loading={loading}
-                          // bookCoaches={handleBookCoaches}
                           selectedCoaching={selectedCoaching}
                           showCoachingsOnCalendar={showCoachingsOnCalendar}
                           showEdit={!showAllCoaching}

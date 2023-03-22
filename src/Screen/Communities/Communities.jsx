@@ -224,7 +224,7 @@ const Communities = () => {
   return (
     <>
       <Homepage_header />
-      <Networking_headers />
+      <Networking_headers title="Communities" />
       {/*  */}
       <div className="networking_wrapper">
         <div class="row mb-4">
@@ -254,6 +254,7 @@ const Communities = () => {
                   <Button
                     title="Back to Events"
                     onClick={() => navigate("/networking")}
+                    style={{borderRadius : "29px"}}
                   />
                 </div>
                 {token && 

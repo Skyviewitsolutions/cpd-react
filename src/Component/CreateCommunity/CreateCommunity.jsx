@@ -327,15 +327,16 @@ const CreateCommunity = () => {
                   <h3 className="communityHeading">Create Community</h3>
                   <div className="row mt-3">
                     <div className="col-md-12 mb-4">
-                      <div className="form-outline">
+                      <div className="communityInput">
                         <label className="form-label" for="">
                           Name of community
                         </label>
                         <input
                           type="text"
-                          className="form-control form-control-lg  cmntyForm"
+                          className=""
                           ref={communityNameRef}
                           value={communityName}
+                          placeholder="Enter community name"
                           onChange={(e) => setCommunityName(e.target.value)}
                         />
                       </div>
@@ -343,15 +344,16 @@ const CreateCommunity = () => {
                   </div>
                   <div className="row">
                     <div className="col-md-12 mb-4 d-flex align-items-center">
-                      <div className="form-outline w-100">
+                      <div className="communityInput w-full" style={{width : "100%"}}>
                         <label for="" className="form-label">
                           Criteria to join
                         </label>
                         <textarea
-                          className="form-control form-control-lg"
+                          className=""
                           rows="4"
                           cols="50"
                           value={criteriaToJoin}
+                          placeholder="Enter criteria to join"
                           ref={joinCriteriaRef}
                           onChange={(e) => setCriteriaToJoin(e.target.value)}
                         ></textarea>
@@ -361,14 +363,15 @@ const CreateCommunity = () => {
 
                   <div className="row">
                     <div className="col-md-12 mb-4 d-flex align-items-center">
-                      <div className="form-outline w-100">
+                      <div className="communityInput w-full" style={{width : "100%"}}>
                         <label for="" className="form-label">
                           Description
                         </label>
                         <textarea
-                          className="form-control form-control-lg"
+                          className=""
                           rows="4"
                           cols="50"
+                          placeholder="Enter description of community"
                           ref={descriptionRef}
                           value={description}
                           onChange={(e) => setDiscription(e.target.value)}
@@ -379,12 +382,12 @@ const CreateCommunity = () => {
 
                   <div className="row">
                     <div className="col-md-6 mb-4 pb-2">
-                      <div className="form-outline">
+                      <div className="communityInput">
                         <label className="form-label" for="emailAddress">
                           Image Upload
                         </label>
                         <input
-                          class="form-control form-control-lg  cmntyForm"
+                          class=""
                           id="takeImg"
                           type="file"
                           accept="image/png, image/gif, image/jpeg"
@@ -402,7 +405,7 @@ const CreateCommunity = () => {
                       </div>
                     </div>
                     <div className="col-md-6 mb-4 pb-2">
-                      <div className="form-outline visibility">
+                      <div className="form-outline visibility communityInput">
                         <label className="form-label" for="phoneNumber">
                           Visibility
                         </label>
@@ -445,12 +448,12 @@ const CreateCommunity = () => {
                   </div>
                   <div className="row">
                     <div className="col-md-6 mb-4 pb-2">
-                      <div className="form-outline">
+                      <div className="communityInput">
                         <label className="form-label" for="">
                           Community Type
                         </label>
                         <select
-                          class="form-select cmntyForm comType"
+                          class=""
                           aria-label="Default select example"
                           value={communityType}
                           onChange={(e) => handleCommunityType(e)}
@@ -471,14 +474,14 @@ const CreateCommunity = () => {
                       </div>
                     </div>
                     <div className="col-md-6 mb-4 pb-2">
-                      <div className="form-outline subType d-none">
+                      <div className="communityInput">
                         <div style={{width : "100%"}}>
                         <label className="form-label" for="">
                           Sub Type
                         </label>
                         <input
                           id="subTypeField"
-                          className="form-control cmntyForm"
+                          className=""
                           value={subType}
                           style={{width : "100%"}}
                           onChange={(e) => setSubType(e.target.value)}
@@ -489,7 +492,7 @@ const CreateCommunity = () => {
                   </div>
                   <div className="row">
                     <div className="col-md-12 mb-4 d-flex align-items-center">
-                      <div className="form-outline  w-100">
+                      <div className="form-outline communityTags w-100">
                         <label for="" className="form-label">
                           Tag
                         </label>

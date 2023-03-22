@@ -16,6 +16,7 @@ import { getCalendarData } from "../../utils/calendar";
 import Subscribe from "../button/Subscribe";
 // here we are designing a single card for all the events ;
 
+
 const EventsCard = (props) => {
   
   const navigate = useNavigate();
@@ -56,6 +57,9 @@ const EventsCard = (props) => {
     setEventsToBeShown(calendarData);
   };
 
+  const showMembersList = (id) =>{
+    
+  }
 
   return (
     <div className="eventCont">
@@ -82,7 +86,7 @@ const EventsCard = (props) => {
               <h6>Free</h6>
             )}
           </div>
-          <div className="d-flex worshopBx align-items-center enrolled">
+          <div className="d-flex worshopBx align-items-center enrolled" onClick={() => showMembersList()}>
              Members ({data?.members_count})
           </div>
         </div>

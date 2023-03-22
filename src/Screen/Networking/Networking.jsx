@@ -28,7 +28,6 @@ import { generatePath } from "react-router-dom";
 import showToast from "../../Component/CustomToast/CustomToast";
 
 
-
 const Networking = () => {
 
   const [eventsToBeShown, setEventsToBeShown] = useState([]);
@@ -197,7 +196,7 @@ const Networking = () => {
   return (
     <>
       <Homepage_header />
-      <Networking_headers />
+      <Networking_headers title="Events"/>
       <div className="networking_wrapper">
         <div className="row">
           <div className="col-lg-3  " style={{ width: "21%" }}>
@@ -226,6 +225,7 @@ const Networking = () => {
                     <Button
                       title="View Community"
                       onClick={() => navigate("/community")}
+                      style={{borderRadius : "29px"}}
                     />
                   </div>
                   {token && (

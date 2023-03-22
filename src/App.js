@@ -47,7 +47,8 @@ import WorkshopDetails from "./Screen/WorkshopDetails/WorkshopDetails";
 import MainLayout from "./Layouts/MainLayout";
 import CoachingDetails from "./Screen/CoachingDetails/CoachingDetails";
 import EventFullDetails from "./Screen/EventFullDetails/EventFullDetails";
-
+import WorkshopEdit from "./Screen/WorkshopEdit/WorkshopEdit";
+import NormalDetailsPage from "./Screen/NormalDetailsPage/NormalDetailsPage";
 
 function App() {
 
@@ -144,17 +145,22 @@ function App() {
             path="/workshopDetails/:workshopId"
             element={<WorkshopDetails />}
           />
+          <Route  
+            exact 
+            path="/workshopEdit/:workshopId"
+            element={<WorkshopEdit />}
+          />
           <Route 
             exact 
             path='/coachingDetails/:coachingId'
             element={<CoachingDetails/>}
           />
           {/* This is the dashboard layout here */}
-          <Route exact path="/dashboardLayout" element={<MainLayout />} />
           <Route exact path="/event-full-details/:eventId" element={<EventFullDetails />} />
+          <Route exact path="/normalDetailsPage" element={<NormalDetailsPage />} />
         </Routes>
       </Router>
-      <ToastContainer autoClose={3000}/>
+      <ToastContainer autoClose={2000}/>
     </>
   );
 }

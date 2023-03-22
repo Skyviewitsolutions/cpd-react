@@ -25,6 +25,7 @@ import { generatePath, useNavigate } from "react-router-dom";
 import NoDataImg from "../../assets/Images/noDataFound.png"
 import showToast from "../../Component/CustomToast/CustomToast";
 
+
 const CommunityDetails = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -255,3 +256,6 @@ const CommunityDetails = (props) => {
 };
 
 export default CommunityDetails;
+
+
+

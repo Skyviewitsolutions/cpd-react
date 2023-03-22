@@ -1,0 +1,67 @@
+.accordiancont button{
+    width: 100%;
+    display: flex;
+    background: white;
+    padding: 6px 8px;
+    border: 1px solid rgb(203, 201, 201) !important;
+    border-bottom-width: 0px;
+}
+
+.accordianTitleCont{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 8px 8px;
+}
+
+.accordianTitleCont div{
+    display: flex;
+    align-items: center;
+}
+
+.accordianTitleCont div h6{
+    margin-bottom: 0px;
+    color: var(--black);
+    font-size: 13px;
+    margin-left: 6px;
+}
+
+.accordianTitleCont  span{
+    color: var(--gray);
+    font-family: "Poppins-Regular";
+    font-size: 14px;
+}
+
+.accordiancont{
+    margin-top: 7px;
+}
+
+.accordion-body{
+    padding: 12px 8px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid rgb(203, 201, 201) !important;
+    border-bottom-width: 0px !important;
+    border-top-width: 0px !important;
+}
+
+.accordianBodyleft{
+    display: flex;
+    align-items: center;
+}
+.accordianBodyleft h6{
+    margin-bottom: 0px;
+    color: var(--gray);
+    font-size: 13px;
+    margin-left: 9px;
+    font-family: 'Poppins-Regular';
+}
+
+.accordion-body span{
+    color: var(--gray);
+    font-family: "Poppins-Regular";
+    font-size: 14px;
+    margin-right: 8px;
+}

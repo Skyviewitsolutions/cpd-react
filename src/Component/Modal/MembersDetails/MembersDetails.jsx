@@ -30,7 +30,6 @@ const MembersDetails = (props) => {
       .get(url, { headers: headers })
       .then((res) => {
         if (res.data.result) {
-          console.log(res , "response here")
           const val = res.data.data;
           setAllMembers(val);
           const path = res.data.avtarPath;

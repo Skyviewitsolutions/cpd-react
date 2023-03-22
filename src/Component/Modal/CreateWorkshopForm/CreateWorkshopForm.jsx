@@ -50,7 +50,6 @@ const CreateWorkshopForm = (props) => {
   const [domainManualInput, setDomainManualInput] = useState("");
   const [industryManualInput, setIndustryManualInput] = useState("");
 
-
   var token = localStorage.getItem("token");
 
   // creating useState for slotsCreations ;

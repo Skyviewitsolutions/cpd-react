@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Recommended_session.css";
-
 import star from "../../assets/Images/star.svg";
 import download_icon from "../../assets/Images/download_icon.svg";
 import Analytic from "../../assets/Icons/Artboard13.svg";
@@ -11,149 +10,300 @@ import Homepage_button from "../button/Homepage_button";
 import Coaches1 from "../../assets/Icons/Artboard26.svg";
 import Coaches2 from "../../assets/Icons/Artboard27.svg";
 import Coaches3 from "../../assets/Icons/Artboard28.svg";
+import axios from "axios";
+import User from "../../assets/Icons/user.png";
+import { endpoints, imgPath } from "../services/endpoints";
+import BookBtn from "../button/BookBtn/BookBtn";
+import showToast from "../CustomToast/CustomToast";
+
 const Recommended_session = () => {
+  // here we are going to get the list of coaching ;
+
+  const [coachingList, setCoachingList] = useState([]);
+  const [coachImgPath, setCoachImgPath] = useState("");
+  const [allEnrolledCoachings, setAllEnrolledCoachings] = useState([]);
+  const token = localStorage.getItem("token");
+  const [selectedCoaching, setSelectedCoaching] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [allWorkShopList, setAllWorkShopList] = useState([]);
+  const [allEnrolledWorkshops, setAllEnrolledWorkshops] = useState([]);
+
+  const getCoachingList = () => {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    const url = endpoints.coaches.allCoachesList;
+
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if (res.data.result) {
+          const val = res.data.data;
+          var coachPath = res.data?.avatar_image_path;
+          setCoachImgPath(coachPath);
+          setCoachingList(val);
+        }
+      })
+      .catch((err) => {
+        console.log(err, "this is the error");
+      });
+  };
+
+  const getAllEnrolledCoachings = () => {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    const url = endpoints.coaches.enrolledCoaching;
+
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if (res.data.result) {
+          var val = res.data.data;
+          setAllEnrolledCoachings(val);
+        }
+      })
+      .catch((err) => {
+        console.log(err, "this is the error");
+      });
+  };
+
+  const bookCoaches = (coachData) => {
+    var token = localStorage.getItem("token");
+    if (token) {
+      var id = coachData._id;
+      var url = `${endpoints.coaches.enrollCoaching}${id}`;
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      };
+
+      setSelectedCoaching(id);
+      setLoading(true);
+
+      axios
+        .get(url, { headers: headers })
+        .then((res) => {
+          setLoading(false);
+          if (res.data.result) {
+            getAllEnrolledCoachings();
+            showToast("Coaching booked successfully", "success");
+          } else if (res.data.result == false) {
+            showToast(res.data.message, "warning");
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err, "this is the error here");
+        });
+    } else {
+      showToast("Please login ", "warning");
+    }
+  };
+
+  const getAllWorkshop = () => {
+    const url = endpoints.workshop.allWorkshop;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if (res.data.result) {
+          var val = res.data.data;
+          setAllWorkShopList(val);
+        }
+      })
+      .catch((err) => {
+        console.log(err, "this is the error h");
+      });
+  };
+
+  const getAllEnrolledList = () => {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    const url = endpoints.workshop.myEnrolledWorkshop;
+
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if (res.data.result) {
+          const val = res.data.data;
+          setAllEnrolledWorkshops(val);
+        }
+      })
+      .catch((err) => {
+        console.log(err, "error here");
+      });
+  };
+
+  useEffect(() => {
+    getCoachingList();
+    getAllEnrolledCoachings();
+    getAllWorkshop();
+    getAllEnrolledList();
+  }, []);
+
+  // writing code for enrolling the workshop
+
+  const enrollWorkshop = (workShopData) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      var id = workShopData._id;
+      const url = `${endpoints.workshop.enrollWorkshop}${id}`;
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      axios
+        .get(url, { headers: headers })
+        .then((res) => {
+          if (res.data.result) {
+            showToast("workshop enrolled successfully", "success");
+            getAllEnrolledList();
+          }
+        })
+        .catch((err) => {
+          console.log(err, "error here");
+        });
+    } else {
+      showToast("Please login", "warning");
+    }
+  };
+
   return (
     <>
-     <div className="recommended_box">
+      <div className="recommended_box">
         <div className="recommended_header">
           <h5>Recommended Session</h5>
         </div>
-        <div className="recommended">      
+        <div className="recommended">
+        <div className="coaches_heading">
+            <h5>WORKSHOPS</h5>
+          </div>
+          {allWorkShopList.length != 0 &&
+            allWorkShopList.map((workshop, index) => {
+              var id = workshop._id;
+              var timing = workshop.availability_timing;
+              timing = timing.split(",");
+
+              var enrollStatus = 3;
+
+              var enrolled = allEnrolledWorkshops.filter((itm, ind) => {
+                return itm.workshop_id == id;
+              });
+
+              if (enrolled.length != 0) {
+                var datas = enrolled[0];
+                var status = datas.status;
+                enrollStatus = status;
+              }
+              const image = imgPath.workshop + workshop.image;
+              var domain = workshop?.domain?.title;
+              var industry = workshop?.industry?.title;
+              var isPaid = workshop?.is_paid;
+              var sessionType = workshop.payment_type == 1 ? "hour" : "session";
+
+              return (
                 <div className="recommended_details">
-            <div className="recommended_imgbox">
-              <img src={Conflict_mgmnt} alt=""></img>
-               <div className="recommended_name">
-                <h4>CONFLICT MANAGEMENT</h4>
-                <h5>WORK & LIFE BALANCE</h5>
-                <div className="views_box">
-                  <h6>4.4</h6>
-                  <img src={star} alt=""></img>
-                  <img src={download_icon} alt=""></img>
-
-                  <h6>5M+</h6>
+                  <div className="recommended_imgbox">
+                    <img src={image} alt="" />
+                    <div className="recommended_name">
+                      <h4>{workshop.title}</h4>
+                      <h5>
+                        {domain} & {industry}
+                      </h5>
+                      <div className="views_box">
+                        <h5>
+                          Total members : {workshop?.workshop_members_count}
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className=" w-1 bookbtnBold"
+                    style={{ marginRight: "-11px" }}
+                  >
+                    <BookBtn
+                      status={enrollStatus}
+                      onClick={() => enrollWorkshop(workshop)}
+                      styles={{ height: "33px", fontSize: "13px" }}
+                    />
+                  </div>
                 </div>
-              </div> 
-            </div>
-             <Homepage_button
-              text="Enroll Now"
-              brColor="#2c6959"
-              fontColor="#2c6959"
-            /> 
-          </div>    
+              );
+            })}
 
-         <div className="recommended_details">
-        
-            <div className="recommended_imgbox">
-              <img src={Analytic} alt=""></img>
-               <div className="recommended_name">
-                <h4>ANALYTIC INTELLIGENCE</h4>
-                {/* <h5>Work & Life Balance</h5> */}
-                <div className="views_box">
-                  <h6>4.4</h6>
-                  <img src={star} alt=""></img>
-                  <img src={download_icon} alt=""></img>
-
-                  <h6>5M+</h6>
-                </div>
-              </div> 
-            </div>
-             <Homepage_button
-              text="Enroll Now"
-              brColor="#2c6959"
-              fontColor="#2c6959"
-            /> 
-          </div>
-
-           <div className="recommended_details">
-           
-            <div className="recommended_imgbox">
-              <img src={Human_resorces} alt=""></img>
-               <div className="recommended_name">
-                <h4>HUMAN RESOURCES</h4>
-                <h5>MANAGEMENT</h5>
-                <div className="views_box">
-                  <h6>4.4</h6>
-                  <img src={star} alt=""></img>
-                  <img src={download_icon} alt=""></img>
-
-                  <h6>5M+</h6>
-                </div>
-              </div> 
-            </div>
-            <Homepage_button
-              text="Enroll Now"
-              brColor="#2c6959"
-              fontColor="#2c6959"
-            /> 
-          </div>
+          
 
           <div className="coaches_heading">
             <h5>COACHES</h5>
           </div>
+          {coachingList &&
+            coachingList.map((item, index) => {
+              const coachImg = coachImgPath + "/" + item?.coach_info?.avtar;
 
-          <div className="recommended_details">
-          <div className="recommended_imgbox">
-              <img src={Coaches1} alt=""></img>
-               <div className="recommended_name">
-                <h4>Break Down Joy</h4>
-                <h5>Developers of UI Design</h5>
-                
-                <div className="Coaches_views_box">
-                  <span>Hey there, I m intrested to maitain your goal</span>
-                  {/* <img src={star} alt=""></img>
-                  <img src={download_icon} alt=""></img> */}
+              var coachInfo = item?.coach_info;
+              var image = coachImgPath + "/" + coachInfo?.avtar;
 
-                  {/* <h6>5M+</h6> */}
+              var coachingDomain = item?.domain?.title;
+              var coachingIndustry = item?.industry?.title;
+              var description = item?.coach_info?.description;
+              var id = item._id;
+
+              var bookingStatus = 3;
+              var enrolled = allEnrolledCoachings.filter((itm, ind) => {
+                return itm.coaching_id == id;
+              });
+
+              if (enrolled.length != 0) {
+                var datas = enrolled[0];
+                var status = datas.status;
+                bookingStatus = status;
+              }
+
+              return (
+                <div className="recommended_details cursor" key={index + 1}>
+                  <div className="recommended_imgbox" key={index}>
+                    {item?.coach_info?.avtar ? (
+                      <img src={image} alt="alternate" />
+                    ) : (
+                      <img src={User} alt=""></img>
+                    )}
+                    <div className="recommended_name">
+                      <h4>{item?.title}</h4>
+                      <h5>
+                        {coachingDomain} | {coachingIndustry}
+                      </h5>
+
+                      <div className="Coaches_views_box">
+                        <span>{description}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className=" w-1 bookbtnBold"
+                    style={{ marginRight: "-11px" }}
+                  >
+                    <BookBtn
+                      status={bookingStatus}
+                      onClick={() => bookCoaches(item)}
+                      styles={{ height: "33px", fontSize: "13px" }}
+                      // loading={selectedCoaching != item._id && loading}
+                    />
+                  </div>
                 </div>
-              </div> 
-            </div>
-             <Homepage_button
-              text="Book Now"
-              brColor="#2c6959"
-              fontColor="#2c6959"
-            /> 
-          </div> 
-
-           <div className="recommended_details">
-           <div className="recommended_imgbox">
-              <img src={Coaches2} alt=""></img>
-               <div className="recommended_name">
-                <h4>Harry Osborn</h4>
-                <h5>Developers of UI Design</h5>
-                <div className="Coaches_views_box">
-                <span>Hey there, I m intrested to maitain your goal</span>
-                </div>
-              </div> 
-            </div>
-             <Homepage_button
-              text="Book Now"
-              brColor="#2c6959"
-              fontColor="#2c6959"
-            /> 
-          </div>
-
-           <div className="recommended_details">
-           <div className="recommended_imgbox">
-              <img src={Coaches3} alt=""></img>
-               <div className="recommended_name">
-                <h4>Jack Smith</h4>
-                <h5>Developers of UI Design</h5>
-                <div className="Coaches_views_box">
-                <span>Hey there, I m intrested to maitain your goal</span>
-
-                
-                </div>
-              </div> 
-            </div>
-             <Homepage_button
-              text="Book Now"
-              brColor="#2c6959"
-              fontColor="#2c6959"
-            /> 
-          </div> 
+              );
+            })}
         </div>
-      </div> 
-      
+      </div>
     </>
   );
 };

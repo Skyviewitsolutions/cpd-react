@@ -394,23 +394,26 @@ const AddEvent = () => {
         <div className="eventForm d-flex">
           <div className="col-lg-6 col-md-12 col-12">
             <div className="inputBox">
-              <label htmlFor="title">Session Title</label>
+              <label htmlFor="title">Session Title <span>Max (20 char)</span></label>
               <input
                 type="text"
                 placeholder="Enter title"
                 value={sessionTitle}
                 onChange={(e) => setSessionTitle(e.target.value)}
+                maxlength={21}
               />
             </div>
             <div className="inputBox">
               <label htmlFor="title">
-                Session Description With Domain and Industry Detail
+                Short Description With Domain and Industry Detail
+                <span>Max (80 char)</span>
               </label>
               <textarea
                 type="text"
                 placeholder="Enter description"
                 value={sessionDesc}
                 onChange={(e) => setSessionDes(e.target.value)}
+                maxlength={80}
               />
             </div>
             <div className="inputBox2">
@@ -474,13 +477,13 @@ const AddEvent = () => {
                     class="form-check-label eventFormSessionType_label"
                     htmlFor="Hybrid"
                   >
-                    Hybrid
+                    Both
                   </label>
                 </div>
               </div>
             </div>
             <div className="inputBox">
-              <label htmlFor="">Session Duration (in hours)</label>
+              <label htmlFor="">Total Session Duration (in hours)</label>
               <input
                 classNames=""
                 value={duration}
@@ -491,7 +494,7 @@ const AddEvent = () => {
               />
             </div>
             <div className="inputBox">
-              <label htmlFor="">Maximum number of students</label>
+              <label htmlFor="">Maximum number of members</label>
               <input
                 classNames=""
                 value={maxStudents}
@@ -617,6 +620,7 @@ const AddEvent = () => {
                         placeholder="upload session photo"
                         class="eventForm_dropzone__input"
                         onChange={(e) => handleImgUpload(e)}
+                        accept="image/x-png ,image/jpeg , image/jpg"
                       />
                       {(update || eventImg) && <img src={eventImg} alt="" />}
                     </div>

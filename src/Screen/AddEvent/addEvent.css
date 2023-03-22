@@ -632,3 +632,10 @@ span.session_photo {
 .sessionType {
   margin-top: 9px;
 }
+
+.inputBox span {
+  font-size: 12px;
+  font-weight: 400;
+  font-family: "Poppins-Regular";
+  margin-left: 12px;
+}

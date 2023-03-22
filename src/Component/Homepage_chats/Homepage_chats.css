@@ -9,8 +9,6 @@
   display: flex;
   box-shadow: none;
   flex-wrap: wrap;
-  padding-left: 2%;
-  padding-right: 2%;
   box-sizing: border-box;
 }
 .chats_header {
@@ -18,27 +16,34 @@
   border: none;
   width: 100%;
   position: relative;
-  height: 40px;
+  height: 44px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-left: 10px;
   padding-right: 10px;
 }
+
 #online {
   color: rgb(237, 237, 237);
   font-size: 14px;
   font-weight: lighter;
 }
+
 .chats_header h5 {
   font-weight: 500;
   color: white;
-  font-size: 18px;
+  margin-bottom: 0px;
+  font-family: "Poppins-Regular";
+  font-size: 16px;
 }
+
 .chats_header h6 {
   color: rgb(251, 251, 251);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: lighter;
+  margin-bottom: 0px;
+  font-family: 'Poppins-Regular';
 }
 #search_chats {
   color: rgb(188, 186, 186);
@@ -46,25 +51,27 @@
   width: 100%;
   height: 45px;
   border: none;
+  font-family: 'Poppins-Regular';
 }
 .search_box {
   display: flex;
-  align-items: center;
-  border-bottom: 1px solid rgb(188, 186, 186);
-  outline: none;
-  width: 100%;
-  padding: 0%;
-  margin: 0%;
+    align-items: center;
+    border-bottom: 1px solid rgb(188, 186, 186);
+    outline: none;
+    width: 100%;
+    padding: 0% 23px;
+    margin: 0%;
 }
 .search_box img {
-  width: 20px;
-  height: 20px;
+  width: 17px;
+  height: 17px;
 }
 .chats_details {
   border-bottom: 1px solid gainsboro;
   height: 80px;
   width: 100%;
   display: flex;
+  padding: 0px 10px;
   align-items: center;
   justify-content: space-between;
 }
@@ -84,8 +91,11 @@
 }
 .chats_name h5 {
   padding-top: 0%;
+  margin-bottom: 4px;
   margin-top: 0%;
   font-size: 15px;
+  color: var(--black);
+  font-family: 'Poppins-SemiBold';
   padding-bottom: 0%;
 }
 .chats_name h6 {
@@ -93,9 +103,10 @@
   font-size: 13px;
 }
 #chat_time {
-  color: rgb(188, 186, 186);
-  font-size: 13px;
-  padding-right: 10px;
+  color: rgb(131 130 130);
+    font-size: 13px;
+    font-family: 'Poppins-Regular';
+    padding-right: 10px;
 }
 .hide {
   display: flex;

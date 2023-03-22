@@ -1,153 +1,197 @@
-
-.CreateCommunityScreen{
-    width:100%;
-    margin:0px;
-    padding: 0px;
-    overflow: hidden;
+.CreateCommunityScreen {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
 }
 
 .CommunityDetails {
-    margin: auto;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    width: 75%;
-    margin-top: 20px;
-    padding: 20px;
-    margin-bottom: 20px;
+  margin: auto;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  width: 75%;
+  margin-top: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
-.typeChecked{
-    height: 45px;
-    align-items: center;
-   cursor: pointer;
+.typeChecked {
+  height: 45px;
+  align-items: center;
+  cursor: pointer;
+  justify-content: left;
 }
 
 .form-check.private {
-    margin-left: 25px;
+  margin-left: 25px;
 }
 h3.communityHeading {
-    font-size: 26px;
+  font-size: 26px;
+  font-family: "Poppins-SemiBold";
+  color: var(--black);
 }
 label.form-label {
-    font-size: 16px;
-    font-weight: 400;
+  font-size: 16px;
+  font-weight: 400;
 }
-.cmntyForm{
-cursor: pointer;
- box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
- border-color: #2c6959;
+.cmntyForm {
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-color: #2c6959;
 }
 /* .form-outline {
     margin: 10px;
 } */
 input.form-check-input {
-    height: 20px;
-    width: 20px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-cursor: pointer;
+  height: 20px;
+  width: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  cursor: pointer;
 }
 input.form-control.form-control-lg.cmntyForm:focus {
-    outline: none;
-    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
-    border-color: #2c6959;
-
+  outline: none;
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+  border-color: #2c6959;
 }
 select.form-select.cmntyForm {
-    height: 45px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-color: #2c6959;
-    cursor: pointer;
+  height: 45px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-color: #2c6959;
+  cursor: pointer;
 }
-select.form-select.cmntyForm:focus{
-    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
-    border-color: #2c6959;
+select.form-select.cmntyForm:focus {
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+  border-color: #2c6959;
 }
-input#formFileLg:focus{
-    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
-    border-color: #2c6959;
+input#formFileLg:focus {
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+  border-color: #2c6959;
 }
-
 
 textarea.form-control.form-control-lg {
-    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
-    border-color: #2c6959;
-    min-height: 90px;
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+  border-color: #2c6959;
+  min-height: 90px;
 }
 textarea.form-control.form-control-lg:focus {
-    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
-    border-color: #2c6959;
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+  border-color: #2c6959;
 }
 
-.form-outline .form-control:focus{
-    border-color: #2c6959;
- outline: none;
- box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+.form-outline .form-control:focus {
+  border-color: #2c6959;
+  outline: none;
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
 }
 
-button.btn.btn-lg .communitySubmitButton{
-    background:#2a5d4e;
-    color: white;
-    width: 150px;
-   height: 50px;
+button.btn.btn-lg .communitySubmitButton {
+  background: #2a5d4e;
+  color: white;
+  width: 150px;
+  height: 50px;
 }
 
-.communitySubmitButton{
-    width: 150px !important;
-    margin-left: 0px !important;
+.communitySubmitButton {
+  width: 150px !important;
+  margin-left: 0px !important;
 }
 
-.communitySubmitButton:hover{
-    background-color: #29876b;
-    color: white;
+.communitySubmitButton:hover {
+  background-color: #29876b;
+  color: white;
 }
-
 
 .rti--container:focus-within {
- border-color: #2c6959;
-    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px!important;
+  border-color: #2c6959;
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px !important;
 }
-.rti--container{
-    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px!important;
-    /* border-color: #2c6959; */
-    
-
+.rti--container {
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px !important;
+  /* border-color: #2c6959; */
 }
 input#subTypeField {
-    height: 44px;
+  height: 44px;
 }
 @media screen and (max-width: 600px) {
-    .CommunityDetails {
-        width:98%;
-    }
-    h3.communityHeading {
-       
-        text-align: center;
-    }
-    input.btn.btn-lg.communitySubmitButton {
-      
-        margin-left: 75px;
-       
-    }
+  .CommunityDetails {
+    width: 98%;
+  }
+  h3.communityHeading {
+    text-align: center;
+  }
+  input.btn.btn-lg.communitySubmitButton {
+    margin-left: 75px;
+  }
 }
-@media only screen and (min-width: 601px) and (max-width: 820px)  {
-    .CommunityDetails {
-        width:100%;
-    }  
-    h3.communityHeading {
-       
-        text-align: center;
-    }
-    input.btn.btn-lg.communitySubmitButton {
-      
-        margin-left:40%;
-       
-    }
+@media only screen and (min-width: 601px) and (max-width: 820px) {
+  .CommunityDetails {
+    width: 100%;
+  }
+  h3.communityHeading {
+    text-align: center;
+  }
+  input.btn.btn-lg.communitySubmitButton {
+    margin-left: 40%;
+  }
 }
 
-.visibility .form-check{
-    display: flex;
-    align-items: center;
+.visibility .form-check {
+  display: flex;
+  align-items: center;
 }
 
-.visibility .form-check label{
-    margin-left: 6px;
+.visibility .form-check label {
+  margin-left: 6px;
+}
+
+/* here we are writing code for community input */
+
+.communityInput input,
+.communityInput textarea,
+.communityInput select {
+  font-family: "Poppins-Regular";
+  color: var(--lightgray);
+  font-size: 14px;
+  padding: 9px 6px;
+  border: 1.3px solid rgb(154, 152, 152);
+  border-radius: 4px;
+  width: 100%;
+  outline: none;
+  box-shadow: none;
+  margin: 8px 0px;
+}
+
+.communityInput input,
+.communityInput select {
+  height: 43px;
+}
+
+.communityInput label,
+.communityTags label {
+  font-family: "Poppins-SemiBold";
+  color: var(--gray);
+  font-size: 14px;
+  margin-bottom: 0px;
+}
+
+.communityInput span {
+  font-size: 12px;
+  font-weight: 400;
+  font-family: "Poppins-Regular";
+  margin-left: 12px;
+}
+
+.communityInput input[type="radio"] {
+  border-radius: 50%;
+  width: 19px;
+  height: 19px;
+  margin-right: 4px;
+}
+
+.communityTags .rti--container {
+  /* box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px!important; */
+  font-family: "Poppins-Regular";
+  margin-top: 9px;
+  font-size: 14px;
+  box-shadow: none !important;
+  height: 43px;
 }

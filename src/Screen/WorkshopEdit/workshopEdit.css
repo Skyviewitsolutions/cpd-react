@@ -1,0 +1,27 @@
+.domainSlt{
+    width: 200px;
+    outline: none;
+    border-radius: 3px;
+    padding: 6px 6px;
+    font-family: "Poppins-Regular";
+    color: var(--lightgray);
+    font-size: 13px;
+    margin-right: 15px;
+}
+
+.domInput{
+    width: 200px;
+    margin-right: 15px;
+    padding: 6px 6px;
+    border-radius: 3px;
+    font-family: "Poppins-Regular";
+    font-size: 13px;
+}
+
+.domInput::placeholder{
+    color: rgb(160, 160, 160);
+}
+
+.workshopMediaImg{
+    cursor: pointer;
+}

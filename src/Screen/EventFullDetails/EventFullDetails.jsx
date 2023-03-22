@@ -1,306 +1,292 @@
-import React , {useState , useEffect} from "react";
-import "./eventFullDetails.css";
-import Homepage_header from "../../Component/Header/Homepage_header";
-import { GiRoundStar } from "react-icons/gi";
-import profileimg from "../../assets/Images/profileimg.png";
-import Footer from "../../Component/Footer/Footer";
-import { useParams , useLocation , useNavigate } from "react-router-dom";
-import { endpoints } from "../../Component/services/endpoints";
+import React from "react";
+import MainLayout from "../../Layouts/MainLayout";
+// import "./normalDetailsPage.css";
+import BackGroundImg from "../../assets/Images/background.jpg";
+import Star from "../../assets/Icons/star.png";
+import DummyBanner from "../../assets/Icons/dummyBanner.png";
+import CourseContent from "../../Component/CourseContent/CourseContent";
+import { BsFillPlayFill } from "react-icons/bs";
+import { AiOutlineYoutube, AiOutlineTrophy } from "react-icons/ai";
+import { BiFileBlank, BiMobile } from "react-icons/bi";
+import { RiFolderDownloadLine } from "react-icons/ri";
+import { MdOutlineLink } from "react-icons/md";
+import User from "../../assets/Images/user3.jpg";
+import workshopImg1 from "../../assets/Images/workshopimg1.png";
+import workshopImg2 from "../../assets/Images/workshopimg2.jpeg";
+import { RiShareFill } from "react-icons/ri";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { event } from "jquery";
+import { endpoints } from "../../Component/services/endpoints";
+
 
 
 const EventFullDetails = () => {
-
-
-  const {eventId} = useParams();
+  const { eventId } = useParams();
   const token = localStorage.getItem("token");
-  const [imgPath , setImgPath] = useState([]);
-  const [eventDetails , setEventDetails] = useState({});
+  const [imgPath, setImgPath] = useState([]);
+  const [eventDetails, setEventDetails] = useState({});
   const navigate = useNavigate();
 
   const headers = {
     Authorization: `Bearer ${token}`,
   };
 
-  const getEventDetails = () =>{
+  const getEventDetails = () => {
     const url = `${endpoints.events.eventDetails}${eventId}`;
     axios
       .get(url, { headers: headers })
       .then((res) => {
         if (res.data.result) {
-          console.log(res , "response");
-          const val = res.data.data
+          console.log(res, "response");
+          const val = res.data.data;
           setEventDetails(val);
-          var path = res.data?.image_path
-          setImgPath(path)
+          var path = res.data?.image_path;
+          setImgPath(path);
         }
       })
       .catch((err) => {
         console.log(err, "error here");
       });
-  }
+  };
 
-  useEffect(() =>{
+  useEffect(() => {
     getEventDetails();
-  },[]);
+  }, []);
 
   const eventImage = imgPath + eventDetails?.event_photo;
 
-  console.log(eventDetails , "eventDetails");
-
   return (
-    <>
-      <Homepage_header />
+    <MainLayout>
+      <div className="dtlscont">
+        <div className="dltsline"></div>
+        <div className="dltsMain">
+          {eventDetails?.event_photo ? (
+            <img src={imgPath + "/" + eventDetails.event_photo} />
+          ) : (
+            <img src={BackGroundImg} alt="" />
+          )}
 
-      <section className="workshopDetailsSection1 position-relative">
-        <div className="container-fluid">
-        <div className="breadCrum">
-            <h4 onClick={() => navigate("/")}>Home</h4> <span>></span>{" "}
-            <h4 onClick={() => navigate(-1)}>Events</h4> <span>></span>
-            <h4 style={{ borderBottom: "2px solid white" }}>Details</h4>
-          </div>
-          <div className="workshopDetailsfirst">
-
-            <div className="evDtlTitle">
-               <h5>Learn</h5>
-               <span>:</span>
-               <h6>{eventDetails?.event_title}</h6>
+          <div className="wrkshoDtls">
+            <h1 className="wrkshTitle">{eventDetails?.event_title}</h1>
+            <p className="wrkpara">{eventDetails?.event_description}</p>
+            <div className="wrkshpOther flex-wrap">
+              <h6>Max Members : {eventDetails?.max_members}</h6>
+              <h6>Joined Members : {eventDetails?.members_count}</h6>
+              <h6>Session Type : {eventDetails?.session_type}</h6>
             </div>
-            <div className="evntDtlsBox ">
-               <h5>Descriptions</h5>
-               <span>:</span>
-               <h6>{eventDetails?.event_description}</h6>
-            </div>
-            <div className="evntDtlsBox ">
-               <h5>Max Members</h5>
-               <span>:</span>
-               <h6>{eventDetails?.max_members}</h6>
-            </div>
-            <div className="evntDtlsBox ">
-               <h5>Joined Members</h5>
-               <span>:</span>
-               <h6>{eventDetails?.members_count}</h6>
-            </div>
-            <div className="evntDtlsBox ">
-               <h5>Session Type</h5>
-               <span>:</span>
-               <h6>{eventDetails?.session_type}</h6>
-            </div>
-
           </div>
         </div>
-      </section>
 
-      <section className="workshopDetailsSection2">
-        <div className="row">
-          <div className="col-lg-8">
-            <div className="row">
-              <div className="col-lg-12 col-md-12 col-12">
-                <div className="workshopDetailsBox1">
-                  <div className="row">
-                    <div className="col-lg-12 col-md-12 col-12">
-                      <h4>What you'll Learn</h4>
-                    </div>
-                    <div className="col-lg-12 col-md-12 col-12">
-                      <ul>
-                        <li>
-                          {" "}
-                          <p>Create their own Python Program</p>
-                        </li>
-                        <li>
-                          <p>Create their own Python Program</p>
-                        </li>
-                        <li>
-                          {" "}
-                          <p>Create their own Python Program</p>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="col-lg-12 col-md-12 col-12">
-                    <h5 style={{ marginTop: "20px" }}>Description</h5>
-                    <p style={{ lineHeight: "25px", marginBottom: "50px" }}>
-                      Do you want to become a programmer? Do you want to learn
-                      how to create games, automate your browser, visualize
-                      data, and much more? Python has rapidly become one of the
-                      most popular programming languages around the world.
-                      Compared to other languages such as Java or C++, Python
-                      consistently outranks and outperforms these languages in
-                      demand from businesses and job availability. The average
-                      Python developer makes over $100,000 - this number is only
-                      going to grow in the coming years.
-                    </p>
-                  </div>
+        <div className="dltsSecond ">
+          <div className="row " style={{ width: "100%" }}>
+            <div className="dltsSecondLeft col-lg-7 col-md-12 col-12">
+              <div className="harbar">
+                <h5 onClick={() => navigate("/")}>Home</h5> <span>></span>
+                <h5 onClick={() => navigate(-1)}>Events</h5> <span>></span>
+                <h5>Details</h5>
+              </div>
+              <div className="whatlearn">
+                <h4>What You'll Learn</h4>
+                <div className="whatLearnP">
+                  <h6>
+                    <img src={Star} alt="" />
+                    Create you own php program
+                  </h6>
+                  <h6>
+                    <img src={Star} alt="" />
+                    Create you own php program
+                  </h6>
+                  <h6>
+                    <img src={Star} alt="" />
+                    Create you own php program
+                  </h6>
                 </div>
               </div>
-              <div className="row">
-                <div className="col-lg-6 col-md-6 col-12">
-                  <div className="reviewBox">
-                    <div className="row">
-                      <div className="col-lg-3">
-                        <div className="reveiewProfile">
-                          <img src={profileimg} alt="" />
-                        </div>
-                      </div>
-                      <div className="col-lg-9">
-                        <h6>James Whatt</h6>
-                        <div className="workshopRating">
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                        </div>
-                        <p> 4days ago</p>
-                      </div>
-                      <div className="col-lg-12 col-md-12 col-12">
-                        <p>
-                          Helpful if starting new, but a lot of information is
-                          out of date, understandably, but an update would be
-                          appreciated. Resources for other places to look for
-                          would also be very useful.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-6 col-md-6 col-12">
-                  <div className="reviewBox">
-                    <div className="row">
-                      <div className="col-lg-3">
-                        <div className="reveiewProfile">
-                          <img src={profileimg} alt="" />
-                        </div>
-                      </div>
-                      <div className="col-lg-9">
-                        <h6>James Whatt</h6>
-                        <div className="workshopRating">
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                        </div>
-                        <p> 4days ago</p>
-                      </div>
-                      <div className="col-lg-12 col-md-12 col-12">
-                        <p>
-                          Helpful if starting new, but a lot of information is
-                          out of date, understandably, but an update would be
-                          appreciated. Resources for other places to look for
-                          would also be very useful.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-6 col-md-6 col-12">
-                  <div className="reviewBox">
-                    <div className="row">
-                      <div className="col-lg-3">
-                        <div className="reveiewProfile">
-                          <img src={profileimg} alt="" />
-                        </div>
-                      </div>
-                      <div className="col-lg-9">
-                        <h6>James Whatt</h6>
-                        <div className="workshopRating">
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                        </div>
-                        <p> 4days ago</p>
-                      </div>
-                      <div className="col-lg-12 col-md-12 col-12">
-                        <p>
-                          Helpful if starting new, but a lot of information is
-                          out of date, understandably, but an update would be
-                          appreciated. Resources for other places to look for
-                          would also be very useful.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-6 col-md-6 col-12">
-                  <div className="reviewBox">
-                    <div className="row">
-                      <div className="col-lg-3">
-                        <div className="reveiewProfile">
-                          <img src={profileimg} alt="" />
-                        </div>
-                      </div>
-                      <div className="col-lg-9">
-                        <h6>James Whatt</h6>
-                        <div className="workshopRating">
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                          <GiRoundStar />
-                        </div>
 
-                        <p> 4days ago</p>
-                      </div>
-                      <div className="col-lg-12 col-md-12 col-12">
-                        <p>
-                          Helpful if starting new, but a lot of information is
-                          out of date, understandably, but an update would be
-                          appreciated. Resources for other places to look for
-                          would also be very useful.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+              <div className="crsCont">
+                <h4>Course Content</h4>
+                <div className="crsttitlesc">
+                  <p>
+                    15 Sections <span></span> 146 Lectures <span></span> 14H 42M
+                    Total Length
+                  </p>
+                  <h6>Expand All Sections</h6>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-4">
-            <div className="workshopReveiw">
-              <div className="workshopMedia">
-                <div className="workshopMediaImg">
-                  <img
-                    src={
-                      eventDetails?.event_photo &&
-                      imgPath + "/" + eventDetails?.event_photo
-                    }
-                    alt=""
-                  />
+                <div className="accordiancont">
+                  <CourseContent />
                 </div>
-              </div>
-              <div className="workshopReveiwBody">
-                <h2>This course include</h2>
 
-                <ul>
-                  <li>14 hours on-demand video </li>
-                  <li>1 article</li>
-                  <li>3 downloadable resources</li>
-                  <li>Full lifetime access</li>
-                  <li>Access on mobile and TV</li>
-                  <li>Certificate of completion</li>
-                </ul>
-                <div className="link">
+                {/* here we are creating descriptions sections */}
+                <div className="wrkshopDescriptions">
+                  <h5>Descriptions</h5>
+                  <p>
+                    The term PHP is an acronym for PHP: Hypertext Preprocessor.
+                    PHP is a server-side scripting language designed
+                    specifically for web development. It is open-source which
+                    means it is free to download and use. It is very simple to
+                    learn and use. The files have the extension “.php”. Rasmus
+                    Lerdorf inspired the first version of PHP and participated
+                    in the later versions. It is an interpreted language and it
+                    does not require a compiler.{" "}
+                  </p>
                   <ul>
-                    <li> </li>
-                    <li> </li>
-                    <li> </li>
+                    <li>During this exclusive webinar , you will learn:</li>
+                    <li>
+                      Techniques of crafting memorable speeches that really
+                      engage your audience .
+                    </li>
+                    <li>
+                      Proven methods for developing confidence when talking
+                      infornt of large groups
+                    </li>
+                    <li>Tips for overcoming fear of public speaking </li>
+                    <li>
+                      Strategies for giving presentations that inspires others.
+                    </li>
+                    <li>
+                      How to craft stories and use anecdotes effectively in
+                      order to make your message more compilling and much more!
+                    </li>
                   </ul>
                 </div>
+
+                <div className="relatedCourse">
+                  <h4 className="corsTitle">Related Events</h4>
+                  <div className="courseBox">
+                    <div className="d-flex">
+                      <img src={workshopImg1} alt="" />
+                      <div>
+                        <h5>
+                          The complete Python bootcamp for beginners to learn
+                          everything about python.
+                        </h5>
+                        <h6>
+                          23 hours total <li>Updated 23/04/2022</li>
+                        </h6>
+                      </div>
+                    </div>
+                    <div className="pricePart">
+                      <h6>Price : 243 HKD</h6>
+                    </div>
+                  </div>
+                  <div className="courseBox">
+                    <div className="d-flex">
+                      <img src={workshopImg1} alt="" />
+                      <div>
+                        <h5>
+                          The complete Python bootcamp for beginners to learn
+                          everything about python.
+                        </h5>
+                        <h6>
+                          23 hours total <li>Updated 23/04/2022</li>
+                        </h6>
+                      </div>
+                    </div>
+                    <div className="pricePart">
+                      <h6>Price : 243 HKD</h6>
+                    </div>
+                  </div>
+                  <div className="courseBox">
+                    <div className="d-flex">
+                      <img src={workshopImg1} alt="" />
+                      <div>
+                        <h5>
+                          The complete Python bootcamp for beginners to learn
+                          everything about python.
+                        </h5>
+                        <h6>
+                          23 hours total <li>Updated 23/04/2022</li>
+                        </h6>
+                      </div>
+                    </div>
+                    <div className="pricePart">
+                      <h6>Price : 243 HKD</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="dltsSecondRght col-lg-5 col-md-12 col-12">
+              <div className="vdoDtls">
+                <div className="vdoDtlsVdo">
+                 
+                  {eventDetails?.event_photo ? (
+                    <img src={imgPath + "/" + eventDetails.event_photo} />
+                  ) : (
+                    <img src={DummyBanner} alt="" />
+                  )}
+                  <div className="vdoPlay">
+                    <BsFillPlayFill size={36} />
+                  </div>
+                  <h6>Preview this course</h6>
+                </div>
+                <div className="vdoTxt">
+                  <h5>Price : 624 HKD </h5>
+                  <button className="addtoCrt">Book Now</button>
+                </div>
+              </div>
+
+              <div className="crsIncld">
+                <h6>This Course Includes : </h6>
+                <div className="crsIncldBx">
+                  <AiOutlineYoutube size={18} color="black" />
+                  <h6>14 hours on-demand video</h6>
+                </div>
+                <div className="crsIncldBx">
+                  <BiFileBlank size={18} color="black" />
+                  <h6>1 Article</h6>
+                </div>
+                <div className="crsIncldBx">
+                  <RiFolderDownloadLine size={18} color="black" />
+                  <h6>3 downloadable resources</h6>
+                </div>
+                <div className="crsIncldBx">
+                  <MdOutlineLink size={18} color="black" />
+                  <h6>FullTime access</h6>
+                </div>
+                <div className="crsIncldBx">
+                  <BiMobile size={18} color="black" />
+                  <h6>Access to mobile and TV</h6>
+                </div>
+                <div className="crsIncldBx">
+                  <AiOutlineTrophy size={18} color="black" />
+                  <h6>Certificate of completion</h6>
+                </div>
+                <div className="crsIncldBx">
+                  {/* <h5>Share</h5> */}
+                  <button className="addtoCrt">
+                    {" "}
+                    <RiShareFill
+                      size={18}
+                      color="white"
+                      style={{ marginRight: "10px" }}
+                    />{" "}
+                    Share
+                  </button>
+                </div>
+              </div>
+
+              {/* coach profile */}
+              <div className="coachPrfle">
+                <img src={User} alt="" />
+                <h5>Rovert William</h5>
+                <h6>Technical & IOT</h6>
+                <p>
+                  Robert William is a professional speaker and a php developer
+                  and has a 15 years of experience in this technology . I have
+                  worked on serveral company domestic and internals and also
+                  doing working currenly.
+                </p>
               </div>
             </div>
           </div>
         </div>
-      </section>
-      <Footer />
-    </>
+      </div>
+    </MainLayout>
   );
 };
 
 export default EventFullDetails;
+
+
