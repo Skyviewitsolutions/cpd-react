@@ -1,0 +1,11 @@
+.employeeFormCont{
+    font-family: "Poppins-Regular";
+}
+
+.employeeFormCont label{
+    color: var(--black);
+}
+
+.imglable label{
+    padding-top:  0px !important;
+}

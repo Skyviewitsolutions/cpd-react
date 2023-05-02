@@ -14,7 +14,9 @@ import CustomCalendar from "../../Calendar/CustomCalendar";
 import Loader from "../../Loader/Loader";
 import showToast from "../../CustomToast/CustomToast";
 
+
 const CreateCoachingForm = (props) => {
+  
   const {
     showCoachingsForm,
     setShowCoachingsForm,
@@ -59,6 +61,7 @@ const CreateCoachingForm = (props) => {
   const [daysSlot, setDaysSlot] = useState([]);
   const [selectedDates, setSelectedDates] = useState([]);
 
+  
   const handleCoachingImg = (e) => {
     const files = e.target.files[0];
     setCoachingImg(files);

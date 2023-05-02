@@ -633,7 +633,7 @@ a.click_forem_box.working.nav-link:hover {
   font-weight: 700;
   box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
   cursor: pointer;
-  width: 140px;
+  width: 220px;
   border-radius: 4px;
 }
 
@@ -653,6 +653,14 @@ a.click_forem_box.working.nav-link:hover {
   border-bottom: 1px solid rgb(236, 235, 235);
 }
 
+.logoutBtn img{
+  border: none;
+  width: 22px !important;
+  height: 22px !important;
+  margin-top: 0px !important;
+  margin-left: -2px;
+  background-color: transparent;
+}
 .logoutBtn:hover {
   background-color: rgb(204, 204, 204);
 }

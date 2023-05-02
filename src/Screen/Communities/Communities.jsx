@@ -17,7 +17,7 @@ import { HiSearch } from "react-icons/hi";
 import Button from "../../Component/button/Button/Button";
 import CommunityCard from "../../Component/CommmunityCard/CommunityCard";
 import showToast from "../../Component/CustomToast/CustomToast";
-
+import Loader from "../../Component/Loader/Loader";
 
 const Communities = () => {
 
@@ -39,15 +39,18 @@ const Communities = () => {
   const [tags, setTags] = useState([]);
   const [imgFiles, setImgFiles] = useState(null);
 
+
   const navigate = useNavigate();
 
   const getCommunityUrl = endpoints.community.getAllCommunity;
   const addCommunityUrl = endpoints.community.addCommunity;
 
   const getAllCommunity = () => {
+    setLoading(true)
     axios
       .get(getCommunityUrl)
       .then((res) => {
+        setLoading(false)
         if (res.data.result === true) {
           const val = res.data.data;
           const imgPath = res.data.image_path;
@@ -61,6 +64,7 @@ const Communities = () => {
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "this is the error");
       });
   };
@@ -75,17 +79,20 @@ const Communities = () => {
       Authorization: `Bearer ${token}`,
       "Content-Type": "multipart/form-data",
     };
+    setLoading(true)
 
     axios
       .get(getMycommunityUrl, { headers: headers })
       .then((res) => {
         if (res.data.result) {
+          setLoading(false)
           const val = res.data.data;
           console.log(val, "myCommunity here");
           setMyCommunity(val);
         }
       })
       .catch((err) => {
+         setLoading(false)
         console.log(err, "this is the error");
       });
   };
@@ -119,10 +126,11 @@ const Communities = () => {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
       };
-
+      setLoading(true)
       axios
         .post(addCommunityUrl, formData, { headers: headers })
         .then((res) => {
+          setLoading(false)
           if (res.data.result) {
             showToast("community created successfully",  "success" );
             navigate("/myCommunity");
@@ -131,6 +139,7 @@ const Communities = () => {
           }
         })
         .catch((err) => {
+          setLoading(false)
           console.log(err, "this is the error");
         });
     }
@@ -140,21 +149,19 @@ const Communities = () => {
 
   const joinCommunity = (id) => {
     const token = localStorage.getItem("token");
-
+    
     if (token) {
-      setLoading(true);
       const headers = {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       };
-
+      setLoading(true)
       const url = `${endpoints.community.joinCommunity}${id}`;
 
       axios
         .get(url, { headers: headers })
         .then((res) => {
-          console.log(res, "join community response");
-          setLoading(false);
+          setLoading(false)
           if (res.data.result) {
             showToast("Community joined successfully",  "success" );
             getAllCommunity();
@@ -227,12 +234,12 @@ const Communities = () => {
       <Networking_headers title="Communities" />
       {/*  */}
       <div className="networking_wrapper">
-        <div class="row mb-4">
-          <div className="col-lg-3" style={{ width: "21%" }}>
+        <div class="networkingWrap mb-4">
+          <div className="networkingleft" >
             <CustomFilter />
           </div>
 
-          <div className="col-sm-12 col-md-12 col-lg-9 ">
+          <div className="networkingRight">
             <div className="row d-flex align-items-center ">
               <div className="col-lg-7 col-md-6 col-12">
                 <div className="workshop_searchBar">
@@ -331,6 +338,7 @@ const Communities = () => {
           </div>
         </div>
         <ToastContainer />
+        {loading && <Loader />}
       </div>
 
       <Footer />

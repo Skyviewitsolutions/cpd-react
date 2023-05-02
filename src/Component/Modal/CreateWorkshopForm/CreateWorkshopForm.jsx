@@ -13,8 +13,9 @@ import { endpoints } from "../../services/endpoints";
 import showToast from "../../CustomToast/CustomToast";
 
 
-const CreateWorkshopForm = (props) => {
 
+const CreateWorkshopForm = (props) => {
+  
   const {
     setShowWorkshopForm,
     showWorkshopForm,
@@ -556,13 +557,7 @@ const CreateWorkshopForm = (props) => {
             setEventsToBeShown={setEventsToBeShown}
           />
 
-          {/* <div
-            className="caledarIcons  clnderIcons"
-            onClick={() => setShowCalendar(true)}
-          >
-            <BsFillCalendarDateFill color="#2c6959" size={32} />
-          </div> */}
-          {/* here adding the fees structure */}
+        
           <div className="eventForm_price mt-3">
             <div>
               <div class="eventForm_paid">

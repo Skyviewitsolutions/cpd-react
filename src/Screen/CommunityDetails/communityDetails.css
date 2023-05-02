@@ -9,6 +9,11 @@
   padding: 5px;
   border-radius: 5px;
 }
+
+.cmntyDtlsCont{
+  padding: 0px 34px;
+}
+
 .filter_search_retail {
   display: flex;
 }

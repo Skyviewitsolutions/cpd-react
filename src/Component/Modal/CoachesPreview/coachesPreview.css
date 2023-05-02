@@ -9,7 +9,10 @@
 .resume-wrapper{
     padding: 25px 30px !important;
 }
-
+.previewCont{
+    background-color: white;
+    border-radius: 5px;
+}
 .cutOption{
     color: gray;
     position: absolute;

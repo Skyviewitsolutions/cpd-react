@@ -3,7 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Resume_creation from "./Screen/Resume_creation";
 import Home_screens from "./Screen/Home/Home_screens";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route , Navigate } from "react-router-dom";
 import Networking from "./Screen/Networking/Networking";
 import Loginpage from "./Screen/Login/LoginPage";
 import Signup from "./Screen/SignUp/SignUp";
@@ -31,136 +31,145 @@ import ForgotPasswordDetails from "./Screen/ForgotPasswordDetails";
 import CreateCommunity from "./Component/CreateCommunity/CreateCommunity";
 import AddCommunitySidebar from "./Component/AddCommunitySidebar/AddCommunitySidebar";
 import Communities from "./Screen/Communities/Communities";
-import JobScreen from "./Screen/Job/JobScreen";
 import CareerFareLinear from "./Screen/Career/CareerFareLinear";
 import ForumScreen from "./Screen/Forum/ForumScreen";
 import AvailableResource from "./Screen/AvailableResource/AvailableResource";
 import CareerFareDetails from "./Screen/Career/CareerFareDetails";
 import CoachesForm from "./Screen/Coaches_screen/CoachesForm";
-import ViewDetail from "./Screen/Workshop/ViewDetail";
 import CoachesDetails from "./Screen/CoachDetails/CoachDetails";
 import Header2 from "./Component/Header/Header2";
 import BookCoaches from "./Component/Modal/BookCoaches/BookCoaches";
 import MyCourses from "./Screen/MyCourses/MyCourses";
 import CommunityNewSidebar from "./Component/navbar/CommunityNewSidebar";
 import WorkshopDetails from "./Screen/WorkshopDetails/WorkshopDetails";
-import MainLayout from "./Layouts/MainLayout";
-import CoachingDetails from "./Screen/CoachingDetails/CoachingDetails";
-import EventFullDetails from "./Screen/EventFullDetails/EventFullDetails";
 import WorkshopEdit from "./Screen/WorkshopEdit/WorkshopEdit";
-import NormalDetailsPage from "./Screen/NormalDetailsPage/NormalDetailsPage";
+import CoachingEdit from "./Screen/CoachingEdit/CoachingEdit";
+import EventsEdit from "./Screen/EventsEdit/EventsEdit";
+import JobBoard from "./Screen/JobBoard/JobBoard";
+import JobBoardDetails from "./Screen/JobBoardDetails/JobBoardDetails";
+import EventFullDetails from "./Screen/EventFullDetails/EventFullDetails"
+import JobBoardEdit from "./Screen/JobBoardEdit/JobBoardEdit";
+import EmployerForm from "./Screen/EmployerFom/EmployerForm";
+import PublicRoute from "./Routing/PublicRoute";
+import PrivateRoute from "./Routing/PrivateRoute";
+
 
 function App() {
-
   return (
     <>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Home_screens />} />
-          <Route exact path="/login" element={<Loginpage />} />
-          <Route exact path="/resume" element={<Student_cv />} />
-          <Route exact path="/signup" element={<Signup />} />
+
+        <Route path="/" element={<PublicRoute element={<Home_screens />} />} />
+        <Route path="/resume" element={<PrivateRoute element={<Student_cv />} />} />
+        <Route path="/login" element={<PublicRoute element={<Loginpage />} />} />
+          <Route exact path="/signup" element={<PublicRoute element={<Signup />} />} />
           <Route exact path="/resume_creation" element={<Resume_creation />} />
-          <Route exact path="/networking" element={<Networking />} />
-          <Route exact path="/community" element={<Communities />} />
-          <Route exact path="/forgot-password" element={<ForgotPasssword />} />
-          <Route exact path="/myprofile_cv" element={<ProfileCv />} />
+          <Route exact path="/networking" element={<PublicRoute element={<Networking />} />} />
+          <Route exact path="/community" element={<PublicRoute element={<Communities />} />} />
+          <Route exact path="/forgot-password" element={<PublicRoute element={<ForgotPasssword />} />} />
+          <Route exact path="/myprofile_cv" element={<PrivateRoute element={<ProfileCv />} />} />
           <Route
             exact
             path="/create_Event_form"
-            element={<Create_EventForm />}
+            element={<PrivateRoute element={<Create_EventForm />} />}
           />
-          <Route exact path="/create-community" element={<CreateCommunity />} />
+          <Route exact path="/create-community" element={<PrivateRoute element={<CreateCommunity />} /> } />
           <Route
             exact
             path="/availableResource"
-            element={<AvailableResource />}
+            element={<PublicRoute element={<AvailableResource />}/>}
           />
-          <Route exact path="/coaches-form" element={<CoachesForm />} />
+          <Route exact path="/coaches-form" element={<PrivateRoute element={<CoachesForm />} />} />
           <Route
             exact
             path="/sidebar_community"
             element={<AddCommunitySidebar />}
           />
           <Route
-            exactf
+            exact
             path="/forgot_password_details"
-            element={<ForgotPasswordDetails />}
+            element={<PublicRoute element={<ForgotPasswordDetails />} />}
           />
           <Route exact path="/inviteMember" element={<CreateEvent_student />} />
           <Route
             exact
             path="/community-finance"
-            element={<Community_finance />}
+            element={<PublicRoute element={<Workshop />} />}
           ></Route>
           <Route
             exact
             path="/community-details/:communityId"
-            element={<CommunityDetails />}
+            element={<PublicRoute element={<CommunityDetails />} />}
           ></Route>
           <Route
             exact
             path="/community_RetailSelected"
-            element={<Community_RetailSelected />}
+            element={<PublicRoute element={<Community_RetailSelected />} />}
           ></Route>
           <Route
             exact
             path="/community_RetailLocation"
-            element={<Community_RetailLocation />}
+            element={<PublicRoute element={<Community_RetailLocation />} />}
           ></Route>
-          <Route path="/add-event" element={<AddEvent />} />
-          <Route exact path="/myEvents" element={<MyEvent />} />
-          <Route exact path="/myCommunity" element={<MyCommunity />} />
-          <Route exact path="/event-details" element={<EventDetails />} />
-          {/* Coaches section */}
-          <Route exact Path="/coaches_form" element={<CoachesForm />} />
+          <Route path="/add-event" element={<PrivateRoute element={<AddEvent />} />} />
+          <Route exact path="/myEvents" element={<PrivateRoute element={<MyEvent />} />} />
+          <Route exact path="/myCommunity" element={<PrivateRoute element={<MyCommunity />} />} />
+          <Route exact path="/event-details" element={<PublicRoute element={<EventDetails />} />} />
+          
+          <Route exact Path="/coaches_form" element={<PrivateRoute element={<CoachesForm />} />} />
           <Route
             exact
             path="/coach-Details/:coachId"
-            element={<CoachesDetails />}
+            element={<PublicRoute element={<CoachesDetails />} />}
           />
           <Route exact path="/finalresume" element={<FinalResume />} />
-          <Route exact path="/workshops" element={<Workshop />} />
-          <Route
-            exact
-            path="/coachings"
-            element={<Coaches_homeScreen />}
-          />
-          <Route exact path="/job" element={<JobScreen />} />
-          <Route exact path="/career" element={<CareerFareLinear />} />
-          <Route exact path="/careerDetails" element={<CareerFareDetails />} />
-          <Route exact path="/forum" element={<ForumScreen />} />
-          <Route exact path="/workshopviewdetails" element={<ViewDetail />} />
-          {/* <Route exact path="/myCourses" element={<MyCourses />} /> */}
-          <Route exact path="/Header2" element={<Header2 />} />
-          <Route exact path="/myCourses" element={<MyCourses />} />
-          <Route exact path="/bookCoaches" element={<BookCoaches />} />
+          <Route exact path="/workshops" element={<PublicRoute element={<Workshop />}  />} />
+          <Route exact path="/coachings" element={<PublicRoute element={<Coaches_homeScreen />}  />} />
+          <Route exact path="/career" element={<PublicRoute element={<CareerFareLinear />} />} />
+          <Route exact path="/careerDetails" element={<PublicRoute element={<CareerFareDetails />} />} />
+          <Route exact path="/forum" element={<PublicRoute element={<ForumScreen />} />} />
+          <Route exact path="/Header2" element={<PublicRoute element={<Header2 />} />} />
+          <Route exact path="/myCourses" element={<PrivateRoute element={<MyCourses />} />} />
+          <Route exact path="/bookCoaches" element={<PublicRoute element={<BookCoaches />} />} />
           <Route
             exact
             path="/communityHeader"
-            element={<CommunityNewSidebar />}
+            element={<PublicRoute element={<CommunityNewSidebar />} />}
           />
           <Route
             exact
             path="/workshopDetails/:workshopId"
-            element={<WorkshopDetails />}
+            element={<PublicRoute element={<WorkshopDetails />} />}
           />
-          <Route  
-            exact 
+          <Route
+            exact
             path="/workshopEdit/:workshopId"
-            element={<WorkshopEdit />}
+            element={<PrivateRoute element={<WorkshopEdit />} />}
           />
-          <Route 
-            exact 
-            path='/coachingDetails/:coachingId'
-            element={<CoachingDetails/>}
+          <Route
+            exact
+            path="/coachingDetails/:coachingId"
+            element={<PublicRoute element={<CoachesDetails />} />}
           />
-          {/* This is the dashboard layout here */}
-          <Route exact path="/event-full-details/:eventId" element={<EventFullDetails />} />
-          <Route exact path="/normalDetailsPage" element={<NormalDetailsPage />} />
+          <Route
+            exact
+            path="/coachingEdit/:coachingId"
+            element={<PrivateRoute element={<CoachingEdit />} />}
+          />
+          <Route
+            exact
+            path="/event-full-details/:eventId"
+            element={<PublicRoute element={<EventFullDetails />} />}
+          />
+          <Route exact path="/eventEdit/:eventId" element={<PrivateRoute element={<EventsEdit />} />} />
+          <Route exact path="/job-board" element={<PublicRoute element={<JobBoard />} />}/>
+          <Route exact path="/job-board-details/:jobId" element={<PublicRoute element={<JobBoardDetails />} />}/>
+          <Route exact path="/job-board-edit/:jobId" element={<PrivateRoute element={<JobBoardEdit />} />}/>
+          <Route exact path="/employer-form" element={<PrivateRoute element={<EmployerForm />}/>} /> 
         </Routes>
       </Router>
-      <ToastContainer autoClose={2000}/>
+      <ToastContainer autoClose={2000} />
     </>
   );
 }

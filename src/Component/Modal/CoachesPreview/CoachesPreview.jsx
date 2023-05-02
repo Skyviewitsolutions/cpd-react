@@ -58,7 +58,9 @@ const CoachesPreview = (props) => {
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
+       
       >
+        <div  className="previewCont">
         <Modal.Header closeButton={false}>
           <Modal.Title id="contained-modal-title-vcenter">
             Coaches Preview
@@ -183,6 +185,7 @@ const CoachesPreview = (props) => {
             </div>
           </div>
         </Modal.Body>
+        </div>
       </Modal>
     </>
   );

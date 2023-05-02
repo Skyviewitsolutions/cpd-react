@@ -15,6 +15,7 @@ import User from "../../assets/Icons/user.png";
 import { endpoints, imgPath } from "../services/endpoints";
 import BookBtn from "../button/BookBtn/BookBtn";
 import showToast from "../CustomToast/CustomToast";
+import DefaultImg from "../../assets/Images/default.png"
 
 const Recommended_session = () => {
   // here we are going to get the list of coaching ;
@@ -214,7 +215,7 @@ const Recommended_session = () => {
               return (
                 <div className="recommended_details">
                   <div className="recommended_imgbox">
-                    <img src={image} alt="" />
+                    <img src={workshop?.image ? image : DefaultImg} alt="" />
                     <div className="recommended_name">
                       <h4>{workshop.title}</h4>
                       <h5>
@@ -275,7 +276,7 @@ const Recommended_session = () => {
                     {item?.coach_info?.avtar ? (
                       <img src={image} alt="alternate" />
                     ) : (
-                      <img src={User} alt=""></img>
+                      <img src={DefaultImg} alt=""></img>
                     )}
                     <div className="recommended_name">
                       <h4>{item?.title}</h4>

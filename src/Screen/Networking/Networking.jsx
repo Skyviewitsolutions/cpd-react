@@ -26,6 +26,8 @@ import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 import { BiPlusCircle } from "react-icons/bi";
 import { generatePath } from "react-router-dom";
 import showToast from "../../Component/CustomToast/CustomToast";
+import Loader from "../../Component/Loader/Loader";
+import DefaultImg from "../../assets/Images/default.png"
 
 
 const Networking = () => {
@@ -42,15 +44,18 @@ const Networking = () => {
   const [showAllEvents, setShowAllEvents] = useState(false);
   const [loading, setLoading] = useState(false);
   const [inputEvent, setInputEvent] = useState("");
+  
 
   const token = localStorage.getItem("token");
   const getAllEventsApi = endpoints.events.getAllEvents;
   const getMyEventsApi = endpoints.events.myEvents;
 
   const getAllEvents = () => {
+    setLoading(true)
     axios
       .get(getAllEventsApi)
       .then((res) => {
+        setLoading(false)
         if (res.data.result === true) {
           const val = res.data.data;
           const eventId = res.data.data[0]._id;
@@ -70,6 +75,7 @@ const Networking = () => {
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "this is events error");
       });
   };
@@ -79,9 +85,11 @@ const Networking = () => {
     const headers = {
       "Authorization" : `Bearer ${token}`
     }
+    setLoading(true)
     axios
       .get(getMyEventsApi , {headers : headers})
       .then((res) => {
+        setLoading(false)
         if (res.data.result === true) {
           const val = res.data.data;
           const imgPath = res.data.image_path;
@@ -93,6 +101,7 @@ const Networking = () => {
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "this is events error");
       });
   }
@@ -138,7 +147,7 @@ const Networking = () => {
       };
 
       const url = `${endpoints.events.joinEvent}${id}`;
-
+      setLoading(true)
       axios
         .get(url, { headers: headers })
         .then((res) => {
@@ -198,11 +207,11 @@ const Networking = () => {
       <Homepage_header />
       <Networking_headers title="Events"/>
       <div className="networking_wrapper">
-        <div className="row">
-          <div className="col-lg-3  " style={{ width: "21%" }}>
+        <div className="networkingWrap">
+          <div className="networkingleft" >
             <CustomFilter />
           </div>
-          <div className="col-lg-9 col-md-12 col-12 ">
+          <div className="networkingRight">
             <section>
               <div className="row d-flex align-items-center">
                 <div className="col-lg-7 col-md-6 col-12">
@@ -296,7 +305,7 @@ const Networking = () => {
         setShowCalendar={setShowCustomCalendar}
         eventsToBeShown={eventsToBeShown}
       />
-      {/* <ToastContainer /> */}
+      {loading && <Loader />}
       <Footer />
     </>
   );

@@ -24,9 +24,10 @@ import { ToastContainer, toast } from "react-toastify";
 import { generatePath, useNavigate } from "react-router-dom";
 import NoDataImg from "../../assets/Images/noDataFound.png"
 import showToast from "../../Component/CustomToast/CustomToast";
-
+import Loader from "../../Component/Loader/Loader";
 
 const CommunityDetails = (props) => {
+
   const location = useLocation();
   const navigate = useNavigate();
   const selectedCommunity = location.state;
@@ -52,10 +53,12 @@ const CommunityDetails = (props) => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
+
+    setLoading(true)
     axios
       .get(communityEventApi, { headers: headers })
       .then((res) => {
-        console.log(res, "response here which can be shown");
+        setLoading(false)
         if (res.data.result === true) {
           var val = res.data.data;
 
@@ -72,6 +75,7 @@ const CommunityDetails = (props) => {
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "this is community details events error");
       });
   };
@@ -80,9 +84,11 @@ const CommunityDetails = (props) => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
+    setLoading(true)
     axios
       .get(getMyEventsApi, { headers: headers })
       .then((res) => {
+        setLoading(false)
         if (res.data.result === true) {
           const val = res.data.data;
           const imgPath = res.data.image_path;
@@ -93,6 +99,7 @@ const CommunityDetails = (props) => {
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "this is events error");
       });
   };
@@ -127,7 +134,6 @@ const CommunityDetails = (props) => {
       axios
         .get(url, { headers: headers })
         .then((res) => {
-          console.log(res, "join community response");
           setLoading(false);
           if (res.data.result) {
             showToast("Events joined successfully",  "success" );
@@ -178,26 +184,22 @@ const CommunityDetails = (props) => {
     }
   };
 
+
   return (
     <>
       <Homepage_header />
-      <Networking_headers />
+      <Networking_headers title="Community Details" />
       <div className="p-4">
         <Community_header communityDetails={selectedCommunity} />
-        <div className="row">
-          <div className="col-lg-3 d-lg-block d-none mt-1 ps-5 pe-5 mb-5 d-lg-block d-none">
+        <div className="networkingWrap cmntyDtlsCont">
+          <div className="networkingleft ">
             <CustomFilter />
           </div>
-          <div className="col-lg-9 col-md-12 col-12">
+          <div className="networkingRight">
             <div className="row ">
               <div className="col-12 col-md-12 col-lg-12 mt-2 cmntyBtn lttitle">
                 <h5>Latest Session</h5>
-                {/* <button
-                  className="btn btn-success showDetailsbtn"
-                  onClick={() => setShowAllEvents(!showAllEvents)}
-                >
-                  {showAllEvents ? "View Less" : "View All"}
-                </button> */}
+               
               </div>
             </div>
             <div className="eventListPersonShow"></div>
@@ -250,6 +252,7 @@ const CommunityDetails = (props) => {
         eventsToBeShown={eventsToBeShown}
       />
       <ToastContainer />
+      {loading && <Loader />}
       <Footer />
     </>
   );

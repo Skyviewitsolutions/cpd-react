@@ -1,0 +1,21 @@
+.videoPlayer{
+    width: 100%;
+    height: 600px;
+    background-color: white;
+    border-radius: 6px;
+    padding: 10px;
+    position: relative;
+}
+
+.videoPlayer video{
+    width: 100%;
+    height: 100%;
+    
+}
+
+.videoClost{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+}

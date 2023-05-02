@@ -13,6 +13,8 @@ import { InlineShareButtons } from "sharethis-reactjs";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useState } from "react";
 import { getCalendarData } from "../../utils/calendar";
+import DefaultImg from "../../assets/Images/default.png"
+
 import Subscribe from "../button/Subscribe";
 // here we are designing a single card for all the events ;
 
@@ -64,7 +66,7 @@ const EventsCard = (props) => {
   return (
     <div className="eventCont">
       <div className="eventImg">
-        <img src={data?.event_photo ? image : DummyWorkhshopImage} alt="" />
+        <img src={data?.event_photo ? image : DefaultImg} alt="" />
       </div>
       <div className="worshopCrdDtls d-flex">
         <div className="col-lg-6 col-6 ">

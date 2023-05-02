@@ -1,0 +1,68 @@
+
+.userReviewCont{
+    width: 100%;
+    margin-top: 25px;
+    padding: 16px 24px;
+    background-color: white;
+    border: 1px solid rgb(203, 201, 201) !important;
+    border-radius: 4px;
+    max-height: 350px;
+    overflow-y: scroll;
+}
+
+.userReviewCont::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey !important;
+    border-radius: 1px !important;
+  }
+  
+  /* Handle */
+  .userReviewCont::-webkit-scrollbar-thumb {
+    background: var(--primary) !important;
+    border-radius: 1px !important;
+  }
+  
+  /* Handle on hover */
+  .userReviewCont::-webkit-scrollbar-thumb:hover {
+    background: var(--primary) !important;
+  }
+  .userReviewCont::-webkit-scrollbar {
+    width: 6px !important;
+    height: 0px;
+  }
+
+  .review_customer_img img{
+    width: 70px ;
+    height: 70px;
+    border-radius: 50%;
+
+  }
+
+  .product_Revews_header h5{
+    color: var("--black");
+    font-size: 24px;
+    margin-bottom: 17px;
+  }
+
+  .review-customer-name{
+    color: var(--gray);
+    margin-bottom: 5px;
+  }
+
+  .review-cutomer-content{
+    font-family: 'Poppins-Regular';
+    font-size: 13px;
+    margin-bottom: 0px;
+  }
+
+  .revwDtlsBox{
+    border-bottom: 1px solid rgb(226, 226, 226);
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .rivewDetls{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
+  }

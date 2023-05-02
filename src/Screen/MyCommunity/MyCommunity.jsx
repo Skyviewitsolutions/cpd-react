@@ -16,6 +16,7 @@ import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 import CommunityCard from "../../Component/CommmunityCard/CommunityCard";
 import { useNavigate, useLocation } from "react-router-dom";
 import showToast from "../../Component/CustomToast/CustomToast";
+import Loader from "../../Component/Loader/Loader";
 
 
 const MyCommunity = () => {
@@ -44,10 +45,12 @@ const MyCommunity = () => {
     };
 
     setCreatedCommunity([]);
+    setLoading(true)
 
     axios
       .get(createdComunity, { headers: headers })
       .then((res) => {
+        setLoading(false)
         if (res.data.result) {
           const val = res.data.data;
           const createdCommunityId = res.data.data[0]._id;
@@ -63,6 +66,7 @@ const MyCommunity = () => {
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "Created communit data error");
       });
   };
@@ -76,9 +80,11 @@ const MyCommunity = () => {
       Authorization: `Bearer ${token}`,
       "Content-Type": "multipart/form-data",
     };
+    setLoading(true)
     axios
       .get(myCommunityApi, { headers: headers })
       .then((res) => {
+        setLoading(false)
         if (res.data.result === true) {
           const val = res.data.data;
           const imgPath = res.data.image_path;
@@ -94,6 +100,7 @@ const MyCommunity = () => {
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "Myjoin community data error");
       });
   };
@@ -113,11 +120,11 @@ const MyCommunity = () => {
       Authorization: `Bearer ${token}`,
       accept: "application/json",
     };
-
+    setLoading(true)
     axios
       .get(deleteCommunityUrl, { headers: headers })
       .then((res) => {
-        console.log(res, "delete api response");
+        setLoading(false)
         if (res.data.result) {
           createCommunity();
           showToast("Community deleted successfully",  "success" );
@@ -125,6 +132,7 @@ const MyCommunity = () => {
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "response here");
       });
   };
@@ -150,7 +158,6 @@ const MyCommunity = () => {
       axios
         .get(url, { headers: headers })
         .then((res) => {
-          console.log(res, "join community response");
           setLoading(false);
           if (res.data.result) {
             showToast("Community joined successfully",  "success" );
@@ -174,7 +181,6 @@ const MyCommunity = () => {
 
     if (token) {
       setLoading(true);
-
       const headers = {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -204,32 +210,19 @@ const MyCommunity = () => {
   return (
     <>
       <Homepage_header />
-      <Networking_headers />
+      <Networking_headers title="My Community"/>
       <div className="px-4">
         <div className=" row">
-          <div className="col-lg-3 col-md-12 col-sm-12 mt-5">
-            {createdCommunity.length != 0 && myJoinCommmunity.length !== 0 && (
-              <CustomFilter />
-            )}
-          </div>
-
-          <div className="col-lg-9 col-md-12 col-sm-12 mt-5">
+          <div className="col-lg-12 col-md-12 col-sm-12 mt-5">
             <div className="cretedCommunity">
               <h4 style={{ fontWeight: "700" }}>Created Community List </h4>
-              {/* <button
-                onClick={() => setShowCreatedCommunity(!showCreatedCommunity)}
-                className="showHideCreateCommunity"
-              >
-                {showCreatedCommunity ? "View Less" : "View All"}
-              </button> */}
             </div>
-
             <div className="row">
               {createdCommunity.length != 0 ? (
                 createdCommunity.map((itm, index) => {
                   return (
-                    <>
-                      <div className="col-lg-4 col-md-6 col-12 mt-3 mb-5">
+                   
+                      <div className="col-lg-3 col-md-4 col-12 mt-3 mb-5" key={index}>
                         <CommunityCard
                           data={itm}
                           key={index}
@@ -242,7 +235,7 @@ const MyCommunity = () => {
                           showEdit={true}
                         />
                       </div>
-                    </>
+                    
                   );
                 })
               ) : (
@@ -254,12 +247,6 @@ const MyCommunity = () => {
 
             <div className="myjoinCommunity">
               <h4 style={{ fontWeight: "700" }}>My Community List </h4>
-              {/* <button
-                onClick={() => setShowMyJoinCommunity(!showMyJoinCommunity)}
-                className="showHideCreateCommunity"
-              >
-                {showMyJoinCommunity ? "View Less" : "View All"}
-              </button> */}
             </div>
             <div className="row">
               {myJoinCommmunity.length !== 0 ? (
@@ -273,8 +260,7 @@ const MyCommunity = () => {
                   });
 
                   return (
-                    <>
-                      <div className="col-lg-4 col-md-6 col-12 mt-3 mb-5">
+                      <div className="col-lg-3 col-md-4 col-12 mt-3 mb-5" key={index}>
                         <CommunityCard
                           data={item}
                           key={index}
@@ -288,7 +274,6 @@ const MyCommunity = () => {
                           isSubscribed={isSubscribed}
                         />
                       </div>
-                    </>
                   );
                 })
               ) : (
@@ -301,7 +286,7 @@ const MyCommunity = () => {
         </div>
         <AddEvent_Modal />
       </div>
-
+      {loading && <Loader />}
       <Footer />
     </>
   );

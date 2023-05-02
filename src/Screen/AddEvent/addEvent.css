@@ -299,6 +299,10 @@ img.vedioIcons {
   cursor: pointer;
 }
 
+.studentEvent_files img{
+  width: 120px;
+}
+
 .quantity-field .value-button:hover {
   background: rgb(230, 230, 230);
 }

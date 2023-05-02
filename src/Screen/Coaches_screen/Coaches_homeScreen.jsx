@@ -27,7 +27,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { BiInfoCircle } from "react-icons/bi";
 import { getCalendarData } from "../../utils/calendar";
 import showToast from "../../Component/CustomToast/CustomToast";
-
+import DefaultImg from "../../assets/Images/default.png"
 
 
 const CoachingCard2 = (props) => {
@@ -80,7 +80,7 @@ const CoachingCard2 = (props) => {
           >
             <div className="col-lg-3 col-md-2 col-sm-12 ">
               <img
-                src={coachInfo?.avtar ? image : dommy_person}
+                src={coachInfo?.avtar ? image : DefaultImg}
                 alt="#"
                 className="coachImg"
               />
@@ -163,7 +163,6 @@ const CoachingCard2 = (props) => {
   );
 };
 
-
 const Coaches_homeScreen = () => {
 
   const [showCalendar, setShowCalendar] = useState(false);
@@ -187,7 +186,7 @@ const Coaches_homeScreen = () => {
   const [selectedCoachingForUpdate, setSelectedCoachingForUpdate] = useState(
     []
   );
-
+  const navigate = useNavigate();
 
   // filter UseState here;
   const [filterByDomain, setFilterByDomain] = useState([]);
@@ -204,11 +203,14 @@ const Coaches_homeScreen = () => {
       "Content-Type": "application/json",
     };
 
+    setLoading(true)
+
     const url = endpoints.coaches.allCoachesList;
 
     axios
       .get(url, { headers: headers })
       .then((res) => {
+        setLoading(false)
         if (res.data.result) {
           const val = res.data.data;
           var coachPath = res.data?.avatar_image_path;
@@ -219,6 +221,7 @@ const Coaches_homeScreen = () => {
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "this is the error");
       });
   };
@@ -238,16 +241,19 @@ const Coaches_homeScreen = () => {
     };
 
     const url = endpoints.coaches.enrolledCoaching;
+    setLoading(true)
 
     axios
       .get(url, { headers: headers })
       .then((res) => {
+        setLoading(false)
         if (res.data.result) {
           var val = res.data.data;
           setAllEnrolledCoachings(val);
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "this is the error");
       });
   };
@@ -258,20 +264,21 @@ const Coaches_homeScreen = () => {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     };
+    setLoading(true)
 
     axios
       .get(url, { headers: headers })
       .then((res) => {
+        setLoading(false)
         if (res.data.result) {
           var val = res.data.data;
           setMyCoachings(val);
-          if (!showAllCoaching) {
             setCoachingListToBeShown(val);
             setCoachingListToBeShown2(val);
-          }
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "this is the error");
       });
   };
@@ -279,9 +286,9 @@ const Coaches_homeScreen = () => {
   useEffect(() => {
     getAllEnrolledCoachings();
     getCoachingList();
-    if (userType == 2) {
-      getMyCoachingsList();
-    }
+    // if (userType == 2) {
+    //   getMyCoachingsList();
+    // }
   }, []);
 
   const bookCoaches = (coachData) => {
@@ -328,14 +335,16 @@ const Coaches_homeScreen = () => {
 
   const handleShowAllCoachings = () => {
     setShowAllCoaching(true);
-    setCoachingListToBeShown(allCoachings);
-    setCoachingListToBeShown2(allCoachings);
+    // setCoachingListToBeShown(allCoachings);
+    // setCoachingListToBeShown2(allCoachings);
+    getCoachingList()
   };
 
   const handleShowMyCoachings = () => {
     setShowAllCoaching(false);
-    setCoachingListToBeShown(myCoachings);
-    setCoachingListToBeShown2(myCoachings);
+    // setCoachingListToBeShown(myCoachings);
+    // setCoachingListToBeShown2(myCoachings);
+    getMyCoachingsList()
   };
 
   const handleFilterCoachings = (val) => {
@@ -358,16 +367,7 @@ const Coaches_homeScreen = () => {
   // here we are filtering the coaching according to the domain and industry;
 
   useEffect(() => {
-    var filterCoachingByDomain = coachingListToBeShown.filter((itm, index) => {
-      var domain = itm.domain;
-      var domainTitle = domain && domain?.title?.toLowerCase();
-      return filterByDomain.includes(domainTitle);
-    });
 
-    setCoachingListToBeShown2(filterCoachingByDomain);
-  }, [filterByDomain, filterByDomain]);
-
-  useEffect(() => {
     var filterCoachingByIndustry = coachingListToBeShown.filter(
       (itm, index) => {
         var industry = itm.industry;
@@ -375,8 +375,32 @@ const Coaches_homeScreen = () => {
         return filterByIndustry.includes(industryTitle);
       }
     );
+
+    var filterCoachingByDomain = filterCoachingByIndustry.filter((itm, index) => {
+      var domain = itm.domain;
+      var domainTitle = domain && domain?.title?.toLowerCase();
+      return filterByDomain.includes(domainTitle);
+    });
+    setCoachingListToBeShown2(filterCoachingByDomain);
+  }, [filterByDomain]);
+
+  useEffect(() => {
+
+    var filterCoachingByDomain = coachingListToBeShown.filter((itm, index) => {
+      var domain = itm.domain;
+      var domainTitle = domain && domain?.title?.toLowerCase();
+      return filterByDomain.includes(domainTitle);
+    });
+
+    var filterCoachingByIndustry = filterCoachingByDomain.filter(
+      (itm, index) => {
+        var industry = itm.industry;
+        var industryTitle = industry && industry?.title?.toLowerCase();
+        return filterByIndustry.includes(industryTitle);
+      }
+    );
     setCoachingListToBeShown2(filterCoachingByIndustry);
-  }, [filterByIndustry, filterByDomain]);
+  }, [filterByIndustry]);
 
   // writing code for updating and deleting coachings;
 
@@ -385,15 +409,18 @@ const Coaches_homeScreen = () => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
+    setLoading(true)
     axios
       .get(url, { headers: headers })
       .then((res) => {
+        setLoading(false)
         if (res.data.result) {
           getMyCoachingsList();
           showToast("coaching deleted successfully",  "success" );
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "delete workshop error");
       });
   };
@@ -402,14 +429,16 @@ const Coaches_homeScreen = () => {
     setUpdateCoaching(true);
     setSelectedCoachingForUpdate(data);
     setShowCoachingsForm(true);
+    const path = generatePath("/coachingEdit/:coachingId" , {coachingId : data._id})
+    navigate(path)
   };
+
+  console.log(filterByDomain  , "filterBy domainer")
 
   return (
     <>
       <Homepage_header />
-
       <section className="coachScreen">
-       
         <div className="container-fluid">
           <div className="row d-flex justify-content-between">
             <div className="col-lg-2 d-lg-block d-none coachScreen_left">
@@ -446,8 +475,6 @@ const Coaches_homeScreen = () => {
                       <button
                         className="coachingBtn"
                         style={{
-                          // background: showAllCoaching ? "#2c6959" : "white",
-                          // color: showAllCoaching ? "white" : "#2c6959",
                           border : showAllCoaching ? "2px solid #2c6959" : "2px solid #d4d9d6"
                         }}
                         onClick={handleShowAllCoachings}
@@ -458,8 +485,6 @@ const Coaches_homeScreen = () => {
                       <button
                         className="coachingBtn"
                         style={{
-                          // background: !showAllCoaching ? "#2c6959" : "white",
-                          // color: !showAllCoaching ? "white" : "#2c6959",
                           border : !showAllCoaching ? "2px solid #2c6959" : "2px solid #d4d9d6"
                         }}
                         onClick={handleShowMyCoachings}
@@ -546,7 +571,7 @@ const Coaches_homeScreen = () => {
 
       
       
-      {/* {!loading && <Loader />} */}
+      {loading && <Loader />}
       <Footer />
     </>
   );

@@ -10,7 +10,9 @@ import { getCalendarData } from "../../utils/calendar";
 import { AiFillCloseCircle } from "react-icons/ai";
 import showToast from "../CustomToast/CustomToast";
 
+
 const CreateSlots = (props) => {
+
   const {
     selectedDays,
     setSelectedDays,
@@ -80,7 +82,6 @@ const CreateSlots = (props) => {
       } else if (endTime == "") {
         showToast("please select end time", "warning");
       } else {
-
         
         if (!selectedDays.includes(clickedDay)) {
           setSelectedDays((itm) => {

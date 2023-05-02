@@ -37,7 +37,7 @@ const EmailVerificationForm = () => {
         </div>
         <span>
           You have already account ? {" "}
-          <a href="/loginpage" className="logInanker">
+          <a href="/Login" className="logInanker">
             Login
           </a>
         </span>

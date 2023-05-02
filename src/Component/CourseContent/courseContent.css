@@ -5,6 +5,11 @@
     padding: 6px 8px;
     border: 1px solid rgb(203, 201, 201) !important;
     border-bottom-width: 0px;
+    position: relative;
+}
+
+.accordiancont button:hover  .wrkshopEditIcon {
+    display: flex ;
 }
 
 .accordianTitleCont{
@@ -64,4 +69,12 @@
     font-family: "Poppins-Regular";
     font-size: 14px;
     margin-right: 8px;
+}
+
+.previewCont h6{
+    font-size: 14px;
+    color: rgb(0, 0, 205);
+    text-decoration: underline;
+    font-family: "Poppins-Regular";
+    cursor: pointer;
 }

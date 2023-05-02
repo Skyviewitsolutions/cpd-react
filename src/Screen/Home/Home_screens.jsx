@@ -15,24 +15,31 @@ import { useEffect } from "react";
 import BASE_URL, { endpoints } from "../../Component/services/endpoints";
 import { useState } from "react";
 import axios from "axios";
+import Loader from "../../Component/Loader/Loader";
+
 
 const Home_screens = () => {
+
   const token = localStorage.getItem("token");
   const [allRecentFeeds, setAllRecentFeeds] = useState([]);
+  const [loading , setLoading] = useState(false)
 
   // writing code for getting all the recent feeds ;
 
   const getAllRecentFeeds = () => {
     const url = endpoints.master.allRecentFeeds;
+    setLoading(true)
     axios
       .get(url)
       .then((res) => {
+        setLoading(false)
         if (res.data.result) {
           const val = res.data.data;
           setAllRecentFeeds(val);
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err);
       });
   };
@@ -52,11 +59,11 @@ const Home_screens = () => {
             <div className="col-lg-5 col-md-12 col-12  home_cards">
               <div className="all_notification">
                 <h6> All notifications</h6>
-                <span>
+                {/* <span>
                   {" "}
                   <img src={filter_home} height="20px" width="20px" />
                   Filter
-                </span>
+                </span> */}
               </div>
               <div className="hmgCrdCont">
                 {allRecentFeeds.length != 0 &&
@@ -73,6 +80,7 @@ const Home_screens = () => {
           </div>
           <ToastContainer />
         </div>
+       {loading && <Loader />}
       </MainLayout>
     </>
   );

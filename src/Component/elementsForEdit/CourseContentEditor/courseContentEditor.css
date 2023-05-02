@@ -1,0 +1,133 @@
+.crseContent{
+    width: 90%;
+    margin: auto;
+    padding: 12px 14px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.accordianCont{
+    margin: auto;
+    width: 90%;
+    margin-bottom: 15px;
+}
+
+.accordianCont button{
+    width: 100%;
+    display: flex;
+    background: white;
+    padding: 6px 8px;
+    border: 1px solid rgb(203, 201, 201) !important;
+    border-bottom-width: 0px;
+}
+
+.crconteHead h4{
+    color: var(--black);
+    font-family: 'Poppins-SemiBold';
+    font-size: 16px;
+    margin-bottom: 0px;
+}
+
+
+.crconteHead{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    border-radius: 3px;
+    border: 1px solid rgb(174, 174, 174);
+    padding: 9px 14px;
+}
+
+.crseContBox label{
+    color: var(--gray);
+    font-size: 14px;
+}
+
+.crseContBox input::placeholder{
+    color: var(--lightgray) !important;
+    font-family: "Poppins-Regular" !important;
+}
+
+.crseContBox input::placeholder{
+    color: rgb(144, 143, 143) !important;
+    font-family: "Poppins-Regular";
+
+}
+
+.crseContBtn{
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    border-radius: 4px;
+    padding: 8px 12px;
+    width: 160px;
+    font-size: 13px;
+    font-family: 'Poppins-SemiBold';
+    background-color: white;
+}
+
+.crseContBtn:hover{
+    background-color: var(--primary);
+    color: white;
+}
+
+.crseConttable{
+    width: 90%;
+    margin: auto;
+    margin-bottom: 16px;
+}
+
+.crseContentBox{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    font-family: 'Poppins-SemiBold';
+    background-color: white;
+    border: 1px solid rgb(174, 174, 174);
+}
+
+.crseConteLeft{
+    display: flex;
+    align-items: center;
+    
+}
+
+.crseConteLeft h4{
+    color: var(--gray);
+    font-size: 15px;
+    margin-bottom: 0px;
+    text-transform: capitalize;
+    font-family: "Poppins-Regular";
+    font-weight: 500;
+}
+
+.crseConteLeft h6{
+    color: var(--lightgray);
+    font-size: 13px;
+    margin-bottom: 0px;
+    text-transform: capitalize;
+    margin-left: 9px;
+    font-family: "Poppins-Regular";
+}
+
+.progressCont{
+    width: 100%;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+.progressCont h2{
+    font-family: "Poppins-SemiBold";
+    color: var(--black);
+    font-size: 14px;
+    text-align:center;
+}
+
+.progressCont progress {
+    align-self: center;
+    margin: auto;
+    width: 80%;
+    height: 31px;
+    display: flex;
+}

@@ -159,7 +159,7 @@ const EventDetails = (props) => {
       <Homepage_header />
       <Networking_headers />
       <div className="p-4">
-        <Event_header eventDetails={location.state.eventDetails} />
+        <Event_header eventDetails={location?.state?.eventDetails} />
 
         <div className="row">
           <div className="col-lg-3 d-lg-block d-none  ps-5 pe-5 mb-5 d-lg-block d-none">

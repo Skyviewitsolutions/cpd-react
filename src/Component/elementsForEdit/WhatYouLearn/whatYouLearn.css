@@ -1,0 +1,64 @@
+.whlearn {
+  width: 100%;
+  background-color: white;
+  min-height: 400px;
+  border-radius: 4px;
+}
+
+.editorCont {
+  border: 2px solid rgb(74, 60, 60) !important;
+}
+
+.learnInput {
+  margin: 25px auto;
+  width: 90%;
+}
+
+.learnInput input {
+  flex: 1;
+  margin-right: 12px;
+  width: 100%;
+  border: 1px solid rgb(163, 163, 163);
+  border-radius: 3px;
+  font-family: "Poppins-Regular";
+  outline: none;
+  color: var(--gray);
+  padding: 10px 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.learnInput label {
+  display: block;
+  font-family: "Poppins-Regular";
+  color: var(--black);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.learnPpp h6 img {
+  width: 20px;
+  margin-right: 9px;
+}
+
+.learnPpp {
+  width: 90%;
+  margin: 25px auto;
+}
+
+.learnPpp h6 {
+  display: flex;
+  align-items: center;
+  font-family: "Poppins-Regular";
+  font-size: 14px;
+  color: var(--black);
+  width: 80%;
+}
+
+.learnPPP {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+}

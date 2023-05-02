@@ -9,6 +9,7 @@ import Button from "../button/Button/Button";
 import { MdDeleteOutline } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
+import DefaultImg from "../../assets/Images/default.png"
 
 const WorkshopCard = (props) => {
   
@@ -41,7 +42,7 @@ const WorkshopCard = (props) => {
       <div className="card" key={key}>
         <div className="workshopcard_media">
           <img
-            src={imageName && img}
+            src={imageName ? img : DefaultImg}
             alt=""
             onClick={() => showCoachDetails(workshop)}
           />

@@ -18,6 +18,8 @@ import CoachingCard from "../../Component/CoachingCard/CoachingCard";
 import { getCalendarData } from "../../utils/calendar";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
 import showToast from "../../Component/CustomToast/CustomToast";
+import Loader from "../../Component/Loader/Loader";
+import DefaultImg from "../../assets/Images/default.png";
 
 
 const CoachesDetails = () => {
@@ -50,9 +52,11 @@ const CoachesDetails = () => {
 
   const getCoachings = () => {
     const url = `${endpoints.coaches.coachingsByCoachId}${coachId}`;
+    setLoading(true)
     axios
       .get(url, { headers: headers })
       .then((res) => {
+        setLoading(false)
         if (res.data.result) {
           var data = res.data.data;
           var path = res.data.coaching_image_path;
@@ -61,6 +65,7 @@ const CoachesDetails = () => {
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "this is the error");
       });
   };
@@ -69,10 +74,11 @@ const CoachesDetails = () => {
 
   const getWorkshops = () => {
     const url = `${endpoints.workshop.WorkshopByCoachId}${coachId}`;
-    console.log(url, "url here");
+    setLoading(true)
     axios
       .get(url, { headers: headers })
       .then((res) => {
+        setLoading(false)
         if (res.data.result) {
           var data = res.data.data;
           var path = res.data.workshop_image_path;
@@ -81,16 +87,18 @@ const CoachesDetails = () => {
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "this is the error");
       });
   };
 
   const getCoachDetails = () => {
     const url = `${endpoints.authentication.getProfileByID}?user_id=${coachId}`;
+    setLoading(true)
     axios
       .get(url, { headers: headers })
       .then((res) => {
-        console.log(res , "response of coach details")
+        setLoading(false)
         if (res.data.result) {
           var data = res.data.data[0];
           var imagePath = res.data.avtarPath;
@@ -101,6 +109,7 @@ const CoachesDetails = () => {
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "this is the error of details");
       });
   };
@@ -244,7 +253,6 @@ const CoachesDetails = () => {
     setShowCustomCalendar(true);
   };
 
-  console.log(coachDetails ,"coachDetails here");
 
   // getting domain and industry of coach ;
 
@@ -268,7 +276,7 @@ const CoachesDetails = () => {
               src={
                 coachDetails?.avtar
                   ? `${coachImgPath}${coachDetails?.avtar}`
-                  : UserImg
+                  : DefaultImg
               }
               alt=""
             />

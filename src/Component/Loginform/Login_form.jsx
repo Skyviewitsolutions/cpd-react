@@ -63,7 +63,7 @@ const Login_form = (props) => {
             localStorage.setItem("token", token);
             localStorage.setItem("users", JSON.stringify(user_data));
             localStorage.setItem("logedIn", true);
-
+            console.log(res.data , "response here");
             showToast("Login successfully", "success" );
             setLoading(false);
             const isCvUploaded = res.data.user?.isCvAvailable;
@@ -77,6 +77,9 @@ const Login_form = (props) => {
                 navigate("/coaches-form");
               } else if (userType == 1) {
                 navigate("/resume");
+              }
+              else if(userType == 3){
+                navigate("/employer-form")
               }
             }
           } else if (res.data.result) {

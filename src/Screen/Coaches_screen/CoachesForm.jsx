@@ -33,7 +33,6 @@ import CompanyImg from "../../assets/Images/company.png";
 import { getDomainList, getIndustryList } from "../../utils/api";
 import showToast from "../../Component/CustomToast/CustomToast";
 
-
 const CoachesForm = () => {
 
   const [showCalendar, setShowCalendar] = useState(false);

@@ -28,7 +28,7 @@ import showToast from "../../Component/CustomToast/CustomToast";
 
 
 const Workshop = () => {
-  
+
   const navigate = useNavigate("");
   const [modalShow, setModalShow] = React.useState(false);
   const token = localStorage.getItem("token");
@@ -49,22 +49,23 @@ const Workshop = () => {
   const [selectedWorkshopForUpdate, setSelectedWorkshopForUpdate] = useState(
     {}
   );
-
+  const [loading, setLoading] = useState(false);
 
   var userDetails = localStorage.getItem("users");
   var userType = JSON.parse(userDetails);
   userType = userType?.user_type;
 
   const getAllWorkshop = () => {
-    
     const url = endpoints.workshop.allWorkshop;
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-
+    setLoading(true);
     axios
       .get(url, { headers: headers })
       .then((res) => {
+        console.log(res, "all response");
+        setLoading(false);
         if (res.data.result) {
           var val = res.data.data;
           var imgPath = res.data.workshop_image_path;
@@ -75,12 +76,13 @@ const Workshop = () => {
         }
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err, "this is the error h");
       });
   };
 
   const showWorkshopOnCalendar = async (data) => {
-    setEventsToBeShown([])
+    setEventsToBeShown([]);
     var slots = JSON.parse(data.availability_slot);
     const calendarData = await getCalendarData(slots);
     setEventsToBeShown(calendarData);
@@ -89,28 +91,29 @@ const Workshop = () => {
   // writing code for enrolling the workshop
 
   const enrollWorkshop = (workShopData) => {
-    const token = localStorage.getItem('token');
-    if(token){
-    var id = workShopData._id;
-    const url = `${endpoints.workshop.enrollWorkshop}${id}`;
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-
-    axios
-      .get(url, { headers: headers })
-      .then((res) => {
-        if (res.data.result) {
-          showToast("workshop enrolled successfully",  "success");
-          getAllEnrolledList();
-        }
-      })
-      .catch((err) => {
-        console.log(err, "error here");
-      });
-    }
-    else {
-      showToast("Please login" ,  "warning")
+    const token = localStorage.getItem("token");
+    if (token) {
+      var id = workShopData._id;
+      const url = `${endpoints.workshop.enrollWorkshop}${id}`;
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      setLoading(true);
+      axios
+        .get(url, { headers: headers })
+        .then((res) => {
+          setLoading(false);
+          if (res.data.result) {
+            showToast("workshop enrolled successfully", "success");
+            getAllEnrolledList();
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err, "error here");
+        });
+    } else {
+      showToast("Please login", "warning");
     }
   };
 
@@ -122,16 +125,18 @@ const Workshop = () => {
     };
 
     const url = endpoints.workshop.myEnrolledWorkshop;
-
+    setLoading(true);
     axios
       .get(url, { headers: headers })
       .then((res) => {
+        setLoading(false);
         if (res.data.result) {
           const val = res.data.data;
           setMyEnrolledWorkshop(val);
         }
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err, "error here");
       });
   };
@@ -142,29 +147,30 @@ const Workshop = () => {
     };
 
     const url = endpoints.workshop.myWorkshop;
-
+    setLoading(true);
     axios
       .get(url, { headers: headers })
       .then((res) => {
         if (res.data.result) {
+          console.log(res, "my list list here");
+          setLoading(false);
           const val = res.data.data;
           setMyWorkshopList(val);
-          if (!showAllWorkshop) {
-            setWorkshopToBeShown(val);
-            setWorkshopToBeShown2(val);
-          }
+          setWorkshopToBeShown(val);
+          setWorkshopToBeShown2(val);
+          setShowAllWorkshop(false);
         }
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err, "error here");
       });
   };
 
   useEffect(() => {
-    getAllEnrolledList();
-    getAllWorkshop();
-    if (userType == 2) {
-      getMyWorkshop();
+    if (showAllWorkshop === true) {
+      getAllEnrolledList();
+      getAllWorkshop();
     }
   }, []);
 
@@ -172,14 +178,16 @@ const Workshop = () => {
 
   const handleShowAllWorkshop = () => {
     setShowAllWorkshop(true);
-    setWorkshopToBeShown(allWorkShopList);
-    setWorkshopToBeShown2(allWorkShopList);
+    // setWorkshopToBeShown(allWorkShopList);
+    // setWorkshopToBeShown2(allWorkShopList);
+    getAllWorkshop();
   };
 
   const handleShowMyWorkshop = () => {
     setShowAllWorkshop(false);
-    setWorkshopToBeShown(myWorkshopList);
-    setWorkshopToBeShown2(myWorkshopList);
+    // setWorkshopToBeShown(myWorkshopList);
+    // setWorkshopToBeShown2(myWorkshopList);
+    getMyWorkshop();
   };
 
   const handleInputData = (val) => {
@@ -208,38 +216,53 @@ const Workshop = () => {
     navigate(path);
   };
 
-  const handleDetails = (dta) =>{
+  const handleDetails = (dta) => {
     const communityId = dta._id;
     const path = generatePath("/community-details/:communityId", {
       communityId: communityId,
     });
-    navigate(path , { communityDetails : JSON.stringify(dta)});
-  }
+    navigate(path, { communityDetails: JSON.stringify(dta) });
+  };
 
   // here we are filtering the coaching according to the domain and industry;
 
   useEffect(() => {
-    var filterWorkshopByDomain = workshopToBeShown.filter((itm, index) => {
-      var domain = itm.domain;
-      var domainTitle = domain && domain?.title.toLowerCase();
-      return filterByDomain.includes(domainTitle);
-    });
-    setWorkshopToBeShown2(filterWorkshopByDomain);
-  }, [filterByDomain, filterByIndustry]);
 
-  useEffect(() => {
     var filterWorkshopByIndustry = workshopToBeShown.filter((itm, index) => {
       var industry = itm.industry;
       var industryTitle = industry && industry?.title.toLowerCase();
       return filterByIndustry.includes(industryTitle);
     });
+
+    var filterWorkshopByDomain = filterWorkshopByIndustry.filter((itm, index) => {
+      var domain = itm.domain;
+      var domainTitle = domain && domain?.title.toLowerCase();
+      return filterByDomain.includes(domainTitle);
+    });
+    setWorkshopToBeShown2(filterWorkshopByDomain);
+  }, [filterByDomain ]);
+
+  useEffect(() => {
+
+    var filterWorkshopByDomain = workshopToBeShown.filter((itm, index) => {
+      var domain = itm.domain;
+      var domainTitle = domain && domain?.title.toLowerCase();
+      return filterByDomain.includes(domainTitle);
+    });
+
+    var filterWorkshopByIndustry = filterWorkshopByDomain.filter((itm, index) => {
+      var industry = itm.industry;
+      var industryTitle = industry && industry?.title.toLowerCase();
+      return filterByIndustry.includes(industryTitle);
+    });
     setWorkshopToBeShown2(filterWorkshopByIndustry);
-  }, [filterByIndustry, filterByDomain]);
+  }, [filterByIndustry]);
 
   const handleEdit = (data) => {
-    setUpdateWorkshop(true);
-    setSelectedWorkshopForUpdate(data);
-    setShowWorkshopForm(true);
+    const path = generatePath("/workshopEdit/:workshopId", {
+      workshopId: data._id,
+    });
+    navigate(path);
   };
 
   const deleteWorkshop = (id) => {
@@ -247,15 +270,18 @@ const Workshop = () => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
+    setLoading(true);
     axios
       .get(url, { headers: headers })
       .then((res) => {
+        setLoading(false);
         if (res.data.result) {
           getMyWorkshop();
-          showToast("workshop deleted successfully",  "success" );
+          showToast("workshop deleted successfully", "success");
         }
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err, "delete workshop error");
       });
   };
@@ -279,7 +305,9 @@ const Workshop = () => {
           </div>
           <div className="row workshop_searchBox col-12">
             <div className="col-8 col-md-12 col-lg-2">
-              <h5 className="workshopHdTitle">This Week's Top Enroll Workshop</h5>
+              <h5 className="workshopHdTitle">
+                This Week's Top Enroll Workshop
+              </h5>
             </div>
             <div className="col-12 col-md-12 col-lg-10">
               <div className="row">
@@ -306,7 +334,9 @@ const Workshop = () => {
                       <button
                         className="coachingBtn"
                         style={{
-                          border : showAllWorkshop ? "2px solid #2c6959" : "2px solid #d4d9d6"
+                          border: showAllWorkshop
+                            ? "2px solid #2c6959"
+                            : "2px solid #d4d9d6",
                         }}
                         onClick={handleShowAllWorkshop}
                       >
@@ -316,7 +346,9 @@ const Workshop = () => {
                       <button
                         className="coachingBtn"
                         style={{
-                          border : !showAllWorkshop ? "2px solid #2c6959" : "2px solid #d4d9d6"
+                          border: !showAllWorkshop
+                            ? "2px solid #2c6959"
+                            : "2px solid #d4d9d6",
                         }}
                         onClick={handleShowMyWorkshop}
                       >
@@ -337,7 +369,10 @@ const Workshop = () => {
         </section>
         <section className="Workshop_section2">
           <div className="row">
-            <div className="col-lg-2 col-md-12 col-12 mb-4 " style={{marginTop : '-12px'}}>
+            <div
+              className="col-lg-2 col-md-12 col-12 mb-4 "
+              style={{ marginTop: "-12px" }}
+            >
               <CustomFilter
                 filterByDomain={filterByDomain}
                 setFilterByDomain={setFilterByDomain}
@@ -365,6 +400,7 @@ const Workshop = () => {
                       var status = datas.status;
                       enrollStatus = status;
                     }
+                    console.log(index , 'index')
                     return (
                       <>
                         <div className="col-lg-4 col-md-12 col-12 workshop-card px-4">
@@ -416,7 +452,8 @@ const Workshop = () => {
         </section>
       </div>
       <Footer />
-      </div>
+      {loading && <Loader />}
+    </div>
   );
 };
 

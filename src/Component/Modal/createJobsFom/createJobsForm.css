@@ -1,0 +1,28 @@
+.imgUploader {
+    height : 50px !important;
+}
+
+.skillssss .rti--container {
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px !important;
+    padding: 12px !important;
+    margin-top: 3px !important;
+    box-shadow: none !important;
+}
+
+.jobportalfomt{
+    font-family: "Poppins-Regular";
+}
+
+.jobportalfomt label {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.jobportalfomt input {
+    font-size: 15px;
+}
+
+.coachCont2 {
+    margin-bottom: 8px;
+    width: 100%;
+}

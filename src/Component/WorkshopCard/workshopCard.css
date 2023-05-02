@@ -12,6 +12,9 @@
     font-size: 14px;
 }
 
+.workshop-card .card {
+    overflow: hidden;
+}
 .workshopEditBtn:hover{
     background: #4b8d7b;
 }

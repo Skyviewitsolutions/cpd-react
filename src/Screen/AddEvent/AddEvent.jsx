@@ -15,6 +15,7 @@ import showToast from "../../Component/CustomToast/CustomToast";
 
 
 const AddEvent = () => {
+  
 
   const [sessionTitle, setSessionTitle] = useState("");
   const [sessionDesc, setSessionDes] = useState("");
@@ -366,11 +367,8 @@ const AddEvent = () => {
       setCommunityName(selectedCommunity?.display_name);
     }
 
-    
-
     var slots = JSON.parse(selectedEvents?.timeslots);
 
-    console.log(slots)
     setSelectedDays(slots?.selectedDays);
     setSelectedDates(slots?.selectedDates);
     setDaysSlot(slots?.daysSlot);
@@ -705,7 +703,6 @@ const AddEvent = () => {
                 })}
               </select>
             </div>
-
             <Button title={update ? "Update & Preview" : "Submit & Preview"} loading={loading} onClick={update ? UpdateEvent : submit}/>
           </div>
         </div>

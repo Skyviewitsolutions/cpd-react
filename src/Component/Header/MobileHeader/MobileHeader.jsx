@@ -30,6 +30,7 @@ import learning from "../../../assets/Icons/Artboard7.svg";
 import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 import { HiOutlineLogout } from "react-icons/hi";
 
+
 const MobileHeader = (props) => {
 
   const { userDetails, handleNavbar, activeNavbar } = props;
@@ -72,7 +73,7 @@ const MobileHeader = (props) => {
                 <Offcanvas.Header closeButton className="navHead">
                   <div className="userDetls">
                     <img src={pimg} alt="" className="home" />
-                    <h6>{userDetails.name}</h6>
+                    <h6>{userDetails?.name}</h6>
                   </div>
                 </Offcanvas.Header>
                 <Offcanvas.Body>

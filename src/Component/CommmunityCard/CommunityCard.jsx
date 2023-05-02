@@ -11,6 +11,7 @@ import { FaUser } from "react-icons/fa";
 import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import { generatePath } from "react-router-dom";
+import DefaultImg from "../../assets/Images/default.png"
 
 
 const CommunityCard = (props) => {
@@ -60,7 +61,7 @@ const CommunityCard = (props) => {
       <div className="domainCard_outline">
         <div className="Card ">
           <div className="domainCard_media">
-            <img src={data?.image ? image : event_cardimg} alt="" />
+            <img src={data?.image ? image : DefaultImg} alt="" />
             <div className="domainCard_title">
               <h6
               >

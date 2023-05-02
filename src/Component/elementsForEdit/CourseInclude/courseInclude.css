@@ -1,0 +1,36 @@
+.learnInput .selectBox{
+    margin-right: 12px;
+    width: 100%;
+    border-radius: 3px;
+    font-family: "Poppins-Regular";
+    outline: none;
+    color: var(--gray);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.crseIncludescont{
+    width: 90%;
+    margin: auto;
+    border: 1px solid rgb(163, 163, 163);
+    border-radius: 3px;
+    margin-bottom: 20px;
+
+    padding: 8px 17px;
+   
+}
+
+.crseIncludescont .crsIncldBx{
+    margin-bottom: 0px !important;
+}
+
+.crseError{
+    color: red;
+    margin-top: 7px;
+    font-family: "Poppins-Regular";
+    font-size: 14px;
+}
+.learnInput input {
+    margin-bottom: 4px;
+}

@@ -1,0 +1,22 @@
+.reiview_product{
+    font-family: "Poppins-Regular";
+    background-color: white;
+    padding: 15px 18px;
+    margin-top: 17px;
+}
+
+.reiview_product h5{
+    font-size: 16px;
+    color: var(--black);
+    font-weight: 600;
+}
+
+.reiview_product h6 ,  .reiview_product label{
+    font-size: 15px;
+    color: var(--gray);
+    margin-top: 8px;
+}
+
+.reiview_product textarea{
+    font-size: 14px;
+}

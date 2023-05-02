@@ -10,19 +10,24 @@ import profileimg from "../../assets/Images/profileimg.png";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import showToast from "../CustomToast/CustomToast";
 
+
 const CoachNotification = (props) => {
+
   const {
     showNotification,
     setShowNotification,
     notificationCount,
     setNotificationCount,
   } = props;
+
+
   const [allNotifiedCoachings, setAllNotifiedCoachings] = useState([]);
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(false);
   const [allNotifiedWorkshops, setAllNotifiedWorkshops] = useState([]);
   const [coachingUserImgPath, setCoachingUserImgPath] = useState("");
   const [workshopUserImgPath, setWorkshopUserImgPath] = useState("");
+  
 
   const getAllNotifiedCoachings = () => {
     const headers = {
@@ -152,6 +157,7 @@ const CoachNotification = (props) => {
   };
 
   const confirmWorkshopRequest = (dta) => {
+    
     const id = dta._id;
     const url = `${endpoints.workshop.confirmWorkshop}${id}&respond_code=2`;
 
@@ -176,9 +182,21 @@ const CoachNotification = (props) => {
       });
   };
 
+  const activeBx = {
+    background : "var(--primary)" ,
+    color : "white"  ,
+    borderColor : "var(--primary)"
+  }
+
+  const inActiveBx = {
+    background : "white" ,
+    color : "var(--black)"  ,
+    borderColor : "var(--lightgray)"
+  }
+
   return (
-    <Modal show={showNotification} size="lg" className="coachNotificationCont">
-      <div>
+    <Modal show={false} size="lg" >
+      <div className="coachNotificationCont">
         <div className="row">
           <div className="col-lg-12 col-md-12 col-12 ">
             <div className="notificationHeader">
@@ -199,6 +217,12 @@ const CoachNotification = (props) => {
           </div>
         </div>
         <div className="notificationOuter">
+
+    <div className="notificationToggle">
+      <h6>All Notification</h6>
+      <h6>My Notification</h6>
+    </div>
+
           <div className="row" style={{ minHeight: "150px" }}>
             <div className="col-lg-12 col-md-12 col-12">
               <h6 className="px-3 py-2 bg-secondary text-light text-center notifyHeading">

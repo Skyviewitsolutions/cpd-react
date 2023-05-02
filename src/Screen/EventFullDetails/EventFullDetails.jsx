@@ -15,18 +15,105 @@ import workshopImg1 from "../../assets/Images/workshopimg1.png";
 import workshopImg2 from "../../assets/Images/workshopimg2.jpeg";
 import { RiShareFill } from "react-icons/ri";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams , generatePath } from "react-router-dom";
 import axios from "axios";
-import { endpoints } from "../../Component/services/endpoints";
+import { endpoints, imgPath } from "../../Component/services/endpoints";
+import Loader from "../../Component/Loader/Loader";
+import UserCard from "../../Component/UserCard/UserCard";
+import ReviewCard from "../../Component/ReviewCard/ReviewCard";
+import parse from "html-react-parser";
+import UsersReview from "../../Component/UsersReview/UsersReview";
 
 
 
 const EventFullDetails = () => {
+
+  const iconsMap = [
+    {
+      icon: <AiOutlineYoutube size={20} color="black" />,
+      text: "Youtube",
+      value: 1,
+    },
+    {
+      icon: <BiFileBlank size={20} color="black" />,
+      text: "File",
+      value: 2,
+    },
+    {
+      icon: <RiFolderDownloadLine size={20} color="black" />,
+      text: "Folder",
+      value: 3,
+    },
+    {
+      icon: <MdOutlineLink size={20} color="black" />,
+      text: "Link",
+      value: 4,
+    },
+    {
+      icon: <BiMobile size={20} color="black" />,
+      text: "Mobile",
+      value: 5,
+    },
+    {
+      icon: <AiOutlineTrophy size={20} color="black" />,
+      text: "Trophy",
+      value: 6,
+    },
+  ];
+
   const { eventId } = useParams();
   const token = localStorage.getItem("token");
-  const [imgPath, setImgPath] = useState([]);
+  const [eventImgPath, setEventImgPath] = useState("");
   const [eventDetails, setEventDetails] = useState({});
   const navigate = useNavigate();
+  const [loading , setLoading] = useState(false);
+  const [eventImg, setEventImg] = useState([]);
+  const [eventImgFiles, setEventImgFiles] = useState("");
+  const [courseIncludeIcon, setCourseIncludeIcon] = useState([]);
+  const [courseIncludeContent, setCourseIncludeContent] = useState([]);
+  const [creatorId, setCreatorId] = useState("");
+  const [creatorImgPath, setCreatorImgPath] = useState("");
+  const [creatorInfo, setCreatorInfo] = useState({});
+  const [sessionTags, setSessionTags] = useState([]);
+  const [allCommunity, setAllCommunity] = useState([]);
+  const [eventVideoImg, setEventVideoImg] = useState("");
+  const [eventDocs, setEventDocs] = useState(null);
+  const [eventList, setEventList] = useState([]);
+  const [communityId, setCommunityId] = useState("");
+  const [imgPath , setImgPath] = useState("")
+  const [communityName, setCommunityName] = useState("");
+
+  // reviews section state;
+  const [rating , setRating] = useState(0)
+  const [reviewNotes , setReviewNotes] = useState("")
+
+  // create variables for holding value ;
+  const [title, setTitle] = useState("");
+  const [maxMembers, setMaxMembers] = useState("");
+  const [duration, setDuration] = useState("");
+  const [paid, setPaid] = useState(false);
+  const [price, setPrice] = useState(0);
+  const [shortDescriptions, setShortDescriptions] = useState("");
+
+  const [joinedMembers, setJoinedMembers] = useState("");
+  const [sessionType2, setSessionType2] = useState("");
+  const [sessionType, setSessionType] = useState("");
+
+
+    // creating useState for slotsCreations ;
+
+    const [selectedDays, setSelectedDays] = useState([]);
+    const [daysFormat, setDaysFormat] = useState("weekly");
+    const [isRepeated, setIsRepeated] = useState(false);
+    const [dateSlot, setDateSlot] = useState([]);
+    const [daysSlot, setDaysSlot] = useState([]);
+    const [selectedDates, setSelectedDates] = useState([]);
+    const [editName, setEditName] = useState("");
+    const [londDescriptionContent, setLongDescriptionContent] = useState("");
+    const [whatYouLearnPoints, setWhatYouLearnPoints] = useState([]);
+
+  
+  const submitReview = () =>{}
 
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -34,27 +121,122 @@ const EventFullDetails = () => {
 
   const getEventDetails = () => {
     const url = `${endpoints.events.eventDetails}${eventId}`;
+    setLoading(true)
     axios
       .get(url, { headers: headers })
       .then((res) => {
+        setLoading(false)
         if (res.data.result) {
-          console.log(res, "response");
           const val = res.data.data;
           setEventDetails(val);
+          setTitle(val?.event_title);
+          setMaxMembers(val?.max_members);
+          setJoinedMembers(val?.members_count);
+          setCreatorId(val?.created_by);
           var path = res.data?.image_path;
           setImgPath(path);
+          var description = val?.event_description;
+          setShortDescriptions(description);
+          setSessionType(val?.session_type);
+          setSessionTags(val?.tags);
+          var imageUrl = path + "/" + val.event_photo;
+          setEventImg(imageUrl);
+          var slots = val?.availability_slot;
+          setDuration(val?.event_duration)
+          if (slots) {
+            slots = JSON.parse(slots);
+            setSelectedDays(slots?.selectedDays || []);
+            setSelectedDates(slots?.selectedDates || []);
+            setDaysSlot(slots?.daysSlot);
+            setDateSlot(slots?.dateSlot);
+            setDuration(slots?.duration);
+            setDaysFormat(slots?.daysFormat);
+          }
+
+          setCommunityId(val?.community_id);
+          var communityNam = allCommunity.find(
+            (item) => item._id === val?.community_id
+          );
+          setCommunityName(communityNam?.display_name);
+          if(val?.long_description){
+            setLongDescriptionContent(val?.long_description);
+          }
+         
+          var courseDta = val?.course_includes;
+          if (val?.course_includes?.content?.length > 1) {
+            courseDta = courseDta?.content.map((itm, index) => {
+              var vll = {
+                content: itm,
+                icon: courseDta?.type?.[index],
+              };
+              return vll;
+            });
+            setCourseIncludeContent(courseDta);
+          } else {
+            setCourseIncludeContent([]);
+          }
+
+          if (val?.learn_topic?.length > 1) {
+            setWhatYouLearnPoints(val?.learn_topic);
+          } else {
+            setWhatYouLearnPoints([]);
+          }
+        
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "error here");
       });
   };
 
+  const getEventList = () => {
+    const url = endpoints.events.eventsByCreatorId + creatorId;
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if (res.data.result) {
+          setEventList(res.data.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err, "this is the error");
+      });
+  };
+
+  const getCreatorDetails = () => {
+    const url =
+      endpoints.authentication.getProfileByID + "?user_id=" + creatorId;
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if (res.data.result) {
+          setCreatorImgPath(res.data.avtarPath);
+          var val = res?.data?.data?.[0];
+          setCreatorInfo(val);
+        }
+      })
+      .catch((err) => {
+        console.log(err, "err");
+      });
+  };
+ 
   useEffect(() => {
     getEventDetails();
-  }, []);
+  }, [eventId]);
+
+  useEffect(() =>{
+    getEventList();
+    getCreatorDetails();
+  },[creatorId])
 
   const eventImage = imgPath + eventDetails?.event_photo;
+
+  const handleEventsClick  = (dta) =>{
+    const id = dta?._id;
+    const path = generatePath("/event-full-details/:eventId" , {eventId : id});
+    navigate(path);
+  }
 
   return (
     <MainLayout>
@@ -62,7 +244,7 @@ const EventFullDetails = () => {
         <div className="dltsline"></div>
         <div className="dltsMain">
           {eventDetails?.event_photo ? (
-            <img src={imgPath + "/" + eventDetails.event_photo} />
+            <img src={eventImage} />
           ) : (
             <img src={BackGroundImg} alt="" />
           )}
@@ -82,25 +264,21 @@ const EventFullDetails = () => {
           <div className="row " style={{ width: "100%" }}>
             <div className="dltsSecondLeft col-lg-7 col-md-12 col-12">
               <div className="harbar">
-                <h5 onClick={() => navigate("/")}>Home</h5> <span>></span>
-                <h5 onClick={() => navigate(-1)}>Events</h5> <span>></span>
+                <h5 onClick={() => navigate("/")}>Home</h5> <span>{'>'}</span>
+                <h5 onClick={() => navigate(-1)}>Events</h5> <span>{'>'}</span>
                 <h5>Details</h5>
               </div>
               <div className="whatlearn">
                 <h4>What You'll Learn</h4>
                 <div className="whatLearnP">
-                  <h6>
-                    <img src={Star} alt="" />
-                    Create you own php program
-                  </h6>
-                  <h6>
-                    <img src={Star} alt="" />
-                    Create you own php program
-                  </h6>
-                  <h6>
-                    <img src={Star} alt="" />
-                    Create you own php program
-                  </h6>
+                {whatYouLearnPoints.map((points, index) => {
+                    return (
+                      <h6 key={index}>
+                        <img src={Star} alt="" />
+                        {points}
+                      </h6>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -114,97 +292,48 @@ const EventFullDetails = () => {
                   <h6>Expand All Sections</h6>
                 </div>
                 <div className="accordiancont">
-                  <CourseContent />
+                  <CourseContent data={eventDetails?.courseContent}/>
                 </div>
 
                 {/* here we are creating descriptions sections */}
                 <div className="wrkshopDescriptions">
-                  <h5>Descriptions</h5>
-                  <p>
-                    The term PHP is an acronym for PHP: Hypertext Preprocessor.
-                    PHP is a server-side scripting language designed
-                    specifically for web development. It is open-source which
-                    means it is free to download and use. It is very simple to
-                    learn and use. The files have the extension “.php”. Rasmus
-                    Lerdorf inspired the first version of PHP and participated
-                    in the later versions. It is an interpreted language and it
-                    does not require a compiler.{" "}
-                  </p>
-                  <ul>
-                    <li>During this exclusive webinar , you will learn:</li>
-                    <li>
-                      Techniques of crafting memorable speeches that really
-                      engage your audience .
-                    </li>
-                    <li>
-                      Proven methods for developing confidence when talking
-                      infornt of large groups
-                    </li>
-                    <li>Tips for overcoming fear of public speaking </li>
-                    <li>
-                      Strategies for giving presentations that inspires others.
-                    </li>
-                    <li>
-                      How to craft stories and use anecdotes effectively in
-                      order to make your message more compilling and much more!
-                    </li>
-                  </ul>
+                <h5>Descriptions</h5>
+                {londDescriptionContent != "" &&
+                    parse(londDescriptionContent)}
                 </div>
 
                 <div className="relatedCourse">
                   <h4 className="corsTitle">Related Events</h4>
-                  <div className="courseBox">
-                    <div className="d-flex">
-                      <img src={workshopImg1} alt="" />
-                      <div>
-                        <h5>
-                          The complete Python bootcamp for beginners to learn
-                          everything about python.
-                        </h5>
-                        <h6>
-                          23 hours total <li>Updated 23/04/2022</li>
-                        </h6>
-                      </div>
-                    </div>
-                    <div className="pricePart">
-                      <h6>Price : 243 HKD</h6>
-                    </div>
-                  </div>
-                  <div className="courseBox">
-                    <div className="d-flex">
-                      <img src={workshopImg1} alt="" />
-                      <div>
-                        <h5>
-                          The complete Python bootcamp for beginners to learn
-                          everything about python.
-                        </h5>
-                        <h6>
-                          23 hours total <li>Updated 23/04/2022</li>
-                        </h6>
-                      </div>
-                    </div>
-                    <div className="pricePart">
-                      <h6>Price : 243 HKD</h6>
-                    </div>
-                  </div>
-                  <div className="courseBox">
-                    <div className="d-flex">
-                      <img src={workshopImg1} alt="" />
-                      <div>
-                        <h5>
-                          The complete Python bootcamp for beginners to learn
-                          everything about python.
-                        </h5>
-                        <h6>
-                          23 hours total <li>Updated 23/04/2022</li>
-                        </h6>
-                      </div>
-                    </div>
-                    <div className="pricePart">
-                      <h6>Price : 243 HKD</h6>
-                    </div>
-                  </div>
+                  {eventList.length != 0 &&
+                    eventList.map((event, index) => {
+                      const img = imgPath + event?.event_photo;
+                      return (
+                        <div className="courseBox" key={index} onClick={() => handleEventsClick(event)}>
+                          <div className="d-flex">
+                            <img src={img} alt="" />
+                            <div>
+                              <h5>{event?.event_title}</h5>
+                              <h6>
+                                23 hours total{" "}
+                                <li>Members : ({event?.members_count})</li>
+                              </h6>
+                            </div>
+                          </div>
+                          <div className="pricePart">
+                            {event?.is_paid == 1 ? (
+                              <h6>Price : {event.price} HKD</h6>
+                            ) : (
+                              <h6>Free</h6>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
                 </div>
+
+                  {/* users review section */}
+                  <UsersReview id={eventId}/>
+                
               </div>
             </div>
             <div className="dltsSecondRght col-lg-5 col-md-12 col-12">
@@ -212,7 +341,7 @@ const EventFullDetails = () => {
                 <div className="vdoDtlsVdo">
                  
                   {eventDetails?.event_photo ? (
-                    <img src={imgPath + "/" + eventDetails.event_photo} />
+                    <img src={eventImage} />
                   ) : (
                     <img src={DummyBanner} alt="" />
                   )}
@@ -229,32 +358,19 @@ const EventFullDetails = () => {
 
               <div className="crsIncld">
                 <h6>This Course Includes : </h6>
+               
                 <div className="crsIncldBx">
-                  <AiOutlineYoutube size={18} color="black" />
-                  <h6>14 hours on-demand video</h6>
-                </div>
-                <div className="crsIncldBx">
-                  <BiFileBlank size={18} color="black" />
-                  <h6>1 Article</h6>
-                </div>
-                <div className="crsIncldBx">
-                  <RiFolderDownloadLine size={18} color="black" />
-                  <h6>3 downloadable resources</h6>
-                </div>
-                <div className="crsIncldBx">
-                  <MdOutlineLink size={18} color="black" />
-                  <h6>FullTime access</h6>
-                </div>
-                <div className="crsIncldBx">
-                  <BiMobile size={18} color="black" />
-                  <h6>Access to mobile and TV</h6>
-                </div>
-                <div className="crsIncldBx">
-                  <AiOutlineTrophy size={18} color="black" />
-                  <h6>Certificate of completion</h6>
-                </div>
-                <div className="crsIncldBx">
-                  {/* <h5>Share</h5> */}
+                  {courseIncludeContent.map((item, index) => {
+                  const icn = iconsMap.find(
+                    (itm, ind) => itm.text === item.icon
+                  );
+                  return (
+                    <div className="crsIncldBx" key={index}>
+                      {icn.icon}
+                      <h6>{item.content}</h6>
+                    </div>
+                  );
+                })}
                   <button className="addtoCrt">
                     {" "}
                     <RiShareFill
@@ -267,21 +383,17 @@ const EventFullDetails = () => {
                 </div>
               </div>
 
-              {/* coach profile */}
-              <div className="coachPrfle">
-                <img src={User} alt="" />
-                <h5>Rovert William</h5>
-                <h6>Technical & IOT</h6>
-                <p>
-                  Robert William is a professional speaker and a php developer
-                  and has a 15 years of experience in this technology . I have
-                  worked on serveral company domestic and internals and also
-                  doing working currenly.
-                </p>
-              </div>
+              <UserCard
+                coachInfo={creatorInfo}
+                imgName={creatorInfo?.avtar}
+                imgPath={creatorImgPath + creatorInfo?.avtar}
+              />
+
+              <ReviewCard entityType={1} id={eventId}/>
             </div>
           </div>
         </div>
+        {loading && <Loader />}
       </div>
     </MainLayout>
   );

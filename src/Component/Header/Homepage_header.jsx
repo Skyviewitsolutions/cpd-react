@@ -32,7 +32,8 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 import Header2 from "./Header2";
-import { FiUser } from "react-icons/fi";
+import { IoMdLogOut } from "react-icons/io";
+import { FaUser } from "react-icons/fa";
 import showToast from "../CustomToast/CustomToast";
 
 // here we are importing the white icons;
@@ -44,9 +45,7 @@ import jobsW from "../../assets/Icons/jobsWhite.png";
 import fareW from "../../assets/Icons/fareWhite.png";
 import MobileHeader from "./MobileHeader/MobileHeader";
 
-
 const Homepage_header = () => {
-
   const navigate = useNavigate("");
   const [isHovering, setIsHovering] = useState(false);
   const token = localStorage.getItem("token");
@@ -62,12 +61,11 @@ const Homepage_header = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("users");
     localStorage.setItem("loginedIn", false);
-    localStorage.removeItem("activeNavbar")
+    localStorage.removeItem("activeNavbar");
     showToast("Logout Successfully", "success");
     navigate("/");
     // window.location.reload();
   };
-
 
   const options = {
     margin: 20,
@@ -95,6 +93,7 @@ const Homepage_header = () => {
   };
 
   const handleNavbar = (selected) => {
+
     if (selected === "coaches") {
       localStorage.setItem("activeNavbar", selected);
       setActiveNavbar(selected);
@@ -110,6 +109,7 @@ const Homepage_header = () => {
     } else if (selected === "job") {
       localStorage.setItem("activeNavbar", selected);
       setActiveNavbar(selected);
+      navigate("/job-board");
     } else if (selected === "carrier") {
       localStorage.setItem("activeNavbar", selected);
       setActiveNavbar(selected);
@@ -121,8 +121,10 @@ const Homepage_header = () => {
       navigate("/resume");
     } else if (userDetails.user_type == 2) {
       navigate("/coaches-form");
+    } else if (userDetails.user_type == 3) {
+      navigate("/employer-form");
     }
-    localStorage.removeItem("activeNavbar")
+    localStorage.removeItem("activeNavbar");
   };
 
   // here we are writing code for the selection of the navbar ;
@@ -134,10 +136,14 @@ const Homepage_header = () => {
 
   // here we are handling the navigation;
 
-  const handleNavigation = (path) =>{
-    navigate(path)
-    localStorage.removeItem("activeNavbar")
-  }
+  const handleNavigation = (path) => {
+    navigate(path);
+    localStorage.removeItem("activeNavbar");
+  };
+
+  const pathName = window.location.pathname;
+
+  
 
   return (
     <>
@@ -163,7 +169,7 @@ const Homepage_header = () => {
                   <img src={home} alt="" className="nav-icons" />
                   <h6>Home</h6>
                 </Nav.Link>
-                <Nav.Link
+                {/* <Nav.Link
                   className="nav_img working"
                   onClick={() => handleResume()}
                 >
@@ -199,13 +205,13 @@ const Homepage_header = () => {
                 <Nav.Link className="nav_img working">
                   <img src={my_jobs} alt="" className="nav-icons" />
                   <h6>My Jobs</h6>
-                </Nav.Link>
+                </Nav.Link> */}
 
                 <Nav.Link className="nav_img working">
                   <img src={message} alt="" className="nav-icons" />
                   <h6>Notification</h6>
                 </Nav.Link>
-               
+
                 <Nav.Link className="nav_img working">
                   <img src={learning} alt="" className="nav-icons" />
                   <h6>My Calendar</h6>
@@ -223,17 +229,58 @@ const Homepage_header = () => {
                         <div className=" userName">
                           <span>{userDetails?.name}</span>
                         </div>
-                        <div className="logoutBtn">
-                          <span style={{ fontWeight: "bold" }}>
-                            <FiUser />
+                        <div
+                          className="logoutBtn working"
+                          onClick={() => handleResume()}
+                        >
+                          <BsFillFileEarmarkPostFill
+                            className="nav-icons"
+                            size={18}
+                            color="#2c6959"
+                          />
+                          <span style={{ marginLeft: "10px" }}>My Resume</span>
+                        </div>
+                        <div
+                          className="logoutBtn"
+                          onClick={() => handleNavigation("/myCommunity")}
+                        >
+                          <img
+                            src={my_Community}
+                            alt=""
+                            className="nav-icons"
+                          />
+                          <span style={{ marginLeft: "10px" }}>
+                            My Community
                           </span>
-                          <span style={{ marginLeft: "10px" }}>Profile</span>
+                        </div>
+                        <div
+                          className="logoutBtn"
+                          onClick={() => handleNavigation("/myCourses")}
+                        >
+                          <img src={my_course} alt="" className="nav-icons" />
+
+                          <span style={{ marginLeft: "10px" }}>My Course</span>
+                        </div>
+                        <div
+                          className="logoutBtn"
+                          onClick={() => handleNavigation("/myEvents")}
+                        >
+                          <img src={my_events} alt="" className="nav-icons" />
+
+                          <span style={{ marginLeft: "10px" }}>My Events</span>
+                        </div>
+                        <div className="logoutBtn">
+                          <img src={my_jobs} alt="" className="nav-icons" />
+
+                          <span style={{ marginLeft: "10px" }}>My Jobs</span>
+                        </div>
+                        <div className="logoutBtn" onClick={handleResume}>
+                          <FaUser color="#2c6959" size={18} />
+                          <span style={{ marginLeft: "12px" }}>My Profile</span>
                         </div>
                         <div className="logoutBtn" onClick={logOut}>
-                          <span style={{ fontWeight: "bold" }}>
-                            <HiOutlineLogout />
-                          </span>
-                          <span style={{ marginLeft: "10px" }}>Logout</span>
+                          <IoMdLogOut size={18} color="#2c6959" />
+                          <span style={{ marginLeft: "12px" }}>Logout</span>
                         </div>
                       </div>
                     )}
@@ -251,7 +298,7 @@ const Homepage_header = () => {
 
       <div className="row secondNave">
         <div className="col-10 d-flex justify-between align-center">
-          {activeNavbar === "coaches" ? (
+          {pathName === "/coachings" ? (
             <div
               className="headerBox activeHeader"
               onClick={() => handleNavbar("coaches")}
@@ -270,7 +317,7 @@ const Homepage_header = () => {
             </div>
           )}
 
-          {activeNavbar === "workShop" ? (
+          {pathName === "/workshops" ? (
             <div className="headerBox" onClick={() => handleNavbar("workShop")}>
               <div className="activeHeaderBox">
                 <img
@@ -296,7 +343,7 @@ const Homepage_header = () => {
             </div>
           )}
 
-          {activeNavbar === "events" ? (
+          {pathName === "/networking" ? (
             <div className="headerBox" onClick={() => handleNavbar("events")}>
               <div className="activeHeaderBox">
                 <img
@@ -321,13 +368,21 @@ const Homepage_header = () => {
               <h5>Events</h5>
             </div>
           )}
-
-          <div className="headerBox">
-            <img src={job} alt="" className="coaches" />
-            <h6>Job</h6>
-            <h5>Board</h5>{" "}
-          </div>
-
+          {pathName === "/job-board" ? (
+            <div className="headerBox" onClick={() => handleNavbar("job")}>
+              <div className="activeHeaderBox">
+                <img src={jobsW} alt="" className="coaches" />
+                <h6>Job</h6>
+                <h5>Board</h5>{" "}
+              </div>
+            </div>
+          ) : (
+            <div className="headerBox" onClick={() => handleNavbar("job")}>
+              <img src={job} alt="" className="coaches" />
+              <h6>Job</h6>
+              <h5>Board</h5>{" "}
+            </div>
+          )}
           <div className="headerBox">
             <img
               src={fare}
@@ -348,9 +403,12 @@ const Homepage_header = () => {
         </div>
       </div>
 
-      <MobileHeader userDetails={userDetails} handleNavbar={handleNavbar} activeNavbar={activeNavbar} setActiveNavbar={activeNavbar}/>
-      
-     
+      <MobileHeader
+        userDetails={userDetails}
+        handleNavbar={handleNavbar}
+        activeNavbar={activeNavbar}
+        setActiveNavbar={activeNavbar}
+      />
     </>
   );
 };

@@ -20,10 +20,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CoachNotification from "../CoachNotification/CoachNotification";
-
+import {CgCommunity} from "react-icons/cg"
 
 const User_profile = () => {
-
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [usersData, setUsersData] = useState({});
@@ -37,6 +36,19 @@ const User_profile = () => {
   const [industry, setIndustry] = useState("");
   const [domain, setDomain] = useState("");
   const [allSkills, setAllSkills] = useState([]);
+
+  // handling some of the variables here ;
+
+  const [statusData, setStatusData] = useState({
+    joinedCommunity: 0,
+    joinedEvents: 0,
+    joinedWorkshop: 0,
+    joinedCoachings: 0,
+    createdCommunity: 0,
+    createdWorkshop: 0,
+    createdEvents: 0,
+    createdCoachings: 0,
+  });
 
   const url = endpoints.authentication.userProfile;
 
@@ -86,6 +98,22 @@ const User_profile = () => {
               parseInt(endYearEmployment) - parseInt(startYearEmployment);
             setTotalExperience(totalExperience);
           }
+
+          // here we are updating the staus code ;
+          console.log(res , "value");
+          setStatusData((itm) => {
+            return {
+              ...itm,
+              createdCoachings: res?.data?.createdCoachings,
+              createdEvents: res?.data?.createdEvents,
+              createdWorkshop: res?.data?.createdWorkshops,
+              createdCommunity: res?.data?.createdCommunities,
+              joinedCoachings: res?.data?.joinedCoachings,
+              joinedWorkshop: res?.data?.joinedWorkshops,
+              joinedEvents: res?.data?.joinedEevents,
+              joinedCoachings: res?.data?.joinedCoachings,
+            };
+          });
         }
       })
       .catch((err) => {
@@ -108,17 +136,16 @@ const User_profile = () => {
     }
   };
 
-  const handleNotification = () =>{
-    if(notificationCount > 0){
-      setShowNotification(true)
+  const handleNotification = () => {
+    if (notificationCount > 0) {
+      setShowNotification(true);
     }
-  }
-
+  };
 
   return (
     <>
       <div className="profile_box">
-        <div className="profile_header d-flex justify-content-between">
+        {/* <div className="profile_header d-flex justify-content-between">
           <div className="profile_photo_box">
             {userImg && <img src={userImg} className="userImgIcon" />}
           </div>
@@ -131,9 +158,9 @@ const User_profile = () => {
               {notificationCount != 0 && <h6 className="badge">{notificationCount}</h6>}
             </div>
           )}
-        </div>
+        </div> */}
         <div className="profile">
-          <div className="profie_photo_box"></div>
+          {/* <div className="profie_photo_box"></div>
           <div className="user_name">
             <h2>{usersData.first_name}</h2>
             <Homepage_button
@@ -176,109 +203,101 @@ const User_profile = () => {
             <Tags_button text="Project Management" />
 
             <h6 id="tags_clickmore">click more</h6>
+          </div> 
+           <hr className="tags_line" />
+          <h4 className="heading2 heading_margin">YOUR STATUS</h4>
+          <hr className="tags_line" /> */}
+
+          <div className="yourstatus_box ">
+            <div className="yourstatus_innerbox">
+            <img src={status_courses} alt="courses" className="status_img" />
+              <h6>Joined Community</h6>
+            </div>
+            <h6 className="yrstatusDta">{statusData.joinedCommunity}</h6>
           </div>
           <hr className="tags_line" />
-          <h4 className="heading2 heading_margin">YOUR STATUS</h4>
-          <hr className="tags_line" />
-          <div className="yourstatus_box heading_margin">
+          <div className="yourstatus_box ">
             <div className="yourstatus_innerbox">
-              <img
-                src={resume_update}
-                alt="resume_update"
+            <img
+                src={tobe_applied}
+                alt="tobe_applied"
                 className="status_img"
               />
-              <h6>Resume Update</h6>
+              <h6>Joined Events</h6>
             </div>
+            <h6 className="yrstatusDta">{statusData.joinedEvents}</h6>
           </div>
           <hr className="tags_line" />
-          <div className="yourstatus_box heading_margin">
-            <div className="yourstatus_innerbox">
-              <img src={status_courses} alt="courses" className="status_img" />
-              <h6>Status of Course</h6>
-            </div>
-            <Index_button text="25% done" brline="Yellow" />
-          </div>
-          <hr className="tags_line" />
-          <div className="yourstatus_box heading_margin">
+          <div className="yourstatus_box ">
             <div className="yourstatus_innerbox">
               <img
                 src={upcoming_session}
                 alt="upcoming_session"
                 className="status_img"
               />
-              <h6>Upcoming Session</h6>
+              <h6>Enrolled Workshop</h6>
             </div>
-            <Index_button text="View(2)" brline="Red" />
+            <h6 className="yrstatusDta">{statusData.joinedWorkshop}</h6>
           </div>
           <hr className="tags_line" />
-          <div className="yourstatus_box heading_margin">
+          <div className="yourstatus_box ">
             <div className="yourstatus_innerbox">
               <img
                 src={community_activity}
                 alt="community_activity"
                 className="status_img"
               />
-              <h6>Community Activities</h6>
+              <h6>Enrolled Coaching</h6>
             </div>
-            <Index_button text="1 Activity" brline="gray" />
+            <h6 className="yrstatusDta">{statusData.joinedCoachings}</h6>
           </div>
           <hr className="tags_line" />
-          <div className="yourstatus_box heading_margin">
+          <div className="yourstatus_box ">
+            <div className="yourstatus_innerbox">
+            <img src={status_courses} alt="courses" className="status_img" />
+              <h6>Created Community</h6>
+            </div>
+            <h6 className="yrstatusDta">{statusData.createdCommunity}</h6>
+          </div>
+          <hr className="tags_line" />
+          <div className="yourstatus_box ">
             <div className="yourstatus_innerbox">
               <img
                 src={tobe_applied}
                 alt="tobe_applied"
                 className="status_img"
               />
-              <h6>To be applied</h6>
+              <h6>Created Events</h6>
             </div>
-            <Index_button text="Applied 2" brline="gray" />
+            <h6 className="yrstatusDta">{statusData.createdEvents}</h6>
           </div>
           <hr className="tags_line" />
-          <h4 className="heading2 heading_margin">MOST RECENTLY USE</h4>
-
-          <div className="yourstatus_box heading_margin">
+          {userType == 2 && (<>
+          <div className="yourstatus_box ">
             <div className="yourstatus_innerbox">
-              <img src={communities} alt="communities" className="status_img" />
-              <h6>Community</h6>
-            </div>
-          </div>
-
-          <div className="yourstatus_box heading_margin">
-            <div className="yourstatus_innerbox">
-              <img src={tech} alt="tech" className="status_img" />
-              <h6>Tech</h6>
-            </div>
-          </div>
-
-          <div className="yourstatus_box heading_margin">
-            <div className="yourstatus_innerbox">
-              <img src={retail} alt="retail" className="status_img" />
-              <h6>Retail</h6>
-            </div>
-          </div>
-
-          <div className="yourstatus_box heading_margin">
-            <div className="yourstatus_innerbox">
-              <img src={status_courses} alt="courses" className="status_img" />
-              <h6>Courses</h6>
-            </div>
-          </div>
-          <div className="yourstatus_box heading_margin">
-            <div className="yourstatus_innerbox">
-              <img
-                src={negotiation_skills}
-                alt="negotiation_skills"
+            <img
+                src={community_activity}
+                alt="community_activity"
                 className="status_img"
               />
-              <h6>Negotiations skills</h6>
+              <h6>Created Coaching</h6>
             </div>
+            <h6 className="yrstatusDta">{statusData.createdCoachings}</h6>
           </div>
-          <div className="yourstatus_box heading_margin">
-            <Index_button text="See All" brline="gray" />
+          <hr className="tags_line" />
+          <div className="yourstatus_box ">
+            <div className="yourstatus_innerbox">
+            <img
+                src={upcoming_session}
+                alt="upcoming_session"
+                className="status_img"
+              />
+              <h6>Created Workshop</h6>
+            </div>
+            <h6 className="yrstatusDta">{statusData.createdWorkshop}</h6>
           </div>
+          <hr className="tags_line" /> </>)}
         </div>
-
         <CoachNotification
           showNotification={showNotification}
           setShowNotification={setShowNotification}

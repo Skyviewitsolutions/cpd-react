@@ -477,6 +477,8 @@
   margin-right: 10px;
   height: 140px;
   object-fit: cover;
+  width: 78%;
+
 }
 
 .coachName {

@@ -13,6 +13,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import enUS from "date-fns/locale/en-US";
 import { IoCloseSharp } from "react-icons/io5";
+import { tableSortLabelClasses } from "@mui/material";
 
 require("react-big-calendar/lib/css/react-big-calendar.css");
 
@@ -133,6 +134,7 @@ const CustomCalendar = (props) => {
 
   return (
     <Modal show={showCalendar} size="lg">
+      <div style={{background : "white"}}>
       <h1 className="calendarTitle">Calendar</h1>
       <div className="calendarCont">
         <Calendar
@@ -146,6 +148,7 @@ const CustomCalendar = (props) => {
 
         <div className="cutOption" onClick={() => setShowCalendar(false)}>
           <IoCloseSharp />
+        </div>
         </div>
       </div>
     </Modal>
@@ -226,3 +229,13 @@ export default CustomCalendar;
 // };
 
 // export default CustomCalendar;
+
+
+const data = [ 
+  {name : "bhola gupta" , age : 23  , salary : 20000} ,
+  {name : "rakesh yadav" , age : 30 , salary : 24000} ,
+  {name : "sanjeev malhotra" , age : 35 , salary : 36000},
+  {name : "arvind" , age : 26 , salary : 150000} ,
+  {name : "rahul" , age : 32 , salary : 40000}
+]
+

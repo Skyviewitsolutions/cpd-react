@@ -12,12 +12,16 @@ import WorkshopCard from "../../Component/WorkshopCard/WorkshopCard";
 import CoachingCard from "../../Component/CoachingCard/CoachingCard";
 import NoDataImg from "../../assets/Images/noDataFound.png";
 import CustomToast from "../../Component/CustomToast/CustomToast";
+import Loader from "../../Component/Loader/Loader";
+
 
 const MyCourses = () => {
+
   const [coachingImgPath, setCoachingImgPath] = useState("");
   const [workshopImgPath, setWorkshopImgPath] = useState("");
   const [myEnrolledCoachings, setMyEnrolledCoachings] = useState([]);
   const [myEnrolledWorkshop, setMyEnrolledWorkshops] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem("token");
   const headers = {
@@ -31,10 +35,11 @@ const MyCourses = () => {
     };
 
     const url = endpoints.coaches.enrolledCoaching;
-
+    setLoading(true);
     axios
       .get(url, { headers: headers })
       .then((res) => {
+        setLoading(false);
         if (res.data.result) {
           var val = res.data.data;
           setMyEnrolledCoachings(val);
@@ -43,6 +48,7 @@ const MyCourses = () => {
         }
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err, "this is the error");
       });
   };
@@ -52,11 +58,12 @@ const MyCourses = () => {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     };
-
+    setLoading(true);
     const url = endpoints.workshop.myEnrolledWorkshop;
     axios
       .get(url, { headers: headers })
       .then((res) => {
+        setLoading(false);
         if (res.data.result) {
           var val = res.data.data;
           setMyEnrolledWorkshops(val);
@@ -65,6 +72,7 @@ const MyCourses = () => {
         }
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err, "this is the error");
       });
   };
@@ -85,7 +93,6 @@ const MyCourses = () => {
         </div>
       </div>
       <div className="coachesDetailsWrapper">
-        <section className="coachesDetailsSection1"></section>
         <section className="Workshop_section2">
           <div className="row">
             <div className="col-lg-12 col-md-12 col-12 ">
@@ -97,17 +104,18 @@ const MyCourses = () => {
                     var image = coachingImgPath + "/" + data.image;
                     var bookingStatus = coaching.status;
                     return (
-                      <>
-                        <div className="col-lg-3 col-md-6 col-12 workshop-card">
-                          <CoachingCard
-                            coaching={data}
-                            key={index}
-                            image={image}
-                            bookingStatus={bookingStatus}
-                            imageName={data.image}
-                          />
-                        </div>
-                      </>
+                      <div
+                        className="col-lg-3 col-md-6 col-12 workshop-card"
+                        key={index}
+                      >
+                        <CoachingCard
+                          coaching={data}
+                          key={index}
+                          image={image}
+                          bookingStatus={bookingStatus}
+                          imageName={data.image}
+                        />
+                      </div>
                     );
                   })}
 
@@ -133,18 +141,19 @@ const MyCourses = () => {
                     var image = workshopImgPath + "/" + data.image;
                     var imageName = data.image;
                     return (
-                      <>
-                        <div className="col-lg-3 col-md-6 col-12 workshop-card">
-                          <WorkshopCard
-                            workshop={data}
-                            key={index}
-                            img={image}
-                            enrollStatus={status}
-                            imageName={imageName}
-                            showBookBtn={true}
-                          />
-                        </div>
-                      </>
+                      <div
+                        className="col-lg-3 col-md-6 col-12 workshop-card"
+                        key={index}
+                      >
+                        <WorkshopCard
+                          workshop={data}
+                          key={index}
+                          img={image}
+                          enrollStatus={status}
+                          imageName={imageName}
+                          showBookBtn={true}
+                        />
+                      </div>
                     );
                   })}
 
@@ -158,7 +167,7 @@ const MyCourses = () => {
           </div>
         </section>
       </div>
-
+      {loading && <Loader />}
       <Footer />
     </>
   );

@@ -8,6 +8,8 @@ import "../../../fonts/Inter-Regular.ttf";
 import "../../../fonts/Inter-Bold.ttf";
 import { endpoints } from "../../services/endpoints";
 import axios from "axios";
+import Loader from "../../Loader/Loader";
+
 
 const MembersDetails = (props) => {
 
@@ -15,20 +17,21 @@ const MembersDetails = (props) => {
   const token = localStorage.getItem("token");
 
   const [allMembers, setAllMembers] = useState([]);
-  const [imagePath , setImagePath] = useState("")
+  const [imagePath, setImagePath] = useState("");
+  const [loading , setLoading] = useState(false);
 
   const getMembers = () => {
-
     const url = `${endpoints.community.joinedMembers}${selectedCommunityIdForMember}`;
 
     const headers = {
       Authorization: `Bearer ${token}`,
       Accept: "application/json",
     };
-
+    setLoading(true);
     axios
       .get(url, { headers: headers })
       .then((res) => {
+        setLoading(false)
         if (res.data.result) {
           const val = res.data.data;
           setAllMembers(val);
@@ -37,6 +40,7 @@ const MembersDetails = (props) => {
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err, "error here members");
       });
   };
@@ -44,7 +48,6 @@ const MembersDetails = (props) => {
   useEffect(() => {
     getMembers();
   }, []);
- 
 
   return (
     <>
@@ -56,6 +59,7 @@ const MembersDetails = (props) => {
           // dialogClassName="modal-90w"
           aria-labelledby="example-custom-modal-styling-title"
         >
+          <div  className="previewCont">
           <Modal.Header closeButton>
             <Modal.Title id="example-custom-modal-styling-title">
               <div className="membersDetailsModalHeading">
@@ -64,16 +68,22 @@ const MembersDetails = (props) => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body className="mebersListOutline">
-            {allMembers.length != 0 ?
+            {allMembers.length != 0 ? (
               allMembers.map((itm, ind) => {
-
                 var userProfile = imagePath + itm.user_profile?.avtar;
 
                 return (
                   <>
                     <div className="membersList_heading">
                       <div class="memberListModalAvatar">
-                        <img src={itm.user_profile?.avtar ? userProfile : membersDetails2} alt="Avatar" />
+                        <img
+                          src={
+                            itm.user_profile?.avtar
+                              ? userProfile
+                              : membersDetails2
+                          }
+                          alt="Avatar"
+                        />
                       </div>
                       <div className="MembersExplanationmodal">
                         <h5>{itm.user_details?.name}</h5>
@@ -84,9 +94,13 @@ const MembersDetails = (props) => {
                     </div>
                   </>
                 );
-              }) : <h5>No members found !</h5>}
-
+              })
+            ) : (
+              <h5>No members found !</h5>
+            )}
           </Modal.Body>
+          {loading && <Loader />}
+          </div>
         </Modal>
       </div>
     </>

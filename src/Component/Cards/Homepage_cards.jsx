@@ -13,18 +13,45 @@ import send from "../../assets/Images/send.svg";
 import Homepage_button from "../button/Homepage_button";
 import { imgPath } from "../services/endpoints";
 import { RiShareFill } from "react-icons/ri";
+import { generatePath } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import DefaultImg from "../../assets/Images/default.png"
 
 const Homepage_cards = (props) => {
+
   const { feeds } = props;
   const type = feeds?.type;
   const workshopImgPath = imgPath.workshop;
   const coachingImgPath = imgPath.coaching;
   const eventsImgPath = imgPath.event;
   const communityImgPath = imgPath.communtiy;
+  const navigate = useNavigate();
+
+  const showWorkshopDetails = (id) =>{
+    const path  = generatePath("/workshopDetails/:workshopId" , {workshopId : id})
+    navigate(path)
+  }
+
+  const showCoachingDetails = (id) =>{
+    const path = generatePath("/coachingDetails/:coachingId" , {coachingId : id});
+    navigate(path)
+  }
+
+  const showEventDetails = (id) =>{
+    const path = generatePath("/event-full-details/:eventId" , {eventId : id});
+    navigate(path)
+  }
+
+  const showCommunityDetails = (dta) =>{
+    const id = dta._id
+    const path = generatePath("/community-details/:communityId" , {communityId : id});
+    navigate(path , {state: { communityDetails: dta }})
+  }
+
   if (type === "workshops") {
     return (
       <>
-        <div className="card_outline">
+        <div className="card_outline" onClick={() => showWorkshopDetails(feeds._id)}>
           <div className="row d-flex justify-between align-center">
             <div className="col-9 col-md-9 col-lg-10 feedsDtls">
               <h4>{feeds?.title}</h4>
@@ -59,7 +86,7 @@ const Homepage_cards = (props) => {
           <div className="row ps-3 pe-3">
             <div className="col-12 col-md-12 col-lg-12 mt-3 uts_image">
               <img
-                src={workshopImgPath + feeds?.image}
+                src={feeds?.image ?  workshopImgPath + feeds?.image : DefaultImg}
                 alt=""
                 className="utslogo"
               />
@@ -86,7 +113,7 @@ const Homepage_cards = (props) => {
   } else if (type === "coachings") {
     return (
       <>
-        <div className="card_outline">
+        <div className="card_outline" onClick={() => showCoachingDetails(feeds._id)}>
           <div className="row d-flex justify-between align-center">
             <div className="col-9 col-md-9 col-lg-10 feedsDtls">
               <h4>{feeds?.title}</h4>
@@ -121,7 +148,7 @@ const Homepage_cards = (props) => {
           <div className="row ps-3 pe-3">
             <div className="col-12 col-md-12 col-lg-12 mt-3 uts_image">
               <img
-                src={coachingImgPath + feeds?.image}
+                src={feeds?.image ?  coachingImgPath + feeds?.image : DefaultImg}
                 alt=""
                 className="utslogo"
               />
@@ -149,7 +176,7 @@ const Homepage_cards = (props) => {
   else if(type === "events"){
     return(<>
       <div className="card_outline">
-          <div className="row d-flex justify-between align-center">
+          <div className="row d-flex justify-between align-center" onClick={() => showEventDetails(feeds._id)}>
             <div className="col-9 col-md-9 col-lg-10 feedsDtls">
               <h4>{feeds?.event_title}</h4>
               <h5>
@@ -183,7 +210,8 @@ const Homepage_cards = (props) => {
           <div className="row ps-3 pe-3">
             <div className="col-12 col-md-12 col-lg-12 mt-3 uts_image">
               <img
-                src={eventsImgPath + feeds?.event_photo }
+                src={feeds?.event_photo ?  eventsImgPath + feeds?.event_photo : DefaultImg}
+
                 alt=""
                 className="utslogo"
               />
@@ -208,9 +236,8 @@ const Homepage_cards = (props) => {
     </>)
   }
   else if(type === "communities"){
-    console.log(feeds ,"feeds");
     return(<>
-      <div className="card_outline">
+      <div className="card_outline" onClick={() => showCommunityDetails(feeds)}>
           <div className="row d-flex justify-between align-center">
             <div className="col-9 col-md-9 col-lg-10 feedsDtls">
               <h4>{feeds?.display_name}</h4>
@@ -245,7 +272,8 @@ const Homepage_cards = (props) => {
           <div className="row ps-3 pe-3">
             <div className="col-12 col-md-12 col-lg-12 mt-3 uts_image">
               <img
-                src={communityImgPath + feeds?.image }
+                src={feeds?.event_photo ?  communityImgPath + feeds?.image : DefaultImg}
+
                 alt=""
                 className="utslogo"
               />
