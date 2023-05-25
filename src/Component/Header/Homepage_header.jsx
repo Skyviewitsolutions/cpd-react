@@ -93,7 +93,6 @@ const Homepage_header = () => {
   };
 
   const handleNavbar = (selected) => {
-
     if (selected === "coaches") {
       localStorage.setItem("activeNavbar", selected);
       setActiveNavbar(selected);
@@ -110,9 +109,10 @@ const Homepage_header = () => {
       localStorage.setItem("activeNavbar", selected);
       setActiveNavbar(selected);
       navigate("/job-board");
-    } else if (selected === "carrier") {
+    } else if (selected === "career-fare") {
       localStorage.setItem("activeNavbar", selected);
       setActiveNavbar(selected);
+      navigate("/career-fare")
     }
   };
 
@@ -142,8 +142,6 @@ const Homepage_header = () => {
   };
 
   const pathName = window.location.pathname;
-
-  
 
   return (
     <>
@@ -383,16 +381,21 @@ const Homepage_header = () => {
               <h5>Board</h5>{" "}
             </div>
           )}
-          <div className="headerBox">
-            <img
-              src={fare}
-              alt=""
-              className="coaches"
-              style={{ width: "24px" }}
-            />
-            <h6>Career</h6>
-            <h5>Fare</h5>{" "}
-          </div>
+          {pathName === "/career-fare" ? (
+            <div className="headerBox" onClick={() => handleNavbar("career-fare")}>
+               <div className="activeHeaderBox">
+              <img  src={fareW} alt=""  className="coaches" style={{ width: "24px" }} />
+              <h6>Career</h6>
+              <h5>Fare</h5>{" "}
+            </div>
+            </div>
+          ) : (
+            <div className="headerBox" onClick={() => handleNavbar("career-fare")}>
+              <img src={fare} alt="" className="coaches" style={{ width: "24px" }} />
+              <h6>Career</h6>
+              <h5>Fare</h5>{" "}
+            </div>
+          )}
         </div>
         <div className="col-2 click_forem_box">
           <div>

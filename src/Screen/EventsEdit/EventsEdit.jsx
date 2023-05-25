@@ -37,6 +37,8 @@ import Button from "../../Component/button/Button/Button";
 import UserCard from "../../Component/UserCard/UserCard";
 import showToast from "../../Component/CustomToast/CustomToast";
 import UsersReview from "../../Component/UsersReview/UsersReview";
+import ShareModal from "../../Component/Modal/ShareModel/ShareModel"
+
 
 const EventsEdit = () => {
   const iconsMap = [
@@ -95,6 +97,8 @@ const EventsEdit = () => {
   const [eventList, setEventList] = useState([]);
   const [communityId, setCommunityId] = useState("");
   const [communityName, setCommunityName] = useState("");
+  const [showShareModal , setShowShareModal] = useState(false)
+
 
   // create variables for holding value ;
   const [title, setTitle] = useState("");
@@ -734,7 +738,7 @@ const EventsEdit = () => {
                   );
                 })}
                 <div className="crsIncldBx">
-                  <button className="addtoCrt">
+                  <button className="addtoCrt" onClick={() => setShowShareModal(true)}>
                     {" "}
                     <RiShareFill
                       size={18}
@@ -820,6 +824,7 @@ const EventsEdit = () => {
         setCourseIncludeContent={setCourseIncludeContent}
       />
       {loading && <Loader />}
+      <ShareModal showShareModal={showShareModal} setShowShareModal={setShowShareModal}/>
     </MainLayout>
   );
 };

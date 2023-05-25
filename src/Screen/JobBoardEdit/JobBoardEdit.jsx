@@ -17,6 +17,7 @@ import DummyBanner from "../../assets/Icons/dummyBanner.png";
 import parse from "html-react-parser";
 import UserCard from "../../Component/UserCard/UserCard";
 import Loader from "../../Component/Loader/Loader";
+import ShareModal from "../../Component/Modal/ShareModel/ShareModel"
 
 
 const JobBoardEdit = () => {
@@ -71,6 +72,8 @@ const JobBoardEdit = () => {
   const [jobList , setJobList] = useState([]);
   const [employeerInfo , setEmployeerInfo] = useState({});
   const [loading , setLoading] = useState(false);
+  const [showShareModal , setShowShareModal] = useState(false)
+
 
   const [courseIncludeContent, setCourseIncludeContent] = useState([]);
   const [responsibilities , setResponsiblities] = useState([]);
@@ -202,7 +205,7 @@ const JobBoardEdit = () => {
               })}
               <div className="crsIncldBx">
                 {/* <h5>Share</h5> */}
-                <button className="addtoCrt">
+                <button className="addtoCrt"  onClick={() => setShowShareModal(true)}>
                   {" "}
                   <RiShareFill
                     size={18}
@@ -223,6 +226,7 @@ const JobBoardEdit = () => {
         </div>
       </div>
       {loading && <Loader />}
+      <ShareModal showShareModal={showShareModal} setShowShareModal={setShowShareModal}/>
     </div>
   </MainLayout>
   )

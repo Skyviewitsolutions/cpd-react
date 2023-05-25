@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Workshop.css";
+import "./careerFare.css";
 import Homepage_header from "../../Component/Header/Homepage_header";
 import Footer from "../../Component/Footer/Footer";
 import "../../fonts/Inter-Bold.ttf";
@@ -9,7 +9,7 @@ import eye from "../../assets/Images/eye.svg";
 import { CgHeart } from "react-icons/cg";
 import workshop_bannerImage from "../../assets/Images/workshop_bannerImage.png";
 import dommy_workshopImage from "../../assets/Images/dommy_workshopImage.png";
-import WorkshsopSidenav from "./WorkshsopSidenav";
+import WorkshsopSidenav from "../Workshop/WorkshsopSidenav";
 import WorkshopEnroll from "../../Component/Modal/WorkshopEnroll/WorkshopEnroll";
 import { endpoints } from "../../Component/services/endpoints";
 import axios from "axios";
@@ -24,10 +24,13 @@ import CreateWorkshopForm from "../../Component/Modal/CreateWorkshopForm/CreateW
 import NoDataImg from "../../assets/Images/noDataFound.png";
 import { getCalendarData } from "../../utils/calendar";
 import Loader from "../../Component/Loader/Loader";
+import CreateCareerFareForm from "../../Component/Modal/CreateCareerFareForm/CreateCareerFareForm";
 import showToast from "../../Component/CustomToast/CustomToast";
+import CareerFareCard from "../../Component/CareerFareCard/CareerFareCard";
+import img2 from "../../assets/Images/careerfaretopimg.svg"
 
 
-const Workshop = () => {
+const CareerFare = () => {
 
   const navigate = useNavigate("");
   const [modalShow, setModalShow] = React.useState(false);
@@ -42,7 +45,7 @@ const Workshop = () => {
   const [inputData, setInputData] = useState("");
   const [workshopToBeShown, setWorkshopToBeShown] = useState([]);
   const [workshopToBeShown2, setWorkshopToBeShown2] = useState([]);
-  const [showWorkshopForm, setShowWorkshopForm] = useState(false);
+  const [showCareerFareForm, setShowCareerFareForm] = useState(false);
   const [filterByIndustry, setFilterByIndustry] = useState([]);
   const [filterByDomain, setFilterByDomain] = useState([]);
   const [updateWorkshop, setUpdateWorkshop] = useState(false);
@@ -288,28 +291,28 @@ const Workshop = () => {
       });
   };
 
-
   return (
+
     <div className="workshopContainer">
       <Homepage_header />
       <div className="workshopwiper">
-        <section className="Workshop_section1">
+        <section className="Workshop_section1" style={{background : "#e4fde5"}}>
           <div className="row ">
             <div className="col-lg-8 col-md-7 col-12 workshop_headingblock ">
-              <h1>Enroll Workshop</h1>
-              <h5>Identify The Skills Yor Need To Advance Your Career</h5>
-              <h6>Search For The Most Popular Workshops Skills Here</h6>
+              <h1>Enroll Incubation </h1>
+              <h5>Identify The Skills You Need To Advance Your Career</h5>
+              <h6>Search For The Most Popular Ideas Here</h6>
             </div>
             <div className="col-lg-4 col-md-5 col-12 ">
               <div className="workshop_imageblock">
-                <img src={workshop_bannerImage} />
+                <img src={img2} />
               </div>
             </div>
           </div>
           <div className="row workshop_searchBox col-12">
             <div className="col-8 col-md-12 col-lg-2">
               <h5 className="workshopHdTitle">
-                This Week's Top Enroll Workshop
+                This Week's Top Ideas
               </h5>
             </div>
             <div className="col-12 col-md-12 col-lg-10">
@@ -328,8 +331,7 @@ const Workshop = () => {
                     </div>{" "}
                   </div>
                 </div>
-                {userType == 2 && (
-                  <>
+               
                     <div
                       className="coachBtnCont col-lg-5 col-md-12 col-12 d-flex justify-content-between"
                       style={{ width: "33%" }}
@@ -355,17 +357,16 @@ const Workshop = () => {
                         }}
                         onClick={handleShowMyWorkshop}
                       >
-                        My workshops
+                        My Incubation 
                       </button>
                       <button
                         className="coachingBtn createCoachingBtn"
-                        onClick={() => setShowWorkshopForm(true)}
+                        onClick={() => setShowCareerFareForm(true)}
                       >
                         Create
                       </button>
                     </div>
-                  </>
-                )}
+                  
               </div>
             </div>
           </div>
@@ -407,7 +408,7 @@ const Workshop = () => {
                     return (
                       <>
                         <div className="col-lg-4 col-md-12 col-12 workshop-card px-4">
-                          <WorkshopCard
+                          <CareerFareCard
                             workshop={workshop}
                             showWorkshopOnCalendar={showWorkshopOnCalendar}
                             enrollWorkshop={enrollWorkshop}
@@ -440,18 +441,7 @@ const Workshop = () => {
             eventsToBeShown={eventsToBeShown}
           />
 
-          <CreateWorkshopForm
-            showWorkshopForm={showWorkshopForm}
-            setShowWorkshopForm={setShowWorkshopForm}
-            getAllWorkshop={getAllWorkshop}
-            getMyWorkshop={getMyWorkshop}
-            setShowAllWorkshop={setShowAllWorkshop}
-            updateWorkshop={updateWorkshop}
-            setUpdateWorkshop={setUpdateWorkshop}
-            selectedWorkshopForUpdate={selectedWorkshopForUpdate}
-            setSelectedWorkshopForUpdate={setSelectedWorkshopForUpdate}
-            imagePath={imagePath}
-          />
+          <CreateCareerFareForm showCareerFareForm={showCareerFareForm} setShowCareerFareForm={setShowCareerFareForm} />
         </section>
       </div>
       <Footer />
@@ -460,4 +450,6 @@ const Workshop = () => {
   );
 };
 
-export default Workshop;
+export default CareerFare;
+
+

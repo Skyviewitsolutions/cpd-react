@@ -36,6 +36,7 @@ import UserCard from "../../Component/UserCard/UserCard";
 import showToast from "../../Component/CustomToast/CustomToast";
 import Button from "../../Component/button/Button/Button";
 import UsersReview from "../../Component/UsersReview/UsersReview";
+import ShareModal from "../../Component/Modal/ShareModel/ShareModel"
 
 
 const CoachingEdit = () => {
@@ -84,6 +85,8 @@ const CoachingEdit = () => {
   const [coachingImgPath, setCoachingImgPath] = useState([]);
   const [coachingImg, setCoachingImg] = useState([]);
   const [coachingImgFiles, setCoachingImgFiles] = useState("");
+  const [showShareModal , setShowShareModal] = useState(false)
+
 
   // create variables for holding value ;
   const [title, setTitle] = useState("");
@@ -685,7 +688,7 @@ const CoachingEdit = () => {
                 })}
                 <div className="crsIncldBx">
                   {/* <h5>Share</h5> */}
-                  <button className="addtoCrt">
+                  <button className="addtoCrt" onClick={() => setShowShareModal(true)}>
                     {" "}
                     <RiShareFill
                       size={18}
@@ -781,6 +784,7 @@ const CoachingEdit = () => {
       />
 
       {loading && <Loader />}
+      <ShareModal showShareModal={showShareModal} setShowShareModal={setShowShareModal}/>
     </MainLayout>
   );
 };

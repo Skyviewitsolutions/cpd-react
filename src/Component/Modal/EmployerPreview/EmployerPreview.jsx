@@ -5,8 +5,7 @@ import { Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import infosysdommy from "../../../assets/Images/infosysdommy.png";
 import dommyuserperson from "../../../assets/Images/dommyuserperson.jfif";
-// import infosysdommy from "../../assets/Images/infosysdommy.png";
-// import edu_logo from "../../assets/Images/edu_logo.jpeg";
+
 import { useLocation } from "react-router-dom";
 import "../../../fonts/Inter-Bold.ttf";
 import Spinner from "react-bootstrap/Spinner";
@@ -15,7 +14,9 @@ import Button from "../../button/Button/Button";
 import dummyUserPerson from "../../../assets/Images/dummyImages.webp";
 import DefaultImg from "../../../assets/Images/default.png"
 
+
 const EmployerPreview = (props) => {
+
   const {
     firstName,
     lastName,
@@ -104,7 +105,7 @@ const EmployerPreview = (props) => {
                               <p key={index}>{skill}</p>
                           );
                         })}
-                      <h5>Hobbies</h5>
+                      
                      
                     </div>
                   </div>
@@ -138,7 +139,6 @@ const EmployerPreview = (props) => {
                           title="Cancel"
                           onClick={() => setShowEmployeerPreview(false)}
                         />
-
                         <Button
                           title={update ? "Update" : "Submit"}
                           loading={loading}
@@ -158,3 +158,5 @@ const EmployerPreview = (props) => {
 };
 
 export default EmployerPreview;
+
+

@@ -16,6 +16,8 @@ import { endpoints, imgPath } from "../services/endpoints";
 import BookBtn from "../button/BookBtn/BookBtn";
 import showToast from "../CustomToast/CustomToast";
 import DefaultImg from "../../assets/Images/default.png"
+import { generatePath , useNavigate } from "react-router-dom";
+
 
 const Recommended_session = () => {
   // here we are going to get the list of coaching ;
@@ -28,6 +30,10 @@ const Recommended_session = () => {
   const [loading, setLoading] = useState(false);
   const [allWorkShopList, setAllWorkShopList] = useState([]);
   const [allEnrolledWorkshops, setAllEnrolledWorkshops] = useState([]);
+  const [allRecommendList , setAllRecommendedList] = useState([])
+
+  const navigate = useNavigate();
+
 
   const getCoachingList = () => {
     const headers = {
@@ -145,11 +151,16 @@ const Recommended_session = () => {
       });
   };
 
+  const getAllRecommendedList = () =>{
+    
+  }
+
   useEffect(() => {
     getCoachingList();
     getAllEnrolledCoachings();
     getAllWorkshop();
     getAllEnrolledList();
+    getAllRecommendedList();
   }, []);
 
   // writing code for enrolling the workshop
@@ -177,6 +188,20 @@ const Recommended_session = () => {
     } else {
       showToast("Please login", "warning");
     }
+  };
+
+  const showCoachDetails = (dta) => {
+    const coachId = dta.created_by;
+    const path = generatePath("/coach-Details/:coachId", { coachId: coachId });
+    navigate(path);
+  };
+
+  const showWorkshopDetails = (dta) => {
+    const workshopId = dta._id;
+    const path = generatePath("/workshopDetails/:workshopId", {
+      workshopId: workshopId,
+    });
+    navigate(path);
   };
 
   return (
@@ -213,7 +238,7 @@ const Recommended_session = () => {
               var sessionType = workshop.payment_type == 1 ? "hour" : "session";
 
               return (
-                <div className="recommended_details">
+                <div className="recommended_details" onClick={() => showWorkshopDetails(workshop)}>
                   <div className="recommended_imgbox">
                     <img src={workshop?.image ? image : DefaultImg} alt="" />
                     <div className="recommended_name">
@@ -243,7 +268,6 @@ const Recommended_session = () => {
             })}
 
           
-
           <div className="coaches_heading">
             <h5>COACHES</h5>
           </div>
@@ -271,7 +295,7 @@ const Recommended_session = () => {
               }
 
               return (
-                <div className="recommended_details cursor" key={index + 1}>
+                <div className="recommended_details cursor" key={index + 1} onClick={() => showCoachDetails(item)}>
                   <div className="recommended_imgbox" key={index}>
                     {item?.coach_info?.avtar ? (
                       <img src={image} alt="alternate" />

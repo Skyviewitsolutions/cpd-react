@@ -31,6 +31,8 @@ import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 import JobCard from "../../Component/JobCard/JobCard";
 import CreateJobForm from "../../Component/Modal/createJobsFom/CreateJobsForm";
 
+
+
 const JobBoard = () => {
 
   const token = localStorage.getItem("token");
@@ -54,7 +56,7 @@ const JobBoard = () => {
 
   var userDetails = localStorage.getItem("users");
   var userData = userDetails && JSON.parse(userDetails);
-  var userId = userData && userData._id;
+  var userId = userData ? userData._id : 0
 
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -68,9 +70,6 @@ const JobBoard = () => {
   var userType = JSON.parse(userDetails);
   userType = userType?.user_type;
 
-  const handleFilterJobs = () => {};
-
-  const applyJob = () => {};
 
   const showJobsOnCalendar = () => {};
 
@@ -91,16 +90,31 @@ const JobBoard = () => {
     })
   };
 
- 
+  const applyJob = (dta) => {
+    setLoading(true)
+    const url = endpoints.jobs.applyJob + "job_id=" + dta?._id + "&user_id=" + userId + "&status=0";
+    axios.get(url , {headers : headers}) 
+    .then((res) =>{
+      if(res.data.result){
+        showToast("Job applied successfully" , "success")
+      }
+      setLoading(false)
+    })
+    .catch((err) =>{
+      console.log(err , "this is the error")
+      setLoading(false)
+    })
+  };
 
   const getJobList = () => {
-    const url = endpoints.jobs.allJobs;
+    const url = endpoints.jobs.allJobs + "?user_id=" + userId;
     setLoading(true)
     axios
       .get(url, { headers: headers })
       .then((res) => {
         setLoading(false)
         if (res.data.result) {
+          console.log(res , "response here");
           const val = res.data.message?.data;
           const allJobs = val.filter((itm) => {return itm?.created_by !== userId})
           setJobsListToBeShown(allJobs);
@@ -124,6 +138,7 @@ const JobBoard = () => {
         const val = res.data.message?.data;
         setJobsListToBeShown(val);
         setJobsListToBeShown2(val);
+        setMyJobs(val)
       }
     })
     .catch((err) => {
@@ -151,6 +166,66 @@ const JobBoard = () => {
   useEffect(() => {
     getJobList();
   }, []);
+
+
+  const handleFilterJobs = (val) => {
+    var value = val.toLowerCase();
+    setInputData(val);
+    if (showAllJobs) {
+      var filteredData = jobsListToBeShown.filter((item, index) => {
+        return item.job_title.toLowerCase().includes(value);
+      });
+      setJobsListToBeShown2(filteredData);
+    } else {
+      var filteredData = myJobs.filter((item, index) => {
+        return item.job_title.toLowerCase().includes(value);
+      });
+      setJobsListToBeShown2(filteredData);
+    }
+
+    if(value === ""){
+      setJobsListToBeShown2(jobsListToBeShown)
+    }
+  };
+
+
+   // here we are filtering the coaching according to the domain and industry;
+
+   useEffect(() => {
+
+    var filterJobByIndustry = jobsListToBeShown.filter(
+      (itm, index) => {
+        var industry = itm.industry;
+        var industryTitle = industry && industry?.title?.toLowerCase();
+        return filterByIndustry.includes(industryTitle);
+      }
+    );
+
+    var filterJobByDomain = filterJobByIndustry.filter((itm, index) => {
+      var domain = itm.domain;
+      var domainTitle = domain && domain?.title?.toLowerCase();
+      return filterByDomain.includes(domainTitle);
+    });
+    setJobsListToBeShown2(filterJobByDomain);
+  }, [filterByDomain]);
+
+  useEffect(() => {
+
+    var filterJopByDomain = jobsListToBeShown.filter((itm, index) => {
+      var domain = itm.domain;
+      var domainTitle = domain && domain?.title?.toLowerCase();
+      return filterByDomain.includes(domainTitle);
+    });
+
+    var filterCoachingByIndustry = filterJopByDomain.filter(
+      (itm, index) => {
+        var industry = itm.industry;
+        var industryTitle = industry && industry?.title?.toLowerCase();
+        return filterByIndustry.includes(industryTitle);
+      }
+    );
+    setJobsListToBeShown2(filterCoachingByIndustry);
+  }, [filterByIndustry]);
 
 
   return (
@@ -232,7 +307,6 @@ const JobBoard = () => {
                     var enrolled = allAppliedJobs.filter((itm, ind) => {
                       return itm.coaching_id == id;
                     });
-
                     if (enrolled.length != 0) {
                       var datas = enrolled[0];
                       var status = datas.status;

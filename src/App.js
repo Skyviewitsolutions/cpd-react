@@ -34,7 +34,6 @@ import Communities from "./Screen/Communities/Communities";
 import CareerFareLinear from "./Screen/Career/CareerFareLinear";
 import ForumScreen from "./Screen/Forum/ForumScreen";
 import AvailableResource from "./Screen/AvailableResource/AvailableResource";
-import CareerFareDetails from "./Screen/Career/CareerFareDetails";
 import CoachesForm from "./Screen/Coaches_screen/CoachesForm";
 import CoachesDetails from "./Screen/CoachDetails/CoachDetails";
 import Header2 from "./Component/Header/Header2";
@@ -52,6 +51,9 @@ import JobBoardEdit from "./Screen/JobBoardEdit/JobBoardEdit";
 import EmployerForm from "./Screen/EmployerFom/EmployerForm";
 import PublicRoute from "./Routing/PublicRoute";
 import PrivateRoute from "./Routing/PrivateRoute";
+import CareerFare from "./Screen/CareerFare/CareerFare"
+import CareerFareDetails from "./Screen/CareerFareDetails/CareerFareDetails";
+import CareerFareEdit from "./Screen/CareerFareEdit/CareerFareEdit";
 
 
 function App() {
@@ -167,6 +169,9 @@ function App() {
           <Route exact path="/job-board-details/:jobId" element={<PublicRoute element={<JobBoardDetails />} />}/>
           <Route exact path="/job-board-edit/:jobId" element={<PrivateRoute element={<JobBoardEdit />} />}/>
           <Route exact path="/employer-form" element={<PrivateRoute element={<EmployerForm />}/>} /> 
+          <Route exact path="/career-fare" element={<CareerFare />}/>
+          <Route exact path="/career-fare-details/:careerFareId" element={<CareerFareDetails />}/>
+          <Route exact path="/career-fare-edit/:careerFareId" element={<CareerFareEdit />}/>
         </Routes>
       </Router>
       <ToastContainer autoClose={2000} />

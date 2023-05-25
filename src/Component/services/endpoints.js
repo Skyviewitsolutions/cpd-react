@@ -89,6 +89,7 @@ export const endpoints = {
     allIndustry: BASE_URL + "/list-industry",
     allDomain: BASE_URL + "/list-domain",
     allRecentFeeds: BASE_URL + "/recent-activities",
+    recommendedList : BASE_URL + "/recommended_list"
   },
   review : {
     createReview : BASE_URL + "/review/create" ,
@@ -99,7 +100,8 @@ export const endpoints = {
     allJobs : BASE_URL + "/job/get-list",
     deleteJobs : BASE_URL + "/job/delete?",
     updateJob : BASE_URL + "/job/update",
-    jobDetails : BASE_URL + "/job/getSingleJob?job_id="
+    jobDetails : BASE_URL + "/job/getSingleJob?job_id=",
+    applyJob : BASE_URL + "/job/apply?"
   } ,
   employer : {
     createEmployer : BASE_URL + "/addEmployer" ,

@@ -343,8 +343,6 @@ function EmployerForm() {
       formdata.append("description", employer.description);
       formdata.append("company_logo", employeerImg);
 
-      const url = endpoints.employer.createEmployer;
-
       setLoading(true);
 
       axios
@@ -366,10 +364,10 @@ function EmployerForm() {
     }
   };
 
+
   useEffect(() => {
     const isCvAvailable = localStorage.getItem("isCvUploaded");
     if (isCvAvailable == "true") {
-      console.log("bhola gupta");
       getEmployerData();
       setUpdate(true);
     }

@@ -20,6 +20,8 @@ import UserCard from "../../Component/UserCard/UserCard";
 import ReviewCard from "../../Component/ReviewCard/ReviewCard";
 import UsersReview from "../../Component/UsersReview/UsersReview";
 import parse from "html-react-parser";
+import ShareModal from "../../Component/Modal/ShareModel/ShareModel"
+
 
 
 const CoachingDetails = () => {
@@ -77,6 +79,8 @@ const CoachingDetails = () => {
   const [industryId, setIndustryId] = useState("");
   const [domainId, setDomainId] = useState("");
   const coachImgPath = imgPath.user;
+  const [showShareModal , setShowShareModal] = useState(false)
+
 
 
   const [selectedDays, setSelectedDays] = useState([]);
@@ -340,7 +344,7 @@ const CoachingDetails = () => {
                     </div>
                   );
                 })}
-                <div className="crsIncldBx">
+                <div className="crsIncldBx" onClick={() => setShowShareModal(true)}>
                   {/* <h5>Share</h5> */}
                   <button className="addtoCrt">
                     {" "}
@@ -364,6 +368,7 @@ const CoachingDetails = () => {
           </div>
         </div>
         {loading && <Loader />}
+        <ShareModal showShareModal={showShareModal} setShowShareModal={setShowShareModal}/>
       </div>
     </MainLayout>
   );

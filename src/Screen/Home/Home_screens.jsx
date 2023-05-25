@@ -16,6 +16,7 @@ import BASE_URL, { endpoints } from "../../Component/services/endpoints";
 import { useState } from "react";
 import axios from "axios";
 import Loader from "../../Component/Loader/Loader";
+import ShareModel from "../../Component/Modal/ShareModel/ShareModel";
 
 
 const Home_screens = () => {
@@ -23,6 +24,7 @@ const Home_screens = () => {
   const token = localStorage.getItem("token");
   const [allRecentFeeds, setAllRecentFeeds] = useState([]);
   const [loading , setLoading] = useState(false)
+  const [showShareModal,setShowShareModal] = useState(false)
 
   // writing code for getting all the recent feeds ;
 
@@ -46,7 +48,12 @@ const Home_screens = () => {
 
   useEffect(() => {
     getAllRecentFeeds();
+    
   }, []);
+
+  const handleShare =(dta) =>{
+    setShowShareModal(true)
+  }
 
   return (
     <>
@@ -68,7 +75,7 @@ const Home_screens = () => {
               <div className="hmgCrdCont">
                 {allRecentFeeds.length != 0 &&
                   allRecentFeeds.map((feeds, index) => {
-                    return <Homepage_cards key={index} feeds={feeds} />;
+                    return <Homepage_cards key={index} feeds={feeds} handleShare={handleShare}/>;
                   })}
               </div>
             </div>
@@ -81,7 +88,8 @@ const Home_screens = () => {
           <ToastContainer />
         </div>
        {loading && <Loader />}
-      </MainLayout>
+       <ShareModel showShareModal={showShareModal} setShowShareModal={setShowShareModal}/>
+      </MainLayout> 
     </>
   );
 };

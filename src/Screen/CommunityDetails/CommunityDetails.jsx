@@ -25,6 +25,8 @@ import { generatePath, useNavigate } from "react-router-dom";
 import NoDataImg from "../../assets/Images/noDataFound.png"
 import showToast from "../../Component/CustomToast/CustomToast";
 import Loader from "../../Component/Loader/Loader";
+import ShareModal from "../../Component/Modal/ShareModel/ShareModel"
+
 
 const CommunityDetails = (props) => {
 
@@ -38,6 +40,8 @@ const CommunityDetails = (props) => {
   const [showCustomCalendar, setShowCustomCalendar] = useState(false);
   const [imagePath, setImagePath] = useState("");
   const [eventsToBeShown, setEventsToBeShown] = useState([]);
+  const [showShareModal , setShowShareModal] = useState(false)
+
 
   const getMyEventsApi = endpoints.events.myEvents;
 

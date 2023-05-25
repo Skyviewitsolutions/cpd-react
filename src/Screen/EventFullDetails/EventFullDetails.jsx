@@ -10,9 +10,6 @@ import { AiOutlineYoutube, AiOutlineTrophy } from "react-icons/ai";
 import { BiFileBlank, BiMobile } from "react-icons/bi";
 import { RiFolderDownloadLine } from "react-icons/ri";
 import { MdOutlineLink } from "react-icons/md";
-import User from "../../assets/Images/user3.jpg";
-import workshopImg1 from "../../assets/Images/workshopimg1.png";
-import workshopImg2 from "../../assets/Images/workshopimg2.jpeg";
 import { RiShareFill } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams , generatePath } from "react-router-dom";
@@ -23,6 +20,7 @@ import UserCard from "../../Component/UserCard/UserCard";
 import ReviewCard from "../../Component/ReviewCard/ReviewCard";
 import parse from "html-react-parser";
 import UsersReview from "../../Component/UsersReview/UsersReview";
+import ShareModal from "../../Component/Modal/ShareModel/ShareModel"
 
 
 
@@ -82,6 +80,8 @@ const EventFullDetails = () => {
   const [communityId, setCommunityId] = useState("");
   const [imgPath , setImgPath] = useState("")
   const [communityName, setCommunityName] = useState("");
+  const [showShareModal , setShowShareModal] = useState(false)
+
 
   // reviews section state;
   const [rating , setRating] = useState(0)
@@ -371,7 +371,7 @@ const EventFullDetails = () => {
                     </div>
                   );
                 })}
-                  <button className="addtoCrt">
+                  <button className="addtoCrt" onClick={() => setShowShareModal(true)}>
                     {" "}
                     <RiShareFill
                       size={18}
@@ -394,6 +394,7 @@ const EventFullDetails = () => {
           </div>
         </div>
         {loading && <Loader />}
+        <ShareModal showShareModal={showShareModal} setShowShareModal={setShowShareModal}/>
       </div>
     </MainLayout>
   );

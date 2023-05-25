@@ -5,7 +5,7 @@ import { Spinner } from "react-bootstrap";
 
 const BookBtn = (props) => {
 
-    const { onClick, status , styles , loading  } = props;
+    const { onClick, status , styles , loading , title } = props;
 
   return (
     <>
@@ -17,9 +17,9 @@ const BookBtn = (props) => {
             variant="light"
             style={{ width: "20px", height: "20px" }}
           />
-        ) : (
-           "Book Now"
-        )}
+        ) : (<>
+          {title ? title : "Book Now"} 
+          </>)}
         </button>
       )}
       {status == 1 && (

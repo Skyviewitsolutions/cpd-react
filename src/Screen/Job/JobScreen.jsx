@@ -3,7 +3,11 @@ import "./JobScreen.css";
 import Homepage_header from "../../Component/Header/Homepage_header";
 import Footer from "../../Component/Footer/Footer";
 import { TagsInput } from "react-tag-input-component";
+
+
+
 const JobScreen = () => {
+
   return (
     <>
       <Homepage_header />

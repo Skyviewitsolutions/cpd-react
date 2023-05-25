@@ -37,6 +37,7 @@ import Button from "../../Component/button/Button/Button";
 import UsersReview from "../../Component/UsersReview/UsersReview";
 import VideoPlayer from "../../Component/Modal/VideoPlayer/VideoPlayer";
 import DefaultImg from "../../assets/Images/default.png"
+import ShareModal from "../../Component/Modal/ShareModel/ShareModel"
 
 
 const WorkshopEdit = () => {
@@ -87,6 +88,8 @@ const WorkshopEdit = () => {
   const [workshopImg, setWorkshopImg] = useState("");
   const [workhshopImgFiles, setWorkshopImgFiles] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showShareModal , setShowShareModal] = useState(false)
+
   const coachImgPath = imgPath.user;
 
   // create variables for holding value ;
@@ -713,7 +716,7 @@ const handleCourseContent = (dta) =>{
                 })}
 
                 <div className="crsIncldBx">
-                  <button className="addtoCrt">
+                  <button className="addtoCrt" onClick={() => setShowShareModal(true)}>
                     <RiShareFill
                       size={18}
                       color="white"
@@ -807,7 +810,7 @@ const handleCourseContent = (dta) =>{
         setCourseIncludeContent={setCourseIncludeContent}
       />
 
-      
+<ShareModal showShareModal={showShareModal} setShowShareModal={setShowShareModal}/>
 
       {loading && <Loader />}
     </MainLayout>

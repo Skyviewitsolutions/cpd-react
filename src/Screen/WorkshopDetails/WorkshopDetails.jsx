@@ -23,7 +23,10 @@ import UserCard from "../../Component/UserCard/UserCard";
 import parse from "html-react-parser";
 import ReviewCard from "../../Component/ReviewCard/ReviewCard";
 import UsersReview from "../../Component/UsersReview/UsersReview";
-import "../NormalDetailsPage/normalDetailsPage.css"
+import "../NormalDetailsPage/normalDetailsPage.css";
+import ShareModal from "../../Component/Modal/ShareModel/ShareModel"
+import showToast from "../../Component/CustomToast/CustomToast";
+import DefaultImg from "../../assets/Images/default.png"
 
 
 const WorkshopDetails = () => {
@@ -67,6 +70,8 @@ const WorkshopDetails = () => {
   const [workshopDtails, setWorkshopDtails] = useState({});
   const [workshopImgPath, setWorkshopImgPath] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showShareModal , setShowShareModal] = useState(false)
+
   const coachImgPath = imgPath.user;
 
   const [selectedDays, setSelectedDays] = useState([]);
@@ -190,6 +195,34 @@ const WorkshopDetails = () => {
     navigate(path);
   }
 
+  const enrollWorkshop = (workshopDetails) => {
+    
+    const token = localStorage.getItem("token");
+    if (token) {
+      var id = workshopDetails._id;
+      const url = `${endpoints.workshop.enrollWorkshop}${id}`;
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      setLoading(true);
+      axios
+        .get(url, { headers: headers })
+        .then((res) => {
+          setLoading(false);
+          if (res.data.result) {
+            showToast("workshop enrolled successfully", "success");
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err, "error here");
+        });
+    } else {
+      showToast("Please login", "warning");
+    }
+  };
+
+
 
   return (
     <MainLayout>
@@ -199,7 +232,7 @@ const WorkshopDetails = () => {
           {workshopDtails?.image ? (
             <img src={workshopImgPath + "/" + workshopDtails.image} />
           ) : (
-            <img src={BackGroundImg} alt="" />
+            <img src={DefaultImg} alt="" />
           )}
           <div className="wrkshoDtls">
             <h1 className="wrkshTitle">{workshopDtails?.title}</h1>
@@ -298,7 +331,7 @@ const WorkshopDetails = () => {
                   {workshopDtails?.image ? (
                     <img src={workshopImgPath + "/" + workshopDtails.image} />
                   ) : (
-                    <img src={DummyBanner} alt="" />
+                    <img src={DefaultImg} alt="" />
                   )}
                   <div className="vdoPlay">
                     <BsFillPlayFill size={36} />
@@ -306,8 +339,8 @@ const WorkshopDetails = () => {
                   <h6>Preview this course</h6>
                 </div>
                 <div className="vdoTxt">
-                  <h5>Price : 624 HKD </h5>
-                  <button className="addtoCrt">Book Now</button>
+                  <h5>{paid ? `Price : ${price} HKD` : "Free"}</h5>
+                  <button className="addtoCrt" onClick={() =>enrollWorkshop()}>Book Now</button>
                 </div>
               </div>
 
@@ -326,7 +359,7 @@ const WorkshopDetails = () => {
                 })}
                 <div className="crsIncldBx">
                   {/* <h5>Share</h5> */}
-                  <button className="addtoCrt">
+                  <button className="addtoCrt" onClick={() => setShowShareModal(true)}> 
                     {" "}
                     <RiShareFill
                       size={18}
@@ -348,6 +381,7 @@ const WorkshopDetails = () => {
           </div>
         </div>
         {loading && <Loader />}
+        <ShareModal showShareModal={showShareModal} setShowShareModal={setShowShareModal}/>
       </div>
     </MainLayout>
   );

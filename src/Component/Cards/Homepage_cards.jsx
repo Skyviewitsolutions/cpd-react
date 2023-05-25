@@ -16,10 +16,11 @@ import { RiShareFill } from "react-icons/ri";
 import { generatePath } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import DefaultImg from "../../assets/Images/default.png"
+import ShareModel from "../Modal/ShareModel/ShareModel"
 
 const Homepage_cards = (props) => {
 
-  const { feeds } = props;
+  const { feeds , handleShare } = props;
   const type = feeds?.type;
   const workshopImgPath = imgPath.workshop;
   const coachingImgPath = imgPath.coaching;
@@ -51,7 +52,7 @@ const Homepage_cards = (props) => {
   if (type === "workshops") {
     return (
       <>
-        <div className="card_outline" onClick={() => showWorkshopDetails(feeds._id)}>
+        <div className="card_outline" >
           <div className="row d-flex justify-between align-center">
             <div className="col-9 col-md-9 col-lg-10 feedsDtls">
               <h4>{feeds?.title}</h4>
@@ -84,7 +85,7 @@ const Homepage_cards = (props) => {
             </div>
           </div>
           <div className="row ps-3 pe-3">
-            <div className="col-12 col-md-12 col-lg-12 mt-3 uts_image">
+            <div className="col-12 col-md-12 col-lg-12 mt-3 uts_image" onClick={() => showWorkshopDetails(feeds._id)}>
               <img
                 src={feeds?.image ?  workshopImgPath + feeds?.image : DefaultImg}
                 alt=""
@@ -97,6 +98,7 @@ const Homepage_cards = (props) => {
             <button
               className="addtoCrt"
               style={{ width: "95%", margin: "17px auto" }}
+              onClick={() => handleShare(feeds)}
             >
               {" "}
               <RiShareFill
@@ -113,7 +115,7 @@ const Homepage_cards = (props) => {
   } else if (type === "coachings") {
     return (
       <>
-        <div className="card_outline" onClick={() => showCoachingDetails(feeds._id)}>
+        <div className="card_outline" >
           <div className="row d-flex justify-between align-center">
             <div className="col-9 col-md-9 col-lg-10 feedsDtls">
               <h4>{feeds?.title}</h4>
@@ -146,7 +148,7 @@ const Homepage_cards = (props) => {
             </div>
           </div>
           <div className="row ps-3 pe-3">
-            <div className="col-12 col-md-12 col-lg-12 mt-3 uts_image">
+            <div className="col-12 col-md-12 col-lg-12 mt-3 uts_image" onClick={() => showCoachingDetails(feeds._id)}>
               <img
                 src={feeds?.image ?  coachingImgPath + feeds?.image : DefaultImg}
                 alt=""
@@ -159,6 +161,7 @@ const Homepage_cards = (props) => {
             <button
               className="addtoCrt"
               style={{ width: "95%", margin: "17px auto" }}
+              onClick={() => handleShare(feeds)}
             >
               {" "}
               <RiShareFill
@@ -176,7 +179,7 @@ const Homepage_cards = (props) => {
   else if(type === "events"){
     return(<>
       <div className="card_outline">
-          <div className="row d-flex justify-between align-center" onClick={() => showEventDetails(feeds._id)}>
+          <div className="row d-flex justify-between align-center">
             <div className="col-9 col-md-9 col-lg-10 feedsDtls">
               <h4>{feeds?.event_title}</h4>
               <h5>
@@ -208,7 +211,7 @@ const Homepage_cards = (props) => {
             </div>
           </div>
           <div className="row ps-3 pe-3">
-            <div className="col-12 col-md-12 col-lg-12 mt-3 uts_image">
+            <div className="col-12 col-md-12 col-lg-12 mt-3 uts_image"  onClick={() => showEventDetails(feeds._id)}>
               <img
                 src={feeds?.event_photo ?  eventsImgPath + feeds?.event_photo : DefaultImg}
 
@@ -222,6 +225,7 @@ const Homepage_cards = (props) => {
             <button
               className="addtoCrt"
               style={{ width: "95%", margin: "17px auto" }}
+              onClick={() => handleShare(feeds)}
             >
               {" "}
               <RiShareFill
@@ -237,7 +241,7 @@ const Homepage_cards = (props) => {
   }
   else if(type === "communities"){
     return(<>
-      <div className="card_outline" onClick={() => showCommunityDetails(feeds)}>
+      <div className="card_outline" >
           <div className="row d-flex justify-between align-center">
             <div className="col-9 col-md-9 col-lg-10 feedsDtls">
               <h4>{feeds?.display_name}</h4>
@@ -270,7 +274,7 @@ const Homepage_cards = (props) => {
             </div>
           </div>
           <div className="row ps-3 pe-3">
-            <div className="col-12 col-md-12 col-lg-12 mt-3 uts_image">
+            <div className="col-12 col-md-12 col-lg-12 mt-3 uts_image" onClick={() => showCommunityDetails(feeds)}>
               <img
                 src={feeds?.event_photo ?  communityImgPath + feeds?.image : DefaultImg}
 
@@ -284,6 +288,7 @@ const Homepage_cards = (props) => {
             <button
               className="addtoCrt"
               style={{ width: "95%", margin: "17px auto" }}
+              onClick={() => handleShare(feeds)}
             >
               {" "}
               <RiShareFill
@@ -294,6 +299,10 @@ const Homepage_cards = (props) => {
               Share
             </button>
           </div>
+
+          {/* share model */}
+
+         
         </div>
     </>)
   }

@@ -1,0 +1,12 @@
+.carerTitle{
+    font-size: 19px;
+    font-family: 'Poppins-Semibold';
+    color: var(--black);
+    text-transform: capitalize;
+    margin-bottom: 0px;
+}
+
+.carerTitle h5{
+    margin-bottom: 4px;
+    color: var(--primary);
+}

@@ -77,7 +77,22 @@ const CreateJobsForm = (props) => {
     }
   };
 
-  const refreshAllInputField = () => {};
+  const refreshAllInputField = () => {
+    setJobTitle("");
+      setCompanyName("");
+      setTotalOpenings("");
+      setJobLocation("");
+      setMinSalary("");
+      setMaxSalary("")
+      setDescription("");
+      setDomainId("")
+      setIndustryId("")
+      setDomain("")
+      setIndustry("")
+      setSalaryType("")
+      setJobType("");
+      setSkills([])
+  };
 
 
   const handleJobImg = (e) => {
@@ -243,7 +258,6 @@ const CreateJobsForm = (props) => {
 
   useEffect(() =>{
     if(updateJob){
-      console.log(selectedJob , "selected job");
       setJobTitle(selectedJob?.job_title);
       setCompanyName(selectedJob?.company_name);
       setTotalOpenings(selectedJob?.total_openings);
