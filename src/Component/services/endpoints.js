@@ -106,6 +106,9 @@ export const endpoints = {
   employer : {
     createEmployer : BASE_URL + "/addEmployer" ,
     updateEmployer : BASE_URL + "/updateEmployer"
+  } ,
+  incubation : {
+    createIncubation : BASE_URL + "/incubation/create"
   }
 };
 

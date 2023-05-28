@@ -10,12 +10,12 @@ import axios from "axios";
 import { getDomainList, getIndustryList } from "../../../utils/api";
 
 const CreateCareerFareForm = (props) => {
+
   const {
     updateCarrerFare,
     setUpdateCareerFare,
     showCareerFareForm,
     setShowCareerFareForm,
- 
   } = props;
 
   const [carrerFareImg, setCareerFareImg] = useState(null);
@@ -30,7 +30,20 @@ const CreateCareerFareForm = (props) => {
   const [allDomain, setAllDomain] = useState([]);
   const [allIndustry, setAllIndustry] = useState([]);
   const [loading, setLoading] = useState(false);
+ 
+  // Title ---> 
+  const [title , setTitle] = useState("");
+  const [stage ,setStage] = useState("");
   const [description, setDescription] = useState("");
+  const [founder , setFounder] = useState("");
+  const [websiteLink , setWebsiteLink] = useState("")
+  const [companyName , setCompanyName] = useState("");
+  const [seekInvestment , setSeekInvestMent] = useState("")  
+  const [partnerRequirement , setPartnerRequirement] = useState("")
+  const [sponsers , setSponsers] = useState([])
+  const [partners , setPartners] = useState([])
+  const [date , setDate] = useState("")
+
 
   const handleCareerFareImg = (e) => {
     const files = e.target.files[0];
@@ -97,7 +110,58 @@ const CreateCareerFareForm = (props) => {
 
   const updateCarrerFares = () => {};
 
-  const submitCarrerFares = () => {};
+  const submitCarrerFares = () => {
+    if(!title){
+     showToast("Title is required" , "warning")
+    }
+    else if(!stage){
+      showToast("Please choose stage" , "warning")
+    }
+    else if(!carrerFareImg){
+      showToast("Image is required" , "warning")
+    }
+    else if(!date){
+      showToast("Date is required" , "warning")
+    }
+    else if(!founder){
+      showToast("Founder is required" , "warning")
+    }
+    else if(!websiteLink){
+      showToast("Website is required" , "warning")
+    }
+    else if(!domain){
+      showToast("Domain is required" , "warning")
+    }
+    else if(!industry){
+      showToast("Industry is required" , "warning")
+    }
+    else if(!seekInvestment){
+      showToast("Please enter investment" , "warning")
+    }
+    else if(!partnerRequirement){
+      showToast("Please choose partner requirement" , "warning")
+    }
+    else {
+      const url = endpoints.incubation.createIncubation;
+      
+      const headers
+      var formdata = new FormData();
+      formdata.append("title", "r");
+      formdata.append("image", fileInput.files[0], "[PROXY]");
+      formdata.append("stage", "d");
+      formdata.append("since_date", "01-01-1998");
+      formdata.append("founder", "e");
+      formdata.append("website_link", "e");
+      formdata.append("project_name", "e");
+      formdata.append("domain", "6373291dfd4cab117e04ddb2");
+      formdata.append("industry", "6373278b2b7154a908092562");
+      formdata.append("investment", "e");
+      formdata.append("partner_requirement", "e");
+      formdata.append("sponsers", "e");
+      formdata.append("partners", "e");
+      formdata.append("others", "e");
+    }
+  };
 
   const refreshAllInputField = () => {};
 
@@ -119,6 +183,8 @@ const CreateCareerFareForm = (props) => {
                   class="form-control field py-4 mb-3"
                   id=""
                   placeholder="Enter  name"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                 />
               </div>
             </div>
@@ -164,6 +230,8 @@ const CreateCareerFareForm = (props) => {
                 <select
                   class="form-select end-year "
                   aria-label="Default select example"
+                  value={stage}
+                  onChange={(e)  => setStage(e.target.value)}
                 >
                   <option>Choose</option>
                   <option value="Pressed">Pressed</option>
@@ -182,6 +250,8 @@ const CreateCareerFareForm = (props) => {
                   class="form-control field py-4"
                   id=""
                   placeholder="Enter job location"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
                 />
               </div>
             </div>
@@ -189,10 +259,12 @@ const CreateCareerFareForm = (props) => {
               <div class="form-group">
                 <label for="exampleInputPassword1">Founder</label>
                 <input
-                  type="number"
+                  type="text"
                   class="form-control field py-4"
                   id=""
                   placeholder="Enter founder name"
+                  value={founder}
+                  onChange={(e)=> setFounder(e.target.value)}
                 />
               </div>
             </div>
@@ -201,10 +273,12 @@ const CreateCareerFareForm = (props) => {
               <div class="form-group">
                 <label for="exampleInputPassword1">Website Link (url)</label>
                 <input
-                  type="number"
+                  type="text"
                   class="form-control field py-4"
                   id=""
                   placeholder="Enter your website"
+                  value={websiteLink}
+                  onChange={(e) =>setWebsiteLink(e.target.value)}
                 />
               </div>
             </div>
@@ -216,6 +290,8 @@ const CreateCareerFareForm = (props) => {
                   class="form-control field py-4"
                   id=""
                   placeholder="Enter company/Project name"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
                 />
               </div>
             </div>
@@ -307,6 +383,8 @@ const CreateCareerFareForm = (props) => {
                   class="form-control field py-4"
                   id=""
                   placeholder="Enter investment"
+                  value={seekInvestment}
+                  onChange={(e) => setSeekInvestMent(e.target.value)}
                 />
               </div>
             </div>
@@ -318,6 +396,8 @@ const CreateCareerFareForm = (props) => {
                 class="form-select end-year "
                 aria-label="Default select example"
                 required
+                value={partnerRequirement}
+                onChange={(e)=> setPartnerRequirement(e.target.value)}
               >
                 <option>Choose</option>
                 <option value="Technical Expertise">Technical Expertise</option>
@@ -329,13 +409,13 @@ const CreateCareerFareForm = (props) => {
           <div className="col-12 col-md-12 col-lg-12 mb-3">
             <div class="form-group skillssss">
               <label for="exampleInputPassword1">Sporsers</label>
-              <TagsInput placeHolder="Enter all sponsers" />
+              <TagsInput placeHolder="Enter all sponsers" value={sponsers} onChange={setSponsers}/>
             </div>
           </div>
           <div className="col-12 col-md-12 col-lg-12 mb-3">
             <div class="form-group skillssss">
               <label for="exampleInputPassword1">Partners</label>
-              <TagsInput placeHolder="Enter all partners" />
+              <TagsInput placeHolder="Enter all partners" value={partners} onChange={setPartners}/>
             </div>
           </div>
 

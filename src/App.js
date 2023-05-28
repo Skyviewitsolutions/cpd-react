@@ -61,7 +61,6 @@ function App() {
     <>
       <Router>
         <Routes>
-
         <Route path="/" element={<PublicRoute element={<Home_screens />} />} />
         <Route path="/resume" element={<PrivateRoute element={<Student_cv />} />} />
         <Route path="/login" element={<PublicRoute element={<Loginpage />} />} />

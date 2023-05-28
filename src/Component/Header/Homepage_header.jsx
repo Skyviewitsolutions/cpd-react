@@ -385,14 +385,14 @@ const Homepage_header = () => {
             <div className="headerBox" onClick={() => handleNavbar("career-fare")}>
                <div className="activeHeaderBox">
               <img  src={fareW} alt=""  className="coaches" style={{ width: "24px" }} />
-              <h6>Career</h6>
+              <h6>Incubation</h6>
               <h5>Fare</h5>{" "}
             </div>
             </div>
           ) : (
             <div className="headerBox" onClick={() => handleNavbar("career-fare")}>
               <img src={fare} alt="" className="coaches" style={{ width: "24px" }} />
-              <h6>Career</h6>
+              <h6>Incubation</h6>
               <h5>Fare</h5>{" "}
             </div>
           )}
