@@ -12,8 +12,7 @@ import axios from "axios";
 import { getDomainList, getIndustryList } from "../../../utils/api";
 
 const CreateJobsForm = (props) => {
-
-  const { showJobForm, setShowJobForm, update, setUpdate , getJobList , getMyJobList ,setShowAllJobs , selectedJob , setSelectedJob ,setUpdateJob , updateJob } = props;
+  const { showJobForm, setShowJobForm, update, setUpdate, getJobList, getMyJobList, setShowAllJobs, selectedJob, setSelectedJob, setUpdateJob, updateJob } = props;
 
   const [jobTitle, setJobTitle] = useState("");
   const [coachingImg, setCoachingImg] = useState(null);
@@ -79,21 +78,20 @@ const CreateJobsForm = (props) => {
 
   const refreshAllInputField = () => {
     setJobTitle("");
-      setCompanyName("");
-      setTotalOpenings("");
-      setJobLocation("");
-      setMinSalary("");
-      setMaxSalary("")
-      setDescription("");
-      setDomainId("")
-      setIndustryId("")
-      setDomain("")
-      setIndustry("")
-      setSalaryType("")
-      setJobType("");
-      setSkills([])
+    setCompanyName("");
+    setTotalOpenings("");
+    setJobLocation("");
+    setMinSalary("");
+    setMaxSalary("");
+    setDescription("");
+    setDomainId("");
+    setIndustryId("");
+    setDomain("");
+    setIndustry("");
+    setSalaryType("");
+    setJobType("");
+    setSkills([]);
   };
-
 
   const handleJobImg = (e) => {
     const files = e.target.files[0];
@@ -144,7 +142,7 @@ const CreateJobsForm = (props) => {
     formdata.append("job_type", jobType);
     formdata.append("skills", skills);
     formdata.append("others", description);
-    formdata.append("created_by" , userId)
+    formdata.append("created_by", userId);
     setLoading(true);
     axios
       .post(url, formdata, { headers: headers })
@@ -153,7 +151,7 @@ const CreateJobsForm = (props) => {
         if (res.data.result == true) {
           showToast("Job created successfully", "success");
           setShowAllJobs(false);
-          getMyJobList()
+          getMyJobList();
           setShowJobForm(false);
         }
       })
@@ -162,7 +160,6 @@ const CreateJobsForm = (props) => {
         console.log(err, "error");
       });
   };
-
 
   // writing function for updating the jobs;
 
@@ -206,9 +203,9 @@ const CreateJobsForm = (props) => {
     formdata.append("job_type", jobType);
     formdata.append("skills", skills);
     formdata.append("others", description);
-    formdata.append("job_id" , selectedJob?._id)
-    formdata.append("created_by" , userId)
-    
+    formdata.append("job_id", selectedJob?._id);
+    formdata.append("created_by", userId);
+
     setLoading(true);
     axios
       .post(url, formdata, { headers: headers })
@@ -217,7 +214,7 @@ const CreateJobsForm = (props) => {
         if (res.data.result == true) {
           showToast("Job updated successfully", "success");
           setShowAllJobs(false);
-          getMyJobList()
+          getMyJobList();
           setShowJobForm(false);
         }
       })
@@ -250,64 +247,46 @@ const CreateJobsForm = (props) => {
       });
   }, []);
 
-
-
   // writing code for updating the fields;
 
-
-
-  useEffect(() =>{
-    if(updateJob){
+  useEffect(() => {
+    if (updateJob) {
       setJobTitle(selectedJob?.job_title);
       setCompanyName(selectedJob?.company_name);
       setTotalOpenings(selectedJob?.total_openings);
       setJobLocation(selectedJob?.job_location);
       setMinSalary(selectedJob?.max_salary);
-      setMaxSalary(selectedJob?.max_salary)
+      setMaxSalary(selectedJob?.max_salary);
       setDescription(selectedJob?.others);
-      setDomainId(selectedJob?.domain?.id)
-      setIndustryId(selectedJob?.industry?.id)
-      setDomain(selectedJob?.domain?.title)
-      setIndustry(selectedJob?.industry?.title)
-      setSalaryType(selectedJob?.duration)
+      setDomainId(selectedJob?.domain?.id);
+      setIndustryId(selectedJob?.industry?.id);
+      setDomain(selectedJob?.domain?.title);
+      setIndustry(selectedJob?.industry?.title);
+      setSalaryType(selectedJob?.duration);
       setJobType(selectedJob?.job_type);
-      setSkills(selectedJob?.skills)
+      setSkills(selectedJob?.skills);
 
       var imgUrl = selectedJob?.job_image;
-      var fileName = "jobimg.jpg"
-      
+      var fileName = "jobimg.jpg";
+
       fetch(imgUrl).then(async (response) => {
         const contentType = response.headers.get("content-type");
         const blob = await response.blob();
         const file = new File([blob], fileName, { contentType });
-       setJobsImg(file)
+        setJobsImg(file);
       });
-
     }
-  },[updateJob]);
-
+  }, [updateJob]);
 
   return (
-    <Modal
-      show={showJobForm}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+    <Modal show={showJobForm} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
       <div className="formoutline_studentcv coachFormSt jobportalfomt">
         <div>
           <div className="row">
             <div className="col-lg-6 col-md-6 col-12 ">
               <div class="form-group">
                 <label for="exampleInputPassword1">Job Title</label>
-                <input
-                  type="text"
-                  class="form-control field py-4 mb-3"
-                  id=""
-                  placeholder="Enter Job title"
-                  value={jobTitle}
-                  onChange={(e) => setJobTitle(e.target.value)}
-                />
+                <input type="text" class="form-control field py-4 mb-3" id="" placeholder="Enter Job title" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} />
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6 ">
@@ -316,7 +295,7 @@ const CreateJobsForm = (props) => {
                   <>
                     <label htmlFor="takePhoto">Upload Img</label>
                     <h5 class="form-control" htmlFor="takePhone">
-                    {jobsImg.name}
+                      {jobsImg.name}
                     </h5>
                     <input
                       type="file"
@@ -362,68 +341,32 @@ const CreateJobsForm = (props) => {
             <div className="col-12 col-md-6 col-lg-6 mb-3">
               <div class="form-group">
                 <label for="exampleInputPassword1">Job Location</label>
-                <input
-                  type="text"
-                  class="form-control field py-4"
-                  id=""
-                  placeholder="Enter job location"
-                  value={jobLocation}
-                  onChange={(e) => setJobLocation(e.target.value)}
-                />
+                <input type="text" class="form-control field py-4" id="" placeholder="Enter job location" value={jobLocation} onChange={(e) => setJobLocation(e.target.value)} />
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6 mb-3">
               <div class="form-group">
                 <label for="exampleInputPassword1">Min Salary (in HKD)</label>
-                <input
-                  type="number"
-                  class="form-control field py-4"
-                  id=""
-                  placeholder="Enter salary"
-                  value={minsalary}
-                  onChange={(e) => setMinSalary(e.target.value)}
-                  min={0}
-                />
+                <input type="number" class="form-control field py-4" id="" placeholder="Enter salary" value={minsalary} onChange={(e) => setMinSalary(e.target.value)} min={0} />
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6 mb-3">
               <div class="form-group">
                 <label for="exampleInputPassword1">Max Salary (in HKD)</label>
-                <input
-                  type="number"
-                  class="form-control field py-4"
-                  id=""
-                  placeholder="Enter salary"
-                  value={maxsalary}
-                  onChange={(e) => setMaxSalary(e.target.value)}
-                  min={0}
-                />
+                <input type="number" class="form-control field py-4" id="" placeholder="Enter salary" value={maxsalary} onChange={(e) => setMaxSalary(e.target.value)} min={0} />
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6 mb-3">
               <div class="form-group">
                 <label for="exampleInputPassword1">Company Name</label>
-                <input
-                  type="text"
-                  class="form-control field py-4"
-                  id=""
-                  placeholder="Enter company name"
-                  value={companyName}
-                  onChange={(e) => setCompanyName(e.target.value)}
-                />
+                <input type="text" class="form-control field py-4" id="" placeholder="Enter company name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
               </div>
             </div>
 
             <div className="col-12 col-md-6 col-lg-6 mb-3">
               <div class="form-group">
                 <label for="exampleInputPassword1">Domain</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                  value={domain}
-                  required
-                  onChange={(e) => handleDomainSelection(e.target.value)}
-                >
+                <select class="form-select end-year " aria-label="Default select example" value={domain} required onChange={(e) => handleDomainSelection(e.target.value)}>
                   <option value="">Choose</option>
                   {allDomain.map((domain, index) => {
                     return (
@@ -455,13 +398,7 @@ const CreateJobsForm = (props) => {
             <div className="col-12 col-md-6 col-lg-6 mb-3">
               <div class="form-group">
                 <label for="exampleInputPassword1">Industry</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                  value={industry}
-                  required
-                  onChange={(e) => handleIndustrySelection(e.target.value)}
-                >
+                <select class="form-select end-year " aria-label="Default select example" value={industry} required onChange={(e) => handleIndustrySelection(e.target.value)}>
                   <option>Choose</option>
                   {allIndustry.map((industry, index) => {
                     return (
@@ -501,8 +438,7 @@ const CreateJobsForm = (props) => {
                     marginRight: "25px",
                     display: "flex",
                     alignItems: "center",
-                  }}
-                >
+                  }}>
                   <input
                     class="form-check-input"
                     type="radio"
@@ -511,11 +447,7 @@ const CreateJobsForm = (props) => {
                     checked={salaryType == "monthly"}
                     onChange={() => setSalaryType("monthly")}
                   />
-                  <label
-                    class="form-check-label  textsession"
-                    for="flexRadioDefault2"
-                    style={{ marginBottom: "0px" }}
-                  >
+                  <label class="form-check-label  textsession" for="flexRadioDefault2" style={{ marginBottom: "0px" }}>
                     Monthly
                   </label>
                 </div>
@@ -527,8 +459,7 @@ const CreateJobsForm = (props) => {
                     display: "flex",
 
                     alignItems: "center",
-                  }}
-                >
+                  }}>
                   <input
                     class="form-check-input"
                     type="radio"
@@ -537,11 +468,7 @@ const CreateJobsForm = (props) => {
                     checked={salaryType == "yearly"}
                     onChange={() => setSalaryType("yearly")}
                   />
-                  <label
-                    class="form-check-label textsession"
-                    for="flexRadioDefault3"
-                    style={{ marginBottom: "0px" }}
-                  >
+                  <label class="form-check-label textsession" for="flexRadioDefault3" style={{ marginBottom: "0px" }}>
                     Yearly
                   </label>
                 </div>
@@ -552,13 +479,7 @@ const CreateJobsForm = (props) => {
           <div className="col-12 col-md-6 col-lg-6 mb-3">
             <div class="form-group">
               <label for="exampleInputPassword1">Job Type</label>
-              <select
-                class="form-select end-year "
-                aria-label="Default select example"
-                value={jobType}
-                required
-                onChange={(e) => setJobType(e.target.value)}
-              >
+              <select class="form-select end-year " aria-label="Default select example" value={jobType} required onChange={(e) => setJobType(e.target.value)}>
                 <option>Choose</option>
                 <option value="remote">Remote</option>
                 <option value="onSite">On Site</option>
@@ -577,24 +498,13 @@ const CreateJobsForm = (props) => {
           <div className="col-12 col-md-12 col-lg-12 mb-3">
             <div class="form-group">
               <label for="exampleInputPassword1">Others</label>
-              <textarea
-                type="text"
-                class="form-control field py-4"
-                id=""
-                placeholder="Enter your industry"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
+              <textarea type="text" class="form-control field py-4" id="" placeholder="Enter your industry" value={description} onChange={(e) => setDescription(e.target.value)} />
             </div>
           </div>
           {/* here we aare adding payment div */}
 
           <div className="confirmBtn">
-            <Button
-              title={updateJob ? "Update Job" : "Create Job"}
-              onClick={updateJob ? updateJobs : submitJobs}
-              loading={loading}
-            />
+            <Button title={updateJob ? "Update Job" : "Create Job"} onClick={updateJob ? updateJobs : submitJobs} loading={loading} />
           </div>
         </div>
         <div
@@ -603,8 +513,7 @@ const CreateJobsForm = (props) => {
             setShowJobForm(false);
             refreshAllInputField();
             setUpdateJob(false);
-          }}
-        >
+          }}>
           <IoIosCloseCircleOutline size={26} color="red" />
         </div>
       </div>

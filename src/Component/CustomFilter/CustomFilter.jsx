@@ -3,10 +3,8 @@ import { BsFilterLeft } from "react-icons/bs";
 import $ from "jquery";
 import { getDomainList, getIndustryList } from "../../utils/api";
 
-
 const CustomFilter = (props) => {
-
-  const { filterByDomain = [] , setFilterByDomain , filterByIndustry = [] , setFilterByIndustry } = props
+  const { filterByDomain = [], setFilterByDomain, filterByIndustry = [], setFilterByIndustry } = props;
 
   const [allDomain, setAllDomain] = useState([]);
   const [allIndustry, setAllIndustry] = useState([]);
@@ -48,14 +46,15 @@ const CustomFilter = (props) => {
   // here we are fetching industry and domain list ;
 
   useEffect(() => {
-
     getIndustryList()
       .then((res) => {
         if (res.data.data) {
           var data = res.data.data;
           setAllIndustry(data);
-          var industryData = data.map((itm) => {return itm.title.toLowerCase()})
-          setFilterByIndustry(industryData)
+          var industryData = data.map((itm) => {
+            return itm.title.toLowerCase();
+          });
+          setFilterByIndustry(industryData);
         }
       })
       .catch((err) => {
@@ -67,8 +66,10 @@ const CustomFilter = (props) => {
         if (res.data.data) {
           var data = res.data.data;
           setAllDomain(data);
-          var domainData = data.map((itm) => {return itm.title.toLowerCase()})
-          setFilterByDomain(domainData)
+          var domainData = data.map((itm) => {
+            return itm.title.toLowerCase();
+          });
+          setFilterByDomain(domainData);
         }
       })
       .catch((err) => {
@@ -76,33 +77,33 @@ const CustomFilter = (props) => {
       });
   }, []);
 
-  const handleFilterByDomain = (value) =>{
+  const handleFilterByDomain = (value) => {
     var val = value.toLowerCase();
-    if(filterByDomain.includes(val)){
-      var filteredData = filterByDomain.filter((item,index) => {return item.toLowerCase() != val})
-      setFilterByDomain(filteredData)
+    if (filterByDomain.includes(val)) {
+      var filteredData = filterByDomain.filter((item, index) => {
+        return item.toLowerCase() != val;
+      });
+      setFilterByDomain(filteredData);
+    } else {
+      setFilterByDomain((itm) => {
+        return [...itm, val];
+      });
     }
-    else {
-      setFilterByDomain((itm) =>{
-        return [...itm , val]
-      })
-    }
-  }
+  };
 
-
-  const handleFilterByIndustry = (value) =>{
+  const handleFilterByIndustry = (value) => {
     var val = value.toLowerCase();
-    if(filterByIndustry.includes(val)){
-      var filteredData = filterByIndustry.filter((item,index) => {return item.toLowerCase() != val})
-      setFilterByIndustry(filteredData)
+    if (filterByIndustry.includes(val)) {
+      var filteredData = filterByIndustry.filter((item, index) => {
+        return item.toLowerCase() != val;
+      });
+      setFilterByIndustry(filteredData);
+    } else {
+      setFilterByIndustry((itm) => {
+        return [...itm, val];
+      });
     }
-    else {
-      setFilterByIndustry((itm) =>{
-        return [...itm , val]
-      })
-    }
-  }
-
+  };
 
   return (
     <div className="workshopsidebar">
@@ -123,31 +124,37 @@ const CustomFilter = (props) => {
                   <>
                     <li key={index}>
                       <a href="#">
-                        <input type="checkbox" className="checkBoxAdCmnty" onClick={() => handleFilterByDomain(domain.title)} checked={filterByDomain.includes(domain.title.toLowerCase())}/>
+                        <input
+                          type="checkbox"
+                          className="checkBoxAdCmnty"
+                          onClick={() => handleFilterByDomain(domain.title)}
+                          checked={filterByDomain.includes(domain.title.toLowerCase())}
+                        />
                         <span>{domain.title}</span>
                       </a>
                     </li>
                   </>
                 );
               })}
-
-           </ul>
-           <ul>
+          </ul>
+          <ul>
             <h6 className="AddCmntyMenuText">Industry</h6>
             {allIndustry.length != 0 &&
               allIndustry.map((industry, index) => {
                 return (
-                  <>
-                    <li key={index}>
-                      <a href="#">
-                        <input type="checkbox" className="checkBoxAdCmnty" onClick={() => handleFilterByIndustry(industry.title)} checked={filterByIndustry.includes(industry.title.toLowerCase())}/>
-                        <span>{industry.title}</span>
-                      </a>
-                    </li>
-                  </>
+                  <li key={index}>
+                    <a href="#">
+                      <input
+                        type="checkbox"
+                        className="checkBoxAdCmnty"
+                        onClick={() => handleFilterByIndustry(industry.title)}
+                        checked={filterByIndustry.includes(industry.title.toLowerCase())}
+                      />
+                      <span>{industry.title}</span>
+                    </a>
+                  </li>
                 );
               })}
-          
           </ul>
         </nav>
       </div>
