@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  json,
-  useLocation,
-  useNavigate,
-  useRouteLoaderData,
-} from "react-router-dom";
+import { json, useLocation, useNavigate, useRouteLoaderData } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
@@ -36,9 +31,7 @@ import "./employerForm.css";
 import Loader from "../../Component/Loader/Loader";
 import EmployerPreview from "../../Component/Modal/EmployerPreview/EmployerPreview";
 
-
 function EmployerForm() {
-
   const token = localStorage.getItem("token");
   const [allIndustry, setAllIndustry] = useState([]);
   const [allDomain, setAllDomain] = useState([]);
@@ -168,9 +161,7 @@ function EmployerForm() {
       showToast("Nationality is required", "warning");
     } else if (!employer.companyName) {
       showToast("Company name is required", "warning");
-    } else if (
-      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(employer.email)
-    ) {
+    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(employer.email)) {
       showToast("Valid email is required", "warning");
     } else if (!employer.dob) {
       showToast("Date of birth is required", "warning");
@@ -273,7 +264,7 @@ function EmployerForm() {
           });
 
           const image = val?.company_logo;
-          console.log(image , "image")
+          console.log(image, "image");
           const fileName = "myFile.jpg";
 
           fetch(image).then(async (response) => {
@@ -302,9 +293,7 @@ function EmployerForm() {
       showToast("Nationality is required", "warning");
     } else if (!employer.companyName) {
       showToast("Company name is required", "warning");
-    } else if (
-      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(employer.email)
-    ) {
+    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(employer.email)) {
       showToast("Valid email is required", "warning");
     } else if (!employer.dob) {
       showToast("Date of birth is required", "warning");
@@ -364,7 +353,6 @@ function EmployerForm() {
     }
   };
 
-
   useEffect(() => {
     const isCvAvailable = localStorage.getItem("isCvUploaded");
     if (isCvAvailable == "true") {
@@ -386,11 +374,11 @@ function EmployerForm() {
           </div>
           <div className="row">
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">First Name*</label>
                 <input
                   type="text"
-                  class="form-control "
+                  className="form-control "
                   id="exampleInputPassword1"
                   placeholder="Enter First Name"
                   value={employer.first_name}
@@ -400,11 +388,11 @@ function EmployerForm() {
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Last Name*</label>
                 <input
                   type="text"
-                  class="form-control "
+                  className="form-control "
                   id="exampleInputPassword1"
                   placeholder="Enter Last Name"
                   required
@@ -415,7 +403,7 @@ function EmployerForm() {
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="mobile_code">Contact*</label>
                 <PhoneInput
                   country="hk"
@@ -430,23 +418,14 @@ function EmployerForm() {
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="">Nationality*</label>
-                <select
-                  class="form-select  "
-                  aria-label="select example"
-                  required
-                  value={employer.nationality}
-                  name="nationality"
-                  onChange={handleForm}
-                >
+                <select className="form-select  " aria-label="select example" required value={employer.nationality} name="nationality" onChange={handleForm}>
                   <option value="">Choose Nationality</option>
                   {allNational.map((country, index) => {
                     return (
                       <>
-                        <option value={country.en_short_name}>
-                          {country.en_short_name}
-                        </option>
+                        <option value={country.en_short_name}>{country.en_short_name}</option>
                       </>
                     );
                   })}
@@ -454,11 +433,11 @@ function EmployerForm() {
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Company Name</label>
                 <input
                   type="text"
-                  class="form-control "
+                  className="form-control "
                   id="exampleInputPassword1"
                   placeholder="Enter Company Name"
                   required
@@ -469,11 +448,11 @@ function EmployerForm() {
               </div>
             </div>{" "}
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Email</label>
                 <input
                   type="text"
-                  class="form-control "
+                  className="form-control "
                   id="exampleInputPassword1"
                   placeholder="Enter Email"
                   required
@@ -484,28 +463,15 @@ function EmployerForm() {
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="">Date of Birth*</label>
-                <input
-                  type="date"
-                  class="form-control "
-                  placeholder="Due date"
-                  value={employer.dob}
-                  name="dob"
-                  onChange={handleForm}
-                />
+                <input type="date" className="form-control " placeholder="Due date" value={employer.dob} name="dob" onChange={handleForm} />
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="">Gender*</label>
-                <select
-                  className="form-select "
-                  aria-label="Default select example"
-                  value={employer.gender}
-                  name="gender"
-                  onChange={handleForm}
-                >
+                <select className="form-select " aria-label="Default select example" value={employer.gender} name="gender" onChange={handleForm}>
                   <option>Choose Gender</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -513,11 +479,11 @@ function EmployerForm() {
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="">Company address</label>
                 <input
                   type="text"
-                  class="form-control "
+                  className="form-control "
                   id="exampleInputPassword1"
                   placeholder="Enter address"
                   required
@@ -528,16 +494,16 @@ function EmployerForm() {
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 {employeerImg ? (
                   <>
                     <label htmlFor="takePhoto">Company Logo</label>
-                    <h5 class="form-control imglable" htmlFor="takePhoto">
+                    <h5 className="form-control imglable" htmlFor="takePhoto">
                       <label htmlFor="takePhoto"> {employeerImg.name} </label>
                     </h5>
                     <input
                       type="file"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Enter here"
                       accept="image/png, image/jpeg, image/jpg"
                       onChange={(e) => handleUploadImg(e)}
@@ -550,7 +516,7 @@ function EmployerForm() {
                     <label htmlFor="takePhoto">Company Logo</label>
                     <input
                       type="file"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Enter here"
                       accept="image/png, image/gif, image/jpeg"
                       onChange={(e) => handleUploadImg(e)}
@@ -562,10 +528,10 @@ function EmployerForm() {
             </div>
             <div className="col-12 col-md-12 col-lg-7  ">
               <label for="exampleInputPassword1">Description</label>
-              <div class="form-group domain_textarea">
+              <div className="form-group domain_textarea">
                 <textarea
                   type="text"
-                  class="form-control "
+                  className="form-control "
                   placeholder="Enter some information related Domain and Industry"
                   value={employer.description}
                   name="description"
@@ -577,11 +543,11 @@ function EmployerForm() {
 
           <div className="row">
             <div classname="col-12 col-md-6 col-lg-12  ">
-              <div class="form-group ">
+              <div className="form-group ">
                 <label for="exampleInputPassword1">Skills</label>
                 <TagsInput
                   type="text"
-                  class="form-control hobbies_tags"
+                  className="form-control hobbies_tags"
                   placeHolder="Enter here"
                   value={employer.skills}
                   name="description"
@@ -597,14 +563,9 @@ function EmployerForm() {
 
           <div className="row">
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Domain</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                  onChange={handleDomainSelection}
-                  value={employer.domain}
-                >
+                <select className="form-select end-year " aria-label="Default select example" onChange={handleDomainSelection} value={employer.domain}>
                   <option value="">Choose</option>
                   {allDomain.map((domain, ind) => {
                     return (
@@ -620,14 +581,9 @@ function EmployerForm() {
             </div>
 
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Industry</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                  onChange={handleIndustrySelection}
-                  value={employer.industry}
-                >
+                <select className="form-select end-year " aria-label="Default select example" onChange={handleIndustrySelection} value={employer.industry}>
                   <option value="">Choose</option>
                   {allIndustry.map((itm, index) => {
                     return (
@@ -642,35 +598,20 @@ function EmployerForm() {
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Sub Industry</label>
 
-                <input
-                  type="text"
-                  class="form-control field"
-                  id=""
-                  placeholder="Enter here"
-                  value={employer.subIndustry}
-                  name="subIndustry"
-                  onChange={handleForm}
-                />
+                <input type="text" className="form-control field" id="" placeholder="Enter here" value={employer.subIndustry} name="subIndustry" onChange={handleForm} />
               </div>
             </div>
 
             <div className="row mt-4">
               <div className="col-lg-6"></div>
               <div className="col-lg-3 col-md-3 col-12">
-                <Button
-                  title={update === true ? "Update" : "Submit"}
-                  loading={loading}
-                  onClick={update === true ? updateProfile : submit}
-                />
+                <Button title={update === true ? "Update" : "Submit"} loading={loading} onClick={update === true ? updateProfile : submit} />
               </div>
               <div className="col-lg-3 col-md-3 col-12">
-                <Button
-                  title="Preview Profile"
-                  onClick={() => setShowEmployeerPreview(true)}
-                />
+                <Button title="Preview Profile" onClick={() => setShowEmployeerPreview(true)} />
               </div>
             </div>
           </div>
@@ -679,7 +620,9 @@ function EmployerForm() {
 
       <ToastContainer />
       {loading && <Loader />}
-      <EmployerPreview showEmployeerPreview={showEmployeerPreview} setShowEmployeerPreview={setShowEmployeerPreview} 
+      <EmployerPreview
+        showEmployeerPreview={showEmployeerPreview}
+        setShowEmployeerPreview={setShowEmployeerPreview}
         submit={submit}
         firstName={employer.first_name}
         lastName={employer.last_name}
@@ -694,7 +637,8 @@ function EmployerForm() {
         updateProfile={updateProfile}
         dob={employer.dob}
         employeerImg={employeerImg}
-        loading={loading}/>
+        loading={loading}
+      />
 
       <Footer />
     </>

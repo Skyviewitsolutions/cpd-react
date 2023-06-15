@@ -17,7 +17,6 @@ import Add_committee from "../Component/Cards/Add_committee";
 import showToast from "../Component/CustomToast/CustomToast";
 
 const Event = () => {
-  
   const [allCommunity, setAllCommunity] = useState([]);
   const [imagePath, setImagePath] = useState("");
   const [showCommunityForm, setShowCommunityForm] = useState(false);
@@ -43,7 +42,7 @@ const Event = () => {
       .then((res) => {
         if (res.data.result === true) {
           const val = res.data.data;
-        
+
           const imgPath = res.data.image_path;
           setImagePath(imgPath);
           // const communityId=res.data[0]._id;
@@ -59,7 +58,7 @@ const Event = () => {
       });
   };
 
-// my community api
+  // my community api
 
   const getMyCommunity = () => {
     const token = localStorage.getItem("token");
@@ -77,7 +76,6 @@ const Event = () => {
           const val = res.data.data;
           setMyCommunity(val);
         }
-        
       })
       .catch((err) => {
         console.log(err, "this is the error");
@@ -93,22 +91,22 @@ const Event = () => {
 
   const addCommunity = () => {
     if (!topics) {
-      showToast("Topic is required",  "warning" );
+      showToast("Topic is required", "warning");
     } else if (!displayName) {
-      showToast("Display name is required",  "warning" );
+      showToast("Display name is required", "warning");
     } else if (!description) {
-      showToast("Description is required",  "warning" );
+      showToast("Description is required", "warning");
     } else if (!tags) {
-      showToast("Tags is required",  "warning" );
+      showToast("Tags is required", "warning");
     } else {
       const token = localStorage.getItem("token");
-     
+
       const formData = new FormData();
 
       formData.append("topic", topics);
       formData.append("display_name", displayName);
       formData.append("description", description);
-      
+
       formData.append("image", imgFiles);
       formData.append("tag", JSON.stringify(tags));
 
@@ -121,10 +119,10 @@ const Event = () => {
         .post(addCommunityUrl, formData, { headers: headers })
         .then((res) => {
           if (res.data.result) {
-            showToast("community created successfully",  "success" );
+            showToast("community created successfully", "success");
             navigate("/myCommunity");
           } else if (!res.data.result) {
-            showToast(res.data?.message, "warning" );
+            showToast(res.data?.message, "warning");
           }
         })
         .catch((err) => {
@@ -144,9 +142,9 @@ const Event = () => {
       .post(Updateapi, { headers: headers })
       .then((res) => {
         if (res.data.result) {
-          showToast("community created successfully",  "success" );
+          showToast("community created successfully", "success");
         } else if (!res.data.result) {
-          showToast(res.data?.message, "warning" );
+          showToast(res.data?.message, "warning");
         }
       })
       .catch((err) => {
@@ -200,7 +198,7 @@ const Event = () => {
       <Networking_headers />
       {/*  */}
       <div className="container">
-        <div class="row mb-4">
+        <div className="row mb-4">
           <div className="col-sm-5 col-md-6 col-lg-2 mt-5 ">
             <Sidenavbar />
           </div>
@@ -208,19 +206,15 @@ const Event = () => {
           <div className="col-sm-5 col-md-6 col-lg-10 mt-5">
             <div className="row  ">
               <div className="col-12 col-md-12 col-lg-8 mb-3">
-                <inputbox className="form-control networking_searchbox">
-                  search{" "}
-                </inputbox>
+                <inputbox className="form-control networking_searchbox">search </inputbox>
               </div>
-              <div
-                className="col-8 col-md-6 col-lg-3"
-                onClick={() => navigate("/networking")}
-              >
+              <div className="col-8 col-md-6 col-lg-3" onClick={() => navigate("/networking")}>
                 <button className="BackToCommunites">Back to Events</button>
                 {/* <Event_button text="Back to Events" /> */}
               </div>
               <div className="col-4 col-md-6 col-lg-1">
-                <Plus_button  onClick={() => navigate("/create-community")}
+                <Plus_button
+                  onClick={() => navigate("/create-community")}
                   // onClick={() => setShowCommunityForm(true)}
                   text=""
                 />
@@ -236,7 +230,7 @@ const Event = () => {
               {allCommunity.length != 0 &&
                 allCommunity.map((itm, index) => {
                   const id = itm._id;
-                  
+
                   var isSubscribed = myCommunity.some((element) => {
                     if (element._id === id) {
                       return true;
@@ -247,16 +241,9 @@ const Event = () => {
                   return (
                     <>
                       <div className="col-sm-12 col-md-6 col-lg-4 ">
-                        <Domain_cards
-                          data={itm}
-                          key={index}
-                          imagePath={imagePath}
-                          isSubscribed={isSubscribed}
-                          getMyCommunity={getMyCommunity}
-                          getAllCommunity={getAllCommunity}
-                        />
+                        <Domain_cards data={itm} key={index} imagePath={imagePath} isSubscribed={isSubscribed} getMyCommunity={getMyCommunity} getAllCommunity={getAllCommunity} />
                       </div>
-                      
+
                       {/* <div className="col-sm-12 col-md-6 col-lg-4 ">
                         <Add_committee
                           data={itm}
@@ -267,7 +254,6 @@ const Event = () => {
                           // getAllCommunity={getAllCommunity}
                         />
                       </div> */}
-
                     </>
                   );
                 })}

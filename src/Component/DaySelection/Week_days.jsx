@@ -4,11 +4,9 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import OwlCarousel from "react-owl-carousel";
 import $ from "jquery";
 import { useState, useEffect } from "react";
-import {AiFillCloseCircle} from "react-icons/ai"
+import { AiFillCloseCircle } from "react-icons/ai";
 
-
-const Week_days = ({ timeSlots, addTimeSlot , removeDay , clickedDay}) => {
-
+const Week_days = ({ timeSlots, addTimeSlot, removeDay, clickedDay }) => {
   useEffect(() => {
     // sync the state to the input
     $(".image-checkbox").on("click", function (e) {
@@ -20,7 +18,7 @@ const Week_days = ({ timeSlots, addTimeSlot , removeDay , clickedDay}) => {
     });
   }, []);
 
-  const [toggleDays, setToggleDays ] = useState(false);
+  const [toggleDays, setToggleDays] = useState(false);
 
   /* week days*/
   const options = {
@@ -64,187 +62,132 @@ const Week_days = ({ timeSlots, addTimeSlot , removeDay , clickedDay}) => {
     fontWeight: "700",
   };
 
-  useEffect(() =>{
-    setToggleDays(!toggleDays)
-  },[timeSlots , clickedDay])
-
+  useEffect(() => {
+    setToggleDays(!toggleDays);
+  }, [timeSlots, clickedDay]);
 
   return (
     <>
       {toggleDays ? (
-        <OwlCarousel
-          className="owl-theme category eventForm_weekDays_carousel "
-          id="category"
-          items={1}
-          margin={1}
-          dots={false}
-          {...options}
-          nav
-        >
-          <div class=" nopad text-center">
-            <label
-              class={`image-checkbox `}
-              style={(timeSlots.includes("monday") || clickedDay=="monday") ? activeBar : inActiveBar}
-              onClick={() => addTimeSlot("monday")}
-            >
+        <OwlCarousel className="owl-theme category eventForm_weekDays_carousel " id="category" items={1} margin={1} dots={false} {...options} nav>
+          <div className=" nopad text-center">
+            <label className={`image-checkbox `} style={timeSlots.includes("monday") || clickedDay == "monday" ? activeBar : inActiveBar} onClick={() => addTimeSlot("monday")}>
               Mon
               <input type="checkbox" value="" />
             </label>
-            {timeSlots.includes("monday") &&  <AiFillCloseCircle className="cutOptions" size={18} color="red"  onClick={() => removeDay("monday")}/>}
+            {timeSlots.includes("monday") && <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("monday")} />}
           </div>
-          <div class=" nopad text-center">
-            <label
-              class={`image-checkbox `}
-              style={(timeSlots.includes("tuesday") || clickedDay=="tuesday")  ? activeBar : inActiveBar}
-              onClick={() => addTimeSlot("tuesday")}
-            >
+          <div className=" nopad text-center">
+            <label className={`image-checkbox `} style={timeSlots.includes("tuesday") || clickedDay == "tuesday" ? activeBar : inActiveBar} onClick={() => addTimeSlot("tuesday")}>
               Tues
               <input type="checkbox" value="" />
             </label>
-            {timeSlots.includes("tuesday") &&  <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("tuesday")}/>}
+            {timeSlots.includes("tuesday") && <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("tuesday")} />}
           </div>
-          <div class=" nopad text-center">
+          <div className=" nopad text-center">
             <label
-              class={`image-checkbox `}
-              style={(timeSlots.includes("wednesday") || clickedDay=="wednesday") ? activeBar : inActiveBar}
-              onClick={() => addTimeSlot("wednesday")}
-            >
+              className={`image-checkbox `}
+              style={timeSlots.includes("wednesday") || clickedDay == "wednesday" ? activeBar : inActiveBar}
+              onClick={() => addTimeSlot("wednesday")}>
               Wed
               <input type="checkbox" value="" />
             </label>
-            {timeSlots.includes("wednesday") &&  <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("wednesday")}/>}
+            {timeSlots.includes("wednesday") && <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("wednesday")} />}
           </div>
-          <div class=" nopad text-center">
+          <div className=" nopad text-center">
             <label
-              class={`image-checkbox `}
-              style={(timeSlots.includes("thursday") || clickedDay=="thursday") ? activeBar : inActiveBar}
-              onClick={() => addTimeSlot("thursday")}
-            >
+              className={`image-checkbox `}
+              style={timeSlots.includes("thursday") || clickedDay == "thursday" ? activeBar : inActiveBar}
+              onClick={() => addTimeSlot("thursday")}>
               Thur
               <input type="checkbox" value="" />
             </label>
-            {timeSlots.includes("thursday") &&  <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("thursday")}/>}
+            {timeSlots.includes("thursday") && <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("thursday")} />}
           </div>
-          <div class=" nopad text-center">
-            <label
-              class={`image-checkbox `}
-              onClick={() => addTimeSlot("friday")}
-              style={(timeSlots.includes("friday") || clickedDay=="friday") ? activeBar : inActiveBar}
-            >
+          <div className=" nopad text-center">
+            <label className={`image-checkbox `} onClick={() => addTimeSlot("friday")} style={timeSlots.includes("friday") || clickedDay == "friday" ? activeBar : inActiveBar}>
               Fri
               <input type="checkbox" value="" />
             </label>
-            {timeSlots.includes("friday") &&  <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("friday")}/>}
+            {timeSlots.includes("friday") && <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("friday")} />}
           </div>
 
-          <div class=" nopad text-center">
+          <div className=" nopad text-center">
             <label
-              class={`image-checkbox `}
-              style={(timeSlots.includes("saturday") || clickedDay=="saturday") ? activeBar : inActiveBar}
-              onClick={() => addTimeSlot("saturday")}
-            >
+              className={`image-checkbox `}
+              style={timeSlots.includes("saturday") || clickedDay == "saturday" ? activeBar : inActiveBar}
+              onClick={() => addTimeSlot("saturday")}>
               Sat <input type="checkbox" value="" />
             </label>
-          {timeSlots.includes("saturday") &&  <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("saturday")}/>}
+            {timeSlots.includes("saturday") && <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("saturday")} />}
           </div>
-          <div class=" nopad text-center">
-            <label
-              class={`image-checkbox `}
-              style={(timeSlots.includes("sunday") || clickedDay=="sunday") ? activeBar : inActiveBar}
-              onClick={() => addTimeSlot("sunday")}
-            >
+          <div className=" nopad text-center">
+            <label className={`image-checkbox `} style={timeSlots.includes("sunday") || clickedDay == "sunday" ? activeBar : inActiveBar} onClick={() => addTimeSlot("sunday")}>
               Sun
               <input type="checkbox" value="" />
             </label>
-            {timeSlots.includes("sunday") &&  <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("sunday")}/>}
+            {timeSlots.includes("sunday") && <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("sunday")} />}
           </div>
         </OwlCarousel>
       ) : (
-        <OwlCarousel
-          className="owl-theme category eventForm_weekDays_carousel "
-          id="category"
-          items={1}
-          margin={1}
-          dots={false}
-          {...options}
-          nav
-        >
-          <div class=" nopad text-center">
-            <label
-              class={`image-checkbox `}
-              style={(timeSlots.includes("monday") || clickedDay=="monday") ? activeBar : inActiveBar}
-              onClick={() => addTimeSlot("monday")}
-            >
+        <OwlCarousel className="owl-theme category eventForm_weekDays_carousel " id="category" items={1} margin={1} dots={false} {...options} nav>
+          <div className=" nopad text-center">
+            <label className={`image-checkbox `} style={timeSlots.includes("monday") || clickedDay == "monday" ? activeBar : inActiveBar} onClick={() => addTimeSlot("monday")}>
               Mon
               <input type="checkbox" value="" />
             </label>
-            {timeSlots.includes("monday") &&  <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("monday")}/>}
+            {timeSlots.includes("monday") && <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("monday")} />}
           </div>
-          <div class=" nopad text-center">
-            <label
-              class={`image-checkbox `}
-              style={(timeSlots.includes("tuesday") || clickedDay=="tuesday") ? activeBar : inActiveBar}
-              onClick={() => addTimeSlot("tuesday")}
-            >
+          <div className=" nopad text-center">
+            <label className={`image-checkbox `} style={timeSlots.includes("tuesday") || clickedDay == "tuesday" ? activeBar : inActiveBar} onClick={() => addTimeSlot("tuesday")}>
               Tues
               <input type="checkbox" value="" />
             </label>
-            {timeSlots.includes("tuesday") &&  <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("tuesday")}/>}
+            {timeSlots.includes("tuesday") && <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("tuesday")} />}
           </div>
-          <div class=" nopad text-center">
+          <div className=" nopad text-center">
             <label
-              class={`image-checkbox `}
-              style={(timeSlots.includes("wednesday") || clickedDay=="wednesday") ? activeBar : inActiveBar}
-              onClick={() => addTimeSlot("wednesday")}
-            >
+              className={`image-checkbox `}
+              style={timeSlots.includes("wednesday") || clickedDay == "wednesday" ? activeBar : inActiveBar}
+              onClick={() => addTimeSlot("wednesday")}>
               Wed
               <input type="checkbox" value="" />
             </label>
-            {timeSlots.includes("wednesday") &&  <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("wednesday")}/>}
+            {timeSlots.includes("wednesday") && <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("wednesday")} />}
           </div>
-          <div class=" nopad text-center">
+          <div className=" nopad text-center">
             <label
-              class={`image-checkbox `}
-              style={(timeSlots.includes("thursday") || clickedDay=="thursday") ? activeBar : inActiveBar}
-              onClick={() => addTimeSlot("thursday")}
-            >
+              className={`image-checkbox `}
+              style={timeSlots.includes("thursday") || clickedDay == "thursday" ? activeBar : inActiveBar}
+              onClick={() => addTimeSlot("thursday")}>
               Thur
               <input type="checkbox" value="" />
             </label>
-            {timeSlots.includes("thursday") &&  <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("thursday")}/>}
+            {timeSlots.includes("thursday") && <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("thursday")} />}
           </div>
-          <div class=" nopad text-center">
-            <label
-              class={`image-checkbox `}
-              onClick={() => addTimeSlot("friday")}
-              style={(timeSlots.includes("friday") || clickedDay=="friday") ? activeBar : inActiveBar}
-            >
+          <div className=" nopad text-center">
+            <label className={`image-checkbox `} onClick={() => addTimeSlot("friday")} style={timeSlots.includes("friday") || clickedDay == "friday" ? activeBar : inActiveBar}>
               Fri
               <input type="checkbox" value="" />
             </label>
-            {timeSlots.includes("friday") &&  <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("friday")}/>}
+            {timeSlots.includes("friday") && <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("friday")} />}
           </div>
 
-          <div class=" nopad text-center">
+          <div className=" nopad text-center">
             <label
-              class={`image-checkbox `}
-              style={(timeSlots.includes("saturday") || clickedDay=="saturday") ? activeBar : inActiveBar}
-              onClick={() => addTimeSlot("saturday")}
-            >
+              className={`image-checkbox `}
+              style={timeSlots.includes("saturday") || clickedDay == "saturday" ? activeBar : inActiveBar}
+              onClick={() => addTimeSlot("saturday")}>
               Sat <input type="checkbox" value="" />
             </label>
-            {timeSlots.includes("saturday")  &&  <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("saturday")}/>}
+            {timeSlots.includes("saturday") && <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("saturday")} />}
           </div>
-          <div class=" nopad text-center">
-            <label
-              class={`image-checkbox `}
-              style={(timeSlots.includes("sunday") || clickedDay=="sunday") ? activeBar : inActiveBar}
-              onClick={() => addTimeSlot("sunday")}
-            >
+          <div className=" nopad text-center">
+            <label className={`image-checkbox `} style={timeSlots.includes("sunday") || clickedDay == "sunday" ? activeBar : inActiveBar} onClick={() => addTimeSlot("sunday")}>
               Sun
               <input type="checkbox" value="" />
             </label>
-            {timeSlots.includes("sunday")  &&  <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("sunday")}/>}
+            {timeSlots.includes("sunday") && <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDay("sunday")} />}
           </div>
         </OwlCarousel>
       )}

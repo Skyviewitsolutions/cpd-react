@@ -45,7 +45,7 @@ import jobsW from "../../assets/Icons/jobsWhite.png";
 import fareW from "../../assets/Icons/fareWhite.png";
 import MobileHeader from "./MobileHeader/MobileHeader";
 
-const Homepage_header = () => {
+const HomepageHeader = ({ notificationClicked }) => {
   const navigate = useNavigate("");
   const [isHovering, setIsHovering] = useState(false);
   const token = localStorage.getItem("token");
@@ -112,16 +112,16 @@ const Homepage_header = () => {
     } else if (selected === "career-fare") {
       localStorage.setItem("activeNavbar", selected);
       setActiveNavbar(selected);
-      navigate("/career-fare")
+      navigate("/career-fare");
     }
   };
 
   const handleResume = () => {
-    if (userDetails.user_type == 1) {
+    if (userDetails.user_type === 1) {
       navigate("/resume");
-    } else if (userDetails.user_type == 2) {
+    } else if (userDetails.user_type === 2) {
       navigate("/coaches-form");
-    } else if (userDetails.user_type == 3) {
+    } else if (userDetails.user_type === 3) {
       navigate("/employer-form");
     }
     localStorage.removeItem("activeNavbar");
@@ -149,21 +149,13 @@ const Homepage_header = () => {
         <div className="first-Nave">
           <Navbar bg="light" expand="lg" className="header1_afterlogin ">
             <Navbar.Brand>
-              <img
-                src={cpd_logo}
-                alt=""
-                className="cpd_logo"
-                onClick={() => navigate("/")}
-              />
+              <img src={cpd_logo} alt="" className="cpd_logo" onClick={() => navigate("/")} />
             </Navbar.Brand>
 
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto justify-content-end nav_middlebox flex-grow-1 pe-3">
-                <Nav.Link
-                  className="nav_img working"
-                  onClick={() => handleNavigation("/")}
-                >
+                <Nav.Link className="nav_img working" onClick={() => handleNavigation("/")}>
                   <img src={home} alt="" className="nav-icons" />
                   <h6>Home</h6>
                 </Nav.Link>
@@ -205,7 +197,7 @@ const Homepage_header = () => {
                   <h6>My Jobs</h6>
                 </Nav.Link> */}
 
-                <Nav.Link className="nav_img working">
+                <Nav.Link className="nav_img working" onClick={notificationClicked}>
                   <img src={message} alt="" className="nav-icons" />
                   <h6>Notification</h6>
                 </Nav.Link>
@@ -216,10 +208,7 @@ const Homepage_header = () => {
                 </Nav.Link>
 
                 <Form className="d-flex userprofile_block">
-                  <div
-                    className="userprofile_row1"
-                    onMouseOver={() => setIsHovering(true)}
-                  >
+                  <div className="userprofile_row1" onMouseOver={() => setIsHovering(true)}>
                     <img src={pimg} alt="" className="home" />
 
                     {isHovering && (
@@ -227,42 +216,20 @@ const Homepage_header = () => {
                         <div className=" userName">
                           <span>{userDetails?.name}</span>
                         </div>
-                        <div
-                          className="logoutBtn working"
-                          onClick={() => handleResume()}
-                        >
-                          <BsFillFileEarmarkPostFill
-                            className="nav-icons"
-                            size={18}
-                            color="#2c6959"
-                          />
+                        <div className="logoutBtn working" onClick={() => handleResume()}>
+                          <BsFillFileEarmarkPostFill className="nav-icons" size={18} color="#2c6959" />
                           <span style={{ marginLeft: "10px" }}>My Resume</span>
                         </div>
-                        <div
-                          className="logoutBtn"
-                          onClick={() => handleNavigation("/myCommunity")}
-                        >
-                          <img
-                            src={my_Community}
-                            alt=""
-                            className="nav-icons"
-                          />
-                          <span style={{ marginLeft: "10px" }}>
-                            My Community
-                          </span>
+                        <div className="logoutBtn" onClick={() => handleNavigation("/myCommunity")}>
+                          <img src={my_Community} alt="" className="nav-icons" />
+                          <span style={{ marginLeft: "10px" }}>My Community</span>
                         </div>
-                        <div
-                          className="logoutBtn"
-                          onClick={() => handleNavigation("/myCourses")}
-                        >
+                        <div className="logoutBtn" onClick={() => handleNavigation("/myCourses")}>
                           <img src={my_course} alt="" className="nav-icons" />
 
                           <span style={{ marginLeft: "10px" }}>My Course</span>
                         </div>
-                        <div
-                          className="logoutBtn"
-                          onClick={() => handleNavigation("/myEvents")}
-                        >
+                        <div className="logoutBtn" onClick={() => handleNavigation("/myEvents")}>
                           <img src={my_events} alt="" className="nav-icons" />
 
                           <span style={{ marginLeft: "10px" }}>My Events</span>
@@ -297,10 +264,7 @@ const Homepage_header = () => {
       <div className="row secondNave">
         <div className="col-10 d-flex justify-between align-center">
           {pathName === "/coachings" ? (
-            <div
-              className="headerBox activeHeader"
-              onClick={() => handleNavbar("coaches")}
-            >
+            <div className="headerBox activeHeader" onClick={() => handleNavbar("coaches")}>
               <div className="activeHeaderBox">
                 <img src={coachesW} alt="" className="coaches" />
                 <h6>Book</h6>
@@ -318,24 +282,14 @@ const Homepage_header = () => {
           {pathName === "/workshops" ? (
             <div className="headerBox" onClick={() => handleNavbar("workShop")}>
               <div className="activeHeaderBox">
-                <img
-                  src={workshopW}
-                  alt=""
-                  className="coaches"
-                  style={{ width: "24px" }}
-                />
+                <img src={workshopW} alt="" className="coaches" style={{ width: "24px" }} />
                 <h6>Enroll Courses</h6>
                 <h5>Workshop</h5>
               </div>
             </div>
           ) : (
             <div className="headerBox" onClick={() => handleNavbar("workShop")}>
-              <img
-                src={workshop}
-                alt=""
-                className="coaches"
-                style={{ width: "24px" }}
-              />
+              <img src={workshop} alt="" className="coaches" style={{ width: "24px" }} />
               <h6>Enroll Courses</h6>
               <h5>Workshop</h5>
             </div>
@@ -344,24 +298,14 @@ const Homepage_header = () => {
           {pathName === "/networking" ? (
             <div className="headerBox" onClick={() => handleNavbar("events")}>
               <div className="activeHeaderBox">
-                <img
-                  src={networkingW}
-                  alt=""
-                  className="coaches"
-                  style={{ width: "24px" }}
-                />
+                <img src={networkingW} alt="" className="coaches" style={{ width: "24px" }} />
                 <h6>Networking</h6>
                 <h5>Events</h5>
               </div>
             </div>
           ) : (
             <div className="headerBox" onClick={() => handleNavbar("events")}>
-              <img
-                src={networking}
-                alt=""
-                className="coaches"
-                style={{ width: "24px" }}
-              />
+              <img src={networking} alt="" className="coaches" style={{ width: "24px" }} />
               <h6>Networking</h6>
               <h5>Events</h5>
             </div>
@@ -383,17 +327,17 @@ const Homepage_header = () => {
           )}
           {pathName === "/career-fare" ? (
             <div className="headerBox" onClick={() => handleNavbar("career-fare")}>
-               <div className="activeHeaderBox">
-              <img  src={fareW} alt=""  className="coaches" style={{ width: "24px" }} />
-              <h6>Incubation</h6>
-              <h5>Fare</h5>{" "}
-            </div>
+              <div className="activeHeaderBox">
+                <img src={fareW} alt="" className="coaches" style={{ width: "24px" }} />
+                <h6>Incubation</h6>
+                <h5>Fare</h5>{" "}
+              </div>
             </div>
           ) : (
             <div className="headerBox" onClick={() => handleNavbar("career-fare")}>
               <img src={fare} alt="" className="coaches" style={{ width: "24px" }} />
               <h6>Incubation</h6>
-              <h5>Fare</h5>{" "}
+              <h5>Fare</h5>
             </div>
           )}
         </div>
@@ -406,14 +350,9 @@ const Homepage_header = () => {
         </div>
       </div>
 
-      <MobileHeader
-        userDetails={userDetails}
-        handleNavbar={handleNavbar}
-        activeNavbar={activeNavbar}
-        setActiveNavbar={activeNavbar}
-      />
+      <MobileHeader userDetails={userDetails} handleNavbar={handleNavbar} activeNavbar={activeNavbar} setActiveNavbar={activeNavbar} />
     </>
   );
 };
 
-export default Homepage_header;
+export default HomepageHeader;

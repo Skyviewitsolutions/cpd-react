@@ -10,9 +10,7 @@ import { FiUpload } from "react-icons/fi";
 import Logininput from "../Inputbox/Logininput";
 import { HiOutlineMail } from "react-icons/hi";
 
-
-const StudentEvents = ({eventDta}) => {
-
+const StudentEvents = ({ eventDta }) => {
   document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
     const dropZoneElement = inputElement.closest(".drop-zone");
     dropZoneElement.addEventListener("click", (e) => {
@@ -95,10 +93,10 @@ const StudentEvents = ({eventDta}) => {
             <div className="col-lg-6 col-md-6 col-sm-6">
               <div className="studentEventDetails">
                 <label className="StdntTitle">Title of Speaker/Workshop</label>
-                <div class="StudentSeesion">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <button type="submit" class="searchEvent ">
+                <div className="StudentSeesion">
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <button type="submit" className="searchEvent ">
                         <img src={Search} className="searchSession" />
                       </button>
                     </div>
@@ -106,21 +104,18 @@ const StudentEvents = ({eventDta}) => {
                       type="search"
                       placeholder="Student-Led Wharton MBA Overview Webinar"
                       aria-describedby="button-addon2"
-                      class="form-control border-0"
+                      className="form-control border-0"
                       readOnly={true}
                       // value={eventDta?.sessionTitle}
                     />
                   </div>
                 </div>
 
-                <h3 className="studnHeding">
-                  Student-Led Wharton MBA Overview Webinar
-                </h3>
+                <h3 className="studnHeding">Student-Led Wharton MBA Overview Webinar</h3>
                 <div className="row mt-3">
                   <div className="col-12 col-md-12 col-lg-6">
                     <h5 className="created_name">
-                      Created By :{" "}
-                      <span style={{ color: " #2c6959" }}>James Adam</span>
+                      Created By : <span style={{ color: " #2c6959" }}>James Adam</span>
                     </h5>
                   </div>
                   <div className="col-12 col-md-12 col-lg-6">
@@ -130,7 +125,7 @@ const StudentEvents = ({eventDta}) => {
                         {/* {eventDta?.sessionDuration
                           ? eventDta?.sessionDuration
                           : 0} */}
-                       0 Hours
+                        0 Hours
                       </span>
                     </h5>
                   </div>
@@ -142,49 +137,34 @@ const StudentEvents = ({eventDta}) => {
 
                   <div className="col-12 col-md-12 col-lg-11 ">
                     <div className="Student_tag">
-                      {eventDta && eventDta.sessionTags.map((itm, index) => {
-                        return (
-                          <>
-                            <span className="eventFormStudent_tag">
-                              {itm} <span className="tags_span"></span>
-                            </span>
-                          </>
-                        );
-                      })}
+                      {eventDta &&
+                        eventDta.sessionTags.map((itm, index) => {
+                          return (
+                            <>
+                              <span className="eventFormStudent_tag">
+                                {itm} <span className="tags_span"></span>
+                              </span>
+                            </>
+                          );
+                        })}
                     </div>
                   </div>
                 </div>
                 <div className="row mt-3">
                   <div className=" col-12 col-md-12 col-lg-12 Create_Event_label">
-                    <label for="exampleInputEmail1" class="form-label">
-                      <h6 className="avilabilityMode">
-                        Available Mode of Delivery
-                      </h6>
+                    <label for="exampleInputEmail1" className="form-label">
+                      <h6 className="avilabilityMode">Available Mode of Delivery</h6>
                     </label>
                     <div className="CheckAvailibility">
                       <div className="form-check">
-                        <input
-                          className="form-check-input "
-                          type="radio"
-                          name="flexRadioDefault"
-                        />
-                        <label
-                          className="form-check-label OnOff"
-                          for="flexRadioDefault1"
-                        >
+                        <input className="form-check-input " type="radio" name="flexRadioDefault" />
+                        <label className="form-check-label OnOff" for="flexRadioDefault1">
                           Online
                         </label>
                       </div>
                       <div className="form-check">
-                        <input
-                          className="form-check-input offline"
-                          type="radio"
-                          name="flexRadioDefault"
-                        />
-                        <label
-                          className="form-check-label OffOn"
-                          for="flexRadioDefault1"
-                        >
+                        <input className="form-check-input offline" type="radio" name="flexRadioDefault" />
+                        <label className="form-check-label OffOn" for="flexRadioDefault1">
                           {" "}
                           Offline
                         </label>
@@ -194,31 +174,21 @@ const StudentEvents = ({eventDta}) => {
                 </div>
                 <div className="row mt-3">
                   <div className="meadiaIntigration">
-                    <div class="TeamMeadia">
+                    <div className="TeamMeadia">
                       <img src={Team} className="teamIcon" />
 
-                      <input
-                        class="form-check-input teamRadio"
-                        type="radio"
-                        name="option1"
-                        value="something"
-                      />
+                      <input className="form-check-input teamRadio" type="radio" name="option1" value="something" />
                     </div>
-                    <div class="TeamMeadia2">
+                    <div className="TeamMeadia2">
                       <img src={zoom} className="ZoomIcon" />
 
-                      <input
-                        class="form-check-input ZoomRadio"
-                        type="radio"
-                        name="option1"
-                        value="something"
-                      />
+                      <input className="form-check-input ZoomRadio" type="radio" name="option1" value="something" />
                     </div>
                   </div>
                 </div>
                 <div className="row mt-4">
                   <div className="col-12 col-md-12 col-lg-12">
-                    <label for="exampleInputEmail1" class="form-label PasteZoomLink">
+                    <label for="exampleInputEmail1" className="form-label PasteZoomLink">
                       Paste Zoom Invite Link Here
                     </label>
                     <div className="zoom_link_box">
@@ -240,36 +210,22 @@ const StudentEvents = ({eventDta}) => {
               <div className="fileDropsZone">
                 <div className="row">
                   <div className="col-lg-6 col-md-12 col-sm-12">
-                    <div class="drop-zone picDrop">
-                      <span class="drop-zone__prompt">
-                        Upload session photo
-                      </span>
-                      <input
-                        type="file"
-                        name="myFile"
-                        class="drop-zone__input"
-                      />
+                    <div className="drop-zone picDrop">
+                      <span className="drop-zone__prompt">Upload session photo</span>
+                      <input type="file" name="myFile" className="drop-zone__input" />
                     </div>
                   </div>
                   <div className="col-lg-6 col-md-12 col-sm-12">
-                    <div class="drop-zone vediodrop">
-                      <span class="drop-zone__prompt">
-                        Upload session vedio
-                      </span>
-                      <input
-                        type="file"
-                        name="myFile"
-                        class="drop-zone__input"
-                      />
+                    <div className="drop-zone vediodrop">
+                      <span className="drop-zone__prompt">Upload session vedio</span>
+                      <input type="file" name="myFile" className="drop-zone__input" />
                     </div>
                   </div>
                 </div>
               </div>
               <div className="row mt-3">
                 <div className="studentDocument">
-                  <h6 className="StudentAtachfile">
-                    Attached Files From Speakers
-                  </h6>
+                  <h6 className="StudentAtachfile">Attached Files From Speakers</h6>
                   <div className="row">
                     <div className="col-lg-4 col-md-12 col-sm-12 mt-2 Create_Event_Atacth">
                       <h6>
@@ -304,8 +260,7 @@ const StudentEvents = ({eventDta}) => {
                             fontSize: "16px",
                             marginLeft: "10px",
                             fontWeight: "400",
-                          }}
-                        >
+                          }}>
                           1 : 00 Hour
                         </span>
                       </h6>
@@ -318,8 +273,7 @@ const StudentEvents = ({eventDta}) => {
                             fontSize: "16px",
                             marginLeft: "10px",
                             fontWeight: "400",
-                          }}
-                        >
+                          }}>
                           25
                         </span>
                       </h6>
@@ -335,17 +289,16 @@ const StudentEvents = ({eventDta}) => {
                     fontSize: "22px",
                     fontWeight: "700",
                     marginLeft: "5px",
-                  }}
-                >
+                  }}>
                   {" "}
                   Paid
                 </h6>
               </div>
               <div className="StudentMail">
                 <h6 className="addMailsdnt">Add Email Id's</h6>
-                <div class="inputWithIcon">
-                  <input type="text" placeholder="Email" className="addmailtext"/>
-                  <i class="StdnMailbox">
+                <div className="inputWithIcon">
+                  <input type="text" placeholder="Email" className="addmailtext" />
+                  <i className="StdnMailbox">
                     <HiOutlineMail />
                   </i>
                 </div>

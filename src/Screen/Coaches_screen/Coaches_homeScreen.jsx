@@ -27,11 +27,9 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { BiInfoCircle } from "react-icons/bi";
 import { getCalendarData } from "../../utils/calendar";
 import showToast from "../../Component/CustomToast/CustomToast";
-import DefaultImg from "../../assets/Images/default.png"
-
+import DefaultImg from "../../assets/Images/default.png";
 
 const CoachingCard2 = (props) => {
-
   const {
     data,
     bookingStatus,
@@ -68,22 +66,13 @@ const CoachingCard2 = (props) => {
   var coachingDomain = data?.domain?.title;
   var coachingIndustry = data?.industry?.title;
 
- 
-
   return (
     <>
       <div className="col-lg-6 col-md-12 col-sm-12 position-relative">
         <div className="coachingCrd bg-white border-2  ">
-          <div
-            onClick={() => showCoachDetails(data)}
-            className="d-flex justify-content-between"
-          >
+          <div onClick={() => showCoachDetails(data)} className="d-flex justify-content-between">
             <div className="col-lg-3 col-md-2 col-sm-12 ">
-              <img
-                src={coachInfo?.avtar ? image : DefaultImg}
-                alt="#"
-                className="coachImg"
-              />
+              <img src={coachInfo?.avtar ? image : DefaultImg} alt="#" className="coachImg" />
             </div>
             <div className="col-lg-4 col-md-5 col-sm-12">
               <div className="d-flex  pr-4 ">
@@ -126,8 +115,7 @@ const CoachingCard2 = (props) => {
                 <div className="d-flex coachCont2 justify-content-between align-items-center">
                   <h6>Price</h6>:
                   <span>
-                    {data.price} HKD /
-                    {data.payment_type == "1" ? "hour" : "session"}
+                    {data.price} HKD /{data.payment_type == "1" ? "hour" : "session"}
                   </span>
                 </div>
               ) : (
@@ -139,21 +127,14 @@ const CoachingCard2 = (props) => {
           </div>
           {showBookBtn && (
             <div className="mt-3 position-absolute w-1 bookbtnBold">
-              <BookBtn
-                status={bookingStatus}
-                onClick={() => bookCoaches(data)}
-                loading={selectedCoaching != data._id && loading}
-              />
+              <BookBtn status={bookingStatus} onClick={() => bookCoaches(data)} loading={selectedCoaching != data._id && loading} />
             </div>
           )}
           {showEdit && (
             <div className="d-flex justify-content-end mr-4 ">
               <div className="coachingEdit mt-3 editBtnBold">
                 <FiEdit color="#2c6959" onClick={() => handleEdit(data)} />
-                <AiOutlineDelete
-                  color="#2c6959"
-                  onClick={() => deleteCoaching(data._id)}
-                />
+                <AiOutlineDelete color="#2c6959" onClick={() => deleteCoaching(data._id)} />
               </div>
             </div>
           )}
@@ -164,7 +145,6 @@ const CoachingCard2 = (props) => {
 };
 
 const Coaches_homeScreen = () => {
-
   const [showCalendar, setShowCalendar] = useState(false);
   const [allCoachings, setAllCoachings] = useState([]);
   const [eventsToBeShown, setEventsToBeShown] = useState([]);
@@ -183,9 +163,7 @@ const Coaches_homeScreen = () => {
   const [selectedCoaching, setSelectedCoaching] = useState("");
   const [imagePath, setImagePath] = useState("");
   const [updateCoaching, setUpdateCoaching] = useState(false);
-  const [selectedCoachingForUpdate, setSelectedCoachingForUpdate] = useState(
-    []
-  );
+  const [selectedCoachingForUpdate, setSelectedCoachingForUpdate] = useState([]);
   const navigate = useNavigate();
 
   // filter UseState here;
@@ -203,14 +181,14 @@ const Coaches_homeScreen = () => {
       "Content-Type": "application/json",
     };
 
-    setLoading(true)
+    setLoading(true);
 
     const url = endpoints.coaches.allCoachesList;
 
     axios
       .get(url, { headers: headers })
       .then((res) => {
-        setLoading(false)
+        setLoading(false);
         if (res.data.result) {
           const val = res.data.data;
           var coachPath = res.data?.avatar_image_path;
@@ -221,7 +199,7 @@ const Coaches_homeScreen = () => {
         }
       })
       .catch((err) => {
-        setLoading(false)
+        setLoading(false);
         console.log(err, "this is the error");
       });
   };
@@ -241,19 +219,19 @@ const Coaches_homeScreen = () => {
     };
 
     const url = endpoints.coaches.enrolledCoaching;
-    setLoading(true)
+    setLoading(true);
 
     axios
       .get(url, { headers: headers })
       .then((res) => {
-        setLoading(false)
+        setLoading(false);
         if (res.data.result) {
           var val = res.data.data;
           setAllEnrolledCoachings(val);
         }
       })
       .catch((err) => {
-        setLoading(false)
+        setLoading(false);
         console.log(err, "this is the error");
       });
   };
@@ -264,21 +242,21 @@ const Coaches_homeScreen = () => {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     };
-    setLoading(true)
+    setLoading(true);
 
     axios
       .get(url, { headers: headers })
       .then((res) => {
-        setLoading(false)
+        setLoading(false);
         if (res.data.result) {
           var val = res.data.data;
           setMyCoachings(val);
-            setCoachingListToBeShown(val);
-            setCoachingListToBeShown2(val);
+          setCoachingListToBeShown(val);
+          setCoachingListToBeShown2(val);
         }
       })
       .catch((err) => {
-        setLoading(false)
+        setLoading(false);
         console.log(err, "this is the error");
       });
   };
@@ -311,9 +289,9 @@ const Coaches_homeScreen = () => {
           if (res.data.result) {
             getMyCoachingsList();
             getAllEnrolledCoachings();
-            showToast("Coaching booked successfully",  "success" );
+            showToast("Coaching booked successfully", "success");
           } else if (res.data.result == false) {
-            showToast(res.data.message,  "warning" );
+            showToast(res.data.message, "warning");
           }
         })
         .catch((err) => {
@@ -321,7 +299,7 @@ const Coaches_homeScreen = () => {
           console.log(err, "this is the error here");
         });
     } else {
-      showToast("Please login ",  "warning" );
+      showToast("Please login ", "warning");
     }
   };
 
@@ -337,14 +315,14 @@ const Coaches_homeScreen = () => {
     setShowAllCoaching(true);
     // setCoachingListToBeShown(allCoachings);
     // setCoachingListToBeShown2(allCoachings);
-    getCoachingList()
+    getCoachingList();
   };
 
   const handleShowMyCoachings = () => {
     setShowAllCoaching(false);
     // setCoachingListToBeShown(myCoachings);
     // setCoachingListToBeShown2(myCoachings);
-    getMyCoachingsList()
+    getMyCoachingsList();
   };
 
   const handleFilterCoachings = (val) => {
@@ -367,14 +345,11 @@ const Coaches_homeScreen = () => {
   // here we are filtering the coaching according to the domain and industry;
 
   useEffect(() => {
-
-    var filterCoachingByIndustry = coachingListToBeShown.filter(
-      (itm, index) => {
-        var industry = itm.industry;
-        var industryTitle = industry && industry?.title?.toLowerCase();
-        return filterByIndustry.includes(industryTitle);
-      }
-    );
+    var filterCoachingByIndustry = coachingListToBeShown.filter((itm, index) => {
+      var industry = itm.industry;
+      var industryTitle = industry && industry?.title?.toLowerCase();
+      return filterByIndustry.includes(industryTitle);
+    });
 
     var filterCoachingByDomain = filterCoachingByIndustry.filter((itm, index) => {
       var domain = itm.domain;
@@ -385,20 +360,17 @@ const Coaches_homeScreen = () => {
   }, [filterByDomain]);
 
   useEffect(() => {
-
     var filterCoachingByDomain = coachingListToBeShown.filter((itm, index) => {
       var domain = itm.domain;
       var domainTitle = domain && domain?.title?.toLowerCase();
       return filterByDomain.includes(domainTitle);
     });
 
-    var filterCoachingByIndustry = filterCoachingByDomain.filter(
-      (itm, index) => {
-        var industry = itm.industry;
-        var industryTitle = industry && industry?.title?.toLowerCase();
-        return filterByIndustry.includes(industryTitle);
-      }
-    );
+    var filterCoachingByIndustry = filterCoachingByDomain.filter((itm, index) => {
+      var industry = itm.industry;
+      var industryTitle = industry && industry?.title?.toLowerCase();
+      return filterByIndustry.includes(industryTitle);
+    });
     setCoachingListToBeShown2(filterCoachingByIndustry);
   }, [filterByIndustry]);
 
@@ -409,18 +381,18 @@ const Coaches_homeScreen = () => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-    setLoading(true)
+    setLoading(true);
     axios
       .get(url, { headers: headers })
       .then((res) => {
-        setLoading(false)
+        setLoading(false);
         if (res.data.result) {
           getMyCoachingsList();
-          showToast("coaching deleted successfully",  "success" );
+          showToast("coaching deleted successfully", "success");
         }
       })
       .catch((err) => {
-        setLoading(false)
+        setLoading(false);
         console.log(err, "delete workshop error");
       });
   };
@@ -429,11 +401,11 @@ const Coaches_homeScreen = () => {
     setUpdateCoaching(true);
     setSelectedCoachingForUpdate(data);
     setShowCoachingsForm(true);
-    const path = generatePath("/coachingEdit/:coachingId" , {coachingId : data._id})
-    navigate(path)
+    const path = generatePath("/coachingEdit/:coachingId", { coachingId: data._id });
+    navigate(path);
   };
 
-  console.log(filterByDomain  , "filterBy domainer")
+  console.log(filterByDomain, "filterBy domainer");
 
   return (
     <>
@@ -445,25 +417,14 @@ const Coaches_homeScreen = () => {
               <h5 className="ml-3" style={{ marginLeft: "9px" }}>
                 Book Coaches
               </h5>
-              <CustomFilter
-                filterByDomain={filterByDomain}
-                setFilterByDomain={setFilterByDomain}
-                filterByIndustry={filterByIndustry}
-                setFilterByIndustry={setFilterByIndustry}
-              />
+              <CustomFilter filterByDomain={filterByDomain} setFilterByDomain={setFilterByDomain} filterByIndustry={filterByIndustry} setFilterByIndustry={setFilterByIndustry} />
             </div>
             <div className="col-lg-10 col-md-12 col-12 coachScreen_right">
               <div className="row">
                 <div className="col-lg-7 col-md-12 col-12">
                   <div className="coach_searchBar ">
                     <div className="form-group ">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Search Here"
-                        value={inputData}
-                        onChange={(e) => handleFilterCoachings(e.target.value)}
-                      />
+                      <input type="text" className="form-control" placeholder="Search Here" value={inputData} onChange={(e) => handleFilterCoachings(e.target.value)} />
                       <HiSearch id="coach_search" />
                     </div>
                   </div>
@@ -475,20 +436,18 @@ const Coaches_homeScreen = () => {
                       <button
                         className="coachingBtn"
                         style={{
-                          border : showAllCoaching ? "2px solid #2c6959" : "2px solid #d4d9d6"
+                          border: showAllCoaching ? "2px solid #2c6959" : "2px solid #d4d9d6",
                         }}
-                        onClick={handleShowAllCoachings}
-                      >
+                        onClick={handleShowAllCoachings}>
                         All
                       </button>
 
                       <button
                         className="coachingBtn"
                         style={{
-                          border : !showAllCoaching ? "2px solid #2c6959" : "2px solid #d4d9d6"
+                          border: !showAllCoaching ? "2px solid #2c6959" : "2px solid #d4d9d6",
                         }}
-                        onClick={handleShowMyCoachings}
-                      >
+                        onClick={handleShowMyCoachings}>
                         My Coachings
                       </button>
                       <CreateBtn onClick={() => setShowCoachingsForm(true)} />
@@ -545,16 +504,9 @@ const Coaches_homeScreen = () => {
         </div>
       </section>
 
-      <CustomCalendar
-        showCalendar={showCalendar}
-        setShowCalendar={setShowCalendar}
-        eventsToBeShown={eventsToBeShown}
-      />
+      <CustomCalendar showCalendar={showCalendar} setShowCalendar={setShowCalendar} eventsToBeShown={eventsToBeShown} />
 
-      <BookCoaches
-        BookCoachesShow={showBookCoachesSlot}
-        setBookCoachesShow={showBookCoachesSlot}
-      />
+      <BookCoaches BookCoachesShow={showBookCoachesSlot} setBookCoachesShow={showBookCoachesSlot} />
 
       <CreateCoachingForm
         showCoachingsForm={showCoachingsForm}
@@ -569,8 +521,6 @@ const Coaches_homeScreen = () => {
         imagePath={imagePath}
       />
 
-      
-      
       {loading && <Loader />}
       <Footer />
     </>

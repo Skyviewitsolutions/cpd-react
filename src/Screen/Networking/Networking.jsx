@@ -27,35 +27,32 @@ import { BiPlusCircle } from "react-icons/bi";
 import { generatePath } from "react-router-dom";
 import showToast from "../../Component/CustomToast/CustomToast";
 import Loader from "../../Component/Loader/Loader";
-import DefaultImg from "../../assets/Images/default.png"
-
+import DefaultImg from "../../assets/Images/default.png";
 
 const Networking = () => {
-
   const [eventsToBeShown, setEventsToBeShown] = useState([]);
   const [showCustomCalendar, setShowCustomCalendar] = useState(false);
   const navigate = useNavigate("");
   const [imagePath, setImagePath] = useState("");
   const [videoPath, setVideoPath] = useState("");
   const [allEvent, setAllEvent] = useState([]);
-  const [myEvent , setMyEvent] = useState([])
+  const [myEvent, setMyEvent] = useState([]);
   const [eventData, setEventData] = useState([]);
   const [shortEvent, setShortEvent] = useState([]);
   const [showAllEvents, setShowAllEvents] = useState(false);
   const [loading, setLoading] = useState(false);
   const [inputEvent, setInputEvent] = useState("");
-  
 
   const token = localStorage.getItem("token");
   const getAllEventsApi = endpoints.events.getAllEvents;
   const getMyEventsApi = endpoints.events.myEvents;
 
   const getAllEvents = () => {
-    setLoading(true)
+    setLoading(true);
     axios
       .get(getAllEventsApi)
       .then((res) => {
-        setLoading(false)
+        setLoading(false);
         if (res.data.result === true) {
           const val = res.data.data;
           const eventId = res.data.data[0]._id;
@@ -75,21 +72,20 @@ const Networking = () => {
         }
       })
       .catch((err) => {
-        setLoading(false)
+        setLoading(false);
         console.log(err, "this is events error");
       });
   };
 
-
-  const getMyEvents = () =>{
+  const getMyEvents = () => {
     const headers = {
-      "Authorization" : `Bearer ${token}`
-    }
-    setLoading(true)
+      Authorization: `Bearer ${token}`,
+    };
+    setLoading(true);
     axios
-      .get(getMyEventsApi , {headers : headers})
+      .get(getMyEventsApi, { headers: headers })
       .then((res) => {
-        setLoading(false)
+        setLoading(false);
         if (res.data.result === true) {
           const val = res.data.data;
           const imgPath = res.data.image_path;
@@ -101,10 +97,10 @@ const Networking = () => {
         }
       })
       .catch((err) => {
-        setLoading(false)
+        setLoading(false);
         console.log(err, "this is events error");
       });
-  }
+  };
 
   useEffect(() => {
     getAllEvents();
@@ -113,12 +109,11 @@ const Networking = () => {
 
   const viewDetails = (data) => {
     var eventId = data._id;
-    const path = generatePath("/event-full-details/:eventId" , {eventId : eventId})
+    const path = generatePath("/event-full-details/:eventId", { eventId: eventId });
     navigate(path);
   };
 
   const handleSearch = (e) => {
-
     var val = e.target.value;
     val = val.toLowerCase();
     setInputEvent(e.target.value);
@@ -147,17 +142,17 @@ const Networking = () => {
       };
 
       const url = `${endpoints.events.joinEvent}${id}`;
-      setLoading(true)
+      setLoading(true);
       axios
         .get(url, { headers: headers })
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            showToast("Events joined successfully", "success" );
+            showToast("Events joined successfully", "success");
             getAllEvents();
             getMyEvents();
           } else if (!res.data.result) {
-            showToast(res.data?.message, "warning" );
+            showToast(res.data?.message, "warning");
           }
         })
         .catch((err) => {
@@ -165,7 +160,7 @@ const Networking = () => {
           console.log(err);
         });
     } else {
-      showToast("Please login", "warning" );
+      showToast("Please login", "warning");
     }
   };
 
@@ -185,11 +180,11 @@ const Networking = () => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            showToast("Events left successfully",  "success" );
+            showToast("Events left successfully", "success");
             getAllEvents();
             getMyEvents();
           } else if (!res.data.result) {
-            showToast(res.data?.message,  "warning" );
+            showToast(res.data?.message, "warning");
           }
         })
         .catch((err) => {
@@ -197,18 +192,17 @@ const Networking = () => {
           console.log(err);
         });
     } else {
-      showToast("Please login", "warning" );
+      showToast("Please login", "warning");
     }
   };
-
 
   return (
     <>
       <Homepage_header />
-      <Networking_headers title="Events"/>
+      <Networking_headers title="Events" />
       <div className="networking_wrapper">
         <div className="networkingWrap">
-          <div className="networkingleft" >
+          <div className="networkingleft">
             <CustomFilter />
           </div>
           <div className="networkingRight">
@@ -217,31 +211,17 @@ const Networking = () => {
                 <div className="col-lg-7 col-md-6 col-12">
                   <div className="workshop_searchBar">
                     <div className="form-group">
-                      
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Search Here"
-                        value={inputEvent}
-                        onChange={(e) => handleSearch(e)}
-                      />
+                      <input type="text" className="form-control" placeholder="Search Here" value={inputEvent} onChange={(e) => handleSearch(e)} />
                       <HiSearch id="networking_search" />
                     </div>
                   </div>
                 </div>
                 <div className="col-lg-5 col-md-6 col-12 d-flex">
                   <div className="eventBtn">
-                    <Button
-                      title="View Community"
-                      onClick={() => navigate("/community")}
-                      style={{borderRadius : "29px"}}
-                    />
+                    <Button title="View Community" onClick={() => navigate("/community")} style={{ borderRadius: "29px" }} />
                   </div>
                   {token && (
-                    <div
-                      className="createEvnet"
-                      onClick={() => navigate("/add-event")}
-                    >
+                    <div className="createEvnet" onClick={() => navigate("/add-event")}>
                       <h6>Create Event</h6>
                       <BiPlusCircle color="white" size={20} />
                     </div>
@@ -300,11 +280,7 @@ const Networking = () => {
           </div>
         </div>
       </div>
-      <CustomCalendar
-        showCalendar={showCustomCalendar}
-        setShowCalendar={setShowCustomCalendar}
-        eventsToBeShown={eventsToBeShown}
-      />
+      <CustomCalendar showCalendar={showCustomCalendar} setShowCalendar={setShowCustomCalendar} eventsToBeShown={eventsToBeShown} />
       {loading && <Loader />}
       <Footer />
     </>

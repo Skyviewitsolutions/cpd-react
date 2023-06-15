@@ -10,24 +10,14 @@ import profileimg from "../../assets/Images/profileimg.png";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import showToast from "../CustomToast/CustomToast";
 
-
 const CoachNotification = (props) => {
-
-  const {
-    showNotification,
-    setShowNotification,
-    notificationCount,
-    setNotificationCount,
-  } = props;
-
-
+  const { showNotification, setShowNotification, notificationCount, setNotificationCount } = props;
   const [allNotifiedCoachings, setAllNotifiedCoachings] = useState([]);
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(false);
   const [allNotifiedWorkshops, setAllNotifiedWorkshops] = useState([]);
   const [coachingUserImgPath, setCoachingUserImgPath] = useState("");
   const [workshopUserImgPath, setWorkshopUserImgPath] = useState("");
-  
 
   const getAllNotifiedCoachings = () => {
     const headers = {
@@ -157,7 +147,6 @@ const CoachNotification = (props) => {
   };
 
   const confirmWorkshopRequest = (dta) => {
-    
     const id = dta._id;
     const url = `${endpoints.workshop.confirmWorkshop}${id}&respond_code=2`;
 
@@ -183,19 +172,19 @@ const CoachNotification = (props) => {
   };
 
   const activeBx = {
-    background : "var(--primary)" ,
-    color : "white"  ,
-    borderColor : "var(--primary)"
-  }
+    background: "var(--primary)",
+    color: "white",
+    borderColor: "var(--primary)",
+  };
 
   const inActiveBx = {
-    background : "white" ,
-    color : "var(--black)"  ,
-    borderColor : "var(--lightgray)"
-  }
+    background: "white",
+    color: "var(--black)",
+    borderColor: "var(--lightgray)",
+  };
 
   return (
-    <Modal show={false} size="lg" >
+    <Modal show={showNotification} size="lg">
       <div className="coachNotificationCont">
         <div className="row">
           <div className="col-lg-12 col-md-12 col-12 ">
@@ -207,27 +196,21 @@ const CoachNotification = (props) => {
                   <MdOutlineNotificationsActive />
                 </span>
               </h5>
-              <div
-                className="coachCut"
-                onClick={() => setShowNotification(false)}
-              >
+              <div className="coachCut" onClick={() => setShowNotification(false)}>
                 <IoCloseSharp size={20} color="white" />
               </div>
             </div>
           </div>
         </div>
         <div className="notificationOuter">
-
-    <div className="notificationToggle">
-      <h6>All Notification</h6>
-      <h6>My Notification</h6>
-    </div>
+          <div className="notificationToggle">
+            <h6>All Notification</h6>
+            <h6>My Notification</h6>
+          </div>
 
           <div className="row" style={{ minHeight: "150px" }}>
             <div className="col-lg-12 col-md-12 col-12">
-              <h6 className="px-3 py-2 bg-secondary text-light text-center notifyHeading">
-                Coachings
-              </h6>
+              <h6 className="px-3 py-2 bg-secondary text-light text-center notifyHeading">Coachings</h6>
             </div>
 
             {allNotifiedCoachings.length != 0 &&
@@ -243,10 +226,7 @@ const CoachNotification = (props) => {
                       <div className="row d-flex justify-content-center my-1">
                         <div className="col-lg-2 col-md-2 col-3">
                           <div className="notificationavatar">
-                            <img
-                              src={userProfile?.avtar ? userImage : UserImg}
-                              alt=""
-                            />
+                            <img src={userProfile?.avtar ? userImage : UserImg} alt="" />
                           </div>
                         </div>
 
@@ -255,27 +235,18 @@ const CoachNotification = (props) => {
                             <div style={{ width: "46%" }}>
                               <div className="notificationName">
                                 <h5>
-                                  {userProfile?.first_name}{" "}
-                                  {userProfile?.last_name}
+                                  {userProfile?.first_name} {userProfile?.last_name}
                                 </h5>
                                 <p>{coachingInfo.title} </p>
                               </div>
                             </div>
 
                             <div className="notificationcancel">
-                              <button
-                                onClick={() => CancelCoachingRequest(item)}
-                              >
-                                cancel
-                              </button>
+                              <button onClick={() => CancelCoachingRequest(item)}>cancel</button>
                             </div>
 
                             <div className="notificationconfirme">
-                              <button
-                                onClick={() => ConfirmedCoachingRequest(item)}
-                              >
-                                confirmed
-                              </button>
+                              <button onClick={() => ConfirmedCoachingRequest(item)}>confirmed</button>
                             </div>
                           </div>
                         </div>
@@ -285,11 +256,7 @@ const CoachNotification = (props) => {
                 }
               })}
 
-            {allNotifiedCoachings.length == 0 && (
-              <h6 className="text-center text-secondary">
-                No notification found
-              </h6>
-            )}
+            {allNotifiedCoachings.length == 0 && <h6 className="text-center text-secondary">No notification found</h6>}
           </div>
         </div>
 
@@ -298,32 +265,23 @@ const CoachNotification = (props) => {
             {allNotifiedWorkshops.length != 0 && (
               <>
                 <div className="col-lg-12 col-md-12 col-12">
-                  <h6 className="px-3 py-2 bg-secondary text-light text-center">
-                    Workshop
-                  </h6>
+                  <h6 className="px-3 py-2 bg-secondary text-light text-center">Workshop</h6>
                 </div>
 
                 {allNotifiedWorkshops.map((item, index) => {
                   var userProfile = item?.user_profile;
                   var status = item?.status;
                   var workshopInfo = item.workshop_info;
-                  var userImage =
-                    workshopUserImgPath + "/" + userProfile?.avtar;
+                  var userImage = workshopUserImgPath + "/" + userProfile?.avtar;
 
                   return (
                     <>
                       {status == 1 && (
                         <>
                           <div className=" d-flex justify-content-center my-1">
-                            <div
-                              className="col-lg-2 col-md-2 col-3"
-                              key={index}
-                            >
+                            <div className="col-lg-2 col-md-2 col-3" key={index}>
                               <div className="notificationavatar">
-                                <img
-                                  src={userProfile?.avtar ? userImage : UserImg}
-                                  alt=""
-                                />
+                                <img src={userProfile?.avtar ? userImage : UserImg} alt="" />
                               </div>
                             </div>
 
@@ -332,27 +290,18 @@ const CoachNotification = (props) => {
                                 <div style={{ width: "46%" }}>
                                   <div className="notificationName">
                                     <h5>
-                                      {userProfile?.first_name}{" "}
-                                      {userProfile?.last_name}
+                                      {userProfile?.first_name} {userProfile?.last_name}
                                     </h5>
                                     <p>{workshopInfo.title} </p>
                                   </div>
                                 </div>
 
                                 <div className="notificationcancel">
-                                  <button
-                                    onClick={() => cancelWorkshopRequest(item)}
-                                  >
-                                    cancel
-                                  </button>
+                                  <button onClick={() => cancelWorkshopRequest(item)}>cancel</button>
                                 </div>
 
                                 <div className="notificationconfirme">
-                                  <button
-                                    onClick={() => confirmWorkshopRequest(item)}
-                                  >
-                                    confirmed
-                                  </button>
+                                  <button onClick={() => confirmWorkshopRequest(item)}>confirmed</button>
                                 </div>
                               </div>
                             </div>

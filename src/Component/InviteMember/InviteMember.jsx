@@ -21,28 +21,28 @@ const InviteMember = () => {
                   <li>
                     {" "}
                     <input type="checkbox" />{" "}
-                    <a class="active" href="#home">
+                    <a className="active" href="#home">
                       Moderator
                     </a>
                   </li>
                   <li>
                     {" "}
                     <input type="checkbox" />{" "}
-                    <a class="active" href="#home">
+                    <a className="active" href="#home">
                       Expert
                     </a>
                   </li>
                   <li>
                     {" "}
                     <input type="checkbox" />{" "}
-                    <a class="active" href="#home">
+                    <a className="active" href="#home">
                       Recruiter
                     </a>
                   </li>
                   <li>
                     {" "}
                     <input type="checkbox" />{" "}
-                    <a class="active" href="#home">
+                    <a className="active" href="#home">
                       Alumini
                     </a>
                   </li>
@@ -54,7 +54,7 @@ const InviteMember = () => {
                 <li>
                     {" "}
                     <input type="checkbox" />{" "}
-                    <a class="active" href="#home">
+                    <a className="active" href="#home">
                       Alumini
                     </a>
                   </li>
@@ -62,14 +62,14 @@ const InviteMember = () => {
                     {" "}
                    
                     <input type="checkbox" />{" "}
-                    <a class="active" href="#home">
+                    <a className="active" href="#home">
                       Alumini
                     </a>
                   </li>
                   <li>
                     {" "}
                     <input type="checkbox" />{" "}
-                    <a class="active" href="#home">
+                    <a className="active" href="#home">
                       Alumini
                     </a>
                   </li>
@@ -89,14 +89,14 @@ const InviteMember = () => {
               <Community_Invite_header />
               {/* <div className="row">
                 <div className="memberCardDetails">
-                <div class="row">
-<div class="col-sm-12">
-<div class="col-sm-2" style={{float:"left"}}></div>
-<div class="col-8" style={{float:"left"}}>
-<div class="card"  style={{minHeight:"150px",width:"100%",}}>
+                <div className="row">
+<div className="col-sm-12">
+<div className="col-sm-2" style={{float:"left"}}></div>
+<div className="col-8" style={{float:"left"}}>
+<div className="card"  style={{minHeight:"150px",width:"100%",}}>
 <img src={user} style={{height:"100px",width:"100px",borderRadius:"15px 15px 15px 15px",marginLeft:"20px",marginTop:"20px" }}/>
-<div class="form-check" style={{marginTop:"-80px",marginLeft:"100px"}}>
-  <input class="form-check-input" type="checkbox" value=""/>
+<div className="form-check" style={{marginTop:"-80px",marginLeft:"100px"}}>
+  <input className="form-check-input" type="checkbox" value=""/>
   </div>
   
   <span style={{marginLeft:"135px",fontSize:"14px",marginTop:"-20px"}}>James</span>
@@ -107,27 +107,26 @@ const InviteMember = () => {
   <div style={{marginLeft:"400px",marginTop:"-80px"}}>
   <span style={{float:"left",marginRight:"-180px",color:"blue",fontSize:"14px"}}>Education Deteil</span>
   <span style={{float:"left",marginRight:"-180px",fontSize:"12px",marginTop:"20px"}}>Skill : Communication, PM, Solution Management, Business Development</span>
-  <button type="button" class="btn btn-info" style={{width:"130px",marginTop:"65px",borderRadius:"20px 20px 20px 20px " }}>invited</button>
+  <button type="button" className="btn btn-info" style={{width:"130px",marginTop:"65px",borderRadius:"20px 20px 20px 20px " }}>invited</button>
   </div>
   
   
 
 </div>
 </div>
-<div class="col-2" style={{float:"left"}}></div>
+<div className="col-2" style={{float:"left"}}></div>
 </div>
 </div>
                 </div>
               </div> */}
               <div className="InviteMemberCard_box">
-              <InviteMembersCard/>
-              <InviteMembersCard/>
-              <InviteMembersCard/>
-              <InviteMembersCard/>
-              <InviteMembersCard/>
-              <InviteMembersCard/>
+                <InviteMembersCard />
+                <InviteMembersCard />
+                <InviteMembersCard />
+                <InviteMembersCard />
+                <InviteMembersCard />
+                <InviteMembersCard />
               </div>
-             
             </div>
           </div>
         </div>

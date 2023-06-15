@@ -94,19 +94,10 @@ const AddEvent_Form_second = () => {
           <div className="col-12 col-md-12 col-lg-6 p-2">
             <div className="row">
               <div className="col-12 col-md-12 col-lg-12 ">
-                <label
-                  for="exampleInputEmail1"
-                  className="Create_Event_label form-label"
-                >
+                <label for="exampleInputEmail1" className="Create_Event_label form-label">
                   <h6>Title of Speaker/Workshop</h6>
                 </label>
-                <input
-                  type="text"
-                  className="form-control Event_formInput"
-                  
-                  aria-describedby="emailHelp"
-                  placeholder="Student-Led Wharton MBA overview Webinar"
-                />
+                <input type="text" className="form-control Event_formInput" aria-describedby="emailHelp" placeholder="Student-Led Wharton MBA overview Webinar" />
               </div>
               <div className="col-12 col-md-12 col-lg-12 mt-2 cef_mainHeading">
                 <h5>Student-Led Wharton MBA overview Webinar</h5>
@@ -129,48 +120,38 @@ const AddEvent_Form_second = () => {
                   <h6>Tags</h6>
                 </div>
                 <div className="col-12 col-md-12 col-lg-10 Student_tags">
-                <span className="eventFormStudent_tags">
-                      Communication <span className="tags_span">x</span>
-                    </span>
-                    <span className="eventFormStudent_tags">
-                      Accounting <span className="tags_span">x</span>
-                    </span>                </div>
+                  <span className="eventFormStudent_tags">
+                    Communication <span className="tags_span">x</span>
+                  </span>
+                  <span className="eventFormStudent_tags">
+                    Accounting <span className="tags_span">x</span>
+                  </span>{" "}
+                </div>
               </div>
 
               <div className="row ">
                 <div className=" col-12 col-md-12 col-lg-12 Create_Event_label">
-                  <label for="exampleInputEmail1" class="form-label">
+                  <label for="exampleInputEmail1" className="form-label">
                     <h6>Available Mode of Delivery</h6>
                   </label>
                 </div>
                 <div className="col-10 col-md-8 col-4  eventFormStudent_onlineOffline">
                   <div className="form-check">
-                  <input
-                      className="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                    />
+                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
                     <label className="form-check-label" for="flexRadioDefault1">
                       Online
                     </label>
                   </div>
                   <div className="form-check">
-                  <input
-                      className="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                    />
+                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
                     <label className="form-check-label" for="flexRadioDefault1">
                       Offline
                     </label>
                   </div>
-
                 </div>
 
                 <div className="col-12 col-md-12 col-lg-12">
-                  <label for="exampleInputEmail1" class="form-label">
+                  <label for="exampleInputEmail1" className="form-label">
                     Paste Zoom Invite Link Here
                   </label>
                   <div className="zoom_link">
@@ -192,18 +173,17 @@ const AddEvent_Form_second = () => {
             <div className="col-12 col-md-12 col-lg-12">
               <div className="row">
                 <div className="col-12 col-md-12 col-lg-6 eventFormSecond_uploadFile">
-                <div className=" upload-btn-wrapper">
-                  <button>Upload Session Document</button>
-                  <input type="file" name="myfile" />
-                </div>
+                  <div className=" upload-btn-wrapper">
+                    <button>Upload Session Document</button>
+                    <input type="file" name="myfile" />
+                  </div>
                 </div>
                 <div className="col-12 col-md-12 col-lg-6 eventFormSecond_uploadVedio">
-                <div className=" upload-btn-wrapper">
-                  <button>Upload Session Video</button>
-                  <input type="file" name="myfile" />
+                  <div className=" upload-btn-wrapper">
+                    <button>Upload Session Video</button>
+                    <input type="file" name="myfile" />
+                  </div>
                 </div>
-                </div>
-
               </div>
             </div>
             <div className="row">
@@ -242,26 +222,16 @@ const AddEvent_Form_second = () => {
             <div className="row">
               <div className="col-12 col-md-12 col-lg-12">
                 <h5>
-                  Subscription :{" "}
-                  <span id="EventForm_subscriptionStatus"> Paid</span>
+                  Subscription : <span id="EventForm_subscriptionStatus"> Paid</span>
                 </h5>
               </div>
             </div>
 
             <div className="col-12 col-md-12 col-lg-12">
-              <label
-                for="exampleInputEmail1"
-                className="Create_Event_label form-label"
-              >
+              <label for="exampleInputEmail1" className="Create_Event_label form-label">
                 <h6>Add Email Id's</h6>
               </label>
-              <input
-                type="email"
-                className="form-control modal_shadow"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Enter Email Here"
-              />
+              <input type="email" className="form-control modal_shadow" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email Here" />
             </div>
           </div>
         </div>

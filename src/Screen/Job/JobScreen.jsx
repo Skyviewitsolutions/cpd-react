@@ -4,10 +4,7 @@ import Homepage_header from "../../Component/Header/Homepage_header";
 import Footer from "../../Component/Footer/Footer";
 import { TagsInput } from "react-tag-input-component";
 
-
-
 const JobScreen = () => {
-
   return (
     <>
       <Homepage_header />
@@ -33,10 +30,7 @@ const JobScreen = () => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="form-group">
                 <label for="exampleInputPassword1">Job Title*</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                >
+                <select className="form-select end-year " aria-label="Default select example">
                   <option>select</option>
                   <option value="Rahul dubey">Rahul dubey</option>
                   <option value="William">William</option>
@@ -48,10 +42,7 @@ const JobScreen = () => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="form-group">
                 <label for="exampleInputPassword1">Employement Type</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                >
+                <select className="form-select end-year " aria-label="Default select example">
                   <option>select</option>
                 </select>
               </div>
@@ -59,10 +50,7 @@ const JobScreen = () => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="form-group">
                 <label for="exampleInputPassword1">Select Company</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                >
+                <select className="form-select end-year " aria-label="Default select example">
                   <option>select</option>
                 </select>
               </div>
@@ -70,10 +58,7 @@ const JobScreen = () => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="form-group">
                 <label for="exampleInputPassword1">Country </label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                >
+                <select className="form-select end-year " aria-label="Default select example">
                   <option>select</option>
                 </select>
               </div>
@@ -81,10 +66,7 @@ const JobScreen = () => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="form-group">
                 <label for="exampleInputPassword1">Postal Code</label>{" "}
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                >
+                <select className="form-select end-year " aria-label="Default select example">
                   <option>select</option>
                 </select>
               </div>
@@ -92,10 +74,7 @@ const JobScreen = () => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="form-group">
                 <label for="exampleInputPassword1">Location</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                >
+                <select className="form-select end-year " aria-label="Default select example">
                   <option>select</option>
                 </select>
               </div>
@@ -103,10 +82,7 @@ const JobScreen = () => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="form-group">
                 <label for="exampleInputPassword1">Type </label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                >
+                <select className="form-select end-year " aria-label="Default select example">
                   <option>select</option>
                 </select>
               </div>
@@ -114,10 +90,7 @@ const JobScreen = () => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="form-group">
                 <label for="exampleInputPassword1">Experience</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                >
+                <select className="form-select end-year " aria-label="Default select example">
                   <option>select</option>
                 </select>
               </div>
@@ -137,10 +110,7 @@ const JobScreen = () => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="form-group">
                 <label for="exampleInputPassword1">Job Function</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                >
+                <select className="form-select end-year " aria-label="Default select example">
                   <option>select</option>
                 </select>
               </div>
@@ -149,10 +119,7 @@ const JobScreen = () => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="form-group">
                 <label for="exampleInputPassword1">Industry</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                >
+                <select className="form-select end-year " aria-label="Default select example">
                   <option>select</option>
                 </select>
               </div>
@@ -161,22 +128,15 @@ const JobScreen = () => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="form-group">
                 <label for="exampleInputPassword1">Job Function</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                >
+                <select className="form-select end-year " aria-label="Default select example">
                   <option>select</option>
                 </select>
               </div>
             </div>
             <div classname="col-12 col-md-6 col-lg-12  ">
-              <div class="form-group ">
+              <div className="form-group ">
                 <label for="exampleInputPassword1">Skills</label>
-                <TagsInput
-                  type="text"
-                  class="form-control hobbies_tags"
-                  placeHolder="Enter here"
-                />
+                <TagsInput type="text" className="form-control hobbies_tags" placeHolder="Enter here" />
               </div>
             </div>
           </div>
@@ -193,10 +153,7 @@ const JobScreen = () => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="form-group">
                 <label for="exampleInputPassword1">Salary</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                >
+                <select className="form-select end-year " aria-label="Default select example">
                   <option>select</option>
                 </select>
               </div>
@@ -205,10 +162,7 @@ const JobScreen = () => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="form-group">
                 <label for="exampleInputPassword1">Referal Bonus</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                >
+                <select className="form-select end-year " aria-label="Default select example">
                   <option>select</option>
                 </select>
               </div>
@@ -217,10 +171,7 @@ const JobScreen = () => {
             <div className="col-lg-4 col-md-6 col-12">
               <div className="form-group">
                 <label for="exampleInputPassword1">Bonus</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                >
+                <select className="form-select end-year " aria-label="Default select example">
                   <option>select</option>
                 </select>
               </div>

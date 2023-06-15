@@ -89,8 +89,7 @@ const AddEvent = () => {
 
     setPrice(selectedEvents?.price);
 
-    var event_pic_url =
-      selectedEvents?.image_path + selectedEvents?.event_photo;
+    var event_pic_url = selectedEvents?.image_path + selectedEvents?.event_photo;
     setEventImg(event_pic_url);
     const fileName = "eventPic.jpg";
 
@@ -101,8 +100,7 @@ const AddEvent = () => {
       setEventImgFile(file);
     });
 
-    var event_video_pic_url =
-      selectedEvents?.video_path + selectedEvents?.event_video;
+    var event_video_pic_url = selectedEvents?.video_path + selectedEvents?.event_video;
 
     setEventVideoImg(event_video_pic_url);
 
@@ -157,23 +155,23 @@ const AddEvent = () => {
 
   const submit = () => {
     if (!sessionTitle) {
-      showToast("session title is required",  "warning" );
+      showToast("session title is required", "warning");
     } else if (!sessionDesc) {
-      showToast("session descrition is required",  "warning" );
+      showToast("session descrition is required", "warning");
     } else if (!sessionTags) {
-      showToast("session tags is required",  "warning" );
+      showToast("session tags is required", "warning");
     } else if (!sessionType) {
-      showToast("session type is required",  "warning" );
+      showToast("session type is required", "warning");
     } else if (!sessionDuration) {
-      showToast("session duration is required",  "warning" );
+      showToast("session duration is required", "warning");
     } else if (!maxStudent) {
-      showToast("max number of student is required",  "warning" );
+      showToast("max number of student is required", "warning");
     } else if (!eventImgFile) {
-      showToast("Please upload image",  "warning" );
+      showToast("Please upload image", "warning");
     } else if (!eventVideo) {
-      showToast("please upload video",  "warning" );
+      showToast("please upload video", "warning");
     } else if (!communityId) {
-      showToast("Community id is required",  "warning" );
+      showToast("Community id is required", "warning");
     } else {
       const token = localStorage.getItem("token");
       var data = new FormData();
@@ -213,7 +211,7 @@ const AddEvent = () => {
         .then(function (res) {
           setLoading(false);
           if (res.data.result) {
-            showToast("Event created sucessfully", "success" );
+            showToast("Event created sucessfully", "success");
             setTimeout(() => {
               navigate("/myEvents");
             }, 1000);
@@ -230,25 +228,25 @@ const AddEvent = () => {
     const updateEventUrl = `${endpoints.events.updateEvent}${selectedEventId}`;
 
     if (!sessionTitle) {
-      showToast("session title is required",  "warning" );
+      showToast("session title is required", "warning");
     } else if (!sessionDesc) {
-      showToast("session descrition is required",  "warning" );
+      showToast("session descrition is required", "warning");
     } else if (!sessionTags) {
-      showToast("session tags is required",  "warning" );
+      showToast("session tags is required", "warning");
     } else if (!sessionType) {
-      showToast("session type is required",  "warning" );
+      showToast("session type is required", "warning");
     } else if (!sessionDuration) {
-      showToast("session duration is required",  "warning" );
+      showToast("session duration is required", "warning");
     } else if (!maxStudent) {
-      showToast("max number of student is required",  "warning" );
+      showToast("max number of student is required", "warning");
     } else if (!eventImgFile) {
-      showToast("Please upload image",  "warning" );
+      showToast("Please upload image", "warning");
     } else if (!eventVideo) {
-      showToast("please upload video",  "warning" );
+      showToast("please upload video", "warning");
       // } else if (!eventDocs) {
       //   toast("event docs is required", { type: "warning" });
     } else if (!communityId) {
-      showToast("Community id is required",  "warning" );
+      showToast("Community id is required", "warning");
     } else {
       const token = localStorage.getItem("token");
       var data = new FormData();
@@ -283,7 +281,7 @@ const AddEvent = () => {
           console.log(res);
           setLoading(false);
           if (res.data.result) {
-            showToast("Events updated successfully",  "success" );
+            showToast("Events updated successfully", "success");
           }
         })
         .catch((err) => {
@@ -343,10 +341,7 @@ const AddEvent = () => {
             <div className="col-12 col-md-12 col-lg-6 p-2">
               <div className="row">
                 <div className="col-12 col-md-12 col-lg-12">
-                  <label
-                    for="exampleInputEmail1"
-                    className="eventForm_speakerLabel form-label"
-                  >
+                  <label for="exampleInputEmail1" className="eventForm_speakerLabel form-label">
                     Session Title
                   </label>
                   <input
@@ -361,29 +356,15 @@ const AddEvent = () => {
                   <label for="" className="eventForm_speakerLabel form-label">
                     Session Description With Domain and Industry Detail
                   </label>
-                  <textarea
-                    class="form-control"
-                    id="exampleFormControlTextarea1"
-                    rows="3"
-                    value={sessionDesc}
-                    onChange={(e) => setSessionDesc(e.target.value)}
-                  ></textarea>
+                  <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" value={sessionDesc} onChange={(e) => setSessionDesc(e.target.value)}></textarea>
                 </div>
 
                 <div className="col-12 col-md-12 col-lg-12 mt-3 eventForm_speakerLabel">
-                  <label
-                    for="exampleInputEmail1"
-                    className="Create_Event_label form-label"
-                  >
+                  <label for="exampleInputEmail1" className="Create_Event_label form-label">
                     Session Tags
                   </label>
-                  <div class="form-group">
-                    <TagsInput
-                      value={sessionTags}
-                      onChange={setSessionTags}
-                      name="tags"
-                      placeHolder="Enter Tags"
-                    />
+                  <div className="form-group">
+                    <TagsInput value={sessionTags} onChange={setSessionTags} name="tags" placeHolder="Enter Tags" />
                     {/* <input
                       type="text"
                       className="form-control eventSession"
@@ -407,11 +388,8 @@ const AddEvent = () => {
             <div className="col-12 col-md-12 col-lg-6 p-4">
               <div className="col-12 col-md-12 col-lg-12">
                 <div className="row">
-                  <label
-                    className="col-12 col-md-12 col-lg-6"
-                    htmlFor="updatePhoto"
-                  >
-                    <div class="eventForm_dropzone">
+                  <label className="col-12 col-md-12 col-lg-6" htmlFor="updatePhoto">
+                    <div className="eventForm_dropzone">
                       <div className="studentEvent_files">
                         <br />
                         <input
@@ -419,7 +397,7 @@ const AddEvent = () => {
                           id="updatePhoto"
                           name="myFile"
                           placeholder="upload session photo"
-                          class="eventForm_dropzone__input"
+                          className="eventForm_dropzone__input"
                           onChange={(e) => handleImgUpload(e)}
                         />
                         {(update || eventImg) && <img src={eventImg} alt="" />}
@@ -429,18 +407,11 @@ const AddEvent = () => {
                       <span>
                         <GrUpload className="upload_icon_Image" />
                       </span>
-                      <span className="session_photo">
-                        {update
-                          ? "Update Session Photo"
-                          : "Upload Session Photo"}
-                      </span>
+                      <span className="session_photo">{update ? "Update Session Photo" : "Upload Session Photo"}</span>
                     </div>
                   </label>
-                  <label
-                    className="col-12 col-md-12 col-lg-6"
-                    htmlFor="uploadVideo"
-                  >
-                    <div class="eventForm_dropzone">
+                  <label className="col-12 col-md-12 col-lg-6" htmlFor="uploadVideo">
+                    <div className="eventForm_dropzone">
                       <div className="studentEvent_files">
                         {/* <h6> Session Promo Video</h6>   */}
 
@@ -448,14 +419,12 @@ const AddEvent = () => {
                           type="file"
                           id="uploadVideo"
                           name="myFile"
-                          class="eventForm_dropzone__input"
+                          className="eventForm_dropzone__input"
                           // accept="video/mp4,video/x-m4v,video/*"
                           onChange={(e) => handleVideoUpload(e)}
                         />
 
-                        {(update || eventVideoImg) && (
-                          <img src={eventVideoImg} alt="eventVideoImg" />
-                        )}
+                        {(update || eventVideoImg) && <img src={eventVideoImg} alt="eventVideoImg" />}
                       </div>
                     </div>
 
@@ -463,11 +432,7 @@ const AddEvent = () => {
                       <span>
                         <img src={VedioIcons} className="vedioIcons" />
                       </span>
-                      <span className="session_photo">
-                        {update
-                          ? "Update Session Video"
-                          : "Upload Session Video"}
-                      </span>
+                      <span className="session_photo">{update ? "Update Session Video" : "Upload Session Video"}</span>
                     </div>
                   </label>
                 </div>
@@ -477,15 +442,9 @@ const AddEvent = () => {
                   <div className="upload-btn-wrapper">
                     <button>
                       {" "}
-                      <img src={filesIcons} className="filesIcons" /> Attach
-                      File & Document
+                      <img src={filesIcons} className="filesIcons" /> Attach File & Document
                     </button>
-                    <input
-                      type="file"
-                      className="form-control"
-                      name="myfile"
-                      onChange={(e) => handleDocumentUpload(e)}
-                    />
+                    <input type="file" className="form-control" name="myfile" onChange={(e) => handleDocumentUpload(e)} />
                   </div>
                 </div>
                 <span className="eventDocumentName">{eventDocs?.name}</span>
@@ -498,9 +457,9 @@ const AddEvent = () => {
               <div className="col-12 col-md-12 col-lg-12">
                 <h5> Session Type</h5>
                 <div className=" col-12 col-md-12 col-lg-12 EventForm_Checkbox">
-                  <div class="form-check">
+                  <div className="form-check">
                     <input
-                      class="form-check-input eventFormSessionType_checkbox "
+                      className="form-check-input eventFormSessionType_checkbox "
                       type="radio"
                       value=""
                       id="Online"
@@ -508,16 +467,13 @@ const AddEvent = () => {
                       checked={sessionType === "online"}
                       onChange={(e) => setSessionType("online")}
                     />
-                    <label
-                      class="form-check-label eventFormSessionType_label"
-                      for="Online"
-                    >
+                    <label className="form-check-label eventFormSessionType_label" for="Online">
                       Online
                     </label>
                   </div>
-                  <div class="form-check">
+                  <div className="form-check">
                     <input
-                      class="form-check-input eventFormSessionType_checkbox"
+                      className="form-check-input eventFormSessionType_checkbox"
                       type="radio"
                       value=""
                       id="Offline"
@@ -525,16 +481,13 @@ const AddEvent = () => {
                       checked={sessionType === "offline"}
                       onChange={(e) => setSessionType("offline")}
                     />
-                    <label
-                      class="form-check-label eventFormSessionType_label"
-                      for="Offline"
-                    >
+                    <label className="form-check-label eventFormSessionType_label" for="Offline">
                       Offline
                     </label>
                   </div>
-                  <div class="form-check">
+                  <div className="form-check">
                     <input
-                      class="form-check-input eventFormSessionType_checkbox"
+                      className="form-check-input eventFormSessionType_checkbox"
                       type="radio"
                       value=""
                       id="Hybrid"
@@ -542,10 +495,7 @@ const AddEvent = () => {
                       checked={sessionType === "hybrid"}
                       onChange={(e) => setSessionType("hybrid")}
                     />
-                    <label
-                      class="form-check-label eventFormSessionType_label"
-                      for="Hybrid"
-                    >
+                    <label className="form-check-label eventFormSessionType_label" for="Hybrid">
                       Hybrid
                     </label>
                   </div>
@@ -574,14 +524,9 @@ const AddEvent = () => {
                     value={maxStudent}
                     onChange={(e) => setMaxStudent(e.target.value)}
                   />
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                    />
-                    <label class="form-check-label" for="flexRadioDefault1">
+                  <div className="form-check">
+                    <input className="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1" />
+                    <label className="form-check-label" for="flexRadioDefault1">
                       If Any
                     </label>
                   </div>
@@ -592,9 +537,9 @@ const AddEvent = () => {
             <div className="col-12 col-md-12 col-lg-6">
               {/* <div className=" col-12 col-md-12 col-lg-12 eventForm_availableDays">
                 <h5 style={{ paddingRight: "10px" }}> Available Days</h5>
-                <div class="form-check eventForm_daysDate">
+                <div className="form-check eventForm_daysDate">
                   <input
-                    class="form-check-input"
+                    className="form-check-input"
                     type="radio"
                     name="flexRadioDefault4"
                     id="flexRadioDefault4"
@@ -605,13 +550,13 @@ const AddEvent = () => {
                       setDays([]);
                     }}
                   />
-                  <label class="form-check-label" for="flexRadioDefault4">
+                  <label className="form-check-label" for="flexRadioDefault4">
                     Days
                   </label>
                 </div>
-                <div class="form-check eventForm_daysDate">
+                <div className="form-check eventForm_daysDate">
                   <input
-                    class="form-check-input"
+                    className="form-check-input"
                     type="radio"
                     name="flexRadioDefault4"
                     id="flexRadioDefault5"
@@ -622,7 +567,7 @@ const AddEvent = () => {
                       setDays([]);
                     }}
                   />
-                  <label class="form-check-label" for="flexRadioDefault5">
+                  <label className="form-check-label" for="flexRadioDefault5">
                     Date
                   </label>
                 </div>
@@ -631,14 +576,14 @@ const AddEvent = () => {
                 <div className="eventForm_weekBox">
                   <h5>Week</h5> <FaCalendarAlt id="calender_icon" />
                 </div>
-                <div class="form-check">
+                <div className="form-check">
                   <input
-                    class="form-check-input"
+                    className="form-check-input"
                     type="checkbox"
                     name="flexRadiDefault7"
                     id="flexRadioDefault7"
                   />
-                  <label class="form-check-label" for="flexRadioDefault7">
+                  <label className="form-check-label" for="flexRadioDefault7">
                     Repeated
                   </label>
                 </div>
@@ -673,21 +618,14 @@ const AddEvent = () => {
                 setEventsToBeShown={setEventsToBeShown}
               />
 
-              <div class="form-group CommunityId">
+              <div className="form-group CommunityId">
                 <label for="exampleInputPassword1">Choose Community</label>
-                <select
-                  class="form-select "
-                  aria-label="Default select example"
-                  value={communityName}
-                  onChange={(e) => handleCommunity(e)}
-                >
+                <select className="form-select " aria-label="Default select example" value={communityName} onChange={(e) => handleCommunity(e)}>
                   <option value="">Choose Community</option>
                   {communityOption.map((item, index) => {
                     return (
                       <>
-                        <option value={item.display_name}>
-                          {item.display_name}
-                        </option>
+                        <option value={item.display_name}>{item.display_name}</option>
                       </>
                     );
                   })}
@@ -700,80 +638,40 @@ const AddEvent = () => {
             <div className="col-12 col-md-10 col-lg-7">
               <h5>Price of Workshop</h5>
               <div className="eventForm_price">
-                <div class="eventForm_paid">
-                  <input
-                    type="radio"
-                    id="a25"
-                    name="check-substitution-2"
-                    onClick={(e) => handelFree(e)}
-                  />
-                  <label
-                    for="a25"
-                    className={`btnfree   ${
-                      paid == true ? "btn-default" : "btn-primary"
-                    }`}
-                  >
+                <div className="eventForm_paid">
+                  <input type="radio" id="a25" name="check-substitution-2" onClick={(e) => handelFree(e)} />
+                  <label for="a25" className={`btnfree   ${paid == true ? "btn-default" : "btn-primary"}`}>
                     Free
                   </label>
                 </div>
                 <div className="eventForm_paid freepaid">
-                  <input
-                    type="radio"
-                    id="a50"
-                    name="check-substitution-2"
-                    onClick={() => setPaid(true)}
-                  />
-                  <label
-                    for="a50"
-                    class={`btnfree ${
-                      paid == true ? "btn-primary" : "btn-default"
-                    }`}
-                  >
+                  <input type="radio" id="a50" name="check-substitution-2" onClick={() => setPaid(true)} />
+                  <label for="a50" className={`btnfree ${paid == true ? "btn-primary" : "btn-default"}`}>
                     Paid
                   </label>
                 </div>
 
-                <div class="form-check" style={{ marginLeft: "25px" }}>
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault2"
-                  />
-                  <label
-                    class="form-check-label  textsession"
-                    for="flexRadioDefault2"
-                  >
+                <div className="form-check" style={{ marginLeft: "25px" }}>
+                  <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+                  <label className="form-check-label  textsession" for="flexRadioDefault2">
                     By Hours
                   </label>
                 </div>
 
-                <div class="form-check" style={{ marginLeft: "25px" }}>
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault3"
-                  />
-                  <label
-                    class="form-check-label textsession"
-                    for="flexRadioDefault3"
-                  >
+                <div className="form-check" style={{ marginLeft: "25px" }}>
+                  <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" />
+                  <label className="form-check-label textsession" for="flexRadioDefault3">
                     By Session
                   </label>
                 </div>
 
-                <div class="quantity-field">
-                  <div
-                    onClick={() => setPrice(parseInt(price) - 1)}
-                    title="Azalt"
-                    className="incBtn"
-                  >
+                <div className="quantity-field">
+                  <div onClick={() => setPrice(parseInt(price) - 1)} title="Azalt" className="incBtn">
                     -
                   </div>
-                  {/* <div class="number">0</div> */}
+                  {/* <div className="number">0</div> */}
                   <input
-                    class="form-text-input"
+                    className="form-text-input"
                     type="number"
                     name="flexRadioDefault"
                     id="flexRadioDefault1"
@@ -781,11 +679,7 @@ const AddEvent = () => {
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                   />
-                  <div
-                    onClick={() => setPrice(parseInt(price) + 1)}
-                    title="Arrtır"
-                    className="incBtn"
-                  >
+                  <div onClick={() => setPrice(parseInt(price) + 1)} title="Arrtır" className="incBtn">
                     +
                   </div>
                 </div>
@@ -794,21 +688,8 @@ const AddEvent = () => {
           </div>
           <div className="row">
             <div className="col-12 col-md-12 col-lg-12 mt-4 text-center">
-              <buttton
-                className="btn  submit_eventFormButton"
-                onClick={update ? UpdateEvent : submit}
-              >
-                {loading ? (
-                  <Spinner
-                    animation="border"
-                    variant="light"
-                    style={{ width: "20px", height: "20px" }}
-                  />
-                ) : update ? (
-                  "Update & Preview"
-                ) : (
-                  "Submit & Preview"
-                )}
+              <buttton className="btn  submit_eventFormButton" onClick={update ? UpdateEvent : submit}>
+                {loading ? <Spinner animation="border" variant="light" style={{ width: "20px", height: "20px" }} /> : update ? "Update & Preview" : "Submit & Preview"}
               </buttton>
               <Spinner />
             </div>

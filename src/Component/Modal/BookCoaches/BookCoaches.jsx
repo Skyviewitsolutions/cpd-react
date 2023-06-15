@@ -13,9 +13,7 @@ import "../../../fonts/Inter-Regular.ttf";
 import BookSlot from "../BookSlot/BookSlot";
 import { BsPlusCircleFill } from "react-icons/bs";
 
-
 const BookCoaches = (props) => {
-  
   // const [modalShow, setModalShow] = React.useState(false);
   const { BookCoachesShow, setBookCoachesShow } = props;
   const [BookSlotShow, setBookSlotShow] = useState(false);
@@ -52,12 +50,7 @@ const BookCoaches = (props) => {
   return (
     <>
       <div className="bookCoachesModal">
-        <Modal
-          show={BookCoachesShow}
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-        >
+        <Modal show={BookCoachesShow} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter"></Modal.Title>
           </Modal.Header>
@@ -74,26 +67,17 @@ const BookCoaches = (props) => {
 
                   <div className="coachmodalleft">
                     <div className="col-lg-4 col-md-4 col-12 ">
-                      <div class="bookCoachimg">
-                        <img
-                          src={dommy_person}
-                          alt="#"
-                          className="card__body-cover-image"
-                        />
+                      <div className="bookCoachimg">
+                        <img src={dommy_person} alt="#" className="card__body-cover-image" />
                       </div>
                     </div>
                     <div className="col-lg-8 col-md-8 col-12 ">
                       <div className="bookCoachnameBox">
                         <h5>Professor Joy</h5>
                         <h6> Expertise</h6>
-                        <p className="coachmodalp">
-                          Executive Coach | Career Coach
-                        </p>
+                        <p className="coachmodalp">Executive Coach | Career Coach</p>
                         <h6 className="details">Details</h6>
-                        <p>
-                          Certified professional teacher or coach assign they
-                          develop your estimations of goals
-                        </p>
+                        <p>Certified professional teacher or coach assign they develop your estimations of goals</p>
                       </div>
                     </div>
                   </div>
@@ -102,9 +86,9 @@ const BookCoaches = (props) => {
                 <div className="col-lg-6 col-md-6 col-12">
                   <div className=" col-12 col-md-12 col-lg-12 coachesmodal_availableDays">
                     <h5 style={{ paddingRight: "10px" }}> Available Days</h5>
-                    <div class="form-check eventForm_daysDate">
+                    <div className="form-check eventForm_daysDate">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="radio"
                         name="flexRadioDefault4"
                         id="flexRadioDefault4"
@@ -115,13 +99,13 @@ const BookCoaches = (props) => {
                           setDays([]);
                         }}
                       />
-                      <label class="form-check-label" for="flexRadioDefault4">
+                      <label className="form-check-label" for="flexRadioDefault4">
                         Days
                       </label>
                     </div>
-                    <div class="form-check eventForm_daysDate">
+                    <div className="form-check eventForm_daysDate">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="radio"
                         name="flexRadioDefault4"
                         id="flexRadioDefault5"
@@ -132,7 +116,7 @@ const BookCoaches = (props) => {
                           setDays([]);
                         }}
                       />
-                      <label class="form-check-label" for="flexRadioDefault5">
+                      <label className="form-check-label" for="flexRadioDefault5">
                         Date
                       </label>
                     </div>
@@ -141,14 +125,9 @@ const BookCoaches = (props) => {
                     <div className="eventForm_weekBox">
                       <h5>Week</h5> <FaCalendarAlt id="calender_icon" />
                     </div>
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="flexRadiDefault7"
-                        id="flexRadioDefault7"
-                      />
-                      <label class="form-check-label" for="flexRadioDefault7">
+                    <div className="form-check">
+                      <input className="form-check-input" type="checkbox" name="flexRadiDefault7" id="flexRadioDefault7" />
+                      <label className="form-check-label" for="flexRadioDefault7">
                         Repeated
                       </label>
                     </div>
@@ -162,35 +141,25 @@ const BookCoaches = (props) => {
                         <Week_days timeSlots={days} addTimeSlot={addDaySlot} />
                       )
                     ) : (
-                      <Month_days
-                        timeSlots={timeSlots}
-                        addTimeSlot={addTimeSlot}
-                      />
+                      <Month_days timeSlots={timeSlots} addTimeSlot={addTimeSlot} />
                     )}
                   </div>
 
                   <Modal.Footer>
-                    <Button
-                      className="coachesmodalcloseButton"
-                      onClick={props.onHide}
-                    >
+                    <Button className="coachesmodalcloseButton" onClick={props.onHide}>
                       Cancel
                     </Button>
                     <Button
                       className="coachesmodalBookButton"
                       onClick={() => {
                         setBookSlotShow(true);
-                      }}
-                    >
+                      }}>
                       Book Slot
                     </Button>
                   </Modal.Footer>
                 </div>
 
-                <BookSlot
-                  show={BookSlotShow}
-                  onHide={() => setBookSlotShow(false)}
-                />
+                <BookSlot show={BookSlotShow} onHide={() => setBookSlotShow(false)} />
               </div>
             </Modal.Body>
           </div>

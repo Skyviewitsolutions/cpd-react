@@ -1,11 +1,6 @@
 import React from "react";
 import "./CoachesForm.css";
-import {
-  json,
-  useLocation,
-  useNavigate,
-  useRouteLoaderData,
-} from "react-router-dom";
+import { json, useLocation, useNavigate, useRouteLoaderData } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
@@ -15,7 +10,7 @@ import { FiEdit } from "react-icons/fi";
 import { AiFillMinusCircle } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import "../../../src/fonts/Inter-Bold.ttf";
-import dummyUserPerson from "../../assets/Images/dommyuserperson.jfif"
+import dummyUserPerson from "../../assets/Images/dommyuserperson.jfif";
 import "../../../src/fonts/Inter-Regular.ttf";
 import company_logo from "../../assets/Images/company_logo.png";
 import { TagsInput } from "react-tag-input-component";
@@ -34,7 +29,6 @@ import { getDomainList, getIndustryList } from "../../utils/api";
 import showToast from "../../Component/CustomToast/CustomToast";
 
 const CoachesForm = () => {
-
   const [showCalendar, setShowCalendar] = useState(false);
   const token = localStorage.getItem("token");
   const [eventsToBeShown, setEventsToBeShown] = useState([]);
@@ -46,7 +40,7 @@ const CoachesForm = () => {
   const [allDomain, setAllDomain] = useState([]);
   const [industry, setIndustry] = useState("");
   const [domain, setDomain] = useState("");
-  const [subIndustry , setSubIndustry] = useState("");
+  const [subIndustry, setSubIndustry] = useState("");
   const navigate = useNavigate();
 
   // creating useState for holding the form date ;
@@ -57,7 +51,7 @@ const CoachesForm = () => {
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
   const [coachImg, setCoachImg] = useState(null);
-  const [coachImg2 , setCoachImg2] = useState('')
+  const [coachImg2, setCoachImg2] = useState("");
   const [skills, setSkills] = useState([]);
   const [allNational, setAllNational] = useState([]);
   const [category, setCategory] = useState("");
@@ -131,16 +125,8 @@ const CoachesForm = () => {
 
   const addExperience = (e) => {
     e.preventDefault();
-    if (
-      sltdJobTitle == "" ||
-      sltdEmploymentType == "" ||
-      sltdJobStartYear == "" ||
-      sltdJobEndYear == "" ||
-      sltdDomain == "" ||
-      sltdIndustry == "" ||
-      sltdCompany == ""
-    ) {
-      showToast("Please fill the experience details",  "warning" );
+    if (sltdJobTitle == "" || sltdEmploymentType == "" || sltdJobStartYear == "" || sltdJobEndYear == "" || sltdDomain == "" || sltdIndustry == "" || sltdCompany == "") {
+      showToast("Please fill the experience details", "warning");
     } else {
       const jobDta = {
         id: allExperience.length + 1,
@@ -208,21 +194,19 @@ const CoachesForm = () => {
     setStldExperienceIndex(ind);
   };
 
-
   const updateSelectedExperience = () => {
-
     if (sltdJobTitle == "") {
-      showToast("Job title is required",  "warning" );
+      showToast("Job title is required", "warning");
     } else if (sltdEmploymentType == "") {
-      showToast("Employee Type is required",  "warning" );
+      showToast("Employee Type is required", "warning");
     } else if (sltdJobStartYear == "") {
-      showToast("Start year is required",  "warning" );
+      showToast("Start year is required", "warning");
     } else if (sltdDomain == "") {
-      showToast("Domain is required",  "warning" );
+      showToast("Domain is required", "warning");
     } else if (sltdIndustry == "") {
-      showToast("Industry is required",  "warning" );
+      showToast("Industry is required", "warning");
     } else if (sltdCompany == "") {
-      showToast("company is required",  "warning" );
+      showToast("company is required", "warning");
     } else {
       var cmpny = company;
       var dmain = jobDomain;
@@ -401,15 +385,15 @@ const CoachesForm = () => {
       e.preventDefault();
     }
     if (firstName == "") {
-      showToast("First name is required",  "warning");
+      showToast("First name is required", "warning");
     } else if (lastName == "") {
-      showToast("Last name is required",  "warning");
+      showToast("Last name is required", "warning");
     } else if (contactNumber == "") {
-      showToast("Please enter phone no.",  "warning");
+      showToast("Please enter phone no.", "warning");
     } else if (nationality == "") {
-      showToast("Please select nationality",  "warning");
+      showToast("Please select nationality", "warning");
     } else if (dob == "") {
-      showToast("Please select date of birth",  "warning");
+      showToast("Please select date of birth", "warning");
     } else {
       // here hitting the api for saving the coaches data;
       const formData = new FormData();
@@ -433,10 +417,9 @@ const CoachesForm = () => {
       formData.append("category", category);
       formData.append("subCategory", subCategory);
       formData.append("description", description);
-      formData.append("domain" , domain);
-      formData.append("industry" , industry); 
-      formData.append("subindustry" , subIndustry)
-
+      formData.append("domain", domain);
+      formData.append("industry", industry);
+      formData.append("subindustry", subIndustry);
 
       const url = endpoints.coaches.createCoachProfile;
       setLoading(true);
@@ -451,8 +434,8 @@ const CoachesForm = () => {
           setLoading(false);
           if (res.data.result) {
             getUserCvData();
-            localStorage.setItem("isCvUploaded" , true)
-            navigate("/")
+            localStorage.setItem("isCvUploaded", true);
+            navigate("/");
             showToast("Profile created successfully", "success");
           }
         })
@@ -466,11 +449,10 @@ const CoachesForm = () => {
   const handleUploadImg = (e) => {
     const files = e.target.files[0];
     setCoachImg(files);
-    setCoachImg2(files)
+    setCoachImg2(files);
   };
 
   const getUserCvData = () => {
-
     const url = endpoints.authentication.userProfile;
 
     const headers = {
@@ -478,13 +460,12 @@ const CoachesForm = () => {
       // "Content-Type": "application/json",
     };
 
-   
     axios
       .get(url, { headers: headers })
       .then((res) => {
         if (res.data.result === true) {
           const usersData = res.data.data;
-          console.log(usersData , "usersData here")
+          console.log(usersData, "usersData here");
 
           if (usersData) {
             setAllExperience([]);
@@ -502,11 +483,11 @@ const CoachesForm = () => {
               setSkills(usersData?.skills);
               setHobbies(usersData?.hobbies);
               setDescription(usersData?.description);
-              if(usersData.subindustry && usersData?.subindustry != undefined && usersData.subindustry != null ){
+              if (usersData.subindustry && usersData?.subindustry != undefined && usersData.subindustry != null) {
                 setSubIndustry(usersData?.subindustry);
               }
               setDomain(usersData?.domain?.[0]);
-              setIndustry(usersData?.industry?.[0])
+              setIndustry(usersData?.industry?.[0]);
               // writing code for all eductional part ;
 
               const jbTitle = usersData.job_title;
@@ -519,10 +500,8 @@ const CoachesForm = () => {
               const crntRole = usersData.isCurrent;
 
               for (var i = 1; i < jbTitle.length; i++) {
-               
                 var endYear = jbEndYear[i];
-                var currentRole =
-                  endYear == new Date().getFullYear() ? "true" : "false";
+                var currentRole = endYear == new Date().getFullYear() ? "true" : "false";
 
                 const jobDta = {
                   id: i,
@@ -551,7 +530,7 @@ const CoachesForm = () => {
               setJobDomain(jbDomain);
 
               var imgUrl = res.data.avtarPath + usersData.avtar;
-              console.log(imgUrl , "imgUlr")
+              console.log(imgUrl, "imgUlr");
               setCoachImg2(imgUrl);
               // setCoachImg(imgUrl)
               const fileName = "myFile.jpg";
@@ -562,7 +541,6 @@ const CoachesForm = () => {
                 const file = new File([blob], fileName);
                 // setCoachImg(file);
               });
-
             }
           }
         }
@@ -588,15 +566,15 @@ const CoachesForm = () => {
     }
 
     if (firstName == "") {
-      showToast("First name is required",  "warning" );
+      showToast("First name is required", "warning");
     } else if (lastName == "") {
-      showToast("Last name is required",  "warning" );
+      showToast("Last name is required", "warning");
     } else if (contactNumber == "") {
-      showToast("Please enter phone no.",  "warning" );
+      showToast("Please enter phone no.", "warning");
     } else if (nationality == "") {
-      showToast("Please select nationality",  "warning" );
+      showToast("Please select nationality", "warning");
     } else if (dob == "") {
-      showToast("Please select date of birth",  "warning" );
+      showToast("Please select date of birth", "warning");
     } else {
       // here hitting the api for saving the coaches data;
       const formData = new FormData();
@@ -620,9 +598,9 @@ const CoachesForm = () => {
       formData.append("category", category);
       formData.append("subCategory", subCategory);
       formData.append("description", description);
-      formData.append("domain" , domain);
-      formData.append("industry" , industry); 
-      formData.append("subindustry" , subIndustry);
+      formData.append("domain", domain);
+      formData.append("industry", industry);
+      formData.append("subindustry", subIndustry);
 
       const url = endpoints.coaches.updateCoachProfile;
       setLoading(true);
@@ -636,8 +614,8 @@ const CoachesForm = () => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            navigate("/")
-            showToast("Profile updated successfully",  "success" );
+            navigate("/");
+            showToast("Profile updated successfully", "success");
             getUserCvData();
           }
         })
@@ -687,11 +665,11 @@ const CoachesForm = () => {
           </div>
           <div className="row">
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">First Name*</label>
                 <input
                   type="text"
-                  class="form-control "
+                  className="form-control "
                   id="exampleInputPassword1"
                   placeholder="Enter First Name"
                   value={firstName}
@@ -701,11 +679,11 @@ const CoachesForm = () => {
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Last Name*</label>
                 <input
                   type="text"
-                  class="form-control "
+                  className="form-control "
                   id="exampleInputPassword1"
                   placeholder="Enter Last Name"
                   value={lastName}
@@ -715,32 +693,20 @@ const CoachesForm = () => {
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="mobile_code">Contact*</label>
-                <PhoneInput
-                  country="hk"
-                  value={contactNumber}
-                  onChange={(phone) => setContactNumber(phone)}
-                />
+                <PhoneInput country="hk" value={contactNumber} onChange={(phone) => setContactNumber(phone)} />
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="">Nationality*</label>
-                <select
-                  class="form-select  "
-                  aria-label="select example"
-                  value={nationality}
-                  required
-                  onChange={(e) => setNationality(e.target.value)}
-                >
+                <select className="form-select  " aria-label="select example" value={nationality} required onChange={(e) => setNationality(e.target.value)}>
                   <option value="">Choose Nationality</option>
                   {allNational.map((country, index) => {
                     return (
                       <>
-                        <option value={country.en_short_name}>
-                          {country.en_short_name}
-                        </option>
+                        <option value={country.en_short_name}>{country.en_short_name}</option>
                       </>
                     );
                   })}
@@ -748,28 +714,15 @@ const CoachesForm = () => {
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="">Date of Birth*</label>
-                <input
-                  type="date"
-                  class="form-control "
-                  placeholder="Due date"
-                  value={dob}
-                  required
-                  onChange={(e) => setDob(e.target.value)}
-                />
+                <input type="date" className="form-control " placeholder="Due date" value={dob} required onChange={(e) => setDob(e.target.value)} />
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="">Gender*</label>
-                <select
-                  className="form-select "
-                  aria-label="Default select example"
-                  value={gender}
-                  required
-                  onChange={(e) => setGender(e.target.value)}
-                >
+                <select className="form-select " aria-label="Default select example" value={gender} required onChange={(e) => setGender(e.target.value)}>
                   <option>Choose Gender</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -777,18 +730,18 @@ const CoachesForm = () => {
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 {/* {coachImg2 ? (
                   <>
                     <label htmlFor="takePhoto">Upload Img</label>
-                    <h5 class="form-control" htmlFor="takePhone" style={{overflow : "hidden" , marginRight : '10px'}}>
+                    <h5 className="form-control" htmlFor="takePhone" style={{overflow : "hidden" , marginRight : '10px'}}>
                       <span>
                       {coachImg2}
                       </span>
                     </h5>
                     <input
                       type="file"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Enter here"
                       accept="image/png, image/gif, image/jpeg"
                       onChange={(e) => handleUploadImg(e)}
@@ -798,36 +751,30 @@ const CoachesForm = () => {
                   </>
                 ) : (
                   <> */}
-                    <label htmlFor="takePhoto">Upload Img</label>
-                    <input
-                      type="file"
-                      class="form-control"
-                      placeholder="Enter here"
-                      accept="image/png, image/gif, image/jpeg"
-                      onChange={(e) => handleUploadImg(e)}
-                      id="takePhoto"
-                    />
-                  {/* </>
+                <label htmlFor="takePhoto">Upload Img</label>
+                <input
+                  type="file"
+                  className="form-control"
+                  placeholder="Enter here"
+                  accept="image/png, image/gif, image/jpeg"
+                  onChange={(e) => handleUploadImg(e)}
+                  id="takePhoto"
+                />
+                {/* </>
                 )} */}
               </div>
               <div className="col-lg-3 col-md-3 col-12">
-                    <div className="resume_img2">
-                      <img
-                        src={
-                          coachImg
-                            ? (URL.createObjectURL(coachImg) || coachImg2)
-                            : (coachImg2 || dummyUserPerson )
-                        }
-                      />
-                    </div>
-                  </div>
+                <div className="resume_img2">
+                  <img src={coachImg ? URL.createObjectURL(coachImg) || coachImg2 : coachImg2 || dummyUserPerson} />
+                </div>
+              </div>
             </div>
             <div className="col-12 col-md-12 col-lg-7  ">
               <label for="exampleInputPassword1">Description</label>
-              <div class="form-group domain_textarea">
+              <div className="form-group domain_textarea">
                 <textarea
                   type="text"
-                  class="form-control "
+                  className="form-control "
                   placeholder="Enter some information related Domain and Industry"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
@@ -836,7 +783,7 @@ const CoachesForm = () => {
             </div>
           </div>
 
-          <div class="customer_records_dynamic"></div>
+          <div className="customer_records_dynamic"></div>
           <div className="row">
             <div className="col-lg-12 col-md-12 col-12">
               <h5 className="heading_seconds">Add Experience</h5>
@@ -857,13 +804,8 @@ const CoachesForm = () => {
                     </div>
                   </div>
                   <div className="studentCV_rightIcon">
-                    <FiEdit
-                      style={{ color: "gray" }}
-                      onClick={() => handleExperienceEdit(itm, index)}
-                    />
-                    <AiFillMinusCircle
-                      onClick={() => removeJobExperience(index)}
-                    />
+                    <FiEdit style={{ color: "gray" }} onClick={() => handleExperienceEdit(itm, index)} />
+                    <AiFillMinusCircle onClick={() => removeJobExperience(index)} />
                   </div>
                 </div>
               </>
@@ -871,11 +813,11 @@ const CoachesForm = () => {
           })}
           <div className="row">
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Job Title</label>
                 <input
                   type="text"
-                  class="form-control field"
+                  className="form-control field"
                   id=""
                   placeholder="Enter here"
                   // error="Please enter text"
@@ -886,14 +828,9 @@ const CoachesForm = () => {
             </div>
 
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Employment Type</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                  value={sltdEmploymentType}
-                  onChange={(e) => setSltdEmploymentType(e.target.value)}
-                >
+                <select className="form-select end-year " aria-label="Default select example" value={sltdEmploymentType} onChange={(e) => setSltdEmploymentType(e.target.value)}>
                   <option>Choose</option>
                   <option value="Full Time">Full Time</option>
                   <option value="Part Time">Part Time</option>
@@ -907,11 +844,11 @@ const CoachesForm = () => {
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Select Company</label>
                 <input
                   type="text"
-                  class="form-control field"
+                  className="form-control field"
                   id=""
                   placeholder="Enter here"
                   // error="Please enter text"
@@ -922,24 +859,21 @@ const CoachesForm = () => {
             </div>
 
             <div className="col-lg-3 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Start Year</label>
                 <select
-                  class="form-select end-year "
+                  className="form-select end-year "
                   aria-label="Default select example"
                   value={sltdJobStartYear}
                   onChange={(e) => {
                     var val = e.target.value;
 
                     if (sltdJobEndYear !== "" && val > sltdJobEndYear) {
-                      showToast("start year cannot be greater then end year", 
-                        "warning",
-                      );
+                      showToast("start year cannot be greater then end year", "warning");
                     } else {
                       setSltdJobStartYear(e.target.value);
                     }
-                  }}
-                >
+                  }}>
                   <option>select</option>
                   {getAcedemicYears()}
                 </select>
@@ -947,23 +881,21 @@ const CoachesForm = () => {
             </div>
 
             <div className="col-lg-3 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">End Year</label>
                 <select
-                  class="form-select end-year "
+                  className="form-select end-year "
                   aria-label="Default select example"
                   value={sltdJobEndYear}
                   onChange={(e) => {
                     var val = e.target.value;
                     setSltdIsCurrentJob(false);
                     if (val < sltdJobStartYear) {
-                      showToast("end year cannot be less than start year",  "warning"
-                      );
+                      showToast("end year cannot be less than start year", "warning");
                     } else {
                       setSltdJobEndYear(e.target.value);
                     }
-                  }}
-                >
+                  }}>
                   <option>select</option>
                   {getAcedemicYears()}
                 </select>
@@ -971,30 +903,20 @@ const CoachesForm = () => {
             </div>
 
             <div className="col-lg-6 col-md-6 col-12 ">
-              <div class="form-group studentCV_ExperienceCheckbox">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="flexCheckDefault"
-                  checked={sltdIsCurrentJob}
-                  onChange={handleSelectRole}
-                />
-                <label
-                  class="form-check-label studentCV_checkLabel"
-                  for="flexCheckDefault"
-                >
+              <div className="form-group studentCV_ExperienceCheckbox">
+                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked={sltdIsCurrentJob} onChange={handleSelectRole} />
+                <label className="form-check-label studentCV_checkLabel" for="flexCheckDefault">
                   I am currently working in this role
                 </label>
               </div>
             </div>
 
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Domain</label>
                 <input
                   type="text"
-                  class="form-control field"
+                  className="form-control field"
                   id=""
                   placeholder="Enter here"
                   // error="Please enter text"
@@ -1005,12 +927,12 @@ const CoachesForm = () => {
             </div>
 
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Industry</label>
 
                 <input
                   type="text"
-                  class="form-control field"
+                  className="form-control field"
                   id=""
                   placeholder="Enter here"
                   // error="Please enter text"
@@ -1021,10 +943,7 @@ const CoachesForm = () => {
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
               {updateExperience === true ? (
-                <button
-                  className="addExperiencebutton"
-                  onClick={updateSelectedExperience}
-                >
+                <button className="addExperiencebutton" onClick={updateSelectedExperience}>
                   Update Experience
                 </button>
               ) : (
@@ -1036,15 +955,9 @@ const CoachesForm = () => {
           </div>
           <div className="row">
             <div classname="col-12 col-md-6 col-lg-12  ">
-              <div class="form-group ">
+              <div className="form-group ">
                 <label for="exampleInputPassword1">Skills</label>
-                <TagsInput
-                  type="text"
-                  class="form-control hobbies_tags"
-                  placeHolder="Enter here"
-                  value={skills}
-                  onChange={setSkills}
-                />
+                <TagsInput type="text" className="form-control hobbies_tags" placeHolder="Enter here" value={skills} onChange={setSkills} />
               </div>
             </div>
           </div>
@@ -1052,15 +965,9 @@ const CoachesForm = () => {
           <hr className="studentcv_hr" />
           <div className="row">
             <div classname="col-12 col-md-6 col-lg-12  ">
-              <div class="form-group ">
+              <div className="form-group ">
                 <label for="exampleInputPassword1">Hobbies</label>
-                <TagsInput
-                  type="text"
-                  class="form-control hobbies_tags "
-                  placeHolder="Enter here"
-                  value={hobbies}
-                  onChange={setHobbies}
-                />
+                <TagsInput type="text" className="form-control hobbies_tags " placeHolder="Enter here" value={hobbies} onChange={setHobbies} />
               </div>
             </div>
           </div>
@@ -1068,15 +975,9 @@ const CoachesForm = () => {
           <hr className="studentcv_hr" />
           <div className="row">
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Domain</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                  value={domain}
-                  required
-                  onChange={(e) => setDomain(e.target.value)}
-                >
+                <select className="form-select end-year " aria-label="Default select example" value={domain} required onChange={(e) => setDomain(e.target.value)}>
                   <option value="">Choose</option>
                   {allDomain.map((domain, ind) => {
                     return (
@@ -1092,15 +993,9 @@ const CoachesForm = () => {
             </div>
 
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Industry</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                  value={industry}
-                  required
-                  onChange={(e) => setIndustry(e.target.value)}
-                >
+                <select className="form-select end-year " aria-label="Default select example" value={industry} required onChange={(e) => setIndustry(e.target.value)}>
                   <option value="">Choose</option>
                   {allIndustry.map((itm, index) => {
                     return (
@@ -1115,40 +1010,24 @@ const CoachesForm = () => {
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Sub Industry</label>
 
-                <input
-                  type="text"
-                  class="form-control field"
-                  id=""
-                  placeholder="Enter here"
-                  value={subIndustry}
-                  onChange={(e) => setSubIndustry(e.target.value)}
-                />
+                <input type="text" className="form-control field" id="" placeholder="Enter here" value={subIndustry} onChange={(e) => setSubIndustry(e.target.value)} />
               </div>
             </div>
 
             <div className="row mt-4">
               <div className="col-lg-6"></div>
               <div className="col-lg-3 col-md-3 col-12">
-                <Button
-                  title={update ? "Update" : "Submit"}
-                  loading={loading}
-                  onClick={update === true ? updateProfile : submit}
-                />
+                <Button title={update ? "Update" : "Submit"} loading={loading} onClick={update === true ? updateProfile : submit} />
               </div>
               <div className="col-lg-3 col-md-3 col-12">
-                <Button
-                  title="Preview Profile"
-                  onClick={() => setCoachesPreview(true)}
-                />
+                <Button title="Preview Profile" onClick={() => setCoachesPreview(true)} />
               </div>
             </div>
           </div>
         </div>
-
-      
       </div>
 
       <ToastContainer />
@@ -1166,7 +1045,6 @@ const CoachesForm = () => {
         hobbies={hobbies}
         category={category}
         subCategory={subCategory}
-        
         allExperience={allExperience}
         skills={skills}
         update={update}
@@ -1177,11 +1055,7 @@ const CoachesForm = () => {
         dob={dob}
         loading={loading}
       />
-      <CustomCalendar
-        showCalendar={showCalendar}
-        setShowCalendar={setShowCalendar}
-        eventsToBeShown={eventsToBeShown}
-      />
+      <CustomCalendar showCalendar={showCalendar} setShowCalendar={setShowCalendar} eventsToBeShown={eventsToBeShown} />
       <Footer />
     </>
   );

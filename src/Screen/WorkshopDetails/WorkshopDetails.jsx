@@ -24,13 +24,11 @@ import parse from "html-react-parser";
 import ReviewCard from "../../Component/ReviewCard/ReviewCard";
 import UsersReview from "../../Component/UsersReview/UsersReview";
 import "../NormalDetailsPage/normalDetailsPage.css";
-import ShareModal from "../../Component/Modal/ShareModel/ShareModel"
+import ShareModal from "../../Component/Modal/ShareModel/ShareModel";
 import showToast from "../../Component/CustomToast/CustomToast";
-import DefaultImg from "../../assets/Images/default.png"
-
+import DefaultImg from "../../assets/Images/default.png";
 
 const WorkshopDetails = () => {
-
   const iconsMap = [
     {
       icon: <AiOutlineYoutube size={20} color="black" />,
@@ -70,7 +68,7 @@ const WorkshopDetails = () => {
   const [workshopDtails, setWorkshopDtails] = useState({});
   const [workshopImgPath, setWorkshopImgPath] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showShareModal , setShowShareModal] = useState(false)
+  const [showShareModal, setShowShareModal] = useState(false);
 
   const coachImgPath = imgPath.user;
 
@@ -189,14 +187,13 @@ const WorkshopDetails = () => {
   var industry = workshopDtails?.industry?.title;
   var domain = workshopDtails?.domain?.title;
 
-  const handleWorkshopClick = (dta) =>{
+  const handleWorkshopClick = (dta) => {
     const id = dta?._id;
-    const path = generatePath("/workshopDetails/:workshopId" , { workshopId : id})
+    const path = generatePath("/workshopDetails/:workshopId", { workshopId: id });
     navigate(path);
-  }
+  };
 
   const enrollWorkshop = (workshopDetails) => {
-    
     const token = localStorage.getItem("token");
     if (token) {
       var id = workshopDetails._id;
@@ -222,18 +219,12 @@ const WorkshopDetails = () => {
     }
   };
 
-
-
   return (
     <MainLayout>
       <div className="dtlscont">
         <div className="dltsline"></div>
         <div className="dltsMain">
-          {workshopDtails?.image ? (
-            <img src={workshopImgPath + "/" + workshopDtails.image} />
-          ) : (
-            <img src={DefaultImg} alt="" />
-          )}
+          {workshopDtails?.image ? <img src={workshopImgPath + "/" + workshopDtails.image} /> : <img src={DefaultImg} alt="" />}
           <div className="wrkshoDtls">
             <h1 className="wrkshTitle">{workshopDtails?.title}</h1>
             <p className="wrkpara">{shortDescriptions}</p>
@@ -251,8 +242,7 @@ const WorkshopDetails = () => {
             <div className="dltsSecondLeft col-lg-7 col-md-12 col-12">
               <div className="harbar">
                 <h5 onClick={() => navigate("/")}>Home</h5> <span>{">"}</span>
-                <h5 onClick={() => navigate(-1)}>Workshop</h5>{" "}
-                <span>{">"}</span>
+                <h5 onClick={() => navigate(-1)}>Workshop</h5> <span>{">"}</span>
                 <h5>Details</h5>
               </div>
               <div className="whatlearn">
@@ -273,20 +263,18 @@ const WorkshopDetails = () => {
                 <h4>Course Content</h4>
                 <div className="crsttitlesc">
                   <p>
-                    15 Sections <span></span> 146 Lectures <span></span> 14H 42M
-                    Total Length
+                    15 Sections <span></span> 146 Lectures <span></span> 14H 42M Total Length
                   </p>
                   <h6>Expand All Sections</h6>
                 </div>
                 <div className="accordiancont">
-                  <CourseContent  data={workshopDtails?.courseContent} update={false}/>
+                  <CourseContent data={workshopDtails?.courseContent} update={false} />
                 </div>
 
                 {/* here we are creating descriptions sections */}
                 <div className="wrkshopDescriptions">
                   <h5>Descriptions</h5>
-                  {londDescriptionContent != "" &&
-                    parse(londDescriptionContent)}
+                  {londDescriptionContent != "" && parse(londDescriptionContent)}
                 </div>
 
                 <div className="relatedCourse">
@@ -301,20 +289,11 @@ const WorkshopDetails = () => {
                             <div>
                               <h5>{workshop.title}</h5>
                               <h6>
-                                23 hours total{" "}
-                                <li>
-                                  Members : ({workshop?.workshop_members_count})
-                                </li>
+                                23 hours total <li>Members : ({workshop?.workshop_members_count})</li>
                               </h6>
                             </div>
                           </div>
-                          <div className="pricePart">
-                            {workshop?.is_paid == 1 ? (
-                              <h6>Price : {workshop.price} HKD</h6>
-                            ) : (
-                              <h6>Free</h6>
-                            )}
-                          </div>
+                          <div className="pricePart">{workshop?.is_paid == 1 ? <h6>Price : {workshop.price} HKD</h6> : <h6>Free</h6>}</div>
                         </div>
                       );
                     })}
@@ -328,11 +307,7 @@ const WorkshopDetails = () => {
               <div className="vdoDtls">
                 <div className="vdoDtlsVdo">
                   {/* <img src={DummyBanner} alt="" /> */}
-                  {workshopDtails?.image ? (
-                    <img src={workshopImgPath + "/" + workshopDtails.image} />
-                  ) : (
-                    <img src={DefaultImg} alt="" />
-                  )}
+                  {workshopDtails?.image ? <img src={workshopImgPath + "/" + workshopDtails.image} /> : <img src={DefaultImg} alt="" />}
                   <div className="vdoPlay">
                     <BsFillPlayFill size={36} />
                   </div>
@@ -340,16 +315,16 @@ const WorkshopDetails = () => {
                 </div>
                 <div className="vdoTxt">
                   <h5>{paid ? `Price : ${price} HKD` : "Free"}</h5>
-                  <button className="addtoCrt" onClick={() =>enrollWorkshop()}>Book Now</button>
+                  <button className="addtoCrt" onClick={() => enrollWorkshop()}>
+                    Book Now
+                  </button>
                 </div>
               </div>
 
               <div className="crsIncld">
                 <h6>This Course Includes : </h6>
                 {courseIncludeContent.map((item, index) => {
-                  const icn = iconsMap.find(
-                    (itm, ind) => itm.text === item.icon
-                  );
+                  const icn = iconsMap.find((itm, ind) => itm.text === item.icon);
                   return (
                     <div className="crsIncldBx" key={index}>
                       {icn.icon}
@@ -359,29 +334,20 @@ const WorkshopDetails = () => {
                 })}
                 <div className="crsIncldBx">
                   {/* <h5>Share</h5> */}
-                  <button className="addtoCrt" onClick={() => setShowShareModal(true)}> 
+                  <button className="addtoCrt" onClick={() => setShowShareModal(true)}>
                     {" "}
-                    <RiShareFill
-                      size={18}
-                      color="white"
-                      style={{ marginRight: "10px" }}
-                    />{" "}
-                    Share
+                    <RiShareFill size={18} color="white" style={{ marginRight: "10px" }} /> Share
                   </button>
                 </div>
               </div>
 
-              <UserCard
-                coachInfo={coachInfo}
-                imgName={coachInfo.avtar}
-                imgPath={coachImgPath + coachInfo.avtar}
-              />
+              <UserCard coachInfo={coachInfo} imgName={coachInfo.avtar} imgPath={coachImgPath + coachInfo.avtar} />
               <ReviewCard entityType={5} id={workshopId} />
             </div>
           </div>
         </div>
         {loading && <Loader />}
-        <ShareModal showShareModal={showShareModal} setShowShareModal={setShowShareModal}/>
+        <ShareModal showShareModal={showShareModal} setShowShareModal={setShowShareModal} />
       </div>
     </MainLayout>
   );

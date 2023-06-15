@@ -12,10 +12,7 @@ import axios from "axios";
 import { endpoints } from "../../services/endpoints";
 import showToast from "../../CustomToast/CustomToast";
 
-
-
 const CreateWorkshopForm = (props) => {
-  
   const {
     setShowWorkshopForm,
     showWorkshopForm,
@@ -112,21 +109,19 @@ const CreateWorkshopForm = (props) => {
     setMaxNumber(0);
   };
 
-
   const submitWorkshop = async () => {
     if (!title) {
-      showToast("please fill the workshop title",  "warning" );
+      showToast("please fill the workshop title", "warning");
     } else if (!workShopDuration) {
-      showToast("workshop duration is required",  "warning" );
+      showToast("workshop duration is required", "warning");
     } else if (!workshopImg) {
-      showToast("workshop image is required",  "warning" );
+      showToast("workshop image is required", "warning");
     } else if (!domain) {
-      showToast("please select workshop domain",  "warning" );
+      showToast("please select workshop domain", "warning");
     } else if (!industry) {
-      showToast("please select workshop industry",  "warning" );
+      showToast("please select workshop industry", "warning");
     } else if (!maxNumber) {
-      showToast("Max number of student is required",  "warning" );
-      
+      showToast("Max number of student is required", "warning");
     } else {
       const url = endpoints.workshop.createWorkshop;
 
@@ -158,14 +153,8 @@ const CreateWorkshopForm = (props) => {
       formData.append("is_repeated", is_repeated);
       formData.append("max_members", maxNumber);
       formData.append("image", workshopImg);
-      formData.append(
-        "domain",
-        showDomainInputBox ? domainManualInput : domainId
-      );
-      formData.append(
-        "industry",
-        showIndustryInputBox ? industryManualInput : industryId
-      );
+      formData.append("domain", showDomainInputBox ? domainManualInput : domainId);
+      formData.append("industry", showIndustryInputBox ? industryManualInput : industryId);
       formData.append("workshop_duration", workShopDuration);
 
       const headers = {
@@ -183,9 +172,9 @@ const CreateWorkshopForm = (props) => {
             setShowWorkshopForm(false);
             setShowAllWorkshop(false);
             refreshAllInputField();
-            showToast("workshop created successfully",  "success" );
+            showToast("workshop created successfully", "success");
           } else if (res.data.result == false) {
-            showToast(res.data.message,  "warning" );
+            showToast(res.data.message, "warning");
           }
         })
         .catch((err) => {
@@ -289,19 +278,19 @@ const CreateWorkshopForm = (props) => {
   const updateWorkshops = () => {
     const url = endpoints.workshop.updateWorkshop;
     if (!title) {
-      showToast("please fill the workshop title",  "warning" );
+      showToast("please fill the workshop title", "warning");
       // } else if (!workShopDuration) {
       //   toast("workshop duration is required", { type: "warning" });
     } else if (!workshopImg) {
-      showToast("workshop image is required",  "warning" );
+      showToast("workshop image is required", "warning");
     } else if (!domain) {
-      showToast("please select workshop domain",  "warning" );
+      showToast("please select workshop domain", "warning");
     } else if (!industry) {
-      showToast("please select workshop industry",  "warning" );
+      showToast("please select workshop industry", "warning");
     } else if (!maxNumber) {
-      showToast("Max number of student is required",  "warning" );
+      showToast("Max number of student is required", "warning");
     } else if (!sessionType) {
-      showToast("please select session type",  "warning" );
+      showToast("please select session type", "warning");
     } else {
       var availability_type = daysFormat == "weekly" ? 1 : 2;
       var payment_type = sessionType == "hourly" ? 1 : 2;
@@ -331,14 +320,8 @@ const CreateWorkshopForm = (props) => {
       formData.append("is_repeated", is_repeated);
       formData.append("max_members", maxNumber);
       formData.append("image", workshopImg);
-      formData.append(
-        "domain",
-        showDomainInputBox ? domainManualInput : domainId
-      );
-      formData.append(
-        "industry",
-        showIndustryInputBox ? industryManualInput : industryId
-      );
+      formData.append("domain", showDomainInputBox ? domainManualInput : domainId);
+      formData.append("industry", showIndustryInputBox ? industryManualInput : industryId);
       formData.append("id", selectedWorkshopId);
       formData.append("workshop_duration", workShopDuration);
 
@@ -358,9 +341,9 @@ const CreateWorkshopForm = (props) => {
             setShowWorkshopForm(false);
             setUpdateWorkshop(false);
             refreshAllInputField();
-            showToast("workshop updated successfully",  "success" );
+            showToast("workshop updated successfully", "success");
           } else if (res.data.result == false) {
-            showToast(res.data.message,  "warning" );
+            showToast(res.data.message, "warning");
           }
         })
         .catch((err) => {
@@ -371,34 +354,22 @@ const CreateWorkshopForm = (props) => {
   };
 
   return (
-    <Modal
-      show={showWorkshopForm}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+    <Modal show={showWorkshopForm} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
       <div className="formoutline_studentcv coachFormSt ">
         <div style={{ width: "150%", paddingBottom: "20px" }}>
           <div className="row ">
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Title</label>
-                <input
-                  type="text"
-                  class="form-control field py-4 mb-3"
-                  id=""
-                  placeholder="Enter workshop title"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
+                <input type="text" className="form-control field py-4 mb-3" id="" placeholder="Enter workshop title" value={title} onChange={(e) => setTitle(e.target.value)} />
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Duration (in hours)</label>
                 <input
                   type="number"
-                  class="form-control field py-4 mb-3"
+                  className="form-control field py-4 mb-3"
                   id=""
                   min={0}
                   value={workShopDuration}
@@ -410,16 +381,16 @@ const CreateWorkshopForm = (props) => {
           </div>
           <div className="row">
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 {workshopImg ? (
                   <>
                     <label htmlFor="takePhoto">Upload Img</label>
-                    <h5 class="form-control" htmlFor="takePhone">
+                    <h5 className="form-control" htmlFor="takePhone">
                       {workshopImg.name}
                     </h5>
                     <input
                       type="file"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Enter here"
                       accept="image/png, image/gif, image/jpeg"
                       onChange={(e) => handleworkshopImg(e)}
@@ -432,7 +403,7 @@ const CreateWorkshopForm = (props) => {
                     <label htmlFor="takePhoto">Upload Img</label>
                     <input
                       type="file"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Enter here"
                       accept="image/png, image/gif, image/jpeg"
                       onChange={(e) => handleworkshopImg(e)}
@@ -443,11 +414,11 @@ const CreateWorkshopForm = (props) => {
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label>Max number of students</label>
                 <input
                   type="number"
-                  class="form-control field py-4 mb-3"
+                  className="form-control field py-4 mb-3"
                   id=""
                   value={maxNumber}
                   min={0}
@@ -459,15 +430,9 @@ const CreateWorkshopForm = (props) => {
           </div>
           <div className="row mb-3">
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Domain</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                  value={domain}
-                  required
-                  onChange={(e) => handleDomainSelection(e.target.value)}
-                >
+                <select className="form-select end-year " aria-label="Default select example" value={domain} required onChange={(e) => handleDomainSelection(e.target.value)}>
                   <option value="">Choose</option>
                   {allDomain.map((domain, ind) => {
                     return (
@@ -484,11 +449,11 @@ const CreateWorkshopForm = (props) => {
             </div>
             {showDomainInputBox && (
               <div className="col-12 col-md-6 col-lg-4 ">
-                <div class="form-group">
+                <div className="form-group">
                   <label for="exampleInputPassword1">Others</label>
                   <input
                     type="text"
-                    class="form-control field py-4 "
+                    className="form-control field py-4 "
                     id=""
                     placeholder="Enter your domain "
                     value={domainManualInput}
@@ -500,15 +465,9 @@ const CreateWorkshopForm = (props) => {
           </div>
           <div className="row mb-3">
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Industry</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                  value={industry}
-                  required
-                  onChange={(e) => handleIndustrySelection(e.target.value)}
-                >
+                <select className="form-select end-year " aria-label="Default select example" value={industry} required onChange={(e) => handleIndustrySelection(e.target.value)}>
                   <option value="">Choose</option>
                   {allIndustry.map((industry, index) => {
                     return (
@@ -525,11 +484,11 @@ const CreateWorkshopForm = (props) => {
             </div>
             {showIndustryInputBox && (
               <div className="col-12 col-md-6 col-lg-4 ">
-                <div class="form-group">
+                <div className="form-group">
                   <label for="exampleInputPassword1">Others</label>
                   <input
                     type="text"
-                    class="form-control field py-4"
+                    className="form-control field py-4"
                     id=""
                     placeholder="Enter your industry"
                     value={industryManualInput}
@@ -557,36 +516,17 @@ const CreateWorkshopForm = (props) => {
             setEventsToBeShown={setEventsToBeShown}
           />
 
-        
           <div className="eventForm_price mt-3">
             <div>
-              <div class="eventForm_paid">
-                <input
-                  type="radio"
-                  id="a25"
-                  name="check-substitution-2"
-                  onClick={() => setPaid(false)}
-                />
-                <label
-                  for="a25"
-                  className={`btnfree ${
-                    !paid ? "btn-primary" : "btn-default"
-                  } `}
-                >
+              <div className="eventForm_paid">
+                <input type="radio" id="a25" name="check-substitution-2" onClick={() => setPaid(false)} />
+                <label for="a25" className={`btnfree ${!paid ? "btn-primary" : "btn-default"} `}>
                   Free
                 </label>
               </div>
               <div className="eventForm_paid freepaid">
-                <input
-                  type="radio"
-                  id="a50"
-                  name="check-substitution-2"
-                  onClick={() => setPaid(true)}
-                />
-                <label
-                  for="a50"
-                  className={`btnfree ${paid ? "btn-primary" : "btn-default"} `}
-                >
+                <input type="radio" id="a50" name="check-substitution-2" onClick={() => setPaid(true)} />
+                <label for="a50" className={`btnfree ${paid ? "btn-primary" : "btn-default"} `}>
                   Paid
                 </label>
               </div>
@@ -594,36 +534,30 @@ const CreateWorkshopForm = (props) => {
 
             {paid && (
               <div className="d-flex">
-                <div class="form-check" style={{ marginLeft: "25px" }}>
+                <div className="form-check" style={{ marginLeft: "25px" }}>
                   <input
-                    class="form-check-input"
+                    className="form-check-input"
                     type="radio"
                     name="flexRadioDefault"
                     id="flexRadioDefault5"
                     checked={sessionType == "hourly"}
                     onChange={() => setSessionType("hourly")}
                   />
-                  <label
-                    class="form-check-label  textsession"
-                    for="flexRadioDefault5"
-                  >
+                  <label className="form-check-label  textsession" for="flexRadioDefault5">
                     Pay by Hours
                   </label>
                 </div>
 
-                <div class="form-check" style={{ marginLeft: "25px" }}>
+                <div className="form-check" style={{ marginLeft: "25px" }}>
                   <input
-                    class="form-check-input"
+                    className="form-check-input"
                     type="radio"
                     name="flexRadioDefault"
                     id="flexRadioDefault6"
                     checked={sessionType == "sessional"}
                     onChange={() => setSessionType("sessional")}
                   />
-                  <label
-                    class="form-check-label textsession"
-                    for="flexRadioDefault6"
-                  >
+                  <label className="form-check-label textsession" for="flexRadioDefault6">
                     Pay by Session
                   </label>
                 </div>
@@ -634,25 +568,14 @@ const CreateWorkshopForm = (props) => {
 
           {paid === true && (
             <div className="col-lg-4 col-md-6 col-12 my-3 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Price in (HKD)</label>
-                <input
-                  type="number"
-                  class="form-control py-4"
-                  placeholder="Enter here"
-                  value={price}
-                  min={0}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
+                <input type="number" className="form-control py-4" placeholder="Enter here" value={price} min={0} onChange={(e) => setPrice(e.target.value)} />
               </div>
             </div>
           )}
           <div className="confirmBtn">
-            <Button
-              title={updateWorkshop ? "Update Workshop" : "Create Workshop"}
-              onClick={updateWorkshop ? updateWorkshops : submitWorkshop}
-              loading={loading}
-            />
+            <Button title={updateWorkshop ? "Update Workshop" : "Create Workshop"} onClick={updateWorkshop ? updateWorkshops : submitWorkshop} loading={loading} />
           </div>
         </div>
         <div
@@ -661,16 +584,11 @@ const CreateWorkshopForm = (props) => {
             setShowWorkshopForm(false);
             refreshAllInputField();
             setUpdateWorkshop(false);
-          }}
-        >
+          }}>
           <IoIosCloseCircleOutline size={26} color="red" />
         </div>
       </div>
-      <CustomCalendar
-        showCalendar={showCalendar}
-        setShowCalendar={setShowCalendar}
-        eventsToBeShown={eventsToBeShown}
-      />
+      <CustomCalendar showCalendar={showCalendar} setShowCalendar={setShowCalendar} eventsToBeShown={eventsToBeShown} />
     </Modal>
   );
 };

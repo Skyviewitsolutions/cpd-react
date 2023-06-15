@@ -7,15 +7,26 @@ import { AiOutlineDelete } from "react-icons/ai";
 import Button from "../button/Button/Button";
 import { useNavigate, generatePath } from "react-router-dom";
 import BookBtn from "../button/BookBtn/BookBtn";
+import { endpoints } from "../services/endpoints";
+import axios from "axios";
+import { useState } from "react";
 
 const CareerFareCard = (props) => {
-  const { data, showWorkshopOnCalendar, enrollWorkshop, enrollStatus, img, showBookBtn, imageName, showIncubationDetails, showEdit, handleEdit, key, deleteIncubation } = props;
-
-  const navigate = useNavigate();
-
-  var domain = data?.domain?.title;
-  var isPaid = data?.is_paid;
-  var sessionType = data.payment_type == 1 ? "hour" : "session";
+  let {
+    data,
+    showWorkshopOnCalendar,
+    enrollIncubation,
+    enrollStatus,
+    img,
+    showBookBtn,
+    imageName,
+    showIncubationDetails,
+    showEdit,
+    handleEdit,
+    key,
+    deleteIncubation,
+    onUnjoinHandler,
+  } = props;
 
   return (
     <div className="workshopCard">
@@ -56,7 +67,8 @@ const CareerFareCard = (props) => {
             {showBookBtn && (
               <BookBtn
                 status={enrollStatus}
-                onClick={() => enrollWorkshop(data)}
+                onUnjoinHandler={onUnjoinHandler}
+                onClick={() => enrollIncubation(data)}
                 styles={{
                   height: "30px",
                   margin: "5px 0px",

@@ -26,11 +26,7 @@ const AvailableResource = () => {
                   <div className="searchBox">
                     <div className="form-group">
                       <HiSearch id="availResource_search" />
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Search "
-                      />
+                      <input type="text" className="form-control" placeholder="Search " />
                     </div>
                   </div>
                 </div>

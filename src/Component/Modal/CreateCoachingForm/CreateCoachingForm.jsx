@@ -14,9 +14,7 @@ import CustomCalendar from "../../Calendar/CustomCalendar";
 import Loader from "../../Loader/Loader";
 import showToast from "../../CustomToast/CustomToast";
 
-
 const CreateCoachingForm = (props) => {
-  
   const {
     showCoachingsForm,
     setShowCoachingsForm,
@@ -61,7 +59,6 @@ const CreateCoachingForm = (props) => {
   const [daysSlot, setDaysSlot] = useState([]);
   const [selectedDates, setSelectedDates] = useState([]);
 
-  
   const handleCoachingImg = (e) => {
     const files = e.target.files[0];
     setCoachingImg(files);
@@ -116,15 +113,15 @@ const CreateCoachingForm = (props) => {
 
   const submitCoaching = () => {
     if (coachTitle == "") {
-      showToast("Please fill the coaching title",  "warning" );
+      showToast("Please fill the coaching title", "warning");
     } else if (!coachingImg) {
-      showToast("coaching image is required",  "warning" );
+      showToast("coaching image is required", "warning");
     } else if (!domain) {
-      showToast("please select coaching domain",  "warning" );
+      showToast("please select coaching domain", "warning");
     } else if (!industry) {
-      showToast("please select coaching industry",  "warning" );
+      showToast("please select coaching industry", "warning");
     } else if (paid == true && !sessionType) {
-      showToast("please select session type",  "warning" );
+      showToast("please select session type", "warning");
     } else {
       // here we are writing the code for updating the data from here ;
 
@@ -156,14 +153,8 @@ const CreateCoachingForm = (props) => {
       formData.append("availability_timing", availability_timing);
       formData.append("is_repeated", is_repeated);
       formData.append("image", coachingImg);
-      formData.append(
-        "domain",
-        showDomainInputBox ? domainManualInput : domainId
-      );
-      formData.append(
-        "industry",
-        showIndustryInputBox ? industryManualInput : industryId
-      );
+      formData.append("domain", showDomainInputBox ? domainManualInput : domainId);
+      formData.append("industry", showIndustryInputBox ? industryManualInput : industryId);
 
       const headers = {
         Authorization: `Bearer ${token}`,
@@ -182,9 +173,9 @@ const CreateCoachingForm = (props) => {
             setShowCoachingsForm(false);
             refreshAllInputField();
             setShowAllCoaching(false);
-            showToast("Coaching created successfully", "success" );
+            showToast("Coaching created successfully", "success");
           } else if (res.data.result == false) {
-            showToast(res?.data?.message, "warning" );
+            showToast(res?.data?.message, "warning");
           }
         })
         .catch((err) => {
@@ -196,15 +187,15 @@ const CreateCoachingForm = (props) => {
 
   const updateCoachings = () => {
     if (coachTitle == "") {
-      showToast("Please fill the coaching title", "warning" );
+      showToast("Please fill the coaching title", "warning");
     } else if (!coachingImg) {
-      showToast("coaching image is required", "warning" );
+      showToast("coaching image is required", "warning");
     } else if (!domain) {
-      showToast("please select coaching domain", "warning" );
+      showToast("please select coaching domain", "warning");
     } else if (!industry) {
-      showToast("please select coaching industry", "warning" );
+      showToast("please select coaching industry", "warning");
     } else if (paid == true && !sessionType) {
-      showToast("please select session type", "warning" );
+      showToast("please select session type", "warning");
     } else {
       // here we are writing the code for updating the data from here ;
 
@@ -235,14 +226,8 @@ const CreateCoachingForm = (props) => {
       formData.append("availability_timing", ["12:00:00", "01:00:00"]);
       formData.append("is_repeated", is_repeated);
       formData.append("image", coachingImg);
-      formData.append(
-        "domain",
-        showDomainInputBox ? domainManualInput : domainId
-      );
-      formData.append(
-        "industry",
-        showIndustryInputBox ? industryManualInput : industryId
-      );
+      formData.append("domain", showDomainInputBox ? domainManualInput : domainId);
+      formData.append("industry", showIndustryInputBox ? industryManualInput : industryId);
       formData.append("id", selectedCoachingId);
 
       const headers = {
@@ -263,9 +248,9 @@ const CreateCoachingForm = (props) => {
             refreshAllInputField();
             setShowAllCoaching(false);
             setUpdateCoaching(false);
-            showToast("Coaching updated successfully",  "success" );
+            showToast("Coaching updated successfully", "success");
           } else if (res.data.result == false) {
-            showToast(res?.data?.message,  "warning" );
+            showToast(res?.data?.message, "warning");
           }
         })
         .catch((err) => {
@@ -355,21 +340,16 @@ const CreateCoachingForm = (props) => {
 
   return (
     <>
-      <Modal
-        show={showCoachingsForm}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
+      <Modal show={showCoachingsForm} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
         <div className="formoutline_studentcv coachFormSt">
           <div style={{ width: "150%" }}>
             <div className="col-12">
               <div className="col-lg-4 col-md-6 col-12 ">
-                <div class="form-group">
+                <div className="form-group">
                   <label for="exampleInputPassword1">Title</label>
                   <input
                     type="text"
-                    class="form-control field py-4 mb-3"
+                    className="form-control field py-4 mb-3"
                     id=""
                     placeholder="Enter coaching title"
                     value={coachTitle}
@@ -378,16 +358,16 @@ const CreateCoachingForm = (props) => {
                 </div>
               </div>
               <div className="col-12 col-md-6 col-lg-4 ">
-                <div class="form-group">
+                <div className="form-group">
                   {coachingImg ? (
                     <>
                       <label htmlFor="takePhoto">Upload Img</label>
-                      <h5 class="form-control" htmlFor="takePhone">
+                      <h5 className="form-control" htmlFor="takePhone">
                         {coachingImg.name}
                       </h5>
                       <input
                         type="file"
-                        class="form-control"
+                        className="form-control"
                         placeholder="Enter here"
                         accept="image/png, image/gif, image/jpeg"
                         onChange={(e) => handleCoachingImg(e)}
@@ -400,7 +380,7 @@ const CreateCoachingForm = (props) => {
                       <label htmlFor="takePhoto">Upload Img</label>
                       <input
                         type="file"
-                        class="form-control"
+                        className="form-control"
                         placeholder="Enter here"
                         accept="image/png, image/gif, image/jpeg"
                         onChange={(e) => handleCoachingImg(e)}
@@ -413,15 +393,9 @@ const CreateCoachingForm = (props) => {
             </div>
             <div className="row mb-3">
               <div className="col-12 col-md-6 col-lg-4 ">
-                <div class="form-group">
+                <div className="form-group">
                   <label for="exampleInputPassword1">Domain</label>
-                  <select
-                    class="form-select end-year "
-                    aria-label="Default select example"
-                    value={domain}
-                    required
-                    onChange={(e) => handleDomainSelection(e.target.value)}
-                  >
+                  <select className="form-select end-year " aria-label="Default select example" value={domain} required onChange={(e) => handleDomainSelection(e.target.value)}>
                     <option value="">Choose</option>
                     {allDomain.map((domain, index) => {
                       return (
@@ -438,11 +412,11 @@ const CreateCoachingForm = (props) => {
               </div>
               {showDomainInputBox && (
                 <div className="col-12 col-md-6 col-lg-4 ">
-                  <div class="form-group">
+                  <div className="form-group">
                     <label for="exampleInputPassword1">Others</label>
                     <input
                       type="text"
-                      class="form-control field py-4 "
+                      className="form-control field py-4 "
                       id=""
                       placeholder="Enter your domain "
                       value={domainManualInput}
@@ -454,15 +428,9 @@ const CreateCoachingForm = (props) => {
             </div>
             <div className="row mb-3">
               <div className="col-12 col-md-6 col-lg-4 ">
-                <div class="form-group">
+                <div className="form-group">
                   <label for="exampleInputPassword1">Industry</label>
-                  <select
-                    class="form-select end-year "
-                    aria-label="Default select example"
-                    value={industry}
-                    required
-                    onChange={(e) => handleIndustrySelection(e.target.value)}
-                  >
+                  <select className="form-select end-year " aria-label="Default select example" value={industry} required onChange={(e) => handleIndustrySelection(e.target.value)}>
                     <option>Choose</option>
                     {allIndustry.map((industry, index) => {
                       return (
@@ -479,11 +447,11 @@ const CreateCoachingForm = (props) => {
               </div>
               {showIndustryInputBox && (
                 <div className="col-12 col-md-6 col-lg-4 ">
-                  <div class="form-group">
+                  <div className="form-group">
                     <label for="exampleInputPassword1">Others</label>
                     <input
                       type="text"
-                      class="form-control field py-4"
+                      className="form-control field py-4"
                       id=""
                       placeholder="Enter your industry"
                       value={industryManualInput}
@@ -520,7 +488,7 @@ const CreateCoachingForm = (props) => {
 
             <div className="eventForm_price">
               <div className="mt-3">
-                <div class="eventForm_paid">
+                <div className="eventForm_paid">
                   <input
                     type="radio"
                     id="a25"
@@ -530,66 +498,43 @@ const CreateCoachingForm = (props) => {
                       setPrice(0);
                     }}
                   />
-                  <label
-                    for="a25"
-                    className={`btnfree ${
-                      !paid ? "btn-primary" : "btn-default"
-                    } `}
-                  >
+                  <label for="a25" className={`btnfree ${!paid ? "btn-primary" : "btn-default"} `}>
                     Free
                   </label>
                 </div>
                 <div className="eventForm_paid freepaid">
-                  <input
-                    type="radio"
-                    id="a50"
-                    name="check-substitution-2"
-                    onClick={() => setPaid(true)}
-                  />
-                  <label
-                    for="a50"
-                    className={`btnfree ${
-                      paid ? "btn-primary" : "btn-default"
-                    } `}
-                  >
+                  <input type="radio" id="a50" name="check-substitution-2" onClick={() => setPaid(true)} />
+                  <label for="a50" className={`btnfree ${paid ? "btn-primary" : "btn-default"} `}>
                     Paid
                   </label>
                 </div>
               </div>
               {paid && (
                 <div className="d-flex">
-                  <div class="form-check" style={{ marginLeft: "25px" }}>
+                  <div className="form-check" style={{ marginLeft: "25px" }}>
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="radio"
                       name="flexRadioDefault"
                       id="flexRadioDefault2"
                       checked={sessionType == "hourly"}
                       onChange={() => setSessionType("hourly")}
                     />
-                    <label
-                      class="form-check-label  textsession"
-                      for="flexRadioDefault2"
-                      style={{ marginBottom: "0px" }}
-                    >
+                    <label className="form-check-label  textsession" for="flexRadioDefault2" style={{ marginBottom: "0px" }}>
                       Pay by Hours
                     </label>
                   </div>
 
-                  <div class="form-check" style={{ marginLeft: "25px" }}>
+                  <div className="form-check" style={{ marginLeft: "25px" }}>
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="radio"
                       name="flexRadioDefault"
                       id="flexRadioDefault3"
                       checked={sessionType == "sessional"}
                       onChange={() => setSessionType("sessional")}
                     />
-                    <label
-                      class="form-check-label textsession"
-                      for="flexRadioDefault3"
-                      style={{ marginBottom: "0px" }}
-                    >
+                    <label className="form-check-label textsession" for="flexRadioDefault3" style={{ marginBottom: "0px" }}>
                       Pay by Session
                     </label>
                   </div>
@@ -600,26 +545,15 @@ const CreateCoachingForm = (props) => {
             {/* here we aare adding payment div */}
             {paid && (
               <div className="col-lg-4 col-md-6 col-12 my-3 ">
-                <div class="form-group">
+                <div className="form-group">
                   <label for="exampleInputPassword1">Price in (HKD)</label>
-                  <input
-                    type="number"
-                    class="form-control py-4"
-                    placeholder="Enter here"
-                    min={0}
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                  />
+                  <input type="number" className="form-control py-4" placeholder="Enter here" min={0} value={price} onChange={(e) => setPrice(e.target.value)} />
                 </div>
               </div>
             )}
 
             <div className="confirmBtn">
-              <Button
-                title={updateCoaching ? "Update Coaching" : "Create Coaching"}
-                onClick={updateCoaching ? updateCoachings : submitCoaching}
-                loading={loading}
-              />
+              <Button title={updateCoaching ? "Update Coaching" : "Create Coaching"} onClick={updateCoaching ? updateCoachings : submitCoaching} loading={loading} />
             </div>
           </div>
           <div
@@ -628,16 +562,11 @@ const CreateCoachingForm = (props) => {
               setShowCoachingsForm(false);
               refreshAllInputField();
               setUpdateCoaching(false);
-            }}
-          >
+            }}>
             <IoIosCloseCircleOutline size={26} color="red" />
           </div>
         </div>
-        <CustomCalendar
-          showCalendar={showCalendar}
-          setShowCalendar={setShowCalendar}
-          eventsToBeShown={eventsToBeShown}
-        />
+        <CustomCalendar showCalendar={showCalendar} setShowCalendar={setShowCalendar} eventsToBeShown={eventsToBeShown} />
       </Modal>
     </>
   );

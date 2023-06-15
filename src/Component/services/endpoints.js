@@ -111,6 +111,9 @@ export const endpoints = {
     getIncubation: BASE_URL + "/incubation/list",
     deleteIncubation: BASE_URL + "/incubation/delete",
     updateIncubation: BASE_URL + "/incubation/update",
+    joinIncubation: BASE_URL + "/incubation/join",
+    enrolledIncubation: BASE_URL + "/incubation/members",
+    unjoinIncubation: BASE_URL + "/incubation/unjoin",
   },
 };
 

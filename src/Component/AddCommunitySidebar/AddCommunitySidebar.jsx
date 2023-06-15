@@ -4,11 +4,10 @@ import { FaBars } from "react-icons/fa";
 import $ from "jquery";
 
 const AddCommunitySidebar = () => {
-
   useEffect(() => {
     $(document).ready(function () {
       toggleNav();
-    },[]);
+    }, []);
 
     function toggleNav(params) {
       var windowWidth = $(window).width();
@@ -39,134 +38,116 @@ const AddCommunitySidebar = () => {
     });
   }, []);
 
-
-
   return (
     <>
-    <div className="addCommunitysidebar">
-      <div className="sibar-community-toggle">
-        <div class="btn sideBarBtn">
-          <span class="ffa-bars">
-            <FaBars className="faBars" />
-          </span>
-          <div class="texthideShow">Filters</div>
+      <div className="addCommunitysidebar">
+        <div className="sibar-community-toggle">
+          <div className="btn sideBarBtn">
+            <span className="ffa-bars">
+              <FaBars className="faBars" />
+            </span>
+            <div className="texthideShow">Filters</div>
+          </div>
+
+          <nav className="sidebar">
+            <div className="text">Details</div>
+            <ul>
+              <h6 className="AddCmntyMenuText">Domain</h6>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Finance</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Accounting</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Data Analytics</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Medical</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Digital Enablement</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Development</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Operations Management</span>
+                </a>
+              </li>
+              <h6 className="AddCmntyMenuText">Industry</h6>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Communications</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Retail</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Technology</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Health</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Educations</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Public Sector</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <button className="BtnMore">More+</button>
+                </a>
+              </li>
+              <h6 className="AddCmntyMenuText">Other</h6>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Sports</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Health</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <input type="checkbox" className="checkBoxAdCmnty" /> <span>Music</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <button className="ClearAllAddCmntybtn">Clear All</button>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
-        
-        <nav class="sidebar">
-          <div class="text">Details</div>
-          <ul>
-            <h6 className="AddCmntyMenuText">Domain</h6>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Finance</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Accounting</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Data Analytics</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Medical</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Digital Enablement</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Development</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Operations Management</span>
-              </a>
-            </li>
-            <h6 className="AddCmntyMenuText">Industry</h6>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Communications</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Retail</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Technology</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Health</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Educations</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Public Sector</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <button className="BtnMore">More+</button>
-              </a>
-            </li>
-            <h6 className="AddCmntyMenuText">Other</h6>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Sports</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Health</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <input type="checkbox" className="checkBoxAdCmnty" />{" "}
-                <span>Music</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <button className="ClearAllAddCmntybtn">Clear All</button>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
       </div>
     </>
   );

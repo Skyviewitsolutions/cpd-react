@@ -18,7 +18,6 @@ import StudentEvents from "../Component/StudentEvents/StudentEvents";
 import AddCommunitySidebar from "../Component/AddCommunitySidebar/AddCommunitySidebar";
 
 const Create_EventForm = (props) => {
-
   const [inviteCommunity, setInviteCommunity] = useState([]);
   const allCommunity = endpoints.community.getAllCommunity;
   const [imagePath, setImagePath] = useState("");
@@ -89,56 +88,52 @@ const Create_EventForm = (props) => {
             <div className="col-12 col-md-12 col-lg-9">
               <div className="row">
                 <div className="col-12 col-md-12 col-lg-12 pe-2 addMember_create_EventForm">
-                  <h5 className="AddCmntyMemberHeading">
-                    Add Organise Committee Or Member
-                  </h5>
+                  <h5 className="AddCmntyMemberHeading">Add Organise Committee Or Member</h5>
                 </div>
               </div>
               <div className="row">
                 <div className="col-12 col-md-12 col-lg-12 mt-3 pe-2 Domain_EventForm">
                   <h5 className="DomainEventH">Domain</h5>
-                  <div class="searchCmnty">
-                    <span class="fasearch"><BiSearch/></span>
+                  <div className="searchCmnty">
+                    <span className="fasearch">
+                      <BiSearch />
+                    </span>
                     <input placeholder="Search Here" />
                   </div>
                 </div>
               </div>
 
               <div className="row">
-                
                 <div className="addinvitecumntyContainer">
                   <div className="row">
-                  {inviteCommunity.length != 0 &&
-                    inviteCommunity.map((itm, index) => {
-                      const id = itm._id;
-                      var isInviteCommunity = inviteCommunity.some(
-                        (element) => {
+                    {inviteCommunity.length != 0 &&
+                      inviteCommunity.map((itm, index) => {
+                        const id = itm._id;
+                        var isInviteCommunity = inviteCommunity.some((element) => {
                           if (element._id === id) {
                             return true;
                           }
                           return false;
-                        }
-                      );
+                        });
 
-                      return (
-                        <>
-                          <div className="col-sm-12 col-md-6 col-lg-4 ">
-                          
-                            <Add_committee
-                              data={itm}
-                              key={index}
-                              imagePath={imagePath}
-                              getMyCommunity={getMyCommunity}
-                              isInviteCommunity={isInviteCommunity}
-                              inviteAllCommunity={inviteAllCommunity}
-                              // getMyCommunity={getMyCommunity}
-                              // getAllCommunity={getAllCommunity}
-                            />
-                          </div>
-                        </>
-                      );
-                    })}
-                </div>
+                        return (
+                          <>
+                            <div className="col-sm-12 col-md-6 col-lg-4 ">
+                              <Add_committee
+                                data={itm}
+                                key={index}
+                                imagePath={imagePath}
+                                getMyCommunity={getMyCommunity}
+                                isInviteCommunity={isInviteCommunity}
+                                inviteAllCommunity={inviteAllCommunity}
+                                // getMyCommunity={getMyCommunity}
+                                // getAllCommunity={getAllCommunity}
+                              />
+                            </div>
+                          </>
+                        );
+                      })}
+                  </div>
                 </div>
               </div>
             </div>

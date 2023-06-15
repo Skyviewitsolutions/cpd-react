@@ -1,26 +1,26 @@
 import React from "react";
 import MainLayout from "../../Layouts/MainLayout";
-import BackGroundImg from "../../assets/Images/background.jpg";
+// import BackGroundImg from "../../assets/Images/background.jpg";
 import Star from "../../assets/Icons/star.png";
-import DummyBanner from "../../assets/Icons/dummyBanner.png";
+// import DummyBanner from "../../assets/Icons/dummyBanner.png";
 import CourseContent from "../../Component/CourseContent/CourseContent";
 import { BsFillPlayFill } from "react-icons/bs";
 import { AiOutlineYoutube, AiOutlineTrophy } from "react-icons/ai";
 import { BiFileBlank, BiMobile } from "react-icons/bi";
 import { RiFolderDownloadLine } from "react-icons/ri";
 import { MdOutlineLink } from "react-icons/md";
-import User from "../../assets/Images/user3.jpg";
-import workshopImg1 from "../../assets/Images/workshopimg1.png";
-import workshopImg2 from "../../assets/Images/workshopimg2.jpeg";
+// import User from "../../assets/Images/user3.jpg";
+// import workshopImg1 from "../../assets/Images/workshopimg1.png";
+// import workshopImg2 from "../../assets/Images/workshopimg2.jpeg";
 import { RiShareFill } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import { generatePath, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { endpoints } from "../../Component/services/endpoints";
-import { imgPath } from "../../Component/services/endpoints";
+// import { imgPath } from "../../Component/services/endpoints";
 import Loader from "../../Component/Loader/Loader";
 import UserCard from "../../Component/UserCard/UserCard";
-import parse from "html-react-parser";
+// import parse from "html-react-parser";
 import ReviewCard from "../../Component/ReviewCard/ReviewCard";
 import UsersReview from "../../Component/UsersReview/UsersReview";
 import "../NormalDetailsPage/normalDetailsPage.css";
@@ -79,40 +79,41 @@ const CareerFareDetails = () => {
   const [title, setTitle] = useState("");
   const [stage, setStage] = useState("");
   const [website, setWebsite] = useState("");
+  const [incubationDetail, setIncubationDetail] = useState({});
 
-  const [selectedDays, setSelectedDays] = useState([]);
-  const [daysFormat, setDaysFormat] = useState("weekly");
-  const [isRepeated, setIsRepeated] = useState(false);
-  const [dateSlot, setDateSlot] = useState([]);
-  const [daysSlot, setDaysSlot] = useState([]);
-  const [shortDescriptions, setShortDescriptions] = useState("");
-  const [selectedDates, setSelectedDates] = useState([]);
-  const [editName, setEditName] = useState("");
+  // const [selectedDays, setSelectedDays] = useState([]);
+  // const [daysFormat, setDaysFormat] = useState("weekly");
+  // const [isRepeated, setIsRepeated] = useState(false);
+  // const [dateSlot, setDateSlot] = useState([]);
+  // const [daysSlot, setDaysSlot] = useState([]);
+  // const [shortDescriptions, setShortDescriptions] = useState("");
+  // const [selectedDates, setSelectedDates] = useState([]);
+  // const [editName, setEditName] = useState("");
   const [paid, setPaid] = useState(false);
   const [price, setPrice] = useState(0);
   const [careerFareList, setCareerFareList] = useState([]);
-  const [sessionType, setSessionType] = useState("");
+  // const [sessionType, setSessionType] = useState("");
   const [founder, setFounder] = useState();
-  const [coachId, setCoachId] = useState("");
+  // const [coachId, setCoachId] = useState("");
   const [description, setDescription] = useState("");
   const [whatYouLearnPoints, setWhatYouLearnPoints] = useState([]);
-  const [courseIncludeIcon, setCourseIncludeIcon] = useState([]);
+  // const [courseIncludeIcon, setCourseIncludeIcon] = useState([]);
   const [courseIncludeContent, setCourseIncludeContent] = useState([]);
 
   const headers = {
     Authorization: `Bearer ${token}`,
   };
 
-  const getWorkshopDetailsById = () => {
+  const getIncubationDetailsById = () => {
     const url = endpoints.incubation.getIncubation + "?_id=" + careerFareId;
     setLoading(true);
     axios
       .get(url, { headers: headers })
       .then((res) => {
         setLoading(false);
-        console.log(res);
         if (res.data.result) {
           const val = res.data.message;
+          setIncubationDetail(val);
           setDescription(val.others);
           setIncubationImg(val.image);
           setDomain(val.domain);
@@ -167,7 +168,7 @@ const CareerFareDetails = () => {
       });
   };
 
-  const getWorkshopByUser = () => {
+  const getIncubationByUser = () => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -177,11 +178,12 @@ const CareerFareDetails = () => {
     axios
       .get(url, { headers: headers })
       .then((res) => {
-        console.log(res);
         setLoading(false);
         if (res.data.result) {
           const val = res.data.message;
-          setCareerFareList(val);
+
+          const filterVal = val.filter((item) => item._id !== careerFareId);
+          setCareerFareList(filterVal);
         }
       })
       .catch((err) => {
@@ -191,34 +193,46 @@ const CareerFareDetails = () => {
   };
 
   useEffect(() => {
-    getWorkshopDetailsById();
+    getIncubationDetailsById();
   }, [careerFareId]);
 
   useEffect(() => {
-    getWorkshopByUser();
+    getIncubationByUser();
   }, [founder]);
 
-  const handleWorkshopClick = (dta) => {
+  const handleIncubationClick = (dta) => {
     const id = dta?._id;
     const path = generatePath("/career-fare-details/:careerFareId", { careerFareId: id });
     navigate(path);
   };
 
-  const enrollWorkshop = (workshopDetails) => {
+  const enrollIncubation = () => {
     const token = localStorage.getItem("token");
+
     if (token) {
-      var id = workshopDetails._id;
-      const url = `${endpoints.workshop.enrollWorkshop}${id}`;
-      const headers = {
-        Authorization: `Bearer ${token}`,
+      const id = incubationDetail._id;
+
+      let formdata = new FormData();
+      formdata.append("incubation_id", id);
+
+      const url = endpoints.incubation.joinIncubation;
+
+      const getConfig = {
+        url: url,
+        method: "post",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+        data: formdata,
       };
+
       setLoading(true);
-      axios
-        .get(url, { headers: headers })
+      axios(getConfig)
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            showToast("workshop enrolled successfully", "success");
+            showToast("incubation enrolled successfully", "success");
           }
         })
         .catch((err) => {
@@ -229,6 +243,7 @@ const CareerFareDetails = () => {
       showToast("Please login", "warning");
     }
   };
+
   return (
     <MainLayout>
       <div className="dtlscont">
@@ -239,8 +254,8 @@ const CareerFareDetails = () => {
             <h1 className="wrkshTitle">{title}</h1>
             <p className="wrkpara">{description}</p>
             <div className="wrkshpOther flex-wrap">
-              <h6>Max Members : {workshopDtails?.max_members}</h6>
-              <h6>Joined Members : {workshopDtails?.workshop_members_count}</h6>
+              <h6>Max Members : </h6>
+              <h6>Joined Members :</h6>
               <h6>Domain : {domain?.title}</h6>
               <h6>Industry : {industry?.title}</h6>
             </div>
@@ -292,7 +307,7 @@ const CareerFareDetails = () => {
                   {careerFareList?.length !== 0 &&
                     careerFareList?.map((item, index) => {
                       return (
-                        <div className="courseBox" key={index} onClick={() => handleWorkshopClick(item)}>
+                        <div className="courseBox" key={index} onClick={() => handleIncubationClick(item)}>
                           <div className="d-flex">
                             <img src={item.image} alt="" />
                             <div>
@@ -326,7 +341,7 @@ const CareerFareDetails = () => {
                   <h6>
                     Stage : <span>{stage}</span>
                   </h6>
-                  <button className="addtoCrt" onClick={() => enrollWorkshop()}>
+                  <button className="addtoCrt" onClick={() => enrollIncubation()}>
                     Book Now
                   </button>
                 </div>

@@ -284,17 +284,17 @@ const CreateJobsForm = (props) => {
         <div>
           <div className="row">
             <div className="col-lg-6 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Job Title</label>
-                <input type="text" class="form-control field py-4 mb-3" id="" placeholder="Enter Job title" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} />
+                <input type="text" className="form-control field py-4 mb-3" id="" placeholder="Enter Job title" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} />
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6 ">
-              <div class="form-group">
+              <div className="form-group">
                 {jobsImg ? (
                   <>
                     <label htmlFor="takePhoto">Upload Img</label>
-                    <h5 class="form-control" htmlFor="takePhone">
+                    <h5 className="form-control" htmlFor="takePhone">
                       {jobsImg.name}
                     </h5>
                     <input
@@ -326,11 +326,11 @@ const CreateJobsForm = (props) => {
 
           <div className="row">
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Total Openings</label>
                 <input
                   type="number"
-                  class="form-control field py-4"
+                  className="form-control field py-4"
                   id=""
                   placeholder="Enter total openings"
                   value={totalOpenings}
@@ -339,34 +339,64 @@ const CreateJobsForm = (props) => {
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Job Location</label>
-                <input type="text" class="form-control field py-4" id="" placeholder="Enter job location" value={jobLocation} onChange={(e) => setJobLocation(e.target.value)} />
+                <input
+                  type="text"
+                  className="form-control field py-4"
+                  id=""
+                  placeholder="Enter job location"
+                  value={jobLocation}
+                  onChange={(e) => setJobLocation(e.target.value)}
+                />
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Min Salary (in HKD)</label>
-                <input type="number" class="form-control field py-4" id="" placeholder="Enter salary" value={minsalary} onChange={(e) => setMinSalary(e.target.value)} min={0} />
+                <input
+                  type="number"
+                  className="form-control field py-4"
+                  id=""
+                  placeholder="Enter salary"
+                  value={minsalary}
+                  onChange={(e) => setMinSalary(e.target.value)}
+                  min={0}
+                />
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Max Salary (in HKD)</label>
-                <input type="number" class="form-control field py-4" id="" placeholder="Enter salary" value={maxsalary} onChange={(e) => setMaxSalary(e.target.value)} min={0} />
+                <input
+                  type="number"
+                  className="form-control field py-4"
+                  id=""
+                  placeholder="Enter salary"
+                  value={maxsalary}
+                  onChange={(e) => setMaxSalary(e.target.value)}
+                  min={0}
+                />
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Company Name</label>
-                <input type="text" class="form-control field py-4" id="" placeholder="Enter company name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+                <input
+                  type="text"
+                  className="form-control field py-4"
+                  id=""
+                  placeholder="Enter company name"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                />
               </div>
             </div>
 
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Domain</label>
-                <select class="form-select end-year " aria-label="Default select example" value={domain} required onChange={(e) => handleDomainSelection(e.target.value)}>
+                <select className="form-select end-year " aria-label="Default select example" value={domain} required onChange={(e) => handleDomainSelection(e.target.value)}>
                   <option value="">Choose</option>
                   {allDomain.map((domain, index) => {
                     return (
@@ -381,11 +411,11 @@ const CreateJobsForm = (props) => {
             </div>
             {showDomainInputBox && (
               <div className="col-12 col-md-6 col-lg-6 mb-3">
-                <div class="form-group">
+                <div className="form-group">
                   <label for="exampleInputPassword1">Others</label>
                   <input
                     type="text"
-                    class="form-control field py-4 "
+                    className="form-control field py-4 "
                     id=""
                     placeholder="Enter your domain "
                     value={domainManualInput}
@@ -396,9 +426,9 @@ const CreateJobsForm = (props) => {
             )}
 
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Industry</label>
-                <select class="form-select end-year " aria-label="Default select example" value={industry} required onChange={(e) => handleIndustrySelection(e.target.value)}>
+                <select className="form-select end-year " aria-label="Default select example" value={industry} required onChange={(e) => handleIndustrySelection(e.target.value)}>
                   <option>Choose</option>
                   {allIndustry.map((industry, index) => {
                     return (
@@ -415,11 +445,11 @@ const CreateJobsForm = (props) => {
             </div>
             {showIndustryInputBox && (
               <div className="col-12 col-md-6 col-lg-6 mb-3">
-                <div class="form-group">
+                <div className="form-group">
                   <label for="exampleInputPassword1">Others</label>
                   <input
                     type="text"
-                    class="form-control field py-4"
+                    className="form-control field py-4"
                     id=""
                     placeholder="Enter your industry"
                     value={industryManualInput}
@@ -433,27 +463,27 @@ const CreateJobsForm = (props) => {
               <h6>Salary Type</h6>
               <div className="d-flex">
                 <div
-                  class="form-check"
+                  className="form-check"
                   style={{
                     marginRight: "25px",
                     display: "flex",
                     alignItems: "center",
                   }}>
                   <input
-                    class="form-check-input"
+                    className="form-check-input"
                     type="radio"
                     name="flexRadioDefault"
                     id="flexRadioDefault2"
                     checked={salaryType == "monthly"}
                     onChange={() => setSalaryType("monthly")}
                   />
-                  <label class="form-check-label  textsession" for="flexRadioDefault2" style={{ marginBottom: "0px" }}>
+                  <label className="form-check-label  textsession" for="flexRadioDefault2" style={{ marginBottom: "0px" }}>
                     Monthly
                   </label>
                 </div>
 
                 <div
-                  class="form-check"
+                  className="form-check"
                   style={{
                     marginRight: "25px",
                     display: "flex",
@@ -461,14 +491,14 @@ const CreateJobsForm = (props) => {
                     alignItems: "center",
                   }}>
                   <input
-                    class="form-check-input"
+                    className="form-check-input"
                     type="radio"
                     name="flexRadioDefault"
                     id="flexRadioDefault3"
                     checked={salaryType == "yearly"}
                     onChange={() => setSalaryType("yearly")}
                   />
-                  <label class="form-check-label textsession" for="flexRadioDefault3" style={{ marginBottom: "0px" }}>
+                  <label className="form-check-label textsession" for="flexRadioDefault3" style={{ marginBottom: "0px" }}>
                     Yearly
                   </label>
                 </div>
@@ -477,9 +507,9 @@ const CreateJobsForm = (props) => {
           </div>
 
           <div className="col-12 col-md-6 col-lg-6 mb-3">
-            <div class="form-group">
+            <div className="form-group">
               <label for="exampleInputPassword1">Job Type</label>
-              <select class="form-select end-year " aria-label="Default select example" value={jobType} required onChange={(e) => setJobType(e.target.value)}>
+              <select className="form-select end-year " aria-label="Default select example" value={jobType} required onChange={(e) => setJobType(e.target.value)}>
                 <option>Choose</option>
                 <option value="remote">Remote</option>
                 <option value="onSite">On Site</option>
@@ -489,16 +519,23 @@ const CreateJobsForm = (props) => {
           </div>
 
           <div className="col-12 col-md-12 col-lg-12 mb-3">
-            <div class="form-group skillssss">
+            <div className="form-group skillssss">
               <label for="exampleInputPassword1">Skills</label>
               <TagsInput value={skills} onChange={setSkills} />
             </div>
           </div>
 
           <div className="col-12 col-md-12 col-lg-12 mb-3">
-            <div class="form-group">
+            <div className="form-group">
               <label for="exampleInputPassword1">Others</label>
-              <textarea type="text" class="form-control field py-4" id="" placeholder="Enter your industry" value={description} onChange={(e) => setDescription(e.target.value)} />
+              <textarea
+                type="text"
+                className="form-control field py-4"
+                id=""
+                placeholder="Enter your industry"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
             </div>
           </div>
           {/* here we aare adding payment div */}

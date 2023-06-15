@@ -1,4 +1,4 @@
-import React, { useState, useEffect , useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Footer from "../Footer/Footer";
 import Homepage_header from "../Header/Homepage_header";
 import "./CreateCommunity.css";
@@ -15,9 +15,7 @@ import $ from "jquery";
 import Button from "../button/Button/Button";
 import showToast from "../CustomToast/CustomToast";
 
-
 const CreateCommunity = () => {
-
   const navigate = useNavigate("");
   const location = useLocation("");
 
@@ -26,8 +24,8 @@ const CreateCommunity = () => {
     { val: "1", name: "Domain" },
     { val: "2", name: "Industry" },
     { val: "3", name: "Socail Club" },
-    { val: "4", name: "Projects"},
-    { val: "5", name: "Other Types"}
+    { val: "4", name: "Projects" },
+    { val: "5", name: "Other Types" },
   ]);
 
   // here we are getting the reference for the input field ;
@@ -50,8 +48,7 @@ const CreateCommunity = () => {
   const [communityTypeId, setCommunityTypeId] = useState("");
   const [update, setUpdate] = useState(false);
   const [communityType, setCommunityType] = useState("");
-  const [selectedCommunityId , setSelectedCommunityId] = useState("");
-
+  const [selectedCommunityId, setSelectedCommunityId] = useState("");
 
   const token = localStorage.getItem("token");
 
@@ -59,14 +56,13 @@ const CreateCommunity = () => {
   const selectedCommunityData = location.state;
 
   const updateWithSelectedCommunity = () => {
-
     setCommunityName(selectedCommunityData.display_name);
     setCriteriaToJoin(selectedCommunityData.criteria);
     setDiscription(selectedCommunityData.description);
     setSubType(selectedCommunityData.sub_type);
     setTags(selectedCommunityData.tag);
     setVisibility(selectedCommunityData.visibility);
-    setSelectedCommunityId(selectedCommunityData._id)
+    setSelectedCommunityId(selectedCommunityData._id);
 
     $(".subType").removeClass("d-none");
 
@@ -105,28 +101,26 @@ const CreateCommunity = () => {
   const addCommunityUrl = endpoints.community.addCommunity;
   const updateCommunityUrl = endpoints.community.updateCommunity;
 
-
   const submitCommunity = () => {
-
     if (communityName === "") {
-      showToast("Please Enter Community Name",  "warning" );
+      showToast("Please Enter Community Name", "warning");
       communityNameRef.current.focus();
     } else if (criteriaToJoin === "") {
-      showToast("Please Write Your Creiteria",  "warning" );
+      showToast("Please Write Your Creiteria", "warning");
       joinCriteriaRef.current.focus();
     } else if (description === "") {
-      showToast("Please Write Your Discription",  "warning" );
+      showToast("Please Write Your Discription", "warning");
       descriptionRef.current.focus();
     } else if (imgFiles === "") {
-      showToast("Please upload Your Image",  "warning" );
+      showToast("Please upload Your Image", "warning");
     } else if (visibility === "") {
-      showToast("Please Choose Your Visibility ",  "warning" );
+      showToast("Please Choose Your Visibility ", "warning");
     } else if (communityType === "") {
-      showToast("Please Choose Your Community Type ",  "warning" );
+      showToast("Please Choose Your Community Type ", "warning");
     } else if (subType === "") {
-      showToast("Please Enter Your Sub Type ",  "warning" );
+      showToast("Please Enter Your Sub Type ", "warning");
     } else if (tags === "") {
-      showToast("Please Enter Your Tags",  "warning" );
+      showToast("Please Enter Your Tags", "warning");
       tagsRef.current.focus();
     } else {
       const token = localStorage.getItem("token");
@@ -149,16 +143,14 @@ const CreateCommunity = () => {
         .then((res) => {
           if (res.data.result === true) {
             setLoading(false);
-            showToast("community created successfully",  "success" );
-           
+            showToast("community created successfully", "success");
+
             setTimeout(() => {
               navigate("/myCommunity");
             }, 1000);
-            
-           
           } else if (!res.data.result) {
             setLoading(false);
-            showToast(res.data?.message,  "warning" );
+            showToast(res.data?.message, "warning");
           }
         })
         .catch((err) => {
@@ -171,25 +163,24 @@ const CreateCommunity = () => {
   // writing function for updating the community;
 
   const updateCommunity = () => {
-
-    const url = `${updateCommunityUrl}${selectedCommunityId}`
+    const url = `${updateCommunityUrl}${selectedCommunityId}`;
 
     if (communityName === "") {
-      showToast("Please Enter Community Name", "warning" );
+      showToast("Please Enter Community Name", "warning");
     } else if (criteriaToJoin === "") {
-      showToast("Please Write Your Creiteria", "warning" );
+      showToast("Please Write Your Creiteria", "warning");
     } else if (description === "") {
-      showToast("Please Write Your Discription", "warning" );
+      showToast("Please Write Your Discription", "warning");
     } else if (imgFiles === "") {
-      showToast("Please upload Your Image", "warning" );
+      showToast("Please upload Your Image", "warning");
     } else if (visibility === "") {
-      showToast("Please Choose Your Visibility ", "warning" );
+      showToast("Please Choose Your Visibility ", "warning");
     } else if (communityType === "") {
-      showToast("Please Choose Your Community Type ", "warning" );
+      showToast("Please Choose Your Community Type ", "warning");
     } else if (subType === "") {
-      showToast("Please Enter Your Sub Type ", "warning" );
+      showToast("Please Enter Your Sub Type ", "warning");
     } else if (tags === "") {
-      showToast("Please Enter Your Tags", "warning" );
+      showToast("Please Enter Your Tags", "warning");
     } else {
       const token = localStorage.getItem("token");
       const formData = new FormData();
@@ -206,20 +197,20 @@ const CreateCommunity = () => {
         "Content-Type": "multipart/form-data",
       };
 
-      setLoading(true)
+      setLoading(true);
 
       axios
         .post(url, formData, { headers: headers })
         .then((res) => {
-          setLoading(false)
-          console.log(res , "updated response")
+          setLoading(false);
+          console.log(res, "updated response");
           if (res.data.result === true) {
             setLoading(false);
-            showToast("community updated successfully",  "success" );
+            showToast("community updated successfully", "success");
             navigate("/myCommunity");
           } else if (!res.data.result) {
             setLoading(false);
-            showToast(res.data?.message,  "warning" );
+            showToast(res.data?.message, "warning");
           }
         })
         .catch((err) => {
@@ -253,7 +244,7 @@ const CreateCommunity = () => {
           // console.log(val,"All DOmain Data here...")
           setDomainData(val);
         } else if (res.data.result === false) {
-          showToast(res.data.message,  "errror" );
+          showToast(res.data.message, "errror");
         }
       })
       .catch((err) => {
@@ -277,7 +268,7 @@ const CreateCommunity = () => {
           const val = res.data.data;
           setIndusryData(val);
         } else if (res.data.result === false) {
-          showToast(res.data.message,  "errror" );
+          showToast(res.data.message, "errror");
         }
       })
       .catch((err) => {
@@ -344,7 +335,7 @@ const CreateCommunity = () => {
                   </div>
                   <div className="row">
                     <div className="col-md-12 mb-4 d-flex align-items-center">
-                      <div className="communityInput w-full" style={{width : "100%"}}>
+                      <div className="communityInput w-full" style={{ width: "100%" }}>
                         <label for="" className="form-label">
                           Criteria to join
                         </label>
@@ -355,15 +346,14 @@ const CreateCommunity = () => {
                           value={criteriaToJoin}
                           placeholder="Enter criteria to join"
                           ref={joinCriteriaRef}
-                          onChange={(e) => setCriteriaToJoin(e.target.value)}
-                        ></textarea>
+                          onChange={(e) => setCriteriaToJoin(e.target.value)}></textarea>
                       </div>
                     </div>
                   </div>
 
                   <div className="row">
                     <div className="col-md-12 mb-4 d-flex align-items-center">
-                      <div className="communityInput w-full" style={{width : "100%"}}>
+                      <div className="communityInput w-full" style={{ width: "100%" }}>
                         <label for="" className="form-label">
                           Description
                         </label>
@@ -374,8 +364,7 @@ const CreateCommunity = () => {
                           placeholder="Enter description of community"
                           ref={descriptionRef}
                           value={description}
-                          onChange={(e) => setDiscription(e.target.value)}
-                        ></textarea>
+                          onChange={(e) => setDiscription(e.target.value)}></textarea>
                       </div>
                     </div>
                   </div>
@@ -387,7 +376,7 @@ const CreateCommunity = () => {
                           Image Upload
                         </label>
                         <input
-                          class=""
+                          className=""
                           id="takeImg"
                           type="file"
                           accept="image/png, image/gif, image/jpeg"
@@ -395,10 +384,7 @@ const CreateCommunity = () => {
                           style={{ display: imgFiles ? "none" : "flex" }}
                         />
                         {imgFiles && (
-                          <label
-                            class="form-control form-control-lg  cmntyForm"
-                            htmlFor="takeImg"
-                          >
+                          <label className="form-control form-control-lg  cmntyForm" htmlFor="takeImg">
                             {imgFiles.name}
                           </label>
                         )}
@@ -410,7 +396,7 @@ const CreateCommunity = () => {
                           Visibility
                         </label>
                         <div className="typeChecked d-flex">
-                          <div class="form-check">
+                          <div className="form-check">
                             <input
                               type="radio"
                               className="form-check-input"
@@ -420,11 +406,11 @@ const CreateCommunity = () => {
                               value=""
                               onChange={(e) => setVisibility("public")}
                             />
-                           
-                            <label
-                              className="form-check-label"
-                              for="Public"
-                            > Public</label>
+
+                            <label className="form-check-label" for="Public">
+                              {" "}
+                              Public
+                            </label>
                           </div>
                           <div className="form-check private">
                             <input
@@ -436,11 +422,11 @@ const CreateCommunity = () => {
                               value=""
                               onChange={(e) => setVisibility("private")}
                             />
-                          
-                            <label
-                              className="form-check-label"
-                              for="Private"
-                            >  Private</label>
+
+                            <label className="form-check-label" for="Private">
+                              {" "}
+                              Private
+                            </label>
                           </div>
                         </div>
                       </div>
@@ -452,12 +438,7 @@ const CreateCommunity = () => {
                         <label className="form-label" for="">
                           Community Type
                         </label>
-                        <select
-                          class=""
-                          aria-label="Default select example"
-                          value={communityType}
-                          onChange={(e) => handleCommunityType(e)}
-                        >
+                        <select className="" aria-label="Default select example" value={communityType} onChange={(e) => handleCommunityType(e)}>
                           <option value="" selected>
                             Select Community Type
                           </option>
@@ -475,18 +456,12 @@ const CreateCommunity = () => {
                     </div>
                     <div className="col-md-6 mb-4 pb-2">
                       <div className="communityInput">
-                        <div style={{width : "100%"}}>
-                        <label className="form-label" for="">
-                          Sub Type
-                        </label>
-                        <input
-                          id="subTypeField"
-                          className=""
-                          value={subType}
-                          style={{width : "100%"}}
-                          onChange={(e) => setSubType(e.target.value)}
-                        />
-                      </div>
+                        <div style={{ width: "100%" }}>
+                          <label className="form-label" for="">
+                            Sub Type
+                          </label>
+                          <input id="subTypeField" className="" value={subType} style={{ width: "100%" }} onChange={(e) => setSubType(e.target.value)} />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -496,30 +471,22 @@ const CreateCommunity = () => {
                         <label for="" className="form-label">
                           Tag
                         </label>
-                       
-                        <TagsInput
-                          value={tags}
-                          onChange={setTags}
-                          name="tags"
-                          ref={tagsRef}
-                          placeHolder="Enter Tags"
-                        />
+
+                        <TagsInput value={tags} onChange={setTags} name="tags" ref={tagsRef} placeHolder="Enter Tags" />
                         <h6
                           style={{
                             color: "red",
                             fontSize: "12px",
                             marginTop: 2,
-                          }}
-                        >
+                          }}>
                           Note : Press enter to add multiple tags
                         </h6>
                       </div>
                     </div>
                   </div>
 
-                  <div class="mb-2">
-                    
-                    <Button onClick={update ? updateCommunity : submitCommunity} loading={loading} title={ update ? "Update" :  "Submit" }/>
+                  <div className="mb-2">
+                    <Button onClick={update ? updateCommunity : submitCommunity} loading={loading} title={update ? "Update" : "Submit"} />
                     <Spinner />
                   </div>
                 </div>

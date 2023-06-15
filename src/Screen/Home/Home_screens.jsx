@@ -18,51 +18,46 @@ import axios from "axios";
 import Loader from "../../Component/Loader/Loader";
 import ShareModel from "../../Component/Modal/ShareModel/ShareModel";
 
-
 const Home_screens = () => {
-
   const token = localStorage.getItem("token");
   const [allRecentFeeds, setAllRecentFeeds] = useState([]);
-  const [loading , setLoading] = useState(false)
-  const [showShareModal,setShowShareModal] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   // writing code for getting all the recent feeds ;
 
   const getAllRecentFeeds = () => {
     const url = endpoints.master.allRecentFeeds;
-    setLoading(true)
+    setLoading(true);
     axios
       .get(url)
       .then((res) => {
-        setLoading(false)
+        setLoading(false);
         if (res.data.result) {
           const val = res.data.data;
           setAllRecentFeeds(val);
         }
       })
       .catch((err) => {
-        setLoading(false)
+        setLoading(false);
         console.log(err);
       });
   };
 
   useEffect(() => {
     getAllRecentFeeds();
-    
   }, []);
 
-  const handleShare =(dta) =>{
-    setShowShareModal(true)
-  }
+  const handleShare = (dta) => {
+    setShowShareModal(true);
+  };
 
   return (
     <>
       <MainLayout>
         <div className="container-fluid">
           <div className="row">
-            <div className="col-lg-3 col-md-12 col-12 mt-5 userprofile_div">
-              {token && <User_profile />}
-            </div>
+            <div className="col-lg-3 col-md-12 col-12 mt-5 userprofile_div">{token && <User_profile />}</div>
             <div className="col-lg-5 col-md-12 col-12  home_cards">
               <div className="all_notification">
                 <h6> All notifications</h6>
@@ -75,7 +70,7 @@ const Home_screens = () => {
               <div className="hmgCrdCont">
                 {allRecentFeeds.length != 0 &&
                   allRecentFeeds.map((feeds, index) => {
-                    return <Homepage_cards key={index} feeds={feeds} handleShare={handleShare}/>;
+                    return <Homepage_cards key={index} feeds={feeds} handleShare={handleShare} />;
                   })}
               </div>
             </div>
@@ -87,9 +82,9 @@ const Home_screens = () => {
           </div>
           <ToastContainer />
         </div>
-       {loading && <Loader />}
-       <ShareModel showShareModal={showShareModal} setShowShareModal={setShowShareModal}/>
-      </MainLayout> 
+        {loading && <Loader />}
+        <ShareModel showShareModal={showShareModal} setShowShareModal={setShowShareModal} />
+      </MainLayout>
     </>
   );
 };

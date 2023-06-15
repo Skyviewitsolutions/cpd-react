@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from "react";
 import "./careerFare.css";
-import Homepage_header from "../../Component/Header/Homepage_header";
 import Footer from "../../Component/Footer/Footer";
 import "../../fonts/Inter-Bold.ttf";
 import "../../fonts/Inter-Regular.ttf";
 import { HiSearch } from "react-icons/hi";
-import eye from "../../assets/Images/eye.svg";
-import { CgHeart } from "react-icons/cg";
-import workshop_bannerImage from "../../assets/Images/workshop_bannerImage.png";
-import dommy_workshopImage from "../../assets/Images/dommy_workshopImage.png";
-import WorkshsopSidenav from "../Workshop/WorkshsopSidenav";
-import WorkshopEnroll from "../../Component/Modal/WorkshopEnroll/WorkshopEnroll";
+// import eye from "../../assets/Images/eye.svg";
+// import { CgHeart } from "react-icons/cg";
+// import workshop_bannerImage from "../../assets/Images/workshop_bannerImage.png";
+// import dommy_workshopImage from "../../assets/Images/dommy_workshopImage.png";
+// import WorkshsopSidenav from "../Workshop/WorkshsopSidenav";
+// import WorkshopEnroll from "../../Component/Modal/WorkshopEnroll/WorkshopEnroll";
 import { endpoints } from "../../Component/services/endpoints";
 import axios from "axios";
-import { BsFillCalendarDateFill } from "react-icons/bs";
+// import { BsFillCalendarDateFill } from "react-icons/bs";
 import CustomCalendar from "../../Component/Calendar/CustomCalendar";
-import { toast } from "react-toastify";
-import WorkshopCard from "../../Component/WorkshopCard/WorkshopCard";
-import BookBtn from "../../Component/button/BookBtn/BookBtn";
+// import { toast } from "react-toastify";
+// import WorkshopCard from "../../Component/WorkshopCard/WorkshopCard";
+// import BookBtn from "../../Component/button/BookBtn/BookBtn";
 import { useNavigate, generatePath } from "react-router-dom";
 import CustomFilter from "../../Component/CustomFilter/CustomFilter";
-import CreateWorkshopForm from "../../Component/Modal/CreateWorkshopForm/CreateWorkshopForm";
+// import CreateWorkshopForm from "../../Component/Modal/CreateWorkshopForm/CreateWorkshopForm";
 import NoDataImg from "../../assets/Images/noDataFound.png";
 import { getCalendarData } from "../../utils/calendar";
 import Loader from "../../Component/Loader/Loader";
@@ -28,16 +27,18 @@ import CreateCareerFareForm from "../../Component/Modal/CreateCareerFareForm/Cre
 import showToast from "../../Component/CustomToast/CustomToast";
 import CareerFareCard from "../../Component/CareerFareCard/CareerFareCard";
 import img2 from "../../assets/Images/careerfaretopimg.svg";
+import CoachNotification from "../../Component/CoachNotification/CoachNotification";
+import HomepageHeader from "../../Component/Header/Homepage_header";
 
 const CareerFare = () => {
   const navigate = useNavigate("");
-  const [modalShow, setModalShow] = React.useState(false);
+  // const [modalShow, setModalShow] = React.useState(false);
   const token = localStorage.getItem("token");
-  const [allWorkShopList, setAllWorkShopList] = useState([]);
-  const [imagePath, setImagePath] = useState("");
+  const [allIncubationList, setAllIncubationList] = useState([]);
+  // const [imagePath, setImagePath] = useState("");
   const [showCustomCalendar, setShowCustomCalendar] = useState(false);
   const [eventsToBeShown, setEventsToBeShown] = useState([]);
-  const [myEnrolledWorkshop, setMyEnrolledWorkshop] = useState([]);
+  const [myEnrolledIncubation, setMyEnrolledIncubation] = useState([]);
   const [myWorkshopList, setMyWorkshopList] = useState([]);
   const [showAllIncubation, setShowAllIncubation] = useState(true);
   const [inputData, setInputData] = useState("");
@@ -46,11 +47,13 @@ const CareerFare = () => {
   const [showCareerFareForm, setShowCareerFareForm] = useState(false);
   const [filterByIndustry, setFilterByIndustry] = useState([]);
   const [filterByDomain, setFilterByDomain] = useState([]);
-  const [updateWorkshop, setUpdateWorkshop] = useState(false);
-  const [selectedWorkshopForUpdate, setSelectedWorkshopForUpdate] = useState({});
+  // const [updateWorkshop, setUpdateWorkshop] = useState(false);
+  // const [selectedWorkshopForUpdate, setSelectedWorkshopForUpdate] = useState({});
   const [loading, setLoading] = useState(false);
   const [selectedIncubation, setSelectedIncubation] = useState({});
   const [updateIncubation, setUpdateIncubation] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0);
 
   var userDetails = localStorage.getItem("users");
   var userType = JSON.parse(userDetails);
@@ -69,9 +72,11 @@ const CareerFare = () => {
       .then((res) => {
         setLoading(false);
         if (res.data.result) {
-          var val = res.data.message;
-          setAllWorkShopList(val);
-          setWorkshopToBeShown(val);
+          let val = res.data.message;
+          // let filteredData = val.filter((item) => item.created_by !== userId);
+          // setWorkshopToBeShown(val);
+          // setCreateCareerFare(filteredData);
+          setAllIncubationList(val);
           setCreateCareerFare(val);
         }
       })
@@ -88,23 +93,69 @@ const CareerFare = () => {
     setEventsToBeShown(calendarData);
     setShowCustomCalendar(true);
   };
+
+  // getting all the enrolled workshop list;
+
+  const getAllEnrolledList = () => {
+    const url = endpoints.incubation.enrolledIncubation;
+    let formdata = new FormData();
+    formdata.append("member_id", userId);
+
+    const getConfig = {
+      url: url,
+      method: "post",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+      data: formdata,
+    };
+
+    setLoading(true);
+    axios(getConfig)
+      .then((res) => {
+        setLoading(false);
+        if (res.data.result) {
+          const val = res.data.message;
+
+          setMyEnrolledIncubation(val);
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err, "error here");
+      });
+  };
+
   // writing code for enrolling the workshop
 
-  const enrollWorkshop = (workShopData) => {
+  const enrollIncubation = (incubationData) => {
     const token = localStorage.getItem("token");
+
     if (token) {
-      var id = workShopData._id;
-      const url = `${endpoints.workshop.enrollWorkshop}${id}`;
-      const headers = {
-        Authorization: `Bearer ${token}`,
+      const id = incubationData._id;
+
+      let formdata = new FormData();
+      formdata.append("incubation_id", id);
+
+      const url = endpoints.incubation.joinIncubation;
+
+      const getConfig = {
+        url: url,
+        method: "post",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+        data: formdata,
       };
+
       setLoading(true);
-      axios
-        .get(url, { headers: headers })
+      axios(getConfig)
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            showToast("workshop enrolled successfully", "success");
+            showToast("incubation enrolled successfully", "success");
             getAllEnrolledList();
           }
         })
@@ -115,30 +166,6 @@ const CareerFare = () => {
     } else {
       showToast("Please login", "warning");
     }
-  };
-
-  // getting all the enrolled workshop list;
-
-  const getAllEnrolledList = () => {
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-
-    const url = endpoints.workshop.myEnrolledWorkshop;
-    setLoading(true);
-    axios
-      .get(url, { headers: headers })
-      .then((res) => {
-        setLoading(false);
-        if (res.data.result) {
-          const val = res.data.data;
-          setMyEnrolledWorkshop(val);
-        }
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.log(err, "error here");
-      });
   };
 
   const getMyIncubation = () => {
@@ -153,7 +180,7 @@ const CareerFare = () => {
         if (res.data.result) {
           setLoading(false);
           const val = res.data.message;
-          // setMyWorkshopList(val);
+          setMyWorkshopList(val);
           // setWorkshopToBeShown(val);
           setCreateCareerFare(val);
           // setShowAllIncubation(false);
@@ -167,7 +194,7 @@ const CareerFare = () => {
 
   useEffect(() => {
     if (showAllIncubation === true) {
-      //getAllEnrolledList();
+      getAllEnrolledList();
       getAllIncubation();
     }
   }, []);
@@ -176,8 +203,8 @@ const CareerFare = () => {
 
   const handleShowAllIncubation = () => {
     setShowAllIncubation(true);
-    // setWorkshopToBeShown(allWorkShopList);
-    // setCreateCareerFare(allWorkShopList);
+    // setWorkshopToBeShown(allIncubationList);
+    // setCreateCareerFare(allIncubationList);
     getAllIncubation();
   };
 
@@ -192,16 +219,16 @@ const CareerFare = () => {
     var value = val.toLowerCase();
     setInputData(val);
     if (showAllIncubation) {
-      var filteredData = allWorkShopList.filter((data, index) => {
+      let filteredData = allIncubationList.filter((data, index) => {
         return data.title.toLowerCase().includes(value);
       });
-      setWorkshopToBeShown(filteredData);
+      // setWorkshopToBeShown(filteredData);
       setCreateCareerFare(filteredData);
     } else {
-      var filteredData = myWorkshopList.filter((data, index) => {
+      let filteredData = allIncubationList.filter((data, index) => {
         return data.title.toLowerCase().includes(value);
       });
-      setWorkshopToBeShown(filteredData);
+      // setWorkshopToBeShown(filteredData);
       setCreateCareerFare(filteredData);
     }
   };
@@ -214,52 +241,37 @@ const CareerFare = () => {
     navigate(path);
   };
 
-  const handleDetails = (dta) => {
-    const communityId = dta._id;
-    const path = generatePath("/community-details/:communityId", {
-      communityId: communityId,
-    });
-    navigate(path, { communityDetails: JSON.stringify(dta) });
-  };
-
   // here we are filtering the coaching according to the domain and industry;
 
   useEffect(() => {
-    var filterWorkshopByIndustry = workshopToBeShown.filter((itm, index) => {
-      var industry = itm.industry;
-      var industryTitle = industry && industry?.title.toLowerCase();
+    const filterIncubationByIndustry = allIncubationList.filter((itm, index) => {
+      let industry = itm.industry;
+      let industryTitle = industry && industry?.title.toLowerCase();
       return filterByIndustry.includes(industryTitle);
     });
 
-    var filterWorkshopByDomain = filterWorkshopByIndustry.filter((itm, index) => {
-      var domain = itm.domain;
-      var domainTitle = domain && domain?.title.toLowerCase();
+    const filterIncubationByDomain = filterIncubationByIndustry.filter((itm, index) => {
+      let domain = itm.domain;
+      let domainTitle = domain && domain?.title.toLowerCase();
       return filterByDomain.includes(domainTitle);
     });
-    setCreateCareerFare(filterWorkshopByDomain);
+    setCreateCareerFare(filterIncubationByDomain);
   }, [filterByDomain]);
 
   useEffect(() => {
-    var filterWorkshopByDomain = workshopToBeShown.filter((itm, index) => {
-      var domain = itm.domain;
-      var domainTitle = domain && domain?.title.toLowerCase();
+    const filterIncubationByDomain = allIncubationList.filter((itm, index) => {
+      let domain = itm.domain;
+      let domainTitle = domain && domain?.title.toLowerCase();
       return filterByDomain.includes(domainTitle);
     });
 
-    var filterWorkshopByIndustry = filterWorkshopByDomain.filter((itm, index) => {
-      var industry = itm.industry;
-      var industryTitle = industry && industry?.title.toLowerCase();
+    const filterIncubationByIndustry = filterIncubationByDomain.filter((itm, index) => {
+      let industry = itm.industry;
+      let industryTitle = industry && industry?.title.toLowerCase();
       return filterByIndustry.includes(industryTitle);
     });
-    setCreateCareerFare(filterWorkshopByIndustry);
+    setCreateCareerFare(filterIncubationByIndustry);
   }, [filterByIndustry]);
-
-  // const handleEdit = (data) => {
-  //   const path = generatePath("/workshopEdit/:workshopId", {
-  //     workshopId: data._id,
-  //   });
-  //   navigate(path);
-  // };
 
   const handleEdit = (data) => {
     setShowCareerFareForm(true);
@@ -297,15 +309,49 @@ const CareerFare = () => {
       });
   };
 
-  // const getMyIncubationList=()=>{}
-
-  // useEffect(() => {
-  //   getAllIncubation();
-  // });
+  const onUnjoinHandler = (id) => {
+    console.log(id);
+    const url = endpoints.incubation.unjoinIncubation;
+    let formdata = new FormData();
+    formdata.append("membership_id", id);
+    const getConfig = {
+      url: url,
+      method: "post",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+      data: formdata,
+    };
+    setLoading(true);
+    axios(getConfig)
+      .then((res) => {
+        console.log(res);
+        setLoading(false);
+        if (res.data.result) {
+          getAllEnrolledList();
+          showToast("incubation unjoin sucessfully", "success");
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err, "error here");
+      });
+  };
+  const notificationClicked = () => {
+    debugger;
+    setShowNotification(true);
+  };
 
   return (
     <div className="workshopContainer">
-      <Homepage_header />
+      <HomepageHeader notificationClicked={notificationClicked} />
+      <CoachNotification
+        showNotification={showNotification}
+        setShowNotification={setShowNotification}
+        notificationCount={notificationCount}
+        setNotificationCount={setNotificationCount}
+      />
       <div className="workshopwiper">
         <section className="Workshop_section1" style={{ background: "#e4fde5" }}>
           <div className="row ">
@@ -316,7 +362,7 @@ const CareerFare = () => {
             </div>
             <div className="col-lg-4 col-md-5 col-12 ">
               <div className="workshop_imageblock">
-                <img src={img2} />
+                <img src={img2} alt="incubationImg" />
               </div>
             </div>
           </div>
@@ -369,25 +415,25 @@ const CareerFare = () => {
             <div className="col-lg-10 col-md-12 col-12 mt-3">
               <div className="row">
                 {createCareerFare?.map((item, index) => {
-                  var id = item?._id;
+                  let id = item?._id;
 
-                  var enrollStatus = 3;
+                  let enrollStatus = 3;
 
-                  // var enrolled = myEnrolledWorkshop.filter((itm, ind) => {
-                  //   return itm._id == id;
-                  // });
+                  let enrolled = myEnrolledIncubation?.filter((itm) => itm.incubation_id === id);
+                  console.log({ status: myEnrolledIncubation });
 
-                  // if (enrolled.length != 0) {
-                  //   var datas = enrolled[0];
-                  //   var status = datas.status;
-                  //   enrollStatus = status;
-                  // }
+                  if (enrolled.length !== 0) {
+                    let datas = enrolled[0];
+                    let status = datas.status;
+                    enrollStatus = status;
+                  }
+
                   return (
                     <div key={id + index} className="col-lg-4 col-md-12 col-12 workshop-card px-4">
                       <CareerFareCard
                         data={item}
                         showWorkshopOnCalendar={showWorkshopOnCalendar}
-                        enrollWorkshop={enrollWorkshop}
+                        enrollIncubation={enrollIncubation}
                         enrollStatus={enrollStatus}
                         img={item.image}
                         showBookBtn={showAllIncubation}
@@ -395,12 +441,13 @@ const CareerFare = () => {
                         showEdit={!showAllIncubation}
                         handleEdit={handleEdit}
                         deleteIncubation={deleteIncubation}
+                        onUnjoinHandler={() => onUnjoinHandler(enrolled[0]._id)}
                       />
                     </div>
                   );
                 })}
               </div>
-              {createCareerFare?.length == 0 && (
+              {createCareerFare?.length === 0 && (
                 <div className="noDataCont">
                   <img src={NoDataImg} alt="" />
                 </div>

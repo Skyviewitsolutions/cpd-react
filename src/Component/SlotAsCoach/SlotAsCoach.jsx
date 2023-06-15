@@ -2,35 +2,19 @@ import React, { useState } from "react";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 
 const SlotAsCoach = (props) => {
-  const { showCalendar, setShowCalendar, eventsToBeShown, setEventsToBeShown } =
-    props;
+  const { showCalendar, setShowCalendar, eventsToBeShown, setEventsToBeShown } = props;
 
   const [selectedDays, setSelectedDays] = useState([]);
   const [daysFormat, setDaysFormat] = useState("weekly");
   const [isRepeated, setIsRepeated] = useState(false);
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [startDate, setStartDate] = useState(
-    new Date()
-      .toLocaleDateString()
-      .replaceAll("/", "-")
-      .split("-")
-      .reverse()
-      .join("-")
-  );
+  const [startDate, setStartDate] = useState(new Date().toLocaleDateString().replaceAll("/", "-").split("-").reverse().join("-"));
   const [endDate, setEndDate] = useState("");
   const [isConfirm, setIsConfirm] = useState(false);
   const [selectedDates, setSelectedDates] = useState([]);
 
-  var allDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
+  var allDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
   const time = [
     "01:00:00",
@@ -59,10 +43,7 @@ const SlotAsCoach = (props) => {
     "24:00:00",
   ];
 
-  var allDates = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
-  ];
+  var allDates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
 
   const handleSelectdDays = (day) => {
     if (selectedDays.indexOf(day) == -1) {
@@ -91,11 +72,7 @@ const SlotAsCoach = (props) => {
   };
 
   var getDates = function (start, end) {
-    for (
-      var arr = [], dt = new Date(start);
-      dt <= new Date(end);
-      dt.setDate(dt.getDate() + 1)
-    ) {
+    for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
       arr.push(new Date(dt));
     }
     return arr;
@@ -171,10 +148,7 @@ const SlotAsCoach = (props) => {
 
       dateArray.map((itm) => {
         var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-        var month =
-          itm.getMonth() + 1 < 10
-            ? `0${itm.getMonth() + 1}`
-            : itm.getDate() + 1;
+        var month = itm.getMonth() + 1 < 10 ? `0${itm.getMonth() + 1}` : itm.getDate() + 1;
         var year = itm.getFullYear();
 
         var startDte = `${year}-${month}-${date}T${startTime}`;
@@ -217,10 +191,7 @@ const SlotAsCoach = (props) => {
 
         allDates.map((itm) => {
           var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-          var month =
-            itm.getMonth() + 1 < 10
-              ? `0${itm.getMonth() + 1}`
-              : itm.getDate() + 1;
+          var month = itm.getMonth() + 1 < 10 ? `0${itm.getMonth() + 1}` : itm.getDate() + 1;
           var year = itm.getFullYear();
           var startDte = `${year}-${month}-${date}T${startTime}`;
           var endDte = `${year}-${month}-${date}T${endTime}`;
@@ -248,10 +219,7 @@ const SlotAsCoach = (props) => {
 
         allDates.map((itm) => {
           var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-          var month =
-            itm.getMonth() + 1 < 10
-              ? `0${itm.getMonth() + 1}`
-              : itm.getDate() + 1;
+          var month = itm.getMonth() + 1 < 10 ? `0${itm.getMonth() + 1}` : itm.getDate() + 1;
           var year = itm.getFullYear();
           var startDte = `${year}-${month}-${date}T${startTime}`;
           var endDte = `${year}-${month}-${date}T${endTime}`;
@@ -275,45 +243,28 @@ const SlotAsCoach = (props) => {
         <h5 className="heading_second">Slot Availability as Coaching</h5>
       </div>
       <div className="col-lg-4 col-md-6 col-12 ">
-        <div class="form-group">
+        <div className="form-group">
           <label for="exampleInputPassword1">Title</label>
           <input
             type="text"
-            class="form-control field py-4 mb-3"
+            className="form-control field py-4 mb-3"
             id=""
             placeholder="Enter here"
             // error="Please enter text"
-           
           />
         </div>
       </div>
       <div className="row">
         <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center">
-          <input
-            type="radio"
-            id="weekly"
-            checked={daysFormat == "weekly"}
-            onChange={() => setDaysFormat("weekly")}
-          />
+          <input type="radio" id="weekly" checked={daysFormat == "weekly"} onChange={() => setDaysFormat("weekly")} />
           <label htmlFor="weekly">Weekly</label>
         </div>
         <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center">
-          <input
-            type="radio"
-            id="monthly"
-            checked={daysFormat == "monthly"}
-            onChange={() => setDaysFormat("monthly")}
-          />
+          <input type="radio" id="monthly" checked={daysFormat == "monthly"} onChange={() => setDaysFormat("monthly")} />
           <label htmlFor="monthly">Monthly</label>
         </div>
         <div className="col-lg-2 col-md-3 col-6 d-flex align-items-center repeadtd">
-          <input
-            type="checkbox"
-            name=""
-            id="repeat"
-            onChange={() => setIsRepeated(!isRepeated)}
-            checked={isRepeated}
-          />
+          <input type="checkbox" name="" id="repeat" onChange={() => setIsRepeated(!isRepeated)} checked={isRepeated} />
           <label htmlFor="repead">Repeated</label>
         </div>
       </div>
@@ -327,11 +278,9 @@ const SlotAsCoach = (props) => {
                   onClick={() => handleSelectdDays(day)}
                   key={index}
                   style={{
-                    background:
-                      selectedDays.indexOf(day) != -1 ? "#2c6959" : "white",
+                    background: selectedDays.indexOf(day) != -1 ? "#2c6959" : "white",
                     color: selectedDays.indexOf(day) != -1 ? "white" : "grey",
-                  }}
-                >
+                  }}>
                   {day[0]}
                 </h5>
               </>
@@ -348,12 +297,10 @@ const SlotAsCoach = (props) => {
                 <h5
                   onClick={() => handleSelectdDates(date)}
                   style={{
-                    background:
-                      selectedDates.indexOf(date) != -1 ? "#2c6959" : "white",
+                    background: selectedDates.indexOf(date) != -1 ? "#2c6959" : "white",
                     color: selectedDates.indexOf(date) != -1 ? "white" : "grey",
                     marginBottom: "7px",
-                  }}
-                >
+                  }}>
                   {date}
                 </h5>
               </>
@@ -366,19 +313,11 @@ const SlotAsCoach = (props) => {
         <div className="month_calendar d-flex ">
           <div className="col-lg-2 col-md-3 col-6 ">
             <h6>Start Date</h6>
-            <input
-              type="date"
-              onChange={(e) => setStartDate(e.target.value)}
-              value={startDate}
-            />
+            <input type="date" onChange={(e) => setStartDate(e.target.value)} value={startDate} />
           </div>
           <div className="col-lg-2 col-md-3 col-6 ">
             <h6>End Date</h6>
-            <input
-              type="date"
-              onChange={(e) => setEndDate(e.target.value)}
-              value={endDate}
-            />
+            <input type="date" onChange={(e) => setEndDate(e.target.value)} value={endDate} />
           </div>
         </div>
       )}
@@ -414,10 +353,7 @@ const SlotAsCoach = (props) => {
       </div>
 
       <div className="confirmBtn">
-        <button
-          className={isConfirm ? "activeCnfBtn" : "inActiveCnfBtn"}
-          onClick={handleConfirmSlots}
-        >
+        <button className={isConfirm ? "activeCnfBtn" : "inActiveCnfBtn"} onClick={handleConfirmSlots}>
           Confirm
         </button>
       </div>

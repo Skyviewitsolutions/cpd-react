@@ -7,9 +7,9 @@ import edu_logo from "../../assets/Images/edu_logo.jpeg";
 // import company_logo from '../../assets/Images/company_logo.jpeg';
 import { FiEdit } from "react-icons/fi";
 //import { Navigate } from 'react-router-dom';
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../../fonts/Inter-SemiBold.ttf";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 
@@ -24,7 +24,7 @@ const Resume = () => {
 
   const [allDomain, setAlldomain] = useState([]);
   const [allIndustry, setAllIndustry] = useState([]);
-  const [loading , setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [lName, setLname] = useState("");
   const [contact, setContact] = useState("");
@@ -51,35 +51,35 @@ const Resume = () => {
 
   const submit = () => {
     if (name === "") {
-      showToast("Please enter first name",  "warning" );
+      showToast("Please enter first name", "warning");
     } else if (lName === "") {
-      showToast("Please enter last name",  "warning" );
+      showToast("Please enter last name", "warning");
     } else if (contact === "") {
-      showToast("Please enter contact",  "warning" );
+      showToast("Please enter contact", "warning");
     } else if (contact.length !== 10) {
-      showToast("Please Enter 10 digit",  "warning" );
+      showToast("Please Enter 10 digit", "warning");
     } else if (nationality === "") {
-      showToast("Please enter nationality",  "warning" );
+      showToast("Please enter nationality", "warning");
     } else if (dob === "") {
-      showToast("Please enter DOB",  "warning" );
+      showToast("Please enter DOB", "warning");
     } else if (gender === "") {
-      showToast("Please enter gender",  "warning" );
+      showToast("Please enter gender", "warning");
     } else if (uploadCv === "") {
-      showToast("Please upload CV",  "warning" );
+      showToast("Please upload CV", "warning");
     } else if (school === "") {
       showToast("Please enter School/College/University", { type: "warning" });
     } else if (!startYear) {
-      showToast("Please enter start year",  "warning" );
+      showToast("Please enter start year", "warning");
     } else if (endYear === "") {
-      showToast("Please enter end year",  "warning" );
+      showToast("Please enter end year", "warning");
     } else if (program === "") {
-      showToast("Please enter program",  "warning" );
+      showToast("Please enter program", "warning");
     } else if (fieldStudy === "") {
-      showToast("Please enter field study",  "warning" );
+      showToast("Please enter field study", "warning");
     } else if (domain === "") {
-      showToast("Please enter domain",  "warning" );
+      showToast("Please enter domain", "warning");
     } else if (industry === "") {
-      showToast("Please enter industry",  "warning" );
+      showToast("Please enter industry", "warning");
     } else {
       const formData = new FormData();
       formData.append("first_name", name);
@@ -104,20 +104,20 @@ const Resume = () => {
         "Content-Type": "multipart/form-data",
       };
 
-      setLoading(true)
+      setLoading(true);
 
       axios
         .post(cvUrl, formData, { headers: headers })
         .then((res) => {
-          setLoading(false)
-          if (res.data.result===true) {
-            showToast("Profile created successfully",  "success" );
-            navigate("/")
+          setLoading(false);
+          if (res.data.result === true) {
+            showToast("Profile created successfully", "success");
+            navigate("/");
           }
         })
         .catch((err) => {
           console.log(err, "error");
-          setLoading(false)
+          setLoading(false);
         });
     }
   };
@@ -145,7 +145,7 @@ const Resume = () => {
         if (res.data.result === true) {
           setAlldomain(res.data.data);
         } else if (res.data.result === false) {
-          showToast(res.data.message,  "error" );
+          showToast(res.data.message, "error");
         }
       })
       .catch((err) => {
@@ -166,7 +166,7 @@ const Resume = () => {
         if (res.data.result === true) {
           setAllIndustry(res.data.data);
         } else if (res.data.result === false) {
-          showToast(res.data.message,  "error" );
+          showToast(res.data.message, "error");
         }
       })
       .catch((err) => {
@@ -201,7 +201,6 @@ const Resume = () => {
     getNationality();
   }, []);
 
-
   return (
     <>
       <Header />
@@ -211,9 +210,7 @@ const Resume = () => {
           <div className="col-lg-10 col-md-12 col-12 flex-center">
             <div className="row">
               <div className="col-lg-12 col-md-12 col-12 text-center mt-3">
-                <h3 id="create_resume">
-                  Please fill some details to create your resume
-                </h3>
+                <h3 id="create_resume">Please fill some details to create your resume</h3>
               </div>
             </div>
             <div className="form_outline">
@@ -223,25 +220,18 @@ const Resume = () => {
 
                   <div className="row">
                     <div className="col-lg-4 col-md-12 col-12 mt-2">
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputPassword1">First Name</label>
-                        <input
-                          type="text"
-                          class="form-control "
-                          id="exampleInputPassword1"
-                          placeholder="Enter here"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                        />
+                        <input type="text" className="form-control " id="exampleInputPassword1" placeholder="Enter here" value={name} onChange={(e) => setName(e.target.value)} />
                       </div>
                     </div>
                     <div className="col-lg-4 col-md-12 col-12 mt-2">
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputPassword1">Last Name</label>
                         <input
                           pattern="[0-9]{10}"
                           type="text"
-                          class="form-control "
+                          className="form-control "
                           id="exampleInputPassword1"
                           placeholder="Enter here"
                           value={lName}
@@ -251,62 +241,39 @@ const Resume = () => {
                     </div>
 
                     <div className="col-lg-4 col-md-12 col-12 mt-2">
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputPassword1">Contact</label>
-                        <input
-                          type="number"
-                          class="form-control "
-                          placeholder="Enter here"
-                          value={contact}
-                          onChange={(e) => setContact(e.target.value)}
-                        />
+                        <input type="number" className="form-control " placeholder="Enter here" value={contact} onChange={(e) => setContact(e.target.value)} />
                       </div>
                     </div>
                   </div>
 
                   <div className="row">
                     <div className="col-12 col-md-12 col-lg-4 mt-2">
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputPassword1">Nationality</label>
-                        <select
-                          class="form-select  "
-                          aria-label="Default select example"
-                          value={nationality}
-                          onChange={(e) => setNationality(e.target.value)}
-                        >
+                        <select className="form-select  " aria-label="Default select example" value={nationality} onChange={(e) => setNationality(e.target.value)}>
                           <option value="">Hong </option>
                           {allNational.map((itm, ind) => {
                             return (
                               <>
-                                <option value={itm.en_short_name}>
-                                  {itm.en_short_name}
-                                </option>
+                                <option value={itm.en_short_name}>{itm.en_short_name}</option>
                               </>
                             );
                           })}
-                          
                         </select>
                       </div>
                     </div>
                     <div className="col-12 col-md-12 col-lg-4 mt-2">
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputPassword1">Date of Birth</label>
-                        <input
-                          type="date"
-                          class="form-control "
-                          placeholder="Due date"
-                          value={dob}
-                          onChange={(e) => setDob(e.target.value)}
-                        />
+                        <input type="date" className="form-control " placeholder="Due date" value={dob} onChange={(e) => setDob(e.target.value)} />
                       </div>
                     </div>
                     <div className="col-12 col-md-12 col-lg-4 mt-2">
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputPassword1">Gender</label>
-                        <select
-                          class="form-select"
-                          aria-label="Default select example"
-                        >
+                        <select className="form-select" aria-label="Default select example">
                           <option selected>Male</option>
                           <option value="1">Female</option>
                         </select>
@@ -315,14 +282,9 @@ const Resume = () => {
                   </div>
                   <div className="row">
                     <div className="col-12 col-md-12 col-lg-4 mt-2">
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputPassword1">Upload CV</label>
-                        <input
-                          type="file"
-                          class="form-control "
-                          id="exampleInputPassword1"
-                          placeholder="Enter here"
-                        />
+                        <input type="file" className="form-control " id="exampleInputPassword1" placeholder="Enter here" />
                       </div>
                     </div>
                   </div>
@@ -331,14 +293,8 @@ const Resume = () => {
 
                   <div className="row">
                     <div className="col-lg-6 col-md-12 col-12 mt-2">
-                      <label for="exampleInputPassword1">
-                        School/College/University*
-                      </label>
-                      <select
-                        class="form-select  "
-                        aria-label="Default select example"
-                        placeholder="Technology"
-                      >
+                      <label for="exampleInputPassword1">School/College/University*</label>
+                      <select className="form-select  " aria-label="Default select example" placeholder="Technology">
                         <option selected>University</option>
                         <option value="1">University</option>
                         <option value="2">University</option>
@@ -347,12 +303,9 @@ const Resume = () => {
                     </div>
 
                     <div className="col-lg-3 col-md-12 col-12 mt-2">
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputPassword1">Start year*</label>
-                        <select
-                          class="form-select  "
-                          aria-label="Default select example"
-                        >
+                        <select className="form-select  " aria-label="Default select example">
                           <option selected>1998</option>
                           <option value="1">1999</option>
                           <option value="2">2000</option>
@@ -362,12 +315,9 @@ const Resume = () => {
                     </div>
 
                     <div className="col-lg-3 col-md-12 col-12 mt-2">
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputPassword1">End year*</label>
-                        <select
-                          class="form-select  "
-                          aria-label="Default select example"
-                        >
+                        <select className="form-select  " aria-label="Default select example">
                           <option selected>1998</option>
                           <option value="1">1999</option>
                           <option value="2">2000</option>
@@ -378,25 +328,15 @@ const Resume = () => {
                   </div>
                   <div className="row">
                     <div className="col-lg-4 col-md-12 col-12 mt-2">
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputPassword1">Program</label>
-                        <input
-                          type="text"
-                          class="form-control "
-                          id="exampleInputPassword1"
-                          placeholder="Enter here"
-                        />
+                        <input type="text" className="form-control " id="exampleInputPassword1" placeholder="Enter here" />
                       </div>
                     </div>
                     <div className="col-lg-4 col-md-12 col-12 mt-2">
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputPassword1">Field Study</label>
-                        <input
-                          type="text"
-                          class="form-control "
-                          id="exampleInputPassword1"
-                          placeholder="Enter here"
-                        />
+                        <input type="text" className="form-control " id="exampleInputPassword1" placeholder="Enter here" />
                       </div>
                     </div>
                   </div>
@@ -409,13 +349,9 @@ const Resume = () => {
 
                   <div className="row">
                     <div className="col-lg-4 col-md-12 col-12 mt-2">
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputPassword1">Domain</label>
-                        <select
-                          class="form-select  "
-                          aria-label="Default select example"
-                          placeholder="Technology"
-                        >
+                        <select className="form-select  " aria-label="Default select example" placeholder="Technology">
                           <option selected>Technology</option>
                           <option value="1">Technology</option>
                           <option value="2">Technology</option>
@@ -425,13 +361,9 @@ const Resume = () => {
                     </div>
 
                     <div className="col-lg-4 col-md-12 col-12 mt-2">
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputPassword1">Industry</label>
-                        <select
-                          class="form-select  "
-                          aria-label="Default select example"
-                          placeholder="IT Sector"
-                        >
+                        <select className="form-select  " aria-label="Default select example" placeholder="IT Sector">
                           <option selected>IT Sector</option>
                           <option value="1">IT Sector</option>
                           <option value="2">IT Sector</option>
@@ -444,23 +376,14 @@ const Resume = () => {
                   <h5 className="heading_second">Description</h5>
                   <div className="row">
                     <div className="col-lg-12 col-md-12 col-12 mt-2">
-                      <div class="form-group">
-                        <textarea
-                          type="text"
-                          class="form-control"
-                          id="cvForm_description_text"
-                          placeholder="Enter here"
-                        />
+                      <div className="form-group">
+                        <textarea type="text" className="form-control" id="cvForm_description_text" placeholder="Enter here" />
                       </div>
                     </div>
                   </div>
 
                   <div className="col-lg-12 col-md-12 col-2 mt-4 text-center">
-                    <buttton
-                      type="submit"
-                      className="btn  submit_resumeCreationButton"
-                      onClick={() => navigate("/")}
-                    >
+                    <buttton type="submit" className="btn  submit_resumeCreationButton" onClick={() => navigate("/")}>
                       {" "}
                       Submit and Preview Resume
                     </buttton>

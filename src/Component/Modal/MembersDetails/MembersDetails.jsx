@@ -10,15 +10,13 @@ import { endpoints } from "../../services/endpoints";
 import axios from "axios";
 import Loader from "../../Loader/Loader";
 
-
 const MembersDetails = (props) => {
-
   const { show, setShow, selectedCommunityIdForMember } = props;
   const token = localStorage.getItem("token");
 
   const [allMembers, setAllMembers] = useState([]);
   const [imagePath, setImagePath] = useState("");
-  const [loading , setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const getMembers = () => {
     const url = `${endpoints.community.joinedMembers}${selectedCommunityIdForMember}`;
@@ -31,7 +29,7 @@ const MembersDetails = (props) => {
     axios
       .get(url, { headers: headers })
       .then((res) => {
-        setLoading(false)
+        setLoading(false);
         if (res.data.result) {
           const val = res.data.data;
           setAllMembers(val);
@@ -40,7 +38,7 @@ const MembersDetails = (props) => {
         }
       })
       .catch((err) => {
-        setLoading(false)
+        setLoading(false);
         console.log(err, "error here members");
       });
   };
@@ -57,49 +55,41 @@ const MembersDetails = (props) => {
           onHide={() => setShow(false)}
           className="membersDetailsModalContent"
           // dialogClassName="modal-90w"
-          aria-labelledby="example-custom-modal-styling-title"
-        >
-          <div  className="previewCont">
-          <Modal.Header closeButton>
-            <Modal.Title id="example-custom-modal-styling-title">
-              <div className="membersDetailsModalHeading">
-                <h5>All Members</h5>
-              </div>
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body className="mebersListOutline">
-            {allMembers.length != 0 ? (
-              allMembers.map((itm, ind) => {
-                var userProfile = imagePath + itm.user_profile?.avtar;
+          aria-labelledby="example-custom-modal-styling-title">
+          <div className="previewCont">
+            <Modal.Header closeButton>
+              <Modal.Title id="example-custom-modal-styling-title">
+                <div className="membersDetailsModalHeading">
+                  <h5>All Members</h5>
+                </div>
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="mebersListOutline">
+              {allMembers.length != 0 ? (
+                allMembers.map((itm, ind) => {
+                  var userProfile = imagePath + itm.user_profile?.avtar;
 
-                return (
-                  <>
-                    <div className="membersList_heading">
-                      <div class="memberListModalAvatar">
-                        <img
-                          src={
-                            itm.user_profile?.avtar
-                              ? userProfile
-                              : membersDetails2
-                          }
-                          alt="Avatar"
-                        />
+                  return (
+                    <>
+                      <div className="membersList_heading">
+                        <div className="memberListModalAvatar">
+                          <img src={itm.user_profile?.avtar ? userProfile : membersDetails2} alt="Avatar" />
+                        </div>
+                        <div className="MembersExplanationmodal">
+                          <h5>{itm.user_details?.name}</h5>
+                          <h6>
+                            Role : <span>{itm.user_profile?.role}</span>
+                          </h6>
+                        </div>
                       </div>
-                      <div className="MembersExplanationmodal">
-                        <h5>{itm.user_details?.name}</h5>
-                        <h6>
-                          Role : <span>{itm.user_profile?.role}</span>
-                        </h6>
-                      </div>
-                    </div>
-                  </>
-                );
-              })
-            ) : (
-              <h5>No members found !</h5>
-            )}
-          </Modal.Body>
-          {loading && <Loader />}
+                    </>
+                  );
+                })
+              ) : (
+                <h5>No members found !</h5>
+              )}
+            </Modal.Body>
+            {loading && <Loader />}
           </div>
         </Modal>
       </div>

@@ -48,7 +48,7 @@ const Header2 = () => {
   userDetails = JSON.parse(userDetails);
   const logOut = () => {
     localStorage.removeItem("token");
-    showToast("Logout Successfully" , "success");
+    showToast("Logout Successfully", "success");
     navigate("/");
     window.location.reload();
   };
@@ -58,21 +58,13 @@ const Header2 = () => {
       <div className="first-Nave">
         <Navbar bg="light" expand="lg" className="header1_afterlogin ">
           <Navbar.Brand>
-            <img
-              src={cpd_logo}
-              alt=""
-              className="cpd_logo"
-              onClick={() => navigate("/")}
-            />
+            <img src={cpd_logo} alt="" className="cpd_logo" onClick={() => navigate("/")} />
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto justify-content-end nav_middlebox flex-grow-1 pe-3">
-              <Nav.Link
-                className="nav_img working"
-                onClick={() => navigate("/")}
-              >
+              <Nav.Link className="nav_img working" onClick={() => navigate("/")}>
                 <img src={home} alt="" className="nav-icons" />
                 <h6>Home</h6>
               </Nav.Link>
@@ -84,10 +76,7 @@ const Header2 = () => {
 
               {token ? (
                 <Form className="d-flex userprofile_block">
-                  <div
-                    className="userprofile_row1"
-                    onMouseOver={() => setIsHovering(true)}
-                  >
+                  <div className="userprofile_row1" onMouseOver={() => setIsHovering(true)}>
                     <img src={pimg} alt="" className="home" />
                     <span className="userName">{userDetails?.name}</span>
 
@@ -97,11 +86,7 @@ const Header2 = () => {
                           <span style={{ fontWeight: "bold" }}>
                             <HiOutlineLogout />
                           </span>
-                          <span
-                            style={{ marginLeft: "10px", fontWeight: "600" }}
-                          >
-                            Logout
-                          </span>
+                          <span style={{ marginLeft: "10px", fontWeight: "600" }}>Logout</span>
                         </div>
                       </div>
                     )}
@@ -109,11 +94,7 @@ const Header2 = () => {
                 </Form>
               ) : (
                 <Nav.Link className="nav_img">
-                  <button
-                    type="submit"
-                    className="BtnLogin"
-                    onClick={() => navigate("/login")}
-                  >
+                  <button type="submit" className="BtnLogin" onClick={() => navigate("/login")}>
                     {" "}
                     <span>
                       <AiOutlineLogin />

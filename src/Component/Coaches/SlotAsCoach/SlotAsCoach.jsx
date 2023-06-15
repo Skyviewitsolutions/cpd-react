@@ -8,9 +8,7 @@ import Button from "../../button/Button/Button";
 import CreateSlots from "../../Slots/CreateSlots";
 import showToast from "../../CustomToast/CustomToast";
 
-
 const SlotAsCoach = (props) => {
-
   const { setShowCalendar, setEventsToBeShown } = props;
   const token = localStorage.getItem("token");
   const [coachTitle, setCoachTitle] = useState("");
@@ -34,14 +32,7 @@ const SlotAsCoach = (props) => {
   const [allIndustry, setAllIndustry] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const [startDate, setStartDate] = useState(
-    new Date()
-      .toLocaleDateString()
-      .replaceAll("/", "-")
-      .split("-")
-      .reverse()
-      .join("-")
-  );
+  const [startDate, setStartDate] = useState(new Date().toLocaleDateString().replaceAll("/", "-").split("-").reverse().join("-"));
   const [endDate, setEndDate] = useState("");
   const [isConfirm, setIsConfirm] = useState(false);
   const [selectedDates, setSelectedDates] = useState([]);
@@ -50,18 +41,7 @@ const SlotAsCoach = (props) => {
     Authorization: `Bearer ${token}`,
   };
 
-  var allDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
- 
-
+  var allDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
   const handleSelectdDays = (day) => {
     if (selectedDays.indexOf(day) == -1) {
@@ -90,11 +70,7 @@ const SlotAsCoach = (props) => {
   };
 
   var getDates = function (start, end) {
-    for (
-      var arr = [], dt = new Date(start);
-      dt <= new Date(end);
-      dt.setDate(dt.getDate() + 1)
-    ) {
+    for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
       arr.push(new Date(dt));
     }
     return arr;
@@ -140,7 +116,6 @@ const SlotAsCoach = (props) => {
   };
 
   const updateDataToCalendar = async () => {
-
     setIsConfirm(true);
     var events = [];
 
@@ -171,10 +146,7 @@ const SlotAsCoach = (props) => {
 
       dateArray.map((itm) => {
         var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-        var month =
-          itm.getMonth() + 1 < 10
-            ? `0${itm.getMonth() + 1}`
-            : itm.getDate() + 1;
+        var month = itm.getMonth() + 1 < 10 ? `0${itm.getMonth() + 1}` : itm.getDate() + 1;
         var year = itm.getFullYear();
 
         var startDte = `${year}-${month}-${date}T${startTime}`;
@@ -217,10 +189,7 @@ const SlotAsCoach = (props) => {
 
         allDates.map((itm) => {
           var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-          var month =
-            itm.getMonth() + 1 < 10
-              ? `0${itm.getMonth() + 1}`
-              : itm.getDate() + 1;
+          var month = itm.getMonth() + 1 < 10 ? `0${itm.getMonth() + 1}` : itm.getDate() + 1;
           var year = itm.getFullYear();
           var startDte = `${year}-${month}-${date}T${startTime}`;
           var endDte = `${year}-${month}-${date}T${endTime}`;
@@ -248,10 +217,7 @@ const SlotAsCoach = (props) => {
 
         allDates.map((itm) => {
           var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-          var month =
-            itm.getMonth() + 1 < 10
-              ? `0${itm.getMonth() + 1}`
-              : itm.getDate() + 1;
+          var month = itm.getMonth() + 1 < 10 ? `0${itm.getMonth() + 1}` : itm.getDate() + 1;
           var year = itm.getFullYear();
           var startDte = `${year}-${month}-${date}T${startTime}`;
           var endDte = `${year}-${month}-${date}T${endTime}`;
@@ -327,9 +293,9 @@ const SlotAsCoach = (props) => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            showToast("Coaching created successfully","success" );
+            showToast("Coaching created successfully", "success");
           } else if (res.data.result == false) {
-            showToast(res?.data?.message, "warning" );
+            showToast(res?.data?.message, "warning");
           }
         })
         .catch((err) => {
@@ -339,7 +305,6 @@ const SlotAsCoach = (props) => {
     }
   };
 
-  
   const handleCoachingImg = (e) => {
     const files = e.target.files[0];
     setCoachingImg(files);
@@ -380,13 +345,11 @@ const SlotAsCoach = (props) => {
     getAllDomain();
   }, []);
 
-
   return (
     <div className="formoutline_studentcv coachFormSt">
       <div className="col-lg-12 col-md-12 col-12">
         <h5 className="heading_second d-flex justify-content-between">
-          <h5>Slot Availability as Coaching</h5>{" "}
-          <h2 onClick={() => setShowForm(!showForm)}>{showForm ? "-" : "+"}</h2>
+          <h5>Slot Availability as Coaching</h5> <h2 onClick={() => setShowForm(!showForm)}>{showForm ? "-" : "+"}</h2>
         </h5>
       </div>
 
@@ -394,11 +357,11 @@ const SlotAsCoach = (props) => {
         <>
           <div className="row">
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Title</label>
                 <input
                   type="text"
-                  class="form-control field py-4 mb-3"
+                  className="form-control field py-4 mb-3"
                   id=""
                   placeholder="Enter coaching title"
                   value={coachTitle}
@@ -407,30 +370,17 @@ const SlotAsCoach = (props) => {
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label htmlFor="takePhoto">Upload Img</label> <br />
-                <input
-                  type="file"
-                  class="form-control  py-4 mb-3 "
-                  placeholder="Enter here"
-                  required
-                  onChange={(e) => handleCoachingImg(e)}
-                  className="imgInput"
-                />
+                <input type="file" className="form-control  py-4 mb-3 " placeholder="Enter here" required onChange={(e) => handleCoachingImg(e)} className="imgInput" />
               </div>
             </div>
           </div>
           <div className="row mb-3">
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Domain</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                  value={domain}
-                  required
-                  onChange={(e) => setDomain(e.target.value)}
-                >
+                <select className="form-select end-year " aria-label="Default select example" value={domain} required onChange={(e) => setDomain(e.target.value)}>
                   <option value="">Choose</option>
                   {allDomain.map((domain, index) => {
                     return (
@@ -446,15 +396,9 @@ const SlotAsCoach = (props) => {
             </div>
 
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Industry</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                  value={industry}
-                  required
-                  onChange={(e) => setIndustry(e.target.value)}
-                >
+                <select className="form-select end-year " aria-label="Default select example" value={industry} required onChange={(e) => setIndustry(e.target.value)}>
                   <option>Choose</option>
                   {allIndustry.map((industry, index) => {
                     return (
@@ -469,14 +413,14 @@ const SlotAsCoach = (props) => {
               </div>
             </div>
           </div>
-         <CreateSlots />
+          <CreateSlots />
           <div className="caledarIcons" onClick={() => setShowCalendar(true)}>
             <BsFillCalendarDateFill color="#2c6959" size={32} />
           </div>
 
           <div className="eventForm_price">
             <div className="mt-3">
-              <div class="eventForm_paid">
+              <div className="eventForm_paid">
                 <input
                   type="radio"
                   id="a25"
@@ -486,51 +430,35 @@ const SlotAsCoach = (props) => {
                     setPrice(0);
                   }}
                 />
-                <label
-                  for="a25"
-                  className={`btnfree ${
-                    !paid ? "btn-primary" : "btn-default"
-                  } `}
-                >
+                <label for="a25" className={`btnfree ${!paid ? "btn-primary" : "btn-default"} `}>
                   Free
                 </label>
               </div>
               <div className="eventForm_paid freepaid">
-                <input
-                  type="radio"
-                  id="a50"
-                  name="check-substitution-2"
-                  onClick={() => setPaid(true)}
-                />
-                <label
-                  for="a50"
-                  className={`btnfree ${paid ? "btn-primary" : "btn-default"} `}
-                >
+                <input type="radio" id="a50" name="check-substitution-2" onClick={() => setPaid(true)} />
+                <label for="a50" className={`btnfree ${paid ? "btn-primary" : "btn-default"} `}>
                   Paid
                 </label>
               </div>
             </div>
             <div className="d-flex">
-              <div class="form-check" style={{ marginLeft: "25px" }}>
+              <div className="form-check" style={{ marginLeft: "25px" }}>
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault2"
                   checked={sessionType == "hourly"}
                   onChange={() => setSessionType("hourly")}
                 />
-                <label
-                  class="form-check-label  textsession"
-                  for="flexRadioDefault2"
-                >
+                <label className="form-check-label  textsession" for="flexRadioDefault2">
                   By Hours
                 </label>
               </div>
 
-              <div class="form-check" style={{ marginLeft: "25px" }}>
+              <div className="form-check" style={{ marginLeft: "25px" }}>
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault3"
@@ -538,10 +466,7 @@ const SlotAsCoach = (props) => {
                   checked={true}
                   onChange={() => setSessionType("sessional")}
                 />
-                <label
-                  class="form-check-label textsession"
-                  for="flexRadioDefault3"
-                >
+                <label className="form-check-label textsession" for="flexRadioDefault3">
                   By Session
                 </label>
               </div>
@@ -550,28 +475,18 @@ const SlotAsCoach = (props) => {
           {/* here we aare adding payment div */}
 
           <div className="col-lg-4 col-md-6 col-12 my-3 ">
-            <div class="form-group">
+            <div className="form-group">
               <label for="exampleInputPassword1">Price in ($)</label>
-              <input
-                type="number"
-                class="form-control py-4"
-                min={0}
-                placeholder="Enter here"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
+              <input type="number" className="form-control py-4" min={0} placeholder="Enter here" value={price} onChange={(e) => setPrice(e.target.value)} />
             </div>
           </div>
 
           <div className="confirmBtn">
-            <Button title="Create Coaching" onClick={handleConfirmSlots} loading={loading}/>
+            <Button title="Create Coaching" onClick={handleConfirmSlots} loading={loading} />
           </div>
         </>
       )}
       <ToastContainer />
-      
-
-
     </div>
   );
 };

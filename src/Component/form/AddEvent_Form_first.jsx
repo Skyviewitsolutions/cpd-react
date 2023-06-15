@@ -24,43 +24,41 @@ import Month_days from "../carousel/Month_days";
 const AddEvent_Form_first = () => {
   /* file upload drag and drop */
 
-  document
-    .querySelectorAll(".eventForm_dropzone__input")
-    .forEach((inputElement) => {
-      const dropZoneElement = inputElement.closest(".eventForm_dropzone");
+  document.querySelectorAll(".eventForm_dropzone__input").forEach((inputElement) => {
+    const dropZoneElement = inputElement.closest(".eventForm_dropzone");
 
-      dropZoneElement.addEventListener("click", (e) => {
-        inputElement.click();
-      });
+    dropZoneElement.addEventListener("click", (e) => {
+      inputElement.click();
+    });
 
-      inputElement.addEventListener("change", (e) => {
-        if (inputElement.files.length) {
-          updateThumbnail(dropZoneElement, inputElement.files[0]);
-        }
-      });
+    inputElement.addEventListener("change", (e) => {
+      if (inputElement.files.length) {
+        updateThumbnail(dropZoneElement, inputElement.files[0]);
+      }
+    });
 
-      dropZoneElement.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        dropZoneElement.classList.add("eventForm_dropzone--over");
-      });
+    dropZoneElement.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropZoneElement.classList.add("eventForm_dropzone--over");
+    });
 
-      ["dragleave", "dragend"].forEach((type) => {
-        dropZoneElement.addEventListener(type, (e) => {
-          dropZoneElement.classList.remove("eventForm_dropzone--over");
-        });
-      });
-
-      dropZoneElement.addEventListener("drop", (e) => {
-        e.preventDefault();
-
-        if (e.dataTransfer.files.length) {
-          inputElement.files = e.dataTransfer.files;
-          updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
-        }
-
+    ["dragleave", "dragend"].forEach((type) => {
+      dropZoneElement.addEventListener(type, (e) => {
         dropZoneElement.classList.remove("eventForm_dropzone--over");
       });
     });
+
+    dropZoneElement.addEventListener("drop", (e) => {
+      e.preventDefault();
+
+      if (e.dataTransfer.files.length) {
+        inputElement.files = e.dataTransfer.files;
+        updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+      }
+
+      dropZoneElement.classList.remove("eventForm_dropzone--over");
+    });
+  });
 
   /**
    * Updates the thumbnail on a drop zone element.
@@ -69,9 +67,7 @@ const AddEvent_Form_first = () => {
    * @param {File} file
    */
   function updateThumbnail(dropZoneElement, file) {
-    let thumbnailElement = dropZoneElement.querySelector(
-      ".eventForm_dropzone__thumb"
-    );
+    let thumbnailElement = dropZoneElement.querySelector(".eventForm_dropzone__thumb");
 
     // First time - remove the prompt
     if (dropZoneElement.querySelector(".eventForm_dropzone__prompt")) {
@@ -127,45 +123,27 @@ const AddEvent_Form_first = () => {
             <div className="col-12 col-md-12 col-lg-6 p-2">
               <div className="row">
                 <div className="col-12 col-md-12 col-lg-12 ">
-                  <label
-                    for="exampleInputEmail1"
-                    className="eventForm_speakerLabel form-label"
-                  >
+                  <label for="exampleInputEmail1" className="eventForm_speakerLabel form-label">
                     Session Title
                   </label>
-                  <input
-                    type="text"
-                    className="form-control Event_formInput"
-                    aria-describedby="emailHelp"
-                  />
+                  <input type="text" className="form-control Event_formInput" aria-describedby="emailHelp" />
                 </div>
                 <div className="col-12 col-md-12 col-lg-12">
                   <label for="" className="eventForm_speakerLabel form-label">
                     Session Description With Domain and Industry Detail
                   </label>
-                  <textarea
-                    class="form-control"
-                    id="exampleFormControlTextarea1"
-                    rows="3"
-                  ></textarea>
+                  <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
 
                 <div className="col-12 col-md-12 col-lg-12 eventForm_speakerLabel">
-                  <label
-                    for="exampleInputEmail1"
-                    className="Create_Event_label form-label"
-                  >
+                  <label for="exampleInputEmail1" className="Create_Event_label form-label">
                     Session Tags
                   </label>
 
-                  <div class="form-group has-search">
+                  <div className="form-group has-search">
                     <AiOutlineSearch className="form-control-feedback" />
 
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Search"
-                    />
+                    <input type="text" className="form-control" placeholder="Search" />
                   </div>
 
                   <div className="col-12 col-md-12 col-lg-12 speaker_tags">
@@ -183,35 +161,23 @@ const AddEvent_Form_first = () => {
               <div className="col-12 col-md-12 col-lg-12">
                 <div className="row">
                   <div className="col-12 col-md-12 col-lg-6">
-                    <div class="eventForm_dropzone">
+                    <div className="eventForm_dropzone">
                       <div className="studentEvent_files">
-                        <span class="eventForm_dropzone__prompt">
-                          Drag and drop to Browser to choose files
-                        </span>
+                        <span className="eventForm_dropzone__prompt">Drag and drop to Browser to choose files</span>
                         {/* <GrUpload className="upload_icon_EventForm" />
                         <h6>Upload Session Photo</h6>
                         <br />  */}
 
-                        <input
-                          type="file"
-                          name="myFile"
-                          class="eventForm_dropzone__input"
-                        />
+                        <input type="file" name="myFile" className="eventForm_dropzone__input" />
                       </div>
                     </div>
                   </div>
                   <div className="col-12 col-md-12 col-lg-6">
-                    <div class="eventForm_dropzone">
+                    <div className="eventForm_dropzone">
                       <div className="studentEvent_files">
-                        <span class="eventForm_dropzone__prompt">
-                          Drag and drop to Browser to choose files
-                        </span>
+                        <span className="eventForm_dropzone__prompt">Drag and drop to Browser to choose files</span>
 
-                        <input
-                          type="file"
-                          name="myFile"
-                          class="eventForm_dropzone__input"
-                        />
+                        <input type="file" name="myFile" className="eventForm_dropzone__input" />
                       </div>
                     </div>
                   </div>
@@ -219,10 +185,10 @@ const AddEvent_Form_first = () => {
               </div>
               <div className="row">
                 <div className="col-12 col-md-12 col-lg-12 eventForm_attachFile">
-                <div className="upload-btn-wrapper">
-                  <button>Upload a file</button>
-                  <input type="file" className="form-control" name="myfile" />
-                </div>
+                  <div className="upload-btn-wrapper">
+                    <button>Upload a file</button>
+                    <input type="file" className="form-control" name="myfile" />
+                  </div>
                 </div>
                 <div className="col-11 col-md-11 col-lg-12 session_uploadedEventForm">
                   <h6>
@@ -247,45 +213,21 @@ const AddEvent_Form_first = () => {
               <div className="col-12 col-md-12 col-lg-12">
                 <h5> Session Type</h5>
                 <div className=" col-12 col-md-12 col-lg-12 EventForm_Checkbox">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input eventFormSessionType_checkbox "
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label
-                      class="form-check-label eventFormSessionType_label"
-                      for="flexCheckDefault"
-                    >
+                  <div className="form-check">
+                    <input className="form-check-input eventFormSessionType_checkbox " type="checkbox" value="" id="flexCheckDefault" />
+                    <label className="form-check-label eventFormSessionType_label" for="flexCheckDefault">
                       Online
                     </label>
                   </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input eventFormSessionType_checkbox"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label
-                      class="form-check-label eventFormSessionType_label"
-                      for="flexCheckDefault"
-                    >
+                  <div className="form-check">
+                    <input className="form-check-input eventFormSessionType_checkbox" type="checkbox" value="" id="flexCheckDefault" />
+                    <label className="form-check-label eventFormSessionType_label" for="flexCheckDefault">
                       Offline
                     </label>
                   </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input eventFormSessionType_checkbox"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                    <label
-                      class="form-check-label eventFormSessionType_label"
-                      for="flexCheckDefault"
-                    >
+                  <div className="form-check">
+                    <input className="form-check-input eventFormSessionType_checkbox" type="checkbox" value="" id="flexCheckDefault" />
+                    <label className="form-check-label eventFormSessionType_label" for="flexCheckDefault">
                       Hybrid
                     </label>
                   </div>
@@ -294,30 +236,15 @@ const AddEvent_Form_first = () => {
 
               <div className="col-12 col-md-12 col-lg-12">
                 <h5>Session Duration</h5>
-                <input
-                  type="text"
-                  className="eventForm_timingInput text-center"
-                  id="eventForm_session"
-                  placeholder=" 1.00 Hr:Mm"
-                />
+                <input type="text" className="eventForm_timingInput text-center" id="eventForm_session" placeholder=" 1.00 Hr:Mm" />
               </div>
               <div className="col-12 col-md-12 col-lg-12">
                 <h5>Maximum Number of Students</h5>
                 <div className="eventForm_studentNumber">
-                  <input
-                    type="number"
-                    className=" Event_formInput text-center"
-                    id="eventFormMaxNumber"
-                    placeholder="25"
-                  />
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                    />
-                    <label class="form-check-label" for="flexRadioDefault1">
+                  <input type="number" className=" Event_formInput text-center" id="eventFormMaxNumber" placeholder="25" />
+                  <div className="form-check">
+                    <input className="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1" />
+                    <label className="form-check-label" for="flexRadioDefault1">
                       If Any
                     </label>
                   </div>
@@ -328,25 +255,15 @@ const AddEvent_Form_first = () => {
             <div className="col-12 col-md-12 col-lg-6">
               <div className=" col-12 col-md-12 col-lg-12 eventForm_availableDays">
                 <h5 style={{ paddingRight: "10px" }}> Available Days</h5>
-                <div class="form-check eventForm_daysDate">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault1"
-                  />
-                  <label class="form-check-label" for="flexRadioDefault1">
+                <div className="form-check eventForm_daysDate">
+                  <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                  <label className="form-check-label" for="flexRadioDefault1">
                     Days
                   </label>
                 </div>
-                <div class="form-check eventForm_daysDate">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault1"
-                  />
-                  <label class="form-check-label" for="flexRadioDefault1">
+                <div className="form-check eventForm_daysDate">
+                  <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                  <label className="form-check-label" for="flexRadioDefault1">
                     Date
                   </label>
                 </div>
@@ -355,14 +272,9 @@ const AddEvent_Form_first = () => {
                 <div className="eventForm_weekBox">
                   <h5>Week</h5> <FaCalendarAlt id="calender_icon" />
                 </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault1"
-                  />
-                  <label class="form-check-label" for="flexRadioDefault1">
+                <div className="form-check">
+                  <input className="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1" />
+                  <label className="form-check-label" for="flexRadioDefault1">
                     Repeated
                   </label>
                 </div>
@@ -379,52 +291,34 @@ const AddEvent_Form_first = () => {
             <div className="col-12 col-md-10 col-lg-7">
               <h5>Price of Workshop</h5>
               <div className="eventForm_price">
-                <div class="eventForm_paid ">
+                <div className="eventForm_paid ">
                   <input type="radio" id="a25" name="check-substitution-2" />
-                  <label class="btn btn-default ">Free</label>
+                  <label className="btn btn-default ">Free</label>
                 </div>
-                <div class="eventForm_paid">
+                <div className="eventForm_paid">
                   <input type="radio" id="a50" name="check-substitution-2" />
-                  <label class="btn btn-default">Paid</label>
+                  <label className="btn btn-default">Paid</label>
                 </div>
 
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault1"
-                  />
-                  <label class="form-check-label" for="flexRadioDefault1">
+                <div className="form-check">
+                  <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                  <label className="form-check-label" for="flexRadioDefault1">
                     By Hours
                   </label>
                 </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault1"
-                  />
-                  <label class="form-check-label" for="flexRadioDefault1">
+                <div className="form-check">
+                  <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                  <label className="form-check-label" for="flexRadioDefault1">
                     By Session
                   </label>
                 </div>
 
-                <div class="quantity-field">
-                  <button
-                    class="value-button decrease-button"
-                    onclick="decreaseValue(this)"
-                    title="Azalt"
-                  >
+                <div className="quantity-field">
+                  <button className="value-button decrease-button" onclick="decreaseValue(this)" title="Azalt">
                     -
                   </button>
-                  <div class="number">0</div>
-                  <button
-                    class="value-button increase-button"
-                    onclick="increaseValue(this, 5)"
-                    title="Arrtır"
-                  >
+                  <div className="number">0</div>
+                  <button className="value-button increase-button" onclick="increaseValue(this, 5)" title="Arrtır">
                     +
                   </button>
                 </div>
@@ -433,11 +327,10 @@ const AddEvent_Form_first = () => {
           </div>
           <div className="row">
             <div className="col-12 col-md-12 col-lg-12 mt-4 text-center">
-            
-                  <buttton type="submit" className="btn  submit_eventFormButton"> Submit and Preview Resume</buttton>
-
-                  
-
+              <buttton type="submit" className="btn  submit_eventFormButton">
+                {" "}
+                Submit and Preview Resume
+              </buttton>
             </div>
           </div>
         </Form>

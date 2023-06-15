@@ -23,7 +23,6 @@ import { ToastContainer, toast } from "react-toastify";
 import showToast from "../CustomToast/CustomToast";
 
 const Signupform = (props) => {
-
   const [showPassword, setShowpassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [name, setName] = useState("");
@@ -72,10 +71,10 @@ const Signupform = (props) => {
         .then((res) => {
           setLoading(false);
           if (res.data.result === true) {
-            showToast("Registered Successfully",  "success" );
+            showToast("Registered Successfully", "success");
             navigate("/login");
           } else if (res.data.result === false) {
-            showToast(res.data.message , "error")
+            showToast(res.data.message, "error");
           }
         })
         .catch((err) => {
@@ -89,10 +88,7 @@ const Signupform = (props) => {
     <>
       <div className="row mb-1">
         <div className=""></div>
-        <div
-          className="col-lg-4 col-md-6 col-12 signUpPage"
-          style={{ marginBottom: "0px" }}
-        >
+        <div className="col-lg-4 col-md-6 col-12 signUpPage" style={{ marginBottom: "0px" }}>
           <h4>Sign up</h4>
         </div>
       </div>
@@ -100,36 +96,22 @@ const Signupform = (props) => {
       <div>
         <Form.Group className="mb-2">
           <div>
-            <select
-              class="form-select"
-              onChange={(e) => setUserType(e.target.value)}
-              className="selectUser"
-            >
+            <select className="form-select" onChange={(e) => setUserType(e.target.value)} className="selectUser">
               <option value="">Select User</option>
               <option value="1">Student</option>
               <option value="2">Speaker / Coach</option>
               <option value="3">Employer</option>
               <option value="4">University</option>
             </select>
-            <span style={{ color: "red", fontSize: "14px" }}>
-              {errorMsg.userType}
-            </span>
+            <span style={{ color: "red", fontSize: "14px" }}>{errorMsg.userType}</span>
           </div>
         </Form.Group>
 
         <Form.Group className="mb-2">
           <label>Name</label>
 
-          <Logininput
-            licon={<FaUserAlt size={17} />}
-            type={"text"}
-            place={"Enter name"}
-            value={name}
-            setValue={(e) => setName(e.target.value)}
-          />
-          <span style={{ color: "red", fontSize: "14px" }}>
-            {errorMsg.name}
-          </span>
+          <Logininput licon={<FaUserAlt size={17} />} type={"text"} place={"Enter name"} value={name} setValue={(e) => setName(e.target.value)} />
+          <span style={{ color: "red", fontSize: "14px" }}>{errorMsg.name}</span>
         </Form.Group>
 
         <Form.Group className="mb-2" controlId="formBasicEmail">
@@ -144,9 +126,7 @@ const Signupform = (props) => {
             setValue={(e) => setEmail(e.target.value)}
             // errors={errorMsg.email}
           />
-          <span style={{ color: "red", fontSize: "14px" }}>
-            {errorMsg.email}
-          </span>
+          <span style={{ color: "red", fontSize: "14px" }}>{errorMsg.email}</span>
         </Form.Group>
 
         <Form.Group className="mb-2" controlId="formBasicPassword">
@@ -159,19 +139,10 @@ const Signupform = (props) => {
             // errors={errorMsg.password}
             setValue={(e) => setPassword(e.target.value)}
             ricon={
-              showPassword === false ? (
-                <AiOutlineEyeInvisible
-                  onClick={() => setShowpassword(true)}
-                  style={{ color: "gray" }}
-                />
-              ) : (
-                <BsEye onClick={() => setShowpassword(false)} />
-              )
+              showPassword === false ? <AiOutlineEyeInvisible onClick={() => setShowpassword(true)} style={{ color: "gray" }} /> : <BsEye onClick={() => setShowpassword(false)} />
             }
           />
-          <span style={{ color: "red", fontSize: "14px" }}>
-            {errorMsg.password}
-          </span>
+          <span style={{ color: "red", fontSize: "14px" }}>{errorMsg.password}</span>
         </Form.Group>
 
         <Form.Group className="mb-2" controlId="formBasicPassword">
@@ -185,18 +156,13 @@ const Signupform = (props) => {
             setValue={(e) => setConfPassword(e.target.value)}
             ricon={
               showConfirmPassword === false ? (
-                <AiOutlineEyeInvisible
-                  onClick={() => setShowConfirmPassword(true)}
-                  style={{ color: "gray" }}
-                />
+                <AiOutlineEyeInvisible onClick={() => setShowConfirmPassword(true)} style={{ color: "gray" }} />
               ) : (
                 <BsEye onClick={() => setShowConfirmPassword(false)} />
               )
             }
           />
-          <span style={{ color: "red", fontSize: "14px" }}>
-            {errorMsg.confPassword}
-          </span>
+          <span style={{ color: "red", fontSize: "14px" }}>{errorMsg.confPassword}</span>
         </Form.Group>
 
         <Btn btn_name={"Sign Up"} submit={submit} loading={loading} />
@@ -231,11 +197,7 @@ const Signupform = (props) => {
       </div>
       <p className="loginSignup">
         Already have an account ?{" "}
-        <span
-          style={{ color: "#2c6959", cursor: "pointer" }}
-          onClick={() => navigate("/login")}
-          className="context-menu"
-        >
+        <span style={{ color: "#2c6959", cursor: "pointer" }} onClick={() => navigate("/login")} className="context-menu">
           Login
         </span>
       </p>

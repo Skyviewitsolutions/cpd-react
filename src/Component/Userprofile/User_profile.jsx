@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CoachNotification from "../CoachNotification/CoachNotification";
-import {CgCommunity} from "react-icons/cg"
+import { CgCommunity } from "react-icons/cg";
 
 const User_profile = () => {
   const token = localStorage.getItem("token");
@@ -91,16 +91,14 @@ const User_profile = () => {
 
           if (startYearEmployment.length != 0) {
             var startYearEmployment = startYearEmployment[0];
-            var endYearEmployment =
-              endYearEmployment[endYearEmployment.length - 1];
+            var endYearEmployment = endYearEmployment[endYearEmployment.length - 1];
 
-            var totalExperience =
-              parseInt(endYearEmployment) - parseInt(startYearEmployment);
+            var totalExperience = parseInt(endYearEmployment) - parseInt(startYearEmployment);
             setTotalExperience(totalExperience);
           }
 
           // here we are updating the staus code ;
-          console.log(res , "value");
+          console.log(res, "value");
           setStatusData((itm) => {
             return {
               ...itm,
@@ -210,7 +208,7 @@ const User_profile = () => {
 
           <div className="yourstatus_box ">
             <div className="yourstatus_innerbox">
-            <img src={status_courses} alt="courses" className="status_img" />
+              <img src={status_courses} alt="courses" className="status_img" />
               <h6>Joined Community</h6>
             </div>
             <h6 className="yrstatusDta">{statusData.joinedCommunity}</h6>
@@ -218,11 +216,7 @@ const User_profile = () => {
           <hr className="tags_line" />
           <div className="yourstatus_box ">
             <div className="yourstatus_innerbox">
-            <img
-                src={tobe_applied}
-                alt="tobe_applied"
-                className="status_img"
-              />
+              <img src={tobe_applied} alt="tobe_applied" className="status_img" />
               <h6>Joined Events</h6>
             </div>
             <h6 className="yrstatusDta">{statusData.joinedEvents}</h6>
@@ -230,11 +224,7 @@ const User_profile = () => {
           <hr className="tags_line" />
           <div className="yourstatus_box ">
             <div className="yourstatus_innerbox">
-              <img
-                src={upcoming_session}
-                alt="upcoming_session"
-                className="status_img"
-              />
+              <img src={upcoming_session} alt="upcoming_session" className="status_img" />
               <h6>Enrolled Workshop</h6>
             </div>
             <h6 className="yrstatusDta">{statusData.joinedWorkshop}</h6>
@@ -242,11 +232,7 @@ const User_profile = () => {
           <hr className="tags_line" />
           <div className="yourstatus_box ">
             <div className="yourstatus_innerbox">
-              <img
-                src={community_activity}
-                alt="community_activity"
-                className="status_img"
-              />
+              <img src={community_activity} alt="community_activity" className="status_img" />
               <h6>Enrolled Coaching</h6>
             </div>
             <h6 className="yrstatusDta">{statusData.joinedCoachings}</h6>
@@ -254,7 +240,7 @@ const User_profile = () => {
           <hr className="tags_line" />
           <div className="yourstatus_box ">
             <div className="yourstatus_innerbox">
-            <img src={status_courses} alt="courses" className="status_img" />
+              <img src={status_courses} alt="courses" className="status_img" />
               <h6>Created Community</h6>
             </div>
             <h6 className="yrstatusDta">{statusData.createdCommunity}</h6>
@@ -262,41 +248,32 @@ const User_profile = () => {
           <hr className="tags_line" />
           <div className="yourstatus_box ">
             <div className="yourstatus_innerbox">
-              <img
-                src={tobe_applied}
-                alt="tobe_applied"
-                className="status_img"
-              />
+              <img src={tobe_applied} alt="tobe_applied" className="status_img" />
               <h6>Created Events</h6>
             </div>
             <h6 className="yrstatusDta">{statusData.createdEvents}</h6>
           </div>
           <hr className="tags_line" />
-          {userType == 2 && (<>
-          <div className="yourstatus_box ">
-            <div className="yourstatus_innerbox">
-            <img
-                src={community_activity}
-                alt="community_activity"
-                className="status_img"
-              />
-              <h6>Created Coaching</h6>
-            </div>
-            <h6 className="yrstatusDta">{statusData.createdCoachings}</h6>
-          </div>
-          <hr className="tags_line" />
-          <div className="yourstatus_box ">
-            <div className="yourstatus_innerbox">
-            <img
-                src={upcoming_session}
-                alt="upcoming_session"
-                className="status_img"
-              />
-              <h6>Created Workshop</h6>
-            </div>
-            <h6 className="yrstatusDta">{statusData.createdWorkshop}</h6>
-          </div>
-          <hr className="tags_line" /> </>)}
+          {userType == 2 && (
+            <>
+              <div className="yourstatus_box ">
+                <div className="yourstatus_innerbox">
+                  <img src={community_activity} alt="community_activity" className="status_img" />
+                  <h6>Created Coaching</h6>
+                </div>
+                <h6 className="yrstatusDta">{statusData.createdCoachings}</h6>
+              </div>
+              <hr className="tags_line" />
+              <div className="yourstatus_box ">
+                <div className="yourstatus_innerbox">
+                  <img src={upcoming_session} alt="upcoming_session" className="status_img" />
+                  <h6>Created Workshop</h6>
+                </div>
+                <h6 className="yrstatusDta">{statusData.createdWorkshop}</h6>
+              </div>
+              <hr className="tags_line" />{" "}
+            </>
+          )}
         </div>
         <CoachNotification
           showNotification={showNotification}

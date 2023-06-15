@@ -26,9 +26,7 @@ import { getCalendarData } from "../../utils/calendar";
 import Loader from "../../Component/Loader/Loader";
 import showToast from "../../Component/CustomToast/CustomToast";
 
-
 const Workshop = () => {
-
   const navigate = useNavigate("");
   const [modalShow, setModalShow] = React.useState(false);
   const token = localStorage.getItem("token");
@@ -46,9 +44,7 @@ const Workshop = () => {
   const [filterByIndustry, setFilterByIndustry] = useState([]);
   const [filterByDomain, setFilterByDomain] = useState([]);
   const [updateWorkshop, setUpdateWorkshop] = useState(false);
-  const [selectedWorkshopForUpdate, setSelectedWorkshopForUpdate] = useState(
-    {}
-  );
+  const [selectedWorkshopForUpdate, setSelectedWorkshopForUpdate] = useState({});
   const [loading, setLoading] = useState(false);
 
   var userDetails = localStorage.getItem("users");
@@ -64,7 +60,6 @@ const Workshop = () => {
     axios
       .get(url, { headers: headers })
       .then((res) => {
-        console.log(res, "all response");
         setLoading(false);
         if (res.data.result) {
           var val = res.data.data;
@@ -91,7 +86,6 @@ const Workshop = () => {
   // writing code for enrolling the workshop
 
   const enrollWorkshop = (workShopData) => {
-    
     const token = localStorage.getItem("token");
     if (token) {
       var id = workShopData._id;
@@ -225,11 +219,9 @@ const Workshop = () => {
     navigate(path, { communityDetails: JSON.stringify(dta) });
   };
 
-
   // here we are filtering the coaching according to the domain and industry;
 
   useEffect(() => {
-
     var filterWorkshopByIndustry = workshopToBeShown.filter((itm, index) => {
       var industry = itm.industry;
       var industryTitle = industry && industry?.title.toLowerCase();
@@ -242,10 +234,9 @@ const Workshop = () => {
       return filterByDomain.includes(domainTitle);
     });
     setWorkshopToBeShown2(filterWorkshopByDomain);
-  }, [filterByDomain ]);
+  }, [filterByDomain]);
 
   useEffect(() => {
-
     var filterWorkshopByDomain = workshopToBeShown.filter((itm, index) => {
       var domain = itm.domain;
       var domainTitle = domain && domain?.title.toLowerCase();
@@ -288,7 +279,6 @@ const Workshop = () => {
       });
   };
 
-
   return (
     <div className="workshopContainer">
       <Homepage_header />
@@ -308,59 +298,39 @@ const Workshop = () => {
           </div>
           <div className="row workshop_searchBox col-12">
             <div className="col-8 col-md-12 col-lg-2">
-              <h5 className="workshopHdTitle">
-                This Week's Top Enroll Workshop
-              </h5>
+              <h5 className="workshopHdTitle">This Week's Top Enroll Workshop</h5>
             </div>
             <div className="col-12 col-md-12 col-lg-10">
               <div className="row">
                 <div className="col-lg-7 col-md-12 col-12">
                   <div className="workshop_searchBar">
                     <div className="form-group">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Search Here"
-                        value={inputData}
-                        onChange={(e) => handleInputData(e.target.value)}
-                      />
+                      <input type="text" className="form-control" placeholder="Search Here" value={inputData} onChange={(e) => handleInputData(e.target.value)} />
                       <HiSearch id="workshop_search" />
                     </div>{" "}
                   </div>
                 </div>
                 {userType == 2 && (
                   <>
-                    <div
-                      className="coachBtnCont col-lg-5 col-md-12 col-12 d-flex justify-content-between"
-                      style={{ width: "33%" }}
-                    >
+                    <div className="coachBtnCont col-lg-5 col-md-12 col-12 d-flex justify-content-between" style={{ width: "33%" }}>
                       <button
                         className="coachingBtn"
                         style={{
-                          border: showAllWorkshop
-                            ? "2px solid #2c6959"
-                            : "2px solid #d4d9d6",
+                          border: showAllWorkshop ? "2px solid #2c6959" : "2px solid #d4d9d6",
                         }}
-                        onClick={handleShowAllWorkshop}
-                      >
+                        onClick={handleShowAllWorkshop}>
                         All
                       </button>
 
                       <button
                         className="coachingBtn"
                         style={{
-                          border: !showAllWorkshop
-                            ? "2px solid #2c6959"
-                            : "2px solid #d4d9d6",
+                          border: !showAllWorkshop ? "2px solid #2c6959" : "2px solid #d4d9d6",
                         }}
-                        onClick={handleShowMyWorkshop}
-                      >
+                        onClick={handleShowMyWorkshop}>
                         My workshops
                       </button>
-                      <button
-                        className="coachingBtn createCoachingBtn"
-                        onClick={() => setShowWorkshopForm(true)}
-                      >
+                      <button className="coachingBtn createCoachingBtn" onClick={() => setShowWorkshopForm(true)}>
                         Create
                       </button>
                     </div>
@@ -372,16 +342,8 @@ const Workshop = () => {
         </section>
         <section className="Workshop_section2">
           <div className="row">
-            <div
-              className="col-lg-2 col-md-12 col-12 mb-4 "
-              style={{ marginTop: "-12px" }}
-            >
-              <CustomFilter
-                filterByDomain={filterByDomain}
-                setFilterByDomain={setFilterByDomain}
-                filterByIndustry={filterByIndustry}
-                setFilterByIndustry={setFilterByIndustry}
-              />
+            <div className="col-lg-2 col-md-12 col-12 mb-4 " style={{ marginTop: "-12px" }}>
+              <CustomFilter filterByDomain={filterByDomain} setFilterByDomain={setFilterByDomain} filterByIndustry={filterByIndustry} setFilterByIndustry={setFilterByIndustry} />
             </div>
             <div className="col-lg-10 col-md-12 col-12 mt-3">
               <div className="row">
@@ -403,26 +365,23 @@ const Workshop = () => {
                       var status = datas.status;
                       enrollStatus = status;
                     }
-                    console.log(index , 'index')
                     return (
-                      <>
-                        <div className="col-lg-4 col-md-12 col-12 workshop-card px-4">
-                          <WorkshopCard
-                            workshop={workshop}
-                            showWorkshopOnCalendar={showWorkshopOnCalendar}
-                            enrollWorkshop={enrollWorkshop}
-                            enrollStatus={enrollStatus}
-                            img={img}
-                            key={index}
-                            showBookBtn={showAllWorkshop}
-                            imageName={workshop.image}
-                            showCoachDetails={showCoachDetails}
-                            showEdit={!showAllWorkshop}
-                            handleEdit={handleEdit}
-                            deleteWorkshop={deleteWorkshop}
-                          />
-                        </div>
-                      </>
+                      <div key={index} className="col-lg-4 col-md-12 col-12 workshop-card px-4">
+                        <WorkshopCard
+                          workshop={workshop}
+                          showWorkshopOnCalendar={showWorkshopOnCalendar}
+                          enrollWorkshop={enrollWorkshop}
+                          enrollStatus={enrollStatus}
+                          img={img}
+                          key={index}
+                          showBookBtn={showAllWorkshop}
+                          imageName={workshop.image}
+                          showCoachDetails={showCoachDetails}
+                          showEdit={!showAllWorkshop}
+                          handleEdit={handleEdit}
+                          deleteWorkshop={deleteWorkshop}
+                        />
+                      </div>
                     );
                   })}
               </div>
@@ -434,11 +393,7 @@ const Workshop = () => {
             </div>
           </div>
 
-          <CustomCalendar
-            showCalendar={showCustomCalendar}
-            setShowCalendar={setShowCustomCalendar}
-            eventsToBeShown={eventsToBeShown}
-          />
+          <CustomCalendar showCalendar={showCustomCalendar} setShowCalendar={setShowCustomCalendar} eventsToBeShown={eventsToBeShown} />
 
           <CreateWorkshopForm
             showWorkshopForm={showWorkshopForm}

@@ -7,7 +7,6 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import Button from "../../../Component/button/Button/Button";
 
 const DomainIndustryEditor = (props) => {
-
   const {
     allDomain,
     allIndustry,
@@ -28,8 +27,8 @@ const DomainIndustryEditor = (props) => {
     joinedMembers,
     domainId,
     industry,
-    sessionType ,
-    setSessionType ,
+    sessionType,
+    setSessionType,
     showDomainIndustryEditor,
     setShowDomainIndustryEditor,
     setJoinedMembers,
@@ -41,24 +40,16 @@ const DomainIndustryEditor = (props) => {
       <div className="dmnInEditor">
         <div className="dmInEdHeader">
           <h4>Editor</h4>
-          <AiOutlineCloseCircle
-            color="white"
-            size={25}
-            onClick={() => setShowDomainIndustryEditor(false)}
-          />
+          <AiOutlineCloseCircle color="white" size={25} onClick={() => setShowDomainIndustryEditor(false)} />
         </div>
 
         <div className="dmInForm row">
-          {showMaxmembers && 
-          <div className="dmformBox col-lg-6 col-md-12 col-12">
-            <label htmlFor="">Max members</label>
-            <input
-              type="number"
-              min={0}
-              value={maxMembers}
-              onChange={(e) => setMaxMembers(e.target.value)}
-            />
-          </div>}
+          {showMaxmembers && (
+            <div className="dmformBox col-lg-6 col-md-12 col-12">
+              <label htmlFor="">Max members</label>
+              <input type="number" min={0} value={maxMembers} onChange={(e) => setMaxMembers(e.target.value)} />
+            </div>
+          )}
 
           {/* <div className="dmformBox  col-lg-6 col-md-12 col-12">
             <label htmlFor="">Joined members</label>
@@ -74,11 +65,7 @@ const DomainIndustryEditor = (props) => {
             <>
               <div className="dmformBox  col-lg-6 col-md-12 col-12">
                 <label htmlFor="">Domain</label>
-                <select
-                  value={domain}
-                  required
-                  onChange={(e) => handleDomainSelection(e.target.value)}
-                >
+                <select value={domain} required onChange={(e) => handleDomainSelection(e.target.value)}>
                   <option value="">Choose</option>
                   {allDomain &&
                     allDomain.map((domain, index) => {
@@ -94,11 +81,7 @@ const DomainIndustryEditor = (props) => {
               <div className="dmformBox  col-lg-6 col-md-12 col-12">
                 <label htmlFor="">Industry</label>
 
-                <select
-                  value={industry}
-                  required
-                  onChange={(e) => handleIndustrySelection(e.target.value)}
-                >
+                <select value={industry} required onChange={(e) => handleIndustrySelection(e.target.value)}>
                   <option>Choose</option>
                   {allIndustry &&
                     allIndustry.map((industry, index) => {
@@ -114,21 +97,13 @@ const DomainIndustryEditor = (props) => {
               {showDomainInputBox && (
                 <div className="dmformBox  col-lg-6 col-md-12 col-12">
                   <label htmlFor="">Others (domain)</label>
-                  <input
-                    type="text"
-                    value={domainManualInput}
-                    onChange={(e) => setDomainManualInput(e.target.value)}
-                  />
+                  <input type="text" value={domainManualInput} onChange={(e) => setDomainManualInput(e.target.value)} />
                 </div>
               )}
               {showIndustryInputBox && (
                 <div className="dmformBox  col-lg-6 col-md-12 col-12">
                   <label htmlFor="">Others (industry)</label>
-                  <input
-                    type="text"
-                    value={industryManualInput}
-                    onChange={(e) => setIndustryManualInput(e.target.value)}
-                  />
+                  <input type="text" value={industryManualInput} onChange={(e) => setIndustryManualInput(e.target.value)} />
                 </div>
               )}
             </>
@@ -136,14 +111,13 @@ const DomainIndustryEditor = (props) => {
 
           {/* here we are creating the session type */}
 
-          {showSessionType && 
-          <div className="col-12 col-md-12 col-lg-6 dmformBox">
+          {showSessionType && (
+            <div className="col-12 col-md-12 col-lg-6 dmformBox">
               <h5> Session Type</h5>
-          <div className="col-12 col-md-12 col-lg-12 dmformCheck">
-
-                <div class="form-check">
+              <div className="col-12 col-md-12 col-lg-12 dmformCheck">
+                <div className="form-check">
                   <input
-                    class="form-check-input eventFormSessionType_checkbox "
+                    className="form-check-input eventFormSessionType_checkbox "
                     type="radio"
                     value=""
                     name="sessionMode"
@@ -151,16 +125,13 @@ const DomainIndustryEditor = (props) => {
                     checked={sessionType === "online"}
                     onChange={(e) => setSessionType("online")}
                   />
-                  <label
-                    class="form-check-label eventFormSessionType_label"
-                    htmlFor="Online"
-                  >
+                  <label className="form-check-label eventFormSessionType_label" htmlFor="Online">
                     Online
                   </label>
                 </div>
-                <div class="form-check">
+                <div className="form-check">
                   <input
-                    class="form-check-input eventFormSessionType_checkbox"
+                    className="form-check-input eventFormSessionType_checkbox"
                     type="radio"
                     value=""
                     name="sessionMode"
@@ -168,16 +139,13 @@ const DomainIndustryEditor = (props) => {
                     checked={sessionType === "offline"}
                     onChange={(e) => setSessionType("offline")}
                   />
-                  <label
-                    class="form-check-label eventFormSessionType_label"
-                    htmlFor="Offline"
-                  >
+                  <label className="form-check-label eventFormSessionType_label" htmlFor="Offline">
                     Offline
                   </label>
                 </div>
-                <div class="form-check">
+                <div className="form-check">
                   <input
-                    class="form-check-input eventFormSessionType_checkbox"
+                    className="form-check-input eventFormSessionType_checkbox"
                     type="radio"
                     value=""
                     name="sessionMode"
@@ -185,21 +153,16 @@ const DomainIndustryEditor = (props) => {
                     checked={sessionType === "hybrid"}
                     onChange={(e) => setSessionType("hybrid")}
                   />
-                  <label
-                    class="form-check-label eventFormSessionType_label"
-                    htmlFor="Hybrid"
-                  >
+                  <label className="form-check-label eventFormSessionType_label" htmlFor="Hybrid">
                     Both
                   </label>
                 </div>
               </div>
-              </div>}
+            </div>
+          )}
 
           <div className="dmFormBtn mt-3">
-            <Button
-              title={"Update"}
-              onClick={() => setShowDomainIndustryEditor(false)}
-            />
+            <Button title={"Update"} onClick={() => setShowDomainIndustryEditor(false)} />
           </div>
         </div>
       </div>

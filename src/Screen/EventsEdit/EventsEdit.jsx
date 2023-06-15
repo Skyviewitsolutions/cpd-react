@@ -8,12 +8,7 @@ import DummyBanner from "../../assets/Icons/dummyBanner.png";
 import CourseContent from "../../Component/CourseContent/CourseContent";
 import { TagsInput } from "react-tag-input-component";
 import { BsFillPlayFill } from "react-icons/bs";
-import {
-  AiOutlineYoutube,
-  AiOutlineTrophy,
-  AiFillEdit,
-  AiOutlineCloseCircle,
-} from "react-icons/ai";
+import { AiOutlineYoutube, AiOutlineTrophy, AiFillEdit, AiOutlineCloseCircle } from "react-icons/ai";
 import { BiFileBlank, BiMobile } from "react-icons/bi";
 import { RiFolderDownloadLine } from "react-icons/ri";
 import { MdOutlineLink } from "react-icons/md";
@@ -37,8 +32,7 @@ import Button from "../../Component/button/Button/Button";
 import UserCard from "../../Component/UserCard/UserCard";
 import showToast from "../../Component/CustomToast/CustomToast";
 import UsersReview from "../../Component/UsersReview/UsersReview";
-import ShareModal from "../../Component/Modal/ShareModel/ShareModel"
-
+import ShareModal from "../../Component/Modal/ShareModel/ShareModel";
 
 const EventsEdit = () => {
   const iconsMap = [
@@ -97,8 +91,7 @@ const EventsEdit = () => {
   const [eventList, setEventList] = useState([]);
   const [communityId, setCommunityId] = useState("");
   const [communityName, setCommunityName] = useState("");
-  const [showShareModal , setShowShareModal] = useState(false)
-
+  const [showShareModal, setShowShareModal] = useState(false);
 
   // create variables for holding value ;
   const [title, setTitle] = useState("");
@@ -107,7 +100,7 @@ const EventsEdit = () => {
   const [paid, setPaid] = useState(false);
   const [price, setPrice] = useState(0);
   const [shortDescriptions, setShortDescriptions] = useState(shrtDesc);
-  const [selectedTopicDta , setSelectedTopicDta] = useState({})
+  const [selectedTopicDta, setSelectedTopicDta] = useState({});
 
   const [joinedMembers, setJoinedMembers] = useState("");
   const [sessionType2, setSessionType2] = useState("");
@@ -126,11 +119,9 @@ const EventsEdit = () => {
 
   // handling the state of the toggleing model ;
 
-  const [showDomainIndustryEditor, setShowDomainIndustryEditor] =
-    useState(false);
+  const [showDomainIndustryEditor, setShowDomainIndustryEditor] = useState(false);
   const [showWhatYouLearn, setShowWhatYouLearn] = useState(false);
-  const [showLongDescriptionEditor, setShowLongDescriptionEditor] =
-    useState(false);
+  const [showLongDescriptionEditor, setShowLongDescriptionEditor] = useState(false);
   const [londDescriptionContent, setLongDescriptionContent] = useState("");
   const [whatYouLearnPoints, setWhatYouLearnPoints] = useState([]);
   const [showCourseContent, setShowCourseContent] = useState(false);
@@ -165,7 +156,7 @@ const EventsEdit = () => {
           var imageUrl = path + "/" + val.event_photo;
           setEventImg(imageUrl);
           var slots = val?.availability_slot;
-          setDuration(val?.event_duration)
+          setDuration(val?.event_duration);
           if (slots) {
             slots = JSON.parse(slots);
             setSelectedDays(slots?.selectedDays || []);
@@ -177,11 +168,9 @@ const EventsEdit = () => {
           }
 
           setCommunityId(val?.community_id);
-          var communityNam = allCommunity.find(
-            (item) => item._id === val?.community_id
-          );
+          var communityNam = allCommunity.find((item) => item._id === val?.community_id);
           setCommunityName(communityNam?.display_name);
-          if(val?.long_description){
+          if (val?.long_description) {
             setLongDescriptionContent(val?.long_description);
           }
 
@@ -225,8 +214,7 @@ const EventsEdit = () => {
   };
 
   const getCreatorDetails = () => {
-    const url =
-      endpoints.authentication.getProfileByID + "?user_id=" + creatorId;
+    const url = endpoints.authentication.getProfileByID + "?user_id=" + creatorId;
     axios
       .get(url, { headers: headers })
       .then((res) => {
@@ -329,12 +317,8 @@ const EventsEdit = () => {
         title: title,
       };
 
-      var course_include_content_type = courseIncludeContent.map(
-        (itm, ind) => itm.icon
-      );
-      var course_include_content = courseIncludeContent.map(
-        (itm, ind) => itm.content
-      );
+      var course_include_content_type = courseIncludeContent.map((itm, ind) => itm.icon);
+      var course_include_content = courseIncludeContent.map((itm, ind) => itm.content);
 
       var data = new FormData();
       data.append("event_title", title);
@@ -370,7 +354,7 @@ const EventsEdit = () => {
 
       var config = {
         method: "post",
-        url: endpoints.events.updateEvent  + eventId,
+        url: endpoints.events.updateEvent + eventId,
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -383,7 +367,7 @@ const EventsEdit = () => {
           setLoading(false);
           if (res.data.result) {
             showToast("Event updated sucessfully", "success");
-            getEventDetailsById()
+            getEventDetailsById();
           }
         })
         .catch(function (error) {
@@ -405,33 +389,21 @@ const EventsEdit = () => {
     borderColor: "gray",
   };
 
-  const handleEventsClick  = (dta) =>{
+  const handleEventsClick = (dta) => {
     const id = dta?._id;
-    const path = generatePath("/eventEdit/:eventId" , {eventId : id});
+    const path = generatePath("/eventEdit/:eventId", { eventId: id });
     navigate(path);
-  }
-
+  };
 
   return (
     <MainLayout>
       <div className="dtlscont">
         <div className="dltsline"></div>
         <div className="dltsMain">
-          {eventDetails?.event_photo ? (
-            <img src={eventImg} />
-          ) : (
-            <img src={BackGroundImg} alt="" />
-          )}
+          {eventDetails?.event_photo ? <img src={eventImg} /> : <img src={BackGroundImg} alt="" />}
           <div className="wrkshoDtls ">
             <div className="position-relative wrkshTitleInput">
-              <input
-                type="text"
-                className="wrkshTitle "
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                readOnly={editName !== "title"}
-                ref={titleRef}
-              />
+              <input type="text" className="wrkshTitle " value={title} onChange={(e) => setTitle(e.target.value)} readOnly={editName !== "title"} ref={titleRef} />
               <RiEditBoxFill
                 size={23}
                 color="white"
@@ -467,28 +439,14 @@ const EventsEdit = () => {
               <h6>Max Members : {maxMembers}</h6>
               <h6>Joined Members : {joinedMembers}</h6>
               <h6>Session : {sessionType}</h6>
-              <RiEditBoxFill
-                size={23}
-                color="white"
-                className="wrkshopEditIcon"
-                onClick={() => setShowDomainIndustryEditor(true)}
-              />
+              <RiEditBoxFill size={23} color="white" className="wrkshopEditIcon" onClick={() => setShowDomainIndustryEditor(true)} />
             </div>
           </div>
 
           <label htmlFor="backgroundImg">
-            <RiEditBoxFill
-              size={23}
-              color="white"
-              className="wrkshopEditIcon2"
-            />
+            <RiEditBoxFill size={23} color="white" className="wrkshopEditIcon2" />
           </label>
-          <input
-            type="file"
-            id="backgroundImg"
-            style={{ visibility: "hidden" }}
-            onChange={handleEventImg}
-          />
+          <input type="file" id="backgroundImg" style={{ visibility: "hidden" }} onChange={handleEventImg} />
         </div>
 
         <div className="dltsSecond ">
@@ -496,8 +454,7 @@ const EventsEdit = () => {
             <div className="dltsSecondLeft col-lg-7 col-md-12 col-12">
               <div className="harbar">
                 <h5 onClick={() => navigate("/")}>Home</h5> <span>{">"}</span>
-                <h5 onClick={() => navigate(-1)}>Event</h5>{" "}
-                <span>{">"}</span>
+                <h5 onClick={() => navigate(-1)}>Event</h5> <span>{">"}</span>
                 <h5>Edit</h5>
               </div>
               <div className="whatlearn">
@@ -512,47 +469,36 @@ const EventsEdit = () => {
                     );
                   })}
                 </div>
-                <RiEditBoxFill
-                  size={23}
-                  color="white"
-                  className="wrkshopEditIcon"
-                  onClick={() => setShowWhatYouLearn(true)}
-                />
+                <RiEditBoxFill size={23} color="white" className="wrkshopEditIcon" onClick={() => setShowWhatYouLearn(true)} />
               </div>
 
               <div className="crsCont">
                 <h4>Event Content</h4>
                 <div className="crsttitlesc">
                   <p>
-                    15 Sections <span></span> 146 Lectures <span></span> 14H 42M
-                    Total Length
+                    15 Sections <span></span> 146 Lectures <span></span> 14H 42M Total Length
                   </p>
                   <div className="d-flex align-items-center">
                     <h6 style={{ marginRight: "9px" }}>Expand All Sections</h6>
-                    <BsPlusCircleFill
-                      size={23}
-                      color="var(--primary)"
-                      className="wrkshopAddIcon"
-                      onClick={() => setShowCourseContent(true)}
-                    />
+                    <BsPlusCircleFill size={23} color="var(--primary)" className="wrkshopAddIcon" onClick={() => setShowCourseContent(true)} />
                   </div>
                 </div>
                 <div className="accordiancont ">
-                  <CourseContent setShowCourseContent={setShowCourseContent}  data={eventDetails?.courseContent} selectedTopicDta={selectedTopicDta} setSelectedTopicDta={setSelectedTopicDta} update={true}/>
+                  <CourseContent
+                    setShowCourseContent={setShowCourseContent}
+                    data={eventDetails?.courseContent}
+                    selectedTopicDta={selectedTopicDta}
+                    setSelectedTopicDta={setSelectedTopicDta}
+                    update={true}
+                  />
                 </div>
 
                 {/* here we are creating descriptions sections */}
                 <div className="wrkshopDescriptions">
                   <h5>Descriptions</h5>
 
-                  {londDescriptionContent != "" &&
-                    parse(londDescriptionContent)}
-                  <RiEditBoxFill
-                    size={23}
-                    color="white"
-                    className="wrkshopEditIcon"
-                    onClick={() => setShowLongDescriptionEditor(true)}
-                  />
+                  {londDescriptionContent != "" && parse(londDescriptionContent)}
+                  <RiEditBoxFill size={23} color="white" className="wrkshopEditIcon" onClick={() => setShowLongDescriptionEditor(true)} />
                 </div>
 
                 <div className="relatedCourse">
@@ -567,18 +513,11 @@ const EventsEdit = () => {
                             <div>
                               <h5>{event?.event_title}</h5>
                               <h6>
-                                23 hours total{" "}
-                                <li>Members : ({event?.members_count})</li>
+                                23 hours total <li>Members : ({event?.members_count})</li>
                               </h6>
                             </div>
                           </div>
-                          <div className="pricePart">
-                            {event?.is_paid == 1 ? (
-                              <h6>Price : {event.price} HKD</h6>
-                            ) : (
-                              <h6>Free</h6>
-                            )}
-                          </div>
+                          <div className="pricePart">{event?.is_paid == 1 ? <h6>Price : {event.price} HKD</h6> : <h6>Free</h6>}</div>
                         </div>
                       );
                     })}
@@ -588,28 +527,16 @@ const EventsEdit = () => {
                 <div className="relatedCourse " style={{ padding: "20px" }}>
                   <div className="inputBox2 " style={{ marginBottom: "12px" }}>
                     <label htmlFor="">Session Tags</label>
-                    <TagsInput
-                      classNames="tagsInput"
-                      value={sessionTags}
-                      onChange={setSessionTags}
-                      placeHolder="Enter tags"
-                    />
+                    <TagsInput classNames="tagsInput" value={sessionTags} onChange={setSessionTags} placeHolder="Enter tags" />
                   </div>
                   <div className="inputBox">
                     <label htmlFor="">Select Community</label>
-                    <select
-                      class="form-select "
-                      aria-label="Default select example"
-                      value={communityName}
-                      onChange={(e) => handleCommunity(e)}
-                    >
+                    <select className="form-select " aria-label="Default select example" value={communityName} onChange={(e) => handleCommunity(e)}>
                       <option value="">Choose Community</option>
                       {allCommunity.map((item, index) => {
                         return (
                           <>
-                            <option value={item.display_name}>
-                              {item.display_name}
-                            </option>
+                            <option value={item.display_name}>{item.display_name}</option>
                           </>
                         );
                       })}
@@ -617,29 +544,18 @@ const EventsEdit = () => {
                   </div>
                   <div className="inputBox">
                     <label htmlFor="">Total Session Duration (in hours)</label>
-                    <input
-                      classNames=""
-                      value={duration}
-                      type="number"
-                      min={0}
-                      onChange={(e) => setDuration(e.target.value)}
-                      placeHolder="Enter duration"
-                    />
+                    <input classNames="" value={duration} type="number" min={0} onChange={(e) => setDuration(e.target.value)} placeHolder="Enter duration" />
                   </div>
                 </div>
 
-                  {/* users review section */}
-                  <UsersReview id={eventId}/>
+                {/* users review section */}
+                <UsersReview id={eventId} />
               </div>
             </div>
             <div className="dltsSecondRght col-lg-5 col-md-12 col-12">
               <div className="vdoDtls">
                 <div className="vdoDtlsVdo">
-                  {eventDetails?.event_photo ? (
-                    <img src={eventImg} />
-                  ) : (
-                    <img src={DummyBanner} alt="" />
-                  )}
+                  {eventDetails?.event_photo ? <img src={eventImg} /> : <img src={DummyBanner} alt="" />}
                   <div className="vdoPlay">
                     <BsFillPlayFill size={36} />
                   </div>
@@ -648,36 +564,16 @@ const EventsEdit = () => {
                 <div className="vdoTxt">
                   <div className="d-flex justify-content-between align-items-center">
                     <h5>{paid ? `Price : ${price} HKD` : "Free"} </h5>
-                    {!editPriceSection && (
-                      <AiFillEdit
-                        size={23}
-                        color="var(--primary)"
-                        style={{ marginTop: "6px" }}
-                        onClick={() => setEditPriceSection(true)}
-                      />
-                    )}
-                    {editPriceSection && (
-                      <AiOutlineCloseCircle
-                        size={23}
-                        color="var(--primary)"
-                        style={{ marginTop: "6px" }}
-                        onClick={() => setEditPriceSection(false)}
-                      />
-                    )}
+                    {!editPriceSection && <AiFillEdit size={23} color="var(--primary)" style={{ marginTop: "6px" }} onClick={() => setEditPriceSection(true)} />}
+                    {editPriceSection && <AiOutlineCloseCircle size={23} color="var(--primary)" style={{ marginTop: "6px" }} onClick={() => setEditPriceSection(false)} />}
                   </div>
                   {editPriceSection && (
                     <div className="priceSection">
                       <div className="frePd">
-                        <h6
-                          onClick={() => setPaid(false)}
-                          style={!paid ? activeBx : inActiveBx}
-                        >
+                        <h6 onClick={() => setPaid(false)} style={!paid ? activeBx : inActiveBx}>
                           Free
                         </h6>
-                        <h6
-                          onClick={() => setPaid(true)}
-                          style={paid ? activeBx : inActiveBx}
-                        >
+                        <h6 onClick={() => setPaid(true)} style={paid ? activeBx : inActiveBx}>
                           Paid
                         </h6>
                       </div>
@@ -685,37 +581,17 @@ const EventsEdit = () => {
                         <>
                           <div className="priceSess">
                             <div>
-                              <input
-                                type="radio"
-                                id="paybyhours"
-                                name="priceSess"
-                                checked={sessionType == "hourly"}
-                                onChange={() => setSessionType("hourly")}
-                              />
+                              <input type="radio" id="paybyhours" name="priceSess" checked={sessionType == "hourly"} onChange={() => setSessionType("hourly")} />
                               <label htmlFor="paybyhours">Pay by hours</label>
                             </div>
                             <div>
-                              <input
-                                type="radio"
-                                id="paybysession"
-                                name="priceSess"
-                                checked={sessionType == "sessional"}
-                                onChange={() => setSessionType("sessional")}
-                              />
-                              <label htmlFor="paybysession">
-                                Pay by session
-                              </label>
+                              <input type="radio" id="paybysession" name="priceSess" checked={sessionType == "sessional"} onChange={() => setSessionType("sessional")} />
+                              <label htmlFor="paybysession">Pay by session</label>
                             </div>
                           </div>
                           <div className="priceIn">
                             <label htmlFor="paybyhours">Price (in HKD)</label>
-                            <input
-                              type="number"
-                              min={0}
-                              placeholder="Enter price here"
-                              value={price}
-                              onChange={(e) => setPrice(e.target.value)}
-                            />
+                            <input type="number" min={0} placeholder="Enter price here" value={price} onChange={(e) => setPrice(e.target.value)} />
                           </div>
                         </>
                       )}
@@ -727,9 +603,7 @@ const EventsEdit = () => {
               <div className="crsIncld position-relative">
                 <h6>This Course Includes : </h6>
                 {courseIncludeContent.map((item, index) => {
-                  const icn = iconsMap.find(
-                    (itm, ind) => itm.text === item.icon
-                  );
+                  const icn = iconsMap.find((itm, ind) => itm.text === item.icon);
                   return (
                     <div className="crsIncldBx" key={index}>
                       {icn.icon}
@@ -740,29 +614,15 @@ const EventsEdit = () => {
                 <div className="crsIncldBx">
                   <button className="addtoCrt" onClick={() => setShowShareModal(true)}>
                     {" "}
-                    <RiShareFill
-                      size={18}
-                      color="white"
-                      style={{ marginRight: "10px" }}
-                    />{" "}
-                    Share
+                    <RiShareFill size={18} color="white" style={{ marginRight: "10px" }} /> Share
                   </button>
                 </div>
 
-                <RiEditBoxFill
-                  size={23}
-                  color="white"
-                  className="wrkshopEditIcon"
-                  onClick={() => setShowCourseInclude(true)}
-                />
+                <RiEditBoxFill size={23} color="white" className="wrkshopEditIcon" onClick={() => setShowCourseInclude(true)} />
               </div>
 
               {/* coach profile */}
-              <UserCard
-                coachInfo={creatorInfo}
-                imgName={creatorInfo?.avtar}
-                imgPath={creatorImgPath + creatorInfo?.avtar}
-              />
+              <UserCard coachInfo={creatorInfo} imgName={creatorInfo?.avtar} imgPath={creatorImgPath + creatorInfo?.avtar} />
 
               <div className="updtButn">
                 <Button title="Update" onClick={updateEvent} />
@@ -824,7 +684,7 @@ const EventsEdit = () => {
         setCourseIncludeContent={setCourseIncludeContent}
       />
       {loading && <Loader />}
-      <ShareModal showShareModal={showShareModal} setShowShareModal={setShowShareModal}/>
+      <ShareModal showShareModal={showShareModal} setShowShareModal={setShowShareModal} />
     </MainLayout>
   );
 };

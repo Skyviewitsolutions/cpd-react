@@ -20,16 +20,15 @@ import showToast from "../../Component/CustomToast/CustomToast";
 import Loader from "../../Component/Loader/Loader";
 
 const Communities = () => {
-
   const [allCommunity, setAllCommunity] = useState([]);
-  const [communityData , setCommunityData] = useState([]);
+  const [communityData, setCommunityData] = useState([]);
   const [imagePath, setImagePath] = useState("");
   const [showCommunityForm, setShowCommunityForm] = useState(false);
   const [communityId, setCommunityId] = useState("");
   const [myCommunity, setMyCommunity] = useState([]);
-  const [inputCommunity , setInputCommunity] = useState("");
+  const [inputCommunity, setInputCommunity] = useState("");
   const [loading, setLoading] = useState(false);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   // adding form data here ;
 
@@ -39,18 +38,17 @@ const Communities = () => {
   const [tags, setTags] = useState([]);
   const [imgFiles, setImgFiles] = useState(null);
 
-
   const navigate = useNavigate();
 
   const getCommunityUrl = endpoints.community.getAllCommunity;
   const addCommunityUrl = endpoints.community.addCommunity;
 
   const getAllCommunity = () => {
-    setLoading(true)
+    setLoading(true);
     axios
       .get(getCommunityUrl)
       .then((res) => {
-        setLoading(false)
+        setLoading(false);
         if (res.data.result === true) {
           const val = res.data.data;
           const imgPath = res.data.image_path;
@@ -64,7 +62,7 @@ const Communities = () => {
         }
       })
       .catch((err) => {
-        setLoading(false)
+        setLoading(false);
         console.log(err, "this is the error");
       });
   };
@@ -79,20 +77,20 @@ const Communities = () => {
       Authorization: `Bearer ${token}`,
       "Content-Type": "multipart/form-data",
     };
-    setLoading(true)
+    setLoading(true);
 
     axios
       .get(getMycommunityUrl, { headers: headers })
       .then((res) => {
         if (res.data.result) {
-          setLoading(false)
+          setLoading(false);
           const val = res.data.data;
           console.log(val, "myCommunity here");
           setMyCommunity(val);
         }
       })
       .catch((err) => {
-         setLoading(false)
+        setLoading(false);
         console.log(err, "this is the error");
       });
   };
@@ -106,13 +104,13 @@ const Communities = () => {
 
   const addCommunity = () => {
     if (!topics) {
-      showToast("Topic is required",  "warning" );
+      showToast("Topic is required", "warning");
     } else if (!displayName) {
-      showToast("Display name is required",  "warning" );
+      showToast("Display name is required", "warning");
     } else if (!description) {
-      showToast("Description is required",  "warning" );
+      showToast("Description is required", "warning");
     } else if (!tags) {
-      showToast("Tags is required",  "warning" );
+      showToast("Tags is required", "warning");
     } else {
       const token = localStorage.getItem("token");
       const formData = new FormData();
@@ -126,20 +124,20 @@ const Communities = () => {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
       };
-      setLoading(true)
+      setLoading(true);
       axios
         .post(addCommunityUrl, formData, { headers: headers })
         .then((res) => {
-          setLoading(false)
+          setLoading(false);
           if (res.data.result) {
-            showToast("community created successfully",  "success" );
+            showToast("community created successfully", "success");
             navigate("/myCommunity");
           } else if (!res.data.result) {
-            showToast(res.data?.message,  "warning" );
+            showToast(res.data?.message, "warning");
           }
         })
         .catch((err) => {
-          setLoading(false)
+          setLoading(false);
           console.log(err, "this is the error");
         });
     }
@@ -149,25 +147,25 @@ const Communities = () => {
 
   const joinCommunity = (id) => {
     const token = localStorage.getItem("token");
-    
+
     if (token) {
       const headers = {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       };
-      setLoading(true)
+      setLoading(true);
       const url = `${endpoints.community.joinCommunity}${id}`;
 
       axios
         .get(url, { headers: headers })
         .then((res) => {
-          setLoading(false)
+          setLoading(false);
           if (res.data.result) {
-            showToast("Community joined successfully",  "success" );
+            showToast("Community joined successfully", "success");
             getAllCommunity();
             getMyCommunity();
           } else if (!res.data.result) {
-            showToast(res.data?.message,  "warning" );
+            showToast(res.data?.message, "warning");
           }
         })
         .catch((err) => {
@@ -175,7 +173,7 @@ const Communities = () => {
           console.log(err);
         });
     } else {
-      showToast("Please login",  "warning" );
+      showToast("Please login", "warning");
     }
   };
 
@@ -195,11 +193,11 @@ const Communities = () => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            showToast("Community left successfully",  "success" );
+            showToast("Community left successfully", "success");
             getAllCommunity();
             getMyCommunity();
           } else if (!res.data.result) {
-            showToast(res.data?.message,  "warning" );
+            showToast(res.data?.message, "warning");
           }
         })
         .catch((err) => {
@@ -207,14 +205,14 @@ const Communities = () => {
           console.log(err);
         });
     } else {
-      showToast("Please login",  "warning" );
+      showToast("Please login", "warning");
     }
   };
 
   const handleSearch = (e) => {
     var val = e.target.value;
     val = val.toLowerCase();
-    setInputCommunity(e.target.value)
+    setInputCommunity(e.target.value);
 
     const filterEvent = communityData.filter((item, index) => {
       var communityTitle = item.display_name.toLowerCase();
@@ -222,11 +220,10 @@ const Communities = () => {
     });
 
     setAllCommunity(filterEvent);
-    if(val == ""){
-      setAllCommunity(communityData)
+    if (val == "") {
+      setAllCommunity(communityData);
     }
   };
-
 
   return (
     <>
@@ -234,8 +231,8 @@ const Communities = () => {
       <Networking_headers title="Communities" />
       {/*  */}
       <div className="networking_wrapper">
-        <div class="networkingWrap mb-4">
-          <div className="networkingleft" >
+        <div className="networkingWrap mb-4">
+          <div className="networkingleft">
             <CustomFilter />
           </div>
 
@@ -244,34 +241,21 @@ const Communities = () => {
               <div className="col-lg-7 col-md-6 col-12">
                 <div className="workshop_searchBar">
                   <div className="form-group">
-                   
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Search Here"
-                      value={inputCommunity}
-                      onChange={(e) => handleSearch(e)}
-                    />
-                     <HiSearch id="networking_search" />
+                    <input type="text" className="form-control" placeholder="Search Here" value={inputCommunity} onChange={(e) => handleSearch(e)} />
+                    <HiSearch id="networking_search" />
                   </div>
                 </div>
               </div>
               <div className="col-lg-5 col-md-6 col-12 d-flex">
                 <div className="eventBtn">
-                  <Button
-                    title="Back to Events"
-                    onClick={() => navigate("/networking")}
-                    style={{borderRadius : "29px"}}
-                  />
+                  <Button title="Back to Events" onClick={() => navigate("/networking")} style={{ borderRadius: "29px" }} />
                 </div>
-                {token && 
-                <div
-                  className="createEvnet"
-                  onClick={() => navigate("/create-community")}
-                >
-                  <h6>Create Community</h6>
-                  <BiPlusCircle color="white" size={20} />
-                </div>}
+                {token && (
+                  <div className="createEvnet" onClick={() => navigate("/create-community")}>
+                    <h6>Create Community</h6>
+                    <BiPlusCircle color="white" size={20} />
+                  </div>
+                )}
               </div>
             </div>
 

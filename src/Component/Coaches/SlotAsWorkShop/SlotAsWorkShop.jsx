@@ -13,23 +13,14 @@ import CreateSlots from "../../Slots/CreateSlots";
 import showToast from "../../CustomToast/CustomToast";
 
 const SlotAsWorkShop = (props) => {
-
-  const { showCalendar, setShowCalendar, eventsToBeShown, setEventsToBeShown } =
-    props;
+  const { showCalendar, setShowCalendar, eventsToBeShown, setEventsToBeShown } = props;
 
   const [selectedDays, setSelectedDays] = useState([]);
   const [daysFormat, setDaysFormat] = useState("weekly");
   const [isRepeated, setIsRepeated] = useState(false);
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [startDate, setStartDate] = useState(
-    new Date()
-      .toLocaleDateString()
-      .replaceAll("/", "-")
-      .split("-")
-      .reverse()
-      .join("-")
-  );
+  const [startDate, setStartDate] = useState(new Date().toLocaleDateString().replaceAll("/", "-").split("-").reverse().join("-"));
   const [endDate, setEndDate] = useState("");
   const [isConfirm, setIsConfirm] = useState(false);
   const [selectedDates, setSelectedDates] = useState([]);
@@ -53,15 +44,7 @@ const SlotAsWorkShop = (props) => {
     Authorization: `Bearer ${token}`,
   };
 
-  var allDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
+  var allDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
   const time = [
     "01:00:00",
@@ -90,10 +73,7 @@ const SlotAsWorkShop = (props) => {
     "24:00:00",
   ];
 
-  var allDates = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
-  ];
+  var allDates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
 
   const handleSelectdDays = (day) => {
     if (selectedDays.indexOf(day) == -1) {
@@ -122,11 +102,7 @@ const SlotAsWorkShop = (props) => {
   };
 
   var getDates = function (start, end) {
-    for (
-      var arr = [], dt = new Date(start);
-      dt <= new Date(end);
-      dt.setDate(dt.getDate() + 1)
-    ) {
+    for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
       arr.push(new Date(dt));
     }
     return arr;
@@ -208,10 +184,7 @@ const SlotAsWorkShop = (props) => {
 
       dateArray.map((itm) => {
         var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-        var month =
-          itm.getMonth() + 1 < 10
-            ? `0${itm.getMonth() + 1}`
-            : itm.getDate() + 1;
+        var month = itm.getMonth() + 1 < 10 ? `0${itm.getMonth() + 1}` : itm.getDate() + 1;
         var year = itm.getFullYear();
 
         var startDte = `${year}-${month}-${date}T${startTime}`;
@@ -243,10 +216,7 @@ const SlotAsWorkShop = (props) => {
       allDates = allDates.slice(0, totalDaysRequired);
       allDates.map((itm) => {
         var date = itm.getDate() < 10 ? `0${itm.getDate()}` : itm.getDate();
-        var month =
-          itm.getMonth() + 1 < 10
-            ? `0${itm.getMonth() + 1}`
-            : itm.getDate() + 1;
+        var month = itm.getMonth() + 1 < 10 ? `0${itm.getMonth() + 1}` : itm.getDate() + 1;
         var year = itm.getFullYear();
         var startDte = `${year}-${month}-${date}T${startTime}`;
         var endDte = `${year}-${month}-${date}T${endTime}`;
@@ -267,19 +237,19 @@ const SlotAsWorkShop = (props) => {
     updateDataToCalendar();
 
     if (!title) {
-      showToast("please fill the workshop title",  "warning" );
+      showToast("please fill the workshop title", "warning");
     } else if (!workShopDuration) {
-      showToast("workshop duration is required",  "warning" );
+      showToast("workshop duration is required", "warning");
     } else if (!workshopImg) {
-      showToast("workshop image is required",  "warning" );
+      showToast("workshop image is required", "warning");
     } else if (!domain) {
-      showToast("please select workshop domain",  "warning" );
+      showToast("please select workshop domain", "warning");
     } else if (!industry) {
-      showToast("please select workshop industry",  "warning" );
+      showToast("please select workshop industry", "warning");
     } else if (!maxNumber) {
-      showToast("Max number of student is required",  "warning" );
+      showToast("Max number of student is required", "warning");
     } else if (!sessionType) {
-      showToast("please select session type",  "warning" );
+      showToast("please select session type", "warning");
     } else {
       const url = endpoints.workshop.createWorkshop;
 
@@ -323,9 +293,9 @@ const SlotAsWorkShop = (props) => {
         .then((res) => {
           setLoading(false);
           if (res.data.result) {
-            showToast("workshop created successfully",  "success" );
+            showToast("workshop created successfully", "success");
           } else if (res.data.result == false) {
-            showToast(res.data.message,  "warning" );
+            showToast(res.data.message, "warning");
           }
         })
         .catch((err) => {
@@ -388,24 +358,17 @@ const SlotAsWorkShop = (props) => {
         <>
           <div className="row d-flex">
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Title</label>
-                <input
-                  type="text"
-                  class="form-control field py-4 mb-3"
-                  id=""
-                  placeholder="Enter workshop title"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
+                <input type="text" className="form-control field py-4 mb-3" id="" placeholder="Enter workshop title" value={title} onChange={(e) => setTitle(e.target.value)} />
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Duration</label>
                 <input
                   type="number"
-                  class="form-control field py-4 mb-3"
+                  className="form-control field py-4 mb-3"
                   min={0}
                   id=""
                   value={workShopDuration}
@@ -417,24 +380,17 @@ const SlotAsWorkShop = (props) => {
           </div>
           <div className="row">
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label htmlFor="takePhoto">Upload Img</label> <br />
-                <input
-                  type="file"
-                  class="form-control  py-4 mb-3 "
-                  placeholder="Enter here"
-                  required
-                  onChange={(e) => handleworkshopImg(e)}
-                  className="imgInput"
-                />
+                <input type="file" className="form-control  py-4 mb-3 " placeholder="Enter here" required onChange={(e) => handleworkshopImg(e)} className="imgInput" />
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label>Max number of students</label>
                 <input
                   type="number"
-                  class="form-control field py-4 mb-3"
+                  className="form-control field py-4 mb-3"
                   id=""
                   min={0}
                   value={maxNumber}
@@ -446,15 +402,9 @@ const SlotAsWorkShop = (props) => {
           </div>
           <div className="row mb-3">
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Domain</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                  value={domain}
-                  required
-                  onChange={(e) => setDomain(e.target.value)}
-                >
+                <select className="form-select end-year " aria-label="Default select example" value={domain} required onChange={(e) => setDomain(e.target.value)}>
                   <option value="">Choose</option>
                   {allDomain.map((domain, ind) => {
                     return (
@@ -470,15 +420,9 @@ const SlotAsWorkShop = (props) => {
             </div>
 
             <div className="col-12 col-md-6 col-lg-4 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Industry</label>
-                <select
-                  class="form-select end-year "
-                  aria-label="Default select example"
-                  value={industry}
-                  required
-                  onChange={(e) => setIndustry(e.target.value)}
-                >
+                <select className="form-select end-year " aria-label="Default select example" value={industry} required onChange={(e) => setIndustry(e.target.value)}>
                   <option>Choose</option>
                   {allIndustry.map((industry, index) => {
                     return (
@@ -500,68 +444,44 @@ const SlotAsWorkShop = (props) => {
           {/* here adding the fees structure */}
           <div className="eventForm_price mt-3">
             <div>
-              <div class="eventForm_paid">
-                <input
-                  type="radio"
-                  id="a25"
-                  name="check-substitution-2"
-                  onClick={() => setPaid(false)}
-                />
-                <label
-                  for="a25"
-                  className={`btnfree ${
-                    !paid ? "btn-primary" : "btn-default"
-                  } `}
-                >
+              <div className="eventForm_paid">
+                <input type="radio" id="a25" name="check-substitution-2" onClick={() => setPaid(false)} />
+                <label for="a25" className={`btnfree ${!paid ? "btn-primary" : "btn-default"} `}>
                   Free
                 </label>
               </div>
               <div className="eventForm_paid freepaid">
-                <input
-                  type="radio"
-                  id="a50"
-                  name="check-substitution-2"
-                  onClick={() => setPaid(true)}
-                />
-                <label
-                  for="a50"
-                  className={`btnfree ${paid ? "btn-primary" : "btn-default"} `}
-                >
+                <input type="radio" id="a50" name="check-substitution-2" onClick={() => setPaid(true)} />
+                <label for="a50" className={`btnfree ${paid ? "btn-primary" : "btn-default"} `}>
                   Paid
                 </label>
               </div>
             </div>
             <div className="d-flex">
-              <div class="form-check" style={{ marginLeft: "25px" }}>
+              <div className="form-check" style={{ marginLeft: "25px" }}>
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault5"
                   checked={sessionType == "hourly"}
                   onChange={() => setSessionType("hourly")}
                 />
-                <label
-                  class="form-check-label  textsession"
-                  for="flexRadioDefault5"
-                >
+                <label className="form-check-label  textsession" for="flexRadioDefault5">
                   By Hours
                 </label>
               </div>
 
-              <div class="form-check" style={{ marginLeft: "25px" }}>
+              <div className="form-check" style={{ marginLeft: "25px" }}>
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault6"
                   checked={sessionType == "sessional"}
                   onChange={() => setSessionType("sessional")}
                 />
-                <label
-                  class="form-check-label textsession"
-                  for="flexRadioDefault6"
-                >
+                <label className="form-check-label textsession" for="flexRadioDefault6">
                   By Session
                 </label>
               </div>
@@ -569,24 +489,13 @@ const SlotAsWorkShop = (props) => {
           </div>
           {/* here we aare adding payment div */}
           <div className="col-lg-4 col-md-6 col-12 my-3 ">
-            <div class="form-group">
+            <div className="form-group">
               <label for="exampleInputPassword1">Price in ($)</label>
-              <input
-                type="number"
-                class="form-control py-4"
-                placeholder="Enter here"
-                min={0}
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
+              <input type="number" className="form-control py-4" placeholder="Enter here" min={0} value={price} onChange={(e) => setPrice(e.target.value)} />
             </div>
           </div>
           <div className="confirmBtn">
-            <Button
-              title="Create Workshop"
-              onClick={handleConfirmSlots}
-              loading={loading}
-            />
+            <Button title="Create Workshop" onClick={handleConfirmSlots} loading={loading} />
           </div>
         </>
       )}

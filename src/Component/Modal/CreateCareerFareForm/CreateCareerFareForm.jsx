@@ -194,7 +194,7 @@ const CreateCareerFareForm = (props) => {
 
       let imgUrl = selectedIncubation?.image;
       let fileName = "incubation.jpg";
-      debugger;
+
       fetch(imgUrl).then(async (response) => {
         const contentType = response.headers.get("content-type");
         const blob = await response.blob();
@@ -299,17 +299,17 @@ const CreateCareerFareForm = (props) => {
         <div>
           <div className="row">
             <div className="col-lg-6 col-md-6 col-12 ">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Title</label>
-                <input type="text" class="form-control field py-4 mb-3" id="" placeholder="Enter  name" value={title} onChange={(e) => setTitle(e.target.value)} />
+                <input type="text" className="form-control field py-4 mb-3" id="" placeholder="Enter  name" value={title} onChange={(e) => setTitle(e.target.value)} />
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6 ">
-              <div class="form-group">
+              <div className="form-group">
                 {carrerFareImg ? (
                   <>
                     <label htmlFor="takePhoto">Upload Img</label>
-                    <h5 class="form-control" htmlFor="takePhone">
+                    <h5 className="form-control" htmlFor="takePhone">
                       {carrerFareImg.name}
                     </h5>
                     <input
@@ -341,9 +341,9 @@ const CreateCareerFareForm = (props) => {
 
           <div className="row">
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Stage</label>
-                <select class="form-select end-year " aria-label="Default select example" value={stage} onChange={(e) => setStage(e.target.value)}>
+                <select className="form-select end-year " aria-label="Default select example" value={stage} onChange={(e) => setStage(e.target.value)}>
                   <option>Choose</option>
                   <option value="Pressed">Pressed</option>
                   <option value="Seed">Seed</option>
@@ -354,30 +354,37 @@ const CreateCareerFareForm = (props) => {
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Since When (date)</label>
-                <input type="date" class="form-control field py-4" id="" placeholder="Enter job location" value={date} onChange={(e) => setDate(e.target.value)} />
+                <input type="date" className="form-control field py-4" id="" placeholder="Enter job location" value={date} onChange={(e) => setDate(e.target.value)} />
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Founder</label>
-                <input type="text" class="form-control field py-4" id="" placeholder="Enter founder name" value={founder} onChange={(e) => setFounder(e.target.value)} />
+                <input type="text" className="form-control field py-4" id="" placeholder="Enter founder name" value={founder} onChange={(e) => setFounder(e.target.value)} />
               </div>
             </div>
 
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Website Link (url)</label>
-                <input type="text" class="form-control field py-4" id="" placeholder="Enter your website" value={websiteLink} onChange={(e) => setWebsiteLink(e.target.value)} />
+                <input
+                  type="text"
+                  className="form-control field py-4"
+                  id=""
+                  placeholder="Enter your website"
+                  value={websiteLink}
+                  onChange={(e) => setWebsiteLink(e.target.value)}
+                />
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Company/Project Name</label>
                 <input
                   type="text"
-                  class="form-control field py-4"
+                  className="form-control field py-4"
                   id=""
                   placeholder="Enter company/Project name"
                   value={companyName}
@@ -387,9 +394,9 @@ const CreateCareerFareForm = (props) => {
             </div>
 
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Domain</label>
-                <select class="form-select end-year " aria-label="Default select example" value={domain} required onChange={(e) => handleDomainSelection(e.target.value)}>
+                <select className="form-select end-year " aria-label="Default select example" value={domain} required onChange={(e) => handleDomainSelection(e.target.value)}>
                   <option value="">Choose</option>
                   {allDomain.map((domain, index) => {
                     return (
@@ -404,11 +411,11 @@ const CreateCareerFareForm = (props) => {
             </div>
             {showDomainInputBox && (
               <div className="col-12 col-md-6 col-lg-6 mb-3">
-                <div class="form-group">
+                <div className="form-group">
                   <label for="exampleInputPassword1">Others</label>
                   <input
                     type="text"
-                    class="form-control field py-4 "
+                    className="form-control field py-4 "
                     id=""
                     placeholder="Enter your domain "
                     value={domainManualInput}
@@ -419,9 +426,9 @@ const CreateCareerFareForm = (props) => {
             )}
 
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Industry</label>
-                <select class="form-select end-year " aria-label="Default select example" value={industry} required onChange={(e) => handleIndustrySelection(e.target.value)}>
+                <select className="form-select end-year " aria-label="Default select example" value={industry} required onChange={(e) => handleIndustrySelection(e.target.value)}>
                   <option>Choose</option>
                   {allIndustry.map((industry, index) => {
                     return (
@@ -436,11 +443,11 @@ const CreateCareerFareForm = (props) => {
             </div>
             {showIndustryInputBox && (
               <div className="col-12 col-md-6 col-lg-6 mb-3">
-                <div class="form-group">
+                <div className="form-group">
                   <label for="exampleInputPassword1">Others</label>
                   <input
                     type="text"
-                    class="form-control field py-4"
+                    className="form-control field py-4"
                     id=""
                     placeholder="Enter your industry"
                     value={industryManualInput}
@@ -451,11 +458,11 @@ const CreateCareerFareForm = (props) => {
             )}
 
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Seek Investment</label>
                 <input
                   type="text"
-                  class="form-control field py-4"
+                  className="form-control field py-4"
                   id=""
                   placeholder="Enter investment"
                   value={seekInvestment}
@@ -465,10 +472,10 @@ const CreateCareerFareForm = (props) => {
             </div>
 
             <div className="col-12 col-md-6 col-lg-6 mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Partners Requirement</label>
                 <select
-                  class="form-select end-year "
+                  className="form-select end-year "
                   aria-label="Default select example"
                   required
                   value={partnerRequirement}
@@ -481,24 +488,24 @@ const CreateCareerFareForm = (props) => {
             </div>
           </div>
           <div className="col-12 col-md-12 col-lg-12 mb-3">
-            <div class="form-group skillssss">
+            <div className="form-group skillssss">
               <label for="exampleInputPassword1">Sporsers</label>
               <TagsInput placeHolder="Enter all sponsers" value={sponsers} onChange={setSponsers} />
             </div>
           </div>
           <div className="col-12 col-md-12 col-lg-12 mb-3">
-            <div class="form-group skillssss">
+            <div className="form-group skillssss">
               <label for="exampleInputPassword1">Partners</label>
               <TagsInput placeHolder="Enter all partners" value={partners} onChange={setPartners} />
             </div>
           </div>
 
           <div className="col-12 col-md-12 col-lg-12 mb-3">
-            <div class="form-group">
+            <div className="form-group">
               <label for="exampleInputPassword1">Others</label>
               <textarea
                 type="text"
-                class="form-control field py-4"
+                className="form-control field py-4"
                 id=""
                 placeholder="Enter your description"
                 value={description}

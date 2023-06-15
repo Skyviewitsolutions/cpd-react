@@ -1,12 +1,10 @@
-import React, { useEffect , useState } from "react";
+import React, { useEffect, useState } from "react";
 import { endpoints } from "../../Component/services/endpoints";
 import axios from "axios";
 
-
 const useFetchCoachingsData = (url) => {
-
   const token = localStorage.getItem("token");
-  const [data , setData] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const url = endpoints.coaches.myCoachings;
@@ -20,7 +18,7 @@ const useFetchCoachingsData = (url) => {
       .then((res) => {
         if (res.data.result) {
           var val = res.data.data;
-          setData(val)
+          setData(val);
         }
       })
       .catch((err) => {
@@ -29,7 +27,6 @@ const useFetchCoachingsData = (url) => {
   }, [url]);
 
   return [data];
-
 };
 
 export default useFetchCoachingsData;

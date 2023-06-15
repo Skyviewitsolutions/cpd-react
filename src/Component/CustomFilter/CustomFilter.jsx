@@ -108,32 +108,30 @@ const CustomFilter = (props) => {
   return (
     <div className="workshopsidebar">
       <div className="sibar-community-toggle">
-        <div class="btn sideBarBtn">
-          <div class="texthideShow">
+        <div className="btn sideBarBtn">
+          <div className="texthideShow">
             <BsFilterLeft />
           </div>
         </div>
 
-        <nav class="sidebar">
-          <div class="text">Filter</div>
+        <nav className="sidebar">
+          <div className="text">Filter</div>
           <ul>
             <h6 className="AddCmntyMenuText">Domain</h6>
             {allDomain.length != 0 &&
               allDomain.map((domain, index) => {
                 return (
-                  <>
-                    <li key={index}>
-                      <a href="#">
-                        <input
-                          type="checkbox"
-                          className="checkBoxAdCmnty"
-                          onClick={() => handleFilterByDomain(domain.title)}
-                          checked={filterByDomain.includes(domain.title.toLowerCase())}
-                        />
-                        <span>{domain.title}</span>
-                      </a>
-                    </li>
-                  </>
+                  <li key={index}>
+                    <a href="#">
+                      <input
+                        type="checkbox"
+                        className="checkBoxAdCmnty"
+                        onClick={() => handleFilterByDomain(domain.title)}
+                        checked={filterByDomain.includes(domain.title.toLowerCase())}
+                      />
+                      <span>{domain.title}</span>
+                    </a>
+                  </li>
                 );
               })}
           </ul>

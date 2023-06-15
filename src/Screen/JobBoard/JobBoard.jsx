@@ -31,10 +31,7 @@ import CustomFilter from "../../Component/CustomFilter/CustomFilter";
 import JobCard from "../../Component/JobCard/JobCard";
 import CreateJobForm from "../../Component/Modal/createJobsFom/CreateJobsForm";
 
-
-
 const JobBoard = () => {
-
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(false);
   const [allAppliedJobs, setAllAppliedJobs] = useState([]);
@@ -50,13 +47,12 @@ const JobBoard = () => {
   const [imagePath, setImagePath] = useState("");
   const [updateJob, setUpdateJob] = useState(false);
   const [selectedJobForUpdate, setSelectedJobForUpdate] = useState([]);
-  
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
 
   var userDetails = localStorage.getItem("users");
   var userData = userDetails && JSON.parse(userDetails);
-  var userId = userData ? userData._id : 0
+  var userId = userData ? userData._id : 0;
 
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -70,82 +66,85 @@ const JobBoard = () => {
   var userType = JSON.parse(userDetails);
   userType = userType?.user_type;
 
-
   const showJobsOnCalendar = () => {};
 
   const deleteJobs = (id) => {
     const url = endpoints.jobs.deleteJobs + "job_id=" + id + "&created_by=" + userId;
-    setLoading(true)
-    axios.get(url , {headers : headers})
-    .then((res) =>{
-      if(res.data.result){
-        showToast("Jobs deleted " , {type : "success"})
-        getMyJobList()
-      }
-      setLoading(false)
-    })
-    .catch((err) =>{
-      console.log(err , "err")
-      setLoading(false)
-    })
+    setLoading(true);
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if (res.data.result) {
+          showToast("Jobs deleted ", { type: "success" });
+          getMyJobList();
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err, "err");
+        setLoading(false);
+      });
   };
 
   const applyJob = (dta) => {
-    setLoading(true)
+    setLoading(true);
     const url = endpoints.jobs.applyJob + "job_id=" + dta?._id + "&user_id=" + userId + "&status=0";
-    axios.get(url , {headers : headers}) 
-    .then((res) =>{
-      if(res.data.result){
-        showToast("Job applied successfully" , "success")
-      }
-      setLoading(false)
-    })
-    .catch((err) =>{
-      console.log(err , "this is the error")
-      setLoading(false)
-    })
+    axios
+      .get(url, { headers: headers })
+      .then((res) => {
+        if (res.data.result) {
+          showToast("Job applied successfully", "success");
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err, "this is the error");
+        setLoading(false);
+      });
   };
 
   const getJobList = () => {
     const url = endpoints.jobs.allJobs + "?user_id=" + userId;
-    setLoading(true)
+    setLoading(true);
     axios
       .get(url, { headers: headers })
       .then((res) => {
-        setLoading(false)
+        setLoading(false);
         if (res.data.result) {
-          console.log(res , "response here");
+          console.log(res, "response here");
           const val = res.data.message?.data;
-          const allJobs = val.filter((itm) => {return itm?.created_by !== userId})
+          const allJobs = val.filter((itm) => {
+            return itm?.created_by !== userId;
+          });
           setJobsListToBeShown(allJobs);
           setJobsListToBeShown2(allJobs);
         }
       })
       .catch((err) => {
-        setLoading(false)
+        setLoading(false);
         console.log(err, "trhis is error");
       });
   };
 
-  const getMyJobList = () =>{
+  const getMyJobList = () => {
     const url = endpoints.jobs.allJobs + "?created_by=" + userId;
-    setLoading(true)
+    setLoading(true);
     axios
-    .get(url, { headers: headers })
-    .then((res) => {
-      setLoading(false)
-      if (res.data.result) {
-        const val = res.data.message?.data;
-        setJobsListToBeShown(val);
-        setJobsListToBeShown2(val);
-        setMyJobs(val)
-      }
-    })
-    .catch((err) => {
-      setLoading(false)
-      console.log(err, "trhis is error");
-    });
-  }
+      .get(url, { headers: headers })
+      .then((res) => {
+        setLoading(false);
+        if (res.data.result) {
+          const val = res.data.message?.data;
+          setJobsListToBeShown(val);
+          setJobsListToBeShown2(val);
+          setMyJobs(val);
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err, "trhis is error");
+      });
+  };
 
   const handleShowMyJobs = () => {
     setShowAllJobs(false);
@@ -158,15 +157,14 @@ const JobBoard = () => {
   };
 
   const handleEdit = (data) => {
-    setShowJobForm(true)
-    setSelectedJob(data)
-    setUpdateJob(true)
+    setShowJobForm(true);
+    setSelectedJob(data);
+    setUpdateJob(true);
   };
 
   useEffect(() => {
     getJobList();
   }, []);
-
 
   const handleFilterJobs = (val) => {
     var value = val.toLowerCase();
@@ -183,23 +181,19 @@ const JobBoard = () => {
       setJobsListToBeShown2(filteredData);
     }
 
-    if(value === ""){
-      setJobsListToBeShown2(jobsListToBeShown)
+    if (value === "") {
+      setJobsListToBeShown2(jobsListToBeShown);
     }
   };
 
+  // here we are filtering the coaching according to the domain and industry;
 
-   // here we are filtering the coaching according to the domain and industry;
-
-   useEffect(() => {
-
-    var filterJobByIndustry = jobsListToBeShown.filter(
-      (itm, index) => {
-        var industry = itm.industry;
-        var industryTitle = industry && industry?.title?.toLowerCase();
-        return filterByIndustry.includes(industryTitle);
-      }
-    );
+  useEffect(() => {
+    var filterJobByIndustry = jobsListToBeShown.filter((itm, index) => {
+      var industry = itm.industry;
+      var industryTitle = industry && industry?.title?.toLowerCase();
+      return filterByIndustry.includes(industryTitle);
+    });
 
     var filterJobByDomain = filterJobByIndustry.filter((itm, index) => {
       var domain = itm.domain;
@@ -210,23 +204,19 @@ const JobBoard = () => {
   }, [filterByDomain]);
 
   useEffect(() => {
-
     var filterJopByDomain = jobsListToBeShown.filter((itm, index) => {
       var domain = itm.domain;
       var domainTitle = domain && domain?.title?.toLowerCase();
       return filterByDomain.includes(domainTitle);
     });
 
-    var filterCoachingByIndustry = filterJopByDomain.filter(
-      (itm, index) => {
-        var industry = itm.industry;
-        var industryTitle = industry && industry?.title?.toLowerCase();
-        return filterByIndustry.includes(industryTitle);
-      }
-    );
+    var filterCoachingByIndustry = filterJopByDomain.filter((itm, index) => {
+      var industry = itm.industry;
+      var industryTitle = industry && industry?.title?.toLowerCase();
+      return filterByIndustry.includes(industryTitle);
+    });
     setJobsListToBeShown2(filterCoachingByIndustry);
   }, [filterByIndustry]);
-
 
   return (
     <MainLayout>
@@ -237,25 +227,14 @@ const JobBoard = () => {
               <h5 className="ml-3" style={{ marginLeft: "9px" }}>
                 Job Board
               </h5>
-              <CustomFilter
-                filterByDomain={filterByDomain}
-                setFilterByDomain={setFilterByDomain}
-                filterByIndustry={filterByIndustry}
-                setFilterByIndustry={setFilterByIndustry}
-              />
+              <CustomFilter filterByDomain={filterByDomain} setFilterByDomain={setFilterByDomain} filterByIndustry={filterByIndustry} setFilterByIndustry={setFilterByIndustry} />
             </div>
             <div className="col-lg-10 col-md-12 col-12 coachScreen_right">
               <div className="row">
                 <div className="col-lg-7 col-md-12 col-12">
                   <div className="coach_searchBar ">
                     <div className="form-group ">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Search Here"
-                        value={inputData}
-                        onChange={(e) => handleFilterJobs(e.target.value)}
-                      />
+                      <input type="text" className="form-control" placeholder="Search Here" value={inputData} onChange={(e) => handleFilterJobs(e.target.value)} />
                       <HiSearch id="coach_search" />
                     </div>
                   </div>
@@ -269,12 +248,9 @@ const JobBoard = () => {
                         style={{
                           // background: showAllCoaching ? "#2c6959" : "white",
                           // color: showAllCoaching ? "white" : "#2c6959",
-                          border: showAllJobs
-                            ? "2px solid #2c6959"
-                            : "2px solid #d4d9d6",
+                          border: showAllJobs ? "2px solid #2c6959" : "2px solid #d4d9d6",
                         }}
-                        onClick={handleShowAllJobs}
-                      >
+                        onClick={handleShowAllJobs}>
                         All
                       </button>
 
@@ -283,12 +259,9 @@ const JobBoard = () => {
                         style={{
                           // background: !showAllCoaching ? "#2c6959" : "white",
                           // color: !showAllCoaching ? "white" : "#2c6959",
-                          border: !showAllJobs
-                            ? "2px solid #2c6959"
-                            : "2px solid #d4d9d6",
+                          border: !showAllJobs ? "2px solid #2c6959" : "2px solid #d4d9d6",
                         }}
-                        onClick={handleShowMyJobs}
-                      >
+                        onClick={handleShowMyJobs}>
                         My Jobs
                       </button>
                       <CreateBtn onClick={() => setShowJobForm(true)} />
@@ -359,4 +332,3 @@ const JobBoard = () => {
 };
 
 export default JobBoard;
-

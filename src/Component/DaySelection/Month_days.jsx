@@ -5,10 +5,9 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import OwlCarousel from "react-owl-carousel";
 import $ from "jquery";
 import { useState, useEffect } from "react";
-import {AiFillCloseCircle} from "react-icons/ai";
+import { AiFillCloseCircle } from "react-icons/ai";
 
-const Month_days = ({ timeSlots, addTimeSlot , removeDate , clickedDate}) => {
-
+const Month_days = ({ timeSlots, addTimeSlot, removeDate, clickedDate }) => {
   useEffect(() => {
     // sync the state to the input
     $(".month_image-checkbox").on("click", function (e) {
@@ -35,7 +34,6 @@ const Month_days = ({ timeSlots, addTimeSlot , removeDate , clickedDate}) => {
   };
 
   const generateMonth = () => {
-    
     let date = new Date();
     let from = new Date(date.getFullYear(), date.getMonth(), 1);
     let to = new Date(date.getFullYear(), date.getMonth() + 1, 0);
@@ -43,22 +41,17 @@ const Month_days = ({ timeSlots, addTimeSlot , removeDate , clickedDate}) => {
     for (var day = from; day <= to; day.setDate(day.getDate() + 1)) {
       let dayName = day.getDate();
       item.push(
-        <div class="nopad text-center">
-          <label
-            class={`month_image-checkbox `}
-            style={(timeSlots.includes(dayName) || clickedDate == dayName) ? activeBar : inActiveBar}
-            onClick={() => addTimeSlot(dayName)}
-          >
+        <div className="nopad text-center">
+          <label className={`month_image-checkbox `} style={timeSlots.includes(dayName) || clickedDate == dayName ? activeBar : inActiveBar} onClick={() => addTimeSlot(dayName)}>
             {day.getDate()}
             <input type="checkbox" value="" />
           </label>
-          {timeSlots.includes(dayName) &&  <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDate(dayName)}/>}
+          {timeSlots.includes(dayName) && <AiFillCloseCircle className="cutOptions" size={18} color="red" onClick={() => removeDate(dayName)} />}
         </div>
       );
     }
     return item;
   };
-
 
   /* week days*/
   const Monthoptions = {
@@ -90,25 +83,13 @@ const Month_days = ({ timeSlots, addTimeSlot , removeDate , clickedDate}) => {
     },
   };
 
-  useEffect(() =>{
-    setToogleDate(!toggleDate)
-  },[timeSlots , clickedDate]);
-
-
-  
+  useEffect(() => {
+    setToogleDate(!toggleDate);
+  }, [timeSlots, clickedDate]);
 
   return (
     <>
-      <OwlCarousel
-        className="owl-theme category eventForm_monthDays_carousel "
-        id="category"
-        items={1}
-        loop
-        margin={1}
-        dots={false}
-        {...Monthoptions}
-        nav
-      >
+      <OwlCarousel className="owl-theme category eventForm_monthDays_carousel " id="category" items={1} loop margin={1} dots={false} {...Monthoptions} nav>
         {toggleDate ? generateMonth() : generateMonth()}
       </OwlCarousel>
     </>
